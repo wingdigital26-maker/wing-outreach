@@ -1,0 +1,21 @@
+rid,row,ok,fallback,blocks,facets,squares,plan_sqft,pitch_mix,seed_within_1ft,within_1ft,within_2ft,mae,bias,cover,watertight,genus,components,points,canopy,axis,seconds,why
+collin-tx,164153,True,True,1,4,81.9,7072,"{""7/12"": 100}",27.6,6.7,12.7,6.64,-2.61,98.4,True,0,1,2482,462,75.6,14.9,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": true}"
+collin-tx,164155,True,False,8,37,49.1,4022,"{""7/12"": 72, ""12/12"": 28}",31.1,38.9,58.7,2.36,-0.11,82.2,True,2,1,2729,255,75.0,12.5,
+collin-tx,164151,True,True,1,4,78.9,6310,"{""9/12"": 100}",29.9,13.8,32.0,4.02,-2.04,97.9,True,0,1,2538,132,75.9,18.0,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": true}"
+collin-tx,164201,True,False,8,33,50.3,4026,"{""9/12"": 100}",54.8,56.8,74.7,1.42,-0.38,89.4,True,1,1,2365,123,75.7,16.2,
+collin-tx,164203,True,True,1,4,71.3,5038,"{""12/12"": 100}",12.3,18.6,39.5,3.82,-1.89,96.9,True,0,1,2642,103,77.2,12.7,"{""watertight"": true, ""height_ok"": false, ""cover_ok"": true}"
+collin-tx,164157,False,False,,,,,,,,,,,,,,,,,,13.6,"AttributeError(""'MultiPolygon' object has no attribute 'exterior'"") |     if oj != fi and polys[oj].exterior.distance(Point(mx, my)) < 0.05:"
+collin-tx,164205,True,True,1,4,74.2,6176,"{""8/12"": 100}",50.3,18.2,35.6,3.61,-1.13,97.5,True,0,1,3395,74,75.0,22.3,"{""watertight"": false, ""height_ok"": false, ""cover_ok"": true}"
+collin-tx,164199,True,False,8,36,51.1,4083,"{""8/12"": 74, ""12/12"": 26}",40.8,35.2,63.3,2.15,-0.6,90.9,True,1,1,2186,262,74.4,14.9,
+collin-tx,164150,True,True,1,4,90.8,7556,"{""8/12"": 100}",20.5,13.8,22.8,5.56,-2.9,99.5,True,0,1,2864,354,77.4,19.0,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": true}"
+collin-tx,164154,True,False,8,30,43.1,3453,"{""9/12"": 100}",26.4,29.0,54.0,2.41,-0.61,81.3,True,2,1,2369,456,75.0,13.9,
+collin-tx,164152,True,True,1,4,69.2,5754,"{""8/12"": 100}",38.2,27.1,42.6,4.01,-1.27,97.7,True,0,1,2546,269,75.0,16.2,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": true}"
+collin-tx,164156,True,False,7,28,49.7,3972,"{""9/12"": 100}",27.6,31.1,57.8,2.64,-1.29,88.0,True,1,1,2657,128,75.0,12.3,
+collin-tx,164207,True,True,1,4,92.3,7090,"{""10/12"": 100}",28.5,17.7,35.1,3.36,-1.51,99.4,True,0,1,3054,40,75.0,14.3,"{""watertight"": false, ""height_ok"": false, ""cover_ok"": true}"
+collin-tx,164159,True,False,8,29,36.3,2962,"{""8/12"": 73, ""10/12"": 27}",34.5,39.8,62.6,1.93,-0.59,71.6,True,0,1,1775,39,75.0,11.1,
+collin-tx,164197,True,True,1,4,77.7,6462,"{""8/12"": 100}",30.6,11.3,20.8,5.6,-2.67,93.9,True,0,1,2000,482,15.0,18.8,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": true}"
+collin-tx,164158,True,True,1,4,101.3,7778,"{""10/12"": 100}",39.7,13.6,27.6,5.25,-2.72,94.4,True,0,1,3604,140,15.0,17.5,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": false}"
+collin-tx,164148,True,True,1,4,70.5,5866,"{""8/12"": 100}",44.3,22.7,41.7,4.32,-2.68,97.3,True,0,1,2218,289,46.7,15.4,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": true}"
+collin-tx,164200,True,False,7,22,43.2,3721,"{""7/12"": 97, ""9/12"": 3}",48.6,50.7,70.0,2.04,-0.25,88.6,True,2,1,2203,674,75.1,9.9,
+collin-tx,164149,False,False,,,,,,,,,,,,,,,,,,11.7,"AttributeError(""'MultiPolygon' object has no attribute 'exterior'"") |     if oj != fi and polys[oj].exterior.distance(Point(mx, my)) < 0.05:"
+collin-tx,164198,True,True,1,4,85.5,7382,"{""7/12"": 100}",33.1,7.7,16.6,6.59,-2.78,98.5,True,0,1,2816,405,76.7,17.3,"{""watertight"": false, ""height_ok"": true, ""cover_ok"": true}"

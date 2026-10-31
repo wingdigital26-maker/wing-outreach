@@ -1,0 +1,205 @@
+{
+ "image": "gtrace/59811/google.png",
+ "ft_per_px": 0.19392,
+ "pieces": [
+  {
+   "name": "west_wing",
+   "rect_px": [
+    [
+     335,
+     400
+    ],
+    [
+     485,
+     400
+    ],
+    [
+     485,
+     490
+    ],
+    [
+     335,
+     490
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "west wing, hip end at x~340, short E-W ridge, bright faces cross at x~440"
+  },
+  {
+   "name": "middle",
+   "rect_px": [
+    [
+     485,
+     400
+    ],
+    [
+     560,
+     400
+    ],
+    [
+     560,
+     500
+    ],
+    [
+     485,
+     500
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "low connecting section between west wing and center, dark north face"
+  },
+  {
+   "name": "center",
+   "rect_px": [
+    [
+     545,
+     400
+    ],
+    [
+     650,
+     400
+    ],
+    [
+     650,
+     560
+    ],
+    [
+     545,
+     560
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "center block, long dark north face to ridge at y~475, south eave under trees near y~555"
+  },
+  {
+   "name": "east_wing",
+   "rect_px": [
+    [
+     650,
+     400
+    ],
+    [
+     750,
+     400
+    ],
+    [
+     750,
+     560
+    ],
+    [
+     650,
+     560
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "east wing, ridge N-S near x~700, dark north hip triangle, bright east face"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    280,
+    395
+   ],
+   [
+    337,
+    395
+   ],
+   [
+    337,
+    500
+   ],
+   [
+    280,
+    500
+   ]
+  ],
+  [
+   [
+    280,
+    495
+   ],
+   [
+    480,
+    495
+   ],
+   [
+    480,
+    565
+   ],
+   [
+    765,
+    565
+   ],
+   [
+    765,
+    715
+   ],
+   [
+    280,
+    715
+   ]
+  ],
+  [
+   [
+    395,
+    372
+   ],
+   [
+    525,
+    372
+   ],
+   [
+    525,
+    400
+   ],
+   [
+    395,
+    400
+   ]
+  ],
+  [
+   [
+    748,
+    390
+   ],
+   [
+    768,
+    390
+   ],
+   [
+    768,
+    570
+   ],
+   [
+    748,
+    570
+   ]
+  ]
+ ],
+ "notes": "Long grey shingle ranch, trees cover the south eave. Trace overshoots badly: trees and ground to the west, the whole yard and neighbour 7774's roof to the south, ground to the NE. Confidence medium: wing boundaries high, ridge detail inside west_wing and middle low (bright faces form an X, could be one pyramid)."
+}

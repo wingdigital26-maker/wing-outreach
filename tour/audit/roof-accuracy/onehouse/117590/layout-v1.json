@@ -1,0 +1,196 @@
+{
+ "image": "gtrace/117590/google.png",
+ "ft_per_px": 0.19296,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     441.0,
+     335.0
+    ],
+    [
+     682.0,
+     335.0
+    ],
+    [
+     704.0,
+     685.0
+    ],
+    [
+     461.0,
+     685.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "notes": "big hip, ridge N-S; the dark V at the top is the north hip face"
+  },
+  {
+   "name": "south_wing",
+   "rect_px": [
+    [
+     517.0,
+     550.0
+    ],
+    [
+     627.0,
+     550.0
+    ],
+    [
+     627.0,
+     685.0
+    ],
+    [
+     517.0,
+     685.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "notes": "cross hip on the south face (the diamond), ridge N-S, hipped at the south eave"
+  },
+  {
+   "name": "north_bay",
+   "rect_px": [
+    [
+     477.0,
+     326.0
+    ],
+    [
+     547.0,
+     326.0
+    ],
+    [
+     547.0,
+     375.0
+    ],
+    [
+     477.0,
+     375.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "notes": "small hip entry/bay at the north eave with its own dark north face"
+  },
+  {
+   "name": "west_bay",
+   "rect_px": [
+    [
+     412.0,
+     427.0
+    ],
+    [
+     447.0,
+     427.0
+    ],
+    [
+     447.0,
+     464.0
+    ],
+    [
+     412.0,
+     464.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "notes": "small bump-out on the west wall, in shadow; could be a chimney mass, low confidence"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    436.0,
+    279.0
+   ],
+   [
+    690.0,
+    271.0
+   ],
+   [
+    690.0,
+    336.0
+   ],
+   [
+    547.0,
+    336.0
+   ],
+   [
+    547.0,
+    326.0
+   ],
+   [
+    477.0,
+    326.0
+   ],
+   [
+    477.0,
+    338.0
+   ],
+   [
+    436.0,
+    340.0
+   ]
+  ],
+  [
+   [
+    550.0,
+    340.0
+   ],
+   [
+    570.0,
+    340.0
+   ],
+   [
+    570.0,
+    367.0
+   ],
+   [
+    550.0,
+    367.0
+   ]
+  ],
+  [
+   [
+    700.0,
+    589.0
+   ],
+   [
+    731.0,
+    589.0
+   ],
+   [
+    731.0,
+    594.0
+   ],
+   [
+    700.0,
+    594.0
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "house shadow band north of the eave; the eave fascia is at y about 335-345, trace overshoots",
+  "chimney",
+  "trace spike east, not roof"
+ ],
+ "notes": "Simple 2-story hip with a south cross hip and a small north entry hip. Confidence high on main and south wing, medium on the bays."
+}

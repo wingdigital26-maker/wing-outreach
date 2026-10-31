@@ -1,0 +1,4 @@
+region,row,address,faces,bearing,to_street,street,street_m,flag
+collin-tx,204869,4427 Kelly Dr,SW,234,232,Kelly Drive,30.9,
+collin-tx,164231,3312 Snidow Ct,N,15,20,Snidow Court,29.8,
+collin-tx,15292,13 Carter Ct,S,181,180,Carter Court,29.2,

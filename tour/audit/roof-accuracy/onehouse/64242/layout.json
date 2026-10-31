@@ -1,0 +1,146 @@
+{
+ "image": "gtrace/64242/google.png",
+ "ft_per_px": 0.2,
+ "pieces": [
+  {
+   "name": "rear_upper",
+   "rect_px": [
+    [
+     492.7,
+     225.1
+    ],
+    [
+     768.7,
+     359.6
+    ],
+    [
+     727.1,
+     445.0
+    ],
+    [
+     451.1,
+     310.5
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.899,
+    0.438
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "strip along the NE (rear) edge, taller section whose fascia shows as a long bright line inside the roof; hip with ridge along the house axis, hipped both ends; NNE faces are small per LiDAR (110, 99, 66 sq ft)"
+  },
+  {
+   "name": "front_lower",
+   "rect_px": [
+    [
+     462.0,
+     288.0
+    ],
+    [
+     738.0,
+     422.5
+    ],
+    [
+     656.6,
+     589.7
+    ],
+    [
+     380.6,
+     455.2
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.899,
+    0.438
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "lower roof over the SW two thirds, ridge along the axis, hipped at the W and E ends; its SSW faces are the big 431 and 313 sq ft 6/12 planes, its NE face runs up under the rear_upper eave"
+  },
+  {
+   "name": "front_left",
+   "rect_px": [
+    [
+     469.9,
+     271.8
+    ],
+    [
+     557.1,
+     314.3
+    ],
+    [
+     468.6,
+     495.9
+    ],
+    [
+     381.4,
+     453.4
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -0.438,
+    0.899
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "front (SW) cross hip on the W half, ridge perpendicular to the axis, hipped at the SW eave, big WNW face (340 sq ft 5.6/12)"
+  },
+  {
+   "name": "cross_right",
+   "rect_px": [
+    [
+     592.9,
+     396.3
+    ],
+    [
+     691.7,
+     444.4
+    ],
+    [
+     627.8,
+     575.7
+    ],
+    [
+     528.9,
+     527.5
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -0.438,
+    0.899
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "cross hip on the E half of the front (SW) side only, ridge perpendicular to the axis, hipped at the SW eave; v1 ran it through to the NE eave which crossed the rear strip"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    537.5,
+    502.8
+   ],
+   [
+    645.4,
+    555.4
+   ],
+   [
+    630.5,
+    586.0
+   ],
+   [
+    522.6,
+    533.4
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "wood pergola/deck strip along the SW eave of the E half"
+ ],
+ "notes": "House rotated 26 deg. v1 one full-depth main hip fit 26%; now split into a taller rear strip (level 2) and a lower front hip (level 1) with two front cross hips. The two long parallel lines across the middle are read as the rear strip eave and its shadow. Confidence low, LiDAR must set the ridge offsets."
+}

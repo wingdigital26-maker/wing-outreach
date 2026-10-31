@@ -1,0 +1,21 @@
+{
+ "row": "59811",
+ "mode": "hybrid",
+ "shown": "needs work",
+ "new_pass": false,
+ "new_why": [
+  "fit 84%",
+  "17% jagged",
+  "outline vs footprint IoU 0.621",
+  "faces misoriented (lighting inverted)",
+  "segmentation suspect (rms 31.3)"
+ ],
+ "old_pass": false,
+ "old_why": [
+  "25% jagged",
+  "10.1% holes",
+  "outline vs footprint IoU 0.636",
+  "faces misoriented (lighting inverted)",
+  "segmentation suspect (rms 33.5)"
+ ]
+}

@@ -1,0 +1,10 @@
+{"row": "10709", "wings": [
+ {"id": 1, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.75},
+ {"id": 2, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.85},
+ {"id": 3, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.7},
+ {"id": 4, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.7},
+ {"id": 5, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.7},
+ {"id": 6, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.3}],
+ "missing": "W6 (NE link between W2 and the main block, by the pool) is a small low connector roof and may be flat; the W3 west block reads as a square hip pyramid sitting slightly forward (south-west) of the main E-W ridge",
+ "guess_ok": true,
+ "notes": "All-hip home: N detached-looking block W2, main E-W hip W1 with a square W hip W3, a center S hip projection W4 and an E hip wing W5 running N-S"}

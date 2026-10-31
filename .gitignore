@@ -1,0 +1,5 @@
+﻿.visual/
+node_modules/
+.env*
+**/private/
+

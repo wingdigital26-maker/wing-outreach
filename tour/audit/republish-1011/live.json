@@ -1,0 +1,76 @@
+{
+ "out": {
+  "text": "Jackson Roofing\nRoof Command, Plano, Frisco, Allen, McKinney, Richardson and Rockwall\nToday\nStorms\nCRM\nPowered by\nWing Digital\nC\nz\nz\nz\nJackson Roofing\nRoof Command, Plano, Frisco, Allen, McKinney, Richardson and Rockwall\nSign in\n\nUse the email and password for your Roof Command account.\n\nEmail\nPassw",
+  "nav": [
+   "Today",
+   "Storms",
+   "CRM"
+  ]
+ },
+ "m164153": {
+  "errs": [],
+  "nav": [
+   "Today",
+   "Storms",
+   "CRM"
+  ],
+  "measure": {
+   "facet": true,
+   "squares": 54.7,
+   "waste": 17,
+   "pitch": "12/12 + 7/12",
+   "shape": "hip and gable roof",
+   "planes": 25,
+   "drawn": false,
+   "pitchMeasured": true
+  },
+  "roof": {
+   "sq": 54.7,
+   "p": 12,
+   "p2": 7,
+   "st": 2,
+   "facets": true,
+   "est": false
+  },
+  "chip": [
+   "2-story"
+  ],
+  "title": "54.7 sq measured, hip and gable roof, pitch 12/12 + 7/12 Measured from LiDAR roof facets (2018): 25 facets, each at its own pitch and height, 12/12 + 7/12. Drag to turn it, click a plane to measure it. B 4.7 sq 12/12 D 3.5 sq 7/12 E 3.9 sq 12/12 L 1.9 sq 7/12 V 0.4 sq 2/12 Planes Edges Dimensions Ha",
+  "report": " Squares, measured54.75,472 sq ft of roof, range 51.6 to 57.8 Order with waste6417% waste, hips and valleys Pitch, hip and gable roof12/12 + 7/1212/12 56%7/12 36%11/12 5% Facets25planes measured Stories2from LiDAR roof heightTop-down diagram lengths in ft111281115211514201521299201191024151797116208",
+  "svg": true,
+  "erep": "Locator.screenshot: Timeout 27951ms exceeded.\nCall log:\n  - taking element scree"
+ },
+ "m207416": {
+  "errs": [],
+  "nav": [
+   "Today",
+   "Storms",
+   "CRM"
+  ],
+  "measure": {
+   "facet": false,
+   "squares": 47.7,
+   "waste": 15,
+   "pitch": "8/12",
+   "shape": "hip roof",
+   "planes": 13,
+   "drawn": false,
+   "pitchMeasured": false
+  },
+  "roof": {
+   "sq": 47.7,
+   "p": 8,
+   "p2": 0,
+   "st": 1,
+   "facets": false,
+   "est": true
+  },
+  "chip": [
+   "1-story"
+  ],
+  "title": "~47.7 sq (est.), hip roof, pitch est. (no LiDAR) Estimated, lower confidence: roof planes drawn from LiDAR (2018), 13 facets, pitch est. 8/12. Drag to turn it, click a plane to measure it. B ~6.6 sq est. 8/12 C ~6.6 sq est. 8/12 F ~4.3 sq est. 8/12 Planes Edges Dimensions Hail Explode No hail on fil",
+  "report": " Squares, est.~47.73,973 sq ft plan Order with waste54.915% waste, hips and valleys Pitch, hip and gable roof8/128/12 main Facets13planes, est. Stories1from LiDAR roof heightTop-down diagram lengths in ft1130313112152931332630281229925988144317243770A \u00b7 8/12B \u00b7 8/12C \u00b7 8/12D \u00b7 8/12E \u00b7 8/12F \u00b7 8/12G ",
+  "svg": true,
+  "erep": "Locator.screenshot: Timeout 28978ms exceeded.\nCall log:\n  - taking element scree"
+ }
+}

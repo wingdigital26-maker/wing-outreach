@@ -1,0 +1,8 @@
+14:17:56 ('collin-tx', 35276) collin-tx 35276 {"clean_rules": 24, "judged": 46, "w1_before": 41.6, "C": "clean", "src": "work:pop-drop:fix2", "w1": 40.7} 21s
+14:18:14 ('collin-tx', 34780) collin-tx 34780 {"clean_rules": 0, "judged": 20, "w1_before": 66.0, "C": "not clean (round-2 file kept)"} 39s
+14:18:45 ('collin-tx', 428) collin-tx 428 {"clean_rules": 0, "judged": 16, "w1_before": 89.4, "C": "not clean (round-2 file kept)"} 30s
+14:18:46 ('collin-tx', 35469) collin-tx 35469 {"clean_rules": 3, "judged": 30, "w1_before": 56.2, "C": "clean", "src": "r2:eq2:fix2", "w1": 56.1} 71s
+14:18:58 ('collin-tx', 5921) collin-tx 5921 {"clean_rules": 2, "judged": 16, "w1_before": 70.6, "C": "not clean (round-2 file kept)"} 13s
+14:19:19 ('collin-tx', 36436) collin-tx 36436 {"clean_rules": 16, "judged": 101, "w1_before": 65.7, "C": "not clean (round-2 file kept)"} 82s
+14:19:36 ('rockwall-tx', 2558) rockwall-tx 2558 {"clean_rules": 0, "judged": 30, "w1_before": 46.4, "C": "not clean (round-2 file kept)"} 49s
+14:20:09 ('rockwall-tx', 48) rockwall-tx 48 {"clean_rules": 0, "judged": 30, "w1_before": 45.3, "C": "not clean (round-2 file kept)"} 70s

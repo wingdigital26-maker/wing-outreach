@@ -1,0 +1,153 @@
+{
+ "image": "gtrace/9441/google.png",
+ "ft_per_px": 0.2,
+ "pieces": [
+  {
+   "name": "nw_wing",
+   "rect_px": [
+    [
+     348,
+     198
+    ],
+    [
+     466,
+     263
+    ],
+    [
+     394,
+     395
+    ],
+    [
+     275,
+     329
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.875,
+    0.484
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "house axis runs WNW-ESE (about 29 deg below the px x axis); NW wing is a 30 ft wide hip with its ridge along the house axis from the hip apex near (343,269) to (417,324) where it dies into the centre NW hip face (LiDAR ridge about 18 ft, eave 9 ft); NW eave is the line from the N corner (348,198) down-left through (300,286); chimney at (330-350,310-375) on its SW slope"
+  },
+  {
+   "name": "centre",
+   "rect_px": [
+    [
+     383,
+     217
+    ],
+    [
+     632,
+     355
+    ],
+    [
+     495,
+     602
+    ],
+    [
+     247,
+     464
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.875,
+    0.484
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "tall single-story hip across the full 56 ft width, ridge along the house axis near the centre line (short, about (411,387) to (446,410), LiDAR 25 ft with a 9 ft eave); W corner at (244,463) to (264,443); E corner at the notch (625,368); its SE end hips down to the notch edge (625,368) to (569,469); the dark triangle (300-400,300-420) with the chimney is its NW-facing hip-end face, not flat"
+  },
+  {
+   "name": "se_wing",
+   "rect_px": [
+    [
+     503,
+     434
+    ],
+    [
+     619,
+     498
+    ],
+    [
+     546,
+     630
+    ],
+    [
+     430,
+     566
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0.875,
+    0.484
+   ],
+   "gable_ends": [
+    "SE"
+   ],
+   "level": 1,
+   "notes": "30 ft wide section offset to the SW side, ridge along the house axis (LiDAR 16 ft) from the centre SE face out to the SE end at full height, so the SE end reads as a gable; NE eave at the notch line (569,469) to about (595,478), then the E corner is clipped on a diagonal to (595,540); SE end line runs from (595,540) down-left to (539,623); LiDAR shows a 4 ft wide flatter strip along the ridge, treated as ridge noise"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    289,
+    206
+   ],
+   [
+    331,
+    230
+   ],
+   [
+    271,
+    338
+   ],
+   [
+    229,
+    315
+   ]
+  ],
+  [
+   [
+    622,
+    487
+   ],
+   [
+    684,
+    521
+   ],
+   [
+    601,
+    670
+   ],
+   [
+    540,
+    636
+   ]
+  ],
+  [
+   [
+    596,
+    477
+   ],
+   [
+    626,
+    493
+   ],
+   [
+    598,
+    544
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "tree canopy beyond the NW wing NW eave at the W corner, trace follows the canopy out to (236,310) and (291,210)",
+  "trace overshoots the SE end by about 12 ft into tree canopy and ground shadow (trace corners (647,569) and (599,656); real SE end near (595,540) to (539,623))",
+  "E corner of the SE wing is clipped on a diagonal; the notch edge in the trace runs past it"
+ ],
+ "notes": "Rotated single-story house (long axis about 29 deg): a tall 56 ft wide hip centre with a hip wing on the NW and a narrower gable-ended wing on the SE, both ridges along the house axis. Confidence med: piece split and the axis are clear from the LiDAR lines; trace overshoots into trees at both ends (excluded); medium on the SE gable call (ridge stays at full height to the end in LiDAR, but the end is under tree shadow) and on the exact NW eave at the W corner under the canopy. Shading is inconsistent on this image so faces were read from LiDAR geometry, not light and dark."
+}

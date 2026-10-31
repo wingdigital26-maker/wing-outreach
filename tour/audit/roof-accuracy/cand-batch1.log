@@ -1,0 +1,58 @@
+09:15:28 57 homes to build, 3 at once
+09:15:53 ('collin-tx', 35276) 09:15:52 collin-tx 35276 {"B": "clean", "C": "not clean: r6_looks", "D": "clean", "E": "clean"} 23s
+09:16:08 ('collin-tx', 206483) 09:16:08 collin-tx 206483 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 39s
+09:16:18 ('collin-tx', 1954) 09:16:17 collin-tx 1954 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 48s
+09:16:56 ('rockwall-tx', 23) 09:16:56 rockwall-tx 23 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 63s
+09:17:06 ('collin-tx', 130356) 09:17:06 collin-tx 130356 {"B": "clean", "C": "not clean: r1_solid, r4_sizes", "D": "clean", "E": "not clean: r4_sizes, r6_looks"} 57s
+09:17:37 ('collin-tx', 10524) 09:17:37 collin-tx 10524 {"B": "not clean: r4_sizes", "C": "not clean: r1_solid, r6_looks, edges", "D": "not clean: r4_sizes", "E": "not clean: r4_sizes, edges"} 78s
+09:17:53 ('collin-tx', 205330) 09:17:53 collin-tx 205330 {"B": "clean", "C": "clean", "D": "clean", "E": "not clean: edges"} 47s
+09:18:10 ('collin-tx', 34780) 09:18:09 collin-tx 34780 {"B": "not clean: r2_walls, r6_looks", "C": "not clean: r6_looks, edges", "D": "not clean: r4_sizes", "E": "not clean: r2_walls, r4_sizes, r6_looks"} 73s
+09:18:38 ('rockwall-tx', 68) 09:18:38 rockwall-tx 68 {"B": "not clean: r6_looks", "C": "not clean: r4_sizes, r6_looks", "D": "not clean: r6_looks", "E": "not clean: r1_solid"} 61s
+09:18:48 ('collin-tx', 5921) 09:18:48 collin-tx 5921 {"B": "clean", "C": "not clean: edges", "D": "clean", "E": "clean"} 37s
+09:18:48 ('collin-tx', 204869) deferred
+09:18:48 ('rockwall-tx', 48) deferred
+09:18:48 ('collin-tx', 166093) deferred
+09:18:48 ('collin-tx', 36436) deferred
+09:18:48 ('collin-tx', 15574) deferred
+09:18:48 ('collin-tx', 200871) deferred
+09:18:48 ('rockwall-tx', 5321) deferred
+09:18:48 ('collin-tx', 173943) deferred
+09:18:48 ('collin-tx', 35469) deferred
+09:18:48 ('rockwall-tx', 2558) deferred
+09:18:48 ('collin-tx', 200985) deferred
+09:18:48 ('collin-tx', 189060) deferred
+09:18:48 ('collin-tx', 36251) deferred
+09:18:48 ('collin-tx', 428) deferred
+09:18:48 ('collin-tx', 206911) deferred
+09:18:48 ('collin-tx', 188969) deferred
+09:18:48 ('collin-tx', 15292) deferred
+09:18:48 ('collin-tx', 207704) deferred
+09:18:48 ('collin-tx', 147750) deferred
+09:18:48 ('collin-tx', 32591) deferred
+09:18:48 ('collin-tx', 204682) deferred
+09:18:48 ('collin-tx', 191766) deferred
+09:18:48 ('collin-tx', 171979) deferred
+09:18:48 ('collin-tx', 164153) deferred
+09:18:48 ('collin-tx', 164151) deferred
+09:18:48 ('collin-tx', 164201) deferred
+09:18:48 ('collin-tx', 164203) deferred
+09:18:48 ('collin-tx', 164157) deferred
+09:18:48 ('collin-tx', 164205) deferred
+09:18:48 ('collin-tx', 164199) deferred
+09:18:48 ('collin-tx', 164150) deferred
+09:18:48 ('collin-tx', 164154) deferred
+09:18:48 ('collin-tx', 164152) deferred
+09:18:48 ('collin-tx', 164156) deferred
+09:18:48 ('collin-tx', 164207) deferred
+09:18:48 ('collin-tx', 164159) deferred
+09:18:48 ('collin-tx', 164197) deferred
+09:18:48 ('collin-tx', 164158) deferred
+09:18:48 ('collin-tx', 164148) deferred
+09:18:48 ('collin-tx', 164200) deferred
+09:18:48 ('collin-tx', 164149) deferred
+09:18:48 ('collin-tx', 164198) deferred
+09:18:48 ('collin-tx', 164209) deferred
+09:18:48 ('collin-tx', 164160) deferred
+09:18:48 ('collin-tx', 164161) deferred
+09:18:48 ('collin-tx', 153987) 09:18:48 collin-tx 153987 {"B": "clean", "C": "clean", "D": "not clean: r1_solid, edges", "E": "not clean: r1_solid, r4_sizes"} 55s
+09:19:01 ('collin-tx', 32361) 09:19:01 collin-tx 32361 {"B": "clean", "C": "clean", "D": "not clean: edges", "E": "not clean: r6_looks, edges"} 23s

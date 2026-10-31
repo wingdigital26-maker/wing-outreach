@@ -1,0 +1,18 @@
+{
+ "row": "15249",
+ "mode": "hybrid",
+ "shown": "needs work",
+ "new_pass": false,
+ "new_why": [
+  "lines 2.12 ft",
+  "18% jagged",
+  "eaves 2.15 ft",
+  "outline vs footprint IoU 0.53"
+ ],
+ "old_pass": false,
+ "old_why": [
+  "lines 3.35 ft",
+  "7.6% holes",
+  "outline vs footprint IoU 0.469"
+ ]
+}

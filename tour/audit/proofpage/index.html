@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Proof Page review</title>
+<style>
+@font-face{font-family:'Inter';font-weight:100 900;font-display:swap;src:url(../../c5-home/assets/fonts/inter-var-latin.woff2) format('woff2')}
+:root{--ink:#0B1020;--ink-2:#2A3246;--muted:#566074;--rule:#E4E7EC;--bg:#F3F5F8;--card:#fff;--accent:#0D6C99;--soft:#E3F6FE;--aink:#07547A;--warn:#9A3412;--warn-bg:#FFF4EC;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:15px/1.55 Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:30px;letter-spacing:-.02em}
+h2{font-size:21px;margin:36px 0 10px;letter-spacing:-.01em}
+h3{font-size:16px;margin:18px 0 6px}
+p{color:var(--ink-2);max-width:78ch}
+.lede{margin-top:6px;font-size:16px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.links a{background:#fff;border:1px solid var(--rule);border-radius:999px;padding:6px 12px;color:var(--aink);text-decoration:none;font-weight:600;font-size:13.5px}
+.box{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px 18px;margin-top:10px}
+.box ul{margin:6px 0 0 18px}.box li{margin:4px 0;color:var(--ink-2)}
+.warn{background:var(--warn-bg);border-color:#F6D3BC}
+.warn b{color:var(--warn)}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:10px}
+.shots figure{background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.shots img{display:block;width:100%;height:340px;object-fit:cover;object-position:top;cursor:zoom-in;background:#EEF1F5}
+.shots figcaption{padding:8px 10px;font-size:12.5px;color:var(--muted)}
+.shots figcaption b{color:var(--ink);display:block;font-size:13px}
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;margin-top:8px}
+.tpl{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:12px 14px}
+.tpl.lead{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.tpl .hd{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12.5px;font-weight:700}
+.tag{border-radius:6px;padding:1px 7px;font-size:11px;font-weight:700;background:#F1F3F6;color:var(--ink-2)}
+.tag.ld{background:var(--accent);color:#fff}.tag.w{background:var(--warn-bg);color:var(--warn)}
+.tpl .sj{margin-top:8px;font-size:13px}.tpl .sj b{color:var(--muted);font-weight:600}
+.tpl pre{white-space:pre-wrap;font:13.5px/1.5 Inter,system-ui,sans-serif;background:#F6F8FA;border-radius:9px;padding:10px 12px;margin-top:8px;color:var(--ink)}
+.tpl .why{font-size:12.5px;color:var(--muted);margin-top:8px}
+.tpl .then{font-size:12.5px;margin-top:6px}
+#legalBody table{width:100%;border-collapse:collapse;margin:8px 0 6px;font-size:13.5px;background:#fff}
+#legalBody th,#legalBody td{border:1px solid var(--rule);padding:7px 9px;text-align:left;vertical-align:top}
+#legalBody th{background:#F6F8FA}
+#legalBody h2{font-size:18px;margin:26px 0 6px}
+#legalBody h1{font-size:22px;margin-top:6px}
+#legalBody p,#legalBody li{font-size:14px}
+#legalBody ol,#legalBody ul{margin:6px 0 6px 20px}
+#legalBody a{color:var(--aink)}
+#legalBody code,.tpl code{font-size:12.5px;background:#EEF1F5;border-radius:4px;padding:0 4px}
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:96vh}
+dialog img{max-width:96vw;max-height:94vh;display:block;border-radius:10px}
+dialog::backdrop{background:rgba(11,16,32,.7)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Bet 3: the Homeowner Proof Page</h1>
+  <p class="lede">A per-home public storm record a rep sends by hand in a text or email: radar hail at the address, the nearest National
+    Weather Service hail report, the street on that storm, re-roof permits nearby (counts only), roof age and the LiDAR size estimate,
+    the roofer, a "Book a free inspection" button and a consent box that records written consent on the home's record.
+    Branch <code>ui/proofpage</code>, built 2026-10-23.</p>
+  <div class="links" id="links"></div>
+
+  <div class="box warn"><b>Before any cold text goes out (legal stop signs).</b>
+    <ul>
+      <li>Scrub phones against the National Do Not Call Registry and the Texas no-call list: DNC rules cover human-tapped texts too. The app has no DNC flag yet.</li>
+      <li>A Texas lawyer on Bus. &amp; Com. Code 305.001 (sales calls to mobile numbers need consent) and the ch. 302 registration exemption (302.059).</li>
+      <li>A backend for consent and opt-out records (today they live on one device), kept 5 years.</li>
+      <li>Jackson's mailing address and a privacy policy link on file (emails are held until the address is there).</li>
+    </ul>
+  </div>
+
+  <h2>What changed</h2>
+  <div class="box"><ul>
+    <li><b>tour/proof/</b>: the public Proof Page. Mobile first, <code>noindex</code>, no owner names, phones or emails; neighbours as counts only. Every fact carries its source.</li>
+    <li><b>tour/lib/rc-proof.js</b>: link token, the send/open/consent/inspection/opt-out log on the home's record, the versioned consent wording, 4 touches x text and email with 2 or 3 versions each, and the send dialog.</li>
+    <li><b>Home record</b>: a "Proof page" button (and "Proof" in the phone bar) opens the dialog; a status strip shows sent, opened, consent and inspection asks. Sending logs a text or email, so the owner's full name unlocks (RC.messaged).</li>
+    <li><b>Today cards</b>: a "Proof" button next to Text and Email, and a pill when the page was opened, consent given or an inspection asked.</li>
+    <li><b>docs/proofpage/</b>: <a href="../../../docs/proofpage/TEMPLATES.md">TEMPLATES.md</a> and <a href="../../../docs/proofpage/LEGAL-CHECKLIST.md">LEGAL-CHECKLIST.md</a>.</li>
+  </ul></div>
+
+  <h2>Screenshots</h2>
+  <p>From <code>tour/audit/proofpage/shoot.py</code> (headless Chromium with swiftshader). The home is 2017 Londonderry Dr (a real county record; no owner shown). The consent shown is a fake 555 number on localhost.</p>
+  <div class="shots" id="shots"></div>
+
+  <section id="templates">
+    <h2>The pitch: every template</h2>
+    <p>Rendered live from <code>lib/rc-proof.js</code> with sample facts, exactly what the dialog drafts. The outlined card in each group is the one I would lead with. Gate "warm" = only after a reply, consent on the page, an opt-in or a past customer; cold follow-ups go by email.</p>
+    <div class="box"><b>Why these leads.</b> Facts: carriers filter texts with public link shorteners, a domain you own is the fix (Twilio, Bird); links get extra carrier scrutiny and perform when expected (Drips); no independent roofing SMS reply-rate study exists, the vendor numbers (38%, 32.7%) are unaudited. Opinion: lead cold texts with B (ask first, link on yes), which keeps the 10-09 no-link rule and turns the link into something the homeowner asked for; email carries the link from the first touch; test A and C against B at 100 sends each once the link is on the roofer's domain. Sources in <a href="../../../docs/proofpage/TEMPLATES.md">TEMPLATES.md</a>.</div>
+    <div id="tplBody"></div>
+  </section>
+
+  <section id="legal">
+    <h2>Legal checklist</h2>
+    <div class="box" id="legalBody">Loading docs/proofpage/LEGAL-CHECKLIST.md...</div>
+  </section>
+</main>
+<dialog id="zoom"><img alt=""></dialog>
+
+<script src="../../lib/rc-state.js"></script>
+<script src="../../lib/brand.js"></script>
+<script src="../../lib/rc-copy.js"></script>
+<script src="../../lib/rc-proof.js"></script>
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s), esc = RC.esc, GI = 19156;
+  const tok = RCP.token(GI);
+  $('#links').innerHTML = [
+    [`../../proof/?h=${tok}&preview=1`, 'Proof Page (preview)'],
+    [`../../c5-home/index.html?home=m${GI}&dev=1`, 'Home record with Proof page button'],
+    ['../../c4-command-deck/deck.html?dev=1', 'Today cards with Proof button'],
+    ['../../../docs/proofpage/TEMPLATES.md', 'TEMPLATES.md'],
+    ['../../../docs/proofpage/LEGAL-CHECKLIST.md', 'LEGAL-CHECKLIST.md']
+  ].map(([h, t]) => `<a href="${h}" target="_blank" rel="noopener">${t}</a>`).join('');
+
+  // screenshots (shots/shots.json lists what the last shoot.py run wrote)
+  const CAP = {
+    'proof-phone-top.png': ['Proof Page, phone', 'The storm at the address, sourced.'],
+    'proof-phone-near-street.png': ['How close the hail came', 'Nearest NWS hail report and the street dot map.'],
+    'proof-phone-roof.png': ['Roof on record', 'Year built, LiDAR squares with the standard estimate wording.'],
+    'proof-phone-form.png': ['Book + consent box', 'Unticked by default; booking works without it.'],
+    'proof-phone-done.png': ['After the request', 'What the homeowner sees.'],
+    'proof-phone-full.png': ['Proof Page, whole phone page', ''],
+    'proof-desktop.png': ['Proof Page, desktop', ''],
+    'proof-desktop-full.png': ['Proof Page, whole desktop page', ''],
+    'record-desktop-status.png': ['Home record: status strip', 'Opened, consent, inspection asked.'],
+    'record-desktop-dialog.png': ['Send the Proof Page', 'Touch, channel, version (lead marked), why, the draft.'],
+    'dialog-storm-text.png': ['First touch after a storm, text', 'B leads: ask first, link on yes.'],
+    'dialog-follow-text.png': ['Follow-up, text', 'Warm homes only.'],
+    'dialog-door-text.png': ['After the door, text', ''],
+    'dialog-door-email.png': ['After the door, email', 'Held until the mailing address is on file.'],
+    'record-desktop-after-send.png': ['After Open in Messages', 'Logged on the record; the owner name rule unlocks.'],
+    'record-phone.png': ['Home record, phone', 'Proof in the bottom bar.'],
+    'record-phone-dialog.png': ['Send dialog, phone', ''],
+    'today-desktop.png': ['Today card', 'Proof next to Text and Email.'],
+    'today-desktop-dialog.png': ['Send from Today', ''],
+    'review-templates.png': ['Template gallery', ''], 'review-legal.png': ['Legal checklist', '']
+  };
+  if (!/noshots/.test(location.search)) fetch('shots/shots.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : []).catch(() => []).then(l => {
+    $('#shots').innerHTML = l.length ? l.map(n => { const c = CAP[n] || [n, ''];
+      return `<figure><img src="shots/${n}" alt="${esc(c[0])}" loading="lazy"><figcaption><b>${esc(c[0])}</b>${esc(c[1])}</figcaption></figure>`; }).join('')
+      : '<p>No shots yet: run <code>python tour/audit/proofpage/shoot.py</code>.</p>';
+  });
+  const z = $('#zoom'); document.addEventListener('click', e => { const i = e.target.closest('.shots img'); if (i) { z.querySelector('img').src = i.src; z.showModal(); } else if (e.target.closest('#zoom')) z.close(); });
+
+  // every template, rendered with sample facts
+  const F = { street: '6351 Burnham St', city: 'Frisco', stormISO: '2026-06-02', hail: 1.41, link: 'https://check.<roofer domain>/?h=' + tok + '&s=t1a2b3',
+    hitNear: 31, areaN: 44, reroofs: 6, year: 2004, squares: 31.2, consented: true };
+  $('#tplBody').innerHTML = RCP.TOUCHES.map(k => `<h3>${esc(RCP.templates[k].label)}</h3><div class="tg">${['text', 'email'].map(ch => RCP.variants(k, ch).map(v => {
+    const r = RCP.render(k, ch, v.v, F);
+    return `<div class="tpl${r.lead ? ' lead' : ''}"><div class="hd">${ch === 'text' ? 'Text' : 'Email'} ${r.v}: ${esc(r.name)} ${r.lead ? '<span class="tag ld">Lead</span>' : ''}${r.gate === 'warm' ? '<span class="tag w">Warm only</span>' : '<span class="tag">Cold OK, tapped by hand</span>'}${ch === 'text' ? `<span class="tag">${r.chars} chars</span>` : ''}${r.emDash ? '<span class="tag w">EM DASH</span>' : ''}</div>
+      ${r.subject ? `<div class="sj"><b>Subject:</b> ${esc(r.subject)}</div>` : ''}<pre>${esc(r.body)}</pre>${r.then ? `<div class="then"><b>When they reply yes:</b> ${esc(r.then)}</div>` : ''}<div class="why">${esc(r.why)}</div></div>`; }).join('')).join('')}</div>`).join('');
+
+  // the legal checklist, from the markdown file (one source)
+  const inl = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>').replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`);
+  function md(src) {
+    const L = src.replace(/\r/g, '').split('\n'), out = []; let i = 0;
+    while (i < L.length) { const l = L[i];
+      if (/^#{1,3} /.test(l)) { const n = l.match(/^#+/)[0].length; out.push(`<h${n}>${inl(l.slice(n + 1))}</h${n}>`); i++; continue; }
+      if (/^\|/.test(l)) { const rows = []; while (i < L.length && /^\|/.test(L[i])) rows.push(L[i++]);
+        const cells = r => r.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+        out.push('<table><thead><tr>' + cells(rows[0]).map(c => `<th>${inl(c)}</th>`).join('') + '</tr></thead><tbody>' + rows.slice(2).map(r => '<tr>' + cells(r).map(c => `<td>${inl(c)}</td>`).join('') + '</tr>').join('') + '</tbody></table>'); continue; }
+      if (/^\d+\. /.test(l)) { const it = []; while (i < L.length && (/^\d+\. /.test(L[i]) || /^ {2,}\S/.test(L[i]))) { if (/^\d+\. /.test(L[i])) it.push(L[i].replace(/^\d+\. /, '')); else it[it.length - 1] += ' ' + L[i].trim(); i++; } out.push('<ol>' + it.map(x => `<li>${inl(x)}</li>`).join('') + '</ol>'); continue; }
+      if (/^- /.test(l)) { const it = []; while (i < L.length && (/^- /.test(L[i]) || /^ {2,}\S/.test(L[i]))) { if (/^- /.test(L[i])) it.push(L[i].slice(2)); else it[it.length - 1] += ' ' + L[i].trim(); i++; } out.push('<ul>' + it.map(x => `<li>${inl(x)}</li>`).join('') + '</ul>'); continue; }
+      if (!l.trim()) { i++; continue; }
+      const p = []; while (i < L.length && L[i].trim() && !/^(#|\||- |\d+\. )/.test(L[i])) p.push(L[i++]); out.push(`<p>${inl(p.join(' '))}</p>`);
+    }
+    return out.join('');
+  }
+  fetch('../../../docs/proofpage/LEGAL-CHECKLIST.md', { cache: 'no-store' }).then(r => r.text()).then(t => { $('#legalBody').innerHTML = md(t); })
+    .catch(() => { $('#legalBody').textContent = 'Could not load docs/proofpage/LEGAL-CHECKLIST.md (serve the worktree root).'; });
+})();
+</script>
+</body>
+</html>

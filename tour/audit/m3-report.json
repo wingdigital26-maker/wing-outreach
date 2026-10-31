@@ -1,0 +1,55 @@
+{
+ "report": {
+  "home": {
+   "screen": "home",
+   "shell": [],
+   "frame": [
+    [
+     "SPAN.pill soft \"Next task\"",
+     "A.p \"Call\"",
+     269
+    ],
+    [
+     "SPAN.due \"Today, best time 5 to 7 pm\"",
+     "BUTTON. \"Text\"",
+     31
+    ],
+    [
+     "SPAN.due \"Today, best time 5 to 7 pm\"",
+     "BUTTON. \"Book\"",
+     24
+    ]
+   ],
+   "n": 21,
+   "small": []
+  },
+  "home-plane-sheet": {
+   "screen": "home-plane-sheet",
+   "shell": [],
+   "frame": [
+    [
+     "SPAN.pill soft \"Next task\"",
+     "A.p \"Call\"",
+     269
+    ],
+    [
+     "SPAN.due \"Today, best time 5 to 7 pm\"",
+     "BUTTON. \"Text\"",
+     31
+    ],
+    [
+     "SPAN.due \"Today, best time 5 to 7 pm\"",
+     "BUTTON. \"Book\"",
+     24
+    ]
+   ],
+   "n": 21,
+   "small": []
+  }
+ },
+ "errors": [],
+ "fails": [
+  "home: frame overlaps = 3 [['SPAN.pill soft \"Next task\"', 'A.p \"Call\"', 269], ['SPAN.due \"Today, best time 5 to 7 pm\"', 'BUTTON. \"Text\"', 31], ['SPAN.due \"Today, best time 5 to 7 pm\"', 'BUTTON. \"Book\"', 24]]",
+  "home-plane-sheet: frame overlaps = 3 [['SPAN.pill soft \"Next task\"', 'A.p \"Call\"', 269], ['SPAN.due \"Today, best time 5 to 7 pm\"', 'BUTTON. \"Text\"', 31], ['SPAN.due \"Today, best time 5 to 7 pm\"', 'BUTTON. \"Book\"', 24]]"
+ ]
+}

@@ -1,0 +1,92 @@
+{
+ "url": "http://127.0.0.1:4886/tour/product.html?dev=1",
+ "ready_ms": 7766,
+ "why": "ready",
+ "warm": {
+  "daily": 7765,
+  "storm": 6864,
+  "home": 7447,
+  "ask": 7257,
+  "storm_why": "drawn",
+  "ask_why": "drawn",
+  "home_why": "drawn",
+  "daily_why": "ready"
+ },
+ "hand_ms": 7796,
+ "handoff_s_after_nav": 8.8,
+ "today_ready_in_frame_ms": 7746,
+ "long_tasks": {
+  "daily": {
+   "before": {
+    "n": 7,
+    "ms": 1121,
+    "max": 503
+   },
+   "after": {
+    "n": 0,
+    "ms": 0,
+    "max": 0
+   }
+  },
+  "1a-storm-intro.html?short=1&wait=1": {
+   "before": {
+    "n": 7,
+    "ms": 1121,
+    "max": 503
+   },
+   "after": {
+    "n": 0,
+    "ms": 0,
+    "max": 0
+   }
+  },
+  "deck.html": {
+   "before": {
+    "n": 7,
+    "ms": 1121,
+    "max": 503
+   },
+   "after": {
+    "n": 0,
+    "ms": 0,
+    "max": 0
+   }
+  },
+  "1b-storm-theater.html": {
+   "before": {
+    "n": 7,
+    "ms": 1121,
+    "max": 503
+   },
+   "after": {
+    "n": 0,
+    "ms": 0,
+    "max": 0
+   }
+  },
+  "index.html?home=m35163&view=inbox": {
+   "before": {
+    "n": 7,
+    "ms": 1121,
+    "max": 503
+   },
+   "after": {
+    "n": 0,
+    "ms": 0,
+    "max": 0
+   }
+  },
+  "index.html": {
+   "before": {
+    "n": 7,
+    "ms": 1121,
+    "max": 503
+   },
+   "after": {
+    "n": 0,
+    "ms": 0,
+    "max": 0
+   }
+  }
+ }
+}

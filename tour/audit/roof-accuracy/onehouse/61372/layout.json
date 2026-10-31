@@ -1,0 +1,199 @@
+{
+ "image": "gtrace/61372/google.png",
+ "ft_per_px": 0.208,
+ "pieces": [
+  {
+   "name": "west_block",
+   "rect_px": [
+    [
+     367.7,
+     312.8
+    ],
+    [
+     505.2,
+     324.1
+    ],
+    [
+     486.0,
+     557.3
+    ],
+    [
+     348.5,
+     546.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.997,
+    0.082
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "West block (garage side, driveway to its south). E-W ridge seen at v about 222 with a clean 45 deg SW hip; north face reads long and shallow (or a stepped lower roof). Big dark north face with many vents."
+  },
+  {
+   "name": "centre_wing",
+   "rect_px": [
+    [
+     508.1,
+     289.2
+    ],
+    [
+     601.7,
+     296.9
+    ],
+    [
+     578.6,
+     578.0
+    ],
+    [
+     485.0,
+     570.3
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -0.082,
+    0.997
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Centre wing projects 35 px north of the other eaves; nested V (chevron) hip lines converge on a N-S ridge at u about 185."
+  },
+  {
+   "name": "east_block",
+   "rect_px": [
+    [
+     599.3,
+     326.8
+    ],
+    [
+     667.1,
+     332.4
+    ],
+    [
+     655.0,
+     478.9
+    ],
+    [
+     587.2,
+     473.4
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -0.082,
+    0.997
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Upper east block; NE hip line runs from the NE corner to the SW. Ridge direction N-S is a medium-low call."
+  },
+  {
+   "name": "south_block",
+   "rect_px": [
+    [
+     451.1,
+     457.1
+    ],
+    [
+     691.3,
+     476.9
+    ],
+    [
+     674.7,
+     679.2
+    ],
+    [
+     434.5,
+     659.5
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.997,
+    0.082
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Lower (south) block: lit south face along the whole south eave, E-W ridge. Includes a round bay (dark half-disc at px 527-587, 580-633) on the south wall; left as part of this piece."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    370,
+    258
+   ],
+   [
+    656,
+    281
+   ],
+   [
+    669,
+    299
+   ],
+   [
+    668,
+    336
+   ],
+   [
+    607,
+    330
+   ],
+   [
+    602,
+    298
+   ],
+   [
+    510,
+    290
+   ],
+   [
+    506,
+    325
+   ],
+   [
+    368,
+    315
+   ]
+  ],
+  [
+   [
+    432,
+    662
+   ],
+   [
+    647,
+    679
+   ],
+   [
+    648,
+    655
+   ],
+   [
+    434,
+    650
+   ]
+  ],
+  [
+   [
+    647,
+    621
+   ],
+   [
+    694,
+    621
+   ],
+   [
+    694,
+    682
+   ],
+   [
+    647,
+    682
+   ]
+  ]
+ ],
+ "notes": "Large single-story hip home rotated about 4.7 deg. Trace overshoots the north eave by 35-53 px (navy band); excluded. Four regions: west block (E-W ridge), centre wing (N-S ridge, chevron hip lines), upper east block (N-S, medium-low), south block (E-W, with a round south bay). Shading is inconsistent with one sun direction (oblique capture), so ridge calls lean on hip-line geometry. Confidence medium-low overall; west block ridge position and east block direction are the doubts."
+}

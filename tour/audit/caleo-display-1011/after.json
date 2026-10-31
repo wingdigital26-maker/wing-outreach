@@ -1,0 +1,72 @@
+{
+ "1440": {
+  "errs": [],
+  "rec": {
+   "titleH": "54.7 sq measured, hip and gable roof, pitch 12/12 + 7/12",
+   "titleP": "Measured from LiDAR roof facets (2018): 25 facets, each at its own pitch and height, 12/12 + 7/12. Drag to turn it, click a plane to measure it.",
+   "focus": "Total54.7sq measuredPitch12/12 + 7/12Facets25",
+   "tfoot": "Total12/12 + 7/125,472 sq ft54.7",
+   "rows": 25,
+   "rsub": "New hit 2-story Plano, TX 75025 Whiffletree V Owner name not available",
+   "tag": null,
+   "report": "Squares, measured54.75,472 sq ft of roof, range 51.6 to 57.8 Order with waste6417% waste, hips and valleys Pitch, hip and gable roof12/12 + 7/1212/12 56%7/12 36%11/12 5% Facets25planes measured Stories2from LiDAR roof heightTop-down diagram lengths in ft1112811152115142015212992011910241517971162084310117131610261813222887796149108248792681172418181834A \u00b7 12/12B \u00b7 12/12C \u00b7 12/12D \u00b7 7/12E \u00b7 12/12F \u00b7 7/12G \u00b7 12/12H \u00b7 7/12I \u00b7 7/12J \u00b7 7/12K \u00b7 11/12L \u00b7 7/12M \u00b7 12/12N \u00b7 12/12O \u00b7 12/12P \u00b7 7/12Q \u00b7 7/12R \u00b7 7/12S \u00b7 12/12T \u00b7 12/12U \u00b7 9/12V \u00b7 2/12W \u00b7 10/12X \u00b7 9/12Y \u00b7 12/12N20 ftRidgeHipValleyEaveRakeStep flashingWall flashingEdge lengthsEdgeLengthConfidenceRidges77 ft58%Hips263 ft48%Valleys160 ft38%Eave",
+   "proposal": "",
+   "next": "Next taskToday, noon to 8 pmSend the first textOn the Jun 2 storm list. Built 1992, no reroof permit on file. Texting is open until 8 pm. DoneBook",
+   "stamp": null,
+   "roof": {
+    "sq": 54.7,
+    "p": 12,
+    "p2": 7,
+    "f": 25,
+    "st": 2,
+    "detail": true
+   },
+   "measure": {
+    "facet": true,
+    "squares": 54.7,
+    "waste": 17,
+    "pitch": "12/12 + 7/12",
+    "shape": "hip and gable roof",
+    "planes": 25,
+    "drawn": false,
+    "pitchMeasured": true
+   }
+  },
+  "report": "Squares, measured 54.7 5,472 sq ft of roof, range 51.6 to 57.8 Order with waste 64 17% waste, hips and valleys Pitch, hip and gable roof 12/12 + 7/12 12/12 56%7/12 36%11/12 5% Facets 25 planes measured Stories 2 from LiDAR roof height TOP-DOWN DIAGRAM lengths in ft 11 12 8 11 15 21 15 14 20 15 21 29 9 20 11 9 10 24 15 17 9 7 11 6 20 8 43 10 11 7 13 16 10 26 18 13 22 28 8 7 7 9 6 14 9 10 8 24 8 7 9 26 8 11 7 24 18 18 18 34 A \u00b7 12/12 B \u00b7 12/12 C \u00b7 12/12 D \u00b7 7/12 E \u00b7 12/12 F \u00b7 7/12 G \u00b7 12/12 H \u00b7 7/12 I \u00b7 7/12 J \u00b7 7/12 K \u00b7 11/12 L \u00b7 7/12 M \u00b7 12/12 N \u00b7 12/12 O \u00b7 12/12 P \u00b7 7/12 Q \u00b7 7/12 R \u00b7 7/12 S \u00b7 12/12 T \u00b7 12/12 U \u00b7 9/12 V \u00b7 2/12 W \u00b7 10/12 X \u00b7 9/12 Y \u00b7 12/12 N 20 ft Ridge Hip Valley Eave Rake Step flashing Wall flashing EDGE LENGTHS Edge Length Confidence Ridges 77 ft 58% Hips 263 ft 48% Valleys 160 ft 38% Eaves 234 ft 58% Rakes 140 ft 43% Step flashing 59 ft 23% Wall flashing 33 ft 23% MAT"
+ },
+ "390": {
+  "errs": [],
+  "rec": {
+   "titleH": "54.7 sq measured, hip and gable roof, pitch 12/12 + 7/12",
+   "titleP": "Measured from LiDAR roof facets (2018): 25 facets, each at its own pitch and height, 12/12 + 7/12. Drag to turn it, click a plane to measure it.",
+   "focus": "Total54.7sq measuredPitch12/12 + 7/12Facets25",
+   "tfoot": "Total 12/12 + 7/12 5,472 sq ft 54.7",
+   "rows": 25,
+   "rsub": "New hit 2-story Plano, TX 75025 Whiffletree V Owner name not available",
+   "tag": null,
+   "report": "Squares, measured54.75,472 sq ft of roof, range 51.6 to 57.8 Order with waste6417% waste, hips and valleys Pitch, hip and gable roof12/12 + 7/1212/12 56%7/12 36%11/12 5% Facets25planes measured Stories2from LiDAR roof heightTop-down diagram lengths in ft1112811152115142015212992011910241517971162084310117131610261813222887796149108248792681172418181834A \u00b7 12/12B \u00b7 12/12C \u00b7 12/12D \u00b7 7/12E \u00b7 12/12F \u00b7 7/12G \u00b7 12/12H \u00b7 7/12I \u00b7 7/12J \u00b7 7/12K \u00b7 11/12L \u00b7 7/12M \u00b7 12/12N \u00b7 12/12O \u00b7 12/12P \u00b7 7/12Q \u00b7 7/12R \u00b7 7/12S \u00b7 12/12T \u00b7 12/12U \u00b7 9/12V \u00b7 2/12W \u00b7 10/12X \u00b7 9/12Y \u00b7 12/12N20 ftRidgeHipValleyEaveRakeStep flashingWall flashingEdge lengthsEdgeLengthConfidenceRidges77 ft58%Hips263 ft48%Valleys160 ft38%Eave",
+   "proposal": "",
+   "next": "Next task Today, noon to 8 pm Send the first text On the Jun 2 storm list. Built 1992, no reroof permit on file. Texting is open until 8 pm. Done Book",
+   "stamp": null,
+   "roof": {
+    "sq": 54.7,
+    "p": 12,
+    "p2": 7,
+    "f": 25,
+    "st": 2,
+    "detail": true
+   },
+   "measure": {
+    "facet": true,
+    "squares": 54.7,
+    "waste": 17,
+    "pitch": "12/12 + 7/12",
+    "shape": "hip and gable roof",
+    "planes": 25,
+    "drawn": false,
+    "pitchMeasured": true
+   }
+  },
+  "report": "Squares, measured 54.7 5,472 sq ft of roof, range 51.6 to 57.8 Order with waste 64 17% waste, hips and valleys Pitch, hip and gable roof 12/12 + 7/12 12/12 56%7/12 36%11/12 5% Facets 25 planes measured Stories 2 from LiDAR roof height TOP-DOWN DIAGRAM lengths in ft 11 12 8 11 15 21 15 14 20 15 21 29 9 20 11 9 10 24 15 17 9 7 11 6 20 8 43 10 11 7 13 16 10 26 18 13 22 28 8 7 7 9 6 14 9 10 8 24 8 7 9 26 8 11 7 24 18 18 18 34 A \u00b7 12/12 B \u00b7 12/12 C \u00b7 12/12 D \u00b7 7/12 E \u00b7 12/12 F \u00b7 7/12 G \u00b7 12/12 H \u00b7 7/12 I \u00b7 7/12 J \u00b7 7/12 K \u00b7 11/12 L \u00b7 7/12 M \u00b7 12/12 N \u00b7 12/12 O \u00b7 12/12 P \u00b7 7/12 Q \u00b7 7/12 R \u00b7 7/12 S \u00b7 12/12 T \u00b7 12/12 U \u00b7 9/12 V \u00b7 2/12 W \u00b7 10/12 X \u00b7 9/12 Y \u00b7 12/12 N 20 ft Ridge Hip Valley Eave Rake Step flashing Wall flashing EDGE LENGTHS Edge Length Confidence Ridges 77 ft 58% Hips 263 ft 48% Valleys 160 ft 38% Eaves 234 ft 58% Rakes 140 ft 43% Step flashing 59 ft 23% Wall flashing 33 ft 23% MAT"
+ }
+}

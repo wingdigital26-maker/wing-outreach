@@ -1,0 +1,57 @@
+{
+ "url": "http://127.0.0.1:4886/tour/product.html?dev=1",
+ "ready_ms": 4370,
+ "why": "ready",
+ "handoff_s_after_nav": 8.4,
+ "today_ready_in_frame_ms": 4351,
+ "long_tasks": {
+  "daily": {
+   "before": {
+    "n": 6,
+    "ms": 1314,
+    "max": 606
+   },
+   "after": {
+    "n": 8,
+    "ms": 2422,
+    "max": 1613
+   }
+  },
+  "1a-storm-intro.html?short=1&wait=1": {
+   "before": {
+    "n": 5,
+    "ms": 1018,
+    "max": 606
+   },
+   "after": {
+    "n": 8,
+    "ms": 2422,
+    "max": 1613
+   }
+  },
+  "deck.html": {
+   "before": {
+    "n": 5,
+    "ms": 1018,
+    "max": 606
+   },
+   "after": {
+    "n": 8,
+    "ms": 2422,
+    "max": 1613
+   }
+  },
+  "index.html?home=m35163&view=inbox": {
+   "before": {
+    "n": 0,
+    "ms": 0,
+    "max": 0
+   },
+   "after": {
+    "n": 3,
+    "ms": 1720,
+    "max": 1613
+   }
+  }
+ }
+}

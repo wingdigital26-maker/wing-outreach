@@ -1,0 +1,218 @@
+{
+ "image": "gtrace/32509/google.png",
+ "ft_per_px": 0.203,
+ "pieces": [
+  {
+   "name": "spine_2story",
+   "rect_px": [
+    [
+     465,
+     295
+    ],
+    [
+     655,
+     295
+    ],
+    [
+     655,
+     475
+    ],
+    [
+     465,
+     475
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "2-story block, N-S crest at x 555 (LiDAR z 26) with a 4 ft flat strip along the top (z 25.8); west face z 23, east face z 21; dark bands from the NW and NE corners are the hips bounding its north face."
+  },
+  {
+   "name": "cross_2story",
+   "rect_px": [
+    [
+     465,
+     365
+    ],
+    [
+     655,
+     365
+    ],
+    [
+     655,
+     475
+    ],
+    [
+     465,
+     475
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "E-W cross on the south half of the 2-story block, ridge at y 420 (LiDAR z 25); its south faces (z 22-23 at y 446) are the lit band at y 400-470 either side of the spine; east hip end z 22 at x 649."
+  },
+  {
+   "name": "south_band",
+   "rect_px": [
+    [
+     390,
+     475
+    ],
+    [
+     660,
+     475
+    ],
+    [
+     660,
+     585
+    ],
+    [
+     390,
+     585
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story hip wrapped along the south, ridge E-W at y 528 (north face z 14.7 at y 503, south face z 16.8 at y 540), hips to both bottom corners; north eave sits under the 2-story eave at y 475."
+  },
+  {
+   "name": "nw_flat",
+   "rect_px": [
+    [
+     392,
+     300
+    ],
+    [
+     468,
+     300
+    ],
+    [
+     468,
+     480
+    ],
+    [
+     392,
+     480
+    ]
+   ],
+   "roof": "flat",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story piece along the west side, LiDAR flat z 11 plan 229 sqft at (427,385) and z 11.4 at (410,475); dark in the image like a membrane roof; NW corner is chamfered by the trace."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    495,
+    455
+   ],
+   [
+    535,
+    455
+   ],
+   [
+    535,
+    550
+   ],
+   [
+    495,
+    550
+   ]
+  ],
+  [
+   [
+    665,
+    295
+   ],
+   [
+    676,
+    295
+   ],
+   [
+    676,
+    580
+   ],
+   [
+    665,
+    580
+   ]
+  ],
+  [
+   [
+    430,
+    580
+   ],
+   [
+    672,
+    580
+   ],
+   [
+    672,
+    600
+   ],
+   [
+    430,
+    600
+   ]
+  ],
+  [
+   [
+    370,
+    430
+   ],
+   [
+    392,
+    430
+   ],
+   [
+    392,
+    545
+   ],
+   [
+    370,
+    545
+   ]
+  ],
+  [
+   [
+    392,
+    300
+   ],
+   [
+    432,
+    300
+   ],
+   [
+    392,
+    352
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "chimney and vent stack beside the spine",
+  "trace overshoot east of the eave",
+  "ground and patio south of the eave",
+  "AC units and side yard west",
+  "chamfered NW corner outside the trace"
+ ],
+ "notes": "2-story centre (N-S spine with an E-W cross) over a 1-story south hip band and a flat west strip. Confidence MED: the 2-story roof reads as a cross of two hips with a flat crest strip and the fitter may prefer a single pyramid; the south band pitch break at y 475 is read as the 2-story eave meeting a 1-story hip, which matches the LiDAR north-facing face at (435,503)."
+}

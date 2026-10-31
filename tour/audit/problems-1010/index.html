@@ -1,0 +1,137 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Roof Command UI audit, 2026-10-10</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--ink:#0B1020;--muted:#465065;--bg:#F7F8FA;--line:#E3E6EC;--p0:#B42318;--p1:#B54708;--p2:#175CD3}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Instrument Sans",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:28px;margin:0 0 6px} .sub{color:var(--muted);margin:0 0 24px}
+.top3{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin:0 0 28px}
+.top3 h2{font-size:17px;margin:0 0 8px} .top3 ol{margin:0;padding-left:20px} .top3 li{margin:4px 0}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left} th{background:#F1F3F7;font-weight:600}
+.note{color:var(--muted);font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:0 0 18px;box-shadow:0 1px 2px rgba(11,16,32,.04)}
+.card header{display:flex;align-items:center;gap:12px;margin:0 0 12px}
+.card h2{font-size:17px;margin:0;flex:1}
+.sev{font-weight:700;font-size:12px;letter-spacing:.04em;padding:3px 9px;border-radius:999px;color:#fff}
+.P0 .sev{background:var(--p0)} .P1 .sev{background:var(--p1)} .P2 .sev{background:var(--p2)}
+.n{color:var(--muted);font-size:13px} .vp{color:var(--muted);font-size:13px;background:#F1F3F7;padding:3px 9px;border-radius:999px}
+.shots{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.shots img{height:220px;width:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+.prob{margin:0 0 8px} .fix{margin:0;color:var(--muted)} .fix b{color:var(--ink);margin-right:6px}
+.legend{display:flex;gap:14px;color:var(--muted);font-size:13px;margin:0 0 18px}
+</style></head><body><main>
+<h1>Roof Command, Jackson: UI problems before the Chris pitch</h1>
+<p class="sub">Audit of 2026-10-10 evening on branch ui/jackson-dfw at :4886, desktop 1440x900 and phone 390x844, headless Chromium with swiftshader. Ranked by impact on Chris's first impression. Locked looks (Today map B, CRM glass deck A, text + email only) are not questioned here.</p>
+<div class="top3"><h2>Three things that would most raise the billion-dollar feel, inside the picked looks</h2><ol>
+<li><b>Instant, personal Today.</b> Paint "Good evening, Chris" and the first house in under a second from cached data, no "Loading" pills, no "Good morning, ." skeleton. Speed is the whole feel of a premium product.</li>
+<li><b>The house as the hero.</b> Roof render on a ground plane with a shadow and north mark, owner written "Noelle Appel", real traced contact fields (or an honest "not traced yet"), and the same counts on Today, Inbox and Pipeline. No 555 numbers, no "None".</li>
+<li><b>Nimbus speaks for Jackson.</b> Remove every "sample tour" line, open Ask empty with three real questions, and give the orb one docked position that never covers a button on the phone.</li>
+</ol></div>
+<h2 style="font-size:18px;margin:0 0 8px">Measured load times (Today was ~14 s before tonight)</h2>
+<p>Timing run did not finish in the time box; see log.txt for the contended numbers.</p>
+<h2 style="font-size:18px;margin:28px 0 8px">Problems, ranked</h2>
+<div class="legend"><span>P0 = Chris notices in the first minute</span><span>P1 = notices in the first session</span><span>P2 = polish</span></div>
+<article class="card P0">
+  <header><span class="sev">P0</span><span class="n">#1</span><h2>Today, Text dialog, CRM home</h2><span class="vp">1440 + 390</span></header>
+  <div class="shots"><a href="03-today-1440.png" target="_blank"><img src="03-today-1440.png" alt="03-today-1440.png" loading="lazy"></a><a href="04-today-text-390.png" target="_blank"><img src="04-today-text-390.png" alt="04-today-text-390.png" loading="lazy"></a><a href="40-crm-home-contact-390.png" target="_blank"><img src="40-crm-home-contact-390.png" alt="40-crm-home-contact-390.png" loading="lazy"></a></div>
+  <p class="prob">Every homeowner shows a fake phone number, &quot;(972) 555-0100 (sample phone)&quot;, on the hero card, in the text dialog and on the CRM contact tab, so the first thing Chris reads is placeholder data.</p>
+  <p class="fix"><b>Suggested fix</b> Hide the phone row until a real number is traced; show &quot;Phone: not traced yet&quot; as a quiet grey line or a &quot;Find the phone&quot; action. Never print a 555 number.</p>
+</article><article class="card P0">
+  <header><span class="sev">P0</span><span class="n">#2</span><h2>Today, Email dialog</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="05-today-email-1440.png" target="_blank"><img src="05-today-email-1440.png" alt="05-today-email-1440.png" loading="lazy"></a></div>
+  <p class="prob">The first Email click opens a dialog whose primary button is disabled and an orange warning says the email cannot go because Jackson&#x27;s mailing address is not on file, plus &quot;No email address on file for this homeowner&quot;.</p>
+  <p class="fix"><b>Suggested fix</b> Fill Jackson&#x27;s mailing address in roofer settings before the pitch so the banner never shows; when the homeowner has no email, swap the dialog header to a calm &quot;Email goes out once the address is traced&quot; state instead of two warnings.</p>
+</article><article class="card P0">
+  <header><span class="sev">P0</span><span class="n">#3</span><h2>Storms</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="20-storms-1440.png" target="_blank"><img src="20-storms-1440.png" alt="20-storms-1440.png" loading="lazy"></a><a href="21-storms-selected-1440.png" target="_blank"><img src="21-storms-selected-1440.png" alt="21-storms-selected-1440.png" loading="lazy"></a></div>
+  <p class="prob">Storms opens as an empty grey canvas (no storm card, no city chips, no timeline) for 6 s or more, and once it paints the right panel reads 0 hit homes / None / 0 route stops next to a card saying 6,546 homes were hit.</p>
+  <p class="fix"><b>Suggested fix</b> Paint the storm card, chips and timeline from cached data before the map tiles land, and seed &quot;Hardest hit in view&quot; from the fitted storm bounds so it never shows zeros beside 6,546.</p>
+</article><article class="card P0">
+  <header><span class="sev">P0</span><span class="n">#4</span><h2>Today, first paint</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="01-intro-6s-1440.png" target="_blank"><img src="01-intro-6s-1440.png" alt="01-intro-6s-1440.png" loading="lazy"></a><a href="02-today-loading-1440.png" target="_blank"><img src="02-today-loading-1440.png" alt="02-today-loading-1440.png" loading="lazy"></a></div>
+  <p class="prob">Right after the intro, Today paints a broken skeleton: the greeting reads &quot;Good morning, .&quot; (no name, wrong time of day), a &quot;Loading&quot; pill and a blank empty pill sit in the map header, and the columns are empty cards. Measured cold load below.</p>
+  <p class="fix"><b>Suggested fix</b> Render the greeting from the signed-in profile and local time before any data, replace &quot;Loading&quot; and the blank pill with shimmer placeholders, and cache the Daily 50 so the first card paints in under 1 s.</p>
+</article><article class="card P0">
+  <header><span class="sev">P0</span><span class="n">#5</span><h2>Ask</h2><span class="vp">1440 + 390</span></header>
+  <div class="shots"><a href="51-ask-answer-1440.png" target="_blank"><img src="51-ask-answer-1440.png" alt="51-ask-answer-1440.png" loading="lazy"></a><a href="50-ask-1440.png" target="_blank"><img src="50-ask-1440.png" alt="50-ask-1440.png" loading="lazy"></a></div>
+  <p class="prob">Nimbus answers Chris with &quot;I do not have that one in this sample tour&quot; and &quot;Nimbus answers only from the storms, the homes and your pipeline in this tour&quot;, and the screen opens with a staged conversation stamped &quot;Chris, 7:42 am&quot; that he never typed.</p>
+  <p class="fix"><b>Suggested fix</b> Strip every &quot;sample tour&quot; / &quot;in this tour&quot; phrase from rc-copy and the fallback answer; open Ask empty with three suggested questions instead of a pre-written chat.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#6</span><h2>CRM Inbox + Pipeline</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="30-crm-inbox-1440.png" target="_blank"><img src="30-crm-inbox-1440.png" alt="30-crm-inbox-1440.png" loading="lazy"></a><a href="36-crm-pipeline-1440.png" target="_blank"><img src="36-crm-pipeline-1440.png" alt="36-crm-pipeline-1440.png" loading="lazy"></a><a href="36-crm-pipeline-full-1440.png" target="_blank"><img src="36-crm-pipeline-full-1440.png" alt="36-crm-pipeline-full-1440.png" loading="lazy"></a></div>
+  <p class="prob">CRM opens to three empty glass panes (&quot;Nothing logged yet&quot;) while the Pipeline tab badge says 12 and Today says 50 to go; the Pipeline pane itself is a blank gradient for several seconds before the board appears.</p>
+  <p class="fix"><b>Suggested fix</b> Give the empty inbox a single &quot;Start today&#x27;s first text&quot; action that jumps to Today, render the board synchronously from the same list Today uses, and make the 12 / 50 counts agree (one source).</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#7</span><h2>Today, route map</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="03-today-1440.png" target="_blank"><img src="03-today-1440.png" alt="03-today-1440.png" loading="lazy"></a></div>
+  <p class="prob">The 50 numbered route pins pile into one blob of overlapping circles, so the map that is meant to show the day&#x27;s route is unreadable at the default zoom.</p>
+  <p class="fix"><b>Suggested fix</b> Cluster or declutter pins at low zoom (show 1, 2, 3 and a &quot;+47&quot; cluster), fit the map tighter to the route, and draw the route line so order is visible without numbers.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#8</span><h2>Today, hero card</h2><span class="vp">1440 + 390</span></header>
+  <div class="shots"><a href="03-today-1440.png" target="_blank"><img src="03-today-1440.png" alt="03-today-1440.png" loading="lazy"></a><a href="03-today-390.png" target="_blank"><img src="03-today-390.png" alt="03-today-390.png" loading="lazy"></a></div>
+  <p class="prob">The roof thumbnail is an abstract blue extruded block floating on flat grey with no ground, shadow or north arrow, and the Pitch tile reads &quot;None&quot;, so the card looks broken rather than measured.</p>
+  <p class="fix"><b>Suggested fix</b> Render the roof on a soft ground plane with a contact shadow and a north mark (the phone Measure sheet already does this), and write Pitch as &quot;6/12 est.&quot; with the LiDAR note underneath instead of &quot;None&quot;.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#9</span><h2>Today list, Pipeline cards</h2><span class="vp">1440 + 390</span></header>
+  <div class="shots"><a href="36-crm-pipeline-full-1440.png" target="_blank"><img src="36-crm-pipeline-full-1440.png" alt="36-crm-pipeline-full-1440.png" loading="lazy"></a><a href="36-crm-pipeline-390.png" target="_blank"><img src="36-crm-pipeline-390.png" alt="36-crm-pipeline-390.png" loading="lazy"></a></div>
+  <p class="prob">Owner names print in raw county order: &quot;Appel Noelle&quot;, &quot;Reznitsky Igor &amp; Alexandra Reznitsky&quot;, &quot;Boateng Marcus &amp; Christine Boateng&quot;.</p>
+  <p class="fix"><b>Suggested fix</b> Normalize names once at load (First Last, split on &amp;) and title-case them; keep the raw string for the county roll tooltip.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#10</span><h2>Text dialog, Storms sheet, CRM home</h2><span class="vp">390</span></header>
+  <div class="shots"><a href="04-today-text-390.png" target="_blank"><img src="04-today-text-390.png" alt="04-today-text-390.png" loading="lazy"></a><a href="20-storms-390.png" target="_blank"><img src="20-storms-390.png" alt="20-storms-390.png" loading="lazy"></a><a href="40-crm-home-contact-390.png" target="_blank"><img src="40-crm-home-contact-390.png" alt="40-crm-home-contact-390.png" loading="lazy"></a></div>
+  <p class="prob">On the phone the Nimbus orb floats over live controls: it covers the &quot;Open in Messages&quot; primary button, sits on the storm sheet copy and hides the contact rows.</p>
+  <p class="fix"><b>Suggested fix</b> Dock the orb in the header on phones (or lift it with the sheet) and keep a 72 px safe zone above the bottom action bar; never let it overlap a primary button.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#11</span><h2>Ask</h2><span class="vp">1440 + 390</span></header>
+  <div class="shots"><a href="51-ask-answer-1440.png" target="_blank"><img src="51-ask-answer-1440.png" alt="51-ask-answer-1440.png" loading="lazy"></a><a href="50-ask-390.png" target="_blank"><img src="50-ask-390.png" alt="50-ask-390.png" loading="lazy"></a></div>
+  <p class="prob">After an answer the quick chips (Today&#x27;s list, Storm map, What is booked?) and the &quot;Add 64 homes to Daily 50&quot; button slide under the input box and are half hidden.</p>
+  <p class="fix"><b>Suggested fix</b> Make the thread a scroll area with bottom padding equal to the composer height so chips and buttons always clear the input.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#12</span><h2>Storms, home popup</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="24-storms-mapclick-1440.png" target="_blank"><img src="24-storms-mapclick-1440.png" alt="24-storms-mapclick-1440.png" loading="lazy"></a></div>
+  <p class="prob">Clicking a home on the storm map pops &quot;Single-family home, outside the swath, Owner not loaded&quot;, which reads like a failed fetch.</p>
+  <p class="fix"><b>Suggested fix</b> Drop &quot;Owner not loaded&quot;; show the address and &quot;Not in the Jun 2 swath&quot; with a Measure link, and load the owner lazily into the popup when it exists.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#13</span><h2>About Roof Command</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="60-about-1440.png" target="_blank"><img src="60-about-1440.png" alt="60-about-1440.png" loading="lazy"></a></div>
+  <p class="prob">The About route (#/opening/about) is a blank grey page with falling rain and no sculpture, title or text for 5 s or more.</p>
+  <p class="fix"><b>Suggested fix</b> Show the logo sculpture and the two facts immediately (they already exist in the intro), or hide the About entry until it paints instantly.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#14</span><h2>CRM home record</h2><span class="vp">390</span></header>
+  <div class="shots"><a href="40-crm-home-contact-390.png" target="_blank"><img src="40-crm-home-contact-390.png" alt="40-crm-home-contact-390.png" loading="lazy"></a></div>
+  <p class="prob">On the phone the roof-mode chips (Planes, Edges, Dimensions, Hail, Explode) float above the record and the tab row is clipped on the left (&quot;easurements&quot;), so the record looks mis-assembled.</p>
+  <p class="fix"><b>Suggested fix</b> Keep the roof chips inside the Roof card on phones and make the tab row scroll from its first tab (scroll-padding-left) so Measurements is never cut.</p>
+</article><article class="card P1">
+  <header><span class="sev">P1</span><span class="n">#15</span><h2>Today, bottom bar</h2><span class="vp">390</span></header>
+  <div class="shots"><a href="03-today-390.png" target="_blank"><img src="03-today-390.png" alt="03-today-390.png" loading="lazy"></a></div>
+  <p class="prob">The phone bottom bar squeezes &quot;0 of 50 sent&quot; into the Map button and &quot;0 booked&quot; into Pipeline, wrapping into two tiny lines.</p>
+  <p class="fix"><b>Suggested fix</b> Give the three buttons equal width with the count as a small badge on the right, or move the counts to a one-line strip above the bar.</p>
+</article><article class="card P2">
+  <header><span class="sev">P2</span><span class="n">#16</span><h2>Storms toolbar + timeline</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="21-storms-selected-1440.png" target="_blank"><img src="21-storms-selected-1440.png" alt="21-storms-selected-1440.png" loading="lazy"></a></div>
+  <p class="prob">The &quot;City&quot; label is cut at the right edge of the zoom pill and the &quot;Jun 2, 6,546 homes&quot; tooltip sits on top of the timeline ticks.</p>
+  <p class="fix"><b>Suggested fix</b> Widen the toolbar pill by 24 px (or drop the City label) and float the tooltip above the bar area.</p>
+</article><article class="card P2">
+  <header><span class="sev">P2</span><span class="n">#17</span><h2>Today tiles, Pipeline cards</h2><span class="vp">1440 + 390</span></header>
+  <div class="shots"><a href="03-today-390.png" target="_blank"><img src="03-today-390.png" alt="03-today-390.png" loading="lazy"></a><a href="36-crm-pipeline-full-1440.png" target="_blank"><img src="36-crm-pipeline-full-1440.png" alt="36-crm-pipeline-full-1440.png" loading="lazy"></a></div>
+  <p class="prob">Tile eyebrows (Hail at home, Roof record, Pitch) are 10.5 px and the grey message counters on pipeline cards are 11 px at 2.3:1 contrast.</p>
+  <p class="fix"><b>Suggested fix</b> Raise eyebrows to 12 px and the counters to ink-muted at 4.5:1 or hide zero counters.</p>
+</article><article class="card P2">
+  <header><span class="sev">P2</span><span class="n">#18</span><h2>Header, Storms chips, Pipeline tabs</h2><span class="vp">390</span></header>
+  <div class="shots"><a href="03-today-390.png" target="_blank"><img src="03-today-390.png" alt="03-today-390.png" loading="lazy"></a><a href="20-storms-390.png" target="_blank"><img src="20-storms-390.png" alt="20-storms-390.png" loading="lazy"></a><a href="36-crm-pipeline-390.png" target="_blank"><img src="36-crm-pipeline-390.png" alt="36-crm-pipeline-390.png" loading="lazy"></a></div>
+  <p class="prob">Truncated labels everywhere on phone: brand line &quot;Plano, Frisco, Allen, McKinney, ...&quot;, storm chip strip cut mid-word, stage tabs &quot;Contac...&quot; and &quot;Inspect...&quot;.</p>
+  <p class="fix"><b>Suggested fix</b> Shorten the phone brand line to &quot;Roof Command&quot;, fade the chip strip edge instead of hard clipping, and use short stage names (New, Contacted, Booked, Proposal, Won) on phones.</p>
+</article><article class="card P2">
+  <header><span class="sev">P2</span><span class="n">#19</span><h2>Today hero card</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="03-today-1440.png" target="_blank"><img src="03-today-1440.png" alt="03-today-1440.png" loading="lazy"></a></div>
+  <p class="prob">The subdivision string &quot;Frisco Original Donation&quot; prints inside the address line and reads as nonsense to a roofer.</p>
+  <p class="fix"><b>Suggested fix</b> Move the subdivision to the Roof record tile as &quot;Subdivision&quot; or drop it from the address line.</p>
+</article><article class="card P2">
+  <header><span class="sev">P2</span><span class="n">#20</span><h2>Ask</h2><span class="vp">1440</span></header>
+  <div class="shots"><a href="51-ask-answer-1440.png" target="_blank"><img src="51-ask-answer-1440.png" alt="51-ask-answer-1440.png" loading="lazy"></a></div>
+  <p class="prob">The same answer shows twice, once in the dark bubble and again as the large headline, and street cards truncate (&quot;Hearst Cas...&quot;).</p>
+  <p class="fix"><b>Suggested fix</b> Keep the bubble as a one-line summary and the headline as the full answer, and let street names wrap to two lines.</p>
+</article>
+<p class="note">Console: no page errors on any screen across both viewports; only warnings (maplibre style expression "Expected value to be of type number, but found null" on the storm and Today maps, deck.gl instanceFillColors normalized). Shots and raw data: findings-390.json, log-390.txt, timing.json in this folder.</p>
+</main></body></html>

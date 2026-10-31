@@ -1,0 +1,174 @@
+{
+ "image": "gtrace/58915/google.png",
+ "ft_per_px": 0.206,
+ "pieces": [
+  {
+   "name": "main_2story",
+   "rect_px": [
+    [
+     388,
+     505
+    ],
+    [
+     688,
+     505
+    ],
+    [
+     688,
+     655
+    ],
+    [
+     388,
+     655
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "2-story main block, ridge E-W. LiDAR puts the crest (z 32) along the bright line at y 578 with north faces y 515-560 and south faces y 600-620; the image shows the lit 7413 face above that line and a very dark hip-shaped band below it (y 585-670). Read the band as the south face of this hip; the fitter should trust LiDAR for the crest position."
+  },
+  {
+   "name": "south_block",
+   "rect_px": [
+    [
+     388,
+     655
+    ],
+    [
+     688,
+     655
+    ],
+    [
+     688,
+     750
+    ],
+    [
+     388,
+     750
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "second E-W hip south of the trough at y 655-675. LiDAR has north-facing faces z 24-25 at y 696-704 and flats z 20 at the trough. The lit face runs to a clear fascia line at y 750; the trace stops at 717 and is short on this side."
+  },
+  {
+   "name": "north_wing",
+   "rect_px": [
+    [
+     388,
+     450
+    ],
+    [
+     688,
+     450
+    ],
+    [
+     688,
+     505
+    ],
+    [
+     388,
+     505
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "strip north of the trace: roof texture with lit hip-end triangles at the NW and NE corners, vents at y 497, dark middle. Outside the LiDAR mask, so it is either a lower 1-story wing in the main block's shadow or a dark patio cover. Low confidence; drop if no LiDAR."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    388,
+    750
+   ],
+   [
+    688,
+    750
+   ],
+   [
+    688,
+    770
+   ],
+   [
+    388,
+    770
+   ]
+  ],
+  [
+   [
+    690,
+    450
+   ],
+   [
+    720,
+    450
+   ],
+   [
+    720,
+    750
+   ],
+   [
+    690,
+    750
+   ]
+  ],
+  [
+   [
+    360,
+    630
+   ],
+   [
+    388,
+    630
+   ],
+   [
+    388,
+    720
+   ],
+   [
+    360,
+    720
+   ]
+  ],
+  [
+   [
+    600,
+    490
+   ],
+   [
+    618,
+    490
+   ],
+   [
+    618,
+    505
+   ],
+   [
+    600,
+    505
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "ground shadow south of the eave at y 750",
+  "tree line east of the house",
+  "AC pads and side yard west",
+  "chimney at the north edge"
+ ],
+ "notes": "Two parallel E-W hips (main 2-story, then a south block) with a trough between them, plus a dark strip of roof north of the trace. Confidence LOW: the image lighting is inverted relative to the LiDAR normals (north faces lit, south faces very dark, shadows both north and south of the house), so I cannot confirm the crest positions by eye; the trace also misses roof at both the north (to y 450) and south (to y 750) ends. Rectangles follow the visible fascia lines; LiDAR should decide the heights."
+}

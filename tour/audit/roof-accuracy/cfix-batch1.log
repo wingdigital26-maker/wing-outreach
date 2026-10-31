@@ -1,0 +1,8 @@
+14:11:03 ('collin-tx', 147750) collin-tx 147750 {"clean_rules": 48, "judged": 124, "w1_before": 40.9, "C": "clean", "src": "r2:C:fix4", "w1": 35.6} 66s
+14:11:08 ('collin-tx', 10524) collin-tx 10524 {"clean_rules": 0, "judged": 23, "w1_before": 35.4, "C": "not clean (round-2 file kept)"} 71s
+14:11:08 ('collin-tx', 130356) collin-tx 130356 {"clean_rules": 6, "judged": 30, "w1_before": 54.4, "C": "clean", "src": "r2:pop-drop:fix3", "w1": 53.4} 71s
+14:11:39 ('collin-tx', 164154) collin-tx 164154 {"clean_rules": 8, "judged": 28, "w1_before": 62.7, "C": "clean", "src": "r2:C:fix3", "w1": 59.9} 31s
+14:12:14 ('collin-tx', 164149) collin-tx 164149 {"clean_rules": 0, "judged": 20, "w1_before": 43.9, "C": "not clean (round-2 file kept)"} 71s
+14:12:18 ('collin-tx', 164151) collin-tx 164151 {"clean_rules": 0, "judged": 16, "w1_before": 50.2, "C": "not clean (round-2 file kept)"} 70s
+14:12:55 ('collin-tx', 164155) collin-tx 164155 {"clean_rules": 12, "judged": 67, "w1_before": 49.3, "C": "not clean (round-2 file kept)"} 76s
+14:13:12 ('collin-tx', 164156) collin-tx 164156 {"clean_rules": 26, "judged": 74, "w1_before": 60.5, "C": "clean", "src": "work:tidy:fix3", "w1": 53.9} 58s

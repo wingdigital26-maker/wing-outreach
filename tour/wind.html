@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>High Wind | Wing Outreach</title>
+<link rel="stylesheet" href="vendor/maplibre-gl@4.7.1/maplibre-gl.css">
+<style>
+@font-face{font-family:Montserrat;font-weight:400;src:url(lib/st-fonts/montserrat-400.woff2) format("woff2")}
+@font-face{font-family:Montserrat;font-weight:600;src:url(lib/st-fonts/montserrat-600.woff2) format("woff2")}
+:root{--ink:#0B1020;--blue:#2757E6;--canvas:#EEF0F3;--line:#D5D9E0;--slate:#5A6378;--tint:#F1F5FA;--sev:#C2410C;--str:#B7791F;--r:6px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;align-items:center;gap:16px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--line)}
+header h1{font:600 18px Montserrat,sans-serif;margin:0}
+header .sub{color:var(--slate);font-size:13px}
+header a{margin-left:auto;color:var(--blue);text-decoration:none;font-weight:600}
+.wrap{display:grid;grid-template-columns:380px 1fr;height:calc(100vh - 57px)}
+aside{overflow:auto;border-right:1px solid var(--line);background:#fff}
+.tools{position:sticky;top:0;background:#fff;padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:6px}
+.tools button{flex:1;border:1px solid var(--line);background:#fff;border-radius:var(--r);padding:8px;font:600 13px inherit;cursor:pointer;color:var(--ink)}
+.tools button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.day{display:grid;grid-template-columns:1fr auto;gap:2px 10px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:#fff;padding:12px 16px;cursor:pointer;font:inherit;color:inherit}
+.day:hover{background:var(--tint)}.day[aria-current=true]{background:var(--tint);box-shadow:inset 3px 0 0 var(--blue)}
+.day b{font-size:15px}.mph{font:600 20px Montserrat,sans-serif;text-align:right}
+.lvl{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:2px 6px;border-radius:4px;color:#fff}
+.lvl.severe{background:var(--sev)}.lvl.strong{background:var(--str)}
+.muted{color:var(--slate);font-size:12.5px}
+.tag{font:600 11px Inter,system-ui,sans-serif;color:#0B1020;background:rgba(255,255,255,.88);padding:1px 5px;border-radius:4px;pointer-events:none;white-space:nowrap}
+main{position:relative}#map{position:absolute;inset:0}
+.panel{position:absolute;left:16px;bottom:16px;max-width:460px;max-height:45%;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:0 12px 32px -16px rgba(11,16,32,.3)}
+.panel h2{font:600 16px Montserrat,sans-serif;margin:0 0 6px}
+.panel table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.panel td{padding:3px 0;border-bottom:1px solid var(--line)}.panel td:last-child{text-align:right;font-weight:600}
+.kdfw{background:var(--tint);border-radius:var(--r);padding:8px 10px;margin:8px 0;font-size:13px}
+.src{font-size:11.5px;color:var(--slate);margin-top:8px}
+@media(max-width:800px){.wrap{grid-template-columns:1fr;grid-template-rows:45vh 1fr;height:auto}main{height:55vh;order:-1}aside{border-right:0}.panel{position:static;max-height:none;border-radius:0;border-width:1px 0 0}}
+</style>
+</head>
+<body>
+<header><h1>High wind</h1><span class="sub" id="sub">Loading wind data</span><a href="product.html">Back to Wing Outreach</a></header>
+<div class="wrap">
+  <aside>
+    <div class="tools" role="group" aria-label="Filter days">
+      <button type="button" data-f="severe" aria-pressed="true">58 mph+</button>
+      <button type="button" data-f="all" aria-pressed="false">All 50 mph+</button>
+    </div>
+    <div id="list"></div>
+  </aside>
+  <main><div id="map"></div><div class="panel" id="panel" hidden></div></main>
+</div>
+<script src="vendor/maplibre-gl@4.7.1/maplibre-gl.js"></script>
+<script>
+(function () {
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const fmt = d => new Date(d + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+  let D = null, filt = "severe", cur = null;
+  const map = new maplibregl.Map({ container: "map", center: [-96.85, 33.0], zoom: 8.6, attributionControl: { compact: true },
+    style: { version: 8, sources: { b: { type: "raster", tileSize: 256, attribution: "USGS The National Map",
+      tiles: ["https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}"] } },
+      layers: [{ id: "b", type: "raster", source: "b", paint: { "raster-saturation": -0.6, "raster-opacity": 0.85 } }] } });
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+  const ready = new Promise(r => map.on("load", r));
+
+  function fc(x) {
+    const f = [];
+    D.stations.forEach(s => {
+      const hit = x.airports.find(a => a.id === s.id);
+      f.push({ type: "Feature", geometry: { type: "Point", coordinates: [s.lon, s.lat] },
+        properties: { kind: "air", mph: hit ? hit.gust_mph : 0, label: s.id.slice(1) + (hit ? " " + hit.gust_mph : ""), dfw: s.id === "KDFW" ? 1 : 0 } });
+    });
+    x.reports.forEach(r => f.push({ type: "Feature", geometry: { type: "Point", coordinates: [r.lon, r.lat] },
+      properties: { kind: r.kind, mph: r.mph || 0, label: r.mph ? r.mph + " mph" : "damage" } }));
+    return { type: "FeatureCollection", features: f };
+  }
+  let marks = [];
+  function labels(data) {   // HTML labels: the raster basemap has no glyph server
+    marks.forEach(m => m.remove());
+    marks = data.features.filter(f => f.properties.kind === "air" ? f.properties.mph : true).map(f => {
+      const el = document.createElement("div"); el.className = "tag"; el.textContent = f.properties.label;
+      return new maplibregl.Marker({ element: el, anchor: "top", offset: [0, 12] }).setLngLat(f.geometry.coordinates).addTo(map);
+    });
+  }
+  function draw(x) {
+    ready.then(() => {
+      const data = fc(x);
+      labels(data);
+      if (map.getSource("w")) { map.getSource("w").setData(data); return; }
+      map.addSource("w", { type: "geojson", data });
+      map.addLayer({ id: "air", type: "circle", source: "w", filter: ["==", ["get", "kind"], "air"], paint: {
+        "circle-radius": ["interpolate", ["linear"], ["get", "mph"], 0, 5, 50, 14, 75, 26],
+        "circle-color": ["step", ["get", "mph"], "#9AA3B5", 50, "#B7791F", 58, "#C2410C"], "circle-opacity": 0.8,
+        "circle-stroke-color": ["case", ["==", ["get", "dfw"], 1], "#2757E6", "#fff"], "circle-stroke-width": ["case", ["==", ["get", "dfw"], 1], 3, 1.5] } });
+      map.addLayer({ id: "rep", type: "circle", source: "w", filter: ["!=", ["get", "kind"], "air"], paint: {
+        "circle-radius": 6, "circle-color": ["case", ["==", ["get", "kind"], "damage"], "#7F1D1D", "#C2410C"], "circle-stroke-color": "#fff", "circle-stroke-width": 1.5 } });
+    });
+  }
+  function panel(x) {
+    const p = document.getElementById("panel"); p.hidden = false;
+    const air = x.airports.map(a => `<tr><td>${esc(a.name)} (${esc(a.id)})</td><td>${a.gust_mph} mph</td></tr>`).join("");
+    const rep = x.reports.map(r => `<tr><td>${esc(r.time)} ${esc(r.place)}, ${esc(r.county)} Co.<div class="muted">${esc(r.note)}</div></td><td>${r.mph ? r.mph + " mph" : "Damage"}</td></tr>`).join("");
+    p.innerHTML = `<h2>${esc(fmt(x.day))} <span class="lvl ${x.level}">${x.level === "severe" ? "Severe" : "Strong"}</span></h2>
+      ${x.single_station ? `<div class="kdfw">Only one airport saw this gust and no NWS report backs it, so it could be a sensor spike. Treat it as strong, not severe.</div>` : ""}
+      <div class="kdfw">${x.kdfw_mph ? `DFW Airport peak gust: <b>${x.kdfw_mph} mph</b>` : "DFW Airport stayed under 50 mph this day; the wind showed up at the stations or reports below."}</div>
+      ${air ? `<table><tbody>${air}</tbody></table>` : ""}
+      ${rep ? `<div class="muted" style="margin-top:10px">NWS storm reports in the service area</div><table><tbody>${rep}</tbody></table>` : ""}
+      <div class="src">Airport gusts: NWS ASOS. Reports: NWS Fort Worth. Shingles start lifting near 50 mph; 58 mph+ is NWS severe.</div>`;
+  }
+  function pick(x) {
+    cur = x.day; draw(x); panel(x); list();
+    const pts = x.reports.map(r => [r.lon, r.lat]).concat(x.airports.map(a => [a.lon, a.lat]));
+    if (pts.length > 1) { const b = new maplibregl.LngLatBounds(pts[0], pts[0]); pts.forEach(q => b.extend(q)); map.fitBounds(b, { padding: 80, maxZoom: 10.5 }); }
+  }
+  function list() {
+    const days = D.days.filter(x => filt === "all" || x.level === "severe");
+    document.getElementById("list").innerHTML = days.map(x => `<button class="day" type="button" data-d="${x.day}" aria-current="${x.day === cur}">
+      <span><b>${esc(fmt(x.day))}</b><br><span class="lvl ${x.level}">${x.level === "severe" ? "Severe" : "Strong"}</span>
+      <span class="muted"> ${x.airports.length} airport${x.airports.length === 1 ? "" : "s"}, ${x.reports.length} report${x.reports.length === 1 ? "" : "s"}${x.damage_reports ? ", " + x.damage_reports + " damage" : ""}</span></span>
+      <span class="mph">${x.peak_mph ? x.peak_mph + "<span class=muted> mph</span>" : "<span class=muted>damage</span>"}</span></button>`).join("");
+  }
+  document.querySelector(".tools").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; filt = b.dataset.f;
+    document.querySelectorAll(".tools button").forEach(x => x.setAttribute("aria-pressed", x === b)); list();
+  });
+  document.getElementById("list").addEventListener("click", e => { const b = e.target.closest(".day"); if (b) pick(D.days.find(x => x.day === b.dataset.d)); });
+  fetch("lib/st-data-dfw/meta/wind.json", { cache: "no-store" }).then(r => r.json()).then(j => {
+    D = j; const sev = j.days.filter(x => x.level === "severe").length;
+    document.getElementById("sub").textContent = sev + " severe wind days since " + fmt(j.window[0]) + ", led by DFW Airport";
+    const first = j.days.find(x => x.level === "severe"); if (first) pick(first); else list();
+  }).catch(() => { document.getElementById("sub").textContent = "Wind data has not been built yet. Run scripts/wind/build_wind.py"; });
+})();
+</script>
+</body>
+</html>

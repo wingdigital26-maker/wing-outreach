@@ -1,0 +1,105 @@
+{
+ "image": "gtrace/57613/google.png",
+ "ft_per_px": 0.199,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     530.0,
+     400.0
+    ],
+    [
+     648.0,
+     400.0
+    ],
+    [
+     648.0,
+     630.0
+    ],
+    [
+     530.0,
+     630.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "notes": "east block, ridge N-S near x=590, dark north hip triangle, lit south face"
+  },
+  {
+   "name": "west_wing",
+   "rect_px": [
+    [
+     400.0,
+     400.0
+    ],
+    [
+     590.0,
+     400.0
+    ],
+    [
+     590.0,
+     630.0
+    ],
+    [
+     400.0,
+     630.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "notes": "west block, ridge E-W near y=505 (dark north face, bright south face); NW quarter under tree shadow"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    466.0,
+    632.0
+   ],
+   [
+    648.0,
+    632.0
+   ],
+   [
+    648.0,
+    661.0
+   ],
+   [
+    466.0,
+    661.0
+   ]
+  ],
+  [
+   [
+    534.0,
+    374.0
+   ],
+   [
+    539.0,
+    374.0
+   ],
+   [
+    539.0,
+    400.0
+   ],
+   [
+    534.0,
+    400.0
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "patio/deck south of the eave; the eave is at about y=630",
+  "chimney notch north of the eave"
+ ],
+ "notes": "Two intersecting hips. Doubt: a lit diagonal band runs from the NW corner to the centre and the roofer LiDAR shows a diagonal ridge there, so the west part may hold a 45 deg element or unequal pitches. Confidence medium."
+}

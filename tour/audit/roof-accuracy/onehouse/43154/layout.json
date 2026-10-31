@@ -1,0 +1,234 @@
+{
+ "image": "gtrace/43154/google.png",
+ "ft_per_px": 0.205,
+ "pieces": [
+  {
+   "name": "main_2story",
+   "rect_px": [
+    [
+     479.4,
+     400.8
+    ],
+    [
+     692.1,
+     474.0
+    ],
+    [
+     617.9,
+     689.6
+    ],
+    [
+     405.2,
+     616.3
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -0.326,
+    0.946
+   ],
+   "gable_ends": [
+    "N"
+   ],
+   "level": 2,
+   "notes": "2-story main, crest runs N-S (house frame) at u 232, LiDAR z 36 from the north eave to about v 190. South end is hipped (big south face z 24 at v 223); north end reads as a gable (east face continues to the north eave)."
+  },
+  {
+   "name": "east_cross",
+   "rect_px": [
+    [
+     585.3,
+     437.2
+    ],
+    [
+     775.4,
+     502.7
+    ],
+    [
+     718.1,
+     669.1
+    ],
+    [
+     528.0,
+     603.6
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.946,
+    0.326
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "2-story cross hip running east from the main crest, ridge E-W at v 108 (LiDAR z 32), north face z 27, east hip end z 25-27. Dark trapezoid at the top is its north face."
+  },
+  {
+   "name": "sw_wing",
+   "rect_px": [
+    [
+     350.1,
+     493.7
+    ],
+    [
+     489.1,
+     541.6
+    ],
+    [
+     457.2,
+     634.2
+    ],
+    [
+     318.2,
+     586.4
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    0.946,
+    0.326
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "front wing at the west end read as a shed: LiDAR crest z 28 sits on its north edge (v 167) and the roof falls at 11-12/12 to a 1-story eave at v 248 (z 16 at v 229, z 23.5 at v 195). High edge runs E-W and dies into the main west face near u 170. Only a 3 ft north return exists (z 27 face at v 156). Porch roof at u 28-72 v 150-195 is part of it."
+  },
+  {
+   "name": "ne_garage",
+   "rect_px": [
+    [
+     725.2,
+     485.4
+    ],
+    [
+     819.8,
+     518.0
+    ],
+    [
+     780.7,
+     631.4
+    ],
+    [
+     686.2,
+     598.9
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.946,
+    0.326
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story hip at the NE end, ridge E-W, faces z 13-15; dark triangle at the east edge is its hip end."
+  },
+  {
+   "name": "se_wing",
+   "rect_px": [
+    [
+     610.5,
+     572.8
+    ],
+    [
+     780.7,
+     631.4
+    ],
+    [
+     745.6,
+     733.5
+    ],
+    [
+     575.4,
+     674.9
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.946,
+    0.326
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "SE wing, ridge E-W at v 194 (LiDAR z 23), south face z 21, north face z 19.6. Eave about 15 ft, so it is taller than a normal 1-story; valleys run from the main block into it."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    335.1,
+    537.2
+   ],
+   [
+    379.6,
+    552.5
+   ],
+   [
+    362.0,
+    603.6
+   ],
+   [
+    317.5,
+    588.3
+   ]
+  ],
+  [
+   [
+    372.5,
+    342.8
+   ],
+   [
+    485.9,
+    381.8
+   ],
+   [
+    437.1,
+    523.7
+   ],
+   [
+    323.6,
+    484.6
+   ]
+  ],
+  [
+   [
+    485.9,
+    381.8
+   ],
+   [
+    826.3,
+    499.1
+   ],
+   [
+    820.4,
+    516.1
+   ],
+   [
+    480.1,
+    398.9
+   ]
+  ],
+  [
+   [
+    317.5,
+    588.3
+   ],
+   [
+    744.9,
+    735.4
+   ],
+   [
+    738.4,
+    754.3
+   ],
+   [
+    311.0,
+    607.2
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "tree at the SW corner",
+  "dark ground west of the main block",
+  "shadow band north of the eave",
+  "ground south of the eave"
+ ],
+ "notes": "Long rotated ranch (long axis 19 deg clockwise of E). 2-story main with a N-S crest and an east cross hip, 1-story garage at the east end, SE wing, and a steep front wing at the west end. Confidence MED-LOW: the main crest is far too long for a hip of this width so I read the north end as a gable; the sw_wing roof geometry (ridge almost on its north edge per LiDAR) does not match a simple gable and may be a saltbox or shed. Frame: rotate 19 deg CCW about (560,566), crop 500x300."
+}

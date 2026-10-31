@@ -1,0 +1,754 @@
+[
+ {
+  "city": "Allen",
+  "gi": 5696,
+  "region": "collin-tx",
+  "row": 5696,
+  "lon": -96.64543914794922,
+  "lat": 33.105403900146484,
+  "ring": [
+   [
+    -96.645328,
+    33.105308
+   ],
+   [
+    -96.645329,
+    33.105312000000005
+   ],
+   [
+    -96.645341,
+    33.105481000000005
+   ],
+   [
+    -96.64544400000001,
+    33.105475
+   ],
+   [
+    -96.645443,
+    33.105463
+   ],
+   [
+    -96.645482,
+    33.105461
+   ],
+   [
+    -96.645483,
+    33.105474
+   ],
+   [
+    -96.645532,
+    33.105472
+   ],
+   [
+    -96.64551900000001,
+    33.105303
+   ],
+   [
+    -96.645448,
+    33.105307
+   ],
+   [
+    -96.645442,
+    33.105307
+   ],
+   [
+    -96.64544400000001,
+    33.105336
+   ],
+   [
+    -96.64540500000001,
+    33.105338
+   ],
+   [
+    -96.645403,
+    33.105304000000004
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251008",
+    "res_m": "0.31",
+    "acc_m": "8.47",
+    "src": "WV03",
+    "info": "Vivid Advanced"
+   },
+   "z21-21": {
+    "date": "20170115",
+    "res_m": "0.07",
+    "acc_m": "99999",
+    "src": "Allen, TX 2017 3\" Aerials",
+    "info": "Allen2017"
+   },
+   "z20-20": {
+    "date": "20250320",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.18,
+   "Esri World Imagery z19": 4.1,
+   "Esri World Imagery z20": 8.88,
+   "Esri World Imagery z21": 10.93,
+   "Esri Clarity z19": 3.41,
+   "Esri Clarity z20": 5.28,
+   "Esri Clarity z21": 10.93
+  }
+ },
+ {
+  "city": "Allen",
+  "gi": 16933,
+  "region": "collin-tx",
+  "row": 16933,
+  "lon": -96.69020080566406,
+  "lat": 33.09004592895508,
+  "ring": [
+   [
+    -96.69029400000001,
+    33.08993400000001
+   ],
+   [
+    -96.69004600000001,
+    33.08998700000001
+   ],
+   [
+    -96.69009,
+    33.09013
+   ],
+   [
+    -96.690358,
+    33.090073000000004
+   ],
+   [
+    -96.690329,
+    33.089977000000005
+   ],
+   [
+    -96.690309,
+    33.089982000000006
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251209",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Advanced"
+   },
+   "z21-21": {
+    "date": "20170115",
+    "res_m": "0.07",
+    "acc_m": "99999",
+    "src": "Allen, TX 2017 3\" Aerials",
+    "info": "Allen2017"
+   },
+   "z20-20": {
+    "date": "20250320",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.11,
+   "Esri World Imagery z19": 3.75,
+   "Esri World Imagery z20": 10.24,
+   "Esri World Imagery z21": 7.43,
+   "Esri Clarity z19": 1.72,
+   "Esri Clarity z20": 4.68,
+   "Esri Clarity z21": 7.43
+  }
+ },
+ {
+  "city": "McKinney",
+  "gi": 119908,
+  "region": "collin-tx",
+  "row": 119908,
+  "lon": -96.68013763427734,
+  "lat": 33.1804313659668,
+  "ring": [
+   [
+    -96.680075,
+    33.180397
+   ],
+   [
+    -96.680077,
+    33.180515
+   ],
+   [
+    -96.680262,
+    33.180512
+   ],
+   [
+    -96.68026,
+    33.180394
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251008",
+    "res_m": "0.31",
+    "acc_m": "8.47",
+    "src": "WV03",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250320",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.25,
+   "Esri World Imagery z19": 3.58,
+   "Esri World Imagery z20": 9.84,
+   "Esri World Imagery z21": 1.62,
+   "Esri Clarity z19": 3.14,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ },
+ {
+  "city": "McKinney",
+  "gi": 91954,
+  "region": "collin-tx",
+  "row": 91954,
+  "lon": -96.73017883300781,
+  "lat": 33.21000671386719,
+  "ring": [
+   [
+    -96.730203,
+    33.209954
+   ],
+   [
+    -96.730046,
+    33.210082
+   ],
+   [
+    -96.73019,
+    33.210206
+   ],
+   [
+    -96.730348,
+    33.210079
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251209",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250415",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.19,
+   "Esri World Imagery z19": 3.51,
+   "Esri World Imagery z20": 8.14,
+   "Esri World Imagery z21": 1.56,
+   "Esri Clarity z19": 2.58,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ },
+ {
+  "city": "Plano",
+  "gi": 186136,
+  "region": "collin-tx",
+  "row": 186136,
+  "lon": -96.76963806152344,
+  "lat": 33.0312614440918,
+  "ring": [
+   [
+    -96.76981,
+    33.031332
+   ],
+   [
+    -96.769816,
+    33.031169
+   ],
+   [
+    -96.76948600000001,
+    33.03116
+   ],
+   [
+    -96.76948000000002,
+    33.031334
+   ],
+   [
+    -96.76965400000002,
+    33.031338
+   ],
+   [
+    -96.76965500000001,
+    33.031304
+   ],
+   [
+    -96.76973600000001,
+    33.031306
+   ],
+   [
+    -96.76973500000001,
+    33.031329
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251209",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250415",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.16,
+   "Esri World Imagery z19": 3.93,
+   "Esri World Imagery z20": 8.99,
+   "Esri World Imagery z21": 1.5,
+   "Esri Clarity z19": 3.26,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ },
+ {
+  "city": "Plano",
+  "gi": 136279,
+  "region": "collin-tx",
+  "row": 136279,
+  "lon": -96.7201919555664,
+  "lat": 33.06000900268555,
+  "ring": [
+   [
+    -96.720041,
+    33.060114000000006
+   ],
+   [
+    -96.720229,
+    33.060114000000006
+   ],
+   [
+    -96.720229,
+    33.059975
+   ],
+   [
+    -96.720041,
+    33.059975
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251209",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250415",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.13,
+   "Esri World Imagery z19": 3.58,
+   "Esri World Imagery z20": 7.99,
+   "Esri World Imagery z21": 1.59,
+   "Esri Clarity z19": 3.02,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ },
+ {
+  "city": "Frisco",
+  "gi": 33726,
+  "region": "collin-tx",
+  "row": 33726,
+  "lon": -96.80351257324219,
+  "lat": 33.15968704223633,
+  "ring": [
+   [
+    -96.80347800000001,
+    33.159765
+   ],
+   [
+    -96.80347800000001,
+    33.159641
+   ],
+   [
+    -96.803555,
+    33.159641
+   ],
+   [
+    -96.803561,
+    33.159765
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20260206",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG05",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250304",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG02",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 0.98,
+   "Esri World Imagery z19": 4.41,
+   "Esri World Imagery z20": 6.81,
+   "Esri World Imagery z21": 1.56,
+   "Esri Clarity z19": 3.49,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ },
+ {
+  "city": "Frisco",
+  "gi": 36628,
+  "region": "collin-tx",
+  "row": 36628,
+  "lon": -96.84004211425781,
+  "lat": 33.12874221801758,
+  "ring": [
+   [
+    -96.84017000000001,
+    33.128727000000005
+   ],
+   [
+    -96.83997900000001,
+    33.12861
+   ],
+   [
+    -96.83989400000002,
+    33.128708
+   ],
+   [
+    -96.839967,
+    33.128753
+   ],
+   [
+    -96.83994500000001,
+    33.128778000000004
+   ],
+   [
+    -96.84001800000001,
+    33.128823000000004
+   ],
+   [
+    -96.83997600000001,
+    33.128872
+   ],
+   [
+    -96.84002000000001,
+    33.128899000000004
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20260206",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG05",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250304",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG02",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.16,
+   "Esri World Imagery z19": 4.57,
+   "Esri World Imagery z20": 6.68,
+   "Esri World Imagery z21": 1.59,
+   "Esri Clarity z19": 2.99,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ },
+ {
+  "city": "Rockwall",
+  "gi": 270947,
+  "region": "rockwall-tx",
+  "row": 15204,
+  "lon": -96.45986938476562,
+  "lat": 32.9100456237793,
+  "ring": [
+   [
+    -96.45972,
+    32.909959
+   ],
+   [
+    -96.45972,
+    32.91008
+   ],
+   [
+    -96.459908,
+    32.91008
+   ],
+   [
+    -96.459908,
+    32.909959
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251212",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG02",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250806",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG04",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.07,
+   "Esri World Imagery z19": 3.44,
+   "Esri World Imagery z20": 7.12,
+   "Esri World Imagery z21": 1.59,
+   "Esri Clarity z19": 2.53,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ },
+ {
+  "city": "Richardson",
+  "gi": 203832,
+  "region": "collin-tx",
+  "row": 203832,
+  "lon": -96.69922637939453,
+  "lat": 32.990177154541016,
+  "ring": [
+   [
+    -96.699174,
+    32.990260000000006
+   ],
+   [
+    -96.699175,
+    32.990187000000006
+   ],
+   [
+    -96.699291,
+    32.990188
+   ],
+   [
+    -96.699292,
+    32.990105
+   ],
+   [
+    -96.699286,
+    32.990105
+   ],
+   [
+    -96.699286,
+    32.990064000000004
+   ],
+   [
+    -96.699246,
+    32.990063000000006
+   ],
+   [
+    -96.699246,
+    32.990056
+   ],
+   [
+    -96.69918200000001,
+    32.990055000000005
+   ],
+   [
+    -96.69918200000001,
+    32.990061000000004
+   ],
+   [
+    -96.699129,
+    32.99006
+   ],
+   [
+    -96.699127,
+    32.990128000000006
+   ],
+   [
+    -96.699121,
+    32.990128000000006
+   ],
+   [
+    -96.69912000000001,
+    32.990185000000004
+   ],
+   [
+    -96.69909100000001,
+    32.990185000000004
+   ],
+   [
+    -96.69909,
+    32.990259
+   ]
+  ],
+  "esri": {
+   "z0-11": {
+    "date": "Null",
+    "res_m": "15",
+    "acc_m": "12",
+    "src": "TerraColor NextGen",
+    "info": "TerraColor NextGen"
+   },
+   "z12-19": {
+    "date": "20251008",
+    "res_m": "0.31",
+    "acc_m": "8.47",
+    "src": "WV03",
+    "info": "Vivid Advanced"
+   },
+   "z20-20": {
+    "date": "20250320",
+    "res_m": "0.34",
+    "acc_m": "8.47",
+    "src": "LG01",
+    "info": "Vivid Premium"
+   }
+  },
+  "clarity": {
+   "error": "HTTP Error 404: Not Found"
+  },
+  "sharp": {
+   "NAIP 0.6 m (public domain)": 1.08,
+   "Esri World Imagery z19": 3.65,
+   "Esri World Imagery z20": 8.2,
+   "Esri World Imagery z21": 1.56,
+   "Esri Clarity z19": 2.97,
+   "Esri Clarity z20": null,
+   "Esri Clarity z21": null
+  }
+ }
+]

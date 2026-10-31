@@ -1,0 +1,93 @@
+{
+ "image": "gtrace/8659/google.png",
+ "ft_per_px": 0.2,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     405,
+     504
+    ],
+    [
+     600,
+     365
+    ],
+    [
+     713,
+     523
+    ],
+    [
+     518,
+     662
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0.814,
+    -0.58
+   ],
+   "gable_ends": [
+    "NE",
+    "SW"
+   ],
+   "level": 1,
+   "notes": "simple gable 48 by 39 ft, ridge along the NE-SW axis through about (461,583) to (656,444), about 4/12; both ends gable ends"
+  },
+  {
+   "name": "porch",
+   "rect_px": [
+    [
+     516.1,
+     635.1
+    ],
+    [
+     556.9,
+     606.1
+    ],
+    [
+     585.9,
+     646.9
+    ],
+    [
+     545.1,
+     675.9
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0.58,
+    0.814
+   ],
+   "gable_ends": [
+    "SE"
+   ],
+   "level": 1,
+   "notes": "small entry gable at the SW end of the SE eave, centred near (551,641), ridge perpendicular to the main, about 3.6/12, faces SW and NE per LiDAR (68 and 66 sq ft); it sticks about 5 ft past the main eave and matches the step in the trace"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    470,
+    360
+   ],
+   [
+    560,
+    360
+   ],
+   [
+    565,
+    415
+   ],
+   [
+    480,
+    430
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "tree crown overhanging the NW eave near the N corner"
+ ],
+ "notes": "One gable plus a small cross gable porch (v1 had it as a shed strip along the whole SW half of the eave). Confidence high."
+}

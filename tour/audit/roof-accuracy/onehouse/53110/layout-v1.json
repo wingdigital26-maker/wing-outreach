@@ -1,0 +1,83 @@
+{
+ "image": "gtrace/53110/google.png",
+ "ft_per_px": 0.2101,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     430,
+     365
+    ],
+    [
+     675,
+     365
+    ],
+    [
+     675,
+     637
+    ],
+    [
+     430,
+     637
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "notes": "single large hip over the whole footprint, 52 by 57 ft, near pyramid; S hips meet at about (552,507), N hips at about (550,467), so a short N-S ridge"
+  },
+  {
+   "name": "north diamond",
+   "rect_px": [
+    [
+     563,
+     360
+    ],
+    [
+     620,
+     413
+    ],
+    [
+     550,
+     467
+    ],
+    [
+     500,
+     422
+    ]
+   ],
+   "roof": "flat",
+   "ridge_dir_px": [
+    0,
+    0
+   ],
+   "gable_ends": [],
+   "notes": "dark uniform diamond on the N half bounded by the two N hip lines and two lines meeting at the N eave centre; looks like a glass or dark atrium or skylight section, not shingle; roof type uncertain, LiDAR decides; could also be a sunken courtyard"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    430,
+    640
+   ],
+   [
+    580,
+    640
+   ],
+   [
+    580,
+    705
+   ],
+   [
+    430,
+    705
+   ]
+  ]
+ ],
+ "notes": "one big hip block, confidence high on the block and ridge direction; the dark diamond on the N side is the only unknown (atrium, skylight or courtyard), medium confidence overall. Exclusions: separate lower roof touching the S eave, detached garage or neighbour structure, outside the traced outline"
+}

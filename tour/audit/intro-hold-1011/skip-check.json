@@ -1,0 +1,19 @@
+{
+ "skip_3s": {
+  "hidden": false,
+  "op": "0.7",
+  "disp": "block",
+  "x": 1416,
+  "y": 876,
+  "font": "\"Instrument Sans\", s"
+ },
+ "beat_10s": {
+  "beat": "hi",
+  "hi": "beat in",
+  "text": "Hi Chris",
+  "loading": "js skip-on beat-on loading",
+  "cue": "Opening today"
+ },
+ "cue_19s": "Still loading, almost there",
+ "after_skip": "go"
+}

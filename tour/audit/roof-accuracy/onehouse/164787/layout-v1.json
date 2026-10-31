@@ -1,0 +1,152 @@
+{
+ "image": "gtrace/164787/google.png",
+ "ft_per_px": 0.20604,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     271.7,
+     641.4
+    ],
+    [
+     455.8,
+     450.7
+    ],
+    [
+     550.7,
+     542.4
+    ],
+    [
+     366.7,
+     733.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.695,
+    -0.719
+   ],
+   "gable_ends": [],
+   "notes": "long hip body, ridge NE-SW, hipped both ends; the N apex of the trace is the NE hip end"
+  },
+  {
+   "name": "east_wing",
+   "rect_px": [
+    [
+     464.4,
+     459.1
+    ],
+    [
+     506.1,
+     415.9
+    ],
+    [
+     578.0,
+     485.4
+    ],
+    [
+     536.4,
+     528.5
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.695,
+    -0.719
+   ],
+   "gable_ends": [],
+   "notes": "narrower extension continuing the main ridge to the E corner, lower; a white car parks SE of it"
+  },
+  {
+   "name": "sw_wing",
+   "rect_px": [
+    [
+     296.1,
+     741.3
+    ],
+    [
+     435.0,
+     597.5
+    ],
+    [
+     521.3,
+     680.8
+    ],
+    [
+     382.4,
+     824.7
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.695,
+    -0.719
+   ],
+   "gable_ends": [],
+   "notes": "SW block, ridge parallel to main, hipped at the S corner; overlaps main at its NE end"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    235.1,
+    689.4
+   ],
+   [
+    290.6,
+    631.8
+   ],
+   [
+    348.2,
+    687.4
+   ],
+   [
+    292.6,
+    744.9
+   ]
+  ],
+  [
+   [
+    488.3,
+    614.2
+   ],
+   [
+    599.5,
+    499.1
+   ],
+   [
+    646.2,
+    544.3
+   ],
+   [
+    535.1,
+    659.4
+   ]
+  ],
+  [
+   [
+    471.0,
+    632.2
+   ],
+   [
+    512.7,
+    589.1
+   ],
+   [
+    570.2,
+    644.6
+   ],
+   [
+    528.5,
+    687.8
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "dark ground at the W corner notch, trace overshoots",
+  "ground SE of the house: parked car and trees, the trace SE eave runs through trees",
+  "white concrete patio inside the inner corner"
+ ],
+ "notes": "House rotated 45 deg. Three hip blocks all ridged along the NE-SW axis: main, a narrower east extension, and a SW wing. Trace is too big on the SE and at the W corner, excluded. Confidence medium: inner-corner detail (small dark square by the patio) unresolved."
+}

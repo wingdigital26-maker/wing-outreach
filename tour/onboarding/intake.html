@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roof Command Intake</title>
+<link rel="stylesheet" href="assets/onboard.css"><script src="assets/roofers.js"></script>
+<style>
+.f{display:grid;gap:4px;margin:0 0 14px}
+.f label{font-weight:600;font-size:14px}
+.f .h{font-size:12.5px;color:var(--mut)}
+.f input,.f textarea,.f select{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%;min-height:44px}
+.f textarea{min-height:76px;resize:vertical}
+.f input:focus,.f textarea:focus,.f select:focus{outline:2px solid var(--r-accent);outline-offset:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+fieldset{border:0;padding:0;margin:0}
+legend{font-size:18px;font-weight:600;margin:0 0 10px;padding:0}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:8px 0}
+.chk input{width:20px;height:20px;margin-top:1px;flex:none}
+#out{white-space:pre-wrap;font:13px/1.5 ui-monospace,Consolas,monospace;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;max-height:340px;overflow:auto}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+@media (max-width:640px){.two{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<header data-hd></header><nav data-nav></nav>
+
+<div class="kick">Intake form</div>
+<h1>Tell us about <em>{{name}}</em></h1>
+<p class="lead">Fill in what you can, then tap <b>Download</b> and email the file to Grant (or copy the summary into an email). This form does not send anything anywhere; it only builds a file on your device. Your answers are kept on this device as a draft until you clear them. Please do not type passwords here.</p>
+
+<form id="intake" autocomplete="on" novalidate>
+<div class="card stack">
+<fieldset><legend>Your company</legend>
+  <div class="two">
+    <div class="f"><label for="company">Company name as it should appear</label><input id="company" name="company" value="{{name}}"></div>
+    <div class="f"><label for="legal_name">Legal business name (as on your EIN letter)</label><input id="legal_name" name="legal_name"></div>
+    <div class="f"><label for="business_phone">Business phone</label><input id="business_phone" name="business_phone" type="tel" value="{{phone}}"></div>
+    <div class="f"><label for="business_email">Business email</label><input id="business_email" name="business_email" type="email" value="{{email}}"></div>
+    <div class="f"><label for="website">Website</label><input id="website" name="website" value="{{website}}"></div>
+    <div class="f"><label for="address">Business street address</label><input id="address" name="address" autocomplete="street-address"></div>
+  </div>
+</fieldset>
+</div>
+
+<div class="card stack" style="margin-top:12px">
+<fieldset><legend>Brand</legend>
+  <div class="two">
+    <div class="f"><label for="logo">Logo</label><span class="h">A link to the file, or "emailing it"</span><input id="logo" name="logo"></div>
+    <div class="f"><label for="colors">Brand colours</label><span class="h">Hex codes if you have them, or "match the website"</span><input id="colors" name="colors"></div>
+  </div>
+</fieldset>
+</div>
+
+<div class="card stack" style="margin-top:12px">
+<fieldset><legend>Service area and jobs</legend>
+  <div class="f"><label for="cities">Cities you serve</label><input id="cities" name="cities" value="{{area}}"></div>
+  <div class="f"><label for="counties">Counties</label><input id="counties" name="counties" value="{{counties}}"></div>
+  <div class="two">
+    <div class="f"><label for="avg_job">Average re-roof job size</label><input id="avg_job" name="avg_job" ></div>
+    <div class="f"><label for="per_square">Price per square</label><input id="per_square" name="per_square" inputmode="numeric"></div>
+  </div>
+  <div class="f"><label for="extras">Common extras and prices</label><span class="h">Tear-off layers, decking, gutters, etc.</span><textarea id="extras" name="extras"></textarea></div>
+  <div class="f"><label for="licence">Licence and registration numbers</label><span class="h">{{licence}}</span><textarea id="licence" name="licence"></textarea></div>
+</fieldset>
+</div>
+
+<div class="card stack" style="margin-top:12px">
+<fieldset><legend>Google and website access</legend>
+  <div class="f"><label for="review_link">Google review link</label><input id="review_link" name="review_link" type="url" placeholder="https://g.page/r/..."></div>
+  <div class="chk"><input type="checkbox" id="gbp_added" name="gbp_added"><label for="gbp_added">I added Wing as a Manager on our Google Business Profile</label></div>
+  <div class="chk"><input type="checkbox" id="site_added" name="site_added"><label for="site_added">I added Wing as a user on our website (or introduced our web person)</label></div>
+  <div class="chk"><input type="checkbox" id="gsc_added" name="gsc_added"><label for="gsc_added">I added Wing on Google Search Console (if we have it)</label></div>
+  <div class="f"><label for="web_person">Web person's name and email (if someone else runs the site)</label><input id="web_person" name="web_person"></div>
+</fieldset>
+</div>
+
+<div class="card stack" style="margin-top:12px">
+<fieldset><legend>Storm alerts and team</legend>
+  <div class="two">
+    <div class="f"><label for="alert_name">Storm alert goes to (name)</label><input id="alert_name" name="alert_name" value="{{owner}}"></div>
+    <div class="f"><label for="alert_phone">Alert mobile</label><input id="alert_phone" name="alert_phone" type="tel"></div>
+    <div class="f"><label for="alert_email">Alert email</label><input id="alert_email" name="alert_email" type="email"></div>
+    <div class="f"><label for="alert_2">Second person for alerts (optional)</label><input id="alert_2" name="alert_2"></div>
+  </div>
+  <div class="f"><label for="team">Team members who need a login</label><span class="h">One per line: name, role, mobile, email</span><textarea id="team" name="team" rows="4"></textarea></div>
+  <div class="f"><label for="works_list">Who works the Daily 50?</label>
+    <select id="works_list" name="works_list"><option value="">Choose</option><option>Our reps</option><option>Wing calls for us</option><option>Both</option></select></div>
+  <div class="f"><label for="door_knock">Who knocks doors after a storm?</label><input id="door_knock" name="door_knock"></div>
+</fieldset>
+</div>
+
+<div class="card stack" style="margin-top:12px">
+<fieldset><legend>Hours</legend>
+  <div class="f"><label for="text_hours">Preferred texting hours</label><span class="h">Suggested: {{textHours}}</span><input id="text_hours" name="text_hours" value="{{textHours}}"></div>
+  <div class="f"><label for="call_hours">Preferred calling hours</label><span class="h">Legal window: {{callHours}}</span><input id="call_hours" name="call_hours"></div>
+</fieldset>
+</div>
+
+<div class="card stack" style="margin-top:12px">
+<fieldset><legend>Past customers</legend>
+  <div class="f"><label for="past_count">About how many past customers?</label><input id="past_count" name="past_count" inputmode="numeric"></div>
+  <div class="f"><label for="past_source">Where is the list now?</label><span class="h">Spreadsheet, job software name, paper. Use the <a href="past-customers-template.csv" download>CSV template</a> if you can.</span><input id="past_source" name="past_source"></div>
+</fieldset>
+</div>
+
+<div class="card stack" style="margin-top:12px">
+<fieldset><legend>Sign-offs</legend>
+  <p class="mut small">Tick what you agree to. Nothing goes out in your name until the script, templates and consent wording are approved in writing.</p>
+  <div class="chk"><input type="checkbox" id="ok_rules" name="ok_rules"><label for="ok_rules">I have read the <a data-keep href="faq.html">ground rules</a> and our team will follow them.</label></div>
+  <div class="chk"><input type="checkbox" id="ok_tapsend" name="ok_tapsend"><label for="ok_tapsend">A person taps send on every cold call and text. No automated messages to homeowners who have not opted in.</label></div>
+  <div class="chk"><input type="checkbox" id="ok_insurance" name="ok_insurance"><label for="ok_insurance">No insurance payout or deductible promises, ever.</label></div>
+  <div class="chk"><input type="checkbox" id="ok_pastcust" name="ok_pastcust"><label for="ok_pastcust">The past customers we send marked "ok_to_contact = yes" agreed to hear from us.</label></div>
+  <div class="chk"><input type="checkbox" id="ok_accounts" name="ok_accounts"><label for="ok_accounts">We will set up the texting number and phone-lookup accounts in our own name with Wing's help.</label></div>
+  <div class="two">
+    <div class="f"><label for="signed_by">Your name</label><input id="signed_by" name="signed_by"></div>
+    <div class="f"><label for="signed_date">Date</label><input id="signed_date" name="signed_date" type="date"></div>
+  </div>
+  <div class="f"><label for="notes">Anything else we should know</label><textarea id="notes" name="notes"></textarea></div>
+</fieldset>
+</div>
+
+<div class="card" style="margin-top:12px">
+  <h3>Your summary</h3>
+  <p class="mut small">Builds on your device. Download the file or copy the summary, then email it to Grant.</p>
+  <div class="bar"><button type="button" class="btn" id="dl">Download file</button><button type="button" class="btn ghost" id="dltxt">Download summary (.txt)</button><button type="button" class="btn ghost" id="copy">Copy summary</button><button type="button" class="btn ghost" id="clear">Clear form</button></div>
+  <p id="msg" class="small mut" style="margin:10px 0 0" aria-live="polite"></p>
+  <div id="out" style="margin-top:10px"></div>
+</div>
+</form>
+
+<footer data-ft></footer>
+</div>
+<script src="assets/onboard.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('intake'), out = document.getElementById('out'), msg = document.getElementById('msg');
+  var KEY = 'rc-intake-' + window.ROOFER_KEY;
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  // the blank template's placeholder words ("Your Roofing Company", "(___) ___-____") are not answers: start those fields empty
+  if (window.ROOFER_KEY === 'template') {
+    var T = window.ONBOARD_ROOFERS.template, blanks = Object.keys(T).map(function (k) { return String(T[k]); });
+    Array.prototype.forEach.call(form.elements, function (el) { if (el.value && blanks.indexOf(el.value) > -1 && el.name !== 'text_hours') el.value = ''; });
+  }
+  function data() {
+    var d = { form: 'Roof Command intake', roofer_key: window.ROOFER_KEY, built: new Date().toISOString() };
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name) return;
+      d[el.name] = el.type === 'checkbox' ? el.checked : el.value.trim();
+    });
+    return d;
+  }
+  function labelFor(name) { var l = form.querySelector('label[for="' + name + '"]'); return l ? l.textContent.trim() : name; }
+  function summary(d) {
+    var lines = ['Roof Command intake: ' + (d.company || window.ROOFER.name), 'Built ' + d.built.slice(0, 10), ''];
+    Object.keys(d).forEach(function (k) {
+      if (['form', 'roofer_key', 'built'].indexOf(k) > -1) return;
+      var v = d[k]; if (v === '' || v === false) v = (v === false ? 'no' : '(blank)'); if (v === true) v = 'yes';
+      lines.push(labelFor(k) + ': ' + v);
+    });
+    return lines.join('\n');
+  }
+  function render() {
+    var d = data(); out.textContent = summary(d);
+    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+    return d;
+  }
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved) Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || !(el.name in saved)) return;
+      if (el.type === 'checkbox') el.checked = !!saved[el.name]; else el.value = saved[el.name];
+    });
+  } catch (e) {}
+  form.addEventListener('input', render); form.addEventListener('change', render); render();
+  function slug() { return (data().company || 'roofer').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+  function save(text, name, type) {
+    var url = URL.createObjectURL(new Blob([text], { type: type }));
+    var a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    msg.textContent = 'Saved ' + name + ' to your device. Email it to Grant.';
+  }
+  document.getElementById('dl').onclick = function () { save(JSON.stringify(render(), null, 2), slug() + '-roof-command-intake.json', 'application/json'); };
+  document.getElementById('dltxt').onclick = function () { save(summary(render()), slug() + '-roof-command-intake.txt', 'text/plain'); };
+  document.getElementById('copy').onclick = function () {
+    var t = summary(render());
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { msg.textContent = 'Summary copied. Paste it into an email to Grant.'; }, function () { msg.textContent = 'Could not copy. Select the summary below and copy it.'; });
+    else msg.textContent = 'Select the summary below and copy it.';
+  };
+  document.getElementById('clear').onclick = function () {
+    if (!confirm('Clear every answer on this device?')) return;
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    location.reload();
+  };
+})();
+</script>
+</body></html>

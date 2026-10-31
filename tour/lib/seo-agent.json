@@ -1,0 +1,2245 @@
+{
+ "generated": "2026-10-29T13:43:35",
+ "site": "https://wingdigital26-maker.github.io/jackson-roofing/",
+ "sources": {
+  "keywords": "seo-factory/jackson-roofing/research/service-keywords.csv",
+  "pages": "jackson-roofing-site origin/main",
+  "checks": "computed from each page's HTML"
+ },
+ "volume_source": null,
+ "volume_note": "Search volume is not connected: the keyword sheet has no volume column filled and the DataForSEO lookup was refused (HTTP 403, 2026-10-29).",
+ "rank_source": null,
+ "rank_note": "Rank tracking is not connected: no Search Console property and no rank tracker for this site.",
+ "stats": {
+  "pages_built": 32,
+  "service_pages": 11,
+  "blog_posts": 21,
+  "searches_tracked": 26,
+  "live_keywords": 9,
+  "top3": null,
+  "checks_passed": 222,
+  "checks_total": 224,
+  "last_published": "2026-10-06"
+ },
+ "steps": [
+  {
+   "n": 1,
+   "name": "Spot trends",
+   "sub": "what locals search",
+   "state": "done",
+   "when": "2026-07-21"
+  },
+  {
+   "n": 2,
+   "name": "Pick the winner",
+   "sub": "intent + competition",
+   "state": "done",
+   "when": "2026-08-05"
+  },
+  {
+   "n": 3,
+   "name": "Build the page",
+   "sub": "copy, FAQs, schema",
+   "state": "done",
+   "when": "2026-09-04"
+  },
+  {
+   "n": 4,
+   "name": "Publish",
+   "sub": "live + indexed",
+   "state": "done",
+   "when": "2026-10-06"
+  },
+  {
+   "n": 5,
+   "name": "Rank + leads",
+   "sub": "calls come in",
+   "state": "not_connected",
+   "when": null
+  }
+ ],
+ "preview": {
+  "slug": "free-roof-inspection-plano-tx",
+  "type": "service",
+  "path": "services/free-roof-inspection-plano-tx.html",
+  "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/free-roof-inspection-plano-tx.html",
+  "title": "What to Expect During a Roof Inspection in Plano, TX | Jackson Roofing",
+  "h1": "What to Expect During a Roof Inspection in Plano, TX",
+  "meta": "What actually happens during a Plano roof inspection: the five-step visit, what we check, and when to book one. From a family roofer since 2000.",
+  "keyword": "free roof inspection plano tx",
+  "city": "Plano",
+  "published": "2026-09-07",
+  "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-inspection.webp",
+  "checks": {
+   "title": {
+    "ok": false,
+    "v": "70 chars"
+   },
+   "meta": {
+    "ok": true,
+    "v": "144 chars"
+   },
+   "h1": {
+    "ok": false,
+    "v": "1 H1"
+   },
+   "schema": {
+    "ok": true,
+    "v": "BreadcrumbList, RoofingContractor, Service"
+   },
+   "links": {
+    "ok": true,
+    "v": "11 internal"
+   },
+   "mobile": {
+    "ok": true,
+    "v": "viewport set"
+   },
+   "canonical": {
+    "ok": true,
+    "v": "canonical set"
+   }
+  },
+  "passed": 5,
+  "of": 7
+ },
+ "keywords": [
+  {
+   "keyword": "free roof inspection plano tx",
+   "city": "Plano",
+   "service": "Free Roof Inspection",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "CONSUMED 2026-08-05 spoke (WP page id=18793 status=draft queued); signature offer; fragmented soft SERP",
+   "volume": null,
+   "kd": null,
+   "slug": "free-roof-inspection-plano-tx",
+   "picked": "2026-08-05",
+   "drafted": "2026-09-04",
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/free-roof-inspection-plano-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof repair allen tx",
+   "city": "Allen",
+   "service": "Roof Repair",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "3 directories in top 3; Pickle is real rival",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-allen-tx",
+   "picked": "2026-07-22",
+   "drafted": "2026-09-04",
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-allen-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof repair frisco tx",
+   "city": "Frisco",
+   "service": "Roof Repair",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "Facebook page ranks #1 — beatable",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-frisco-tx",
+   "picked": "2026-07-22",
+   "drafted": "2026-09-04",
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-frisco-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof repair mckinney tx",
+   "city": "McKinney",
+   "service": "Roof Repair",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "standard",
+   "note": "BBB #1 but GAF Master Elite locals below",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-mckinney-tx",
+   "picked": "2026-07-22",
+   "drafted": "2026-09-04",
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-mckinney-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof repair plano tx",
+   "city": "Plano",
+   "service": "Roof Repair",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "standard",
+   "note": "home city + core service; strong locals entrenched",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-plano-tx",
+   "picked": null,
+   "drafted": null,
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-repair-plano-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof replacement frisco tx",
+   "city": "Frisco",
+   "service": "Roof Replacement",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "CONSUMED 2026-07-27 spoke (WP page id=18606 status=draft queued); cost blog post ranks #1",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-frisco-tx",
+   "picked": "2026-07-27",
+   "drafted": "2026-09-04",
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-replacement-frisco-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof replacement mckinney tx",
+   "city": "McKinney",
+   "service": "Roof Replacement",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "standard",
+   "note": "cost aggregators rank; crowded",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-mckinney-tx",
+   "picked": null,
+   "drafted": null,
+   "published": "2026-09-14",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-replacement-mckinney-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof repair richardson tx",
+   "city": "Richardson",
+   "service": "Roof Repair",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "CONSUMED 2026-08-05 spoke (WP page id=18801 status=draft queued); Yelp+Thumbtack top 2",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-richardson-tx",
+   "picked": "2026-08-05",
+   "drafted": "2026-09-04",
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-richardson-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "roof repair rockwall tx",
+   "city": "Rockwall",
+   "service": "Roof Repair",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "CONSUMED 2026-07-27 spoke (WP page id=18607 status=draft queued); GAF+BBB+Chamber top 3 softest repair SERP",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-rockwall-tx",
+   "picked": "2026-07-27",
+   "drafted": "2026-09-04",
+   "published": "2026-09-07",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-rockwall-tx.html",
+   "status": "live"
+  },
+  {
+   "keyword": "hail damage roof repair plano tx",
+   "city": "Plano",
+   "service": "Storm and Hail Damage",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "DRAFTED 2026-07-23 (WP page id=18577 status=ready); NO insurance angle ever; soft niche SERP",
+   "volume": null,
+   "kd": null,
+   "slug": "hail-damage-roof-repair-plano-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "drafted"
+  },
+  {
+   "keyword": "commercial roofing plano tx",
+   "city": "Plano",
+   "service": "Commercial Roofing",
+   "priority": 1,
+   "serp": "strong-serp",
+   "fit": "standard",
+   "note": "TPO mod-bit coatings; CentiMark national entrenched",
+   "volume": null,
+   "kd": null,
+   "slug": "commercial-roofing-plano-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof replacement plano tx",
+   "city": "Plano",
+   "service": "Roof Replacement",
+   "priority": 1,
+   "serp": "weak-serp",
+   "fit": "standard",
+   "note": "highest ticket in home city; directories rank but locals strong",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-plano-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "commercial roofing frisco tx",
+   "city": "Frisco",
+   "service": "Commercial Roofing",
+   "priority": 2,
+   "serp": "strong-serp",
+   "fit": "standard",
+   "note": "regional specialists not nationals",
+   "volume": null,
+   "kd": null,
+   "slug": "commercial-roofing-frisco-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "flat roof repair plano tx",
+   "city": "Plano",
+   "service": "Commercial Roofing",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "BBB #1; fits TPO/mod-bit strength",
+   "volume": null,
+   "kd": null,
+   "slug": "flat-roof-repair-plano-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "free roof inspection frisco tx",
+   "city": "Frisco",
+   "service": "Free Roof Inspection",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "signature offer; soft fragmented SERP",
+   "volume": null,
+   "kd": null,
+   "slug": "free-roof-inspection-frisco-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof repair garland tx",
+   "city": "Garland",
+   "service": "Roof Repair",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "Angi+gov+Facebook clutter",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-garland-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof repair wylie tx",
+   "city": "Wylie",
+   "service": "Roof Repair",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "GAF+Facebook+HomeAdvisor top 3",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-wylie-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof replacement allen tx",
+   "city": "Allen",
+   "service": "Roof Replacement",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "standard",
+   "note": "GAF #1 but Pickle+Peak strong",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-allen-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof replacement richardson tx",
+   "city": "Richardson",
+   "service": "Roof Replacement",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "city permit page #1; permit FAQ = killer H2",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-richardson-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof replacement rockwall tx",
+   "city": "Rockwall",
+   "service": "Roof Replacement",
+   "priority": 2,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "GAF+Yelp top; small locals",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-rockwall-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof repair murphy tx",
+   "city": "Murphy",
+   "service": "Roof Repair",
+   "priority": 3,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "only templated service-area pages to beat",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-murphy-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof repair prosper tx",
+   "city": "Prosper",
+   "service": "Roof Repair",
+   "priority": 3,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "extended area; Yelp #1",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-prosper-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof repair sachse tx",
+   "city": "Sachse",
+   "service": "Roof Repair",
+   "priority": 3,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "weakest SERP of sweep — only thin pages",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-repair-sachse-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof replacement celina tx",
+   "city": "Celina",
+   "service": "Roof Replacement",
+   "priority": 3,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "extended area fast growth; thin templated pages",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-celina-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "roof replacement wylie tx",
+   "city": "Wylie",
+   "service": "Roof Replacement",
+   "priority": 3,
+   "serp": "weak-serp",
+   "fit": "priority",
+   "note": "no big brands; thin exact-match sites",
+   "volume": null,
+   "kd": null,
+   "slug": "roof-replacement-wylie-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "queued"
+  },
+  {
+   "keyword": "commercial roofing mckinney tx",
+   "city": "McKinney",
+   "service": "Commercial Roofing",
+   "priority": 2,
+   "serp": "strong-serp",
+   "fit": "park",
+   "note": "PARKED 2026-07-21: KPost Top-100 + exact-match commercial domains",
+   "volume": null,
+   "kd": null,
+   "slug": "commercial-roofing-mckinney-tx",
+   "picked": null,
+   "drafted": null,
+   "published": null,
+   "url": null,
+   "status": "parked"
+  }
+ ],
+ "pages": [
+  {
+   "slug": "prosper-celina-new-build-roofs",
+   "type": "blog",
+   "path": "blog/prosper-celina-new-build-roofs.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/prosper-celina-new-build-roofs.html",
+   "title": "New Build Roofs in Prosper and Celina",
+   "h1": "New Build Roofs in Prosper and Celina",
+   "meta": "What two years of NOAA hail reports show around Prosper and Celina, why builder grade roofs need watching, and when a new roof should get a look.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-10-06",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/about-hero.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "37 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "145 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, FAQPage"
+    },
+    "links": {
+     "ok": true,
+     "v": "17 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "signs-you-need-a-new-roof-frisco",
+   "type": "blog",
+   "path": "blog/signs-you-need-a-new-roof-frisco.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/signs-you-need-a-new-roof-frisco.html",
+   "title": "7 Signs Your Frisco Home Needs a New Roof",
+   "h1": "7 Signs Your Frisco Home Needs a New Roof",
+   "meta": "Seven signs a Frisco home needs a new roof, from curling shingles to attic daylight, plus why so many Frisco roofs reach replacement age together.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-10-02",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-repair.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "41 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "146 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, FAQPage"
+    },
+    "links": {
+     "ok": true,
+     "v": "19 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-warranty-what-it-covers",
+   "type": "blog",
+   "path": "blog/roof-warranty-what-it-covers.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-warranty-what-it-covers.html",
+   "title": "Manufacturer vs Workmanship Roof Warranty",
+   "h1": "Manufacturer vs Workmanship Roof Warranty",
+   "meta": "A new North Texas roof has two warranties: one for the materials, one for the install. What each covers, where the gaps are, and what to ask first.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-29",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-hero.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "41 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "147 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, FAQPage"
+    },
+    "links": {
+     "ok": true,
+     "v": "19 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-check-after-storm-murphy-tx",
+   "type": "blog",
+   "path": "blog/roof-check-after-storm-murphy-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-check-after-storm-murphy-tx.html",
+   "title": "After a Storm in Murphy TX: What to Check on Your Roof",
+   "h1": "After a Storm in Murphy TX: What to Check on Your Roof",
+   "meta": "Murphy logged 1.5 inch hail in May 2025 and 1 inch hail in April 2026. Here is what to check on your roof from the ground, and when to get a closer look.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-28",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/jackson-truck.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "54 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "153 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, FAQPage"
+    },
+    "links": {
+     "ok": true,
+     "v": "18 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "garland-roof-storm-history",
+   "type": "blog",
+   "path": "blog/garland-roof-storm-history.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/garland-roof-storm-history.html",
+   "title": "Garland Roofs and the Storms That Age Them",
+   "h1": "Garland Roofs and the Storms That Age Them",
+   "meta": "Garland homes are older than most North Texas suburbs. Here is what the real hail record shows and what repeated storms do to a roof with years on it.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-22",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-000000.jpg",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "42 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "150 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, FAQPage"
+    },
+    "links": {
+     "ok": true,
+     "v": "18 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-decking-replacement-explained",
+   "type": "blog",
+   "path": "blog/roof-decking-replacement-explained.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-decking-replacement-explained.html",
+   "title": "Roof Decking: What Happens When the Old Roof Comes Off",
+   "h1": "Roof Decking: What Happens When the Old Roof Comes Off",
+   "meta": "Roof decking stays hidden until a tear off. What North Texas crews check, why no one can count bad sheets in advance, and what to ask before you sign.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-16",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/hero-poster.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "54 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "150 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "18 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-replacement-mckinney-tx",
+   "type": "blog",
+   "path": "blog/roof-replacement-mckinney-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-replacement-mckinney-tx.html",
+   "title": "Roof Replacement in McKinney TX: What to Expect",
+   "h1": "Roof Replacement in McKinney TX: What to Expect",
+   "meta": "Roof replacement in McKinney TX from a Plano roofer: when to replace instead of repair, what really drives the price, and what the hail record shows.",
+   "keyword": "roof replacement mckinney tx",
+   "city": "McKinney",
+   "published": "2026-09-14",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/contact.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "47 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "149 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "19 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-flashing-leak-spots",
+   "type": "blog",
+   "path": "blog/roof-flashing-leak-spots.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-flashing-leak-spots.html",
+   "title": "The Five Places a Roof Usually Leaks First",
+   "h1": "The Five Places a Roof Usually Leaks First",
+   "meta": "The five places a North Texas roof usually leaks first, what each one looks like from the ground, and when to get it checked. Free roof inspections.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-13",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-vanalstyne.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "42 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "148 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "18 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "shingle-granule-loss-explained",
+   "type": "blog",
+   "path": "blog/shingle-granule-loss-explained.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/shingle-granule-loss-explained.html",
+   "title": "Granule Loss: What Those Grains Actually Mean",
+   "h1": "Granule Loss: What Those Grains Actually Mean",
+   "meta": "Granule loss on asphalt shingles: a Plano roofer explains what those grains in the downspout mean and when it is worth worrying. Free inspections.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-13",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-0326.jpg",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "45 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "146 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "17 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "spring-storm-season-roof-prep",
+   "type": "blog",
+   "path": "blog/spring-storm-season-roof-prep.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/spring-storm-season-roof-prep.html",
+   "title": "When North Texas Hail Season Actually Peaks",
+   "h1": "When North Texas Hail Season Actually Peaks",
+   "meta": "What the NOAA hail record actually shows about when North Texas hail season peaks, and what to do with your roof before it arrives. Free inspections.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-13",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-inspection.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "43 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "149 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "18 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "hail-history-wylie-tx",
+   "type": "blog",
+   "path": "blog/hail-history-wylie-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/hail-history-wylie-tx.html",
+   "title": "What the Hail Record Shows for Wylie Roofs",
+   "h1": "What the Hail Record Shows for Wylie Roofs",
+   "meta": "The real NOAA hail record for Wylie TX, what those hail sizes do to asphalt shingles, and what a homeowner can check from the ground after a storm.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-08",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-inspection.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "42 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "147 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "18 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "free-roof-inspection-plano-tx",
+   "type": "service",
+   "path": "services/free-roof-inspection-plano-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/free-roof-inspection-plano-tx.html",
+   "title": "What to Expect During a Roof Inspection in Plano, TX | Jackson Roofing",
+   "h1": "What to Expect During a Roof Inspection in Plano, TX",
+   "meta": "What actually happens during a Plano roof inspection: the five-step visit, what we check, and when to book one. From a family roofer since 2000.",
+   "keyword": "free roof inspection plano tx",
+   "city": "Plano",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-inspection.webp",
+   "checks": {
+    "title": {
+     "ok": false,
+     "v": "70 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "144 chars"
+    },
+    "h1": {
+     "ok": false,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "11 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 5,
+   "of": 7
+  },
+  {
+   "slug": "free-roof-inspection",
+   "type": "service",
+   "path": "services/free-roof-inspection.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/free-roof-inspection.html",
+   "title": "Free Roof Inspection in Plano TX | Jackson Roofing",
+   "h1": "Free Roof Inspection in Plano TX",
+   "meta": "Free roof inspection in Plano TX from a family roofer since 2000. We look, show you photos, and give a straight answer. No pressure, no obligation.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-inspection.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "50 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "147 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "12 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-repair-allen-tx",
+   "type": "service",
+   "path": "services/roof-repair-allen-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-allen-tx.html",
+   "title": "Roof Repair in Allen TX | Jackson Roofing",
+   "h1": "Roof Repair in Allen TX: Fast, Honest Repairs",
+   "meta": "Roof repair Allen TX from a family-run roofer since 2000. Leaks, missing shingles, storm damage fixed fast. Free no-obligation inspections.",
+   "keyword": "roof repair allen tx",
+   "city": "Allen",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-repair.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "41 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "139 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "10 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-repair-frisco-tx",
+   "type": "service",
+   "path": "services/roof-repair-frisco-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-frisco-tx.html",
+   "title": "Roof Repair in Frisco TX | Jackson Roofing",
+   "h1": "Roof Repair in Frisco TX: Fast, Honest, Local",
+   "meta": "Roof repair Frisco TX from a family roofer on North Texas roofs since 2000. Leaks, storm damage, worn shingles. Free no-obligation inspections.",
+   "keyword": "roof repair frisco tx",
+   "city": "Frisco",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-4998.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "42 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "143 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "11 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-repair-mckinney-tx",
+   "type": "service",
+   "path": "services/roof-repair-mckinney-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-mckinney-tx.html",
+   "title": "Roof Repair in McKinney TX | Jackson Roofing",
+   "h1": "Roof Repair in McKinney TX: An Honest Roofer",
+   "meta": "Roof repair McKinney TX done right by a family roofer since 2000. Leaks, flashing, storm and hail damage, honest advice. Free roof inspections.",
+   "keyword": "roof repair mckinney tx",
+   "city": "McKinney",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-9349.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "44 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "143 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "10 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-repair-richardson-tx",
+   "type": "service",
+   "path": "services/roof-repair-richardson-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-richardson-tx.html",
+   "title": "Roof Repair in Richardson TX | Jackson Roofing",
+   "h1": "Roof Repair in Richardson TX: Honest and Local",
+   "meta": "Roof repair Richardson TX from a family roofer on North Texas roofs since 2000. Leaks, storm damage, worn shingles. Free estimates online.",
+   "keyword": "roof repair richardson tx",
+   "city": "Richardson",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-repair.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "46 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "138 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "10 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-repair-rockwall-tx",
+   "type": "service",
+   "path": "services/roof-repair-rockwall-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair-rockwall-tx.html",
+   "title": "Roof Repair in Rockwall TX | Jackson Roofing",
+   "h1": "Roof Repair in Rockwall TX: Honest, Local, Fast",
+   "meta": "Roof repair Rockwall TX from a family roofer on North Texas roofs since 2000. Wind-lifted shingles, leaks, storm damage. Free no-obligation inspections.",
+   "keyword": "roof repair rockwall tx",
+   "city": "Rockwall",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-vanalstyne.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "44 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "152 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "10 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-repair",
+   "type": "service",
+   "path": "services/roof-repair.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-repair.html",
+   "title": "Roof Repair in Plano TX | Jackson Roofing",
+   "h1": "Roof Repair in Plano TX",
+   "meta": "Roof repair in Plano TX from a family roofer since 2000. Leaks, storm damage, worn shingles. Free no-obligation inspections across North DFW.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-repair.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "41 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "141 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "16 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-replacement-frisco-tx",
+   "type": "service",
+   "path": "services/roof-replacement-frisco-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-replacement-frisco-tx.html",
+   "title": "Roof Replacement in Frisco TX | Jackson Roofing",
+   "h1": "Roof Replacement in Frisco TX: Tear Off to Cleanup",
+   "meta": "Roof replacement Frisco TX from a family roofer on North Texas roofs since 2000. Written quotes, our own crews, one day installs. Free inspection.",
+   "keyword": "roof replacement frisco tx",
+   "city": "Frisco",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-replacement.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "47 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "146 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "12 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-replacement",
+   "type": "service",
+   "path": "services/roof-replacement.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/roof-replacement.html",
+   "title": "Roof Replacement in Plano TX | Jackson Roofing",
+   "h1": "Roof Replacement in Plano TX",
+   "meta": "Roof replacement in Plano TX from a family roofer since 2000. Full tear-offs, our own crews, free inspections, and an honest repair-or-replace answer.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-replacement.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "46 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "150 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "12 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "storm-hail-damage-roof-repair",
+   "type": "service",
+   "path": "services/storm-hail-damage-roof-repair.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/services/storm-hail-damage-roof-repair.html",
+   "title": "Hail Damage Roof Repair Plano TX | Jackson Roofing",
+   "h1": "Hail Damage Roof Repair in Plano TX",
+   "meta": "Hail damage roof repair in Plano TX from a family roofer since 2000. Fast storm response, free inspections, photos of the damage, and an honest fix.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-storm.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "50 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "148 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BreadcrumbList, RoofingContractor, Service"
+    },
+    "links": {
+     "ok": true,
+     "v": "11 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "hail-damage-roof-signs",
+   "type": "blog",
+   "path": "blog/hail-damage-roof-signs.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/hail-damage-roof-signs.html",
+   "title": "Hail Damage Roof Signs You Can Spot From the Ground",
+   "h1": "Hail Damage Roof Signs You Can Spot From the Ground",
+   "meta": "Hail damage roof signs a North Texas homeowner can check from the ground, from a Plano roofer on roofs since 2000. Free inspections.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-storm.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "51 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "132 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "20 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "how-long-does-a-roof-replacement-take",
+   "type": "blog",
+   "path": "blog/how-long-does-a-roof-replacement-take.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/how-long-does-a-roof-replacement-take.html",
+   "title": "How Long Does a Roof Replacement Take in Texas?",
+   "h1": "How Long Does a Roof Replacement Take in Texas?",
+   "meta": "How long does a roof replacement take? Most North Texas homes are done in one day. A Plano roofer walks through the schedule hour by hour.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-replacement.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "47 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "138 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "20 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-repair-plano-tx",
+   "type": "blog",
+   "path": "blog/roof-repair-plano-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-repair-plano-tx.html",
+   "title": "Roof Repair in Plano TX: An Honest Guide",
+   "h1": "Roof Repair in Plano TX: An Honest Guide",
+   "meta": "Roof repair in Plano TX from a family roofer since 2000. What we fix, the warning signs to watch, and free no obligation inspections across North DFW.",
+   "keyword": "roof repair plano tx",
+   "city": "Plano",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-repair.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "40 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "150 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "21 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-replacement-frisco-tx",
+   "type": "blog",
+   "path": "blog/roof-replacement-frisco-tx.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-replacement-frisco-tx.html",
+   "title": "Roof Replacement in Frisco TX: What to Expect",
+   "h1": "Roof Replacement in Frisco TX: What to Expect",
+   "meta": "Roof replacement in Frisco TX: what drives the cost, how long it takes, and what to expect, from a family roofer on North DFW roofs since 2000.",
+   "keyword": "roof replacement frisco tx",
+   "city": "Frisco",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-9349.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "45 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "143 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "20 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roofer-near-me-plano",
+   "type": "blog",
+   "path": "blog/roofer-near-me-plano.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roofer-near-me-plano.html",
+   "title": "Roofer Near Me: Why Local Wins in Plano",
+   "h1": "Roofer Near Me: Why Local Wins in Plano",
+   "meta": "Searching roofer near me in Plano? Why a local North DFW roofer beats a storm chaser, what to ask, and free no obligation inspections since 2000.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-07",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/home-truck.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "39 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "145 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "21 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "attic-ventilation-roof-lifespan",
+   "type": "blog",
+   "path": "blog/attic-ventilation-roof-lifespan.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/attic-ventilation-roof-lifespan.html",
+   "title": "Attic Ventilation and Roof Lifespan in North Texas",
+   "h1": "Attic Ventilation and Roof Lifespan in North Texas",
+   "meta": "Attic ventilation roof lifespan in North Texas: a Plano roofer explains what heat does up there and what to check. Free estimates online.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-06",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-storm.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "50 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "137 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "17 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "how-to-choose-a-roofer-plano",
+   "type": "blog",
+   "path": "blog/how-to-choose-a-roofer-plano.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/how-to-choose-a-roofer-plano.html",
+   "title": "How to Choose a Roofer in Plano Without Getting Burned",
+   "h1": "How to Choose a Roofer in Plano Without Getting Burned",
+   "meta": "How to choose a roofer in Plano: the checks that matter, the questions that separate real contractors from salesmen, and how to compare two quotes honestly.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-06",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/crew-work.jpg",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "54 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "156 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "17 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "metal-roof-vs-shingles-cost-texas",
+   "type": "blog",
+   "path": "blog/metal-roof-vs-shingles-cost-texas.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/metal-roof-vs-shingles-cost-texas.html",
+   "title": "Metal Roof vs Shingles in Texas: Cost and What to Know",
+   "h1": "Metal Roof vs Shingles in Texas: Cost and What to Know",
+   "meta": "Metal roof vs shingles cost in Texas: a North Texas roofer explains the honest tradeoffs, what each option costs, and which makes more sense for your home.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-06",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/svc-replacement.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "54 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "155 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "16 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "roof-maintenance-checklist-texas",
+   "type": "blog",
+   "path": "blog/roof-maintenance-checklist-texas.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/roof-maintenance-checklist-texas.html",
+   "title": "A Roof Maintenance Checklist for Texas Homeowners",
+   "h1": "A Roof Maintenance Checklist for Texas Homeowners",
+   "meta": "Roof maintenance checklist Texas homeowners can actually use, from a Plano roofer on North Texas roofs since 2000. Free estimates online.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-06",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/g-4998.webp",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "49 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "137 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "17 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  },
+  {
+   "slug": "texas-heat-roof-damage",
+   "type": "blog",
+   "path": "blog/texas-heat-roof-damage.html",
+   "url": "https://wingdigital26-maker.github.io/jackson-roofing/blog/texas-heat-roof-damage.html",
+   "title": "Texas Heat and Roof Damage: Why Roofs Age Faster",
+   "h1": "Texas Heat and Roof Damage: Why Roofs Age Faster",
+   "meta": "Texas heat roof damage explained by a Plano roofer: how summer ages shingles and what it means for your roof. Free estimates online.",
+   "keyword": "",
+   "city": "",
+   "published": "2026-09-06",
+   "hero": "https://wingdigital26-maker.github.io/jackson-roofing/assets/img/house-brick.jpg",
+   "checks": {
+    "title": {
+     "ok": true,
+     "v": "48 chars"
+    },
+    "meta": {
+     "ok": true,
+     "v": "132 chars"
+    },
+    "h1": {
+     "ok": true,
+     "v": "1 H1"
+    },
+    "schema": {
+     "ok": true,
+     "v": "BlogPosting, BreadcrumbList, FAQPage, RoofingContractor"
+    },
+    "links": {
+     "ok": true,
+     "v": "16 internal"
+    },
+    "mobile": {
+     "ok": true,
+     "v": "viewport set"
+    },
+    "canonical": {
+     "ok": true,
+     "v": "canonical set"
+    }
+   },
+   "passed": 7,
+   "of": 7
+  }
+ ],
+ "feed": [
+  {
+   "when": "2026-10-06",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: New Build Roofs in Prosper and Celina",
+   "sha": "deafd17",
+   "n": 1
+  },
+  {
+   "when": "2026-10-02",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: 7 Signs Your Frisco Home Needs a New Roof",
+   "sha": "10533c7",
+   "n": 1
+  },
+  {
+   "when": "2026-09-29",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: Manufacturer vs Workmanship Roof Warranty",
+   "sha": "f378de6",
+   "n": 1
+  },
+  {
+   "when": "2026-09-28",
+   "step": 4,
+   "text": "Site tune-up",
+   "sub": "Blog index: keep the Murphy card alt to what the photo shows",
+   "sha": "a31a914"
+  },
+  {
+   "when": "2026-09-28",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: After a Storm in Murphy TX: What to Check on Your Roof",
+   "sha": "4368b0a",
+   "n": 1
+  },
+  {
+   "when": "2026-09-22",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: Garland Roofs and the Storms That Age Them",
+   "sha": "3bd0948",
+   "n": 1
+  },
+  {
+   "when": "2026-09-20",
+   "step": 4,
+   "text": "Site tune-up",
+   "sub": "SEO: feed starved city pages, noindex internal Wing docs",
+   "sha": "a9cd840"
+  },
+  {
+   "when": "2026-09-18",
+   "step": 4,
+   "text": "Site tune-up",
+   "sub": "schema: add FAQPage JSON-LD to 9 blog posts that already show an FAQ",
+   "sha": "425f7bc"
+  },
+  {
+   "when": "2026-09-17",
+   "step": 4,
+   "text": "Site tune-up",
+   "sub": "schema: remove placeholder sameAs, list served cities explicitly",
+   "sha": "161a971"
+  },
+  {
+   "when": "2026-09-16",
+   "step": 4,
+   "text": "Site tune-up",
+   "sub": "jaswarm R6 (visual test, Level 4): add og:url + Twitter Cards to 3 pages, OG + BreadcrumbList JSON-LD to about/contact; a11y+focus verified ",
+   "sha": "0216f13"
+  },
+  {
+   "when": "2026-09-16",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: Roof Decking: What Happens When the Old Roof Comes Off",
+   "sha": "ab28eb6",
+   "n": 1
+  },
+  {
+   "when": "2026-09-15",
+   "step": 4,
+   "text": "Site tune-up",
+   "sub": "SEO past-posts fix: BreadcrumbList + RoofingContractor schema, image dims + lazy-load",
+   "sha": "44eb88c"
+  },
+  {
+   "when": "2026-09-14",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: Roof Replacement in McKinney TX",
+   "sha": "9e5a010",
+   "n": 1
+  },
+  {
+   "when": "2026-09-13",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: When North Texas Hail Season Actually Peaks; correct NOAA hail figures in two prior posts",
+   "sha": "8ac38f6",
+   "n": 1
+  },
+  {
+   "when": "2026-09-13",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: The Five Places a Roof Usually Leaks First",
+   "sha": "bf276f5",
+   "n": 1
+  },
+  {
+   "when": "2026-09-13",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Blog: Granule Loss: What Those Grains Actually Mean",
+   "sha": "1b1cb04",
+   "n": 1
+  },
+  {
+   "when": "2026-09-08",
+   "step": 4,
+   "text": "Published 1 blog post",
+   "sub": "Publish blog post: What the Hail Record Shows for Wylie Roofs",
+   "sha": "af97eb2",
+   "n": 1
+  },
+  {
+   "when": "2026-09-07",
+   "step": 4,
+   "text": "Site tune-up",
+   "sub": "Make service page H1s unique against the blog",
+   "sha": "245899b"
+  },
+  {
+   "when": "2026-09-07",
+   "step": 4,
+   "text": "Published 12 service pages",
+   "sub": "Publish 11 service and city landing pages",
+   "sha": "1153c8b",
+   "n": 12
+  },
+  {
+   "when": "2026-09-07",
+   "step": 4,
+   "text": "Published 5 blog posts",
+   "sub": "Publish 5 blog posts: hail damage signs, replacement timeline, roofer near me Plano, Frisco replacement, Plano repair",
+   "sha": "91f85d2",
+   "n": 5
+  },
+  {
+   "when": "2026-09-06",
+   "step": 4,
+   "text": "Published 5 blog posts",
+   "sub": "Add blog section with five roofing posts and site nav link",
+   "sha": "12a83c1",
+   "n": 5
+  },
+  {
+   "when": "2026-09-04",
+   "step": 3,
+   "text": "Wrote the page for \"free roof inspection plano tx\"",
+   "sub": "headline, copy, FAQs and schema in the roofer's voice"
+  },
+  {
+   "when": "2026-09-04",
+   "step": 3,
+   "text": "Wrote the page for \"roof repair allen tx\"",
+   "sub": "headline, copy, FAQs and schema in the roofer's voice"
+  },
+  {
+   "when": "2026-09-04",
+   "step": 3,
+   "text": "Wrote the page for \"roof repair frisco tx\"",
+   "sub": "headline, copy, FAQs and schema in the roofer's voice"
+  },
+  {
+   "when": "2026-09-04",
+   "step": 3,
+   "text": "Wrote the page for \"roof repair mckinney tx\"",
+   "sub": "headline, copy, FAQs and schema in the roofer's voice"
+  },
+  {
+   "when": "2026-09-04",
+   "step": 3,
+   "text": "Wrote the page for \"roof replacement frisco tx\"",
+   "sub": "headline, copy, FAQs and schema in the roofer's voice"
+  },
+  {
+   "when": "2026-09-04",
+   "step": 3,
+   "text": "Wrote the page for \"roof repair richardson tx\"",
+   "sub": "headline, copy, FAQs and schema in the roofer's voice"
+  },
+  {
+   "when": "2026-09-04",
+   "step": 3,
+   "text": "Wrote the page for \"roof repair rockwall tx\"",
+   "sub": "headline, copy, FAQs and schema in the roofer's voice"
+  },
+  {
+   "when": "2026-08-05",
+   "step": 2,
+   "text": "Picked \"free roof inspection plano tx\" from the queue",
+   "sub": "fragmented soft SERP"
+  },
+  {
+   "when": "2026-08-05",
+   "step": 2,
+   "text": "Picked \"roof repair richardson tx\" from the queue",
+   "sub": "Yelp+Thumbtack top 2"
+  },
+  {
+   "when": "2026-07-27",
+   "step": 2,
+   "text": "Picked \"roof replacement frisco tx\" from the queue",
+   "sub": "cost blog post ranks #1"
+  },
+  {
+   "when": "2026-07-27",
+   "step": 2,
+   "text": "Picked \"roof repair rockwall tx\" from the queue",
+   "sub": "GAF+BBB+Chamber top 3 softest repair SERP"
+  },
+  {
+   "when": "2026-07-22",
+   "step": 2,
+   "text": "Picked \"roof repair allen tx\" from the queue",
+   "sub": "Pickle is real rival"
+  },
+  {
+   "when": "2026-07-22",
+   "step": 2,
+   "text": "Picked \"roof repair frisco tx\" from the queue",
+   "sub": "Facebook page ranks #1 — beatable"
+  },
+  {
+   "when": "2026-07-22",
+   "step": 2,
+   "text": "Picked \"roof repair mckinney tx\" from the queue",
+   "sub": "BBB #1 but GAF Master Elite locals below"
+  },
+  {
+   "when": "2026-07-21",
+   "step": 1,
+   "text": "Checked who ranks for 26 local roofing searches",
+   "sub": "weak or strong page 1 noted per search; priorities re-ranked (research/serp-notes.md)"
+  }
+ ]
+}

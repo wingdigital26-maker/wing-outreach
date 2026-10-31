@@ -1,0 +1,5 @@
+{"row": "56682", "wings": [
+ {"id": 1, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.6}],
+ "missing": "One box covers a roof with at least three hip blocks: a main E-W hip across the north, a W wing running N-S down the west side, and an E wing projecting south on the east side; a notch (re-entrant corner) at the south-middle between the two south projections where the front entry/porch sits, with a small porch roof there; the main-to-W-wing junction reads as a long diagonal valley/hip",
+ "guess_ok": false,
+ "notes": "The guess draws a single hip pyramid over the whole box; the real roof is a U/E-shaped set of hip wings with a south notch"}

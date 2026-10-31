@@ -1,0 +1,127 @@
+{
+ "image": "gtrace/31648/google.png",
+ "ft_per_px": 0.209,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     425,
+     355
+    ],
+    [
+     675,
+     355
+    ],
+    [
+     675,
+     623
+    ],
+    [
+     425,
+     623
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "big 2-story hip, E-W ridge near y 504 from x 526 to 599 (LiDAR 35 ft, eave about 14 ft); N face is one 7.9/12 plane of about 900 sq ft from the ridge to the north eave at y 355 (x 533-675); the navy patch (535-600,355-440) is that N face in the NW wing cast shadow, not ground; W face from x 425 is the same plane as the NW wing W face; hips to the SW corner (420,606) and SE corner (675,617); small chamfer at the NE corner near (650-675,355-375)"
+  },
+  {
+   "name": "nw_wing",
+   "rect_px": [
+    [
+     425,
+     298
+    ],
+    [
+     533,
+     298
+    ],
+    [
+     533,
+     445
+    ],
+    [
+     425,
+     445
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "2-story N-S hip wing on the NW, dark N-facing triangle at the north eave (hips (438,298) and (520,298) meeting at (477,354)), ridge at x about 475 south to y 419 where it dies into the main; its E face meets the main N face in the valley from (528,377) to (480,435)"
+  },
+  {
+   "name": "w_shed",
+   "rect_px": [
+    [
+     378,
+     298
+    ],
+    [
+     425,
+     298
+    ],
+    [
+     425,
+     404
+    ],
+    [
+     378,
+     404
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story lean-to on the NW wing west wall, high edge along x 425, sloping west (LiDAR: 107 pts, 9.1/12 W-facing, centre 14 ft, tight fit). Doubt: the white objects on it at (380-408,305-350) look like patio furniture, so this could be a deck or a ground patio; if the LiDAR fill looks wrong here, exclude it instead"
+  },
+  {
+   "name": "s_gable",
+   "rect_px": [
+    [
+     490,
+     504
+    ],
+    [
+     605,
+     504
+    ],
+    [
+     605,
+     623
+    ],
+    [
+     490,
+     623
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [
+    "S"
+   ],
+   "level": 2,
+   "notes": "N-S gable cross wing on the main south slope: ridge at x about 550 from the main ridge down to the south eave at full height (LiDAR 32 ft at (552,621)), steep 10/12 W and E faces; shows as a darker triangle with apex (540,522) and base (490-600,615), its sides are valleys into the main S face, not hips"
+  }
+ ],
+ "exclude_px": [],
+ "exclude_notes": [],
+ "notes": "2-story hip main with an E-W ridge, a N-S hip wing on the NW, a south-pointing gable on the S slope, and a 1-story west lean-to. Trace matches the eaves closely; no exclusions needed. Confidence med-high on main, NW wing and S gable (LiDAR lines and image agree); low on the west lean-to (sloped per LiDAR but objects on it look like furniture)."
+}

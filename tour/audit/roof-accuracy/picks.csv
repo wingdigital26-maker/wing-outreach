@@ -1,0 +1,68 @@
+region,row,pick,why,w1_all,iou,sq_err_pct,bar,published
+collin-tx,1954,W,"clean, best clean fit; within 1 ft 67.9% vs outline 45.3%",67.9,0.811,5.2,False,True
+collin-tx,35276,B,"clean, best clean fit; within 1 ft 25.3% vs outline 1.2%; photo 87% vs outline 66%; FLAG squares short (-9.2%)",25.3,0.905,-9.2,False,True
+collin-tx,206483,D,"clean, best clean fit; within 1 ft 29.3% vs outline 7.3%; photo check skipped: tree cover",29.3,0.757,5.1,False,True
+rockwall-tx,23,A,"best clean model G not clearly closer (72.9% vs outline 72.5% within 1 ft, MAE 1.27 vs 1.36 ft; photo 83% vs outline 83%)",72.5,0.936,2.1,True,False
+collin-tx,130356,W,"clean, best clean fit; within 1 ft 50.5% vs outline 8.3%",50.5,0.804,-2.0,False,True
+collin-tx,10524,F,"clean, best clean fit; within 1 ft 32.8% vs outline 5.5%; photo 59% vs outline 66%",32.8,0.818,8.7,False,True
+collin-tx,34780,W,"clean, best clean fit; within 1 ft 55.2% vs outline 7.2%; FLAG squares short (-12.6%)",55.2,0.781,-12.6,False,True
+collin-tx,205330,W,"clean, clears the bar; within 1 ft 61.2% vs outline 8.4%",61.2,0.85,2.4,True,True
+rockwall-tx,68,A,no clean model candidate,7.7,0.782,2.1,False,False
+collin-tx,153987,C,"clean, best clean fit; within 1 ft 66.8% vs outline 5.6%; photo 96% vs outline 67%",66.8,0.84,2.7,False,True
+collin-tx,5921,A,"best clean model G not clearly closer (44.6% vs outline 40.9% within 1 ft, MAE 2.09 vs 1.99 ft; photo 96% vs outline 96%)",40.9,0.831,2.1,False,False
+collin-tx,32361,A,"best clean model G not clearly closer (26.3% vs outline 26.1% within 1 ft, MAE 3.74 vs 3.76 ft; photo 58% vs outline 58%)",26.1,0.821,-0.9,False,False
+collin-tx,204869,W,"clean, best clean fit; within 1 ft 57.6% vs outline 26.2%",57.6,0.851,-4.5,False,True
+rockwall-tx,48,G,"clean, best clean fit; within 1 ft 21.3% vs outline 0.9%; photo 71% vs outline 71%",21.3,0.753,16.9,False,True
+collin-tx,166093,D,"clean, clears the bar; within 1 ft 88.4% vs outline 66.7%; photo 100% vs outline 99%",88.4,0.928,4.4,True,True
+collin-tx,36436,W,"clean, clears the bar; within 1 ft 68.1% vs outline 24.8%",68.1,0.908,-2.7,True,True
+collin-tx,15574,W,"clean, clears the bar; within 1 ft 67.9% vs outline 33.5%",67.9,0.911,-2.6,True,True
+collin-tx,200871,A,no clean model candidate,1.7,0.75,-47.7,False,False
+rockwall-tx,5321,W,"clean, best clean fit; within 1 ft 65.3% vs outline 2.7%",65.3,0.845,4.6,False,True
+collin-tx,173943,W,"clean, best clean fit; within 1 ft 55.8% vs outline 11.3%",55.8,0.768,-3.4,False,True
+collin-tx,35469,W,"clean, clears the bar; within 1 ft 65.1% vs outline 16.2%",65.1,0.853,-0.0,True,True
+rockwall-tx,2558,A,no clean model candidate,2.1,0.805,20.1,False,False
+collin-tx,200985,D,"clean, best clean fit; within 1 ft 30.2% vs outline 11.5%; photo 65% vs outline 46%",30.2,0.912,4.7,False,True
+collin-tx,189060,A,"best clean model B not clearly closer (20.8% vs outline 18.0% within 1 ft, MAE 3.43 vs 3.89 ft; photo check skipped: tree cover)",18.0,0.876,6.4,False,False
+collin-tx,36251,C,"clean, clears the bar; within 1 ft 72.3% vs outline 4.6%; photo 103% vs outline 79%",72.3,0.905,0.2,True,True
+collin-tx,428,G,"clean, best clean fit; within 1 ft 53.5% vs outline 14.7%; photo 89% vs outline 81%",53.5,0.829,-2.5,False,True
+collin-tx,206911,C,"clean, clears the bar; within 1 ft 65.2% vs outline 24.5%; photo 90% vs outline 82%",65.2,0.88,-1.1,True,True
+collin-tx,188969,G,"clean, best clean fit; within 1 ft 17.1% vs outline 4.6%; photo check skipped: tree cover",17.1,0.865,26.7,False,True
+collin-tx,15292,W,"clean, best clean fit; within 1 ft 52.9% vs outline 2.5%; FLAG squares short (-5.7%)",52.9,0.814,-5.7,False,True
+collin-tx,207704,D,"clean, clears the bar; within 1 ft 72.3% vs outline 6.9%; photo 65% vs outline 91%",72.3,0.865,4.7,True,True
+collin-tx,147750,W,"clean, best clean fit; within 1 ft 53.4% vs outline 9.6%; photo check skipped: tree cover",53.4,0.768,5.7,False,True
+collin-tx,32591,W,"clean, clears the bar; within 1 ft 73.9% vs outline 26.8%",73.9,0.879,-4.4,True,True
+collin-tx,204682,D,"clean, best clean fit; within 1 ft 46.3% vs outline 11.0%; photo 88% vs outline 70%",46.3,0.837,6.6,False,True
+collin-tx,191766,C,"clean, best clean fit; within 1 ft 45.0% vs outline 3.8%; photo 83% vs outline 79%",45.0,0.846,3.0,False,True
+collin-tx,171979,G,"clean, best clean fit; within 1 ft 51.9% vs outline 46.2%; photo 106% vs outline 106%; FLAG squares short (-8.5%)",51.9,0.801,-8.5,False,True
+collin-tx,164153,hand,approved hand model kept,68.3,0.857,3.5,True,False
+collin-tx,164155,G,"clean, best clean fit; within 1 ft 22.6% vs outline 4.5%; photo 60% vs outline 60%",22.6,0.843,14.7,False,True
+collin-tx,164151,B,"clean, best clean fit; within 1 ft 15.9% vs outline 5.1%; photo 84% vs outline 32%",15.9,0.877,4.4,False,True
+collin-tx,164201,D,"clean, clears the bar; within 1 ft 74.2% vs outline 20.4%; photo 83% vs outline 51%",74.2,0.876,2.0,True,True
+collin-tx,164203,A,"best clean model W not clearly closer (14.9% vs outline 21.7% within 1 ft, MAE 3.82 vs 3.18 ft; photo check skipped: solar panels)",21.7,0.792,-5.0,False,False
+collin-tx,164157,W,"clean, clears the bar; within 1 ft 72.6% vs outline 6.1%",72.6,0.895,-4.7,True,True
+collin-tx,164205,W,"clean, best clean fit; within 1 ft 54.7% vs outline 19.0%",54.7,0.908,-3.7,False,True
+collin-tx,164199,W,"clean, best clean fit; within 1 ft 50.2% vs outline 9.4%",50.2,0.845,-1.8,False,True
+collin-tx,164150,G,"clean, best clean fit; within 1 ft 17.3% vs outline 6.4%; photo 75% vs outline 72%",17.3,0.809,5.0,False,True
+collin-tx,164154,W,"clean, best clean fit; within 1 ft 74.8% vs outline 8.1%; photo check skipped: tree cover",74.8,0.899,6.2,False,True
+collin-tx,164152,C,"clean, best clean fit; within 1 ft 55.2% vs outline 10.4%; photo 76% vs outline 32%",55.2,0.838,-3.8,False,True
+collin-tx,164156,B,"clean, best clean fit; within 1 ft 14.8% vs outline 5.6%; photo 57% vs outline 59%",14.8,0.905,8.6,False,True
+collin-tx,164207,W,"clean, clears the bar; within 1 ft 64.4% vs outline 27.7%",64.4,0.915,1.6,True,True
+collin-tx,164159,W,"clean, best clean fit; within 1 ft 51.5% vs outline 16.2%",51.5,0.87,6.0,False,True
+collin-tx,164197,C,"clean, best clean fit; within 1 ft 59.0% vs outline 3.7%; photo check skipped: tree cover",59.0,0.821,1.0,False,True
+collin-tx,164158,W,"clean, best clean fit; within 1 ft 41.8% vs outline 14.3%; richer model over a 26-face roof",41.8,0.857,-3.2,False,True
+collin-tx,164148,W,"clean, best clean fit; within 1 ft 25.2% vs outline 13.8%",25.2,0.767,2.4,False,True
+collin-tx,164200,G,"clean, best clean fit; within 1 ft 36.0% vs outline 6.7%; FLAG squares short (-7.1%); photo check skipped: tree cover",36.0,0.749,-7.1,False,True
+collin-tx,164149,W,"clean, best clean fit; within 1 ft 52.9% vs outline 3.2%; photo check skipped: tree cover",52.9,0.783,5.4,False,True
+collin-tx,164198,A,"best clean model G not clearly closer (16.8% vs outline 8.3% within 1 ft, MAE 6.02 vs 4.78 ft; photo 75% vs outline 75%)",8.3,0.785,-3.4,False,False
+collin-tx,164209,W,"clean, best clean fit; within 1 ft 53.8% vs outline 4.7%",53.8,0.848,0.1,False,True
+collin-tx,164160,W,"clean, best clean fit; within 1 ft 38.7% vs outline 15.9%",38.7,0.862,4.7,False,True
+collin-tx,164161,G,"clean, best clean fit; within 1 ft 21.6% vs outline 4.0%; photo check skipped: tree cover",21.6,0.812,17.4,False,True
+collin-tx,164195,W,"clean, best clean fit; within 1 ft 65.6% vs outline 5.8%",65.6,0.798,5.3,False,True
+collin-tx,164180,F,"clean, best clean fit; within 1 ft 32.9% vs outline 20.3%; photo 76% vs outline 64%",32.9,0.85,8.3,False,True
+collin-tx,164229,D,"clean, best clean fit; within 1 ft 50.6% vs outline 9.4%; photo 71% vs outline 65%",50.6,0.831,-3.9,False,True
+collin-tx,164202,C,"clean, best clean fit; within 1 ft 57.1% vs outline 12.5%; photo 79% vs outline 68%",57.1,0.86,-2.1,False,True
+collin-tx,164196,W,"clean, best clean fit; within 1 ft 66.5% vs outline 12.1%",66.5,0.832,0.5,False,True
+collin-tx,164231,F,"clean, best clean fit; within 1 ft 46.0% vs outline 12.1%; photo 97% vs outline 54%; FLAG squares short (-12.2%)",46.0,0.865,-12.2,False,True
+collin-tx,164182,W,"clean, best clean fit; within 1 ft 54.8% vs outline 9.6%",54.8,0.806,2.4,False,True
+collin-tx,164227,W,"clean, clears the bar; within 1 ft 68.9% vs outline 5.1%; photo check skipped: solar panels",68.9,0.853,1.9,True,True
+collin-tx,164233,W,"clean, best clean fit; within 1 ft 52.0% vs outline 5.1%; photo check skipped: tree cover",52.0,0.763,4.9,False,True

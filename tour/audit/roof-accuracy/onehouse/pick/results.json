@@ -1,0 +1,31 @@
+{
+ "homes": {
+  "116507": {
+   "address": "10201 Benwick Dr",
+   "note": "shown: sound; skeleton soundness PASS; 6 faces, 5/12, LiDAR fit 79%; old: 4 wall slab(s): touching faces at different heights; Point2Roof: wrong (sparse edges not on the photo's ridges/hips)",
+   "verdict": "SOUND: yes. SHAPE: right (main N-S hip + the front garage hip, now included). Outline: Microsoft 0.84 vs county 0.71"
+  },
+  "37228": {
+   "address": "8430 Cripple Creek Dr",
+   "note": "shown: sound; skeleton soundness PASS; 4 faces, 6/12, LiDAR fit 74%; old: sound; old accuracy: segmentation suspect (rms 26.2); Point2Roof: wrong (sparse edges not on the photo's ridges/hips)",
+   "verdict": "SOUND: yes. SHAPE: close (L of two wings right; end forms uncertain). Outline: county 0.79 (Microsoft 0.76)"
+  },
+  "34243": {
+   "address": "6756 Livorno Ln",
+   "note": "shown: sound; skeleton soundness PASS; 20 faces, 6/12, LiDAR fit 48%; CHECK HOUSE: no outline source agrees with the LiDAR, not shown to roofers; old: face 6 does not reach an eave; 21 wall slab(s): touching faces at different heights; old accuracy: outline vs footprint IoU 0.515; segmentation suspect (rms 41.7); Point2Roof: wrong (sparse edges not on the photo's ridges/hips)",
+   "verdict": "CHECK HOUSE (not shown): photo outline 0.89 but the skeleton fits the LiDAR only 48% (cut-up roof)"
+  },
+  "56630": {
+   "address": "9718 Enmore Ln",
+   "note": "shown: sound; skeleton soundness PASS; 4 faces, 7/12, LiDAR fit 92%; old: 2 wall slab(s): touching faces at different heights; Point2Roof: wrong (sparse edges not on the photo's ridges/hips)",
+   "verdict": "SOUND: yes. SHAPE: close (plain hip, LiDAR fit 92%; SE cross wing simplified away). Outline: Microsoft 0.86 = county"
+  },
+  "54316": {
+   "address": "10800 Promise Land Dr",
+   "note": "shown: sound; skeleton soundness PASS; 14 faces, 7/12, LiDAR fit 31%; CHECK HOUSE: no outline source agrees with the LiDAR, not shown to roofers; old: 3 wall slab(s): touching faces at different heights; old accuracy: fit 74%; Point2Roof: wrong (sparse edges not on the photo's ridges/hips)",
+   "verdict": "CHECK HOUSE (not shown): no outline agrees with the LiDAR (Microsoft = county = 0.60, under trees)"
+  }
+ },
+ "title": "Microsoft outlines + line models",
+ "summary": "Microsoft outlines on the 5 sound-test homes: shown 1 right + 2 close, all sound; 2 check house; 0 wrong shown. Line models (Point2Roof, BWFormer): Colab package next. Point2Roof on 10 homes: 0 right, 10 wrong by eye (sparse random edges, even on plain hips); adds nothing over the skeleton. BWFormer stopped at its dataset loader (no output)."
+}

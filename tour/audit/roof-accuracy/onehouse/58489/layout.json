@@ -1,0 +1,134 @@
+{
+ "image": "gtrace/58489/google.png",
+ "ft_per_px": 0.196,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     535,
+     400
+    ],
+    [
+     725,
+     436
+    ],
+    [
+     686,
+     642
+    ],
+    [
+     496,
+     607
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.983,
+    0.183
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "house rotated about 10.4 deg (edges run 10 deg below the px x axis); 1-story hip, ridge along the house axis near (640,507) to (696,521) (LiDAR 20 ft, eave 9 to 10 ft); north eave is the line through (600,412) and (660,424): the navy band north of it (y 384-410 at x 600) is the ground shadow of the north wall, confirmed by the county image where the roof spans the same 210 px at x 600; north eave sits higher (about 11 ft) than the south eave (9 ft); the S face is one 5.6/12 plane of about 750 sq ft shared with the W wing; the E end is a vertical fascia at x about 700 from y 430 to 565 then a diagonal clip to the SE corner (674,640); the trace E edge is 2 to 7 ft too far east"
+  },
+  {
+   "name": "w_wing",
+   "rect_px": [
+    [
+     427,
+     472
+    ],
+    [
+     579,
+     500
+    ],
+    [
+     557,
+     618
+    ],
+    [
+     405,
+     590
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.983,
+    0.183
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story hip wing on the SW, ridge along the house axis near (493,530) to (564,541) (LiDAR 15 ft), hipped at the W end with hips from (431,452) and (421,576) meeting at the ridge; its N face meets the main W face in the valley (564,541) to (516,450); north eave at about y 480 (x 470), not the trace line at y 441: the navy band (446-476) is ground shadow and the white line at 436-441 is the patio wall top (county image shows the same 120 px N-S extent); north eave about 11 ft, south eave 9 ft"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    516,
+    296
+   ],
+   [
+    722,
+    335
+   ],
+   [
+    704,
+    432
+   ],
+   [
+    497,
+    394
+   ]
+  ],
+  [
+   [
+    432,
+    431
+   ],
+   [
+    528,
+    449
+   ],
+   [
+    520,
+    489
+   ],
+   [
+    425,
+    472
+   ]
+  ],
+  [
+   [
+    700,
+    340
+   ],
+   [
+    728,
+    340
+   ],
+   [
+    737,
+    445
+   ],
+   [
+    703,
+    621
+   ],
+   [
+    674,
+    642
+   ],
+   [
+    700,
+    565
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "trace north part (y 305 to about 410) is the neighbour house south slope, the gap between the houses and our own north wall shadow; our north eave runs from about (540,400) to (700,432)",
+  "shadow band between the trace north edge of the W wing (y 441) and its real north eave (y 480)",
+  "strip between the real east fascia (x about 700, vertical, y 430-565, then the diagonal to (674,640)) and the trace east edge: lawn, an AC pad at (705-725,475-500) and tree canopy at the NE"
+ ],
+ "notes": "Rotated (10 deg) single-story hip house: main hip with ridge along the axis plus a hip wing on the SW sharing the same south eave and slope. Trace is badly off on the north (neighbour roof plus a 5 to 8 ft wall shadow band on both the main and the W wing) and loose on the east; all excluded, checked against the county image and brightness profiles. Confidence med-high on the two pieces and ridges (LiDAR ridges and hips agree with the image); medium on the exact east edge (vertical in px while the rest of the house is rotated, read from the fascia line and brightness)."
+}

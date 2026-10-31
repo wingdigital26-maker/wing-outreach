@@ -1,0 +1,202 @@
+{
+ "image": "gtrace/117590/google.png",
+ "ft_per_px": 0.19296,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     441,
+     335
+    ],
+    [
+     682,
+     335
+    ],
+    [
+     704,
+     685
+    ],
+    [
+     461,
+     685
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [
+    "S"
+   ],
+   "level": 2,
+   "notes": "big 2-story body, ridge N-S near x 572; N end hipped (dark V, about 7/12, 541 sq ft), S end a gable: the 10/12 W and E faces (1209 and 1303 sq ft) run the full length to the S eave with no S-facing face"
+  },
+  {
+   "name": "south_wing",
+   "rect_px": [
+    [
+     500,
+     558
+    ],
+    [
+     625,
+     558
+    ],
+    [
+     625,
+     688
+    ],
+    [
+     500,
+     688
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "narrower cross hip inside the S gable end, ridge N-S near x 548 from about y 560, hipped at the S eave; LiDAR shows small W, E and near-flat S pieces here, so a hip is the best single primitive"
+  },
+  {
+   "name": "north_bay",
+   "rect_px": [
+    [
+     477,
+     326
+    ],
+    [
+     547,
+     326
+    ],
+    [
+     547,
+     375
+    ],
+    [
+     477,
+     375
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "small hip entry bay at the N eave with its own dark N face about 6.5/12 (185 sq ft)"
+  },
+  {
+   "name": "west_bay",
+   "rect_px": [
+    [
+     412,
+     427
+    ],
+    [
+     447,
+     427
+    ],
+    [
+     447,
+     464
+    ],
+    [
+     412,
+     464
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "small 1-story bump-out on the W wall, single W-facing plane about 5/12 (80 sq ft), low confidence"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    436,
+    279
+   ],
+   [
+    690,
+    271
+   ],
+   [
+    690,
+    336
+   ],
+   [
+    547,
+    336
+   ],
+   [
+    547,
+    326
+   ],
+   [
+    477,
+    326
+   ],
+   [
+    477,
+    338
+   ],
+   [
+    436,
+    340
+   ]
+  ],
+  [
+   [
+    550,
+    340
+   ],
+   [
+    570,
+    340
+   ],
+   [
+    570,
+    367
+   ],
+   [
+    550,
+    367
+   ]
+  ],
+  [
+   [
+    700,
+    589
+   ],
+   [
+    731,
+    589
+   ],
+   [
+    731,
+    594
+   ],
+   [
+    700,
+    594
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "house shadow band north of the eave, trace overshoots",
+  "chimney",
+  "trace spike east, not roof"
+ ],
+ "notes": "2-story body with a hipped N end and gable S end (v1 had it as a full hip, which put a big S face where LiDAR has none), cross hip at the S, small N bay, W bump as a shed. Confidence high on main, medium on the S wing."
+}

@@ -1,0 +1,107 @@
+{
+ "image": "gtrace/57613/google.png",
+ "ft_per_px": 0.199,
+ "pieces": [
+  {
+   "name": "east",
+   "rect_px": [
+    [
+     490,
+     400
+    ],
+    [
+     655,
+     400
+    ],
+    [
+     655,
+     630
+    ],
+    [
+     490,
+     630
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "E block, N-S ridge near x 575 from about y 455 to 530, lit S hip face, N hip face dark; its W face is the big 859 sq ft 8/12 plane so the W eave is pushed to x 490 (v1 had 530)"
+  },
+  {
+   "name": "west",
+   "rect_px": [
+    [
+     400,
+     400
+    ],
+    [
+     560,
+     400
+    ],
+    [
+     560,
+     630
+    ],
+    [
+     400,
+     630
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "W block, E-W ridge near y 505, hipped at the W end near x 455, N face shallower (5 to 6/12) than S face (8/12) per LiDAR; NW quarter under tree shadow, the lit diagonal from (455,400) to (565,455) is the junction with the E block"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    466,
+    632
+   ],
+   [
+    648,
+    632
+   ],
+   [
+    648,
+    661
+   ],
+   [
+    466,
+    661
+   ]
+  ],
+  [
+   [
+    534,
+    374
+   ],
+   [
+    539,
+    374
+   ],
+   [
+    539,
+    400
+   ],
+   [
+    534,
+    400
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "patio/deck south of the eave, eave at about y 630",
+  "chimney notch north of the eave"
+ ],
+ "notes": "Two intersecting 1-story hips. E block widened W to x 490, W block E edge pulled back to 560 so neither spans the other ridge. Doubt remains on the lit diagonal from the NW corner. Confidence medium-low."
+}

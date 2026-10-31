@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page preview</title></head>
+<body style="font:15px system-ui;padding:40px;color:#444">Building the preview...
+<script src="../lib/rc-state.js"></script>
+<script src="../lib/brand.js"></script>
+<script src="preview-lib.js"></script>
+<script>
+(function(){
+  const slug=new URLSearchParams(location.search).get('slug')||'';
+  const show=html=>{ const doc=new DOMParser().parseFromString(html,'text/html'); document.replaceChild(document.importNode(doc.documentElement,true),document.documentElement); };
+  let saved=null; try{ saved=localStorage.getItem('seo-preview:'+slug); }catch(e){}
+  if(saved){ show(saved); return; }
+  // not built on this device yet: build it now from the same data
+  fetch('../lib/seo-agent.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{
+    const {pg,kw}=SEOPreview.find(d,slug);
+    if(!pg&&!kw){ document.body.textContent='No search with that slug.'; return; }
+    let r=null; try{ r=activeRoofer(); }catch(e){}
+    show(SEOPreview.build(d,slug,r));
+  }).catch(()=>{ document.body.textContent='The SEO data did not load.'; });
+})();
+</script>
+</body></html>

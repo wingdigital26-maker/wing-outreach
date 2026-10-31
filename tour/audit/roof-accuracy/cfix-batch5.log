@@ -1,0 +1,2 @@
+14:20:42 ('rockwall-tx', 5321) rockwall-tx 5321 {"clean_rules": 0, "judged": 24, "w1_before": 52.9, "C": "not clean (round-2 file kept)"} 33s
+14:21:20 ('rockwall-tx', 68) rockwall-tx 68 {"clean_rules": 0, "judged": 27, "w1_before": 46.7, "C": "not clean (round-2 file kept)"} 70s

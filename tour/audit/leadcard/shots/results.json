@@ -1,0 +1,796 @@
+{
+ "92039": {
+  "desk": {
+   "title": "~54.2 sq est., pitch 8/12 + 6/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "8620 Tuscan Oaks Dr, McKinney, TX 75071",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~54.2 squares | LiDAR estimate, typically within 7 to 9% of roofer measurements (2020 LiDAR)"
+    ],
+    [
+     "Pitch",
+     "8/12 + 6/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2016 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "4,410 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed May 2022 (permit RES2022-05-02480, McKinney) | permit completed; high confidence; City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~54.2 sq est., pitch 8/12 + 6/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "8620 Tuscan Oaks Dr, McKinney, TX 75071",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~54.2 squares | LiDAR estimate, typically within 7 to 9% of roofer measurements (2020 LiDAR)"
+    ],
+    [
+     "Pitch",
+     "8/12 + 6/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2016 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "4,410 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed May 2022 (permit RES2022-05-02480, McKinney) | permit completed; high confidence; City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "89018": {
+  "desk": {
+   "title": "~38.2 sq est. (2020 LiDAR), roof shape being checked, pitch 8/12 + 6/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "5521 Mountjoy Dr, McKinney, TX 75071",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~38.2 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "8/12 + 6/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2018 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,644 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roof permit Mar 2022 (permit RES2022-03-01069, McKinney) | permit expired, work not confirmed; low confidence; City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~38.2 sq est. (2020 LiDAR), roof shape being checked, pitch 8/12 + 6/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "5521 Mountjoy Dr, McKinney, TX 75071",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~38.2 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "8/12 + 6/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2018 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,644 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roof permit Mar 2022 (permit RES2022-03-01069, McKinney) | permit expired, work not confirmed; low confidence; City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "76695": {
+  "desk": {
+   "title": "~53.1 sq est. (2020 LiDAR), roof shape being checked, pitch 7/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "3211 Saint Germain Dr, McKinney, TX 75070",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~53.1 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "7/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2001 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "5,328 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed 2015 or earlier (permit HTE-Permit-15-08155, McKinney) | permit completed; high confidence; City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~53.1 sq est. (2020 LiDAR), roof shape being checked, pitch 7/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "3211 Saint Germain Dr, McKinney, TX 75070",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~53.1 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "7/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2001 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "5,328 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed 2015 or earlier (permit HTE-Permit-15-08155, McKinney) | permit completed; high confidence; City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "74194": {
+  "desk": {
+   "title": "~39.1 sq est. (2020 LiDAR), roof shape being checked, pitch 6/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "5705 Lodgestone Dr, McKinney, TX 75070",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~39.1 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "6/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2006 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,300 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "No re-roof permit on file since 2015 | City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~39.1 sq est. (2020 LiDAR), roof shape being checked, pitch 6/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "5705 Lodgestone Dr, McKinney, TX 75070",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~39.1 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "6/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2006 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,300 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "No re-roof permit on file since 2015 | City of McKinney permit records"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "27526": {
+  "desk": {
+   "title": "~39.8 sq est. (2020 LiDAR), roof shape being checked, pitch 9/12 + 7/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "1108 Salado Dr, Allen, TX 75013",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~39.8 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "9/12 + 7/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2001 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,147 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed Aug 2023 (permit 007552-2023-RMISC2, Allen) | permit issued, not finaled; medium confidence; City of Allen permit records"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~39.8 sq est. (2020 LiDAR), roof shape being checked, pitch 9/12 + 7/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "1108 Salado Dr, Allen, TX 75013",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~39.8 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "9/12 + 7/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2001 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,147 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed Aug 2023 (permit 007552-2023-RMISC2, Allen) | permit issued, not finaled; medium confidence; City of Allen permit records"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "4049": {
+  "desk": {
+   "title": "~19.7 sq est. (2018 LiDAR), roof shape being checked, pitch 8/12 + 5/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2018 LiDAR. Drag to turn it.",
+   "addr": "615 English Oak Dr, Allen, TX 75002",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~19.7 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "8/12 + 5/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1991 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "1,922 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "No re-roof permit on file since 2017 | City of Allen permit records"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~19.7 sq est. (2018 LiDAR), roof shape being checked, pitch 8/12 + 5/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2018 LiDAR. Drag to turn it.",
+   "addr": "615 English Oak Dr, Allen, TX 75002",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~19.7 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "8/12 + 5/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1991 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "1,922 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "No re-roof permit on file since 2017 | City of Allen permit records"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "178303": {
+  "desk": {
+   "title": "~40.1 sq est. (2018 LiDAR), roof shape being checked, pitch 4/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2018 LiDAR. Drag to turn it.",
+   "addr": "2413 Skiles Dr, Plano, TX 75075",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~40.1 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "4/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1972 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,733 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~40.1 sq est. (2018 LiDAR), roof shape being checked, pitch 4/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2018 LiDAR. Drag to turn it.",
+   "addr": "2413 Skiles Dr, Plano, TX 75075",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~40.1 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "4/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1972 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,733 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "53207": {
+  "desk": {
+   "title": "~38.1 sq est. (2020 LiDAR), roof shape being checked, pitch 7/12 + 1/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "11345 Beeville Dr, Frisco, TX 75035",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~38.1 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "7/12 + 1/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2006 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,651 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~38.1 sq est. (2020 LiDAR), roof shape being checked, pitch 7/12 + 1/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "11345 Beeville Dr, Frisco, TX 75035",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~38.1 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "7/12 + 1/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2006 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,651 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "166093": {
+  "desk": {
+   "title": "~46.3 sq est. (2018 LiDAR), hip roof, pitch 5/12",
+   "sub": "Measured from LiDAR roof facets (2018), built as one solid model: 8 facets, 5/12. Drag to turn it, click a plane to measure it.",
+   "addr": "1901 Hillcrest Dr, Plano, TX 75074",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~46.3 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "5/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1973 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,788 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~46.3 sq est. (2018 LiDAR), hip roof, pitch 5/12",
+   "sub": "Measured from LiDAR roof facets (2018), built as one solid model: 8 facets, 5/12. Drag to turn it, click a plane to measure it.",
+   "addr": "1901 Hillcrest Dr, Plano, TX 75074",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~46.3 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "5/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1973 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,788 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "148535": {
+  "desk": {
+   "title": "Outline not on file yet",
+   "sub": "The public building maps have no outline for this home yet, so there are no squares to show. This is the parcel from above.",
+   "addr": "5744 Robbie Rd, Plano, TX 75024",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Year built",
+     "2006 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "1,990 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "Outline not on file yet",
+   "sub": "The public building maps have no outline for this home yet, so there are no squares to show. This is the parcel from above.",
+   "addr": "5744 Robbie Rd, Plano, TX 75024",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Year built",
+     "2006 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "1,990 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "202228": {
+  "desk": {
+   "title": "Roof size not measured (no LiDAR), roof shape being checked, pitch not measured",
+   "sub": "Roof shape being checked; no LiDAR roof record for this home. Drag to turn it.",
+   "addr": "3100 Peck Pl, Richardson, TX 75082",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "Not measured | built 2022, after the 2018 LiDAR flew"
+    ],
+    [
+     "Year built",
+     "2022 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "5,013 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "Roof size not measured (no LiDAR), roof shape being checked, pitch not measured",
+   "sub": "Roof shape being checked; no LiDAR roof record for this home. Drag to turn it.",
+   "addr": "3100 Peck Pl, Richardson, TX 75082",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "Not measured | built 2022, after the 2018 LiDAR flew"
+    ],
+    [
+     "Year built",
+     "2022 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "5,013 sq ft | Collin CAD"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "128888": {
+  "desk": {
+   "title": "~47.6 sq est. (2018 LiDAR), roof shape being checked, pitch 11/12 + 9/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2018 LiDAR. Drag to turn it.",
+   "addr": "3301 Sandy Trail Ln, Plano, TX 75023",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~47.6 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "11/12 + 9/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1983 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,899 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed Jan 2024 (permit 24-00106, Plano) | permit issued, final not on the list; medium confidence; Collin CAD permit list"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~47.6 sq est. (2018 LiDAR), roof shape being checked, pitch 11/12 + 9/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2018 LiDAR. Drag to turn it.",
+   "addr": "3301 Sandy Trail Ln, Plano, TX 75023",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~47.6 squares | estimate, measured from 2018 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "11/12 + 9/12 | 2018 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "1983 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "2,899 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed Jan 2024 (permit 24-00106, Plano) | permit issued, final not on the list; medium confidence; Collin CAD permit list"
+    ]
+   ],
+   "errors": []
+  }
+ },
+ "62035": {
+  "desk": {
+   "title": "~45 sq est. (2020 LiDAR), roof shape being checked, pitch 8/12 + 1/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "13263 Cool Meadow Dr, Frisco, TX 75035",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~45 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "8/12 + 1/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2016 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,982 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed Jan 2023 (permit 23-00003, Frisco) | permit issued, final not on the list; medium confidence; Collin CAD permit list"
+    ]
+   ],
+   "errors": []
+  },
+  "phone": {
+   "title": "~45 sq est. (2020 LiDAR), roof shape being checked, pitch 8/12 + 1/12",
+   "sub": "Roof shape being checked; squares and pitch estimated from 2020 LiDAR. Drag to turn it.",
+   "addr": "13263 Cool Meadow Dr, Frisco, TX 75035",
+   "kv": [
+    [
+     "Hail here",
+     "No 1 in+ hail on file (last 24 months) | NOAA MRMS radar"
+    ],
+    [
+     "Roof size",
+     "~45 squares | estimate, measured from 2020 LiDAR; typically within 6 to 8% of the roofer's count"
+    ],
+    [
+     "Pitch",
+     "8/12 + 1/12 | 2020 LiDAR, to the nearest 12th"
+    ],
+    [
+     "Year built",
+     "2016 | Collin CAD"
+    ],
+    [
+     "Living area",
+     "3,982 sq ft | Collin CAD"
+    ],
+    [
+     "Last re-roof",
+     "Re-roofed Jan 2023 (permit 23-00003, Frisco) | permit issued, final not on the list; medium confidence; Collin CAD permit list"
+    ]
+   ],
+   "errors": []
+  }
+ }
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Welcome to Roof Command</title>
+<link rel="stylesheet" href="assets/onboard.css"><script src="assets/roofers.js"></script></head>
+<body><div class="wrap">
+<header data-hd></header><nav data-nav></nav>
+
+<div class="kick">Welcome packet</div>
+<h1>Welcome, {{name}}. Here is what <em>Roof Command</em> does for you.</h1>
+<p class="lead">Roof Command finds the homes in {{area}} most likely to need a roof right now, and Wing Digital runs it for you. Your team talks to homeowners and books inspections. We do the data, the lists, the storm watching, the website work and the reporting.</p>
+
+<h2>What Wing does for you every week</h2>
+<div class="grid">
+  <div class="card"><span class="num">1</span><h3>Every morning: a fresh Daily 50</h3><p class="mut">Fifty homes ranked by who most likely needs a roof today, built from storm reports, roof age, permits and street activity. Ready on your phone before your first coffee.</p></div>
+  <div class="card"><span class="num">2</span><h3>Every night: storm watch</h3><p class="mut">We track hail and wind reports for your area overnight. The morning after a storm, you get an alert with the streets hit, how many homes, and a list ready to work.</p></div>
+  <div class="card"><span class="num">3</span><h3>Every week: calls, posts, follow-ups</h3><p class="mut">If we agree Wing helps with calls, Maddox works the list with you. Jack publishes local posts on your website and keeps your Google profile active. We chase every open lead so none go cold.</p></div>
+  <div class="card"><span class="num">4</span><h3>Every week: a short report and a 15-minute call</h3><p class="mut">Grant sends the numbers and walks through them with you: what was worked, what got booked, what is next.</p></div>
+</div>
+
+<h2>A quick tour of Roof Command</h2>
+<div class="stack">
+  <div class="card"><h3>Today and the Daily 50</h3><p class="mut">Your home screen. The 50 best homes for today, each with the key facts (roof age, last storm, nearby re-roofs) and where each fact came from. Tap a home to call or text the owner. Owner names show as initials until you reach out.</p></div>
+  <div class="card"><h3>Storms and the morning-after alert</h3><p class="mut">A storm timeline for {{area}}: hail size, wind, which streets were inside the path. After a storm, {{ownerOr}} gets a morning alert by text or email with the hit streets and a ready list. Past customers in the path come first.</p></div>
+  <div class="card"><h3>Turnover Radar</h3><p class="mut">Shows streets where neighbors are re-roofing right now, from city permit records. When several homes on a street replace their roofs, the neighbors often follow. Homes that were just re-roofed drop off the list.</p></div>
+  <div class="card"><h3>The home record and the LiDAR roof estimate</h3><p class="mut">Every home has one page: year built, permits, storm history, notes and every call or text. The roof size is measured from public LiDAR laser scans of the area, so you get squares and pitch before you drive out. It is an estimate, usually within about 10%. Measure before you quote.</p></div>
+  <div class="card"><h3>Proof Page</h3><p class="mut">A clean one-page summary a rep can send a homeowner: the storm that hit their street, what to look for, and how to book a free inspection with {{name}}. It carries your name and number, not ours.</p></div>
+  <div class="card"><h3>CRM</h3><p class="mut">Every lead moves through simple stages: new, contacted, inspection booked, inspected, won or lost. Every call, text and note is logged on the home, so anyone on your team can pick up where someone else left off.</p></div>
+  <div class="card"><h3>Past customers</h3><p class="mut">Your past-customer list lives here. When a storm crosses a past customer's street, they are flagged first, and you approve a friendly check-in. Past customers are your warmest leads and the easiest yes.</p></div>
+  <div class="card"><h3>SEO tab</h3><p class="mut">How {{name}} shows up on Google: rankings for your main searches in your cities, the posts and pages we published, and Google Business activity. So you can see the website work, not just hear about it.</p></div>
+</div>
+
+<h2>How we report results</h2>
+<div class="card">
+  <ul class="clean">
+    <li><b>Weekly report</b> <span class="mut">from Grant: homes worked, conversations, inspections booked, inspections shown, jobs won, storms in your area, website and Google movement.</span></li>
+    <li><b>Weekly 15-minute call</b> <span class="mut">same day every week. What worked, what to change, what is coming.</span></li>
+    <li><b>Monthly shown-inspection report</b> <span class="mut">how many inspections actually happened. Shown means a homeowner was home and the roof was looked at.</span></li>
+    <li><b>Numbers you can check</b> <span class="mut">every figure in the report comes from the CRM. You can open any home and see the calls and notes behind it.</span></li>
+  </ul>
+</div>
+
+<h2>Your Wing team</h2>
+<div class="grid3">
+  <div class="card"><h3>Grant</h3><p class="mut small">Your main contact. Email, weekly report, scheduling.</p></div>
+  <div class="card"><h3>Maddox</h3><p class="mut small">Calls. Works the Daily 50 phone list with your team.</p></div>
+  <div class="card"><h3>Jack</h3><p class="mut small">System and SEO. Builds your data, storm alerts and website work.</p></div>
+</div>
+<p class="mut small" style="margin-top:12px">{{wing.contact}}</p>
+
+<div class="band noprint">Next: <a data-keep href="needs.html">what we need from you</a> and the <a data-keep href="timeline.html">14-day launch plan</a>.</div>
+<footer data-ft></footer>
+</div><script src="assets/onboard.js"></script></body></html>

@@ -1,0 +1,442 @@
+{
+ "built": "2026-10-26",
+ "delay_days": 30,
+ "radius_m": 100,
+ "lookback_days": 90,
+ "just_years": 5,
+ "split": "2025-01-01",
+ "bands": {
+  "fit": [
+   {
+    "band": "none nearby",
+    "home_months": 3677893,
+    "reroofs": 4606,
+    "per1000": 1.25,
+    "lift": 1.0
+   },
+   {
+    "band": "1 nearby",
+    "home_months": 209165,
+    "reroofs": 1057,
+    "per1000": 5.05,
+    "lift": 4.0
+   },
+   {
+    "band": "2 to 3 nearby",
+    "home_months": 59099,
+    "reroofs": 1084,
+    "per1000": 18.34,
+    "lift": 14.6
+   },
+   {
+    "band": "4 or more nearby",
+    "home_months": 23828,
+    "reroofs": 837,
+    "per1000": 35.13,
+    "lift": 28.0
+   }
+  ],
+  "held out": [
+   {
+    "band": "none nearby",
+    "home_months": 3971212,
+    "reroofs": 2272,
+    "per1000": 0.57,
+    "lift": 1.0
+   },
+   {
+    "band": "1 nearby",
+    "home_months": 140390,
+    "reroofs": 370,
+    "per1000": 2.64,
+    "lift": 4.6
+   },
+   {
+    "band": "2 to 3 nearby",
+    "home_months": 21169,
+    "reroofs": 169,
+    "per1000": 7.98,
+    "lift": 14.0
+   },
+   {
+    "band": "4 or more nearby",
+    "home_months": 4002,
+    "reroofs": 61,
+    "per1000": 15.24,
+    "lift": 26.6
+   }
+  ]
+ },
+ "months": [
+  {
+   "start": "2023-05-31",
+   "part": "fit",
+   "at_risk": 202613,
+   "reroofs": 936,
+   "top500": 2,
+   "top2000": 12,
+   "exposed": 7620
+  },
+  {
+   "start": "2023-06-30",
+   "part": "fit",
+   "at_risk": 201731,
+   "reroofs": 1092,
+   "top500": 3,
+   "top2000": 26,
+   "exposed": 10298
+  },
+  {
+   "start": "2023-07-30",
+   "part": "fit",
+   "at_risk": 200687,
+   "reroofs": 838,
+   "top500": 34,
+   "top2000": 135,
+   "exposed": 16555
+  },
+  {
+   "start": "2023-08-29",
+   "part": "fit",
+   "at_risk": 200240,
+   "reroofs": 776,
+   "top500": 27,
+   "top2000": 120,
+   "exposed": 20613
+  },
+  {
+   "start": "2023-09-28",
+   "part": "fit",
+   "at_risk": 199523,
+   "reroofs": 587,
+   "top500": 21,
+   "top2000": 97,
+   "exposed": 21612
+  },
+  {
+   "start": "2023-10-28",
+   "part": "fit",
+   "at_risk": 198986,
+   "reroofs": 482,
+   "top500": 20,
+   "top2000": 79,
+   "exposed": 21578
+  },
+  {
+   "start": "2023-11-27",
+   "part": "fit",
+   "at_risk": 198578,
+   "reroofs": 292,
+   "top500": 5,
+   "top2000": 28,
+   "exposed": 19383
+  },
+  {
+   "start": "2023-12-27",
+   "part": "fit",
+   "at_risk": 198343,
+   "reroofs": 214,
+   "top500": 6,
+   "top2000": 24,
+   "exposed": 17852
+  },
+  {
+   "start": "2024-01-26",
+   "part": "fit",
+   "at_risk": 198165,
+   "reroofs": 402,
+   "top500": 42,
+   "top2000": 59,
+   "exposed": 15552
+  },
+  {
+   "start": "2024-02-25",
+   "part": "fit",
+   "at_risk": 197813,
+   "reroofs": 265,
+   "top500": 8,
+   "top2000": 27,
+   "exposed": 13749
+  },
+  {
+   "start": "2024-03-26",
+   "part": "fit",
+   "at_risk": 197652,
+   "reroofs": 279,
+   "top500": 8,
+   "top2000": 26,
+   "exposed": 13872
+  },
+  {
+   "start": "2024-04-25",
+   "part": "fit",
+   "at_risk": 197506,
+   "reroofs": 202,
+   "top500": 3,
+   "top2000": 11,
+   "exposed": 15195
+  },
+  {
+   "start": "2024-05-25",
+   "part": "fit",
+   "at_risk": 197483,
+   "reroofs": 143,
+   "top500": 3,
+   "top2000": 14,
+   "exposed": 16227
+  },
+  {
+   "start": "2024-06-24",
+   "part": "fit",
+   "at_risk": 197542,
+   "reroofs": 333,
+   "top500": 13,
+   "top2000": 33,
+   "exposed": 14218
+  },
+  {
+   "start": "2024-07-24",
+   "part": "fit",
+   "at_risk": 197336,
+   "reroofs": 185,
+   "top500": 5,
+   "top2000": 8,
+   "exposed": 11739
+  },
+  {
+   "start": "2024-08-23",
+   "part": "fit",
+   "at_risk": 197230,
+   "reroofs": 165,
+   "top500": 16,
+   "top2000": 27,
+   "exposed": 12269
+  },
+  {
+   "start": "2024-09-22",
+   "part": "fit",
+   "at_risk": 197130,
+   "reroofs": 210,
+   "top500": 1,
+   "top2000": 3,
+   "exposed": 12456
+  },
+  {
+   "start": "2024-10-22",
+   "part": "fit",
+   "at_risk": 196994,
+   "reroofs": 111,
+   "top500": 0,
+   "top2000": 1,
+   "exposed": 12692
+  },
+  {
+   "start": "2024-11-21",
+   "part": "fit",
+   "at_risk": 197071,
+   "reroofs": 39,
+   "top500": 0,
+   "top2000": 1,
+   "exposed": 9908
+  },
+  {
+   "start": "2024-12-21",
+   "part": "fit",
+   "at_risk": 197362,
+   "reroofs": 33,
+   "top500": 0,
+   "top2000": 1,
+   "exposed": 8704
+  },
+  {
+   "start": "2025-01-20",
+   "part": "held out",
+   "at_risk": 197509,
+   "reroofs": 44,
+   "top500": 1,
+   "top2000": 1,
+   "exposed": 6586
+  },
+  {
+   "start": "2025-02-19",
+   "part": "held out",
+   "at_risk": 197587,
+   "reroofs": 89,
+   "top500": 0,
+   "top2000": 3,
+   "exposed": 4325
+  },
+  {
+   "start": "2025-03-21",
+   "part": "held out",
+   "at_risk": 197743,
+   "reroofs": 178,
+   "top500": 7,
+   "top2000": 11,
+   "exposed": 2687
+  },
+  {
+   "start": "2025-04-20",
+   "part": "held out",
+   "at_risk": 197681,
+   "reroofs": 204,
+   "top500": 1,
+   "top2000": 8,
+   "exposed": 3995
+  },
+  {
+   "start": "2025-05-20",
+   "part": "held out",
+   "at_risk": 197518,
+   "reroofs": 213,
+   "top500": 12,
+   "top2000": 40,
+   "exposed": 6632
+  },
+  {
+   "start": "2025-06-19",
+   "part": "held out",
+   "at_risk": 197389,
+   "reroofs": 171,
+   "top500": 13,
+   "top2000": 24,
+   "exposed": 8803
+  },
+  {
+   "start": "2025-07-19",
+   "part": "held out",
+   "at_risk": 197335,
+   "reroofs": 154,
+   "top500": 14,
+   "top2000": 29,
+   "exposed": 9374
+  },
+  {
+   "start": "2025-08-18",
+   "part": "held out",
+   "at_risk": 197250,
+   "reroofs": 115,
+   "top500": 9,
+   "top2000": 18,
+   "exposed": 9630
+  },
+  {
+   "start": "2025-09-17",
+   "part": "held out",
+   "at_risk": 197185,
+   "reroofs": 121,
+   "top500": 6,
+   "top2000": 18,
+   "exposed": 9746
+  },
+  {
+   "start": "2025-10-17",
+   "part": "held out",
+   "at_risk": 197100,
+   "reroofs": 96,
+   "top500": 1,
+   "top2000": 8,
+   "exposed": 8884
+  },
+  {
+   "start": "2025-11-16",
+   "part": "held out",
+   "at_risk": 197036,
+   "reroofs": 130,
+   "top500": 3,
+   "top2000": 8,
+   "exposed": 8051
+  },
+  {
+   "start": "2025-12-16",
+   "part": "held out",
+   "at_risk": 196953,
+   "reroofs": 101,
+   "top500": 3,
+   "top2000": 5,
+   "exposed": 7196
+  },
+  {
+   "start": "2026-01-15",
+   "part": "held out",
+   "at_risk": 196899,
+   "reroofs": 124,
+   "top500": 7,
+   "top2000": 16,
+   "exposed": 7832
+  },
+  {
+   "start": "2026-02-14",
+   "part": "held out",
+   "at_risk": 196776,
+   "reroofs": 237,
+   "top500": 16,
+   "top2000": 27,
+   "exposed": 6972
+  },
+  {
+   "start": "2026-03-16",
+   "part": "held out",
+   "at_risk": 196658,
+   "reroofs": 158,
+   "top500": 6,
+   "top2000": 12,
+   "exposed": 7056
+  },
+  {
+   "start": "2026-04-15",
+   "part": "held out",
+   "at_risk": 196596,
+   "reroofs": 160,
+   "top500": 8,
+   "top2000": 23,
+   "exposed": 8925
+  },
+  {
+   "start": "2026-05-15",
+   "part": "held out",
+   "at_risk": 196491,
+   "reroofs": 131,
+   "top500": 11,
+   "top2000": 19,
+   "exposed": 10003
+  },
+  {
+   "start": "2026-06-14",
+   "part": "held out",
+   "at_risk": 196362,
+   "reroofs": 139,
+   "top500": 6,
+   "top2000": 13,
+   "exposed": 10891
+  },
+  {
+   "start": "2026-07-14",
+   "part": "held out",
+   "at_risk": 196294,
+   "reroofs": 133,
+   "top500": 3,
+   "top2000": 8,
+   "exposed": 9486
+  },
+  {
+   "start": "2026-08-13",
+   "part": "held out",
+   "at_risk": 196222,
+   "reroofs": 86,
+   "top500": 4,
+   "top2000": 6,
+   "exposed": 9401
+  },
+  {
+   "start": "2026-09-12",
+   "part": "held out",
+   "at_risk": 196189,
+   "reroofs": 88,
+   "top500": 1,
+   "top2000": 6,
+   "exposed": 9086
+  }
+ ],
+ "note": "Same permits as the app; fit = months starting before the split, held out = after."
+}

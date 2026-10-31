@@ -1,0 +1,222 @@
+{
+ "image": "gtrace/144768/google.png",
+ "ft_per_px": 0.208,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     401,
+     457
+    ],
+    [
+     657,
+     433
+    ],
+    [
+     675,
+     622
+    ],
+    [
+     419,
+     646
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.996,
+    -0.095
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "2-story main body, house rotated about 5.4 deg (west edge (394,364) to (419,642)); nearly a pyramid: a small flat cap about 8 ft across at (490-533,484-531) with hips to all four corners; the west slope is the same plane as the NW wing west slope; the east slope sweeps past x 600 with no break down to a low east eave at x 660-672 (LiDAR eave about 10 ft there vs 20 ft on the west); north eave of this block at about y 447 for x 516-580 (the flat patio cover fills y 362-447 there); dark faces at (470-560,400-480) are N-facing, not flat"
+  },
+  {
+   "name": "nw_wing",
+   "rect_px": [
+    [
+     392,
+     364
+    ],
+    [
+     509,
+     353
+    ],
+    [
+     520,
+     471
+    ],
+    [
+     403,
+     482
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.095,
+    0.996
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "2-story N-S hip wing on the NW, ridge at x about 458 from y 383 to 473, dark N-facing triangle at the north eave (apex near (455,400)); ridge lower than the main cap and dies into the main north slope; east eave at x about 510"
+  },
+  {
+   "name": "ne_low",
+   "rect_px": [
+    [
+     580,
+     372
+    ],
+    [
+     650,
+     365
+    ],
+    [
+     657,
+     433
+    ],
+    [
+     586,
+     439
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.095,
+    0.996
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story hip at the NE, north eave at y about 370 from x 580 to 650, dark N-facing triangle (590-640,372-400) so the ridge is N-S at about x 612 and runs south into the main east slope; its east face is continuous with the main sweeping east face"
+  },
+  {
+   "name": "se_bump",
+   "rect_px": [
+    [
+     604,
+     553
+    ],
+    [
+     668,
+     547
+    ],
+    [
+     675,
+     622
+    ],
+    [
+     611,
+     628
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.095,
+    0.996
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "small raised hip bump at the SE corner over the low east eave, N-S ridge near x 639 with a nearly flat top (LiDAR pitch 1); it casts the NW-going shadow line (653,565) to (633,595) onto the main east slope"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    383,
+    300
+   ],
+   [
+    662,
+    300
+   ],
+   [
+    662,
+    360
+   ],
+   [
+    383,
+    360
+   ]
+  ],
+  [
+   [
+    512,
+    360
+   ],
+   [
+    582,
+    360
+   ],
+   [
+    582,
+    449
+   ],
+   [
+    512,
+    449
+   ]
+  ],
+  [
+   [
+    580,
+    360
+   ],
+   [
+    655,
+    360
+   ],
+   [
+    655,
+    369
+   ],
+   [
+    580,
+    369
+   ]
+  ],
+  [
+   [
+    415,
+    625
+   ],
+   [
+    475,
+    625
+   ],
+   [
+    475,
+    662
+   ],
+   [
+    415,
+    662
+   ]
+  ],
+  [
+   [
+    545,
+    605
+   ],
+   [
+    600,
+    605
+   ],
+   [
+    600,
+    648
+   ],
+   [
+    545,
+    648
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "pool and pool deck north of the roof; the trace runs up to y 308 there",
+  "dark inside corner between the NW wing and the NE block: shadowed patio cover (LiDAR shows a 2-pitch surface at about 14 ft), not roof",
+  "deck strip above the NE block eave",
+  "tree canopy over the SW corner eave",
+  "tree canopy over the south eave"
+ ],
+ "notes": "Rotated (5.4 deg) 2-story hip house: pyramid-like main with a tiny flat cap, a N-S hip wing on the NW, a 1-story hip at the NE, and a small raised hip bump at the SE corner. Trace overshoots badly to the north (pool deck) and the inside corner is a shadowed patio cover. Confidence med: piece split and the big north exclusion are clear; medium on the main ridge direction (cap is tiny, diagonal in LiDAR) and on whether the patio cover between the wings should count as roof (excluded here as a patio)."
+}

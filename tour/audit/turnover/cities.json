@@ -1,0 +1,228 @@
+{
+ "built": "2026-10-26",
+ "split": "2023-01-01",
+ "radius_m": 100,
+ "lookback_days": 90,
+ "delay_days": 30,
+ "cities": [
+  {
+   "city": "Richardson",
+   "homes": 26929,
+   "permits": 7460,
+   "first": "2014-01-15",
+   "last": "2026-09-28",
+   "top1": 269,
+   "top5": 1346,
+   "bands": {
+    "fit": [
+     {
+      "band": "none nearby",
+      "home_months": 2311990,
+      "reroofs": 3946,
+      "per1000": 1.71,
+      "lift": 1.0,
+      "ci": null
+     },
+     {
+      "band": "1 nearby",
+      "home_months": 167578,
+      "reroofs": 973,
+      "per1000": 5.81,
+      "lift": 3.4,
+      "ci": [
+       3.2,
+       3.6
+      ]
+     },
+     {
+      "band": "2 to 3 nearby",
+      "home_months": 42225,
+      "reroofs": 755,
+      "per1000": 17.88,
+      "lift": 10.5,
+      "ci": [
+       9.7,
+       11.3
+      ]
+     },
+     {
+      "band": "4 or more nearby",
+      "home_months": 10282,
+      "reroofs": 302,
+      "per1000": 29.37,
+      "lift": 17.2,
+      "ci": [
+       15.3,
+       19.3
+      ]
+     }
+    ],
+    "held out": [
+     {
+      "band": "none nearby",
+      "home_months": 1040240,
+      "reroofs": 1216,
+      "per1000": 1.17,
+      "lift": 1.0,
+      "ci": null
+     },
+     {
+      "band": "1 nearby",
+      "home_months": 67680,
+      "reroofs": 112,
+      "per1000": 1.65,
+      "lift": 1.4,
+      "ci": [
+       1.2,
+       1.7
+      ]
+     },
+     {
+      "band": "2 to 3 nearby",
+      "home_months": 5734,
+      "reroofs": 15,
+      "per1000": 2.62,
+      "lift": 2.2,
+      "ci": [
+       1.3,
+       3.7
+      ]
+     },
+     {
+      "band": "4 or more nearby",
+      "home_months": 38,
+      "reroofs": 0,
+      "per1000": 0.0,
+      "lift": 0.0,
+      "ci": null
+     }
+    ]
+   },
+   "cards": {
+    "fit": {
+     "months": 106,
+     "reroofs": 5976,
+     "top1": 161,
+     "top5": 673
+    },
+    "held out": {
+     "months": 44,
+     "reroofs": 1343,
+     "top1": 27,
+     "top5": 105
+    }
+   }
+  },
+  {
+   "city": "Rockwall",
+   "homes": 15255,
+   "permits": 4923,
+   "first": "2016-01-08",
+   "last": "2026-10-15",
+   "top1": 152,
+   "top5": 762,
+   "bands": {
+    "fit": [
+     {
+      "band": "none nearby",
+      "home_months": 1002043,
+      "reroofs": 2127,
+      "per1000": 2.12,
+      "lift": 1.0,
+      "ci": null
+     },
+     {
+      "band": "1 nearby",
+      "home_months": 82289,
+      "reroofs": 467,
+      "per1000": 5.68,
+      "lift": 2.7,
+      "ci": [
+       2.4,
+       3.0
+      ]
+     },
+     {
+      "band": "2 to 3 nearby",
+      "home_months": 20987,
+      "reroofs": 286,
+      "per1000": 13.63,
+      "lift": 6.4,
+      "ci": [
+       5.7,
+       7.3
+      ]
+     },
+     {
+      "band": "4 or more nearby",
+      "home_months": 4769,
+      "reroofs": 134,
+      "per1000": 28.1,
+      "lift": 13.2,
+      "ci": [
+       11.1,
+       15.8
+      ]
+     }
+    ],
+    "held out": [
+     {
+      "band": "none nearby",
+      "home_months": 543363,
+      "reroofs": 1266,
+      "per1000": 2.33,
+      "lift": 1.0,
+      "ci": null
+     },
+     {
+      "band": "1 nearby",
+      "home_months": 53214,
+      "reroofs": 258,
+      "per1000": 4.85,
+      "lift": 2.1,
+      "ci": [
+       1.8,
+       2.4
+      ]
+     },
+     {
+      "band": "2 to 3 nearby",
+      "home_months": 9429,
+      "reroofs": 119,
+      "per1000": 12.62,
+      "lift": 5.4,
+      "ci": [
+       4.5,
+       6.5
+      ]
+     },
+     {
+      "band": "4 or more nearby",
+      "home_months": 1452,
+      "reroofs": 32,
+      "per1000": 22.04,
+      "lift": 9.5,
+      "ci": [
+       6.7,
+       13.4
+      ]
+     }
+    ]
+   },
+   "cards": {
+    "fit": {
+     "months": 81,
+     "reroofs": 3014,
+     "top1": 143,
+     "top5": 508
+    },
+    "held out": {
+     "months": 46,
+     "reroofs": 1675,
+     "top1": 69,
+     "top5": 265
+    }
+   }
+  }
+ ]
+}

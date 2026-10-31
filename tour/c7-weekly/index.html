@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" data-rc="weekly">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Weekly reel</title>
+<link rel="preload" href="../lib/st-fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../lib/st-fonts/montserrat-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../lib/st-common.css">
+<style>
+/* Weekly reel: a ~20 s auto-playing volume recap. Volume only: homes in the data, storms, homes hit, Daily 50 picks,
+   traced homes, texts and emails, places covered. Nothing about replies, bookings or money. Every number is read
+   from the app's own files and this device's records; a slide with nothing real behind it is skipped, never faked. */
+:root{--accent:#0D6C99;--accent-soft:#E3F6FE;--accent-ink:#07547A;--accent-hi:#1388BF;--dur:3200ms}
+html,body{height:100%;background:#F7F8FA;overflow:hidden}
+body{display:grid;place-items:stretch}
+.stage{position:relative;height:100vh;height:100dvh;width:100%;overflow:hidden;
+  background:radial-gradient(120% 80% at 80% 0%,var(--accent-soft) 0%,rgba(227,246,254,0) 55%),radial-gradient(90% 70% at 0% 100%,#EEF2F6 0%,rgba(238,242,246,0) 60%),#F7F8FA}
+/* the service-area map sits under every slide and comes forward on the two map slides */
+#map{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1200ms ease}
+.stage.map-on #map{opacity:1}
+.stage.map-dim #map{opacity:.28}
+/* slides crossfade in place */
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 clamp(28px,8vw,140px);
+  opacity:0;transform:translateY(10px);transition:opacity 900ms cubic-bezier(.2,.7,.2,1),transform 900ms cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.slide.on{opacity:1;transform:none;pointer-events:auto}
+.slide.out{opacity:0;transform:translateY(-8px)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);margin:0 0 14px}
+.big{font-weight:600;font-size:clamp(64px,11vw,168px);line-height:.95;letter-spacing:-.035em;color:var(--paper);margin:0;font-variant-numeric:tabular-nums}
+.big small{font-size:.32em;font-weight:500;letter-spacing:-.01em;color:var(--muted);margin-left:.18em}
+.sub{font-size:clamp(17px,1.5vw,22px);line-height:1.4;color:var(--muted);margin:18px 0 0;max-width:34ch}
+.sub b{color:var(--paper);font-weight:600}
+/* glass card for the side facts */
+.glass{background:rgba(255,255,255,.62);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 24px 50px -30px rgba(11,16,32,.35),inset 0 1px 0 rgba(255,255,255,.8);border-radius:22px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;max-width:560px;width:100%}
+.pair .glass{padding:18px 20px}
+.pair .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.pair .v{font-size:clamp(26px,3vw,38px);font-weight:600;letter-spacing:-.025em;margin:0;font-variant-numeric:tabular-nums;color:var(--paper)}
+.pair .v small{font-size:.5em;color:var(--muted);font-weight:500;margin-left:.2em}
+/* places list */
+.places{display:grid;gap:10px;margin-top:26px;width:100%;max-width:620px}
+.place{display:grid;grid-template-columns:minmax(96px,160px) 1fr auto;align-items:center;gap:14px;font-size:clamp(15px,1.3vw,19px)}
+.place .nm{font-weight:600;color:var(--paper)}
+.place .bar{height:8px;border-radius:999px;background:rgba(11,16,32,.07);overflow:hidden}
+.place .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent-hi));transition:width 1400ms cubic-bezier(.2,.7,.1,1)}
+.slide.on .place .bar i{width:var(--w)}
+.place .n{font-variant-numeric:tabular-nums;color:var(--muted);min-width:5.5ch;text-align:right}
+/* title and end cards */
+.brand{display:flex;align-items:center;gap:16px;margin-bottom:34px}
+.logo{height:56px;border-radius:12px;background:#000;display:flex;align-items:center;padding:0 12px}
+.logo img{height:38px;width:auto;display:block}
+.who{font-size:15px;color:var(--muted);line-height:1.4}
+.who b{display:block;color:var(--paper);font-weight:600;font-size:17px}
+.title{font-weight:600;font-size:clamp(44px,7vw,112px);line-height:.98;letter-spacing:-.035em;margin:0;color:var(--paper)}
+.title span{color:var(--accent)}
+.wing{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted);margin-top:40px}
+.wing svg{width:14px;height:15px;display:block}
+.note{font-size:13px;color:var(--muted);margin-top:14px;max-width:48ch;line-height:1.5}
+/* progress + controls, story style */
+.hud{position:absolute;left:0;right:0;top:0;padding:max(14px,env(safe-area-inset-top)) 18px 0;display:flex;gap:6px;z-index:5}
+.hud i{flex:1;height:3px;border-radius:999px;background:rgba(11,16,32,.12);overflow:hidden;position:relative}
+.hud i::after{content:"";position:absolute;inset:0;width:0;background:var(--accent);border-radius:inherit}
+.hud i.done::after{width:100%}
+.hud i.live::after{width:100%;transform-origin:left;transform:scaleX(0);animation:fill var(--dur) linear forwards}
+.paused .hud i.live::after{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.ctl{position:absolute;right:18px;bottom:max(18px,env(safe-area-inset-bottom));display:flex;gap:8px;z-index:5}
+.ctl button{font:inherit;font-size:13.5px;font-weight:500;color:var(--paper);background:rgba(255,255,255,.72);border:1px solid var(--hair);border-radius:999px;padding:9px 16px;cursor:pointer;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);min-height:40px;transition:background .2s ease}
+.ctl button:hover{background:#fff}
+.framed .ctl{right:112px}
+.ctl button:focus-visible{outline:2px solid #1F47C9;outline-offset:2px}
+.tap{position:absolute;inset:0;z-index:2;display:grid;grid-template-columns:1fr 1fr}
+.tap button{appearance:none;border:0;background:transparent;cursor:pointer}
+.week{position:absolute;left:18px;bottom:max(20px,env(safe-area-inset-bottom));z-index:5;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:640px){
+  .slide{padding:0 22px;justify-content:flex-end;padding-bottom:88px}
+  .big{font-size:clamp(56px,19vw,84px)}
+  .pair{grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+  .pair .glass{padding:14px 15px;border-radius:18px}
+  .place{grid-template-columns:88px 1fr auto;gap:10px;font-size:15px}
+  .brand{margin-bottom:22px}.logo{height:46px}.logo img{height:30px}
+  .title{font-size:clamp(40px,12vw,64px)}
+  .week{display:none}
+  .ctl{right:14px}
+  .sub{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .slide{transition:opacity 220ms linear;transform:none}
+  #map{transition:none}
+  .place .bar i{transition:none}
+}
+</style>
+<link rel="stylesheet" href="../lib/rc-console.css"><!-- polish direction B: Ops Console -->
+</head>
+<body>
+<div class="stage" id="stage">
+  <canvas id="map" aria-hidden="true"></canvas>
+  <div class="hud" id="hud" aria-hidden="true"></div>
+  <div class="tap" aria-hidden="true"><button tabindex="-1" data-step="-1"></button><button tabindex="-1" data-step="1"></button></div>
+  <div id="slides" aria-live="polite"></div>
+  <div class="week" id="week"></div>
+  <div class="ctl">
+    <button id="play" aria-pressed="true">Pause</button>
+    <button id="replay">Replay</button>
+  </div>
+</div>
+
+<script src="../lib/rc-state.js"></script>
+<script src="../lib/brand.js"></script>
+<script src="../lib/st-homes.js"></script>
+<script>/* optional traced file: skipped for 10 min after a 404 (loop 6) */try{if(Date.now()-(+localStorage.getItem('rc.off.traced')||0)>6e5)document.write('<script src="../lib/rc-traced.js" onerror="try{localStorage.setItem(\'rc.off.traced\',Date.now())}catch(e){}this.remove()"><\/script>')}catch(e){}</script>
+<script>
+(function(){
+  const $=s=>document.querySelector(s), fmt=n=>Number(n||0).toLocaleString('en-US');
+  const q=new URLSearchParams(location.search);
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STILL=q.get('still')==='1';                     // capture mode: jump to ?slide=N, finish every count, hold
+  const stage=$('#stage'), slidesEl=$('#slides'), hud=$('#hud');
+  const R=applyRoofer(rooferKey());
+  if(window.top!==window) document.documentElement.classList.add('framed');   // inside the shell the Nimbus orb sits bottom right
+  document.documentElement.style.setProperty('--accent-hi',R.accentHi||R.accent);
+
+  /* ---------- the week ---------- */
+  const now=new Date(), day=(now.getDay()+6)%7;          // Monday = 0
+  const mon=new Date(now.getFullYear(),now.getMonth(),now.getDate()-day), sun=new Date(mon); sun.setDate(mon.getDate()+6);
+  const md=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  $('#week').textContent='Week of '+md(mon)+' to '+md(sun);
+  const inWeek=iso=>{ const t=Date.parse(iso); return t>=mon.getTime() && t<mon.getTime()+7*864e5; };
+  const dayKeys=[]; for(let i=0;i<7;i++){ const d=new Date(mon); d.setDate(mon.getDate()+i); if(d<=now) dayKeys.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')); }
+
+  /* ---------- the numbers (real only) ---------- */
+  const facts={ homes:0, cities:[], storms:0, storms6:0, newest:null, hit:0, hit075:0, picks:0, pickCities:0, pickNbs:0, traced:0, mockTraced:0, texts:0, emails:0, textsDevice:0, emailsDevice:0 };
+  function sendLog(){ // the send service (scripts/send/server.py) when it runs; absent = no sends to count
+    const ac=new AbortController(); const t=setTimeout(()=>ac.abort(),1500);
+    return fetch('http://127.0.0.1:4911/inbox?roofer='+encodeURIComponent(rooferKey())+'&limit=2000',{signal:ac.signal}).then(r=>r.ok?r.json():null).then(j=>{ clearTimeout(t);
+      ((j&&j.messages)||[]).forEach(m=>{ if(m.direction!=='out'||m.status!=='sent'||!m.ts||!inWeek(m.ts)) return; if(m.channel==='sms') facts.texts++; else if(m.channel==='email') facts.emails++; }); }).catch(()=>{ clearTimeout(t); });
+  }
+  // every loader retries: a busy local server drops the odd request, and one dropped file must not blank the reel
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const retry=(fn,n)=>fn().catch(e=>n>0?wait(800).then(()=>retry(fn,n-1)):Promise.reject(e));
+  const getJson=u=>retry(()=>fetch(u).then(r=>{ if(!r.ok) throw new Error(u); return r.json(); }),3);
+  const getBuf=u=>retry(()=>fetch(u).then(r=>{ if(!r.ok) throw new Error(u); return r.arrayBuffer(); }),3);
+  const dataReady=RC.factsReady.catch(()=>getJson(rooferDataRoot()+'catalog.json').then(c=>{ RC.catalog=c; RC.dataRoot=rooferDataRoot(); })).then(()=>{
+    const c=RC.catalog; if(!c) return;
+    facts.homes=c.total;
+    const by={}; c.regions.forEach(r=>Object.entries(r.by_city||{}).forEach(([k,v])=>{ by[k]=(by[k]||0)+v; }));
+    facts.cities=Object.entries(by).sort((a,b)=>b[1]-a[1]);
+    const six=new Date(now); six.setMonth(six.getMonth()-6);
+    facts.storms=c.storms.length; facts.storms6=c.storms.filter(s=>Date.parse(s.date+'T12:00:00Z')>=six.getTime()).length;
+    const newest=c.storms.slice().sort((a,b)=>a.date<b.date?1:-1)[0]; facts.newest=newest||null;
+    if(newest){ facts.hit=newest.homes_1in; facts.hit075=newest.homes_075; }
+  });
+  // Daily 50 picks = the lists the Today screen kept on this device this week (localStorage rc.t.daily), read as they are,
+  // never rebuilt here. City and neighbourhood come from the candidate file the engine picked from (meta/daily/cands.json).
+  const picksReady=dataReady.then(()=>getJson(RC.dataRoot+'meta/daily/cands.json').catch(()=>null)).then(d=>{
+    let kept={}; try{ kept=JSON.parse(localStorage.getItem('rc.t.daily')||'{}')||{}; }catch(e){}
+    const F=d&&d.fields?d.fields:[], gi=F.indexOf('gi'), ci=F.indexOf('city'), nb=F.indexOf('nb'), sb=F.indexOf('sub'), rows=new Map();
+    if(d&&gi>=0) d.rows.forEach(r=>rows.set(r[gi],r));
+    const ids=new Set(), cities=new Set(), nbs=new Set();
+    dayKeys.forEach(k=>{ const e=kept[k]; if(!e||e.roofer!==rooferKey()||!Array.isArray(e.picks)) return;
+      e.picks.forEach(p=>{ ids.add(p.id); const r=/^m\d+$/.test(p.id)?rows.get(+p.id.slice(1)):null; if(!r) return;
+        if(ci>=0&&d.cities[r[ci]]) cities.add(d.cities[r[ci]]); const n=nb>=0&&r[nb]?'n'+r[nb]:sb>=0&&r[sb]?'s'+r[sb]:null; if(n) nbs.add(n); }); });
+    facts.picks=ids.size; facts.pickCities=cities.size; facts.pickNbs=nbs.size;
+  }).catch(()=>{});
+  (function(){ const T=window.RC_TRACED&&RC_TRACED.homes||{}; Object.values(T).forEach(h=>{ if(h.mock) facts.mockTraced++; else facts.traced++; }); })();
+  (function(){ let c=[]; try{ c=RC.contacted({all:true}); }catch(e){} c.forEach(e=>{ if(!inWeek(e.at)) return; if(e.channel==='text') facts.textsDevice+=e.count; else if(e.channel==='email') facts.emailsDevice+=e.count; }); })();
+
+  /* ---------- the map: every home as a density glow ---------- */
+  const cv=$('#map'), ctx=cv.getContext('2d'); let W=0,Hh=0,dpr=1, proj=null, drawn=0, hitMask=null, hitDrawn=false, mapRaf=0;
+  function size(){ dpr=Math.min(2,devicePixelRatio||1); W=cv.clientWidth; Hh=cv.clientHeight; cv.width=Math.round(W*dpr); cv.height=Math.round(Hh*dpr); ctx.setTransform(dpr,0,0,dpr,0,0); project(); drawn=0; hitDrawn=false; ctx.clearRect(0,0,W,Hh); }
+  function project(){ if(!STH.cat) return; const b=STH.regionBounds('all')||STH.cat.box; const cosl=Math.cos((b[1]+b[3])/2*Math.PI/180);
+    // wide: the glow sits right of the copy; phone: it fills the top half and the copy sits under it
+    const phone=W<640, padX=phone?W*.06:W*.42, right=phone?W*.06:W*.06, top=phone?Hh*.07:Hh*.1, bottom=phone?Hh*.47:Hh*.1;
+    const sx=(W-padX-right)/((b[2]-b[0])*cosl), sy=(Hh-top-bottom)/(b[3]-b[1]), s=Math.min(sx,sy);
+    const cx=padX+(W-padX-right)/2, cy=top+(Hh-top-bottom)/2, mx=(b[0]+b[2])/2, my=(b[1]+b[3])/2;
+    proj=(lon,lat)=>[cx+(lon-mx)*cosl*s, cy-(lat-my)*s]; }
+  const STEPS=reduced||STILL?1:70;   // homes appear over ~2.3 s at 30 fps
+  function drawHomes(step){ if(!proj||!STH.xy) return; const n=STH.n, xy=STH.xy; ctx.fillStyle=R.accent; ctx.globalAlpha=W<640?0.02:0.03; const r=W<640?1:1.2;
+    for(let i=step;i<n;i+=STEPS){ if(!STH.residential(i)) continue; const p=proj(xy[i*2],xy[i*2+1]); ctx.fillRect(p[0]-r/2,p[1]-r/2,r,r); } ctx.globalAlpha=1; }
+  function drawHits(){ if(!proj||!hitMask||hitDrawn) return; hitDrawn=true; const n=STH.n, xy=STH.xy; ctx.fillStyle=R.accentHi||R.accent; ctx.globalAlpha=.35; const r=W<640?1.4:1.8;
+    for(let i=0;i<n;i++){ if(hitMask[i]<100) continue; const p=proj(xy[i*2],xy[i*2+1]); ctx.fillRect(p[0]-r/2,p[1]-r/2,r,r); } ctx.globalAlpha=1; }
+  function animateMap(withHits){ cancelAnimationFrame(mapRaf); if(drawn>=STEPS){ if(withHits) drawHits(); return; }
+    const tick=()=>{ if(paused&&!STILL) { mapRaf=requestAnimationFrame(tick); return; } drawHomes(drawn++); if(drawn<STEPS) mapRaf=requestAnimationFrame(tick); else if(withHits) drawHits(); };
+    if(STILL||reduced){ while(drawn<STEPS) drawHomes(drawn++); if(withHits) drawHits(); } else mapRaf=requestAnimationFrame(tick); }
+  // homes.bin (2 MB) through st-homes, or straight from the file with retries when that first load was dropped
+  const homesLoad=()=>STH.ready.catch(()=>getBuf(rooferDataRoot()+'homes.bin').then(buf=>{ const c=RC.catalog; STH.cat=c; STH.n=c.total; STH.regions=c.regions; STH.xy=new Float32Array(buf,0,c.total*2); STH.type=new Uint8Array(buf,c.total*8,c.total); return STH; }));
+  // the newest storm's per-home radar hail (meta/hail/<region>/<date>.bin, one byte per home in 1/100 in), read per region with retries
+  const hailLoad=()=>{ const c=RC.catalog, st=facts.newest; if(!c||!st) return Promise.resolve(null); const out=new Uint8Array(c.total), regs=Object.keys(st.regions||{});
+    return Promise.all(c.regions.filter(r=>regs.includes(r.id)&&(st.regions[r.id].homes_075>0)).map(r=>getBuf(RC.dataRoot+'meta/hail/'+r.id+'/'+st.date+'.bin').then(b=>{ if(b.byteLength===r.count) out.set(new Uint8Array(b),r.offset); }).catch(()=>{}))).then(()=>out); };
+  const mapReady=dataReady.then(()=>homesLoad()).then(()=>{ size(); return hailLoad().then(m=>{ hitMask=m; }); }).catch(()=>{});
+  addEventListener('resize',()=>{ size(); if(cur>=0&&slides[cur].map) animateMap(slides[cur].hits); });
+
+  /* ---------- the slides ---------- */
+  const NEWEST=()=>facts.newest?new Date(facts.newest.date+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'}):'';
+  let slides=[];
+  function buildSlides(){
+    const S=[];
+    S.push({ id:'title', dur:2600, html:()=>`<div class="brand"><div class="logo" data-r="logo"></div><div class="who"><b>${RC.esc(R.name)}</b>${RC.esc(R.area)}</div></div>
+      <h1 class="title">Weekly<br><span>reel</span></h1><p class="sub">The volume behind this week, ${md(mon)} to ${md(sun)}.</p>` });
+    S.push({ id:'homes', dur:3600, map:true, html:()=>`<p class="eyebrow">Homes in the database</p><p class="big" data-count="${facts.homes}">0</p>
+      <p class="sub">Every residential roof across <b>${RC.esc(cityLine(facts.cities.map(c=>c[0])))}</b>, from the county appraisal rolls.</p>` });
+    S.push({ id:'storms', dur:3400, html:()=>`<p class="eyebrow">Hail days tracked</p><p class="big" data-count="${facts.storms}">0</p>
+      <div class="pair"><div class="glass"><p class="k">Last 6 months</p><p class="v" data-count="${facts.storms6}">0</p></div><div class="glass"><p class="k">Newest</p><p class="v">${NEWEST()}<small>${facts.newest?facts.newest.max_in.toFixed(2)+' in':''}</small></p></div></div>` });
+    if(facts.hit>0) S.push({ id:'hit', dur:3600, map:true, hits:true, dim:false, html:()=>`<p class="eyebrow">Homes hit, ${NEWEST()}</p><p class="big" data-count="${facts.hit}">0</p>
+      <p class="sub"><b>${fmt(facts.hit)}</b> homes under 1 inch or larger radar hail, <b>${fmt(facts.hit075)}</b> at three quarters of an inch or more.</p>` });
+    if(facts.picks>0) S.push({ id:'picks', dur:3400, html:()=>`<p class="eyebrow">Picked for the Daily 50 this week</p><p class="big" data-count="${facts.picks}">0<small>homes</small></p>
+      <div class="pair"><div class="glass"><p class="k">Cities</p><p class="v" data-count="${facts.pickCities}">0</p></div><div class="glass"><p class="k">Neighborhoods</p><p class="v" data-count="${facts.pickNbs}">0</p></div></div>` });
+    if(facts.traced>0) S.push({ id:'traced', dur:3000, html:()=>`<p class="eyebrow">Homes traced</p><p class="big" data-count="${facts.traced}">0</p>
+      <p class="sub">Owner contact details found for <b>${fmt(facts.traced)}</b> homes.${facts.mockTraced?' Test contacts are left out.':''}</p>` });
+    const tx=facts.texts||facts.textsDevice, em=facts.emails||facts.emailsDevice;
+    if(tx>0||em>0) S.push({ id:'sent', dur:3400, html:()=>`<p class="eyebrow">Reached out this week</p>
+      <div class="pair" style="margin-top:0"><div class="glass"><p class="k">${facts.texts?'Texts sent':'Texts opened to send'}</p><p class="v" data-count="${tx}">0</p></div><div class="glass"><p class="k">${facts.emails?'Emails sent':'Emails drafted'}</p><p class="v" data-count="${em}">0</p></div></div>` });
+    S.push({ id:'places', dur:3800, html:()=>{ const top=facts.cities.slice(0,6), max=top.length?top[0][1]:1;
+      return `<p class="eyebrow">Cities covered</p><p class="big" data-count="${facts.cities.length}">0<small>cities</small></p>
+      <div class="places">${top.map(([c,n])=>`<div class="place"><span class="nm">${RC.esc(c)}</span><span class="bar"><i style="--w:${Math.round(n/max*100)}%"></i></span><span class="n" data-count="${n}">0</span></div>`).join('')}</div>`; } });
+    S.push({ id:'end', dur:3200, html:()=>`<div class="brand"><div class="logo" data-r="logo"></div></div><h1 class="title">Roof <span>Command</span></h1>
+      <p class="sub">Volume this week. Nothing here is a reply, a booking or a dollar.</p>
+      <div class="wing"><span data-wing="#0B1020"></span>Built by Wing Digital</div>` });
+    return S;
+  }
+
+  /* ---------- playback ---------- */
+  let cur=-1, paused=false, timer=0, t0=0, left=0, counters=[];
+  function render(){
+    slidesEl.innerHTML=''; hud.innerHTML='';
+    slides.forEach((s,i)=>{ const el=document.createElement('section'); el.className='slide'; el.dataset.id=s.id; el.innerHTML=s.html(); slidesEl.appendChild(el); s.el=el;
+      const bar=document.createElement('i'); hud.appendChild(bar); s.bar=bar; });
+    slidesEl.querySelectorAll('[data-r="logo"]').forEach(n=>rooferMark(n,R));
+    slidesEl.querySelectorAll('[data-wing]').forEach(n=>{ n.innerHTML=WING_MARK(n.dataset.wing); });
+  }
+  function ease(t){ return 1-Math.pow(1-t,3); }
+  function countUp(el,ms){ const target=+el.dataset.count||0, suffix=el.querySelector('small'); const sfx=suffix?suffix.outerHTML:'';
+    if(reduced||STILL){ el.innerHTML=fmt(target)+sfx; return; }
+    const start=performance.now(); let raf=0; const tick=now=>{ if(paused){ raf=requestAnimationFrame(tick); return; } const t=Math.min(1,(now-start)/ms); el.innerHTML=fmt(Math.round(target*ease(t)))+sfx; if(t<1) raf=requestAnimationFrame(tick); };
+    raf=requestAnimationFrame(tick); counters.push(()=>cancelAnimationFrame(raf)); }
+  function show(i){
+    if(i<0||i>=slides.length) return;
+    counters.forEach(f=>f()); counters=[]; clearTimeout(timer);
+    if(cur>=0&&slides[cur]){ slides[cur].el.classList.remove('on'); slides[cur].el.classList.add('out'); slides[cur].bar.classList.remove('live'); }
+    slides.forEach((s,k)=>{ s.bar.classList.toggle('done',k<i); if(k>i){ s.bar.classList.remove('done','live'); s.el.classList.remove('out'); } });
+    cur=i; const s=slides[i]; s.el.classList.remove('out'); s.el.classList.add('on'); s.bar.classList.add('live'); s.bar.style.animation='none'; void s.bar.offsetWidth; s.bar.style.animation='';
+    document.documentElement.style.setProperty('--dur',s.dur+'ms');
+    stage.classList.toggle('map-on',!!s.map); stage.classList.toggle('map-dim',!s.map&&i>0&&i<slides.length-1&&drawn>0);
+    if(s.map) mapReady.then(()=>animateMap(!!s.hits));
+    s.el.querySelectorAll('[data-count]').forEach(n=>countUp(n,Math.min(2200,s.dur*.65)));
+    left=s.dur; t0=performance.now();
+    if(!paused&&!STILL) timer=setTimeout(next,s.dur);
+  }
+  function next(){ if(cur+1<slides.length) show(cur+1); else { setPaused(true); } }
+  function setPaused(on){ paused=!!on; stage.classList.toggle('paused',paused); $('#play').textContent=paused?'Play':'Pause'; $('#play').setAttribute('aria-pressed',String(!paused));
+    clearTimeout(timer); if(paused){ left=Math.max(0,left-(performance.now()-t0)); } else { if(cur===slides.length-1&&left<=0){ show(0); return; } t0=performance.now(); if(!STILL) timer=setTimeout(next,left); } }
+  $('#play').onclick=()=>setPaused(!paused);
+  $('#replay').onclick=()=>{ setPaused(false); show(0); };
+  document.querySelectorAll('.tap button').forEach(b=>b.onclick=()=>{ const n=cur+(+b.dataset.step); if(n>=0&&n<slides.length){ show(n); if(paused) { left=slides[n].dur; } } });
+  addEventListener('keydown',e=>{ if(e.key===' '){ e.preventDefault(); setPaused(!paused); } else if(e.key==='ArrowRight') show(Math.min(slides.length-1,cur+1)); else if(e.key==='ArrowLeft') show(Math.max(0,cur-1)); else if(e.key==='r'||e.key==='R'){ setPaused(false); show(0); } });
+  // the shell parks this frame when another screen is up; a hidden tab pauses too
+  let wasPaused=false;
+  addEventListener('message',e=>{ const m=e.data; if(!m||m.type!=='visibility') return; if(m.hidden){ wasPaused=paused; setPaused(true); } else if(!wasPaused) setPaused(false); });
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden){ wasPaused=paused; setPaused(true); } else if(!wasPaused) setPaused(false); });
+
+  // a busy local server can stall one of the loaders; after 15 s the reel starts with whatever has arrived
+  Promise.race([Promise.all([dataReady,picksReady,sendLog(),mapReady]),new Promise(res=>setTimeout(res,15000)).then(()=>dataReady)]).then(()=>{
+    slides=buildSlides(); render(); window.__reel={facts,slides:slides.map(s=>s.id)};
+    const at=q.get('slide'); if(at!=null){ const n=slides.findIndex(s=>s.id===at); show(n>=0?n:Math.min(slides.length-1,+at||0)); if(STILL) setPaused(true); }
+    else show(0);
+    document.documentElement.dataset.ready='1';
+  });
+})();
+</script>
+</body>
+</html>

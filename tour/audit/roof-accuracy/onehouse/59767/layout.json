@@ -1,0 +1,4 @@
+{"image":"gtrace/59767/google.png","source":"practice layout drawn by the build session (not the vision agent)",
+ "pieces":[{"name":"main","rect_px":[[340,415],[760,415],[760,585],[340,585]],"roof":"hip","ridge_dir_px":[1,0],"notes":"long E-W hip"}],
+ "exclude_px":[[[300,150],[800,150],[800,405],[300,405]]],
+ "notes":"neighbour 7619 (solar panels) above: ignore"}

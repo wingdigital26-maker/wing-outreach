@@ -1,0 +1,14 @@
+{
+ "row": "57613",
+ "shown": "needs work",
+ "new_pass": false,
+ "new_why": [
+  "fit 71%",
+  "outline vs footprint IoU 0.683"
+ ],
+ "old_pass": false,
+ "old_why": [
+  "lines 1.15 ft",
+  "outline vs footprint IoU 0.726"
+ ]
+}

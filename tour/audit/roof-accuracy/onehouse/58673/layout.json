@@ -1,0 +1,136 @@
+{
+ "image": "gtrace/58673/google.png",
+ "ft_per_px": 0.205,
+ "pieces": [
+  {
+   "name": "main_ns",
+   "rect_px": [
+    [
+     517.1,
+     416.2
+    ],
+    [
+     679.3,
+     385.5
+    ],
+    [
+     722.9,
+     616.4
+    ],
+    [
+     560.8,
+     647.1
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.186,
+    0.983
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "main body, ridge N-S (house frame) at u 192, LiDAR z 28-29 from v 125 to 195; big lit east face, south hip end with hips to both bottom corners."
+  },
+  {
+   "name": "north_hip",
+   "rect_px": [
+    [
+     511.0,
+     383.7
+    ],
+    [
+     599.4,
+     367.0
+    ],
+    [
+     622.3,
+     487.9
+    ],
+    [
+     533.8,
+     504.6
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.186,
+    0.983
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "narrower block continuing north of the main body (the main steps in at the NE), own N-S ridge at u 155 (LiDAR z 27), hips from the NW corner; chimney at its NE corner excluded."
+  },
+  {
+   "name": "west_wing",
+   "rect_px": [
+    [
+     436.1,
+     472.2
+    ],
+    [
+     605.1,
+     440.2
+    ],
+    [
+     632.1,
+     582.7
+    ],
+    [
+     463.0,
+     614.7
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.983,
+    -0.186
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "west wing, ridge E-W at v 165 (LiDAR z 27), hips to both west corners, valley into the north block at u 115-160; porch band along its south edge excluded."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    577.4,
+    369.1
+   ],
+   [
+    601.0,
+    364.7
+   ],
+   [
+    605.1,
+    386.3
+   ],
+   [
+    581.5,
+    390.8
+   ]
+  ],
+  [
+   [
+    459.9,
+    598.0
+   ],
+   [
+    553.2,
+    580.3
+   ],
+   [
+    557.3,
+    601.9
+   ],
+   [
+    464.0,
+    619.6
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "chimney at the north edge",
+  "brick patio and porch along the SW edge"
+ ],
+ "notes": "Single-level cross plan: N-S main hip, a narrower north hip, and an E-W west wing, all at the same eave. Confidence HIGH (all LiDAR faces z 22-25, lines agree with the visible hips). Frame: rotate 10.7 deg CW about (575,507), crop 300x320."
+}

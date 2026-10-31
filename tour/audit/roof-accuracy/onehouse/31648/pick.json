@@ -1,0 +1,8 @@
+{"row": "31648", "wings": [
+ {"id": 1, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.75},
+ {"id": 2, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.8},
+ {"id": 3, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.8},
+ {"id": 4, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.45}],
+ "missing": "A small front porch/entry hip at the south edge of W2 (south-middle of the house) that the guess draws but no wing covers; a low shadowed roof section at the NE, between the north end of W2 and the top of W3, that looks like a covered patio or a lower lean-to, not drawn; W4 at the NW is a small garage-front bump, could be a shed/low roof rather than a full hip",
+ "guess_ok": true,
+ "notes": "All-hip: long N-S hip W2 on the west, E-W main hip W1, square hip W3 on the east, small W4 bump at NW"}

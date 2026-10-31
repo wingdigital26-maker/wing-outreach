@@ -1,0 +1,65 @@
+{
+ "res": {
+  "daily": {
+   "cold": {
+    "shell": 284,
+    "paint": 1769,
+    "ready": 7583,
+    "bytes": 1663937,
+    "reqs": 31,
+    "sw": 0,
+    "third": 10
+   },
+   "repeat": {
+    "shell": 228,
+    "paint": 298,
+    "ready": 6057,
+    "bytes": -1,
+    "reqs": 31,
+    "sw": 30,
+    "third": 10
+   }
+  },
+  "storm": {
+   "cold": {
+    "shell": 300,
+    "paint": 822,
+    "ready": 5313,
+    "bytes": 7172110,
+    "reqs": 37,
+    "sw": 0,
+    "third": 13
+   },
+   "repeat": {
+    "shell": 176,
+    "paint": 248,
+    "ready": 2727,
+    "bytes": -2,
+    "reqs": 37,
+    "sw": 35,
+    "third": 13
+   }
+  },
+  "home": {
+   "cold": {
+    "shell": 196,
+    "paint": 327,
+    "ready": 4962,
+    "bytes": 1130542,
+    "reqs": 23,
+    "sw": 0,
+    "third": 0
+   },
+   "repeat": {
+    "shell": 188,
+    "paint": 302,
+    "ready": 4818,
+    "bytes": 0,
+    "reqs": 23,
+    "sw": 23,
+    "third": 0
+   }
+  }
+ },
+ "errors": []
+}

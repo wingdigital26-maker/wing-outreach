@@ -1,0 +1,8 @@
+{"home": "3312 Snidow Ct", "by": "eye check on Google satellite (viewed only) 2026-10-18, positions read off the LiDAR grid (sketch_grid.py)",
+ "sections": [
+  {"name": "main",        "x": 0,   "y": 5,   "ridge": "EW", "len": 60, "wid": 44, "ends": "hip"},
+  {"name": "front left",  "x": -22, "y": 36,  "ridge": "NS", "len": 28, "wid": 18, "ends": "hip"},
+  {"name": "front mid",   "x": 5,   "y": 34,  "ridge": "NS", "len": 26, "wid": 20, "ends": "hip"},
+  {"name": "east",        "x": 32,  "y": 25,  "ridge": "EW", "len": 26, "wid": 18, "ends": "hip"},
+  {"name": "rear left",   "x": -28, "y": -20, "ridge": "NS", "len": 28, "wid": 22, "ends": "hip"},
+  {"name": "rear right",  "x": 8,   "y": -30, "ridge": "NS", "len": 36, "wid": 30, "ends": "hip"}]}

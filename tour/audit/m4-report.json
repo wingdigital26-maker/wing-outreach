@@ -1,0 +1,40 @@
+{
+ "report": {
+  "daily": {
+   "screen": "daily",
+   "shell": [],
+   "frame": [],
+   "n": 38,
+   "small": []
+  },
+  "daily-roof-sheet": {
+   "screen": "daily-roof-sheet",
+   "shell": [],
+   "frame": [],
+   "n": 37,
+   "small": []
+  },
+  "storm": {
+   "screen": "storm",
+   "shell": [],
+   "frame": [],
+   "n": 10,
+   "small": []
+  },
+  "storm-sep12": {
+   "screen": "storm-sep12",
+   "shell": [
+    "ERR Page.evaluate: Target crashed "
+   ],
+   "frame": [
+    "ERR Frame.evaluate: Target crashed "
+   ],
+   "small": []
+  }
+ },
+ "errors": [],
+ "fails": [
+  "storm-sep12: shell overlaps = 1 ['ERR Page.evaluate: Target crashed ']",
+  "storm-sep12: frame overlaps = 1 ['ERR Frame.evaluate: Target crashed ']"
+ ]
+}

@@ -1,0 +1,203 @@
+{
+ "image": "gtrace/10709/google.png",
+ "ft_per_px": 0.208,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     410,
+     441
+    ],
+    [
+     679,
+     441
+    ],
+    [
+     679,
+     648
+    ],
+    [
+     410,
+     648
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "main 2-story block, N-S ridge near x 546 from about y 500 to 590; E face is one big 8/12 plane (1026 sq ft) from the ridge to the E eave; N face shallow and dark; W face mostly covered by the west cross"
+  },
+  {
+   "name": "west_cross",
+   "rect_px": [
+    [
+     410,
+     441
+    ],
+    [
+     547,
+     441
+    ],
+    [
+     547,
+     553
+    ],
+    [
+     410,
+     553
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "cross hip on the W half, E-W ridge near y 497 meeting the main ridge, hipped at the W eave with hips meeting near (455,497); lit S face"
+  },
+  {
+   "name": "nw_wing",
+   "rect_px": [
+    [
+     375,
+     350
+    ],
+    [
+     525,
+     350
+    ],
+    [
+     525,
+     445
+    ],
+    [
+     375,
+     445
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story garage wing NW, E-W ridge near y 397, hipped both ends (W hips meet near (420,397)); its S face sits in the main block shadow"
+  },
+  {
+   "name": "east_bump",
+   "rect_px": [
+    [
+     610,
+     540
+    ],
+    [
+     679,
+     540
+    ],
+    [
+     679,
+     580
+    ],
+    [
+     610,
+     580
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "small hip bump on the E face at the eave, E-W ridge near y 560, the dark triangle is its N face"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    525,
+    398
+   ],
+   [
+    572,
+    398
+   ],
+   [
+    572,
+    441
+   ],
+   [
+    525,
+    441
+   ]
+  ],
+  [
+   [
+    367,
+    450
+   ],
+   [
+    410,
+    450
+   ],
+   [
+    410,
+    504
+   ],
+   [
+    367,
+    504
+   ]
+  ],
+  [
+   [
+    409,
+    646
+   ],
+   [
+    667,
+    646
+   ],
+   [
+    667,
+    672
+   ],
+   [
+    430,
+    672
+   ]
+  ],
+  [
+   [
+    545,
+    290
+   ],
+   [
+    680,
+    290
+   ],
+   [
+    680,
+    440
+   ],
+   [
+    545,
+    440
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "dark ground between the garage wing and main",
+  "ground west of main below the garage eave",
+  "tree shadow and walkway south of the eave, eave at about y 646",
+  "pool and deck NE"
+ ],
+ "notes": "Main 2-story hip (ridge N-S) with a 2-story W cross hip, a 1-story NW garage hip and a small E bump. v1 geometry kept, levels added and the garage rect widened to its real W eave; v1 main fit flat at 19%, the level split is the fix."
+}

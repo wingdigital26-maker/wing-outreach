@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nimbus SEO | Wing Outreach</title>
+<script src="../lib/rc-frame-pause.js"></script><!-- parked by the shell = no drawing -->
+<!-- SEO Agent: the pages Wing's engine spots, picks, writes and publishes for the roofer. Data: ../lib/seo-agent.json,
+     written by scripts/seo_agent/build_seo_agent.py from the keyword sheet, the draft records and the site repo (origin/main).
+     Real only: search volume and Google position are not connected, and the page says so instead of inventing them. -->
+<link rel="stylesheet" href="../lib/wo-calm.css">
+<style>
+:root{--e-out:cubic-bezier(.23,1,.32,1);--ink:#17181C;--ink-2:#3B3F49;--slate:#767B88;--line:#E8E6E1;--line-2:#F0EEE9;--tint:#FAF8F4;--paper:#fff;--green:#0D6C99;--green-soft:#E3F0F6;--amber:#9A6700;--amber-soft:#FFF4D6;--red:#B42318;--red-soft:#FCEBEA}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--tint);-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid #2757E6;outline-offset:2px}
+.wrap{max-width:1280px;min-width:0;overflow-x:hidden;margin:0 auto;padding:22px 28px 120px}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
+.top .k{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin:0 0 4px}
+.top h1{margin:0;font-family:var(--wo-serif);font-weight:400;font-size:34px;letter-spacing:-.01em;line-height:1.05}
+.top h1 b{font-weight:400;font-style:italic}
+.top .r{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12.5px;color:var(--slate)}
+.top .r b{color:var(--ink);font-weight:500}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-right:6px;vertical-align:1px}
+.ava{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center}
+
+/* stepper */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative;margin:0 0 22px;padding:0 10px}
+.steps::before{content:"";position:absolute;left:10%;right:10%;top:15px;height:1px;background:var(--line)}
+.st{position:relative;text-align:center;padding-top:40px;font-size:13px}
+.st i{position:absolute;left:50%;top:0;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:12px;color:var(--slate);transition:background 180ms ease,border-color 180ms ease,color 180ms ease}
+.st.done i svg{animation:tick 240ms var(--e-out) both}
+@keyframes tick{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+.st.done i{background:var(--green);border-color:var(--green);color:#fff}
+.st.done i svg{width:13px;height:13px}
+.st b{display:block;font-weight:500;color:var(--ink)}
+.st span{display:block;font-size:11.5px;color:var(--slate);margin-top:2px}
+.st.wait b{color:var(--slate)}
+
+/* cards */
+.grid{min-width:0;display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:start}
+.card{min-width:0;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(23,24,28,.03),0 8px 24px -16px rgba(23,24,28,.12);display:flex;flex-direction:column;min-height:520px}
+.ch{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:18px 20px 10px}
+.ch h2{margin:0;font-family:var(--wo-serif);font-weight:400;font-size:20px;letter-spacing:-.005em;overflow-wrap:anywhere}
+.ch p{margin:3px 0 0;font-size:12px;color:var(--slate)}
+.chip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:500;white-space:nowrap;border:1px solid var(--line);color:var(--ink-2);background:var(--paper)}
+.chip.g{background:var(--green-soft);border-color:transparent;color:var(--green)}
+.chip.a{background:var(--amber-soft);border-color:transparent;color:var(--amber)}
+.chip.m{color:var(--slate);background:var(--tint);border-color:transparent}
+.cb{flex:1;min-height:0}
+.cf{padding:10px 20px 14px;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--slate)}
+
+/* trending */
+.cols{display:grid;grid-template-columns:1fr 52px 70px 56px;gap:8px;padding:6px 20px;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--slate)}
+.kw{list-style:none;margin:0;padding:0 20px}
+.kw li{display:grid;grid-template-columns:1fr 52px 70px 56px;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-2);font-size:13px}
+.kw li:last-child{border-bottom:0}
+.kw li .t{min-width:0;line-height:1.3;overflow-wrap:anywhere}
+.kw li .t .kwt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}   /* break-ui: a 130-character search clamps to two lines */
+.kw li .t small{display:block;font-size:11px;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kw li .s{font-size:12px;color:var(--ink-2)}
+.kw li .s.weak{color:var(--green)}
+.kw li .s.strong{color:var(--slate)}
+.kw li .st2{justify-self:end}
+.kw a{text-decoration:none}
+.kw a:hover{text-decoration:underline}
+
+/* feed */
+.feed{list-style:none;margin:0;padding:4px 20px 8px;max-height:430px;overflow:auto}
+.feed li{position:relative;padding:0 0 14px 26px;font-size:13px;line-height:1.4}
+.feed li::before{content:"";position:absolute;left:7px;top:18px;bottom:-2px;width:1px;background:var(--line)}
+.feed li:last-child::before{display:none}
+.feed li i{position:absolute;left:0;top:3px;width:15px;height:15px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center}
+.feed li.s4 i,.feed li.s3 i{background:var(--green);border-color:var(--green)}
+.feed li.s4 i svg,.feed li.s3 i svg{width:9px;height:9px}
+.feed li.s2 i{background:var(--ink);border-color:var(--ink)}
+.feed li small{display:block;font-size:11px;color:var(--slate);margin-top:1px}
+.feed li mark{background:#FFF1A8;color:inherit;padding:0 2px;border-radius:2px}
+.feed .empty{padding:28px 0;color:var(--slate);font-size:13px;text-align:center}.feed .empty::before{display:none}
+
+/* page builder */
+.pb{padding:0 20px}
+.url{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--slate);margin:4px 0 10px;min-width:0}
+.url span{display:inline-flex;gap:3px}
+.url span i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.url code{font-family:inherit;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.shot{border-radius:10px;overflow:hidden;background:#111;color:#fff;position:relative;aspect-ratio:16/9.6;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.shot .nav{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;font-size:10px;opacity:.9}
+.shot .nav b{font-weight:600}
+.shot .nav span{border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 8px}
+.shot .tag{position:relative;font-size:10px;opacity:.85;margin-bottom:6px}
+.shot h3{position:relative;margin:0;font-family:var(--wo-serif);font-weight:400;font-size:21px;line-height:1.15;letter-spacing:-.01em}
+.shot p{position:relative;margin:6px 0 0;font-size:11.5px;line-height:1.4;opacity:.85;max-width:38ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.shot .cta{position:relative;margin-top:10px;display:flex;gap:6px}
+.shot .cta span{font-size:10px;padding:5px 9px;border-radius:6px;background:#fff;color:#111;font-weight:600}
+.shot .cta span+span{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+.checks{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.checks .chip svg{width:11px;height:11px}
+.checks .chip.x{background:var(--red-soft);border-color:transparent;color:var(--red)}
+.pos{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 4px;padding:12px 0 0;border-top:1px solid var(--line-2);font-size:12.5px}
+.pos{min-width:0}.pos>div{min-width:0}.pos b{display:block;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pos small{color:var(--slate)}
+.pos .n{font-family:var(--wo-serif);font-size:22px;color:var(--slate)}
+.pb .open{display:inline-flex;align-items:center;gap:6px;margin:10px 0 16px;font-size:12.5px;text-decoration:none;color:var(--ink-2)}
+.pb .open:hover{text-decoration:underline}
+.pb .open svg{width:12px;height:12px}
+
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 20px 18px;box-shadow:0 1px 2px rgba(23,24,28,.03)}
+.tile .l{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--slate)}
+.tile .n{font-family:var(--wo-serif);font-size:44px;line-height:1;margin-top:10px;letter-spacing:-.01em;color:var(--green)}
+.tile .n.off{color:var(--slate);font-size:22px;margin-top:18px}
+.tile .s{font-size:12px;color:var(--slate);margin-top:6px}
+.foot{margin:14px 2px 0;font-size:11.5px;color:var(--slate)}
+.err{padding:28px 20px;color:var(--slate);font-size:14px}
+
+
+/* live builder (H) */
+.bld{justify-self:end;height:26px;padding:0 10px;border-radius:7px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:500 11.5px/1 inherit;font-family:inherit;cursor:pointer;transition:border-color 120ms ease,color 120ms ease,transform 160ms var(--e-out)}
+.bld:hover{border-color:var(--green);color:var(--green)}
+.bld:active{transform:scale(.96)}
+.kw li{transition:background 160ms ease}
+.kw li.on{background:var(--green-soft);margin:0 -20px;padding-left:20px;padding-right:20px}
+.go{display:flex;width:100%;justify-content:center;align-items:center;height:40px;border:0;border-radius:9px;background:var(--green);color:#fff;font:600 13.5px/1 inherit;font-family:inherit;cursor:pointer;margin:2px 0 12px}
+.go{transition:transform 160ms var(--e-out),opacity 160ms ease}
+.go:not(:disabled):active{transform:scale(.98)}
+.go:disabled{opacity:.55;cursor:default}
+.trk{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.trk li{font-size:10.5px;color:var(--slate);text-align:center;line-height:1.2}
+.trk li{transition:color 180ms ease}
+.trk li i{display:grid;place-items:center;width:20px;height:20px;margin:0 auto 4px;border-radius:50%;border:1px solid var(--line);background:var(--paper);font-style:normal;font-size:10px;transition:background 180ms ease,border-color 180ms ease,color 180ms ease,transform 200ms var(--e-out)}
+.trk li.now i{border-color:var(--green);color:var(--green);transform:scale(1.1)}
+.trk li.ok{color:var(--ink)} .trk li.ok i{background:var(--green);border-color:var(--green);color:#fff;transform:none}
+.trk li i svg{width:10px;height:10px;animation:tick 240ms var(--e-out) both}
+.doc{border:1px solid var(--line);border-radius:10px;padding:14px;min-height:260px;background:var(--paper);font-size:12px;line-height:1.45}
+.doc>*{animation:rise 260ms var(--e-out) both}
+@keyframes rise{from{opacity:0;transform:translateY(6px);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}
+.doc h3,.doc p{overflow-wrap:anywhere}
+.doc .real{display:block;width:100%;height:360px;border:0;border-radius:8px;background:#fff}
+.doc .lab{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin:10px 0 3px}
+.doc h3{margin:0;font-family:var(--wo-serif);font-weight:400;font-size:19px;line-height:1.15}
+.doc p{margin:0;color:var(--ink-2)}
+.doc .bar{height:7px;border-radius:4px;background:var(--line-2);margin:5px 0}
+.doc img{display:block;width:100%;height:110px;object-fit:cover;border-radius:8px}
+.doc .call{display:inline-block;margin-top:6px;padding:7px 12px;border-radius:7px;background:var(--ink);color:#fff;font-weight:600;font-size:11.5px}
+.prev{background:var(--amber-soft);color:var(--amber)}
+.ol-hd{display:flex;gap:8px;align-items:flex-start;padding:0 0 10px;border-bottom:1px solid var(--line-2);margin-bottom:4px}.ol-hd p{font-size:12px;color:var(--ink-2)}
+.ol{margin:2px 0 0;padding-left:18px}.ol li{margin:0 0 5px}.ol li b{font-weight:500}.ol li small{display:block;font-size:11px;color:var(--slate)}
+.ol-g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}.ol-g b{display:block;font-weight:500;font-size:13px}.ol-g small{display:block;font-size:11px;color:var(--slate)}.ol-g img{height:80px}
+/* build / open / push */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}
+.acts button,.acts a{display:flex;align-items:center;justify-content:center;gap:6px;height:36px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:600 12.5px/1 inherit;font-family:inherit;cursor:pointer;text-decoration:none;transition:transform 160ms var(--e-out),border-color 120ms ease,background 120ms ease,opacity 160ms ease}
+.acts button:not(:disabled):hover,.acts a:hover{border-color:var(--ink)}
+.acts .p:hover{background:#2A2C33}
+.acts button:not(:disabled):active,.acts a:active{transform:scale(.97)}
+.acts button:disabled{opacity:.45;cursor:default}
+.acts .p{background:var(--ink);color:#fff;border-color:var(--ink)}
+.acts svg{width:12px;height:12px}
+.live{display:inline-flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-2);margin:6px 0 0}
+.live svg{width:12px;height:12px;flex:none}
+.live{white-space:nowrap}
+.push{border:1px solid var(--line);border-radius:10px;padding:14px;margin:10px 0 14px;background:var(--paper);font-size:12.5px;box-shadow:0 1px 2px rgba(23,24,28,.03),0 8px 24px -16px rgba(23,24,28,.12);transform-origin:50% 0;transition:opacity 200ms var(--e-out),transform 200ms var(--e-out)}
+@starting-style{.push{opacity:0;transform:translateY(-4px) scale(.98)}}
+.push h4{margin:0 0 8px;font-size:13.5px}
+.push dl{display:grid;grid-template-columns:70px 1fr;gap:4px 10px;margin:0 0 10px}
+.push dt{color:var(--slate)} .push dd{margin:0;word-break:break-word}
+.push ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:6px}
+.push li{padding:8px 10px;border-radius:7px;background:var(--line-2)}
+.push li.bad{background:var(--red-soft);color:var(--red)} .push li.good{background:var(--green-soft);color:var(--green)}
+.push li small{display:block;color:var(--ink-2);margin-top:3px}
+.push .row{display:flex;gap:8px}
+.push .row button{flex:1;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font:600 12.5px/1 inherit;font-family:inherit;cursor:pointer;transition:transform 160ms var(--e-out),border-color 120ms ease}
+.push .row button:not(:disabled):hover{border-color:var(--ink)}
+.push .row button:not(:disabled):active{transform:scale(.97)}
+.push .row button:disabled{opacity:.6;cursor:default}
+.push .row .p{background:var(--green);border-color:var(--green);color:#fff}
+.push .fine{font-size:11px;color:var(--slate);margin:8px 0 0}
+.chip.wait{background:var(--amber-soft);color:var(--amber)}
+.chip.q{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+.note{margin:8px 0 0;font-size:12px;color:var(--slate);line-height:1.45}
+.note.bad{color:var(--red)}
+@media (prefers-reduced-motion:reduce){.doc>*,.st.done i svg,.trk li i svg{animation:none}.trk li i,.push,.acts button,.acts a,.bld,.go,.push .row button{transition:none;transform:none}}
+@media (max-width:1099px){ .grid{grid-template-columns:1fr} .card{min-height:0} }
+@media (max-width:359px){ .steps{grid-template-columns:repeat(5,1fr);padding:0} .st b{font-size:10px} .trk{grid-template-columns:repeat(3,1fr);gap:6px} .acts{grid-template-columns:1fr} .cols{display:none} .kw li{grid-template-columns:auto 1fr auto;gap:4px 8px} .kw li .t{grid-column:1/-1} .kw li .st2{justify-self:start} .url{display:none} }
+@media (max-width:719px){
+  .wrap{padding:16px 14px 130px}
+  .top{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:14px}
+  .top h1{font-size:28px}
+  .steps{grid-template-columns:repeat(5,1fr);padding:0;margin-bottom:16px}
+  .steps::before{left:10%;right:10%}
+  .st{padding-top:36px;font-size:11px}
+  .st span{display:none}
+  .st i{width:26px;height:26px;font-size:11px}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .card{min-height:0}
+  .feed{max-height:360px}
+  .cols,.kw li{grid-template-columns:1fr 48px 68px 54px;gap:6px}
+  .tiles{grid-template-columns:1fr;gap:12px}
+  .tile .n{font-size:36px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top">
+    <div><p class="k">Growth</p><h1>Nimbus <b>SEO</b></h1></div>
+    <div class="r" id="topr"></div>
+  </div>
+  <div class="steps" id="steps" aria-label="How Nimbus works"></div>
+  <div class="grid" id="grid">
+    <section class="card" aria-labelledby="h-kw">
+      <div class="ch"><div><h2 id="h-kw">Trending near you</h2><p id="kwsub">Local roofing searches Nimbus tracks</p></div><span class="chip g" id="kwpick"></span></div>
+      <div class="cols" aria-hidden="true"><span>Search</span><span>Page 1</span><span>Status</span><span></span></div>
+      <ul class="kw cb" id="kw"></ul>
+      <div class="cf"><span id="kwvol"></span><span id="kwn"></span></div>
+    </section>
+    <section class="card pbc" aria-labelledby="h-pb">
+      <div class="ch"><div><h2 id="h-pb">Page builder</h2><p>Plan the page, then Build has Nimbus write it with the SEO skill</p></div><span class="chip" id="pbchip"></span></div>
+      <div class="pb cb" id="pb"></div>
+    </section>
+  </div>
+  <div class="tiles" id="tiles"></div>
+  <p class="foot" id="foot"></p>
+</main>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const day=iso=>{ if(!iso) return ''; const [y,m,d]=String(iso).slice(0,10).split('-').map(Number); return y?`${MON[m-1]} ${d}`:''; };
+  const dayY=iso=>{ if(!iso) return ''; const [y,m,d]=String(iso).slice(0,10).split('-').map(Number); return y?`${MON[m-1]} ${d}, ${y}`:''; };
+  const TICK='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5 5 9l4.5-6"/></svg>';
+  const CROSS='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6"/></svg>';
+  const OUT='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4.5 2H2v8h8V7.5M7 2h3v3M10 2 5.5 6.5"/></svg>';
+  const STATUS={live:['Live','g'],drafted:['Drafted','a'],queued:['Queued',''],parked:['Parked','m']};
+  const CHECK={title:'Title tag',meta:'Meta description',h1:'H1 match',schema:'Local schema',links:'Internal links',mobile:'Mobile',canonical:'Canonical'};
+
+  function paint(d){
+    const s=d.stats;
+    $('topr').innerHTML=`<span>Last publish <b>${dayY(s.last_published)}</b></span><span>${s.pages_built} pages live</span><span class="ava" aria-hidden="true">W</span>`;
+    $('steps').innerHTML=d.steps.map(x=>`<div class="st ${x.state==='done'?'done':'wait'}"><i>${x.state==='done'?TICK:x.n}</i><b>${esc(x.name)}</b><span>${x.state==='done'&&x.when?day(x.when):x.state==='not_connected'?'not connected yet':esc(x.sub)}</span></div>`).join('');
+
+    // trending: the keyword queue. No volume column is filled anywhere, so there is no volume, trend or % here.
+    const live=d.keywords.filter(k=>k.status==='live').length;
+    $('kwpick').textContent=`${live} live`;
+    $('kwsub').textContent=`${d.keywords.length} local roofing searches Nimbus tracks`;
+    $('kw').innerHTML=d.keywords.map(k=>{
+      const [lab,cls]=STATUS[k.status]||['',''];
+      const serp=k.serp==='weak-serp'?'<span class="s weak">Weak</span>':k.serp==='strong-serp'?'<span class="s strong">Strong</span>':'<span class="s"></span>';
+      const t=k.url?`<a href="${esc(k.url)}" target="_blank" rel="noopener">${esc(k.keyword)}</a>`:esc(k.keyword);
+      return `<li class="${k.status==='live'?'pick':''}"><div class="t"><span class="kwt">${t}</span><small>${esc(k.city)} · ${esc(k.service)}${k.published?' · live '+day(k.published):k.priority?' · priority '+k.priority:''}</small></div>${serp}<span class="chip st2 ${cls}">${lab}</span><button class="bld" type="button" data-slug="${esc(k.slug)}" data-kw="${esc(k.keyword)}" aria-label="Build a page for ${esc(k.keyword)}">Build</button></li>`;
+    }).join('');
+    $('kwvol').textContent=d.volume_source?'':'Search volume not connected';
+    $('kwvol').title=d.volume_note||'';
+    $('kwn').textContent=`Page 1 = how strong the sites ranking today are`;
+
+    // page builder: a live build of one search's page, from real draft text when there is one
+    const host=d.site.replace(/^https?:\/\//,'').replace(/\/$/,'');
+    const all=[d.preview].concat(d.pages||[]).filter(Boolean);
+    const STEPS=['Pick topic','Write','Images','SEO checks','Build page','Ready'];
+    let timer=null;
+    function build(kw){
+      clearTimeout(timer);
+      const slug=kw?kw.slug:(d.preview&&d.preview.slug);
+      const pg=all.find(x=>x.slug===slug)||(!kw?d.preview:null);
+      const name=kw?kw.keyword:(pg&&(pg.keyword||pg.title))||'';
+      document.querySelectorAll('#kw li').forEach(li=>li.classList.toggle('on',!!kw&&li.querySelector('.bld').dataset.slug===kw.slug));
+      const isPrev=!pg||(kw&&kw.status!=='live');
+      $('pbchip').textContent=isPrev?'Quick outline':'Rebuilt from the draft';
+      $('pbchip').className='chip '+(isPrev?'prev':'g');
+      const path=pg?pg.path:('services/'+(slug||'new-page')+'.html');
+      const rname=(window.activeRoofer&&(()=>{try{return activeRoofer().name}catch(e){return ''}})())||'Your site';
+      const city=pg?(pg.city||(kw&&kw.city)||''):(kw?kw.city:'');
+      const svc=kw?kw.service:'';
+      const pslug=slug||'new-page';
+      const liveUrl=(kw&&kw.status==='live'&&kw.url)||(pg&&pg.url)||'';
+      let roofer=null; try{ roofer=activeRoofer(); }catch(e){}
+      /* Quick outline (loop 27, Jack: the old preview was "super brief"). It plans what the /service SKILL writes: an
+         answer-first block under the H1, question-shaped H2s, LocalBusiness + Service + BreadcrumbList + FAQPage schema,
+         unique images that resolve, a tel: call button. Nothing here is the page itself. */
+      const where=city||'your city', what=(svc||(pg&&pg.service)||String(name||'').split(' ').filter(w=>w&&['tx','texas','near','me',String(city||'').toLowerCase()].indexOf(w.toLowerCase())<0).join(' ')||'this service').toLowerCase();
+      const title=pg?(pg.h1||pg.title):(svc&&city?svc+' in '+city+', TX':name);
+      const SECS=[['Answer-first block','40 to 60 words under the H1 that answer the search directly'],
+        ['Why '+what+' in '+where,'Local weather, roof types and codes for '+where],
+        ['How do you know you need '+what+'?','Signs to look for, question-shaped H2'],
+        ['What does '+what+' cost in '+where+'?','Price drivers in plain words, question-shaped H2'],
+        ['Hail and insurance claims','How the claim works, what the roofer handles'],
+        ['How the job goes, step by step','Inspection to cleanup'],
+        ['Areas served near '+where,'Nearby cities, internal links to their pages'],
+        ['Frequently asked questions','From the People Also Ask results for the search']];
+      const blocks=[];
+      blocks.push([0,`<div class="ol-hd"><span class="chip prev">Quick outline</span><p>Quick outline. Press Build to have Nimbus write the full page with the SEO skill.</p></div><div class="lab">Search</div><p><b>${esc(name)}</b>${city?' · '+esc(city):''}</p>`]);
+      blocks.push([1,`<div class="lab">Page title (H1)</div><h3>${esc(title)}</h3>`]);
+      blocks.push([1,`<div class="lab">Sections planned (${SECS.length})</div><ol class="ol">${SECS.map(x=>`<li><b>${esc(x[0])}</b><small>${esc(x[1])}</small></li>`).join('')}</ol>`]);
+      blocks.push([1,`<div class="ol-g"><div><span class="lab">Word count target</span><b>1,200 to 1,600</b><small>body copy, no filler</small></div><div><span class="lab">FAQ</span><b>6 questions</b><small>each answer matches its schema</small></div></div>`]);
+      blocks.push([2,`<div class="ol-g"><div><span class="lab">Images</span><b>4 planned</b><small>hero, roof detail, crew at work, a ${esc(where)} home. No repeats, every one checked to load</small></div>${pg&&pg.hero?`<img src="${esc(pg.hero)}" alt="" loading="lazy">`:''}</div>`]);
+      blocks.push([3,`<div class="lab">Schema</div><div class="checks" style="margin:0"><span class="chip m">LocalBusiness</span><span class="chip m">Service</span><span class="chip m">BreadcrumbList</span><span class="chip m">FAQPage</span></div>`]);
+      if(pg&&pg.checks){ const chips=Object.keys(CHECK).map(k=>{ const c=pg.checks[k]; if(!c) return ''; return `<span class="chip ${c.ok?'g':'x'}" title="${esc(c.v)}">${c.ok?TICK:CROSS}${CHECK[k]}</span>`; }).join(''); blocks.push([3,`<div class="lab">SEO checks on the current draft</div><div class="checks" style="margin:0">${chips}</div>`]); }
+      else blocks.push([3,`<div class="lab">SEO checks</div><p>Title, meta, H1, schema, links, mobile and canonical are checked on the full page once it is written.</p>`]);
+      blocks.push([4,`<div class="lab">Call button</div><span class="call">Call ${esc(rname)}</span>`]);
+      $('pb').innerHTML=`
+        <ol class="trk" id="trk">${STEPS.map((x,i)=>`<li><i>${i+1}</i>${x}</li>`).join('')}</ol>
+        <div class="url"><span><i></i><i></i><i></i></span><code>${esc(host)}/<b>${esc(path)}</b></code></div>
+        <div class="doc" id="doc" aria-live="polite"></div>
+        <div class="pos"><div><b>${esc(name)}</b><small>Google position</small></div><span class="n" title="${esc(d.rank_note||'')}">${d.rank_source?'':'not tracked'}</span></div>
+        <div class="acts"><button type="button" id="b-build" class="p">Build</button><button type="button" id="b-open" disabled>Open in browser</button><button type="button" id="b-push" disabled>Push</button></div>
+        <p class="note" id="bnote" hidden></p>
+        ${liveUrl?`<a class="live" href="${esc(liveUrl)}" target="_blank" rel="noopener">${OUT}Open live page</a>`:''}
+        <div id="pushp"></div>`;
+      /* Build (Jack 10-30): the real page comes from the SEO skill (/service, /blog), never from this page's filler. Build posts a
+         request to scripts/serve.py (POST /api/seo-build -> tour/c11-seo-agent/build-queue.json); Claude in the lead chat
+         watches that file, runs the skill and writes built/<slug>.html; this page polls for it and swaps the quick preview for
+         the real page. The in-page walk-through stays as the "Quick preview" until then. */
+      const BUILT='built/'+encodeURIComponent(pslug)+'.html';
+      let pollT=null, realUrl=null;
+      const note=(t,bad)=>{ const n=$('bnote'); if(!n) return; n.hidden=!t; n.textContent=t||''; n.classList.toggle('bad',!!bad); };
+      function showReal(){
+        realUrl=BUILT+'?v='+Date.now();
+        $('pbchip').textContent='Built with the SEO skill'; $('pbchip').className='chip g';
+        $('doc').innerHTML=`<div><iframe class="real" src="${esc(realUrl)}" title="The built page" loading="lazy"></iframe></div>`;
+        const ob=$('b-open'); ob.disabled=false; ob.onclick=()=>window.open(BUILT,'_blank','noopener');
+        $('b-push').disabled=false;
+        const bb=$('b-build'); bb.disabled=false; bb.textContent='Build again';
+        note('This is the real page Nimbus built with the SEO skill. Open in browser shows it full size.');
+      }
+      function pollBuilt(){
+        clearTimeout(pollT);
+        fetch('/api/seo-built?slug='+encodeURIComponent(pslug),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{
+          if(j&&j.built){ showReal(); return; }
+          pollT=setTimeout(pollBuilt,5000);
+        }).catch(()=>{ pollT=setTimeout(pollBuilt,8000); });
+      }
+      function queueBuild(){
+        const bb=$('b-build'); bb.disabled=true; bb.textContent='Queued';
+        const body={slug:pslug,keyword:name,city:city||'',service:svc||(pg&&pg.service)||'',client:(roofer&&roofer.key)||(roofer&&roofer.name)||'',requested_at:new Date().toISOString()};
+        fetch('/api/seo-build',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>{
+          if(!r.ok) throw new Error(String(r.status));
+          $('pbchip').textContent='Queued for Nimbus'; $('pbchip').className='chip q';
+          note('Queued for Nimbus to build with the SEO skill. The real page replaces this quick outline when it lands (usually a few minutes).');
+          try{ localStorage.setItem('seo-queued:'+pslug,body.requested_at); }catch(e){}
+          pollBuilt();
+        }).catch(()=>{
+          bb.disabled=false; bb.textContent='Build';
+          note('The build hand-off is not running on this server (POST /api/seo-build answered with an error). Restart scripts/serve.py from this worktree and try again. What you see is the quick outline only.',true);
+        });
+      }
+      $('b-build').onclick=queueBuild;
+      $('b-build').disabled=true;
+      /* already built on disk, or already queued on this device: pick up where it left off */
+      fetch('/api/seo-built?slug='+encodeURIComponent(pslug),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{
+        if(j&&j.built){ clearTimeout(timer); showReal(); return; }
+        let q=null; try{ q=localStorage.getItem('seo-queued:'+pslug); }catch(e){}
+        if(q&&j){ $('pbchip').textContent='Queued for Nimbus'; $('pbchip').className='chip q'; note('Queued for Nimbus to build with the SEO skill. This is the quick outline until the real page lands.'); pollBuilt(); }
+      }).catch(()=>{});
+      const trk=[...$('trk').children], doc=$('doc');
+      let i=0;
+      const mark=st=>trk.forEach((li,n)=>{ li.className=n<st?'ok':n===st?'now':''; li.querySelector('i').innerHTML=n<st?TICK:n+1; });
+      mark(0);
+      function finish(){
+        try{ localStorage.setItem('seo-preview:'+pslug, SEOPreview.build(d,pslug,roofer)); }catch(e){}
+        const ob=$('b-open'), pb=$('b-push'); ob.disabled=false; pb.disabled=false;
+        ob.onclick=()=>window.open(realUrl?BUILT:'preview.html?slug='+encodeURIComponent(pslug),'_blank','noopener');
+        pb.onclick=()=>pushPanel();
+      }
+      function pushPanel(){
+        const brand=(roofer&&roofer.name)||'this client';
+        const c=SEOPreview.checks(pg,kw||SEOPreview.find(d,pslug).kw,brand);
+        const dataChecks=pg&&pg.checks?Object.keys(CHECK).filter(k=>k!=='title'&&k!=='h1'&&pg.checks[k]).map(k=>`<li class="${pg.checks[k].ok?'good':'bad'}">${pg.checks[k].ok?'Passed':'Failed'}: ${CHECK[k]} (${esc(pg.checks[k].v)})</li>`).join(''):'<li>Other checks run on the real page once it is drafted.</li>';
+        const req=`Publish SEO page ${pslug} for ${brand}`;
+        $('pushp').innerHTML=`<div class="push" role="dialog" aria-label="Confirm publish"><h4>What would go live</h4>
+          <dl><dt>Address</dt><dd>${esc(host)}/${esc(path)}</dd><dt>Slug</dt><dd>${esc(pslug)}</dd><dt>Title</dt><dd>${esc(c.title)}</dd><dt>H1</dt><dd>${esc(c.h1)}</dd></dl>
+          <ul>
+            <li class="${c.titleOk?'good':'bad'}">${c.titleOk?'Passed':'Failed'}: title is ${c.titleLen} characters${c.titleOk?'':' (over 60, Google cuts it off)'}${c.titleOk?'':`<small>Suggested title (${c.fixTitle.length}): ${esc(c.fixTitle)}</small>`}</li>
+            <li class="${c.h1Ok?'good':'bad'}">${c.h1Ok?'Passed':'Failed'}: H1 ${c.h1Ok?'has the search words':'is missing "'+esc(c.missing.join(', '))+'" from the search'}${c.h1Ok?'':`<small>Suggested H1: ${esc(c.fixH1)}</small>`}</li>
+            ${dataChecks}
+          </ul>
+          <div class="row"><button type="button" id="b-cancel">Cancel</button><button type="button" class="p" id="b-req">Request publish</button></div>
+          <p class="fine">Nothing goes live from here. Request publish copies "${esc(req)}" so you can send it; Claude publishes the page after Jack approves.</p></div>`;
+        $('b-cancel').onclick=()=>{ $('pushp').innerHTML=''; };
+        $('b-req').onclick=()=>{
+          const done=()=>{ try{ localStorage.setItem('seo-push:'+pslug,new Date().toISOString()); }catch(e){} $('b-req').textContent='Copied. Waiting to publish'; $('b-req').disabled=true; markWaiting(); };
+          (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(req):Promise.reject()).then(done,()=>{ const t=document.createElement('textarea'); t.value=req; document.body.appendChild(t); t.select(); try{document.execCommand('copy')}catch(e){} t.remove(); done(); });
+        };
+      }
+      (function next(){
+        if(i<blocks.length){ const [st,h]=blocks[i++]; mark(st); doc.insertAdjacentHTML('beforeend','<div>'+h+'</div>'); timer=setTimeout(next,650); }
+        else { mark(6); if(!realUrl){ const bb=$('b-build'); if(bb.textContent!=='Queued'){ bb.disabled=false; bb.textContent='Build'; } $('pbchip').textContent=$('pbchip').classList.contains('q')?'Queued for Nimbus':'Quick outline'; } finish(); }
+      })();
+    }
+    $('kw').addEventListener('click',e=>{ const btn=e.target.closest('.bld'); if(!btn) return; build(d.keywords.find(k=>k.slug===btn.dataset.slug&&k.keyword===btn.dataset.kw)); });
+    function markWaiting(){ document.querySelectorAll('#kw .bld').forEach(b=>{ let w=null; try{ w=localStorage.getItem('seo-push:'+b.dataset.slug); }catch(e){} if(!w) return; const ch=b.parentNode.querySelector('.st2'); if(ch){ ch.textContent='Waiting to publish'; ch.className='chip st2 wait'; } }); }
+    markWaiting();
+    if(all.length) build(null); else $('pb').innerHTML='<p class="err">No page built yet.</p>';
+
+    // tiles
+    $('tiles').innerHTML=`
+      <div class="tile"><div class="l"><span>Pages built by Nimbus</span><span class="chip g">${s.service_pages} service · ${s.blog_posts} blog</span></div><div class="n">${s.pages_built}</div><div class="s">${s.checks_passed} of ${s.checks_total} on-page checks pass</div></div>
+      <div class="tile"><div class="l"><span>Searches tracked</span><span class="chip g">${s.live_keywords} with a live page</span></div><div class="n">${s.searches_tracked}</div><div class="s">From the keyword sheet; volume not connected</div></div>
+      <div class="tile"><div class="l"><span>Top 3 on Google</span><span class="chip m">not connected</span></div><div class="n off">Rank tracking not connected</div><div class="s">Connect Search Console to count the top 3 here</div></div>`;
+    $('foot').textContent=`Updated ${dayY(d.generated)} from the keyword sheet and the live site. Checks are computed from each page's HTML.`;
+  }
+  fetch('../lib/seo-agent.json',{cache:'no-cache'}).then(r=>{ if(!r.ok) throw 0; return r.json(); }).then(paint)
+    .catch(()=>{ $('grid').innerHTML='<p class="err">Nimbus SEO data did not load. Run scripts/seo_agent/build_seo_agent.py and refresh.</p>'; });
+  window.__ready=true;
+})();
+</script>
+<script src="../lib/rc-state.js"></script>
+<script src="../lib/brand.js"></script>
+<script src="preview-lib.js"></script>
+</body>
+</html>

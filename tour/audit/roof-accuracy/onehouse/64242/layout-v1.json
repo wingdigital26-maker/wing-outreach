@@ -1,0 +1,114 @@
+{
+ "image": "gtrace/64242/google.png",
+ "ft_per_px": 0.2,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     492.7,
+     225.1
+    ],
+    [
+     768.7,
+     359.6
+    ],
+    [
+     656.0,
+     590.6
+    ],
+    [
+     380.1,
+     456.1
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.899,
+    0.438
+   ],
+   "gable_ends": [],
+   "notes": "full-depth main hip along the house axis, ridge near the centre line, hipped both ends; NW face dark. Parallel diagonal bands and bright fascia lines inside the roof read as a 2-story section casting shadows on 1-story roofs around it"
+  },
+  {
+   "name": "front_left",
+   "rect_px": [
+    [
+     469.9,
+     271.8
+    ],
+    [
+     557.1,
+     314.3
+    ],
+    [
+     468.6,
+     495.9
+    ],
+    [
+     381.4,
+     453.4
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -0.438,
+    0.899
+   ],
+   "gable_ends": [],
+   "notes": "front (SE) cross hip on the W half, ridge perpendicular to main, big lit SE and SW faces; valleys run near 35 deg so its pitch likely differs from main"
+  },
+  {
+   "name": "cross_right",
+   "rect_px": [
+    [
+     642.8,
+     298.3
+    ],
+    [
+     746.2,
+     348.7
+    ],
+    [
+     631.3,
+     584.2
+    ],
+    [
+     528.0,
+     533.8
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -0.438,
+    0.899
+   ],
+   "gable_ends": [],
+   "notes": "cross hip through the E half from the NW eave to the SE eave, ridge perpendicular to main, hipped at both eaves; lit SE face, dark 45 deg band is a hip edge plus its shadow"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    537.5,
+    502.8
+   ],
+   [
+    645.4,
+    555.4
+   ],
+   [
+    630.5,
+    586.0
+   ],
+   [
+    522.6,
+    533.4
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "wood pergola/deck strip along the SE eave of the E half"
+ ],
+ "notes": "House rotated 26 deg. Full-depth main hip plus a front-left cross hip and a right cross hip. Two long parallel diagonal lines cross the middle that equal-pitch hips do not explain; LiDAR should set pitches. The back-left may be a 2-story block with its own eave (bright fascia lines inside the roof). Confidence medium-low."
+}

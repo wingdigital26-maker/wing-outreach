@@ -1,0 +1,13 @@
+{
+ "row": "9441",
+ "mode": "hybrid",
+ "shown": "hybrid",
+ "new_pass": true,
+ "new_why": [
+  "passed with line_fit_ft 1.23 (borderline)"
+ ],
+ "old_pass": false,
+ "old_why": [
+  "lines 1.32 ft"
+ ]
+}

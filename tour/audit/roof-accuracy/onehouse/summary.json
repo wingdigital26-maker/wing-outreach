@@ -1,0 +1,1651 @@
+{
+ "58566": {
+  "confirmed": 11,
+  "photo_only": 2,
+  "photo_only_sqft": 59,
+  "fit": 0.955,
+  "squares": 31.1,
+  "permit": 30.0,
+  "ratio": 1.038,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 7,
+  "status": "pass",
+  "why": [],
+  "seconds": 31.8
+ },
+ "57928": {
+  "confirmed": 16,
+  "photo_only": 4,
+  "photo_only_sqft": 118,
+  "fit": 0.885,
+  "squares": 29.1,
+  "permit": 24.0,
+  "ratio": 1.213,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 4,
+  "status": "pass",
+  "why": [],
+  "seconds": 15.9
+ },
+ "32855": {
+  "confirmed": 9,
+  "photo_only": 4,
+  "photo_only_sqft": 429,
+  "fit": 0.886,
+  "squares": 39.8,
+  "permit": 48.0,
+  "ratio": 0.83,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 9,
+  "status": "needs work",
+  "why": [
+   "16% of the roof photo-only (shade / trees / not planar)",
+   "squares 0.83 x permit"
+  ],
+  "seconds": 20.7
+ },
+ "31438": {
+  "confirmed": 13,
+  "photo_only": 17,
+  "photo_only_sqft": 646,
+  "fit": 0.98,
+  "squares": 32.9,
+  "permit": 33.0,
+  "ratio": 0.998,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 6,
+  "status": "pass",
+  "why": [],
+  "seconds": 2338.9
+ },
+ "33588": {
+  "confirmed": 7,
+  "photo_only": 14,
+  "photo_only_sqft": 1611,
+  "fit": 0.634,
+  "squares": 50.7,
+  "permit": 43.0,
+  "ratio": 1.18,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 6,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 63%",
+   "49% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.18 x permit"
+  ],
+  "seconds": 16.1
+ },
+ "34751": {
+  "status": "failed",
+  "why": [
+   "AttributeError(\"'MultiPolygon' object has no attribute 'exterior'\")"
+  ],
+  "seconds": 3.9
+ },
+ "35469": {
+  "confirmed": 17,
+  "photo_only": 24,
+  "photo_only_sqft": 3139,
+  "fit": 0.535,
+  "squares": 83.3,
+  "permit": 84.0,
+  "ratio": 0.992,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 15,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 53%",
+   "56% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 31.2
+ },
+ "35845": {
+  "confirmed": 6,
+  "photo_only": 5,
+  "photo_only_sqft": 770,
+  "fit": 0.5,
+  "squares": 31.3,
+  "permit": 20.0,
+  "ratio": 1.563,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 5,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 50%",
+   "37% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 16.7
+ },
+ "35864": {
+  "confirmed": 10,
+  "photo_only": 9,
+  "photo_only_sqft": 286,
+  "fit": 0.975,
+  "squares": 34.5,
+  "permit": 28.0,
+  "ratio": 1.233,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 4,
+  "status": "pass",
+  "why": [],
+  "seconds": 34.1
+ },
+ "36360": {
+  "confirmed": 7,
+  "photo_only": 11,
+  "photo_only_sqft": 3999,
+  "fit": 0.274,
+  "squares": 92.3,
+  "permit": 80.0,
+  "ratio": 1.154,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 5,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 27%",
+   "76% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 26.5
+ },
+ "36498": {
+  "confirmed": 10,
+  "photo_only": 15,
+  "photo_only_sqft": 1590,
+  "fit": 0.592,
+  "squares": 57.5,
+  "permit": 35.0,
+  "ratio": 1.644,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 10,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 59%",
+   "51% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 17.7
+ },
+ "36800": {
+  "confirmed": 22,
+  "photo_only": 18,
+  "photo_only_sqft": 646,
+  "fit": 0.813,
+  "squares": 59.5,
+  "permit": 37.0,
+  "ratio": 1.608,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 13,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 81% of the roof within 1 ft of the drawn faces"
+  ],
+  "seconds": 199.8
+ },
+ "36953": {
+  "confirmed": 7,
+  "photo_only": 2,
+  "photo_only_sqft": 311,
+  "fit": 0.928,
+  "squares": 39.5,
+  "permit": 40.0,
+  "ratio": 0.988,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 7,
+  "status": "pass",
+  "why": [],
+  "seconds": 17.2
+ },
+ "39730": {
+  "confirmed": 6,
+  "photo_only": 0,
+  "photo_only_sqft": 0,
+  "fit": 0.967,
+  "squares": 35.0,
+  "permit": 37.0,
+  "ratio": 0.946,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 6,
+  "status": "pass",
+  "why": [],
+  "seconds": 13.2
+ },
+ "43959": {
+  "status": "failed",
+  "why": [
+   "AttributeError(\"'MultiPolygon' object has no attribute 'exterior'\")"
+  ],
+  "seconds": 1.9
+ },
+ "46066": {
+  "confirmed": 10,
+  "photo_only": 2,
+  "photo_only_sqft": 279,
+  "fit": 0.64,
+  "squares": 42.1,
+  "permit": 37.0,
+  "ratio": 1.137,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 6,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 64%",
+   "11% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.14 x permit"
+  ],
+  "seconds": 15.1
+ },
+ "46079": {
+  "confirmed": 13,
+  "photo_only": 10,
+  "photo_only_sqft": 707,
+  "fit": 0.651,
+  "squares": 37.9,
+  "permit": 43.0,
+  "ratio": 0.882,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 8,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 65%",
+   "30% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 10.4
+ },
+ "46081": {
+  "confirmed": 7,
+  "photo_only": 12,
+  "photo_only_sqft": 888,
+  "fit": 0.932,
+  "squares": 38.4,
+  "permit": 37.0,
+  "ratio": 1.038,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 6,
+  "status": "needs work",
+  "why": [
+   "31% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 10.4
+ },
+ "46083": {
+  "status": "failed",
+  "why": [
+   "AttributeError(\"'MultiPolygon' object has no attribute 'exterior'\")"
+  ],
+  "seconds": 1.7
+ },
+ "48582": {
+  "status": "failed",
+  "why": [
+   "AttributeError(\"'MultiPolygon' object has no attribute 'exterior'\")"
+  ],
+  "seconds": 2.9
+ },
+ "48880": {
+  "confirmed": 11,
+  "photo_only": 10,
+  "photo_only_sqft": 1134,
+  "fit": 0.471,
+  "squares": 32.3,
+  "permit": 26.0,
+  "ratio": 1.243,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 47%",
+   "46% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.24 x permit"
+  ],
+  "seconds": 9.4
+ },
+ "48888": {
+  "confirmed": 14,
+  "photo_only": 6,
+  "photo_only_sqft": 642,
+  "fit": 0.9,
+  "squares": 36.3,
+  "permit": 25.0,
+  "ratio": 1.454,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 13,
+  "status": "needs work",
+  "why": [
+   "24% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.45 x permit"
+  ],
+  "seconds": 11.7
+ },
+ "53909": {
+  "confirmed": 8,
+  "photo_only": 7,
+  "photo_only_sqft": 1396,
+  "fit": 0.207,
+  "squares": 48.6,
+  "permit": 45.0,
+  "ratio": 1.079,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 4,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 21%",
+   "32% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.08 x permit"
+  ],
+  "seconds": 18.9
+ },
+ "55033": {
+  "confirmed": 7,
+  "photo_only": 5,
+  "photo_only_sqft": 268,
+  "fit": 0.878,
+  "squares": 25.9,
+  "permit": 35.0,
+  "ratio": 0.74,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "15% of the roof photo-only (shade / trees / not planar)",
+   "squares 0.74 x permit"
+  ],
+  "seconds": 9.7
+ },
+ "55224": {
+  "confirmed": 17,
+  "photo_only": 2,
+  "photo_only_sqft": 42,
+  "fit": 0.966,
+  "squares": 32.0,
+  "permit": 34.0,
+  "ratio": 0.942,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 17,
+  "status": "pass",
+  "why": [],
+  "seconds": 17.4
+ },
+ "55669": {
+  "confirmed": 12,
+  "photo_only": 4,
+  "photo_only_sqft": 184,
+  "fit": 0.96,
+  "squares": 41.0,
+  "permit": 42.0,
+  "ratio": 0.976,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 11,
+  "status": "pass",
+  "why": [],
+  "seconds": 21.5
+ },
+ "57216": {
+  "confirmed": 14,
+  "photo_only": 6,
+  "photo_only_sqft": 829,
+  "fit": 0.757,
+  "squares": 34.6,
+  "permit": 30.0,
+  "ratio": 1.155,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 10,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 76%",
+   "32% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.15 x permit"
+  ],
+  "seconds": 13.3
+ },
+ "58032": {
+  "status": "failed",
+  "why": [
+   "AttributeError(\"'MultiPolygon' object has no attribute 'exterior'\")"
+  ],
+  "seconds": 3.4
+ },
+ "58092": {
+  "confirmed": 10,
+  "photo_only": 7,
+  "photo_only_sqft": 1224,
+  "fit": 0.568,
+  "squares": 36.2,
+  "permit": 33.0,
+  "ratio": 1.097,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 6,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 57%",
+   "40% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.10 x permit"
+  ],
+  "seconds": 12.8
+ },
+ "59149": {
+  "confirmed": 9,
+  "photo_only": 9,
+  "photo_only_sqft": 1032,
+  "fit": 0.522,
+  "squares": 35.4,
+  "permit": 32.0,
+  "ratio": 1.106,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 6,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 52%",
+   "38% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.11 x permit"
+  ],
+  "seconds": 11.7
+ },
+ "59177": {
+  "confirmed": 9,
+  "photo_only": 3,
+  "photo_only_sqft": 976,
+  "fit": 0.475,
+  "squares": 36.2,
+  "permit": 35.0,
+  "ratio": 1.033,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 5,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 48%",
+   "33% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 11.9
+ },
+ "59179": {
+  "confirmed": 5,
+  "photo_only": 8,
+  "photo_only_sqft": 506,
+  "fit": 0.951,
+  "squares": 35.8,
+  "permit": 35.0,
+  "ratio": 1.024,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 5,
+  "status": "needs work",
+  "why": [
+   "20% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 12.6
+ },
+ "59538": {
+  "confirmed": 5,
+  "photo_only": 9,
+  "photo_only_sqft": 1201,
+  "fit": 0.668,
+  "squares": 41.1,
+  "permit": 42.0,
+  "ratio": 0.979,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 4,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 67%",
+   "40% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 13.6
+ },
+ "59606": {
+  "confirmed": 4,
+  "photo_only": 14,
+  "photo_only_sqft": 2246,
+  "fit": 0.558,
+  "squares": 49.1,
+  "permit": 38.0,
+  "ratio": 1.291,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 3,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 56%",
+   "62% of the roof photo-only (shade / trees / not planar)",
+   "squares 1.29 x permit"
+  ],
+  "seconds": 17.6
+ },
+ "59633": {
+  "status": "failed",
+  "why": [
+   "AttributeError(\"'MultiPolygon' object has no attribute 'exterior'\")"
+  ],
+  "seconds": 3.5
+ },
+ "64783": {
+  "confirmed": 7,
+  "photo_only": 9,
+  "photo_only_sqft": 1517,
+  "fit": 0.603,
+  "squares": 44.1,
+  "permit": 48.0,
+  "ratio": 0.919,
+  "believable_permit": true,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 60%",
+   "47% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 14.9
+ },
+ "164231": {
+  "confirmed": 13,
+  "photo_only": 14,
+  "photo_only_sqft": 1872,
+  "fit": 0.208,
+  "squares": 70.3,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 5,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 21%",
+   "44% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 23.5
+ },
+ "15292": {
+  "confirmed": 7,
+  "photo_only": 13,
+  "photo_only_sqft": 2376,
+  "fit": 0.646,
+  "squares": 70.4,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 6,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 65%",
+   "49% of the roof photo-only (shade / trees / not planar)"
+  ],
+  "seconds": 14.3
+ },
+ "5921": {
+  "confirmed": 8,
+  "photo_only": 15,
+  "photo_only_sqft": 1467,
+  "fit": 0.958,
+  "squares": 54.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 13,
+  "status": "needs work",
+  "why": [
+   "19% of ridge/hip/valley length off the house axes"
+  ],
+  "seconds": 50.6
+ },
+ "36436": {
+  "confirmed": 33,
+  "photo_only": 16,
+  "photo_only_sqft": 680,
+  "fit": 0.834,
+  "squares": 68.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 17,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 83% of the roof within 1 ft of the drawn faces",
+   "19% of ridge/hip/valley length off the house axes"
+  ],
+  "seconds": 320.5
+ },
+ "32361": {
+  "confirmed": 25,
+  "photo_only": 15,
+  "photo_only_sqft": 1160,
+  "fit": 0.957,
+  "squares": 47.1,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 15,
+  "status": "needs work",
+  "why": [
+   "1 faces under 30 sq ft"
+  ],
+  "seconds": 82.9
+ },
+ "10524": {
+  "confirmed": 37,
+  "photo_only": 27,
+  "photo_only_sqft": 1239,
+  "fit": 0.818,
+  "squares": 56.3,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 23,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 82% of the roof within 1 ft of the drawn faces",
+   "55% of ridge/hip/valley length off the house axes"
+  ],
+  "seconds": 317.2
+ },
+ "428": {
+  "confirmed": 19,
+  "photo_only": 11,
+  "photo_only_sqft": 530,
+  "fit": 0.682,
+  "squares": 65.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 10,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 68% of the roof within 1 ft of the drawn faces"
+  ],
+  "seconds": 191.0
+ },
+ "33165": {
+  "confirmed": 40,
+  "photo_only": 32,
+  "photo_only_sqft": 1778,
+  "fit": 0.513,
+  "squares": 76.0,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 16,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 51% of the roof within 1 ft of the drawn faces",
+   "lines 1.13 ft from the photo edges",
+   "17% of the roof on planes facing off the house axes"
+  ],
+  "seconds": 372.6
+ },
+ "46572": {
+  "confirmed": 18,
+  "photo_only": 17,
+  "photo_only_sqft": 470,
+  "fit": 0.915,
+  "squares": 43.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "lines 3.0 ft from the photo edges"
+  ],
+  "seconds": 34.8
+ },
+ "34027": {
+  "confirmed": 7,
+  "photo_only": 4,
+  "photo_only_sqft": 159,
+  "fit": 0.902,
+  "squares": 22.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 4,
+  "status": "needs work",
+  "why": [
+   "lines 1.61 ft from the photo edges"
+  ],
+  "seconds": 13.6
+ },
+ "56739": {
+  "confirmed": 11,
+  "photo_only": 8,
+  "photo_only_sqft": 269,
+  "fit": 0.959,
+  "squares": 31.0,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "pass",
+  "why": [],
+  "seconds": 20.2
+ },
+ "31311": {
+  "confirmed": 8,
+  "photo_only": 10,
+  "photo_only_sqft": 465,
+  "fit": 0.927,
+  "squares": 23.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "lines 2.21 ft from the photo edges"
+  ],
+  "seconds": 17.9
+ },
+ "783": {
+  "confirmed": 17,
+  "photo_only": 7,
+  "photo_only_sqft": 208,
+  "fit": 0.861,
+  "squares": 36.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "lines 1.35 ft from the photo edges"
+  ],
+  "seconds": 32.6,
+  "visual": "ok: main hip X and the garage wing on the photo's creases (gate says lines 1.35 ft)"
+ },
+ "149197": {
+  "confirmed": 21,
+  "photo_only": 12,
+  "photo_only_sqft": 571,
+  "fit": 0.903,
+  "squares": 42.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 14,
+  "status": "pass",
+  "why": [],
+  "seconds": 36.4,
+  "visual": "needs work: gates pass but lines cluttered, wedge faces, odd pieces in the app"
+ },
+ "224": {
+  "confirmed": 7,
+  "photo_only": 14,
+  "photo_only_sqft": 687,
+  "fit": 0.972,
+  "squares": 32.4,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "lines 1.28 ft from the photo edges"
+  ],
+  "seconds": 25.5,
+  "visual": "needs work: simple hip roof drawn with diagonal lines across the right half"
+ },
+ "38831": {
+  "confirmed": 24,
+  "photo_only": 27,
+  "photo_only_sqft": 2436,
+  "fit": 0.842,
+  "squares": 58.4,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 20,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 84% of the roof within 1 ft of the drawn faces",
+   "1 faces under 30 sq ft",
+   "lines 2.79 ft from the photo edges",
+   "eaves 1.74 ft from the photo edges"
+  ],
+  "seconds": 99.3,
+  "visual": "failed: jagged faces, holes in the 3D"
+ },
+ "55125": {
+  "confirmed": 9,
+  "photo_only": 7,
+  "photo_only_sqft": 405,
+  "fit": 0.905,
+  "squares": 33.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "lines 1.67 ft from the photo edges"
+  ],
+  "seconds": 22.7,
+  "visual": "needs work: main hips right, extra valleys at the bottom, thin spike in the app"
+ },
+ "66037": {
+  "confirmed": 26,
+  "photo_only": 10,
+  "photo_only_sqft": 388,
+  "fit": 0.902,
+  "squares": 35.6,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 16,
+  "status": "pass",
+  "why": [],
+  "seconds": 163.2,
+  "visual": "failed: gates pass but faces jagged, holes in the 3D, stray wall pieces in the app"
+ },
+ "22669": {
+  "confirmed": 15,
+  "photo_only": 4,
+  "photo_only_sqft": 53,
+  "fit": 0.961,
+  "squares": 42.6,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 8,
+  "status": "needs work",
+  "why": [
+   "lines 2.12 ft from the photo edges"
+  ],
+  "seconds": 21.5,
+  "visual": "failed: outline takes in the pool/patio below the house (outline check passed it)"
+ },
+ "8396": {
+  "confirmed": 3,
+  "photo_only": 0,
+  "photo_only_sqft": 0,
+  "fit": 0.999,
+  "squares": 23.3,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 4,
+  "status": "needs work",
+  "why": [
+   "lines 2.18 ft from the photo edges"
+  ],
+  "seconds": 11.7,
+  "visual": "ok: gable ridge and the small wing match the photo (line gate 2.18 ft, looks right)"
+ },
+ "37271": {
+  "confirmed": 20,
+  "photo_only": 5,
+  "photo_only_sqft": 84,
+  "fit": 0.98,
+  "squares": 33.2,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 8,
+  "status": "needs work",
+  "why": [
+   "lines 2.2 ft from the photo edges"
+  ],
+  "seconds": 61.0,
+  "visual": "needs work: skewed outline, lines only partly on the photo"
+ },
+ "64304": {
+  "confirmed": 9,
+  "photo_only": 4,
+  "photo_only_sqft": 151,
+  "fit": 0.98,
+  "squares": 19.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "needs work",
+  "why": [
+   "lines 2.03 ft from the photo edges"
+  ],
+  "seconds": 16.3,
+  "visual": "needs work: retraced from the county footprint, which covers only part of the wide building"
+ },
+ "59767": {
+  "confirmed": 15,
+  "photo_only": 10,
+  "photo_only_sqft": 291,
+  "fit": 0.958,
+  "squares": 46.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 18,
+  "status": "needs work",
+  "why": [
+   "outline is not this building (footprint IoU 0.72)",
+   "6.8% of the outline not covered by faces (holes)"
+  ],
+  "seconds": 103.6,
+  "visual": "failed: the photo trace runs into the neighbour's roof (gate caught it: footprint IoU 0.72); holes; app shot timed out"
+ },
+ "5696": {
+  "confirmed": 18,
+  "photo_only": 8,
+  "photo_only_sqft": 261,
+  "fit": 0.942,
+  "squares": 44.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 14,
+  "status": "pass",
+  "why": [],
+  "seconds": 146.8,
+  "visual": "needs work: lower hips right, top half cluttered with valleys (gates passed it)"
+ },
+ "64162": {
+  "confirmed": 8,
+  "photo_only": 14,
+  "photo_only_sqft": 531,
+  "fit": 0.869,
+  "squares": 45.0,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 4,
+  "status": "pass",
+  "why": [],
+  "seconds": 82.8,
+  "visual": "ok: one clean hip roof on the photo's lines (clean blocks, 4 faces)"
+ },
+ "12727": {
+  "confirmed": 21,
+  "photo_only": 10,
+  "photo_only_sqft": 451,
+  "fit": 0.925,
+  "squares": 31.6,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "needs work",
+  "why": [
+   "outline is not this building (footprint IoU 0.746)",
+   "lines 1.12 ft from the photo edges (after a [-2.75, 2.0] ft shift)",
+   "2 stray pieces (faces in more than one piece)"
+  ],
+  "seconds": 72.6,
+  "visual": "needs work: main hip + garage wing right, extra valleys top right, notch top left"
+ },
+ "62819": {
+  "confirmed": 19,
+  "photo_only": 27,
+  "photo_only_sqft": 1257,
+  "fit": 0.891,
+  "squares": 48.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 14,
+  "status": "needs work",
+  "why": [
+   "1 faces under 30 sq ft",
+   "lines 1.57 ft from the photo edges (after a [-2.5, 2.75] ft shift)",
+   "eaves 2.03 ft from the photo edges",
+   "2.7% of the outline not covered by faces (holes)"
+  ],
+  "seconds": 122.6,
+  "visual": "failed: jagged faces, lines not on the photo"
+ },
+ "53110": {
+  "confirmed": 8,
+  "photo_only": 2,
+  "photo_only_sqft": 50,
+  "fit": 0.936,
+  "squares": 36.9,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 4,
+  "status": "pass",
+  "why": [],
+  "seconds": 88.8,
+  "visual": "ok: hip + the north diamond on the photo",
+  "visual_new": "needs work: the north diamond is a 45-deg piece; snapping rectangles to the house axes squares it off",
+  "new": {
+   "fit": 0.902,
+   "squares": 36.6,
+   "line_fit": 0.59,
+   "faces": 5
+  }
+ },
+ "57927": {
+  "confirmed": 14,
+  "photo_only": 4,
+  "photo_only_sqft": 194,
+  "fit": 0.913,
+  "squares": 33.1,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "lines 1.02 ft from the photo edges (after a [3.0, -2.75] ft shift)",
+   "eaves 1.63 ft from the photo edges"
+  ],
+  "seconds": 66.8,
+  "visual": "needs work: cluttered NW wing",
+  "visual_new": "close: clean main hip + garage wing like the photo, but LiDAR fit only 46%",
+  "new": {
+   "fit": 0.455,
+   "squares": 30.0,
+   "line_fit": 1.09,
+   "faces": 8
+  }
+ },
+ "52803": {
+  "confirmed": 16,
+  "photo_only": 7,
+  "photo_only_sqft": 214,
+  "fit": 0.913,
+  "squares": 33.6,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 12,
+  "status": "needs work",
+  "why": [
+   "28% of the roof on jagged faces",
+   "8.6% of the outline not covered by faces (holes)"
+  ],
+  "seconds": 78.4,
+  "visual": "needs work: jagged, holes",
+  "visual_new": "needs work: cleaner than OLD but LiDAR fit 33% (piece heights wrong)",
+  "new": {
+   "fit": 0.329,
+   "squares": 31.1,
+   "line_fit": 0.97,
+   "faces": 11
+  }
+ },
+ "46941": {
+  "confirmed": 14,
+  "photo_only": 9,
+  "photo_only_sqft": 418,
+  "fit": 0.942,
+  "squares": 40.2,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 8,
+  "status": "needs work",
+  "why": [
+   "eaves 1.98 ft from the photo edges"
+  ],
+  "seconds": 91.8,
+  "visual": "needs work: cross hip partly right, eaves 2 ft off",
+  "visual_new": "needs work: shape partly right, fit 68%",
+  "new": {
+   "fit": 0.678,
+   "squares": 36.2,
+   "line_fit": 1.12,
+   "faces": 12
+  }
+ },
+ "8659": {
+  "confirmed": 5,
+  "photo_only": 0,
+  "photo_only_sqft": 0,
+  "fit": 0.957,
+  "squares": 24.8,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 2,
+  "status": "needs work",
+  "why": [
+   "lines 1.14 ft from the photo edges (after a [-3.0, 3.0] ft shift)"
+  ],
+  "seconds": 65.0,
+  "visual": "ok: gable on the photo",
+  "visual_new": "ok: gable + front shed, fit 93%, lines 0.24 ft",
+  "new": {
+   "fit": 0.933,
+   "squares": 25.8,
+   "line_fit": 0.24,
+   "faces": 3
+  }
+ },
+ "164787": {
+  "confirmed": 19,
+  "photo_only": 16,
+  "photo_only_sqft": 756,
+  "fit": 0.929,
+  "squares": 33.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 12,
+  "status": "needs work",
+  "why": [
+   "lines 1.28 ft from the photo edges (after a [-2.75, -0.25] ft shift)",
+   "24% of the roof on planes facing off the house axes"
+  ],
+  "seconds": 131.0,
+  "visual": "needs work: cluttered",
+  "visual_new": "needs work: clean diagonal hip + wing, fit 55%",
+  "shown": "needs work",
+  "new": {
+   "fit": 0.547,
+   "squares": 33.2,
+   "line_fit": 1.19,
+   "faces": 12
+  }
+ },
+ "117590": {
+  "confirmed": 12,
+  "photo_only": 9,
+  "photo_only_sqft": 354,
+  "fit": 0.91,
+  "squares": 44.3,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 6,
+  "status": "needs work",
+  "why": [
+   "lines 1.46 ft from the photo edges (after a [-3.0, -2.75] ft shift)",
+   "28% of ridge length off the house axes"
+  ],
+  "seconds": 84.1,
+  "visual": "close: hip + front dormer roughly right",
+  "visual_new": "close: main hip right, stray valley stub bottom-left (fit 81%)",
+  "shown": "needs work",
+  "new": {
+   "fit": 0.814,
+   "squares": 43.0,
+   "line_fit": 1.2,
+   "faces": 12
+  }
+ },
+ "64242": {
+  "confirmed": 21,
+  "photo_only": 8,
+  "photo_only_sqft": 527,
+  "fit": 0.866,
+  "squares": 26.1,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 14,
+  "status": "needs work",
+  "why": [
+   "1 faces under 30 sq ft",
+   "outline is not this building (footprint IoU 0.531)",
+   "lines 1.82 ft from the photo edges (after a [-1.0, 3.0] ft shift)",
+   "eaves 1.54 ft from the photo edges",
+   "13% of the roof on jagged faces",
+   "20.0% of the outline not covered by faces (holes)"
+  ],
+  "seconds": 74.1,
+  "visual": "failed: jagged, holes, outline off",
+  "visual_new": "failed: fit 29%",
+  "shown": "needs work",
+  "new": {
+   "fit": 0.293,
+   "squares": 31.5,
+   "line_fit": 1.62,
+   "faces": 8
+  }
+ },
+ "57613": {
+  "confirmed": 13,
+  "photo_only": 15,
+  "photo_only_sqft": 1038,
+  "fit": 0.942,
+  "squares": 29.4,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "needs work",
+  "why": [
+   "outline is not this building (footprint IoU 0.726)",
+   "lines 1.15 ft from the photo edges (after a [-3.0, -1.5] ft shift)"
+  ],
+  "seconds": 93.5,
+  "visual": "close-ish: hips right, extra lines W",
+  "visual_new": "failed: two hips side by side + a strip, not the photo's roof",
+  "shown": "needs work",
+  "new": {
+   "fit": 0.433,
+   "squares": 26.7,
+   "line_fit": 1.1,
+   "faces": 8
+  }
+ },
+ "10709": {
+  "confirmed": 12,
+  "photo_only": 10,
+  "photo_only_sqft": 736,
+  "fit": 0.906,
+  "squares": 41.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 14,
+  "status": "pass",
+  "why": [],
+  "seconds": 114.9,
+  "visual": "ok: cross hips + NW wing on the photo (passes gates)",
+  "visual_new": "failed: main piece fitted FLAT (0/12, fit 19%)",
+  "shown": "old",
+  "new": {
+   "fit": 0.25,
+   "squares": 36.4,
+   "line_fit": 1.28,
+   "faces": 5
+  }
+ },
+ "58915": {
+  "confirmed": 15,
+  "photo_only": 26,
+  "photo_only_sqft": 1544,
+  "fit": 0.693,
+  "squares": 33.0,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 12,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 69% of the roof within 1 ft of the drawn faces",
+   "outline is not this building (footprint IoU 0.645)",
+   "lines 1.65 ft from the photo edges (after a [2.25, -2.0] ft shift)",
+   "eaves 1.96 ft from the photo edges",
+   "20% of the roof on jagged faces"
+  ],
+  "seconds": 108.4
+ },
+ "43154": {
+  "confirmed": 18,
+  "photo_only": 18,
+  "photo_only_sqft": 1133,
+  "fit": 0.917,
+  "squares": 45.9,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 14,
+  "status": "needs work",
+  "why": [
+   "1 faces under 30 sq ft",
+   "42% of the roof on jagged faces",
+   "4.0% of the outline not covered by faces (holes)"
+  ],
+  "seconds": 101.8
+ },
+ "31351": {
+  "confirmed": 10,
+  "photo_only": 4,
+  "photo_only_sqft": 155,
+  "fit": 0.953,
+  "squares": 43.0,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "pass",
+  "why": [],
+  "seconds": 112.8
+ },
+ "58673": {
+  "confirmed": 17,
+  "photo_only": 7,
+  "photo_only_sqft": 122,
+  "fit": 0.938,
+  "squares": 28.6,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "pass",
+  "why": [],
+  "seconds": 80.5
+ },
+ "32509": {
+  "confirmed": 15,
+  "photo_only": 12,
+  "photo_only_sqft": 514,
+  "fit": 0.905,
+  "squares": 39.9,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 16,
+  "status": "pass",
+  "why": [],
+  "seconds": 128.0
+ },
+ "33416": {
+  "confirmed": 17,
+  "photo_only": 18,
+  "photo_only_sqft": 585,
+  "fit": 0.901,
+  "squares": 40.3,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 12,
+  "status": "pass",
+  "why": [],
+  "seconds": 81.3
+ },
+ "144768": {
+  "confirmed": 16,
+  "photo_only": 15,
+  "photo_only_sqft": 813,
+  "fit": 0.855,
+  "squares": 44.9,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "segmentation suspect: face brightness does not follow facing (rms 23.2)"
+  ],
+  "seconds": 100.8
+ },
+ "9441": {
+  "confirmed": 19,
+  "photo_only": 11,
+  "photo_only_sqft": 246,
+  "fit": 0.99,
+  "squares": 52.7,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "needs work",
+  "why": [
+   "lines 1.32 ft from the photo edges (after a [3.0, -0.25] ft shift)"
+  ],
+  "seconds": 147.7
+ },
+ "31648": {
+  "confirmed": 17,
+  "photo_only": 6,
+  "photo_only_sqft": 154,
+  "fit": 0.94,
+  "squares": 49.0,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 8,
+  "status": "needs work",
+  "why": [
+   "segmentation suspect: face brightness does not follow facing (rms 21.4)"
+  ],
+  "seconds": 65.5
+ },
+ "58489": {
+  "confirmed": 8,
+  "photo_only": 4,
+  "photo_only_sqft": 359,
+  "fit": 0.928,
+  "squares": 32.2,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "needs work",
+  "why": [
+   "outline is not this building (footprint IoU 0.698)"
+  ],
+  "seconds": 80.8
+ },
+ "50599": {
+  "confirmed": 34,
+  "photo_only": 14,
+  "photo_only_sqft": 724,
+  "fit": 0.944,
+  "squares": 57.2,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 15,
+  "status": "pass",
+  "why": [],
+  "seconds": 398.3
+ },
+ "59811": {
+  "confirmed": 27,
+  "photo_only": 26,
+  "photo_only_sqft": 1559,
+  "fit": 0.888,
+  "squares": 47.6,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 24,
+  "status": "needs work",
+  "why": [
+   "outline is not this building (footprint IoU 0.636)",
+   "25% of the roof on jagged faces",
+   "10.1% of the outline not covered by faces (holes)",
+   "faces face the wrong way: S-facing faces darker than N-facing in the photo (lighting inverted)",
+   "segmentation suspect: face brightness does not follow facing (rms 33.5)",
+   "44% of ridge length off the house axes"
+  ],
+  "seconds": 237.9
+ },
+ "34286": {
+  "confirmed": 14,
+  "photo_only": 3,
+  "photo_only_sqft": 135,
+  "fit": 0.972,
+  "squares": 31.4,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 10,
+  "status": "needs work",
+  "why": [
+   "outline is not this building (footprint IoU 0.55)",
+   "lines 2.16 ft from the photo edges (after a [-2.5, -2.25] ft shift)",
+   "eaves 1.78 ft from the photo edges",
+   "15% of the roof on jagged faces",
+   "2.6% of the outline not covered by faces (holes)",
+   "15% of the roof on planes facing off the house axes"
+  ],
+  "seconds": 76.2
+ },
+ "12735": {
+  "confirmed": 9,
+  "photo_only": 3,
+  "photo_only_sqft": 65,
+  "fit": 0.931,
+  "squares": 33.0,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 5,
+  "status": "needs work",
+  "why": [
+   "lines 1.7 ft from the photo edges (after a [-2.5, 3.0] ft shift)"
+  ],
+  "seconds": 104.5
+ },
+ "15249": {
+  "confirmed": 6,
+  "photo_only": 1,
+  "photo_only_sqft": 34,
+  "fit": 1.0,
+  "squares": 30.5,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 8,
+  "status": "needs work",
+  "why": [
+   "outline is not this building (footprint IoU 0.469)",
+   "lines 3.35 ft from the photo edges (after a [3.0, 0.0] ft shift)",
+   "7.6% of the outline not covered by faces (holes)"
+  ],
+  "seconds": 58.1
+ },
+ "10519": {
+  "confirmed": 15,
+  "photo_only": 20,
+  "photo_only_sqft": 801,
+  "fit": 0.894,
+  "squares": 47.2,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 9,
+  "status": "pass",
+  "why": [],
+  "seconds": 243.5
+ },
+ "61372": {
+  "confirmed": 26,
+  "photo_only": 18,
+  "photo_only_sqft": 989,
+  "fit": 0.777,
+  "squares": 61.2,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 22,
+  "status": "needs work",
+  "why": [
+   "LiDAR fit 78% of the roof within 1 ft of the drawn faces",
+   "lines 1.03 ft from the photo edges (after a [-1.75, -2.5] ft shift)",
+   "segmentation suspect: face brightness does not follow facing (rms 24.3)"
+  ],
+  "seconds": 1349.2
+ },
+ "58124": {
+  "confirmed": 10,
+  "photo_only": 10,
+  "photo_only_sqft": 387,
+  "fit": 0.945,
+  "squares": 32.8,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 7,
+  "status": "pass",
+  "why": [],
+  "seconds": 139.0
+ },
+ "56682": {
+  "confirmed": 14,
+  "photo_only": 7,
+  "photo_only_sqft": 394,
+  "fit": 0.872,
+  "squares": 32.1,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 8,
+  "status": "needs work",
+  "why": [
+   "lines 1.84 ft from the photo edges (after a [-1.25, 3.0] ft shift)",
+   "42% of the roof on jagged faces",
+   "2 stray pieces (faces in more than one piece)"
+  ],
+  "seconds": 152.1
+ },
+ "33709": {
+  "confirmed": 7,
+  "photo_only": 10,
+  "photo_only_sqft": 621,
+  "fit": 0.927,
+  "squares": 38.1,
+  "permit": null,
+  "ratio": null,
+  "believable_permit": false,
+  "dangling": 0,
+  "faces": 2,
+  "status": "pass",
+  "why": [],
+  "seconds": 84.1
+ }
+}

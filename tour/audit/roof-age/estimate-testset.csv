@@ -1,0 +1,83 @@
+region,row,city,built,est_roof_year,basis,sure,note,flag
+collin-tx,1954,Allen,2000,2000,built_floor,low,no newer than 2000; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.35 in on 2025-03-25, no reroof permit since"
+collin-tx,70053,McKinney,1920,2017,permit,high,reroof permit 2017-01,"radar hail 1.25 in on 2025-03-25, no reroof permit since"
+collin-tx,35276,Frisco,2004,2004,built_floor,low,no newer than 2004; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.41 in on 2026-06-02, no reroof permit since"
+collin-tx,206483,Richardson,1991,1991,built_floor,low,no newer than 1991; about 31% of McKinney homes this age got a new roof since 2015,
+rockwall-tx,23,Rockwall,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 2.15 in on 2026-04-27, no reroof permit since"
+collin-tx,130356,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.27 in on 2024-05-27, no reroof permit since"
+collin-tx,10524,Allen,2000,2000,built_floor,low,no newer than 2000; about 28% of McKinney homes this age got a new roof since 2015,
+collin-tx,97049,McKinney,2004,2016,permit,high,reroof permit 2016-01,
+collin-tx,34780,Frisco,2003,2003,built_floor,low,no newer than 2003; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.56 in on 2024-09-24, no reroof permit since"
+collin-tx,205330,Richardson,2003,2003,built_floor,low,no newer than 2003; about 28% of McKinney homes this age got a new roof since 2015,
+rockwall-tx,68,Rockwall,1996,1996,built_floor,low,no newer than 1996; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 2.01 in on 2026-04-27, no reroof permit since"
+collin-tx,153987,Plano,1988,1988,built_floor,low,no newer than 1988; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.32 in on 2024-05-27, no reroof permit since"
+collin-tx,83996,McKinney,1990,1990,built_floor,low,no newer than 1990; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.46 in on 2025-03-25, no reroof permit since"
+collin-tx,5921,Allen,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,
+collin-tx,32361,Frisco,2002,2002,built_floor,low,no newer than 2002; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.59 in on 2024-09-24, no reroof permit since"
+collin-tx,204869,Richardson,2001,2001,built_floor,low,no newer than 2001; about 28% of McKinney homes this age got a new roof since 2015,
+rockwall-tx,48,Rockwall,1997,1997,built_floor,low,no newer than 1997; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 2.37 in on 2026-04-27, no reroof permit since"
+collin-tx,166093,Plano,1973,1973,built_floor,low,no newer than 1973; about 16% of McKinney homes this age got a new roof since 2015,
+collin-tx,36436,Frisco,1997,1997,built_floor,low,no newer than 1997; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.68 in on 2024-09-24, no reroof permit since"
+collin-tx,15574,Allen,2002,2002,built_floor,low,no newer than 2002; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-22, no reroof permit since"
+collin-tx,79958,McKinney,2004,2004,built_floor,low,no newer than 2004; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.26 in on 2025-03-25, no reroof permit since"
+collin-tx,200871,Richardson,1971,1971,built_floor,low,no newer than 1971; about 16% of McKinney homes this age got a new roof since 2015,"radar hail 1.47 in on 2024-05-27, no reroof permit since"
+rockwall-tx,5321,Rockwall,2003,2003,built_floor,low,no newer than 2003; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 2.22 in on 2026-04-27, no reroof permit since"
+collin-tx,173943,Plano,1968,1968,built_floor,low,no newer than 1968; about 16% of McKinney homes this age got a new roof since 2015,"radar hail 1.29 in on 2024-05-22, no reroof permit since"
+collin-tx,35469,Frisco,1999,1999,built_floor,low,no newer than 1999; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.56 in on 2024-09-24, no reroof permit since"
+collin-tx,103512,McKinney,2004,2004,built_floor,low,no newer than 2004; about 28% of McKinney homes this age got a new roof since 2015,
+collin-tx,4957,Allen,1982,1982,built_floor,low,no newer than 1982; about 27% of McKinney homes this age got a new roof since 2015,
+rockwall-tx,2558,Rockwall,1996,1996,built_floor,low,no newer than 1996; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 2.09 in on 2026-04-27, no reroof permit since"
+collin-tx,200985,Richardson,1970,1970,built_floor,low,no newer than 1970; about 16% of McKinney homes this age got a new roof since 2015,"radar hail 1.39 in on 2024-05-27, no reroof permit since"
+collin-tx,189060,Plano,2001,2001,built_floor,low,no newer than 2001; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.57 in on 2024-05-22, no reroof permit since"
+collin-tx,36251,Frisco,2002,2002,built_floor,low,no newer than 2002; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.92 in on 2024-09-24, no reroof permit since"
+collin-tx,428,Allen,1962,1962,built_floor,low,no newer than 1962; about 16% of McKinney homes this age got a new roof since 2015,
+collin-tx,77282,McKinney,1998,1998,built_floor,low,no newer than 1998; about 31% of McKinney homes this age got a new roof since 2015,
+collin-tx,206911,Richardson,1990,1990,built_floor,low,no newer than 1990; about 31% of McKinney homes this age got a new roof since 2015,
+collin-tx,188969,Plano,1994,1994,built_floor,low,no newer than 1994; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.25 in on 2024-05-22, no reroof permit since"
+collin-tx,15292,Allen,2000,2000,built_floor,low,no newer than 2000; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.41 in on 2024-05-22, no reroof permit since"
+collin-tx,70059,McKinney,1965,1965,built_floor,low,no newer than 1965; about 16% of McKinney homes this age got a new roof since 2015,
+collin-tx,67062,Frisco,2000,2000,built_floor,low,no newer than 2000; about 28% of McKinney homes this age got a new roof since 2015,
+collin-tx,207704,Richardson,1998,1998,built_floor,low,no newer than 1998; about 31% of McKinney homes this age got a new roof since 2015,
+collin-tx,147750,Plano,1995,1995,built_floor,low,no newer than 1995; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.88 in on 2024-09-24, no reroof permit since"
+collin-tx,71943,McKinney,1910,1910,built_floor,low,no newer than 1910; about 16% of McKinney homes this age got a new roof since 2015,
+collin-tx,32591,Frisco,2001,2001,built_floor,low,no newer than 2001; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-09-24, no reroof permit since"
+collin-tx,14003,Allen,2003,2003,built_floor,low,no newer than 2003; about 28% of McKinney homes this age got a new roof since 2015,
+collin-tx,204682,Richardson,1995,1995,built_floor,low,no newer than 1995; about 31% of McKinney homes this age got a new roof since 2015,
+collin-tx,191766,Plano,1994,1994,built_floor,low,no newer than 1994; about 31% of McKinney homes this age got a new roof since 2015,
+collin-tx,116210,McKinney,2000,2017,permit,high,reroof permit 2017-01,
+collin-tx,62645,Frisco,2000,2000,built_floor,low,no newer than 2000; about 28% of McKinney homes this age got a new roof since 2015,"radar hail 1.44 in on 2024-05-27, no reroof permit since"
+collin-tx,30154,Allen,2003,2003,built_floor,low,no newer than 2003; about 28% of McKinney homes this age got a new roof since 2015,
+collin-tx,171979,Plano,1970,1970,built_floor,low,no newer than 1970; about 16% of McKinney homes this age got a new roof since 2015,"radar hail 1.41 in on 2024-05-22, no reroof permit since"
+collin-tx,70302,McKinney,1953,2015,permit,high,reroof permit 2015-01,
+collin-tx,164153,Plano,1992,1992,built_floor,low,no newer than 1992; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164155,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164151,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164201,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164203,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164157,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164205,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164199,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164150,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164154,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164152,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164156,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164207,Plano,2011,2011,built_floor,low,no newer than 2011; about 25% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164159,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164197,Plano,1991,1991,built_floor,low,no newer than 1991; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164158,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164148,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164200,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164149,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164198,Plano,1990,1990,built_floor,low,no newer than 1990; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164209,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164160,Plano,1987,1987,built_floor,low,no newer than 1987; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164161,Plano,1985,1985,built_floor,low,no newer than 1985; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164195,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164180,Plano,1996,1996,built_floor,low,no newer than 1996; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164229,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164202,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164196,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164231,Plano,1987,1987,built_floor,low,no newer than 1987; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164182,Plano,1996,1996,built_floor,low,no newer than 1996; about 31% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164227,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"
+collin-tx,164233,Plano,1986,1986,built_floor,low,no newer than 1986; about 27% of McKinney homes this age got a new roof since 2015,"radar hail 1.34 in on 2024-05-27, no reroof permit since"

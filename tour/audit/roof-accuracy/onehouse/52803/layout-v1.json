@@ -1,0 +1,111 @@
+{
+ "image": "gtrace/52803/google.png",
+ "ft_per_px": 0.206,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     408,
+     407
+    ],
+    [
+     521,
+     398
+    ],
+    [
+     540,
+     647
+    ],
+    [
+     427,
+     656
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.077,
+    0.997
+   ],
+   "gable_ends": [],
+   "notes": "front N-S hip body, 23 by 51 ft, ridge along the house axis at local x 57 (about orig x 475 at y 540), S hips meet near (479,597); W side darker, E side lighter"
+  },
+  {
+   "name": "rear right",
+   "rect_px": [
+    [
+     503,
+     339
+    ],
+    [
+     610,
+     331
+    ],
+    [
+     627,
+     542
+    ],
+    [
+     519,
+     551
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.997,
+    -0.077
+   ],
+   "gable_ends": [],
+   "notes": "rear E block to the patio cutout, dark N face with an E-W ridge near orig y 417 and a lit E hip triangle at the NE corner, lit S face down to the patio line"
+  },
+  {
+   "name": "rear left",
+   "rect_px": [
+    [
+     403,
+     347
+    ],
+    [
+     503,
+     339
+    ],
+    [
+     515,
+     499
+    ],
+    [
+     415,
+     507
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.997,
+    -0.077
+   ],
+   "gable_ends": [],
+   "notes": "rear W block, dark N face to an E-W ridge near orig y 430 with a lit W hip end; a slanted valley separates it from the rear right block, their N eaves differ by about 2 ft; could instead be the N end of the main, lowest confidence piece"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    533,
+    550
+   ],
+   [
+    627,
+    542
+   ],
+   [
+    634,
+    640
+   ],
+   [
+    540,
+    647
+   ]
+  ]
+ ],
+ "notes": "house tilted about 4 deg (local frame u=[0.997, -0.077]); front N-S hip body plus two E-W hip rear blocks; confidence medium-low: oblique imagery skews hip lines, so ridge directions of the two rear blocks are a judgment call. Exclusions: rear brick patio with a small flat pool equipment cover, SE corner, already outside the trace but touching it"
+}

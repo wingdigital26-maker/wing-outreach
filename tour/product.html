@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en" data-rc="shell">
+<head>
+<meta charset="utf-8">
+<script>/* local dev only: the laptop's Esri key (git-ignored lib/rc-local-keys.json) goes into localStorage for lib/rc-imagery.js and st-mapview.js. Never on a hosted page. A missing file is remembered for 10 min (rc.off.keys) so reloads do not 404 again (loop 6). */
+if(/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)){try{var off=+localStorage.getItem("rc.off.keys")||0;if(Date.now()-off>6e5){var x=new XMLHttpRequest();x.open("GET","lib/rc-local-keys.json",false);x.send();if(x.status!==200)localStorage.setItem("rc.off.keys",Date.now());else{var j=JSON.parse(x.responseText);if(j&&j.esri)localStorage.setItem("rc-esri-key",j.esri)}}}catch(e){}}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wing Outreach</title>
+<link rel="preload" href="lib/st-fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="lib/st-fonts/montserrat-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="lib/nimbus-shell.css">
+<link rel="stylesheet" href="lib/nimbus-assistant.css">
+<link rel="stylesheet" href="lib/nimbus-truck.css">
+<link rel="stylesheet" href="lib/nimbus-talk.css">
+<link rel="stylesheet" href="lib/rc-physical.css">
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(lib/st-fonts/inter-var-latin.woff2) format('woff2')}
+:root{--paper:#0B1020;--muted:#465065;--blue:#2757E6;--bar:#E6E8ED;--hair:rgba(11,16,32,.14);--roofer:#0D6C99}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--paper);display:flex;flex-direction:column;
+  background:radial-gradient(ellipse 60% 48% at 50% 40%,rgba(255,255,255,.95),rgba(255,255,255,0) 70%),
+  linear-gradient(180deg,#B9BEC9 0%,#D5D9E0 30%,#ECEEF2 62%,#F7F8FA 100%)}
+/* ONE header, roofer-led, in the page bar's own pill style (c4-command-deck/dk.css .bar) */
+header{display:flex;align-items:center;gap:12px;height:64px;padding:0 24px;background:rgba(230,232,237,.72);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.co{display:flex;align-items:center;gap:12px;min-width:0;flex:0 1 auto}   /* Inter runs wider: the city line gives way first */
+.co>div{min-width:0}
+.co .mark{width:36px;height:36px;border-radius:10px;background:var(--roofer);display:grid;place-items:center;flex:none}
+.co .mark svg{width:20px;height:20px}
+.co b{display:block;font-weight:700;font-size:15px;letter-spacing:-.01em;white-space:nowrap;line-height:1.15}
+.co small{display:block;font-size:12px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav{display:flex;gap:4px;margin-left:8px;padding:4px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid var(--hair);overflow-x:auto;scrollbar-width:none;flex:none;max-width:100%}nav::-webkit-scrollbar{display:none}
+nav button{white-space:nowrap;flex:none;font:inherit;font-size:13.5px;font-weight:500;border:0;background:transparent;color:var(--muted);padding:7px 16px;border-radius:999px;cursor:pointer;transition:background .2s ease,color .2s ease}
+nav button:hover{background:rgba(255,255,255,.9);color:var(--paper)}
+nav button.on{background:var(--paper);color:#fff}
+nav button:focus-visible,.find:focus-within,.me:focus-visible{outline:2px solid #1F47C9;outline-offset:2px}
+.sp{flex:1}
+.find{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--hair);background:rgba(255,255,255,.7);color:var(--muted);font-size:13px;width:220px;flex:none}
+.find svg{width:15px;height:15px;flex:none}
+.find input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:13px;color:var(--paper);outline:none}
+.find input::placeholder{color:var(--muted)}
+.sig{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);white-space:nowrap;flex:none}
+.sig svg{width:13px;height:13.6px}
+.sig b{color:var(--paper);font-weight:600}
+.me{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:600;font-size:13px;border:1px solid var(--hair);flex:none}
+main{flex:1;display:flex;justify-content:center;align-items:center;padding:12px 12px 12px;min-height:0}
+/* the stage holds one kept-alive frame per screen; switching screens is a fade out / rise in, never a reload */
+.stage{position:relative;width:100%;height:100%;border-radius:14px;background:#fff;box-shadow:0 10px 40px rgba(11,16,32,.12);transition:width .3s ease,border-radius .3s ease;overflow:hidden}
+.frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;opacity:0;transform:translateY(16px);visibility:hidden;pointer-events:none;
+  transition:opacity .4s ease-out,transform .4s ease-out,visibility 0s linear .4s}
+.frame.on{opacity:1;transform:none;visibility:visible;pointer-events:auto;transition-delay:0s}
+.frame.out{opacity:0;transform:none;visibility:visible;transition:opacity .3s ease-out,visibility 0s linear .3s}
+.frame.parked{display:none}
+/* the switch bar: shows the moment a screen is asked for, until its frame has drawn (10-30) */
+.navbar{position:absolute;top:0;left:0;height:3px;width:0;background:var(--roofer,#1F47C9);z-index:5;opacity:0;pointer-events:none;border-radius:0 2px 2px 0}   /* parked frames keep their document and state but stop painting */
+main.phone .stage{width:390px;height:min(844px,100%);border-radius:28px}
+@media (prefers-reduced-motion:reduce){.frame,.frame.out,.stage{transition:none}}
+@media (max-width:1180px){.sig{display:none}.find{width:170px}}
+@media (max-width:900px){
+  header{flex-wrap:wrap;height:auto;padding:8px 14px 8px;gap:8px 10px}
+  .co{order:0}.sp{order:1}.find{order:2;width:36px;padding:0;justify-content:center}.find input{display:none}.me{order:3}
+  nav{order:5;flex:1 1 100%;margin:0;max-width:none}
+}
+@media (max-width:599px){
+  header{padding:8px 14px 4px;gap:6px 8px}
+  .find{width:44px;height:44px;order:2}
+  .me{width:44px;height:44px;order:3}
+  main{padding:6px 8px 8px}
+  .co{flex:1 1 0;min-width:0}.co>div{min-width:0}.co .mark{width:32px;height:32px}.co b{font-size:14px;overflow:hidden;text-overflow:ellipsis}.co small{font-size:11.5px;overflow:hidden;text-overflow:ellipsis}
+  .sp{display:none}
+  nav{background:transparent;border:0;padding:0;margin:0 -14px;padding:0 14px}
+  nav{justify-content:space-between}
+  nav button{padding:8px 12px;font-size:14px;min-height:44px;flex:1 1 0}
+  .frame{border-radius:10px}
+}
+</style>
+<link rel="stylesheet" href="lib/rc-console.css"><!-- polish direction B: Ops Console -->
+<style>
+/* Today simplified (Jack 10-26, "the header is crowded", the roofer's name was cut to "Jacks"): the name never shrinks on
+   desktop; the storm chip shows just the date (the homes count is in its tooltip and on Storms) and steps out on Today,
+   whose hero names the storm; "Powered by" shows only where there is room for it */
+@media (min-width:900px){ html[data-rc] body>header .co{flex:none} html[data-rc] body>header .co b{overflow:visible} }
+html[data-rc] body>header .wstorm .n{display:none}
+html[data-rc] body[data-screen="daily"]>header .wstorm{display:none}
+@media (max-width:1599px){ html[data-rc] body>header .sig{display:none} }
+/* six tabs since Find (10-26): tighter tabs on a phone so Results still fits at 375 */
+@media (max-width:480px){ html[data-rc] body>header nav button{padding:5px 8px;font-size:14px} }
+</style>
+<link rel="stylesheet" href="lib/wo-sidebar.css"><!-- calm left sidebar + warm paper (DESIGN-RULES.md, 10-29) -->
+</head>
+<body>
+<header>
+  <div class="co"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12.5 12 5l9 7.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 11v7.5h11V11" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M6 21h12" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".55"/></svg></span><div><b id="coName">Wing Outreach</b><small id="coArea" hidden></small></div></div>
+  <button type="button" class="wstorm" id="wstorm" hidden></button><!-- the ONE place the working storm is named for every screen (RC.SHOWCASE) -->
+  <span class="sp"></span>
+  <label class="find" id="find" title="Find an address or storm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="findIn" type="search" placeholder="Find an address or storm" autocomplete="off" aria-label="Find an address or ask Nimbus"></label>
+  <div class="sig">Powered by <svg viewBox="0 0 63 66" aria-hidden="true"><path fill="#2757E6" d="M 0 3 Q 0 0 3 0 L 27 0 Q 30.5 0 30.5 3.5 L 30.5 28.5 Q 30.5 33.5 35.5 33.5 L 60 33.5 Q 63 33.5 63 36.5 L 63 63 Q 63 66 60 66 L 36 66 Q 32.5 66 32.5 62.5 L 32.5 37.5 Q 32.5 32.5 27.5 32.5 L 3 32.5 Q 0 32.5 0 29.5 Z"/></svg><b>Wing Digital</b></div>
+  <div class="me" id="me" title="" tabindex="0"></div>
+</header>
+<main id="main"><aside class="side" id="side" aria-label="Screens"><nav id="nav" aria-label="Screens"></nav></aside><div class="stage" id="f"></div></main>
+<script src="lib/rc-state.js"></script>
+<script src="lib/brand.js"></script>
+<script src="lib/wing-mascot.js"></script>
+<script src="lib/nimbus-shell.js"></script>
+<script src="lib/rc-features.js"></script><!-- kept features switchboard (10-11) -->
+<script src="lib/nb-react.js"></script><!-- Nimbus reacts: ping, storm pulse, booked glow; the orb never moves -->
+<script src="lib/rc-setup.js"></script><!-- Company setup, from the account menu -->
+<script src="lib/auth.js"></script>
+<script src="lib/st-meta.js"></script><!-- the county roll copies: the header search reads them on every screen -->
+<script src="lib/rc-find.js"></script>
+<script src="lib/rc-scores.js"></script><!-- RCS: search, score, explain-evidence, save-segment, assign (for Nimbus; 10-26) --><!-- header search: every home, street, ZIP, city, owner; results open in the CRM -->
+<script src="lib/nimbus-tools.js"></script><script src="lib/nimbus-settings.js"></script><script src="lib/nimbus-data.js"></script><script src="lib/nimbus-brain.js"></script><script src="lib/nimbus-assistant.js"></script><script src="lib/nimbus-truck.js"></script><script src="lib/nimbus-talk.js"></script><script src="lib/nimbus-ops.js"></script><script src="lib/rc-push.js"></script><!-- Nimbus assistant: talk, he runs the app (tools ring what they touch; nothing sends) -->
+<script>
+/* One shell, real routes. #/opening (About), #/storm, #/storm/<iso>, #/daily, #/daily/<n>, #/ask (?q=, opens the Nimbus panel), and the CRM:
+   #/crm (inbox), #/crm/inbox/<id> (a thread open), #/crm/pipeline (the board), #/crm/home/<id> (one home's record).
+   #/home/<id> still works as an alias of #/crm/home/<id> (RC.go('home', {id}) from Today, Storms and Nimbus).
+   Every route is a history entry, so Back moves between screens and never leaves the app.
+   Frames ask for a screen with RC.go() (postMessage {type:'go'}) and the shell routes it. ?tab= deep links still work. */
+/* opening = the first-run intro (and #/opening/about), never a nav tab */
+const screens={
+  opening:{label:'About Wing Outreach',page:'1a-storm-intro.html'},
+  storm:{label:'Storms',page:'1b-storm-theater.html'},
+  daily:{label:'Today',page:'c4-command-deck/deck.html'},
+  home:{label:'CRM',page:'c5-home/index.html',path:'crm'},   /* screen key stays 'home' (RC.go('home') everywhere); the URL says crm */
+  find:{label:'Find',page:'c10-find/index.html'},   /* Find homes (10-26): search + saved searches + best blocks + rep lists (lib/rc-scores.js) */
+  seo:{label:'SEO',page:'c8-seo/index.html'},   /* the blog posts and service pages Wing published for the roofer (lib/seo-jackson.json, 10-26) */
+  results:{label:'Reports',page:'c9-results/index.html'},   /* leads, inspections, jobs won and revenue by lead source (lib/rc-results.js, migration 012, 10-26) */
+  seoagent:{label:'SEO Agent',page:'c11-seo-agent/index.html'}   /* the SEO engine's work: searches tracked, pages built, checks (lib/seo-agent.json, scripts/seo_agent, 10-29) */
+  /* Weekly (c7-weekly) removed from the app (Jack 10-15); old #/weekly links land on Today via ALIAS */
+};
+/* Ask is no longer a tab (Jack 10-11): the Nimbus orb, bottom-right, opens the full Ask Nimbus page (c2-nimbus) as a panel.
+   #/ask and RC.go('ask') open that panel on whatever screen is up. */
+const ALIAS={crm:'home',weekly:'daily'};
+const ORDER=['daily','storm','home','find','seoagent','seo','results'];
+const nav=document.getElementById('nav'),stage=document.getElementById('f'),main=document.getElementById('main');
+const PLACEHOLDER='<!doctype html><meta charset=utf-8><style>@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(lib/st-fonts/inter-var-latin.woff2) format("woff2")}body{margin:0;height:100vh;display:grid;place-items:center;font-family:"Inter",system-ui,sans-serif;color:#0B1020;background:#F7F8FA}div{text-align:center;max-width:420px;padding:24px}h1{font-size:22px;font-weight:600;margin:0 0 8px}p{margin:0;color:#465065;line-height:1.5}</style><div><h1>The CRM screen is being built</h1><p>Every conversation, the pipeline and each home with its roof. Check back shortly.</p></div>';
+const q=new URLSearchParams(location.search);
+const NOINTRO=q.get('nointro')==='1';
+const NOPREFETCH=q.get('noprefetch')==='1';   // capture scripts on a software GPU: do not warm the next screen
+const ss={get(k){try{return sessionStorage.getItem(k)}catch(e){return null}},set(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}};
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let cur=null,briefed=false;
+const frames={};            // screen -> {el, src, loaded}
+const PREFETCH={daily:'home',storm:'daily',home:'daily'};
+window.__switch={last:0};   // tab-switch timing for the Playwright check
+
+/* ---- routes ---- */
+/* the CRM's segment: '' (inbox) | inbox/<id> | pipeline | calendar | home/<id>; an id with no view = that home's record (the old route) */
+function crmSeg(params){
+  const id=params.id?encodeURIComponent(params.id):'';
+  if(params.view==='pipeline') return 'pipeline';
+  if(params.view==='calendar') return 'calendar';   /* #/crm/calendar: the built-in calendar (c5-home/cal.js) */
+  if(params.view==='customers') return 'customers';   /* #/crm/customers: Past customers (c5-home/customers.js, 10-26) */
+  if(params.view==='inbox') return id?'inbox/'+id:'';
+  return id?'home/'+id:'';
+}
+function hashFor(screen,params){
+  params=params||{};
+  if(screen==='home'){ const seg=crmSeg(params); return '#/'+screens.home.path+(seg?'/'+seg:''); }
+  const seg=screen==='storm'?params.iso:screen==='daily'?params.n:screen==='opening'&&params.about?'about':'';
+  return '#/'+screen+(seg?'/'+encodeURIComponent(seg):'');
+}
+function parseHash(h){
+  const m=/^#\/([a-z]+)(?:\/([^?]+))?(?:\?(.*))?$/.exec(h||'');
+  if(!m) return null;
+  if(m[1]==='ask'){ const p=new URLSearchParams(m[3]||''); return {screen:cur&&cur!=='opening'?cur:'daily',params:{},ask:p.get('q')||''}; }   /* the old Ask route: stay put, open the Nimbus panel */
+  const screen=ALIAS[m[1]]||m[1]; if(!screens[screen]) return null;
+  const seg=m[2]?decodeURIComponent(m[2]):'',params={};
+  if(screen==='storm'&&seg) params.iso=seg;
+  if(screen==='daily'&&seg) params.n=seg;
+  if(screen==='home'){
+    const t=seg?seg.split('/'):[];
+    if(m[1]==='home'){ if(t[0]){ params.view='home'; params.id=t[0]; } }   /* #/home/<id>: the old route, one home's record */
+    else if(t[0]==='pipeline') params.view='pipeline';
+    else if(t[0]==='calendar') params.view='calendar';
+    else if(t[0]==='customers') params.view='customers';
+    else if(t[0]==='home'&&t[1]){ params.view='home'; params.id=t[1]; }
+    else if(t[0]==='inbox'){ params.view='inbox'; if(t[1]) params.id=t[1]; }
+    else if(t[0]){ params.view='home'; params.id=t[0]; }
+  }
+  if(screen==='opening'&&seg==='about') params.about='1';
+  return {screen,params};
+}
+function srcFor(screen,params){
+  const s=screens[screen],p=new URLSearchParams();
+  if(screen==='storm'&&params.iso) p.set('storm',params.iso);
+  if(screen==='daily'&&params.n) p.set('n',params.n);
+  if(screen==='home'){ if(params.id) p.set('home',params.id); if(params.view) p.set('view',params.view); }
+  if(screen==='opening'){ if(params.about) p.set('about','1'); else { p.set('short','1'); if(LOADING.on) p.set('wait','1'); } }   // wait: the first open holds for Today (startLoading)
+  const qs=p.toString();
+  return s.page+(qs?'?'+qs:'');
+}
+/* go: push a history entry (the user asked for a screen); render: draw whatever the hash says */
+function go(screen,params,replace){
+  const h=hashFor(screen,params);
+  if(h!==location.hash) navStart();
+  window.__switch.t0=performance.now();
+  if(h===location.hash){ render(); return; }
+  if(replace){ history.replaceState(null,'',location.pathname+location.search+h); render(); }
+  else location.hash=h;
+}
+/* one frame per screen, made on first visit and kept alive; a frame's URL only changes when its params change */
+function frameFor(screen){
+  let fr=frames[screen]; if(fr) return fr;
+  const el=document.createElement('iframe'); el.className='frame'; el.title='Wing Outreach: '+screens[screen].label; el.dataset.screen=screen;
+  stage.appendChild(el);
+  fr=frames[screen]={el,src:'',loaded:false,routeAck:null};
+  /* Escape pressed while a screen has focus (nearly always): the frame's own dialogs and popovers eat it first; what is
+     left reaches the shell, so the Nimbus panel and the update bubble close like they do when the shell has focus (10-15) */
+  el.addEventListener('load',()=>{ try{ el.contentWindow.addEventListener('keydown',e=>{ if(e.key==='Escape') window.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'})); if((e.ctrlKey||e.metaKey)&&String(e.key).toLowerCase()==='k'){ e.preventDefault(); e.stopImmediatePropagation(); RCFind.open(); } },true);   /* Ctrl K inside any screen opens the one header search */ }catch(e){} });
+  el.addEventListener('load',()=>{ fr.loaded=true; if(cur===screen){ window.__switch.last=Math.round(performance.now()-(window.__switch.t0||performance.now())); settle(screen); }
+    else if(!fr.held) setTimeout(()=>{ if(cur!==screen&&!fr.held){ el.classList.add('parked'); tell(fr,{type:'visibility',hidden:true}); } },2500); });   // a prefetched frame sizes itself first, then parks (a held frame keeps painting under the opening)
+  return fr;
+}
+function load(fr,src){
+  fr.src=src; fr.loaded=false;
+  fr.el.removeAttribute('srcdoc');
+  try{ fr.el.contentWindow.location.replace(new URL(src,location.href).href); }catch(e){ fr.el.src=src; }
+}
+/* a param change on a frame that is already on the right page: tell it, and only reload if it does not answer */
+function route(fr,src,params){
+  const samePage=fr.src.split('?')[0]===src.split('?')[0];
+  if(fr.loaded&&samePage&&fr.el.contentWindow){
+    fr.src=src; const token=Math.random().toString(36).slice(2);
+    fr.routeAck=token;
+    try{ fr.el.contentWindow.postMessage({type:'route',params,token},location.origin); }catch(e){}
+    setTimeout(()=>{ if(fr.routeAck===token){ fr.routeAck=null; load(fr,src); } },350);
+  } else load(fr,src);
+}
+function render(){
+  if(!RCT_AUTH.ok()) return;   /* signed out: no frame (and no data) until lib/auth.js lets the shell in */
+  const r=parseHash(location.hash)||{screen:'daily',params:{}};
+  const screen=r.screen,params=r.params,s=screens[screen];
+  if(r.ask!==undefined){ const canon=hashFor(screen,params); history.replaceState(null,'',location.pathname+location.search+canon); setTimeout(()=>Nimbus.ask(true,r.ask),cur===screen?0:600); }   /* #/ask: the Nimbus panel over the current screen */
+  if(screen==='home'&&/^#\/home(\/|$)/.test(location.hash)){ const canon=hashFor(screen,params); if(canon!==location.hash) history.replaceState(null,'',location.pathname+location.search+canon); }   /* the old #/home/<id> reads as #/crm/home/<id> */
+  const quiet=cur===screen, prev=cur;
+  if(screen==='opening'&&params.about) aboutFrom=prev&&prev!=='opening'?lastHash:null;   /* About's Open Roof Command goes back where the roofer came from */
+  else if(screen!=='opening'){
+    /* a home record remembers the screen it was opened from: the sidebar keeps that screen lit and the record's back button returns there */
+    if(screen==='home'&&params.view==='home'){ if(!(prev==='home'&&lastView==='home')&&prev&&prev!=='opening'){ const it=SIDE.find(x=>!Array.isArray(x)&&x.s===prev&&(x.v===undefined||x.v===(lastView==='home'?'inbox':lastView)||(x.v===''&&lastView==='inbox'))); window.RC_FROM={hash:lastHash,screen:prev,view:lastView==='inbox'?'':lastView,label:it?it.l:(screens[prev]||{}).label}; } }
+    else window.RC_FROM=null;
+    lastHash=location.hash; lastView=params.view||''; }
+  /* loop 18: the roofer left the opening for another screen (a link, the search, a tab key): frames held under it stop painting */
+  if(prev==='opening'&&screen!=='opening'&&screen!=='daily') Object.keys(frames).forEach(k=>{ const f=frames[k]; if(k===screen||!f.held) return; f.held=false; delete f.el.dataset.hold; f.el.classList.add('parked'); tell(f,{type:'visibility',hidden:true}); });
+  cur=screen;
+  document.body.dataset.screen=screen;   /* header CSS per screen (Today hides the storm chip: its hero names the storm) */
+  paintNav(screen,params);
+  Nimbus.setScreen(screen,quiet);
+  if(screen==='opening'){ Nimbus.hideAll(); }
+  else if(!Nimbus.isArrived()) Nimbus.arrive(null);
+  const fr=frameFor(screen), src=srcFor(screen,params);
+  if(screen==='home'&&!fr.src){
+    fetch(s.page,{method:'HEAD',cache:'no-store'}).then(x=>{ if(x.ok) load(fr,src); else { fr.el.srcdoc=PLACEHOLDER; fr.src=src; } }).catch(()=>{ fr.el.srcdoc=PLACEHOLDER; fr.src=src; });
+  } else if(src!==fr.src) route(fr,src,params);
+  else if(screen==='opening'&&fr.loaded&&!quiet) load(fr,src);   // the opening replays from the top
+  /* website-style transition: outgoing fades, incoming rises 16 px */
+  if(prev&&prev!==screen&&frames[prev]){ const o=frames[prev].el; o.classList.remove('on'); o.classList.add('out'); tell(frames[prev],{type:'visibility',hidden:true});
+    setTimeout(()=>{ o.classList.remove('out'); if(cur!==prev) o.classList.add('parked'); },reduced?0:320); }
+  Object.keys(frames).forEach(k=>{ if(k!==screen){ frames[k].el.classList.remove('on'); if(k!==prev&&!frames[k].held) frames[k].el.classList.add('parked'); } });
+  if(fr.held){ fr.held=false; delete fr.el.dataset.hold; }   // the frame that loaded under the opening is now the screen
+  fr.el.classList.remove('parked'); void fr.el.offsetWidth; fr.el.classList.add('on');   // reflow first so a brand-new frame still rises in
+  tell(fr,{type:'visibility',hidden:false});
+  if(fr.loaded&&src===fr.src){ window.__switch.last=Math.round(performance.now()-(window.__switch.t0||performance.now())); settle(screen); }
+}
+function paintNav(screen,params){
+  const lit=(screen==='home'&&params.view==='home'&&window.RC_FROM)?window.RC_FROM:null;
+  [...nav.querySelectorAll('button')].forEach(b=>{if(lit){ const on=b.dataset.screen===lit.screen&&(b.dataset.view===undefined||b.dataset.view===(lit.view||'')); b.classList.toggle('on',on);b.setAttribute('aria-current',on?'page':'false'); return; } let on=b.dataset.screen===screen; if(on&&b.dataset.view!==undefined){ const v=params.view||''; on=(b.dataset.view===v)||(b.dataset.view===''&&(v==='inbox'||v==='home')); } b.classList.toggle('on',on);b.setAttribute('aria-current',on?'page':'false')});
+}
+/* a frame moved on its own (next stop, next home, a storm picked on the timeline): keep the URL true without touching the frame */
+function syncRoute(screen,params){
+  const fr=frames[screen]; if(!fr||cur!==screen) return;
+  fr.src=srcFor(screen,params);
+  const h=hashFor(screen,params); if(h===location.hash) return;
+  if(screen==='home'){   /* a home opened inside the CRM (Leads, Customers, Inbox): remember that view for the sidebar and the back button */
+    if(params.view==='home'){ if(lastView!=='home'){ const v=lastView==='inbox'?'':lastView, it=SIDE.find(x=>!Array.isArray(x)&&x.s==='home'&&x.v===v); window.RC_FROM={hash:location.hash,screen:'home',view:v,label:it?it.l:'Inbox'}; } }
+    else window.RC_FROM=null;
+    lastView=params.view||''; }
+  history.replaceState(null,'',location.pathname+location.search+h);
+  lastHash=location.hash; paintNav(screen,params);
+  if(screen==='home') try{ fr.el.contentWindow.rcRenderHead&&fr.el.contentWindow.rcRenderHead(); }catch(e){}
+}
+function tell(fr,msg){ try{ fr.el.contentWindow.postMessage(msg,location.origin); }catch(e){} }
+/* after the screen you asked for has loaded, warm the one you are most likely to open next */
+function settle(screen){
+  navDone();
+  if(pendingBrief&&screen==='daily') sayBrief();
+  if(pendingFind&&screen===findTarget()){ const m=pendingFind; pendingFind=null; setTimeout(()=>tell(frames[screen],m),250); }
+  const next=PREFETCH[screen]; if(NOPREFETCH||!next||frames[next]) return;
+  /* Today first: the CRM prefetch (three.js + a 3D roof) used to start 1.5 s after the Today frame loaded, while its map was
+     still drawing; on a slow GPU that starved the map. Now it waits until Today's map is ready (or 12 s), then for idle. */
+  const mapDone=()=>{ if(screen!=='daily') return true; try{ const w=frames[screen].el.contentWindow; return !!(w&&w.__mapReady); }catch(e){ return true; } };
+  const t0=performance.now();
+  const tryPrefetch=()=>{ if(cur!==screen||frames[next]) return; if(!mapDone()&&performance.now()-t0<12000){ setTimeout(tryPrefetch,500); return; }
+    idle(()=>{ if(cur!==screen||frames[next]) return; const fr=frameFor(next); load(fr,srcFor(next,{})); }); };
+  /* Today's first reveal draws the fan of lines for about 6 s: the CRM prefetch (three.js) waits until that is over */
+  const first=screen==='daily'&&!frames[screen].warmed; frames[screen].warmed=true;
+  setTimeout(tryPrefetch,first?6500:1500);
+}
+/* the switch bar (.navbar): starts on go(), finishes two frames after the new screen's frame has drawn */
+const NB=document.createElement('div'); NB.className='navbar'; NB.setAttribute('aria-hidden','true'); stage.appendChild(NB);
+let nbT=0;
+function navStart(){ clearTimeout(nbT); NB.style.transition='none'; NB.style.width='0'; NB.style.opacity='1'; void NB.offsetWidth;
+  NB.style.transition='width 2.5s cubic-bezier(.1,.6,.2,1)'; NB.style.width='85%'; nbT=setTimeout(navFin,15000); }
+function navFin(){ clearTimeout(nbT); NB.style.transition='width .2s ease,opacity .3s ease .2s'; NB.style.width='100%'; NB.style.opacity='0'; }
+function navDone(){ if(NB.style.opacity!=='1') return; const fr=frames[cur]; let w=null; try{ w=fr&&fr.el.contentWindow; }catch(e){}
+  if(w&&w.requestAnimationFrame){ let done=false; const f=()=>{ if(!done){ done=true; navFin(); } }; try{ w.requestAnimationFrame(()=>w.requestAnimationFrame(f)); }catch(e){ f(); } setTimeout(f,1200); } else navFin(); }
+const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:4000}):setTimeout(f,0);
+addEventListener('hashchange',render);
+
+/* the opening hands off on its own to Today, then Nimbus gives the morning brief */
+let pendingBrief=false;
+function sayBrief(){ pendingBrief=false; setTimeout(()=>Nimbus.say(Nimbus.brief(),8000),400); }
+let lastHash='',lastView='',aboutFrom=null;
+function onIntroDone(){
+  if(cur!=='opening') return;
+  if(/[?&]about=1/.test((frames.opening&&frames.opening.src)||'')){   /* About (not the first-run opening): back to the screen it was opened from, Storms by default */
+    if(!Nimbus.isArrived()) Nimbus.arrive(null);
+    if(aboutFrom&&parseHash(aboutFrom)){ const r=parseHash(aboutFrom); go(r.screen,r.params,true); } else go('storm',{},true);
+    return;
+  }
+  ss.set('rc.introSeen','1');
+  clearTimeout(LOADING.cap); LOADING.on=false; LOADING.hand=Math.round(performance.now()-LOADING.t0); window.__handAbs=performance.timeOrigin+performance.now();
+  go('daily',{},true); parkWarm();
+  if(!Nimbus.isArrived()) Nimbus.arrive(null);
+  if(!briefed){ briefed=true; const fr=frames.daily; if(fr&&fr.loaded) sayBrief(); else pendingBrief=true; }   // the brief states the real queue, so it waits for the Daily 50
+}
+/* the opening is the loading screen (Jack 10-11): on the first open the WHOLE app loads underneath it, every screen
+   in parallel, each held (opacity 0, never parked, data-hold so Today's lines wait). The opening plays its beats and
+   the greeting to the roofer, then idles until every screen is warm: Today (map style and first tiles drawn, Daily 50
+   built, cards painted, lines mounted), Storms (homes + map style, first idle), the CRM (three.js, the 3D roof's first
+   frames, inbox painted) and Ask (its map idle). Each screen has a soft cap after its document loads, the whole hold
+   a 25 s cap, so a slow network never traps the roofer; then it hands off: the opening fades, Today rises, the lines
+   draw, the other screens park (display none) warm until their tab is opened. A key or click skips. */
+const LOADING={on:false,cap:0,t0:0,ready:0,warm:{}};
+window.__loading=LOADING;   // the headless check reads the measured ready time here
+const WARM_CAP_MS=25000;
+/* screens warmed behind the opening, with the flag each page sets when its first view has drawn and its soft cap */
+const WARM=[{s:'storm',stage:'storms',flag:'__ready',cap:10000},{s:'home',stage:'crm',flag:'__ready',cap:10000},{s:'ask',stage:'ask',flag:'__ready',cap:10000}];
+function startLoading(){
+  LOADING.on=true; LOADING.t0=performance.now();
+  go('opening',{wait:1},true);
+  const hold=(screen)=>{ const fr=frameFor(screen); if(cur==='opening'){ fr.held=true; fr.el.dataset.hold='1'; } load(fr,srcFor(screen,{})); return fr; };   // after the opening a warm screen loads parked (frameFor parks it once sized)
+  hold('daily'); LOADING.warm.daily=false;
+  /* loop 18: the warm screens load one after another, not all at once. Five frames starting together queued ~700 requests
+     and a home's county facts took 90 s; now each starts when the one before has drawn (or passed its soft cap), and a
+     screen the roofer opens jumps the queue (render() loads it at once and the rest wait until it has drawn) */
+  const queue=NOPREFETCH?[]:WARM.slice();
+  WARM.forEach(w=>{ if(!NOPREFETCH) LOADING.warm[w.s]=false; });
+  const startWarm=(w)=>{
+    /* 'ask' is the Nimbus panel's page (c2-nimbus), warmed hidden by the orb; the others are screens held under the opening */
+    if(w.s!=='ask'&&frames[w.s]&&frames[w.s].src){ LOADING.warm[w.s]=LOADING.warm[w.s]||Math.round(performance.now()-LOADING.t0); LOADING.warm[w.s+'_why']='opened'; return nextWarm(); }
+    const el=w.s==='ask'?Nimbus.warm():null, fr=el?{el,get loaded(){ return !!el.__loaded; }}:hold(w.s);
+    if(el) el.addEventListener('load',()=>{ el.__loaded=true; },{once:true});
+    const flag=()=>{ try{ const win=fr.el.contentWindow; return !!(win&&win[w.flag]); }catch(e){ return true; } };
+    let fired=false;
+    const done=(why)=>{ if(fired) return; fired=true; if(LOADING.warm[w.s]===false){ LOADING.warm[w.s]=Math.round(performance.now()-LOADING.t0); LOADING.warm[w.s+'_why']=why; if(LOADING.on) tell(frames.opening,{type:'intro-stage',stage:w.stage}); warmCheck(); } nextWarm(); };
+    const poll=(t0)=>{ if(fired) return; if(flag()) done('drawn'); else if(performance.now()-t0>w.cap) done('soft-cap'); else setTimeout(()=>poll(t0),250); };
+    fr.el.addEventListener('load',()=>{ if(fr.loaded===false) return; poll(performance.now()); },{once:false});
+    setTimeout(()=>{ if(!fr.loaded) poll(performance.now()); },w.cap);   // the document itself never arrived: give its scripts the same grace, then move on
+  };
+  /* the next warm screen waits for the screen on show to have loaded (a jump during the opening comes first) */
+  const nextWarm=()=>{ const w=queue.shift(); if(!w) return;
+    const go1=()=>{ const f=cur&&cur!=='opening'?frames[cur]:frames.daily; if(f&&!f.loaded){ setTimeout(go1,500); return; } idle(()=>startWarm(w)); };
+    setTimeout(go1,cur&&cur!=='opening'&&cur!=='daily'?3000:0); };
+  LOADING.nextWarm=nextWarm;
+  /* Today goes first; the warm chain starts once its document has loaded (or 4 s) */
+  { const d=frames.daily; let started=false; const kick=()=>{ if(started) return; started=true; nextWarm(); };
+    d.el.addEventListener('load',()=>setTimeout(kick,500),{once:true}); setTimeout(kick,4000); }
+  LOADING.cap=setTimeout(()=>release('cap'),WARM_CAP_MS);
+}
+/* every screen warm (Today ready, Storms, CRM and Ask drawn or past their soft cap) releases the opening */
+/* Jack 10-30: the opening waited for every screen (up to 25 s); now Today alone releases it and the rest keep warming behind */
+function warmCheck(){ if(!LOADING.on) return; if(LOADING.warm.daily!==false) release('ready'); }
+function release(why){
+  if(!LOADING.on) return; clearTimeout(LOADING.cap);
+  LOADING.ready=Math.round(performance.now()-LOADING.t0); LOADING.why=why;
+  const fr=frames.opening; if(fr) tell(fr,{type:'intro-go'});
+}
+/* after the handoff the screens that loaded under the opening park warm (their documents and state kept) until their tab opens */
+function parkWarm(){
+  Object.keys(frames).forEach(k=>{ const fr=frames[k]; if(k==='daily'||!fr.held) return; fr.held=false; delete fr.el.dataset.hold; fr.el.classList.add('parked'); tell(fr,{type:'visibility',hidden:true}); });
+}
+addEventListener('message',e=>{ if(e.origin!==location.origin) return; const d=e.data||{};
+  if(d.type==='intro-done') onIntroDone();
+  else if(d.type==='today-ready'){ if(LOADING.on&&LOADING.warm.daily===false){ LOADING.warm.daily=Math.round(performance.now()-LOADING.t0); LOADING.warm.daily_why=d.why||'ready'; warmCheck(); } }
+  else if(d.type==='today-stage'){ if(LOADING.on&&frames.opening) tell(frames.opening,{type:'intro-stage',stage:d.stage}); }
+  else if(d.type==='routed'){ Object.values(frames).forEach(fr=>{ if(fr.routeAck===d.token) fr.routeAck=null; }); navDone(); }
+  else if(d.type==='route'&&screens[d.screen]) syncRoute(d.screen,d.params||{});
+  else if(d.type==='go'&&d.screen==='ask') Nimbus.ask(true,(d.params||{}).q||'');   /* RC.go('ask'): the Nimbus panel, not a tab */
+  else if(d.type==='go'&&screens[d.screen]) go(d.screen,d.params||{});
+  else if(d.type==='nimbus-say'&&d.text) Nimbus.say({t:String(d.text).slice(0,160),m:d.mood||'calm',k:d.label||'Nimbus'},6500);
+});
+
+const narrow=matchMedia('(max-width:599px)');
+/* the left sidebar (10-29): every entry opens a real screen; CRM views are deep routes of the one CRM frame */
+const SIDE=[
+  ['Work'],
+  {l:'Overview',s:'daily',i:'home'},
+  {l:'Inbox',s:'home',v:'',i:'inbox'},
+  {l:'Leads',s:'home',v:'pipeline',i:'leads'},
+  {l:'Calendar',s:'home',v:'calendar',i:'cal'},
+  {l:'Customers',s:'home',v:'customers',i:'people'},
+  ['Find'],
+  {l:'Storms',s:'storm',i:'storm'},
+  {l:'Find homes',s:'find',i:'search'},
+  ['Growth'],
+  {l:'SEO Agent',s:'seoagent',i:'bolt'},
+  {l:'Pages',s:'seo',i:'pages'},
+  {l:'Reports',s:'results',i:'chart'}];
+const SI={home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M6 10v9h12v-9"/>',inbox:'<path d="M4 5h16v14H4z"/><path d="M4 14h5l1.5 2h3L15 14h5"/>',leads:'<path d="M4 6h16M4 12h10M4 18h6"/>',cal:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/>',people:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M16 11a3 3 0 1 0 0-6M21 20c0-3-2-5.3-4.5-5.8"/>',storm:'<path d="M7 16a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a3.5 3.5 0 0 1 0 7"/><path d="M12 12l-2 4h4l-2 4"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',bolt:'<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>',pages:'<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',chart:'<path d="M4 20h16M7 16v-5M12 16V7M17 16v-9"/>'};
+const ico=k=>`<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${SI[k]||''}</svg></span>`;
+SIDE.forEach(it=>{ if(Array.isArray(it)){ const g=document.createElement('div'); g.className='grp'; g.textContent=it[0]; nav.appendChild(g); return; }
+  const b=document.createElement('button'); b.dataset.screen=it.s; if(it.v!==undefined) b.dataset.view=it.v; b.innerHTML=ico(it.i)+'<span>'+it.l+'</span>';
+  b.onclick=()=>go(it.s,it.v?{view:it.v}:{}); nav.appendChild(b); });
+narrow.addEventListener('change',()=>setTimeout(Nimbus.place,50));
+/* ?mode=phone: a phone-sized stage inside a desktop window (capture tooling only; no toggle in the app) */
+function setMode(phone){main.classList.toggle('phone',phone);document.body.classList.toggle('nb-phone',phone);setTimeout(Nimbus.place,320);}
+stage.addEventListener('transitionend',Nimbus.place);
+Nimbus.init({go:(screen,params)=>go(screen,params)});
+/* the roofer: Jackson Roofing (lib/brand.js); ?roofer=<key> is kept on this device by lib/rc-state.js */
+(function(){ if(!window.ROOFERS) return; const r=activeRoofer(); coName.textContent=r.name; me.textContent=r.owner[0]; me.title=r.owner;
+  document.documentElement.style.setProperty('--roofer',r.accent); rooferMark(document.querySelector('header .co .mark'),r);
+  document.title=r.name+' | Wing Outreach';
+  coArea.hidden=true;   /* Jack 10-17: the top left just says the roofer's name */ })();
+/* the working storm, named once for every screen: the newest storm in the roofer's data (RC.SHOWCASE / RC.facts.storm).
+   Today's 50 count hail from every storm in the last 24 months and each home shows its own; this chip is the newest one.
+   A click opens it on Storms. */
+(function(){ const b=document.getElementById('wstorm'); if(!b||!window.RC) return;
+  RC.factsReady.then(()=>{ const s=RC.facts.storm; if(!s||!s.iso||!s.homes) return;
+    b.innerHTML=`<span class="k">Newest storm</span><b>${RC.esc(s.d)}</b><span class="n">${RC.fmt(s.homes)} homes hit</span>`;
+    b.title=`${s.long}: ${RC.fmt(s.homes)} homes took 1 in or larger radar hail, ${Number(s.max).toFixed(2)} in max. Every screen names this storm. Today's 50 also count older storms from the last 24 months, each home with its own hail.`;
+    b.setAttribute('aria-label',`Newest storm ${s.d}, ${RC.fmt(s.homes)} homes hit. Open it on Storms`);
+    b.hidden=false; b.onclick=()=>go('storm',{iso:s.iso}); }); })();
+/* Search every home from any screen (lib/rc-find.js): an address, owner, street, subdivision, ZIP or city opens in the CRM;
+   a storm date opens on Storms. Enter takes the first result. The phone icon opens the same search full width. */
+const findIn=document.getElementById('findIn'),findBox=document.getElementById('find');
+let pendingFind=null;   // kept for settle(): nothing queues a screen-side search any more
+function findTarget(){ return null; }
+RCFind.mount({input:findIn,box:findBox,go,frameOf:s=>frames[s]});
+if(q.get('mode')==='phone') setMode(true);
+
+/* keyboard: 1 to 3 switch screens (Today, Storms, CRM), Ctrl K opens the search (every home, results in the CRM) */
+addEventListener('keydown',e=>{
+  const typing=/^(INPUT|TEXTAREA|SELECT)$/.test((e.target&&e.target.tagName)||'')||(e.target&&e.target.isContentEditable);
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); RCFind.open(); return; }
+  if(typing||e.ctrlKey||e.metaKey||e.altKey) return;
+  const n=parseInt(e.key,10); if(n>=1&&n<=ORDER.length) go(ORDER[n-1],{});
+});
+/* first paint (after sign-in, lib/auth.js): ?tab= deep link, else the hash, else the opening once per session, else Today */
+RCT_AUTH.gate(function start(){
+  const tab=ALIAS[q.get('tab')]||q.get('tab');
+  if(tab&&screens[tab]&&!location.hash){ go(tab,tab==='opening'?{about:'1'}:{},true); return; }
+  if(location.hash&&parseHash(location.hash)){ const r=parseHash(location.hash); if(r.screen==='opening'&&!r.params.about&&(NOINTRO||ss.get('rc.introSeen'))){ go('daily',{},true); return; } render(); return; }
+  if(NOINTRO||ss.get('rc.introSeen')){ go('daily',{},true); return; }
+  startLoading();
+});
+</script>
+<script>/* offline cache (sw.js): repeat visits and tab switches load from disk on the hosted build. Registered after the first screen is up; ?nosw=1 or localhost removes it. */
+if('serviceWorker' in navigator){ if(/[?&]nosw=1/.test(location.search)||/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) /* on the laptop the cache served stale code and re-saved ~39 MB every load (10-17): local always loads fresh */ navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).then(()=>window.caches&&caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)))).catch(()=>{});
+  else addEventListener('load',()=>setTimeout(()=>(window.requestIdleCallback||setTimeout)(()=>{ if(RCT_AUTH.ok()) navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}); },{timeout:5000}),1000)); }</script>
+<script>
+// phone: the screen strip (Overview, Inbox, Leads, Calendar...) scrolls sideways; fade the edge that has more behind it
+(function () { const s = document.getElementById('side'); if (!s) return;
+  const f = () => { const m = s.scrollWidth - s.clientWidth; s.classList.toggle('more-r', m > 2 && s.scrollLeft < m - 2); s.classList.toggle('more-l', m > 2 && s.scrollLeft > 2); };
+  s.addEventListener('scroll', f, { passive: true }); addEventListener('resize', f); f(); setTimeout(f, 800); })();
+</script>
+</body>
+</html>

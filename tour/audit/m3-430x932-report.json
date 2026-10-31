@@ -1,0 +1,20 @@
+{
+ "report": {
+  "daily": {
+   "screen": "daily",
+   "shell": [],
+   "frame": [],
+   "n": 37,
+   "small": []
+  },
+  "daily-roof-sheet": {
+   "screen": "daily-roof-sheet",
+   "shell": [],
+   "frame": [],
+   "n": 37,
+   "small": []
+  }
+ },
+ "errors": [],
+ "fails": []
+}

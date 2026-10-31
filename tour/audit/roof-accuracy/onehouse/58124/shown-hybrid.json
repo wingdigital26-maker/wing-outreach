@@ -1,0 +1,12 @@
+{
+ "row": "58124",
+ "mode": "hybrid",
+ "shown": "old",
+ "new_pass": false,
+ "new_why": [
+  "42% jagged",
+  "outline vs footprint IoU 0.676"
+ ],
+ "old_pass": true,
+ "old_why": []
+}

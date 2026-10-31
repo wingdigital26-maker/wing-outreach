@@ -1,0 +1,107 @@
+{
+ "errors": [],
+ "checks": {
+  "caches_first_visit": [
+   "rc-tour-v1-shell:40"
+  ],
+  "1440 #/daily": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    150,
+    536,
+    129
+   ]
+  },
+  "1440 #/storm": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    241,
+    1019
+   ]
+  },
+  "1440 #/home/dreddirt-3": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    129,
+    194,
+    241,
+    1019
+   ]
+  },
+  "1440 #/ask": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    13946
+   ]
+  },
+  "1440 #/opening/about": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    3051,
+    6226
+   ]
+  },
+  "390 #/daily": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    109,
+    322,
+    145,
+    577
+   ]
+  },
+  "390 #/storm": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    1298
+   ]
+  },
+  "390 #/home/dreddirt-3": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    145,
+    577,
+    1298
+   ]
+  },
+  "390 #/ask": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    17490,
+    508,
+    239,
+    1881
+   ]
+  },
+  "390 #/opening/about": {
+   "loaded": true,
+   "controlled": true,
+   "longtasks_over_100ms": [
+    121,
+    4127,
+    307,
+    139,
+    8507,
+    230
+   ]
+  },
+  "hard_reload": {
+   "controller_after": false,
+   "daily_text": 5732
+  },
+  "after_bump": [
+   "rc-tour-v1-shell",
+   "rc-tour-v1-data",
+   "rc-tour-v1-tiles"
+  ]
+ }
+}

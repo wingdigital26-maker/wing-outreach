@@ -1,0 +1,322 @@
+[
+ {
+  "gi": 5696,
+  "city": "Allen",
+  "layer": "naip",
+  "fp_template_m": [
+   -0.15,
+   0.0
+  ],
+  "lidar_ref_m": [
+   -0.3,
+   0.15
+  ],
+  "disagree_m": 0.21,
+  "sure": 1.12,
+  "lidar_sure": 1.16
+ },
+ {
+  "gi": 5696,
+  "city": "Allen",
+  "layer": "z19",
+  "fp_template_m": [
+   -1.8,
+   1.05
+  ],
+  "lidar_ref_m": [
+   -2.4,
+   0.6
+  ],
+  "disagree_m": 0.75,
+  "sure": 1.11,
+  "lidar_sure": 1.09
+ },
+ {
+  "gi": 5696,
+  "city": "Allen",
+  "layer": "z20",
+  "fp_template_m": [
+   -1.8,
+   0.75
+  ],
+  "lidar_ref_m": [
+   -1.8,
+   0.45
+  ],
+  "disagree_m": 0.3,
+  "sure": 1.22,
+  "lidar_sure": 1.09
+ },
+ {
+  "gi": 5696,
+  "city": "Allen",
+  "layer": "z21",
+  "fp_template_m": [
+   -1.2,
+   0.6
+  ],
+  "lidar_ref_m": [
+   -1.05,
+   -0.15
+  ],
+  "disagree_m": 0.76,
+  "sure": 1.11,
+  "lidar_sure": 1.08
+ },
+ {
+  "gi": 16933,
+  "city": "Allen",
+  "layer": "naip",
+  "fp_template_m": [
+   1.95,
+   -2.25
+  ],
+  "lidar_ref_m": [
+   1.2,
+   -2.25
+  ],
+  "disagree_m": 0.75,
+  "sure": 1.12,
+  "lidar_sure": 1.04
+ },
+ {
+  "gi": 16933,
+  "city": "Allen",
+  "layer": "z19",
+  "fp_template_m": [
+   -4.35,
+   -3.75
+  ],
+  "lidar_ref_m": [
+   2.25,
+   -1.2
+  ],
+  "disagree_m": 7.08,
+  "sure": 1.13,
+  "lidar_sure": 1.0
+ },
+ {
+  "gi": 16933,
+  "city": "Allen",
+  "layer": "z20",
+  "fp_template_m": [
+   2.1,
+   -2.1
+  ],
+  "lidar_ref_m": [
+   2.1,
+   -1.2
+  ],
+  "disagree_m": 0.9,
+  "sure": 1.0,
+  "lidar_sure": 1.03
+ },
+ {
+  "gi": 16933,
+  "city": "Allen",
+  "layer": "z21",
+  "fp_template_m": [
+   4.95,
+   3.6
+  ],
+  "lidar_ref_m": [
+   6.15,
+   3.15
+  ],
+  "disagree_m": 1.28,
+  "sure": 1.07,
+  "lidar_sure": 1.04
+ },
+ {
+  "gi": 186136,
+  "city": "Plano",
+  "layer": "naip",
+  "fp_template_m": [
+   0.0,
+   2.1
+  ],
+  "lidar_ref_m": [
+   -0.6,
+   0.0
+  ],
+  "disagree_m": 2.18,
+  "sure": 1.04,
+  "lidar_sure": 1.16
+ },
+ {
+  "gi": 186136,
+  "city": "Plano",
+  "layer": "z19",
+  "fp_template_m": [
+   -0.75,
+   -4.95
+  ],
+  "lidar_ref_m": [
+   -0.75,
+   -0.75
+  ],
+  "disagree_m": 4.2,
+  "sure": 1.01,
+  "lidar_sure": 1.29
+ },
+ {
+  "gi": 186136,
+  "city": "Plano",
+  "layer": "z20",
+  "fp_template_m": [
+   0.0,
+   -0.9
+  ],
+  "lidar_ref_m": [
+   -1.05,
+   -0.6
+  ],
+  "disagree_m": 1.09,
+  "sure": 1.09,
+  "lidar_sure": 1.22
+ },
+ {
+  "gi": 136279,
+  "city": "Plano",
+  "layer": "naip",
+  "fp_template_m": [
+   1.05,
+   -0.45
+  ],
+  "lidar_ref_m": [
+   1.05,
+   -0.15
+  ],
+  "disagree_m": 0.3,
+  "sure": 1.13,
+  "lidar_sure": 1.26
+ },
+ {
+  "gi": 136279,
+  "city": "Plano",
+  "layer": "z19",
+  "fp_template_m": [
+   -3.15,
+   -0.9
+  ],
+  "lidar_ref_m": [
+   -3.6,
+   -0.6
+  ],
+  "disagree_m": 0.54,
+  "sure": 1.09,
+  "lidar_sure": 1.05
+ },
+ {
+  "gi": 136279,
+  "city": "Plano",
+  "layer": "z20",
+  "fp_template_m": [
+   -3.0,
+   -1.05
+  ],
+  "lidar_ref_m": [
+   -1.05,
+   -0.6
+  ],
+  "disagree_m": 2.0,
+  "sure": 1.1,
+  "lidar_sure": 1.1
+ },
+ {
+  "gi": 270947,
+  "city": "Rockwall",
+  "layer": "naip",
+  "fp_template_m": [
+   -1.2,
+   4.8
+  ],
+  "lidar_ref_m": [
+   5.85,
+   -4.35
+  ],
+  "disagree_m": 11.55,
+  "sure": 1.07,
+  "lidar_sure": 1.07
+ },
+ {
+  "gi": 270947,
+  "city": "Rockwall",
+  "layer": "z19",
+  "fp_template_m": [
+   -1.35,
+   4.95
+  ],
+  "lidar_ref_m": [
+   -1.2,
+   4.5
+  ],
+  "disagree_m": 0.47,
+  "sure": 1.12,
+  "lidar_sure": 1.13
+ },
+ {
+  "gi": 270947,
+  "city": "Rockwall",
+  "layer": "z20",
+  "fp_template_m": [
+   -0.45,
+   -2.4
+  ],
+  "lidar_ref_m": [
+   -0.45,
+   -2.55
+  ],
+  "disagree_m": 0.15,
+  "sure": 1.18,
+  "lidar_sure": 1.07
+ },
+ {
+  "gi": 203832,
+  "city": "Richardson",
+  "layer": "naip",
+  "fp_template_m": [
+   -3.0,
+   -0.45
+  ],
+  "lidar_ref_m": [
+   1.8,
+   0.75
+  ],
+  "disagree_m": 4.95,
+  "sure": 1.06,
+  "lidar_sure": 1.01
+ },
+ {
+  "gi": 203832,
+  "city": "Richardson",
+  "layer": "z19",
+  "fp_template_m": [
+   1.5,
+   2.25
+  ],
+  "lidar_ref_m": [
+   3.15,
+   2.4
+  ],
+  "disagree_m": 1.66,
+  "sure": 1.1,
+  "lidar_sure": 1.17
+ },
+ {
+  "gi": 203832,
+  "city": "Richardson",
+  "layer": "z20",
+  "fp_template_m": [
+   -0.45,
+   -1.05
+  ],
+  "lidar_ref_m": [
+   1.35,
+   2.1
+  ],
+  "disagree_m": 3.63,
+  "sure": 1.03,
+  "lidar_sure": 1.05
+ }
+]

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>CRM direction B: Mission control</title>
+<style>
+@font-face{font-family:'Instrument Sans';src:url(../../lib/st-fonts/instrument-sans-var-latin.woff2) format('woff2');font-weight:400 700}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Instrument Sans',system-ui,sans-serif;color:#E8ECF5;background:#070B16}
+body::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(79,140,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(79,140,255,.06) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(70% 70% at 60% 50%,#000,transparent)}
+.top{position:relative;height:60px;display:flex;align-items:center;gap:16px;padding:0 24px;border-bottom:1px solid rgba(79,140,255,.18)}
+.mark{width:34px;height:34px;border-radius:9px;background:#0D6C99;box-shadow:0 0 24px rgba(13,108,153,.8)}
+.top b{font-size:15px}.top small{display:block;color:#7C8AA6;font-size:12px}
+.nav{margin-left:16px;display:flex;gap:2px}
+.nav span{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;color:#7C8AA6}.nav span.on{background:rgba(79,140,255,.16);color:#9EC2FF;box-shadow:inset 0 0 0 1px rgba(79,140,255,.35)}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#5E7BAA}
+.wrap{position:relative;display:grid;grid-template-columns:320px 1fr 470px;height:840px}
+.col{border-right:1px solid rgba(79,140,255,.14);display:flex;flex-direction:column;min-height:0}
+.h{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 10px}
+.h h2{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9EC2FF}
+.search{margin:4px 14px 10px;height:38px;border:1px solid rgba(79,140,255,.25);border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:12.5px;color:#5E7BAA;background:rgba(10,18,36,.6)}
+.fil{display:flex;gap:4px;margin:0 14px 10px;flex-wrap:wrap}
+.fil span{height:26px;padding:0 10px;border-radius:6px;font-size:11.5px;font-weight:600;color:#7C8AA6;border:1px solid rgba(79,140,255,.18);display:inline-flex;align-items:center;gap:6px}
+.fil span.on{background:#4F8CFF;color:#06101F;border-color:#4F8CFF}
+.row{margin:0 10px 4px;padding:12px;border-radius:10px;border:1px solid transparent;display:grid;gap:4px}
+.row.on{background:rgba(79,140,255,.12);border-color:rgba(79,140,255,.45);box-shadow:0 0 0 1px rgba(79,140,255,.2),0 0 30px -10px rgba(79,140,255,.6)}
+.row .t{display:flex;justify-content:space-between;align-items:baseline}
+.row b{font-size:13.5px}.row .t small{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:#5E7BAA}
+.row small{font-size:12px;color:#7C8AA6}
+.row p{font-size:12.5px;color:#C3CFE6;line-height:1.35}
+.bar{height:4px;border-radius:2px;background:rgba(79,140,255,.15);margin-top:4px;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:linear-gradient(90deg,#4F8CFF,#9EC2FF)}
+.tags{display:flex;gap:6px}.tags span{font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(79,140,255,.14);color:#9EC2FF}
+.tags span.amber{background:rgba(255,176,64,.15);color:#FFB040}
+.tags span.cyan{background:rgba(70,220,255,.14);color:#6FE3FF}
+/* conversation */
+.cv{display:grid;grid-template-rows:auto auto 1fr auto;min-height:0}
+.cv .h b{font-size:22px;letter-spacing:-.02em;display:block}.cv .h small{display:block;font-size:12.5px;color:#7C8AA6;margin-top:3px}
+.stage{display:flex;gap:0;margin:0 20px 10px;border:1px solid rgba(79,140,255,.2);border-radius:8px;overflow:hidden}
+.stage span{flex:1;padding:8px 10px;font-size:11.5px;font-weight:600;color:#5E7BAA;text-align:center;border-right:1px solid rgba(79,140,255,.14)}
+.stage span.dn{color:#9EC2FF}.stage span.on{background:#4F8CFF;color:#06101F}
+.rail{display:grid;grid-template-columns:56px 1fr;min-height:0;overflow:hidden}
+.rail .ln{position:relative}.rail .ln::before{content:"";position:absolute;left:28px;top:0;bottom:0;width:1px;background:linear-gradient(rgba(79,140,255,.5),rgba(79,140,255,.05))}
+.rail .ln i{position:absolute;left:23px;width:11px;height:11px;border-radius:50%;background:#070B16;border:2px solid #4F8CFF;box-shadow:0 0 12px #4F8CFF}
+.msgs{padding:8px 20px 8px 0;display:flex;flex-direction:column;gap:10px}
+.m{max-width:72%;padding:12px 14px;border-radius:12px;font-size:13.5px;line-height:1.45;position:relative}
+.m.out{align-self:flex-end;background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.35);color:#E8ECF5}
+.m.in{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.m small{display:block;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:#5E7BAA;margin-top:6px;letter-spacing:.06em}
+.m.sys{align-self:center;font-size:11.5px;color:#7C8AA6;border:1px dashed rgba(79,140,255,.3);padding:5px 12px;border-radius:999px}
+.next{margin:0 20px 16px;border:1px solid rgba(79,140,255,.3);border-radius:12px;background:rgba(10,18,36,.8);padding:12px 14px}
+.next .l{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;color:#9EC2FF;letter-spacing:.04em}
+.seg{display:inline-flex;border:1px solid rgba(79,140,255,.3);border-radius:6px;overflow:hidden}
+.seg span{padding:4px 11px;font-size:11.5px;font-weight:600;color:#7C8AA6}.seg span.on{background:#4F8CFF;color:#06101F}
+.next textarea{width:100%;margin-top:10px;border:1px solid rgba(79,140,255,.2);border-radius:8px;padding:10px;font:inherit;font-size:13px;height:62px;resize:none;background:#070B16;color:#E8ECF5}
+.next .b{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:11.5px;color:#7C8AA6}
+.pri{height:38px;padding:0 16px;border-radius:8px;background:#4F8CFF;color:#06101F;font-weight:700;font-size:13px;display:inline-flex;align-items:center;box-shadow:0 0 30px -6px #4F8CFF}
+/* home */
+.house{margin:4px 16px 0;height:340px;border-radius:14px;position:relative;overflow:hidden;border:1px solid rgba(79,140,255,.25);background:radial-gradient(60% 60% at 50% 70%,rgba(79,140,255,.25),rgba(79,140,255,0) 70%),#0A1224}
+.house::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(79,140,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(79,140,255,.12) 1px,transparent 1px);background-size:28px 28px;transform:perspective(500px) rotateX(55deg) translateY(120px) scale(1.6);transform-origin:50% 100%}
+.house img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;filter:saturate(1.15) contrast(1.05);mask-image:radial-gradient(75% 75% at 50% 55%,#000 55%,transparent 100%)}
+.house .hud{position:absolute;left:12px;top:12px;font-family:ui-monospace,Consolas,monospace;font-size:11px;color:#6FE3FF;letter-spacing:.08em}
+.house .hud b{display:block;font-family:'Instrument Sans',sans-serif;font-size:26px;letter-spacing:-.02em;color:#fff}
+.house .corner{position:absolute;width:18px;height:18px;border:2px solid #4F8CFF}
+.c1{left:8px;top:8px;border-right:0;border-bottom:0}.c2{right:8px;top:8px;border-left:0;border-bottom:0}.c3{left:8px;bottom:8px;border-right:0;border-top:0}.c4{right:8px;bottom:8px;border-left:0;border-top:0}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:14px 16px 0;border:1px solid rgba(79,140,255,.2);border-radius:10px;overflow:hidden;background:rgba(79,140,255,.2)}
+.kpi div{background:#0A1224;padding:12px}
+.kpi span{display:block;font-family:ui-monospace,Consolas,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5E7BAA}
+.kpi b{display:block;font-size:20px;letter-spacing:-.02em;margin-top:4px;color:#fff}
+.kpi small{font-size:11px;color:#7C8AA6}
+.fact{margin:12px 16px 0;display:grid;gap:1px;font-size:12.5px;border:1px solid rgba(79,140,255,.15);border-radius:10px;overflow:hidden}
+.fact div{display:flex;justify-content:space-between;padding:9px 12px;background:rgba(10,18,36,.8)}
+.fact span{color:#7C8AA6}
+.book{margin:14px 16px 0;height:46px;border-radius:10px;background:#4F8CFF;color:#06101F;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;box-shadow:0 0 40px -8px #4F8CFF}
+.tag{position:absolute;right:24px;top:14px;font-size:11px;color:#9EC2FF;border:1px solid rgba(79,140,255,.35);padding:4px 10px;border-radius:999px}
+</style></head><body>
+<div class="top"><div class="mark"></div><div><b>Jackson Roofing</b><small>Roof Command, Plano, Frisco, Allen, McKinney, Richardson and Rockwall</small></div>
+  <div class="nav"><span>Today</span><span>Storms</span><span class="on">CRM</span><span>Ask</span></div><span class="tag">Direction B: Mission control (prototype)</span></div>
+<div class="wrap">
+  <div class="col">
+    <div class="h"><h2>Inbox</h2><span class="mono">3 threads</span></div>
+    <div class="search">Search address or owner</div>
+    <div class="fil"><span class="on">All</span><span>Due today 1</span><span>Overdue</span><span>Replied 1</span><span>Opted out</span></div>
+    <div class="row on"><div class="t"><b>3405 O Malley Ct</b><small>11:04</small></div><small>Wang Andy · Plano</small><p>Reply: “Who is this?”</p><div class="tags"><span class="cyan">Replied</span><span>Day 3 due Sat</span><span>Contacted</span></div><div class="bar"><i style="width:40%"></i></div></div>
+    <div class="row"><div class="t"><b>3501 O Malley Ct</b><small>2d</small></div><small>Meeds Michael V &amp; Kimberly · Plano</small><p>Drafted: “Hi, this is Chris with Jackson Roofing in Plano. Radar put hail…”</p><div class="tags"><span class="amber">Day 3 due today</span><span>Contacted</span></div><div class="bar"><i style="width:40%"></i></div></div>
+    <div class="row"><div class="t"><b>3713 Roundtree Way</b><small>3d</small></div><small>Olivarez Rolando &amp; Yolanda · Plano</small><p>Email drafted: “Your roof after the Aug 12 hail”</p><div class="tags"><span>Day 7 due Mon</span><span>Contacted</span></div><div class="bar"><i style="width:40%"></i></div></div>
+  </div>
+  <div class="col cv">
+    <div class="h"><div><b>3405 O Malley Ct</b><small>Wang Andy · Plano 75023 · (972) 555-0100 (sample phone) · Day 3 follow-up due Sat, Oct 10</small></div><span class="mono">Log a reply · Opt out · Open record</span></div>
+    <div class="stage"><span class="dn">New hit</span><span class="on">Contacted</span><span>Inspection</span><span>Proposal</span><span>Won</span></div>
+    <div class="rail"><div class="ln"><i style="top:60px"></i><i style="top:196px"></i><i style="top:262px"></i></div>
+      <div class="msgs">
+        <div class="m sys">Thu, Oct 8</div>
+        <div class="m out">Hi, this is Chris with Jackson Roofing in Plano. Radar put hail around 1.1 inches (quarter size) at 3405 O Malley Ct on Aug 12, 2025. Built 1987, no reroof permit in county records since. Would you want a free inspection? Text STOP and I won't text again.<small>TEXT · DRAFTED IN MESSAGES · 11:00</small></div>
+        <div class="m in">Who is this?<small>TEXT REPLY · 11:04</small></div>
+        <div class="m sys">Stage: Contacted · 11:00</div>
+      </div></div>
+    <div class="next"><div class="l"><span>SUGGESTED ANSWER: ASKED WHO THIS IS</span><span class="seg"><span class="on">Text</span><span>Email</span></span></div>
+      <textarea>This is Chris with Jackson Roofing in Plano. I reached out about the Aug 12, 2025 hail at 3405 O Malley Ct. Happy to answer anything, or text STOP and I won't text again.</textarea>
+      <div class="b"><span>Goes from your phone, so replies come to you.</span><span class="pri">Open in Messages</span></div></div>
+  </div>
+  <div class="col" style="border-right:0">
+    <div class="h"><div><b style="font-size:16px">3405 O Malley Ct</b><small style="display:block;font-size:12px;color:#7C8AA6">Plano, TX 75023 · Forest Creek Estates Phase III</small></div><span class="mono">Open record</span></div>
+    <div class="house"><img src="roof-crop.png" alt=""><div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div><div class="hud">ROOF · MEASURED FROM OUTLINE<b>59.8 sq</b>HIP ROOF · 10/12 LIDAR 2018</div></div>
+    <div class="kpi"><div><span>Hail</span><b>1.09 in</b><small>Aug 12, 2025 radar</small></div><div><span>Roof</span><b>1987</b><small>no reroof permit</small></div><div><span>Pitch</span><b>10/12</b><small>LiDAR</small></div></div>
+    <div class="fact"><div><span>Owner</span><b>Wang Andy, homestead</b></div><div><span>Texts</span><b>Not yet opted in</b></div><div><span>Stage</span><b>Contacted, 2 days</b></div></div>
+    <div class="book">Book inspection</div>
+  </div>
+</div>
+</body></html>

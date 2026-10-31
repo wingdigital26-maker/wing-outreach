@@ -1,0 +1,4 @@
+09:05:56 roof_blocks 1e485077c5f8: 1 homes, 3 at once, 120 s each
+09:06:31 collin-tx 164233 needs work 34.3 s fails ['r2_walls', 'r5_measure', 'r6_looks']
+09:06:31 done: 0/1 pass every rule; per rule r1_solid 1/1, r2_walls 0/1, r3_lines 1/1, r4_sizes 1/1, r5_measure 0/1, r6_looks 0/1, check_edges 1/1, pass 0/1
+09:06:31 index 14 homes; run log C:\Users\wjack\roof-command-sell\tour\audit\roof-blocks-work\runs\20261016-0906-near32b.csv; gate log C:\Users\wjack\roof-command-sell\tour\audit\roof-blocks-work\gate-log.csv

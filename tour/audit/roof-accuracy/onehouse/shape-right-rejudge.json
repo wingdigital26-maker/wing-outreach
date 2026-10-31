@@ -1,0 +1,340 @@
+{
+ "standard": "shape-right (Jack 10-21)",
+ "homes": {
+  "5921": {
+   "old": "close",
+   "hybrid": "none",
+   "best": "old",
+   "why": "L hip outline right but valleys cut across main slope and no clear main ridge"
+  },
+  "36436": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "chaotic faces, outline includes pool deck"
+  },
+  "32361": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "hips/valleys in wrong places across main body, jagged garage outline"
+  },
+  "10524": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "23 faces of clutter, parallel ridges, no readable shape"
+  },
+  "428": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "outline runs into trees at right, wings wrong"
+  },
+  "33165": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "faces do not follow the roof, chaos"
+  },
+  "46572": {
+   "old": "close",
+   "hybrid": "none",
+   "best": "old",
+   "why": "outline and hip type right, main ridge split into two stubs"
+  },
+  "34027": {
+   "old": "close",
+   "hybrid": "none",
+   "best": "old",
+   "why": "gable ridge right, top section modeled as one flat face"
+  },
+  "56739": {
+   "old": "right",
+   "hybrid": "none",
+   "best": "old",
+   "why": "two hip blocks, ridges right"
+  },
+  "31311": {
+   "old": "close",
+   "hybrid": "none",
+   "best": "old",
+   "why": "gable T shape about right, kinked junction piece"
+  },
+  "783": {
+   "old": "right",
+   "hybrid": "none",
+   "best": "old",
+   "why": "L hip with garage wing, clean"
+  },
+  "149197": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "many parallel valleys, no readable shape"
+  },
+  "224": {
+   "old": "close",
+   "hybrid": "none",
+   "best": "old",
+   "why": "main hip right, bottom-left has parallel valley clutter"
+  },
+  "38831": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "20 faces of clutter"
+  },
+  "55125": {
+   "old": "right",
+   "hybrid": "none",
+   "best": "old",
+   "why": "hip with front wing reads right, minor extra bits bottom-right"
+  },
+  "66037": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "16 faces, jagged extras, no shape"
+  },
+  "22669": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "outline includes patio and pool"
+  },
+  "8396": {
+   "old": "right",
+   "hybrid": "none",
+   "best": "old",
+   "why": "gable with front gable wing, clean"
+  },
+  "37271": {
+   "old": "close",
+   "hybrid": "none",
+   "best": "old",
+   "why": "hip L about right but ridges/hips do not match photo well"
+  },
+  "64304": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "only middle strip modeled, wings missing"
+  },
+  "59767": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "neighbour roof included, chaos"
+  },
+  "5696": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "chaos of valleys across main slopes"
+  },
+  "64162": {
+   "old": "right",
+   "hybrid": "none",
+   "best": "old",
+   "why": "big hip pyramid reads right, only slivers extra at top-right"
+  },
+  "12727": {
+   "old": "close",
+   "hybrid": "none",
+   "best": "old",
+   "why": "main hip + rear hip wing right, top-right garage wing outline runs wide"
+  },
+  "62819": {
+   "old": "wrong",
+   "hybrid": "none",
+   "best": "none",
+   "why": "14 faces of jagged clutter"
+  },
+  "57613": {
+   "old": "wrong",
+   "hybrid": "close",
+   "best": "hybrid",
+   "why": "old: lines ignore the hip shape; hybrid: pyramid hip + left wing reads close, left edge wobbly"
+  },
+  "53110": {
+   "old": "close",
+   "hybrid": "right",
+   "best": "hybrid",
+   "why": "old: top wing mapped as wedge, ridge missing; hybrid: hip square with top cross wing reads right"
+  },
+  "57927": {
+   "old": "right",
+   "hybrid": "wrong",
+   "best": "old",
+   "why": "old: hip main + left hip wing clean; hybrid: left wing broken"
+  },
+  "52803": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: clutter in the top block"
+  },
+  "46941": {
+   "old": "wrong",
+   "hybrid": "close",
+   "best": "hybrid",
+   "why": "old: left half is parallel wedges; hybrid: hip + lower-left wing ok but top-left roof part clipped"
+  },
+  "8659": {
+   "old": "right",
+   "hybrid": "close",
+   "best": "old",
+   "why": "old: plain gable, 2 faces; hybrid adds a bogus front gable piece"
+  },
+  "164787": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: jagged clutter, no readable shape"
+  },
+  "117590": {
+   "old": "close",
+   "hybrid": "close",
+   "best": "old",
+   "why": "old: long gable + top hip wing ok, left bay missing; hybrid: bottom end becomes clutter"
+  },
+  "64242": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: parallel slivers, no shape"
+  },
+  "31351": {
+   "old": "close",
+   "hybrid": "close",
+   "best": "old",
+   "why": "main N-S gable right, left wings only partly modeled; hybrid cuts an odd notch"
+  },
+  "10709": {
+   "old": "wrong",
+   "hybrid": "close",
+   "best": "hybrid",
+   "why": "old: pool-house block chaos; hybrid: main hip + left wing reads close, wing rough"
+  },
+  "58915": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both merge the neighbour roof below into the house"
+  },
+  "43154": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: clutter, ridges wrong way"
+  },
+  "58673": {
+   "old": "right",
+   "hybrid": "close",
+   "best": "old",
+   "why": "old: cross hip with four wings reads right; hybrid same but ridges collapse to a point"
+  },
+  "32509": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: 14-16 faces of clutter on a cross hip"
+  },
+  "33416": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: diagonal hip main ridge missing, wedge faces at odd angles"
+  },
+  "144768": {
+   "old": "close",
+   "hybrid": "close",
+   "best": "old",
+   "why": "old: valley runs into pool corner; hybrid: shape ok but right-side extension doubtful"
+  },
+  "9441": {
+   "old": "close",
+   "hybrid": "close",
+   "best": "old",
+   "why": "L hip shape ok, main ridge not drawn as a ridge, outline slightly over at top-left"
+  },
+  "31648": {
+   "old": "right",
+   "hybrid": "close",
+   "best": "old",
+   "why": "old: hip with top wing and front hip reads right; hybrid adds jagged extra at top"
+  },
+  "58489": {
+   "old": "wrong",
+   "hybrid": "right",
+   "best": "hybrid",
+   "why": "old includes neighbour roof at top; hybrid: clean hip L, 5 faces"
+  },
+  "50599": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: 15 faces of clutter on the tile roof"
+  },
+  "59811": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "old includes neighbour house; hybrid: partial lines, left wing not readable"
+  },
+  "34286": {
+   "old": "wrong",
+   "hybrid": "close",
+   "best": "hybrid",
+   "why": "old: jagged clutter; hybrid: block outline ok but notches at left and bottom-right"
+  },
+  "12735": {
+   "old": "right",
+   "hybrid": "close",
+   "best": "old",
+   "why": "old: hip with N-S ridge and front wing, clean; hybrid adds a bogus strip at bottom-left"
+  },
+  "15249": {
+   "old": "wrong",
+   "hybrid": "close",
+   "best": "hybrid",
+   "why": "old includes both carports and has no main ridge; hybrid: outline ok, ridge short"
+  },
+  "10519": {
+   "old": "right",
+   "hybrid": "wrong",
+   "best": "old",
+   "why": "old: L hip with garage wing right; hybrid drops the garage wing"
+  },
+  "61372": {
+   "old": "wrong",
+   "hybrid": "wrong",
+   "best": "none",
+   "why": "both: 16-22 faces of clutter"
+  },
+  "58124": {
+   "old": "close",
+   "hybrid": "wrong",
+   "best": "old",
+   "why": "old: hip + top wing ok but outline runs right into trees; hybrid: dangling lines, wing missing"
+  },
+  "56682": {
+   "old": "close",
+   "hybrid": "close",
+   "best": "old",
+   "why": "old: parallel valley slivers top-left; hybrid: cleaner but front wing ridge collapses"
+  },
+  "33709": {
+   "old": "close",
+   "hybrid": "wrong",
+   "best": "old",
+   "why": "old: plain gable under trees, cannot confirm hip at left; hybrid outline jagged and short"
+  }
+ },
+ "counts": {
+  "right_any": 13,
+  "close_any": 19,
+  "wrong": 23
+ }
+}

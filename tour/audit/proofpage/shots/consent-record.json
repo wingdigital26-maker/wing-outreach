@@ -1,0 +1,31 @@
+{
+ "sends": [],
+ "opens": [
+  {
+   "at": "2026-10-23T17:39:34.857Z",
+   "sid": "tshoot1"
+  }
+ ],
+ "consent": {
+  "at": "2026-10-23T17:39:42.522Z",
+  "phone": "(972) 555-0142",
+  "email": null,
+  "text": true,
+  "version": "tx-1.0-2026-10-23",
+  "words": "By checking this box and tapping the button below, I agree that Jackson Roofing may text and call me at the number I entered about a roof inspection and roofing services, including marketing messages, which may be sent using automated technology. I can reply STOP to any text to stop, or HELP for help. Consent is not a condition of any purchase. Message frequency varies; message and data rates may apply. Texts and calls only 9 am to 8 pm Monday to Saturday and noon to 8 pm Sunday, Central time. Jackson Roofing will not sell or share my number. I agree this is my electronic signature.",
+  "sid": "tshoot1",
+  "page": "/tour/proof/",
+  "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537"
+ },
+ "ask": {
+  "at": "2026-10-23T17:39:42.522Z",
+  "when": "Saturday",
+  "sid": "tshoot1"
+ },
+ "optout": null,
+ "lastSent": null,
+ "lastOpen": {
+  "at": "2026-10-23T17:39:34.857Z",
+  "sid": "tshoot1"
+ }
+}

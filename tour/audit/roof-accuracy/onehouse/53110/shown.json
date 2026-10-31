@@ -1,0 +1,10 @@
+{
+ "row": "53110",
+ "shown": "old",
+ "new_pass": false,
+ "new_why": [
+  "18% jagged"
+ ],
+ "old_pass": true,
+ "old_why": []
+}

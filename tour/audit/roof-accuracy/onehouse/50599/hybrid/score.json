@@ -1,0 +1,35 @@
+{
+ "row": "50599",
+ "fit": 0.935,
+ "squares": 53.2,
+ "line_fit": 0.42,
+ "faces": 15,
+ "outline": {
+  "footprint_iou": 0.848,
+  "footprint_iou_excl": 0.92,
+  "footprint_inside": true,
+  "line_fit_ft": 0.42,
+  "eave_fit_ft": 0.56,
+  "line_fit_raw_ft": 1.19,
+  "photo_shift_ft": [
+   -2.75,
+   7.5
+  ],
+  "photo": "google.png",
+  "jagged_share": 0.101,
+  "holes_share": 0.0002,
+  "light_s_minus_n": 27.0,
+  "sun_rms": 6.5
+ },
+ "log": [
+  "layout shifted (+3.5, -6.5) ft onto the LiDAR roof (IoU 0.85)",
+  "tower: hip ridge v, hips ['v0', 'v1'], pitch 4/12, eave 17.3 ft, fit 60% on its top-surface returns",
+  "turret: hip ridge v, hips ['v0', 'v1'], pitch 9/12, eave 26.1 ft, fit 42% on its top-surface returns",
+  "ne_wing: hip ridge v, hips ['v0', 'v1'], pitch 4/12, eave 24.1 ft, fit 62% on its top-surface returns",
+  "main: hip ridge u, hips ['u0', 'u1'], pitch 5/12, eave 24.3 ft, fit 64% on its top-surface returns",
+  "south_wing: hip ridge u, hips ['u0', 'u1'], pitch 2/12, eave 16.7 ft, fit 25% on its top-surface returns",
+  "sw_ell: hip ridge v, hips ['v0', 'v1'], pitch 2/12, eave 15.4 ft, fit 51% on its top-surface returns",
+  "se_low: hip ridge v, hips ['v0', 'v1'], pitch 5/12, eave 12.0 ft, fit 93% on its top-surface returns",
+  "one-building cut (ground gaps only) removed 3 sq ft"
+ ]
+}

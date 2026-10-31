@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roof Command upgrade, Oct 19</title>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(../lib/st-fonts/inter-var-latin.woff2) format('woff2')}
+:root{--ink:#0B1020;--ink-2:#2A3246;--muted:#465065;--hair:rgba(11,16,32,.12);--panel:#fff;--bg:#F1F3F6;--acc:#0D6C99;--acc-soft:#E3F6FE;--acc-ink:#07547A;--new:#0F7B4F;--new-soft:#E4F5EC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--acc-ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 24px 80px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px}
+h1{font-size:34px;letter-spacing:-.03em;line-height:1.1}
+.sub{color:var(--muted);font-size:15.5px;max-width:680px;margin-top:8px}
+.meta{font-size:13px;color:var(--muted);text-align:right}
+.meta b{color:var(--ink)}
+.rank{background:var(--panel);border-radius:10px;padding:22px 24px;box-shadow:0 1px 2px rgba(11,16,32,.05),0 14px 40px -24px rgba(11,16,32,.25);margin-bottom:28px}
+.rank h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc-ink);margin-bottom:12px}
+.rank ol{list-style:none;display:grid;gap:10px;counter-reset:r}
+.rank li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;counter-increment:r;align-items:start}
+.rank li::before{content:counter(r);width:30px;height:30px;border-radius:6px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.rank li b{display:block;font-size:15.5px}
+.rank li span{font-size:14px;color:var(--muted)}
+.ch{background:var(--panel);border-radius:10px;padding:24px 24px 26px;margin-bottom:22px;box-shadow:0 1px 2px rgba(11,16,32,.05),0 14px 40px -24px rgba(11,16,32,.25)}
+.ch .hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ch .no{font-size:13px;font-weight:700;color:#fff;background:var(--ink);border-radius:6px;padding:2px 9px}
+.ch h3{font-size:21px;letter-spacing:-.02em}
+.tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:5px;padding:3px 8px}
+.tag.add{background:var(--new-soft);color:var(--new)}
+.tag.fix{background:var(--acc-soft);color:var(--acc-ink)}
+.ch .why{margin-top:10px;font-size:14.5px;color:var(--ink-2);max-width:900px}
+.ch .why b{color:var(--ink)}
+.ch .how{margin-top:6px;font-size:13.5px;color:var(--muted);max-width:900px}
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.shots.three{grid-template-columns:2fr 2fr 1fr}
+.shots.phone{grid-template-columns:repeat(4,minmax(0,1fr))}
+figure{margin:0;background:var(--bg);border:1px solid var(--hair);border-radius:8px;overflow:hidden}
+figure a{display:block}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:12.5px;color:var(--muted);padding:7px 10px;border-top:1px solid var(--hair);background:#fff}
+figcaption b{color:var(--ink)}
+figcaption .b{color:#9A3B12}
+figcaption .a{color:var(--new)}
+.nb{background:var(--panel);border-radius:10px;padding:22px 24px;margin-top:30px}
+.nb h2{font-size:19px;margin-bottom:10px}
+.nb table{width:100%;border-collapse:collapse;font-size:14px}
+.nb td{padding:9px 8px;border-top:1px solid var(--hair);vertical-align:top}
+.nb td:first-child{font-weight:600;width:30%}
+.foot{margin-top:24px;font-size:13px;color:var(--muted)}
+@media (max-width:820px){.shots,.shots.three{grid-template-columns:1fr}.shots.phone{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:28px}.meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>Roof Command upgrade, Oct 19</h1>
+    <p class="sub">What the leading storm and roofing tools offer, what small roofers say they want, and what Roof Command can honestly back with its own data. Then the build: the best of it, one change at a time, each shown before and after at desktop and phone width.</p>
+  </div>
+  <div class="meta">Branch <b>ui/upgrade-1019</b> (off ui/sell-base)<br>Nothing pushed, deployed or sent<br><a href="../../docs/RESEARCH-UPGRADE-1019.md">Research write-up</a></div>
+</header>
+
+<section class="rank">
+  <h2>What was added, ranked by value to a small roofer</h2>
+  <ol>
+    <li><div><b>Hail at this address, and a Storm report for the homeowner</b><span>Every storm on file with the radar hail at the house, storm age and its one-year mark, and a printable one-page report. HailTrace sells this report for $40 each; here it is built in, for every one of 271,032 homes.</span></div></li>
+    <li><div><b>Neighbors who took the same hail</b><span>The closest homes that took 1 in+ on that same storm with no reroof since, one tap to add them to today's list. Roofers' top ask from canvassing tools: which doors deserve a knock.</span></div></li>
+    <li><div><b>At the door: Not home is never a dead end</b><span>One tap logs Not home, Talked, Not interested or Book. Not home names a better time to come back and becomes the next step on the record and the pipeline card.</span></div></li>
+    <li><div><b>Storms opens on the hail</b><span>The opening map frames the hardest-hit neighbourhoods instead of a grey map with four of five glowing areas off screen.</span></div></li>
+    <li><div><b>Materials tab: a starting order from the measured roof</b><span>Shingle bundles at the report's waste, starter, hip and ridge cap, underlayment, valley ice and water, drip edge, nails, with Copy list for the supplier.</span></div></li>
+    <li><div><b>Ask Nimbus: "How much hail at 1524 Yorkshire?"</b><span>Any address in the four counties: every storm on file at the house, storm age, and the Storm report one tap away.</span></div></li>
+    <li><div><b>Smaller wins</b><span>The home record opens on This home; the 3D roof stays in view while scrolling; a first-morning guide on an empty inbox (desktop and phone); the calendar opens on the next working day; Directions for the day; a broken pipeline count fixed.</span></div></li>
+  </ol>
+</section>
+
+<article class="ch" id="c1">
+  <div class="hd"><span class="no">1</span><h3>Hail at this address + Storm report</h3><span class="tag add">New</span></div>
+  <p class="why"><b>Why:</b> the feature roofers name most in hail tools is a hail report for one address they can show the homeowner (HailTrace $40 a report, Interactive Hail Maps emails one per address). Roof Command already had the radar hail for every home and every storm; it only showed one number.</p>
+  <p class="how">On the home record (This home): a bar per storm on file (13 since Mar 2024), 1 in line, the biggest hit, how old that storm is and its one-year mark (worded as a check: the policy decides). Storm report opens a branded page to print or save as PDF: storm-by-storm table with NWS size words (quarter, half dollar, golf ball), roof facts, neighbors on the same storm. No owner name, no price, no claim promises; radar estimate, not certified. Also in the record's More menu and the inbox home pane.</p>
+  <div class="shots three">
+    <figure><a href="shots/before/record-1440.png" target="_blank"><img src="shots/before/record-1440.png" alt="Before: home record" loading="lazy"></a><figcaption><span class="b">Before</span>: one hail number; the right side opened on the pipeline board</figcaption></figure>
+    <figure><a href="shots/after/record-hail-1440.png" target="_blank"><img src="shots/after/record-hail-1440.png" alt="After: hail panel" loading="lazy"></a><figcaption><span class="a">After</span>: <b>Hail at this address</b>, storm age, Storm report, neighbors</figcaption></figure>
+    <figure><a href="shots/after/record-hail-390.png" target="_blank"><img src="shots/after/record-hail-390.png" alt="After: phone" loading="lazy"></a><figcaption><span class="a">After</span>, phone</figcaption></figure>
+  </div>
+  <div class="shots">
+    <figure><a href="shots/after/hailreport-1440.png" target="_blank"><img src="shots/after/hailreport-1440.png" alt="Storm report page" loading="lazy"></a><figcaption><span class="a">New</span>: the Storm report page, 1524 Yorkshire Dr (1.35 in on Mar 25, 2025; 1.30 in May 2024)</figcaption></figure>
+    <figure><a href="shots/after/hailreport-390.png" target="_blank"><img src="shots/after/hailreport-390.png" alt="Storm report on a phone" loading="lazy"></a><figcaption><span class="a">New</span>: the same report on a phone</figcaption></figure>
+  </div>
+</article>
+
+<article class="ch" id="c2">
+  <div class="hd"><span class="no">2</span><h3>Neighbors who took the same hail</h3><span class="tag add">New</span></div>
+  <p class="why"><b>Why:</b> the clearest canvassing complaint is tools that show where reps walked, not which doors deserve a knock. One booked inspection can become a street: the neighbors took the same storm.</p>
+  <p class="how">Under the hail chart: how many homes within a quarter mile took 1 in+ on this home's biggest storm with no reroof permit since (343 for 1524 Yorkshire Dr), the nearest 12 with distance, hail and year built. Open one, or Add to today: it joins Today's list as "Neighbor, same storm".</p>
+  <div class="shots"><figure><a href="shots/after/record-hail-1440.png" target="_blank"><img src="shots/after/record-hail-1440.png" alt="Neighbors list" loading="lazy"></a><figcaption><span class="a">After</span>: the neighbor list under the hail chart</figcaption></figure>
+  <figure><a href="shots/after/record-door-390.png" target="_blank"><img src="shots/after/record-door-390.png" alt="Phone" loading="lazy"></a><figcaption><span class="a">After</span>, phone: the record's right column stacks under the 3D roof</figcaption></figure></div>
+</article>
+
+<article class="ch" id="c3">
+  <div class="hd"><span class="no">3</span><h3>At the door</h3><span class="tag add">New</span></div>
+  <p class="why"><b>Why:</b> every canvassing tool has door outcomes, and roofers' most specific ask was that "Not home" lead somewhere (a return visit, a follow-up), not nowhere. The record already said "No phone on file: email or knock" but had no way to log a knock.</p>
+  <p class="how">Four big buttons: Not home, Talked, Not interested, Book inspection. Each is logged on the home's history (so Activity, the board and the cloud copy see it) with Undo. Not home says when to come back (weekday evening, Saturday morning) and keeps the text draft one tap away (a person sends it). The record's Next task becomes "Knock again" and the pipeline card says "Knock again Tuesday after 5 pm". Talked moves a New hit to Contacted; Not interested parks it in Not now.</p>
+  <div class="shots"><figure><a href="shots/after/record-door-1440.png" target="_blank"><img src="shots/after/record-door-1440.png" alt="At the door" loading="lazy"></a><figcaption><span class="a">After</span>: Not home logged, Next task is Knock again</figcaption></figure>
+  <figure><a href="shots/before/record-1440.png" target="_blank"><img src="shots/before/record-1440.png" alt="Before" loading="lazy"></a><figcaption><span class="b">Before</span>: no way to log a knock</figcaption></figure></div>
+</article>
+
+<article class="ch" id="c4">
+  <div class="hd"><span class="no">4</span><h3>Storms opens on the hail</h3><span class="tag fix">Fix</span></div>
+  <p class="why"><b>Why:</b> Storms is the first screen in a demo. It opened on Plano and Allen, a grey map, while four of the five glowing hardest-hit neighbourhoods sat off screen in Rockwall.</p>
+  <p class="how">Once the 6-month hardest-hit areas are known, the camera frames the top five (outliers dropped). It never moves a map the roofer already touched, a picked storm or an open list.</p>
+  <div class="shots"><figure><a href="shots/before/storms-1440.png" target="_blank"><img src="shots/before/storms-1440.png" alt="Before" loading="lazy"></a><figcaption><span class="b">Before</span>: grey map, one area half visible at the bottom</figcaption></figure>
+  <figure><a href="shots/after/storms-1440.png" target="_blank"><img src="shots/after/storms-1440.png" alt="After" loading="lazy"></a><figcaption><span class="a">After</span>: Richardson Heights and the four Rockwall areas labelled on screen</figcaption></figure></div>
+</article>
+
+<article class="ch" id="c5">
+  <div class="hd"><span class="no">5</span><h3>Materials tab</h3><span class="tag add">New</span></div>
+  <p class="why"><b>Why:</b> Roofr and RoofSnap sell measurement reports with a material list, and roofers ask for a proposal that turns into a supplier order. The record already measures squares, pitch, waste and every edge.</p>
+  <p class="how">A fifth tab beside Roof report: squares to order at the report's waste (17% for this hip roof), then bundles, starter, hip and ridge cap, underlayment, valley ice and water, drip edge and nails, each with the figure it came from. Common coverage numbers, labelled as such; boots and vents are counted on site. Copy list puts it on the clipboard for the supplier message the roofer writes.</p>
+  <div class="shots"><figure><a href="shots/after/record-mat-1440.png" target="_blank"><img src="shots/after/record-mat-1440.png" alt="Materials tab" loading="lazy"></a><figcaption><span class="a">After</span>: 54.7 squares to order, 164 bundles, 10 bundles of cap</figcaption></figure>
+  <figure><a href="shots/after/record-mat-390.png" target="_blank"><img src="shots/after/record-mat-390.png" alt="Materials on phone" loading="lazy"></a><figcaption><span class="a">After</span>, phone</figcaption></figure></div>
+</article>
+
+<article class="ch" id="c6n">
+  <div class="hd"><span class="no">6</span><h3>Ask Nimbus: hail at an address</h3><span class="tag add">New</span></div>
+  <p class="why"><b>Why:</b> the question a homeowner asks first is "did hail hit my house?". Nimbus now answers it for any address in the four counties, from the same radar the rest of the app reads, with the Storm report one tap away. New chip: Hail at an address.</p>
+  <div class="shots"><figure><a href="shots/before/nimbus-1440.png" target="_blank"><img src="shots/before/nimbus-1440.png" alt="Before" loading="lazy"></a><figcaption><span class="b">Before</span>: no address hail question</figcaption></figure>
+  <figure><a href="shots/after/nimbus-hail-1440.png" target="_blank"><img src="shots/after/nimbus-hail-1440.png" alt="After" loading="lazy"></a><figcaption><span class="a">After</span>: 1524 Yorkshire Dr, 1.35 in on Mar 25, 2025 and 1.30 in on May 22, 2024</figcaption></figure></div>
+</article>
+
+<article class="ch" id="c6">
+  <div class="hd"><span class="no">7</span><h3>Smaller wins and fixes</h3><span class="tag fix">Polish</span></div>
+  <p class="why"><b>Home record opens on This home</b> (next task, door, hail, roof) instead of a second copy of the pipeline board, and the 3D roof stays in view while the right column scrolls. <b>First-morning guide</b> on an empty inbox, desktop and phone. <b>Calendar</b> opened after working hours starts on the next working day (the phone day view was a column of "Past"), and the day view has <b>Directions for the day</b> (the day's inspections in booked order as one Maps route). <b>Pipeline count</b>: "50" no longer breaks into a boxed 5 over a 0 after it rolls.</p>
+  <div class="shots phone">
+    <figure><a href="shots/before/inbox-390.png" target="_blank"><img src="shots/before/inbox-390.png" alt="Before inbox phone" loading="lazy"></a><figcaption><span class="b">Before</span>: empty inbox</figcaption></figure>
+    <figure><a href="shots/after/inbox-390.png" target="_blank"><img src="shots/after/inbox-390.png" alt="After inbox phone" loading="lazy"></a><figcaption><span class="a">After</span>: three steps</figcaption></figure>
+    <figure><a href="shots/before/calendar-390.png" target="_blank"><img src="shots/before/calendar-390.png" alt="Before calendar" loading="lazy"></a><figcaption><span class="b">Before</span>: 6 pm, every hour Past</figcaption></figure>
+    <figure><a href="shots/after/calendar-390.png" target="_blank"><img src="shots/after/calendar-390.png" alt="After calendar" loading="lazy"></a><figcaption><span class="a">After</span>: opens on Tuesday</figcaption></figure>
+    <figure><a href="shots/before/pipeline-390.png" target="_blank"><img src="shots/before/pipeline-390.png" alt="Before pipeline" loading="lazy"></a><figcaption><span class="b">Before</span>: "5" over "0"</figcaption></figure>
+    <figure><a href="shots/after/pipeline-390.png" target="_blank"><img src="shots/after/pipeline-390.png" alt="After pipeline" loading="lazy"></a><figcaption><span class="a">After</span>: 50</figcaption></figure>
+    <figure><a href="shots/after/calendar-dir-390.png" target="_blank"><img src="shots/after/calendar-dir-390.png" alt="Directions for the day" loading="lazy"></a><figcaption><span class="a">New</span>: Directions for the day</figcaption></figure>
+    <figure><a href="shots/after/record-390.png" target="_blank"><img src="shots/after/record-390.png" alt="Record phone" loading="lazy"></a><figcaption><span class="a">After</span>: record, phone</figcaption></figure>
+  </div>
+  <div class="shots">
+    <figure><a href="shots/before/inbox-1440.png" target="_blank"><img src="shots/before/inbox-1440.png" alt="Before inbox" loading="lazy"></a><figcaption><span class="b">Before</span>: three empty columns</figcaption></figure>
+    <figure><a href="shots/after/inbox-1440.png" target="_blank"><img src="shots/after/inbox-1440.png" alt="After inbox" loading="lazy"></a><figcaption><span class="a">After</span>: the first morning in three steps</figcaption></figure>
+    <figure><a href="shots/before/record-1440.png" target="_blank"><img src="shots/before/record-1440.png" alt="Before record" loading="lazy"></a><figcaption><span class="b">Before</span>: record opens beside the board</figcaption></figure>
+    <figure><a href="shots/after/record-real-1440.png" target="_blank"><img src="shots/after/record-real-1440.png" alt="After record" loading="lazy"></a><figcaption><span class="a">After</span>: record opens on This home: next task, At the door, hail (real browser)</figcaption></figure>
+  </div>
+</article>
+
+<article class="ch" id="r2">
+  <div class="hd"><span class="no">R2</span><h3>Round 2: the street around each home</h3><span class="tag add">New</span></div>
+  <p class="why"><b>Street hail map.</b> Under the neighbor list and on the Storm report: one dot per home within 1,000 ft, coloured by the radar hail it took on that storm, reroofed-since homes hollow, the house ringed. 1524 Yorkshire Dr: 195 of 223 nearby homes took 1 in+ on Mar 25, 2025. On the homeowner's report it shows the street without any addresses.</p>
+  <p class="why"><b>Walk sheet.</b> "Print a walk sheet" turns the neighbors into a one-page canvassing list: the nearest 40 doors with 1 in+ and no reroof since, in walking order, a map with the walking line, and boxes to tick at each door. Addresses only, never owner names.</p>
+  <p class="why"><b>Round 3:</b> on Storms, pick a hardest-hit neighbourhood and "Print a walk sheet" builds the door list for that neighbourhood and that storm. The pipeline Filter has "Knock again (nobody home last time)". The record's More menu has "Walk sheet for this street".</p>
+  <p class="why"><b>Door knocks in Activity.</b> Knocks get a door icon and their own Knocks filter, and stay out of Notes. Today's list rows no longer show a bare initial for owners not messaged yet.</p>
+  <div class="shots">
+    <figure><a href="shots/round2/street-map-record.png" target="_blank"><img src="shots/round2/street-map-record.png" alt="Street map on the record" loading="lazy"></a><figcaption><span class="a">New</span>: the street map under the neighbor list (real browser)</figcaption></figure>
+    <figure><a href="shots/round2/walk-sheet-map.jpg" target="_blank"><img src="shots/round2/walk-sheet-map.jpg" alt="Walk sheet map" loading="lazy"></a><figcaption><span class="a">New</span>: the walk sheet's route map, 40 doors</figcaption></figure>
+    <figure><a href="shots/round2/street-map-report.jpg" target="_blank"><img src="shots/round2/street-map-report.jpg" alt="Street map on the Storm report" loading="lazy"></a><figcaption><span class="a">New</span>: "Your street" on the Storm report, phone width</figcaption></figure>
+  </div>
+</article>
+
+<section class="nb">
+  <h2>Researched, not built (and why)</h2>
+  <table>
+    <tr><td>Certified hail reports</td><td>We cannot certify weather. The Storm report says plainly it is a radar estimate.</td></tr>
+    <tr><td>Good / better / best pricing, e-sign, financing</td><td>Needs the roofer's own products and prices and a signing service. Showing them without real prices would be mock data.</td></tr>
+    <tr><td>Instant online quote widget for the roofer's website</td><td>Needs hosting on the roofer's site and their price list (Roofle charges $350 a month plus $2,000 setup for this).</td></tr>
+    <tr><td>Photo documentation (CompanyCam style)</td><td>Needs a per-account photo store; the hosted build has no upload storage yet. A good next step once accounts sync.</td></tr>
+    <tr><td>Insurance claim and supplement tracking</td><td>No tool in the research does it well, and it needs claim data we do not have.</td></tr>
+    <tr><td>Territories, rep GPS, leaderboards</td><td>The pilot is one small team. Worth it with several reps.</td></tr>
+    <tr><td>Push storm alerts to a phone</td><td>Needs a phone app or push service; the cloud storm watch runs separately.</td></tr>
+    <tr><td>Door hangers, mailers, automated cold texts</td><td>Never physical mail, and a person always taps Send (house rules).</td></tr>
+  </table>
+</section>
+<p class="foot">Most screens are headless Chromium; the home record's 3D roof does not draw there, so the record views marked "real browser" (hail panel, door, Materials, Nimbus) were captured in the app's own browser pane at 800 by 500. Storms is a real GPU window. Every request leaving the laptop was blocked during the shots, and county owner files were blocked, so owner names show as initials or not at all. Phones and people are sample; homes, hail, roofs and permits are real records.</p>
+</div>
+</body>
+</html>

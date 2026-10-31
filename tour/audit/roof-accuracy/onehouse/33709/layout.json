@@ -1,0 +1,100 @@
+{
+ "image": "gtrace/33709/google.png",
+ "ft_per_px": 0.202,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     439,
+     308
+    ],
+    [
+     702,
+     308
+    ],
+    [
+     702,
+     578
+    ],
+    [
+     439,
+     578
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Whole roof is in deep shadow (navy) with a dense tree canopy over the south half; no ridge or hip lines visible. Ridge direction E-W is a guess from the plan shape only."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    437,
+    306
+   ],
+   [
+    522,
+    306
+   ],
+   [
+    522,
+    343
+   ],
+   [
+    437,
+    343
+   ]
+  ],
+  [
+   [
+    439,
+    470
+   ],
+   [
+    520,
+    452
+   ],
+   [
+    600,
+    478
+   ],
+   [
+    700,
+    498
+   ],
+   [
+    702,
+    580
+   ],
+   [
+    439,
+    580
+   ]
+  ],
+  [
+   [
+    702,
+    306
+   ],
+   [
+    770,
+    306
+   ],
+   [
+    770,
+    580
+   ],
+   [
+    702,
+    580
+   ]
+  ]
+ ],
+ "notes": "Unreadable roof: house sits in the shadow of a large tree to its south and the canopy covers the south half. Single hip rectangle from the trace with the east 68 px strip (bright concrete and a straight fence shadow) excluded; the true east eave may be anywhere between x=700 and 750. Confidence low."
+}

@@ -1,0 +1,15 @@
+{
+ "row": "117590",
+ "shown": "needs work",
+ "new_pass": false,
+ "new_why": [
+  "fit 79%",
+  "lines 1.09 ft",
+  "37% jagged"
+ ],
+ "old_pass": false,
+ "old_why": [
+  "lines 1.46 ft",
+  "eaves 1.02 ft"
+ ]
+}

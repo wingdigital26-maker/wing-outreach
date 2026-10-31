@@ -1,0 +1,12 @@
+Load from ckpts of epoch 620
+Traceback (most recent call last):
+  File "/content/BWformer/infer.py", line 405, in <module>
+    main(args.dataset, args.checkpoint_path, args.image_size, infer_times=args.infer_times)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/BWformer/infer.py", line 69, in main
+    test_dataset = testOutdoorBuildingDataset(data_path, det_path, phase='test', image_size=image_size, rand_aug=False,
+                                              inference=True)
+  File "/content/BWformer/datasets/test_outdoor_buildings.py", line 32, in __init__
+    with open(datalistfile, 'r') as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './building3d/b3d/test_list.txt'

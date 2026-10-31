@@ -1,0 +1,126 @@
+{
+ "image": "gtrace/57927/google.png",
+ "ft_per_px": 0.194,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     487,
+     393
+    ],
+    [
+     675,
+     393
+    ],
+    [
+     675,
+     625
+    ],
+    [
+     487,
+     625
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "main hip 36 by 45 ft, N-S ridge near x 580 from about y 490 to 528, 45 deg hips; W eave at x 487 south of the garage"
+  },
+  {
+   "name": "garage",
+   "rect_px": [
+    [
+     413,
+     380
+    ],
+    [
+     523,
+     380
+    ],
+    [
+     523,
+     493
+    ],
+    [
+     413,
+     493
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "W garage wing, hip at the W end with hips meeting near (465,436), E-W ridge dies into the main W face; its N face merges with the main N face as one plane (LiDAR 896 sq ft N face)"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    434,
+    497
+   ],
+   [
+    487,
+    497
+   ],
+   [
+    487,
+    600
+   ],
+   [
+    434,
+    600
+   ]
+  ],
+  [
+   [
+    413,
+    341
+   ],
+   [
+    677,
+    341
+   ],
+   [
+    677,
+    380
+   ],
+   [
+    413,
+    380
+   ]
+  ],
+  [
+   [
+    380,
+    341
+   ],
+   [
+    413,
+    341
+   ],
+   [
+    413,
+    482
+   ],
+   [
+    380,
+    482
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "open patio with furniture inside the trace, no roof",
+  "ground shadow N of the eaves, trace overshoots about 7 ft",
+  "driveway shadow W of the garage, trace overshoots about 6 ft"
+ ],
+ "notes": "L-plan, 1-story: main hip N-S plus garage hip E-W. Same as v1 with the main W eave moved from 480 to 487 and levels added. Confidence high."
+}

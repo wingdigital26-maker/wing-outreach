@@ -1,0 +1,88 @@
+{
+ "image": "gtrace/53110/google.png",
+ "ft_per_px": 0.2101,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     430,
+     365
+    ],
+    [
+     675,
+     365
+    ],
+    [
+     675,
+     637
+    ],
+    [
+     430,
+     637
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "single hip over the whole 52 by 57 ft footprint, short N-S ridge from about (550,467) to (552,507); W and E faces about 8/12 and reach the N eave on both sides of the diamond"
+  },
+  {
+   "name": "north_diamond",
+   "rect_px": [
+    [
+     548,
+     356
+    ],
+    [
+     612,
+     414
+    ],
+    [
+     550,
+     470
+    ],
+    [
+     497,
+     420
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "dark diamond on the N half is ONE north-facing plane about 7.5/12 per LiDAR (not flat, not a skylight); it is lowest at the N eave apex (548,356) and highest at the ridge end (550,470); its SW and SE edges are the main N hip lines, its NW and NE edges are steps against the main W and E faces"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    430,
+    640
+   ],
+   [
+    580,
+    640
+   ],
+   [
+    580,
+    705
+   ],
+   [
+    430,
+    705
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "separate lower roof touching the S eave, detached garage or neighbour structure"
+ ],
+ "notes": "One 2-story hip block (long N and E shadow bands). The dark diamond is a north-facing plane, its two upper edges are not valleys but steps where the main W and E faces run past it to the N eave. Confidence high on the block, medium on the diamond edges."
+}

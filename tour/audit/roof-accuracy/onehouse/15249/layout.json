@@ -1,0 +1,143 @@
+{
+ "image": "gtrace/15249/google.png",
+ "ft_per_px": 0.20502,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     492,
+     318
+    ],
+    [
+     735,
+     440
+    ],
+    [
+     615,
+     690
+    ],
+    [
+     380,
+     565
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    243,
+    122
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "large rotated hip, long axis ~27 deg, ridge along long axis"
+  },
+  {
+   "name": "nw_wing",
+   "rect_px": [
+    [
+     458,
+     392
+    ],
+    [
+     574,
+     451
+    ],
+    [
+     513,
+     587
+    ],
+    [
+     397,
+     528
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    -116,
+    -59
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "cross wing on the NW side, bright south-west face, ridge perpendicular to main"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    670,
+    395
+   ],
+   [
+    795,
+    455
+   ],
+   [
+    745,
+    580
+   ],
+   [
+    640,
+    520
+   ]
+  ],
+  [
+   [
+    555,
+    600
+   ],
+   [
+    690,
+    665
+   ],
+   [
+    650,
+    735
+   ],
+   [
+    510,
+    665
+   ]
+  ],
+  [
+   [
+    630,
+    520
+   ],
+   [
+    760,
+    565
+   ],
+   [
+    740,
+    650
+   ],
+   [
+    620,
+    610
+   ]
+  ],
+  [
+   [
+    590,
+    285
+   ],
+   [
+    780,
+    285
+   ],
+   [
+    780,
+    405
+   ],
+   [
+    690,
+    405
+   ],
+   [
+    650,
+    380
+   ]
+  ]
+ ],
+ "notes": "Brown shingle rotated hip with a NW cross wing. Two white metal patio/carport covers (NE and S) and a dark pergola/deck at the SE are inside the trace and excluded; tree overhangs the NE edge. Confidence medium-high on outline, medium on the cross wing extent."
+}

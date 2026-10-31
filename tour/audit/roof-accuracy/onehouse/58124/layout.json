@@ -1,0 +1,166 @@
+{
+ "image": "gtrace/58124/google.png",
+ "ft_per_px": 0.194,
+ "pieces": [
+  {
+   "name": "west_block",
+   "rect_px": [
+    [
+     397,
+     369
+    ],
+    [
+     500,
+     369
+    ],
+    [
+     500,
+     505
+    ],
+    [
+     397,
+     505
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "West block: dark north trapezoid with a 45 deg NW hip, horizontal ridge line about y=410-418, large lit SW face below. E-W ridge."
+  },
+  {
+   "name": "centre_wing",
+   "rect_px": [
+    [
+     487,
+     369
+    ],
+    [
+     639,
+     369
+    ],
+    [
+     639,
+     613
+    ],
+    [
+     487,
+     613
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Centre wing: lit north hip-end triangle with apex at (535,400), ridge runs south to about (540,540), lit south hip-end triangle widening to the south eave at y about 613."
+  },
+  {
+   "name": "east_block",
+   "rect_px": [
+    [
+     600,
+     376
+    ],
+    [
+     686,
+     376
+    ],
+    [
+     686,
+     590
+    ],
+    [
+     600,
+     590
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "East block under the big tree; direction is a guess from the trace shape (taller than wide). Low confidence."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    392,
+    335
+   ],
+   [
+    645,
+    333
+   ],
+   [
+    686,
+    376
+   ],
+   [
+    686,
+    380
+   ],
+   [
+    600,
+    370
+   ],
+   [
+    396,
+    370
+   ]
+  ],
+  [
+   [
+    600,
+    440
+   ],
+   [
+    640,
+    418
+   ],
+   [
+    690,
+    430
+   ],
+   [
+    690,
+    592
+   ],
+   [
+    640,
+    602
+   ],
+   [
+    608,
+    588
+   ],
+   [
+    588,
+    520
+   ]
+  ],
+  [
+   [
+    485,
+    575
+   ],
+   [
+    527,
+    616
+   ],
+   [
+    485,
+    616
+   ]
+  ]
+ ],
+ "notes": "Axis-aligned single-story hip home. Trace overshoots the north eave by about 32 px (navy band), excluded. West block E-W hip, centre wing N-S hip (north and south hip-end triangles visible), east block under a dense tree (canopy excluded, direction guessed). Confidence medium for west and centre, low for east."
+}

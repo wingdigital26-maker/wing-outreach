@@ -1,0 +1,132 @@
+{
+ "image": "gtrace/34286/google.png",
+ "ft_per_px": 0.204,
+ "pieces": [
+  {
+   "name": "upper_north",
+   "rect_px": [
+    [
+     598,
+     292
+    ],
+    [
+     802,
+     243
+    ],
+    [
+     831,
+     365
+    ],
+    [
+     627,
+     414
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    55,
+    240
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "upper low-slope metal roof, dark = north facing, standing seams run down-slope; could be flat"
+  },
+  {
+   "name": "lower_south",
+   "rect_px": [
+    [
+     585,
+     412
+    ],
+    [
+     785,
+     358
+    ],
+    [
+     828,
+     517
+    ],
+    [
+     628,
+     571
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    -55,
+    -240
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "lower bright plane south of the white parapet line, faces south; could be flat"
+  },
+  {
+   "name": "west_sheds",
+   "rect_px": [
+    [
+     540,
+     330
+    ],
+    [
+     590,
+     318
+    ],
+    [
+     652,
+     576
+    ],
+    [
+     602,
+     588
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    -55,
+    -240
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "stack of narrow parallel planes on the west side, alternating lit/dark, low confidence"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    680,
+    490
+   ],
+   [
+    760,
+    490
+   ],
+   [
+    760,
+    560
+   ],
+   [
+    680,
+    560
+   ]
+  ],
+  [
+   [
+    560,
+    562
+   ],
+   [
+    700,
+    530
+   ],
+   [
+    720,
+    592
+   ],
+   [
+    560,
+    602
+   ]
+  ]
+ ],
+ "notes": "Modern rotated house (~13 deg) with flat/low-slope planes and white parapet lines, hard to read. Confidence low: plane boundaries roughly from brightness, roof types may all be flat. Tree over the SE corner excluded."
+}

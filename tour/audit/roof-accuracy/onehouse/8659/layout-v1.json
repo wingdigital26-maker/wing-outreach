@@ -1,0 +1,86 @@
+{
+ "image": "gtrace/8659/google.png",
+ "ft_per_px": 0.2,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     405,
+     504
+    ],
+    [
+     600,
+     365
+    ],
+    [
+     713,
+     523
+    ],
+    [
+     518,
+     662
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0.814,
+    -0.58
+   ],
+   "gable_ends": [
+    "NE",
+    "SW"
+   ],
+   "notes": "simple gable, 48 by 39 ft, ridge along the long NE-SW axis through about (461,583) to (656,444); both faces are parallelograms so both ends are gable ends; NW face darker, SE face lighter"
+  },
+  {
+   "name": "front extension",
+   "rect_px": [
+    [
+     619,
+     590
+    ],
+    [
+     633,
+     610
+    ],
+    [
+     536,
+     679
+    ],
+    [
+     522,
+     659
+    ]
+   ],
+   "roof": "shed",
+   "ridge_dir_px": [
+    0.814,
+    -0.58
+   ],
+   "gable_ends": [],
+   "notes": "SE face continues about 5 ft further out along the SW half of the front, matches the step in the traced outline"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    470,
+    360
+   ],
+   [
+    560,
+    360
+   ],
+   [
+    565,
+    415
+   ],
+   [
+    480,
+    430
+   ]
+  ]
+ ],
+ "notes": "one gable with a shallow front extension; confidence high; dark blob on the SE face near (560,600) is a tree shadow, not a roof feature. Exclusions: tree crown overhanging the NW eave near the N corner"
+}

@@ -1,0 +1,1582 @@
+[
+ {
+  "persona": "Opening",
+  "screen": "opening",
+  "step": "watch the opening for 9s",
+  "expected": "ends on something actionable",
+  "happened": "ends at 1b-storm-theater.html",
+  "note": "",
+  "shot": "shots/desk-opening-2.png",
+  "sev": ""
+ },
+ {
+  "persona": "Opening",
+  "screen": "opening",
+  "step": "press a key to skip",
+  "expected": "skips",
+  "happened": "url after 1.2s: 1b-storm-theater.html",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Opening",
+  "screen": "opening",
+  "step": "open ?storm=1",
+  "expected": "storm variant",
+  "happened": "url 1a-storm-intro.html?storm=1",
+  "note": "",
+  "shot": "shots/desk-opening-storm1.png",
+  "sev": ""
+ },
+ {
+  "persona": "Opening",
+  "screen": "storm",
+  "step": "open 1b ?storm=1",
+  "expected": "storm variant",
+  "happened": "text: OpenFreeMap \u00a9 OpenMapTiles Data from OpenStreetMap / Red Dirt Roofing / Norman and south OKC / Good evening, Cody / Last storm Sep 12, 23 days ago / Ask about any storm, street or home / Ctrl K / Roof Command by Wi",
+  "note": "",
+  "shot": "shots/desk-storm-storm1.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "open product.html",
+  "expected": "see what happened overnight at a glance",
+  "happened": "1.74s to load; shell shows tabs Opening/Storm map/Daily 50/Home/Ask Nimbus; the Opening intro starts (logo sculpture + hail)",
+  "note": "",
+  "shot": "shots/desk-cody-01-open.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "opening",
+  "step": "wait for the opening to hand off",
+  "expected": "it lands on something useful (overnight summary)",
+  "happened": "after ~9s frame is 1b-storm-theater.html, active tab 'Storm map', Nimbus bubble: 'Storm mapQuiet skies today. 539k homes watched.'",
+  "note": "",
+  "shot": "shots/desk-cody-03-after-intro.png",
+  "sev": "minor"
+ },
+ {
+  "persona": "Cody",
+  "screen": "storm",
+  "step": "read the landing screen",
+  "expected": "overnight summary: new storms, calls booked, follow-ups due",
+  "happened": "screen text begins: OpenFreeMap \u00a9 OpenMapTiles Data from OpenStreetMap / Red Dirt Roofing / Norman and south OKC / Good evening, Cody / Last storm Sep 12, 23 days ago / Ask about any storm, street or home / Ctrl K / Roof Command by Wing Digital / Your serv",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "click the Nimbus orb",
+  "expected": "a chat opens where I can ask what happened",
+  "happened": "chat open=False; text: ",
+  "note": "",
+  "shot": "shots/desk-cody-04-nimbus-chat.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "look for a text box in Nimbus chat",
+  "expected": "I can type a question",
+  "happened": "no input found in chat",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "press Esc with chat open",
+  "expected": "chat closes",
+  "happened": "chat still open=False",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "press Ctrl K",
+  "expected": "a command palette / search",
+  "happened": "palette found=True",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Daily 50",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /c4-command-deck/deck.html; Nimbus says 'Daily 5012 of 50 called. Next best window 4 to 6 pm.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/desk-cody-07-tab-daily50.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Home",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /c5-home/index.html; Nimbus says 'This homeFront slope took 1.75 in hail Sep 12.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/desk-cody-07-tab-home.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Ask Nimbus",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /c2-nimbus/index.html; Nimbus says 'Ask NimbusAsk me anything about your storms and homes.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/desk-cody-07-tab-asknimbus.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Storm map",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /1b-storm-theater.html; Nimbus says 'Storm mapQuiet skies today. 539k homes watched.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/desk-cody-07-tab-stormmap.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Opening",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /1a-storm-intro.html; Nimbus says 'Storm mapQuiet skies today. 539k homes watched.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/desk-cody-07-tab-opening.png",
+  "sev": ""
+ },
+ {
+  "persona": "cody",
+  "screen": "-",
+  "step": "task",
+  "expected": "",
+  "happened": "TASK ERR ",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "open storm map ?recent=1",
+  "expected": "the recent storm is front and centre with hardest-hit streets",
+  "happened": "4.63s; text: OpenFreeMap \u00a9 OpenMapTiles Data from OpenStreetMap / Red Dirt Roofing / Norman and south OKC / Good evening, Cody / Ask about any storm, street or home / Ctrl K / Roof Command by Wing Digital / Storms this season / Jul 11 / Aug 7 / Aug 16, 17 / Aug 21 / Sep 12 / Storm Map concept. Samp",
+  "note": "",
+  "shot": "shots/desk-storm-01-recent.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "find hardest-hit streets",
+  "expected": "a ranked list of streets",
+  "happened": "streets ranked on this screen: NO (only homes/towers, no street ranking)",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "click 'show' latest storm",
+  "expected": "the Sep 12 storm is selected, homes highlighted",
+  "happened": "text: OpenFreeMap \u00a9 OpenMapTiles Data from OpenStreetMap / Red Dirt Roofing / Norman and south OKC / Good evening, Cody / 2 days since the Sep 12 storm / Ask about any storm, street or home / Ctrl K / Roof Command by Win",
+  "note": "",
+  "shot": "shots/desk-storm-03-show-latest.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "click houses on the map (7 tries)",
+  "expected": "a home card opens",
+  "happened": "no home card opened by clicking around the centre; tiny targets",
+  "note": "",
+  "shot": "shots/desk-storm-04-no-house.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "click 'Open record'",
+  "expected": "the Home screen for this house opens",
+  "happened": "NOTHING happened, dead end",
+  "note": "",
+  "shot": "shots/desk-storm-05-open-record.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "queue homes to Daily 50 / plan a knock route from the map",
+  "expected": "a button to add hit homes to the Daily 50 and plan a route",
+  "happened": "'Daily 50' on screen: True; 'route' on screen: False",
+  "note": "",
+  "shot": "",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "click a timeline tick (storm 2)",
+  "expected": "swap to that storm",
+  "happened": "6 ticks, sizes ['44x128', '44x128', '44x128', '44x128', '44x128', '44x128']; text: OpenFreeMap \u00a9 OpenMapTiles Data from OpenStreetMap / Red Dirt Roofing / Norman and south OKC / Good evening, Cody / 38 days since the Aug 7 storm / Ask about any storm, s",
+  "note": "",
+  "shot": "shots/desk-storm-06-timeline-tick.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "open Ask Nimbus",
+  "expected": "I can ask which streets were hit and act",
+  "happened": "6.16s; text: Red Dirt Roofing / Roof Command, Norman OK / 1,755New hit / 214Called / 31Inspection booked / 12Proposal / 5Won / Powered by Wing Digital / C / OpenFreeMap \u00a9 OpenMapTiles Data from OpenStreetMap / Which streets got hit hardest Sep 12? / Cody, 7:42 am / z / z / z / W Lindsey St got it worst: 64 homes, hail up to 1.78 in. 14 still",
+  "note": "",
+  "shot": "shots/desk-storm-08-ask.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "type a question in the composer and send",
+  "expected": "an answer",
+  "happened": "composer text after typing: 'Ask Nimbus about a storm, street or home'; page changed=False",
+  "note": "",
+  "shot": "shots/desk-storm-09-ask-typed.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "tap 3rd street (S Berry Rd)",
+  "expected": "map flies there, answer updates",
+  "happened": "answer: Five streets took the core of the swath. W Lindsey St has the most homes you have not called yet.",
+  "note": "",
+  "shot": "shots/desk-storm-10-ask-street.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Add 38 homes to Daily 50'",
+  "expected": "they appear in Daily 50",
+  "happened": "button now '38 homes added to Daily 50'",
+  "note": "",
+  "shot": "shots/desk-storm-11-ask-added.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "daily",
+  "step": "open Daily 50 after adding 38 homes",
+  "expected": "38 Lindsey/Berry homes are in the queue",
+  "happened": "Lindsey in deck=False; Berry=False; deck text: Red Dirt Roofing / Norman and south OKC / Today / Pipeline / Map / Homes / Storms / Find an address / Powered by / Wing Digital / C / Morning, Cody. /  / 50 homes from the May 8 hail are queued for today, closest first. Callin",
+  "note": "",
+  "shot": "shots/desk-storm-12-daily-after-add.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Plan a route'",
+  "expected": "something happens",
+  "happened": "state changed",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Compare with Aug 21'",
+  "expected": "something happens",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Who picked up yesterday?'",
+  "expected": "something happens",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "console",
+  "expected": "no errors",
+  "happened": "warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; error: Error: Cannot style non-existing layer \"homes\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setP; error: Error: Cannot style non-existing layer \"dots\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setPa; error: Error: Cannot style non-existing layer \"rib\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setPai; error: Error: Cannot style non-existing layer \"edge\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setPa; warning: Expected value to be of type number, but found null instead.",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open Daily 50",
+  "expected": "today's first stop, big Call button",
+  "happened": "4.42s; text: Red Dirt Roofing / Norman and south OKC / Today / Pipeline / Map / Homes / Storms / Find an address / Powered by / Wing Digital / C / Morning, Cody. /  / 50 homes from the May 8 hail are queued for today, closest first. Calling opens at 8am. /  / 8am to 8pm / Three calls per home in 24 hours",
+  "note": "",
+  "shot": "shots/desk-rep-01-deck.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Pipeline",
+  "expected": "opens that section",
+  "happened": "NOTHING happened, dead tab",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Map",
+  "expected": "opens that section",
+  "happened": "NOTHING happened, dead tab",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Homes",
+  "expected": "opens that section",
+  "happened": "NOTHING happened, dead tab",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Storms",
+  "expected": "opens that section",
+  "happened": "NOTHING happened, dead tab",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "read the first card",
+  "expected": "address, hail, best time, owner, one tap to call",
+  "happened": "1.32 in hail / 13 of 50 / 23.6 squares, 5/12 pitch, measured from the drawing (sample) / 413 S. Pickard Avenue /  / Norman, OK 73069. Owner on file. /  / New hit / Hail at home / 1.32in / Roof age / 21yrs, 2005 / Best time / 4 to 6 pm /  / Hit on May 8. No roof permit on file since 2005. Two homes on Pickard Avenue booked inspec",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap Call on the first card",
+  "expected": "phone dials; then I pick an outcome (no answer / spoke / booked)",
+  "happened": "button said 'Logged, pick result' then card auto-advanced to: 2.34 in hail / 14 of 50 / 19.4 squares, 6/12 pitch, measured from the drawing (sample) / 1211 Ann Arbor Dr; any tel: link on deck=False; no outcome picker appeared",
+  "note": "",
+  "shot": "shots/desk-rep-03-call-pressed.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap Text",
+  "expected": "a draft I can read/edit/send (only if opted in)",
+  "happened": "button now 'Draft ready'; draft visible=False; nothing to read or send",
+  "note": "",
+  "shot": "shots/desk-rep-05-text.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap Skip",
+  "expected": "next stop, with a reason/undo",
+  "happened": "'1211 Ann Arbor Drive\n\nNorman, OK 73069. ' -> '1411 Windsor Way\n\nNorman, OK 73069. Owne'; no reason asked, no undo",
+  "note": "",
+  "shot": "shots/desk-rep-06-skip.png",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "swipe the card right",
+  "expected": "clear meaning (right = ?)",
+  "happened": "card swiped and advanced; swipe direction meaning is not labelled on screen",
+  "note": "",
+  "shot": "shots/desk-rep-07-swipe-mid.png",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "roof sheet",
+  "expected": "",
+  "happened": "ERR Locator.click: Timeout 3000ms exceeded.\nCall log:\n  - waiting for locator(\".card[data-d=\\\"0\\\"] [data",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open Route sheet",
+  "expected": "",
+  "happened": "peek bar not visible at this size (desktop shows side panels)",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open Pipeline sheet",
+  "expected": "",
+  "happened": "peek bar not visible at this size (desktop shows side panels)",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap queue row 6",
+  "expected": "jumps to that stop",
+  "happened": "card now: 1.41 in hail / 18 of 50 / 18.9 squares, 6/12 pitch, measured fro",
+  "note": "",
+  "shot": "shots/desk-rep-12-queue-jump.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "click a pipeline stage",
+  "expected": "filters to that stage",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open the full record of the current stop",
+  "expected": "tap the address to open Home",
+  "happened": "any 'Open record'/'Open home' control: False; address is not a link",
+  "note": "",
+  "shot": "",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "open Home",
+  "expected": "the home I was just on (from Daily 50)",
+  "happened": "7.15s; shows: RD / Red Dirt Roofing / Roof Command / Sep 12 hit list / 2417 Cedar Ridge Ln / Concept, sample data / Powered by Wing Digital / 2417 Cedar Ridge Ln / Called / Norman, OK 73069 / Owner on file / Assigned to Cody / Call / Text; address matches deck=False",
+  "note": "",
+  "shot": "shots/desk-rep-13-home.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "click a roof plane to measure",
+  "expected": "plane highlights, area and squares shown",
+  "happened": "meas pill/sheet: 'Front slope | Plane | undefined'; found plane=True",
+  "note": "",
+  "shot": "shots/desk-rep-14-plane.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Book",
+  "expected": "a booking/text/note flow",
+  "happened": "state changed",
+  "note": "",
+  "shot": "shots/desk-rep-17-book.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Text",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/desk-rep-17-text.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap More",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/desk-rep-17-more.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Done",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/desk-rep-17-done.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Reschedule",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/desk-rep-17-reschedule.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Add a note",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/desk-rep-17-addanote.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "click Activity tab 'Calls'",
+  "expected": "filters the timeline",
+  "happened": "NOTHING happened, dead (and it is a span, not a button)",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "Call link",
+  "expected": "dials the owner",
+  "happened": "tel links: ['tel:+14055550118', 'tel:+14055550118']; same sample number on all = True",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "move to the next stop",
+  "expected": "a 'Next stop' button back into the Daily 50",
+  "happened": "'Next' control present=False; crumb says 'Sep 12 hit list / 2417 Cedar Ridge Ln' but is not a link",
+  "note": "",
+  "shot": "",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "browser Back",
+  "expected": "returns to Daily 50 at the same stop",
+  "happened": "url c4-command-deck/deck.html",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "console",
+  "expected": "no errors",
+  "happened": "warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "load 1b-storm-theater.html?recent=1",
+  "expected": "loads fast",
+  "happened": "2.47s, 11 visible controls, 4 under 44px tap target",
+  "note": "",
+  "shot": "shots/desk-sweep-storm-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "8 live, 3 dead. Dead: a \"OpenFreeMap\"; a \"\u00a9 OpenMapTiles\"; a \"OpenStreetMap\"",
+  "note": "[{\"label\": \"OpenFreeMap\", \"tag\": \"a\", \"w\": 58, \"h\": 10, \"cls\": \"\"}, {\"label\": \"\\u00a9 OpenMapTiles\", \"tag\": \"a\", \"w\": 67, \"h\": 10, \"cls\": \"\"}, {\"label\": \"OpenStreetMap\", \"tag\": \"a\", \"w\": 64, \"h\": 10, \"cls\": \"\"}]",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=0; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "CANVAS Map outline:solid 2px",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "load c4-command-deck/deck.html",
+  "expected": "loads fast",
+  "happened": "2.78s, 59 visible controls, 6 under 44px tap target",
+  "note": "",
+  "shot": "shots/desk-sweep-daily-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "8 live, 37 dead. Dead: button \"Today\"; button \"Pipeline\"; button \"Map\"; button \"Homes\"; button \"Storms\"; button \"13 413 S. Pickard Ave 4 to 6 pm 1.32\"\"; button \"14 1211 Ann Arbor Dr 5 to 7 pm 2.34\"\"; button \"15 1411 Windsor Way 4 to 6 pm 1.64\"\"; button \"16 919 Leslie Ln 12 to 1 pm 1.54\"\"; button \"17 1417 Cruce St 12 to 1 pm 1.49\"\"; button \"18 613 W. Brooks St 8 to 10 am 1.41\"\"; button \"19 1203 W. Brooks St 9 to 11 am 1.85\"\"; button \"20 1107 S. Pickard Ave 8 to 10 am 2.09\"\"; button \"21 1215 S. Lahoma Ave 12 to 1 pm 2.18\"\"; button \"22 419 W. Symmes St 5 to 7 pm 1.81\"\"; button \"23 1603 S. Pickard Ave 8 to 10 am 1.50\"\"; button \"24 1309 W. Comanche St 4 to 6 pm 1.97\"\"; button \"Skip\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"Call\"",
+  "note": "[{\"label\": \"Today\", \"tag\": \"button\", \"w\": 70, \"h\": 30, \"cls\": \"on\"}, {\"label\": \"Pipeline\", \"tag\": \"button\", \"w\": 83, \"h\": 30, \"cls\": \"\"}, {\"label\": \"Map\", \"tag\": \"button\", \"w\": 60, \"h\": 30, \"cls\": \"\"}, {\"label\": \"Homes\", \"tag\": \"button\", \"w\": 77, \"h\": 30, \"cls\": \"\"}, {\"label\": \"Storms\", \"tag\": \"button\", \"w\": 78, \"h\": 30, \"cls\": \"\"}, {\"label\": \"13 413 S. Pickard Ave 4 to 6 pm 1.32\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow on\"}, {\"label\": \"14 1211 Ann Arbor Dr 5 to 7 pm 2.34\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"15 1411 Windsor Way 4 to 6 pm 1.64\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"16 919 Leslie Ln 12 to 1 pm 1.54\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"17 1417 Cruce St 12 to 1 pm 1.49\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"18 613 W. Brooks St 8 to 10 am 1.41\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"19 1203 W. Brooks St 9 to 11 am 1.85\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"20 1107 S. Pickard Ave 8 to 10 am 2.09\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"21 1215 S. Lahoma Ave 12 to 1 pm 2.18\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"22 419 W. Symmes St 5 to 7 pm 1.81\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"23 1603 S. Pickard Ave 8 to 10 am 1.50\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"24 1309 W. Comanche St 4 to 6 pm 1.97\\\"\", \"tag\": \"button\", \"w\": 270, \"h\": 51, \"cls\": \"qrow \"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 93, \"h\": 46, \"cls\": \"skp\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 185, \"h\": 45, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 117, \"h\": 45, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 92, \"h\": 45, \"cls\": \"skp\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 185, \"h\": 45, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 117, \"h\": 45, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 92, \"h\": 45, \"cls\": \"skp\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 185, \"h\": 45, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 117, \"h\": 45, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 92, \"h\": 45, \"cls\": \"skp\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 185, \"h\": 45, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 117, \"h\": 45, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 92, \"h\": 45, \"cls\": \"skp\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 185, \"h\": 45, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 117, \"h\": 45, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 92, \"h\": 45, \"cls\": \"skp\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 185, \"h\": 45, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 117, \"h\": 45, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 92, \"h\": 45, \"cls\": \"skp\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 185, \"h\": 45, \"cls\": \"call\"}]",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=3; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "BUTTON Call outline:solid 2px",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "load c5-home/index.html",
+  "expected": "loads fast",
+  "happened": "5.08s, 17 visible controls, 5 under 44px tap target",
+  "note": "",
+  "shot": "shots/desk-sweep-home-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "5 live, 12 dead. Dead: button \"Text\"; button \"Book\"; button \"More\"; div \"New hit Sep 12, 1.75 in hail\"; div \"2 Called Sep 15, voicemail left\"; div \"3 Inspection booked Not yet\"; div \"4 Proposal After inspection\"; div \"5 Won Signed contract\"; button \"Planes\"; button \"Add a note\"; button \"Done\"; button \"Reschedule\"",
+  "note": "[{\"label\": \"Text\", \"tag\": \"button\", \"w\": 97, \"h\": 46, \"cls\": \"\"}, {\"label\": \"Book\", \"tag\": \"button\", \"w\": 102, \"h\": 46, \"cls\": \"\"}, {\"label\": \"More\", \"tag\": \"button\", \"w\": 46, \"h\": 46, \"cls\": \"sq\"}, {\"label\": \"New hit Sep 12, 1.75 in hail\", \"tag\": \"div\", \"w\": 277, \"h\": 72, \"cls\": \"st dn\"}, {\"label\": \"2 Called Sep 15, voicemail left\", \"tag\": \"div\", \"w\": 277, \"h\": 72, \"cls\": \"st on\"}, {\"label\": \"3 Inspection booked Not yet\", \"tag\": \"div\", \"w\": 277, \"h\": 72, \"cls\": \"st\"}, {\"label\": \"4 Proposal After inspection\", \"tag\": \"div\", \"w\": 277, \"h\": 72, \"cls\": \"st\"}, {\"label\": \"5 Won Signed contract\", \"tag\": \"div\", \"w\": 277, \"h\": 72, \"cls\": \"st\"}, {\"label\": \"Planes\", \"tag\": \"button\", \"w\": 92, \"h\": 38, \"cls\": \"chip on\"}, {\"label\": \"Add a note\", \"tag\": \"button\", \"w\": 912, \"h\": 44, \"cls\": \"add\"}, {\"label\": \"Done\", \"tag\": \"button\", \"w\": 172, \"h\": 44, \"cls\": \"\"}, {\"label\": \"Reschedule\", \"tag\": \"button\", \"w\": 172, \"h\": 44, \"cls\": \"\"}]",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=0; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "none",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "load c2-nimbus/index.html",
+  "expected": "loads fast",
+  "happened": "2.62s, 16 visible controls, 8 under 44px tap target",
+  "note": "",
+  "shot": "shots/desk-sweep-ask-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "16 live, 0 dead. Dead: none",
+  "note": "[]",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=0; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "CANVAS Map outline:solid 2px",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "all",
+  "step": "tap targets under 44px",
+  "expected": "none on a phone",
+  "happened": "{\"storm\": [[\"OpenFreeMap\", 58, 10], [\"\\u00a9 OpenMapTiles\", 67, 10], [\"OpenStreetMap\", 64, 10], [\"Clear\", 57, 32]], \"daily\": [[\"Today\", 70, 30], [\"Pipeline\", 83, 30], [\"Map\", 60, 30], [\"Homes\", 77, 30], [\"Storms\", 78, 30], [\"Directions\", 115, 36]], \"home\": [[\"Planes\", 92, 38], [\"Edges\", 88, 38], [\"Dimensions\", 124, 38], [\"Hail\", 73, 38], [\"Explode\", 84, 40]], \"ask\": [[\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Compare with Aug 21\", 157, 32], [\"Who picked up yesterday?\", 186, 32], [\"Send\", 40, 40]]}",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "all",
+  "step": "console",
+  "expected": "no errors",
+  "happened": "PAGEERR: Cannot read properties of undefined (reading 'setData'); error: Error: Cannot style non-existing layer \"dots\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setPa; error: Error: Cannot style non-existing layer \"edge\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setPa; error: Error: Cannot style non-existing layer \"homes\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setP; error: Error: Cannot style non-existing layer \"rib\".\n    at de.setPaintProperty (https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js:46:128533)\n    at t.Map.setPai; warning: Expected value to be of type number, but found null instead.",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Opening",
+  "screen": "opening",
+  "step": "watch the opening for 9s",
+  "expected": "ends on something actionable",
+  "happened": "ends at 1b-storm-theater.html",
+  "note": "",
+  "shot": "shots/phone-opening-2.png",
+  "sev": ""
+ },
+ {
+  "persona": "Opening",
+  "screen": "opening",
+  "step": "press a key to skip",
+  "expected": "skips",
+  "happened": "url after 1.2s: 1b-storm-theater.html",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Opening",
+  "screen": "opening",
+  "step": "open ?storm=1",
+  "expected": "storm variant",
+  "happened": "url 1a-storm-intro.html?storm=1",
+  "note": "",
+  "shot": "shots/phone-opening-storm1.png",
+  "sev": ""
+ },
+ {
+  "persona": "Opening",
+  "screen": "storm",
+  "step": "open 1b ?storm=1",
+  "expected": "storm variant",
+  "happened": "text: Red Dirt Roofing / Norman and south OKC / Ask / Your area / all homes / Sep 12 / 1,755 homes / Aug 21 / 640 homes / Aug 17 / 97 homes / Aug 16 / 254 homes / Aug 7 / 988 homes / Jul 11 / 2 homes / Your service area / No hail in the last ",
+  "note": "",
+  "shot": "shots/phone-storm-storm1.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "open product.html",
+  "expected": "see what happened overnight at a glance",
+  "happened": "1.66s to load; shell shows tabs Opening/Storm map/Daily 50/Home/Ask Nimbus; the Opening intro starts (logo sculpture + hail)",
+  "note": "",
+  "shot": "shots/phone-cody-01-open.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "opening",
+  "step": "wait for the opening to hand off",
+  "expected": "it lands on something useful (overnight summary)",
+  "happened": "after ~9s frame is 1b-storm-theater.html, active tab 'Storm map', Nimbus bubble: 'NimbusMorning. I am Nimbus. I keep watch on the storms and the homes for you.'",
+  "note": "",
+  "shot": "shots/phone-cody-03-after-intro.png",
+  "sev": "minor"
+ },
+ {
+  "persona": "Cody",
+  "screen": "storm",
+  "step": "read the landing screen",
+  "expected": "overnight summary: new storms, calls booked, follow-ups due",
+  "happened": "screen text begins: Red Dirt Roofing / Norman and south OKC / Ask / Your area / all homes / Sep 12 / 1,755 homes / Aug 21 / 640 homes / Aug 17 / 97 homes / Aug 16 / 254 homes / Aug 7 / 988 homes / Jul 11 / 2 homes / Your service area / No hail in the last 3 days / Last storm Se",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "click the Nimbus orb",
+  "expected": "a chat opens where I can ask what happened",
+  "happened": "chat open=False; text: ",
+  "note": "",
+  "shot": "shots/phone-cody-04-nimbus-chat.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "look for a text box in Nimbus chat",
+  "expected": "I can type a question",
+  "happened": "no input found in chat",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "press Esc with chat open",
+  "expected": "chat closes",
+  "happened": "chat still open=False",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "press Ctrl K",
+  "expected": "a command palette / search",
+  "happened": "palette found=True",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Daily 50",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /c4-command-deck/deck.html; Nimbus says 'Daily 5012 of 50 called. Next best window 4 to 6 pm.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/phone-cody-07-tab-daily50.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Home",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /c5-home/index.html; Nimbus says 'This homeFront slope took 1.75 in hail Sep 12.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/phone-cody-07-tab-home.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Ask Nimbus",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /c2-nimbus/index.html; Nimbus says 'Ask NimbusAsk me anything about your storms and homes.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/phone-cody-07-tab-asknimbus.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Storm map",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /1b-storm-theater.html; Nimbus says 'Storm mapQuiet skies today. 539k homes watched.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/phone-cody-07-tab-stormmap.png",
+  "sev": ""
+ },
+ {
+  "persona": "Cody",
+  "screen": "shell",
+  "step": "tab Opening",
+  "expected": "screen swaps smoothly, state carries",
+  "happened": "frame /1a-storm-intro.html; Nimbus says 'Storm mapQuiet skies today. 539k homes watched.'; url bar product.html (no deep link)",
+  "note": "",
+  "shot": "shots/phone-cody-07-tab-opening.png",
+  "sev": ""
+ },
+ {
+  "persona": "cody",
+  "screen": "-",
+  "step": "task",
+  "expected": "",
+  "happened": "TASK ERR Page.go_back: Timeout 30000ms exceeded.\nCall log:\n  - waiting for navigation until \"load\"\n",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "open storm map ?recent=1",
+  "expected": "the recent storm is front and centre with hardest-hit streets",
+  "happened": "18.72s; text: Red Dirt Roofing / Norman and south OKC / Ask / Open record / Storm Map concept. Sample storms, homes and pipeline",
+  "note": "",
+  "shot": "shots/phone-storm-01-recent.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "find hardest-hit streets",
+  "expected": "a ranked list of streets",
+  "happened": "streets ranked on this screen: NO (only homes/towers, no street ranking)",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "click 'show' latest storm",
+  "expected": "selects latest",
+  "happened": "ERR Locator.click: Timeout 3000ms exceeded.\nCall log:\n  - waiting for locator(\"#show\")\n    - locator res",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "click houses on the map (7 tries)",
+  "expected": "a home card opens",
+  "happened": "no home card opened by clicking around the centre; tiny targets",
+  "note": "",
+  "shot": "shots/phone-storm-04-no-house.png",
+  "sev": "minor"
+ },
+ {
+  "persona": "Storm",
+  "screen": "storm",
+  "step": "queue homes to Daily 50 / plan a knock route from the map",
+  "expected": "a button to add hit homes to the Daily 50 and plan a route",
+  "happened": "'Daily 50' on screen: False; 'route' on screen: False",
+  "note": "",
+  "shot": "",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "open Ask Nimbus",
+  "expected": "I can ask which streets were hit and act",
+  "happened": "3.8s; text: Red Dirt Roofing / Roof Command, Norman OK / C / 1 / 2 / 3 / 4 / 5 / Which streets got hit hardest Sep 12? / z / z / z / W Lindsey St got it worst: 64 homes, hail up to 1.78 in. 14 still need a call. /  / Five streets took the core of the swath. W Lindsey St has the most homes you have not called yet. /  / From radar hail estimate",
+  "note": "",
+  "shot": "shots/phone-storm-08-ask.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "type a question in the composer and send",
+  "expected": "an answer",
+  "happened": "composer text after typing: 'Ask Nimbus about a storm, street or home'; page changed=False",
+  "note": "",
+  "shot": "shots/phone-storm-09-ask-typed.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "tap 3rd street (S Berry Rd)",
+  "expected": "map flies there, answer updates",
+  "happened": "answer: Five streets took the core of the swath. W Lindsey St has the most homes you have not called yet.",
+  "note": "",
+  "shot": "shots/phone-storm-10-ask-street.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Add 38 homes to Daily 50'",
+  "expected": "they appear in Daily 50",
+  "happened": "button now '38 homes added to Daily 50'",
+  "note": "",
+  "shot": "shots/phone-storm-11-ask-added.png",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "daily",
+  "step": "open Daily 50 after adding 38 homes",
+  "expected": "38 Lindsey/Berry homes are in the queue",
+  "happened": "Lindsey in deck=False; Berry=False; deck text: Red Dirt Roofing / Norman and south OKC / 12 of 50 / called today / 12 / Morning, Cody. /  / 50 homes from the May 8 hail are queued for today, closest first. Calling opens at 8am. /  / 8am to 8pmThree calls per home i",
+  "note": "",
+  "shot": "shots/phone-storm-12-daily-after-add.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Plan a route'",
+  "expected": "something happens",
+  "happened": "not visible at this size",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Compare with Aug 21'",
+  "expected": "something happens",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "click 'Who picked up yesterday?'",
+  "expected": "something happens",
+  "happened": "state changed",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Storm",
+  "screen": "ask",
+  "step": "console",
+  "expected": "no errors",
+  "happened": "PAGEERR: STH is not defined; PAGEERR: ST is not defined; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open Daily 50",
+  "expected": "today's first stop, big Call button",
+  "happened": "3.77s; text: Red Dirt Roofing / Norman and south OKC / 12 of 50 / called today / 12 / Morning, Cody. /  / 50 homes from the May 8 hail are queued for today, closest first. Calling opens at 8am. /  / 8am to 8pmThree calls per home in 24 hours, every one tapped by you. / 3 / inspections booked / 9 / ",
+  "note": "",
+  "shot": "shots/phone-rep-01-deck.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Pipeline",
+  "expected": "opens that section",
+  "happened": "not visible",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Map",
+  "expected": "opens that section",
+  "happened": "not visible",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Homes",
+  "expected": "opens that section",
+  "happened": "not visible",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "nav tab Storms",
+  "expected": "opens that section",
+  "happened": "not visible",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "read the first card",
+  "expected": "address, hail, best time, owner, one tap to call",
+  "happened": "1.32 in hail / 13 of 50 / 23.6 sq / 413 S. Pickard Avenue /  / Norman, OK 73069. Owner on file. /  / New hit / Hail at home / 1.32in / Roof age / 21yrs, 2005 / Best time / 4 to 6 pm /  / Hit on May 8. No roof permit on file since 2005. Two homes on Pickard Avenue booked inspections this week. /  / No calls yet / 0 of 3 calls in 24h / Ca",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap Call on the first card",
+  "expected": "phone dials; then I pick an outcome (no answer / spoke / booked)",
+  "happened": "button said 'Logged, pick result' then card auto-advanced to: 2.34 in hail / 14 of 50 / 19.4 sq / 1211 Ann Arbor Drive /  / Norman, OK 73069. Owner on file. /  / New hit / Hail a; any tel: link on deck=False; no outcome picker appeared",
+  "note": "",
+  "shot": "shots/phone-rep-03-call-pressed.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap Text",
+  "expected": "a draft I can read/edit/send (only if opted in)",
+  "happened": "button now 'Draft ready'; draft visible=False; nothing to read or send",
+  "note": "",
+  "shot": "shots/phone-rep-05-text.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap Skip",
+  "expected": "next stop, with a reason/undo",
+  "happened": "'1211 Ann Arbor Drive\n\nNorman, OK 73069. ' -> '1411 Windsor Way\n\nNorman, OK 73069. Owne'; no reason asked, no undo",
+  "note": "",
+  "shot": "shots/phone-rep-06-skip.png",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "swipe the card right",
+  "expected": "clear meaning (right = ?)",
+  "happened": "card swiped and advanced; swipe direction meaning is not labelled on screen",
+  "note": "",
+  "shot": "shots/phone-rep-07-swipe-mid.png",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "tap the roof squares button",
+  "expected": "roof measurement opens",
+  "happened": "roof sheet: 919 Leslie Ln / 60' / 8' / 33' / 12' / 12' / N / 20 ft / Planes / Edges / Dimensions / Hail / North slope\t6/12\t1,006 sq ft\t10.1 sq / South slope\t6/12\t905 sq ft\t9.1 sq / Wing west",
+  "note": "",
+  "shot": "shots/phone-rep-08-roof-sheet.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "from the roof sheet, open the full home / book inspection",
+  "expected": "a link to the Home screen and a Book button",
+  "happened": "'Open' in sheet=False; 'Book' in sheet=False",
+  "note": "",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open Route sheet",
+  "expected": "route map with stops, Directions button",
+  "happened": "Knock route / 13 / 14 / 15 / 16 / 17 / 18 / 19 / 20 / 21 / 22 / 23 / 24 / Knock route / 12 homes / 4.4 mi / Stop 16, 919 Leslie Ln / Then 1417 Cruce St, 2 min; 'Directions' present=False",
+  "note": "",
+  "shot": "shots/phone-rep-11-route.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open Pipeline sheet",
+  "expected": "route map with stops, Directions button",
+  "happened": "Pipeline / 1,750 homes hit / May 8 hail, 2.50 in max, Cleveland County, 1 in and up / 1,688 / New hit / 38 / Called / 14 / Inspection booked / 6 / Proposal / 4 / Won; 'Directions' present=False",
+  "note": "",
+  "shot": "shots/phone-rep-11-pipeline.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "queue",
+  "expected": "",
+  "happened": "ERR Locator.click: Element is not visible\nCall log:\n  - waiting for locator(\".qrow\").nth(5)\n    - locato",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "daily",
+  "step": "open the full record of the current stop",
+  "expected": "tap the address to open Home",
+  "happened": "any 'Open record'/'Open home' control: False; address is not a link",
+  "note": "",
+  "shot": "",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "open Home",
+  "expected": "the home I was just on (from Daily 50)",
+  "happened": "4.68s; shows: RD / Red Dirt Roofing / Roof Command / Concept, sample data / 2417 Cedar Ridge Ln / Called / Norman, OK 73069 / Owner on file / Assigned to Cody / New hit / 2 / Called / Sep 15, voicemail left / 3 / Inspection booked / 4 / Proposal / ; address matches deck=False",
+  "note": "",
+  "shot": "shots/phone-rep-13-home.png",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "click a roof plane to measure",
+  "expected": "plane highlights, area and squares shown",
+  "happened": "meas pill/sheet: 'Front slope | Front slope, 6/12 | undefined'; found plane=True",
+  "note": "",
+  "shot": "shots/phone-rep-14-plane.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Book",
+  "expected": "a booking/text/note flow",
+  "happened": "state changed",
+  "note": "",
+  "shot": "shots/phone-rep-17-book.png",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Text",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/phone-rep-17-text.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap More",
+  "expected": "",
+  "happened": "not visible",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Done",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/phone-rep-17-done.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Reschedule",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/phone-rep-17-reschedule.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "tap Add a note",
+  "expected": "a booking/text/note flow",
+  "happened": "NOTHING happened, dead",
+  "note": "",
+  "shot": "shots/phone-rep-17-addanote.png",
+  "sev": "major"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "click Activity tab 'Calls'",
+  "expected": "filters the timeline",
+  "happened": "NOTHING happened, dead (and it is a span, not a button)",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "Call link",
+  "expected": "dials the owner",
+  "happened": "tel links: ['tel:+14055550118', 'tel:+14055550118']; same sample number on all = True",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "move to the next stop",
+  "expected": "a 'Next stop' button back into the Daily 50",
+  "happened": "'Next' control present=False; crumb says 'Sep 12 hit list / 2417 Cedar Ridge Ln' but is not a link",
+  "note": "",
+  "shot": "",
+  "sev": "blocker"
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "browser Back",
+  "expected": "returns to Daily 50 at the same stop",
+  "happened": "url c4-command-deck/deck.html",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Rep",
+  "screen": "home",
+  "step": "console",
+  "expected": "no errors",
+  "happened": "warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.; warning: Expected value to be of type number, but found null instead.",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "load 1b-storm-theater.html?recent=1",
+  "expected": "loads fast",
+  "happened": "2.46s, 4 visible controls, 4 under 44px tap target",
+  "note": "",
+  "shot": "shots/phone-sweep-storm-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "0 live, 4 dead. Dead: button \"3D\"; button \"Zoom in\"; button \"Zoom out\"; button \"Open details\"",
+  "note": "[{\"label\": \"3D\", \"tag\": \"button\", \"w\": 40, \"h\": 40, \"cls\": \"nb\"}, {\"label\": \"Zoom in\", \"tag\": \"button\", \"w\": 40, \"h\": 40, \"cls\": \"nb ic\"}, {\"label\": \"Zoom out\", \"tag\": \"button\", \"w\": 40, \"h\": 40, \"cls\": \"nb ic\"}, {\"label\": \"Open details\", \"tag\": \"button\", \"w\": 390, \"h\": 26, \"cls\": \"handle\"}]",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=2; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "storm",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "BUTTON Open record outline:solid 2px",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "load c4-command-deck/deck.html",
+  "expected": "loads fast",
+  "happened": "2.57s, 59 visible controls, 16 under 44px tap target",
+  "note": "",
+  "shot": "shots/phone-sweep-daily-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "10 live, 35 dead. Dead: button \"19.4 sq\"; button \"20.6 sq\"; button \"22.8 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"19.3 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"18.9 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"23.2 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"18.8 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"19.7 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"24.3 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"23.8 sq\"; button \"Call\"; button \"Text\"; button \"Skip\"; button \"28.1 sq\"",
+  "note": "[{\"label\": \"19.4 sq\", \"tag\": \"button\", \"w\": 75, \"h\": 29, \"cls\": \"ex\"}, {\"label\": \"20.6 sq\", \"tag\": \"button\", \"w\": 72, \"h\": 28, \"cls\": \"ex\"}, {\"label\": \"22.8 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"19.3 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"18.9 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"23.2 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"18.8 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"19.7 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"24.3 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"23.8 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}, {\"label\": \"Call\", \"tag\": \"button\", \"w\": 128, \"h\": 52, \"cls\": \"call\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 82, \"h\": 52, \"cls\": \"txt\"}, {\"label\": \"Skip\", \"tag\": \"button\", \"w\": 56, \"h\": 52, \"cls\": \"skp\"}, {\"label\": \"28.1 sq\", \"tag\": \"button\", \"w\": 70, \"h\": 27, \"cls\": \"ex\"}]",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=4; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "daily",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "BUTTON Call outline:solid 2px",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "load c5-home/index.html",
+  "expected": "loads fast",
+  "happened": "2.94s, 17 visible controls, 0 under 44px tap target",
+  "note": "",
+  "shot": "shots/phone-sweep-home-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "5 live, 12 dead. Dead: div \"New hit\"; div \"2 Called Sep 15, voicemail left\"; div \"3 Inspection booked\"; div \"4 Proposal\"; div \"5 Won\"; button \"Planes\"; button \"Add a note\"; button \"Done\"; button \"Reschedule\"; button \"Text\"; button \"Book\"; button \"Back to whole roof\"",
+  "note": "[{\"label\": \"New hit\", \"tag\": \"div\", \"w\": 111, \"h\": 60, \"cls\": \"st dn\"}, {\"label\": \"2 Called Sep 15, voicemail left\", \"tag\": \"div\", \"w\": 183, \"h\": 60, \"cls\": \"st on\"}, {\"label\": \"3 Inspection booked\", \"tag\": \"div\", \"w\": 179, \"h\": 60, \"cls\": \"st\"}, {\"label\": \"4 Proposal\", \"tag\": \"div\", \"w\": 121, \"h\": 60, \"cls\": \"st\"}, {\"label\": \"5 Won\", \"tag\": \"div\", \"w\": 95, \"h\": 60, \"cls\": \"st\"}, {\"label\": \"Planes\", \"tag\": \"button\", \"w\": 82, \"h\": 44, \"cls\": \"chip on\"}, {\"label\": \"Add a note\", \"tag\": \"button\", \"w\": 322, \"h\": 44, \"cls\": \"add\"}, {\"label\": \"Done\", \"tag\": \"button\", \"w\": 157, \"h\": 44, \"cls\": \"\"}, {\"label\": \"Reschedule\", \"tag\": \"button\", \"w\": 157, \"h\": 44, \"cls\": \"\"}, {\"label\": \"Text\", \"tag\": \"button\", \"w\": 99, \"h\": 54, \"cls\": \"\"}, {\"label\": \"Book\", \"tag\": \"button\", \"w\": 99, \"h\": 54, \"cls\": \"\"}, {\"label\": \"Back to whole roof\", \"tag\": \"button\", \"w\": 44, \"h\": 44, \"cls\": \"\"}]",
+  "shot": "",
+  "sev": "major"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=0; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "home",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "BUTTON Back to whole roof outline:solid 2px",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "load c2-nimbus/index.html",
+  "expected": "loads fast",
+  "happened": "2.54s, 16 visible controls, 8 under 44px tap target",
+  "note": "",
+  "shot": "shots/phone-sweep-ask-00-loaded.png",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "click every control",
+  "expected": "every control does something visible",
+  "happened": "16 live, 0 dead. Dead: none",
+  "note": "[]",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "accessibility quick check",
+  "expected": "labels, contrast, focus",
+  "happened": "unlabelled controls=0; small text under 4.5:1 contrast: 0 e.g. []",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "ask",
+  "step": "press Tab once",
+  "expected": "visible focus ring on first control",
+  "happened": "CANVAS Map outline:solid 2px",
+  "note": "",
+  "shot": "",
+  "sev": ""
+ },
+ {
+  "persona": "Sweep",
+  "screen": "all",
+  "step": "tap targets under 44px",
+  "expected": "none on a phone",
+  "happened": "{\"storm\": [[\"3D\", 40, 40], [\"Zoom in\", 40, 40], [\"Zoom out\", 40, 40], [\"Open details\", 390, 26]], \"daily\": [[\"23.6 sq\", 78, 30], [\"19.4 sq\", 75, 29], [\"20.6 sq\", 72, 28], [\"22.8 sq\", 70, 27], [\"19.3 sq\", 70, 27], [\"18.9 sq\", 70, 27], [\"23.2 sq\", 70, 27], [\"18.8 sq\", 70, 27], [\"19.7 sq\", 70, 27], [\"24.3 sq\", 70, 27], [\"23.8 sq\", 70, 27], [\"28.1 sq\", 70, 27], [\"\", 36, 36], [\"Directions\", 40, 36], [\"\", 36, 36], [\"\", 36, 36]], \"home\": [], \"ask\": [[\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Map marker\", 30, 30], [\"Resize the conversation\", 390, ",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ },
+ {
+  "persona": "Sweep",
+  "screen": "all",
+  "step": "console",
+  "expected": "no errors",
+  "happened": "PAGEERR: STH is not defined; REQFAIL: http://localhost:4880/lib/st-map.js; error: Failed to load resource: the server responded with a status of 404 (File not found); warning: Expected value to be of type number, but found null instead.",
+  "note": "",
+  "shot": "",
+  "sev": "minor"
+ }
+]

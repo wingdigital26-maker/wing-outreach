@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>CRM direction C: Field ledger</title>
+<style>
+@font-face{font-family:'Instrument Sans';src:url(../../lib/st-fonts/instrument-sans-var-latin.woff2) format('woff2');font-weight:400 700}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Instrument Sans',system-ui,sans-serif;color:#15181F;background:#F4F1EA}
+.top{height:62px;display:flex;align-items:center;gap:16px;padding:0 28px;border-bottom:1px solid #15181F;background:#F4F1EA}
+.mark{width:34px;height:34px;border-radius:50%;background:#0D6C99}
+.top b{font-size:15px}.top small{display:block;color:#5C6170;font-size:12px}
+.nav{margin-left:20px;display:flex;gap:18px}
+.nav span{font-size:13.5px;color:#5C6170;padding:6px 0;border-bottom:2px solid transparent}.nav span.on{color:#15181F;border-color:#15181F;font-weight:600}
+.serif{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.01em}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7A7F8C}
+.wrap{display:grid;grid-template-columns:340px 1fr 460px;height:838px}
+.col{border-right:1px solid rgba(21,24,31,.18);display:flex;flex-direction:column;min-height:0}
+.h{padding:22px 24px 10px;display:flex;justify-content:space-between;align-items:baseline}
+.h h2{font-size:30px}
+.search{margin:6px 24px 12px;height:38px;border-bottom:1px solid #15181F;display:flex;align-items:center;font-size:13px;color:#7A7F8C}
+.fil{display:flex;gap:14px;margin:0 24px 8px;flex-wrap:wrap}
+.fil span{font-size:12px;color:#5C6170;padding:4px 0;border-bottom:1.5px solid transparent}.fil span.on{color:#15181F;border-color:#15181F;font-weight:600}
+.row{padding:14px 24px;border-top:1px solid rgba(21,24,31,.12);display:grid;gap:3px;position:relative}
+.row.on{background:#15181F;color:#F4F1EA}
+.row .t{display:flex;justify-content:space-between;align-items:baseline}
+.row b{font-size:16px;font-family:Georgia,serif;font-weight:400}
+.row .t small{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:#7A7F8C}.row.on .t small{color:#B9BCC6}
+.row small{font-size:12px;color:#5C6170}.row.on small{color:#B9BCC6}
+.row p{font-size:12.5px;line-height:1.4;margin-top:2px}
+.row .k{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#A3161F;margin-top:4px}
+.row.on .k{color:#F2B98A}
+/* conversation */
+.cv .h{flex-direction:column;align-items:flex-start;gap:4px}
+.cv .h b{font-size:34px;font-family:Georgia,serif;font-weight:400;line-height:1.05}
+.cv .h small{font-size:13px;color:#5C6170}
+.meta{display:grid;grid-template-columns:repeat(5,1fr);margin:6px 24px 12px;border-top:1px solid #15181F;border-bottom:1px solid #15181F}
+.meta div{padding:8px 0;font-size:12px}
+.meta div + div{padding-left:12px;border-left:1px solid rgba(21,24,31,.15)}
+.meta span{display:block;font-family:ui-monospace,Consolas,monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#7A7F8C}
+.meta b{font-weight:600}
+.acts{display:flex;gap:16px;margin:0 24px 10px;font-size:12.5px;font-weight:600}
+.acts span{text-decoration:underline;text-underline-offset:4px}
+.log{flex:1;min-height:0;padding:4px 24px 8px;display:flex;flex-direction:column;gap:14px}
+.e{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:start}
+.e .w{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:#7A7F8C;line-height:1.5;padding-top:3px}
+.e .w b{display:block;color:#15181F;font-weight:600}
+.e p{font-size:14px;line-height:1.5;padding:12px 14px;border:1px solid rgba(21,24,31,.18);border-radius:3px;background:#FBFAF6}
+.e.out p{border-left:3px solid #0D6C99}
+.e.in p{border-left:3px solid #A3161F;font-family:Georgia,serif;font-size:15px}
+.e.sys p{border:0;background:none;padding:2px 0;font-size:12px;color:#5C6170}
+.next{margin:0 24px 18px;border:1px solid #15181F;padding:14px 16px;background:#FBFAF6}
+.next .l{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600}
+.seg span{font-size:12px;color:#7A7F8C;margin-left:12px}.seg span.on{color:#15181F;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.next textarea{width:100%;margin-top:10px;border:0;border-bottom:1px solid rgba(21,24,31,.25);padding:6px 0;font:inherit;font-size:13.5px;height:64px;resize:none;background:transparent;font-family:Georgia,serif}
+.next .b{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:#5C6170}
+.pri{height:40px;padding:0 18px;background:#15181F;color:#F4F1EA;font-weight:600;font-size:13px;display:inline-flex;align-items:center}
+/* home */
+.sheet{margin:16px 20px 0;border:1px solid #15181F;background:#FBFAF6;position:relative}
+.sheet .cap{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #15181F;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.house{height:310px;position:relative;overflow:hidden;background:linear-gradient(rgba(21,24,31,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(21,24,31,.06) 1px,transparent 1px);background-size:24px 24px}
+.house img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
+.note{position:absolute;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;background:#15181F;color:#F4F1EA;padding:3px 7px}
+.note::after{content:"";position:absolute;width:40px;height:1px;background:#15181F;left:100%;top:50%}
+.big{padding:14px 16px 6px;display:flex;align-items:baseline;gap:12px}
+.big b{font-family:Georgia,serif;font-weight:400;font-size:44px;letter-spacing:-.02em;line-height:1}
+.big span{font-size:13px;color:#5C6170}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #15181F}
+.grid div{padding:10px 14px;border-right:1px solid rgba(21,24,31,.15)}
+.grid div:last-child{border-right:0}
+.grid span{display:block;font-family:ui-monospace,Consolas,monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#7A7F8C}
+.grid b{display:block;font-size:17px;margin-top:3px;font-weight:600}
+.grid small{font-size:11px;color:#5C6170}
+.fact{margin:14px 20px 0;font-size:13px;display:grid}
+.fact div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(21,24,31,.15)}
+.fact span{color:#5C6170}
+.stage{margin:14px 20px 0;display:flex;gap:0}
+.stage span{flex:1;font-size:11px;padding:8px 0;text-align:center;border-bottom:3px solid rgba(21,24,31,.12);color:#7A7F8C}
+.stage span.dn{border-color:#7A7F8C;color:#15181F}.stage span.on{border-color:#15181F;color:#15181F;font-weight:700}
+.book{margin:16px 20px 0;height:46px;background:#15181F;color:#F4F1EA;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px}
+.tag{position:absolute;right:28px;top:16px;font-size:11px;color:#5C6170;border:1px solid #15181F;padding:4px 10px}
+</style></head><body>
+<div class="top"><div class="mark"></div><div><b>Jackson Roofing</b><small>Roof Command, Plano, Frisco, Allen, McKinney, Richardson and Rockwall</small></div>
+  <div class="nav"><span>Today</span><span>Storms</span><span class="on">CRM</span><span>Ask</span></div><span class="tag">Direction C: Field ledger (prototype)</span></div>
+<div class="wrap">
+  <div class="col">
+    <div class="h"><h2 class="serif">Inbox</h2><span class="mono">3 homes</span></div>
+    <div class="search">Search address or owner</div>
+    <div class="fil"><span class="on">All</span><span>Due today 1</span><span>Overdue</span><span>Replied 1</span><span>Opted out</span><span>Any stage</span></div>
+    <div class="row on"><div class="t"><b>3405 O Malley Ct</b><small>11:04 AM</small></div><small>Wang Andy · Plano</small><p>“Who is this?”</p><div class="k">Replied · Day 3 due Sat · Contacted</div></div>
+    <div class="row"><div class="t"><b>3501 O Malley Ct</b><small>OCT 8</small></div><small>Meeds Michael V &amp; Kimberly · Plano</small><p>Drafted: “Hi, this is Chris with Jackson Roofing in Plano. Radar put hail around 1.1 inches…”</p><div class="k">Day 3 due today · Contacted</div></div>
+    <div class="row"><div class="t"><b>3713 Roundtree Way</b><small>OCT 7</small></div><small>Olivarez Rolando &amp; Yolanda · Plano</small><p>Email drafted: “Your roof after the Aug 12 hail”</p><div class="k">Day 7 due Mon · Contacted</div></div>
+  </div>
+  <div class="col cv">
+    <div class="h"><b>3405 O Malley Ct</b><small>Wang Andy · Plano, TX 75023 · (972) 555-0100 (sample phone)</small></div>
+    <div class="meta"><div><span>Stage</span><b>Contacted</b></div><div><span>Cadence</span><b>Day 3, due Sat</b></div><div><span>Hail</span><b>1.09 in</b></div><div><span>Roof</span><b>1987, no permit</b></div><div><span>Squares</span><b>59.8</b></div></div>
+    <div class="acts"><span>Log a reply</span><span>Opt out</span><span>Open home record</span></div>
+    <div class="log">
+      <div class="e out"><div class="w"><b>Thu, Oct 8</b>11:00 am<br>Text, drafted</div><p>Hi, this is Chris with Jackson Roofing in Plano. Radar put hail around 1.1 inches (quarter size) at 3405 O Malley Ct on Aug 12, 2025. Built 1987, no reroof permit in county records since. Would you want a free inspection? Text STOP and I won't text again.</p></div>
+      <div class="e in"><div class="w"><b>Reply</b>11:04 am<br>Text</div><p>Who is this?</p></div>
+      <div class="e sys"><div class="w">11:00 am</div><p>Moved to Contacted</p></div>
+    </div>
+    <div class="next"><div class="l"><span>Suggested answer: asked who this is</span><span class="seg"><span class="on">Text</span><span>Email</span></span></div>
+      <textarea>This is Chris with Jackson Roofing in Plano. I reached out about the Aug 12, 2025 hail at 3405 O Malley Ct. Happy to answer anything, or text STOP and I won't text again.</textarea>
+      <div class="b"><span>Goes from your phone, so replies come to you.</span><span class="pri">Open in Messages</span></div></div>
+  </div>
+  <div class="col" style="border-right:0">
+    <div class="sheet"><div class="cap"><span>Sheet 1 · 3405 O Malley Ct</span><span>Plano, TX 75023</span></div>
+      <div class="house"><img src="roof-crop.png" alt=""><span class="note" style="left:24px;top:60px">A 13.6 sq</span><span class="note" style="left:24px;top:120px">Hail faced E</span></div>
+      <div class="big"><b>59.8</b><span>squares · hip roof · 10/12 LiDAR 2018<br>measured from the building outline</span></div>
+      <div class="grid"><div><span>Hail</span><b>1.09 in</b><small>Aug 12, 2025 radar</small></div><div><span>Roof</span><b>1987</b><small>no reroof permit</small></div><div><span>Owner</span><b>Wang Andy</b><small>homestead</small></div></div></div>
+    <div class="stage"><span class="dn">New hit</span><span class="on">Contacted</span><span>Inspection</span><span>Proposal</span><span>Won</span></div>
+    <div class="fact"><div><span>Texts</span><b>Not yet opted in</b></div><div><span>Subdivision</span><b>Forest Creek Estates Phase III</b></div></div>
+    <div class="book">Book inspection</div>
+  </div>
+</div>
+</body></html>

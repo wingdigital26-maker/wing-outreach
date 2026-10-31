@@ -1,0 +1,252 @@
+[
+ {
+  "region": "collin-tx",
+  "row": 35276,
+  "query": "6337 BURNHAM",
+  "built": 2004,
+  "permits": 4,
+  "oldest": 2003,
+  "roof_years": [],
+  "later_building_permits": [
+   {
+    "permit": "B25-01985",
+    "parent": "",
+    "addr": "6337 BURNHAM ST",
+    "contractor": "DALLAS PWD INC",
+    "year": 2025,
+    "roofer": false,
+    "detail": {
+     "permit": "B25-01985",
+     "type": "BUILDING",
+     "subtype": "SKYWINDOOR",
+     "short_description": "",
+     "status": "EXPIRED",
+     "applied_date": "6/9/2025",
+     "issued_date": "6/9/2025",
+     "finaled_date": "",
+     "reroof": false
+    }
+   }
+  ]
+ },
+ {
+  "region": "collin-tx",
+  "row": 34780,
+  "query": "6458 MEMORIAL",
+  "built": 2003,
+  "permits": 7,
+  "oldest": 2002,
+  "roof_years": [],
+  "later_building_permits": []
+ },
+ {
+  "region": "collin-tx",
+  "row": 32361,
+  "query": "7419 CHINABERRY",
+  "built": 2002,
+  "permits": 3,
+  "oldest": 2002,
+  "roof_years": [],
+  "later_building_permits": []
+ },
+ {
+  "region": "collin-tx",
+  "row": 36436,
+  "query": "5438 WIDGEON",
+  "built": 1997,
+  "permits": 8,
+  "oldest": 1997,
+  "roof_years": [],
+  "later_building_permits": [
+   {
+    "permit": "B11-1468",
+    "parent": "",
+    "addr": "5438 WIDGEON WAY",
+    "contractor": "UPGRADES",
+    "year": 2011,
+    "roofer": false,
+    "detail": {
+     "permit": "B11-1468",
+     "type": "BUILDING",
+     "subtype": "SALT",
+     "short_description": "210 SQ FT, SALT / PATIO COVER",
+     "status": "COMPLETED",
+     "applied_date": "6/15/2011",
+     "issued_date": "6/15/2011",
+     "finaled_date": "10/18/2011",
+     "reroof": false
+    }
+   },
+   {
+    "permit": "HZ10-1586",
+    "parent": "",
+    "addr": "5438 WIDGEON WAY",
+    "contractor": "",
+    "year": 2010,
+    "roofer": false,
+    "detail": {
+     "permit": "HZ10-1586",
+     "type": "HAZARDOUS WASTE",
+     "subtype": "",
+     "short_description": "",
+     "status": "COMPLETED",
+     "applied_date": "9/9/2010",
+     "issued_date": "",
+     "finaled_date": "",
+     "reroof": false
+    }
+   }
+  ]
+ },
+ {
+  "region": "collin-tx",
+  "row": 35469,
+  "query": "7672 FOSSIL",
+  "built": 1999,
+  "permits": 5,
+  "oldest": 1999,
+  "roof_years": [
+   2012,
+   2018
+  ],
+  "later_building_permits": [
+   {
+    "permit": "B12-3455",
+    "parent": "",
+    "addr": "7672 FOSSIL RIDGE DR",
+    "contractor": "BILLY ODOM ROOFING INC",
+    "year": 2012,
+    "roofer": true,
+    "detail": {
+     "permit": "B12-3455",
+     "type": "BUILDING",
+     "subtype": "SALT",
+     "short_description": "REROOF/SALT/84SQS",
+     "status": "COMPLETED",
+     "applied_date": "12/4/2012",
+     "issued_date": "12/4/2012",
+     "finaled_date": "1/21/2013",
+     "reroof": true
+    }
+   },
+   {
+    "permit": "B18-01161",
+    "parent": "P1999-0085",
+    "addr": "7672 FOSSIL RIDGE DR",
+    "contractor": "OSCAR G LONG",
+    "year": 2018,
+    "roofer": false,
+    "detail": {
+     "permit": "B18-01161",
+     "type": "BUILDING",
+     "subtype": "SALT",
+     "short_description": "SALT / REROOF",
+     "status": "COMPLETED",
+     "applied_date": "3/1/2018",
+     "issued_date": "3/5/2018",
+     "finaled_date": "4/6/2018",
+     "reroof": true
+    }
+   },
+   {
+    "permit": "HZ08-0619",
+    "parent": "",
+    "addr": "7672 FOSSIL RIDGE DR",
+    "contractor": "",
+    "year": 2008,
+    "roofer": false,
+    "detail": {
+     "permit": "HZ08-0619",
+     "type": "HAZARDOUS WASTE",
+     "subtype": "",
+     "short_description": "",
+     "status": "COMPLETED",
+     "applied_date": "6/17/2008",
+     "issued_date": "",
+     "finaled_date": "",
+     "reroof": false
+    }
+   }
+  ]
+ },
+ {
+  "region": "collin-tx",
+  "row": 36251,
+  "query": "4969 BUENA",
+  "built": 2002,
+  "permits": 7,
+  "oldest": 2002,
+  "roof_years": [],
+  "later_building_permits": []
+ },
+ {
+  "region": "collin-tx",
+  "row": 67062,
+  "query": "15304 PLUM",
+  "built": 2000,
+  "permits": 2,
+  "oldest": 2019,
+  "roof_years": [],
+  "later_building_permits": []
+ },
+ {
+  "region": "collin-tx",
+  "row": 32591,
+  "query": "7882 DAYLILY",
+  "built": 2001,
+  "permits": 8,
+  "oldest": 2001,
+  "roof_years": [],
+  "later_building_permits": [
+   {
+    "permit": "HZ09-0117",
+    "parent": "",
+    "addr": "7882 DAYLILY WAY",
+    "contractor": "",
+    "year": 2009,
+    "roofer": false,
+    "detail": {
+     "permit": "HZ09-0117",
+     "type": "HAZARDOUS WASTE",
+     "subtype": "",
+     "short_description": "",
+     "status": "COMPLETED",
+     "applied_date": "1/7/2009",
+     "issued_date": "",
+     "finaled_date": "",
+     "reroof": false
+    }
+   }
+  ]
+ },
+ {
+  "region": "collin-tx",
+  "row": 62645,
+  "query": "9636 SEAN",
+  "built": 2000,
+  "permits": 5,
+  "oldest": 2000,
+  "roof_years": [],
+  "later_building_permits": [
+   {
+    "permit": "HZ08-2102",
+    "parent": "",
+    "addr": "9636 SEAN DR",
+    "contractor": "",
+    "year": 2008,
+    "roofer": false,
+    "detail": {
+     "permit": "HZ08-2102",
+     "type": "HAZARDOUS WASTE",
+     "subtype": "",
+     "short_description": "",
+     "status": "COMPLETED",
+     "applied_date": "12/15/2008",
+     "issued_date": "",
+     "finaled_date": "",
+     "reroof": false
+    }
+   }
+  ]
+ }
+]

@@ -1,0 +1,107 @@
+{
+ "m249051": {
+  "errs": [],
+  "rec": {
+   "titleH": "26.6 sq measured, hip and gable roof, pitch 4/12",
+   "titleP": "Measured from LiDAR roof facets (2018): 7 facets, each at its own pitch and height, 4/12. Drag to turn it, click a plane to measure it.",
+   "focus": "Total26.6sq measuredPitch4/12Facets7",
+   "tfoot": "Total4/122,661 sq ft26.6",
+   "rows": 7,
+   "rsub": "New hit 1-story Richardson, TX 75081 Highland Estates 2 Owner name not available",
+   "tag": null,
+   "report": "Squares, measured26.62,469 sq ft plan Order with waste29.812% waste, hips and valleys Pitch, hip and gable roof4/124/12 main Facets7planes measured Stories1from LiDAR roof heightTop-down diagram lengths in ft2612252012241210242514391735721257A \u00b7 4/12B \u00b7 4/12C \u00b7 4/12D \u00b7 4/12E \u00b7 4/12F \u00b7 4/12G \u00b7 14/12N20 ftRidgeHipValleyEaveRakeStep flashingWall flashingEdge lengthsEdgeLengthConfidenceRidges39 ft87%Hips90 ft87%Valleys29 ft87%Eaves187 ft87%Rakes21 ft87%Flashing17 ft87%Materials Drip edge eaves + rakes208 ft Starter eaves + rakes208 ft Ridge cap ridges + hips129 ft Shingles 12% waste29.8 sqConfidence Squares87%Pitch87% Facets87%Stories86% Verify on site. Measured from 2018 LiDAR roof returns and ",
+   "proposal": "",
+   "next": "Next taskToday, noon to 8 pmSend the first textOn the Jun 2 storm list. Built 1961, no reroof permit on file. Texting closed at 8 pm and opens again at 9 am. DoneBook",
+   "stamp": null,
+   "roof": {
+    "sq": 26.6,
+    "p": 4,
+    "p2": 0,
+    "f": 7,
+    "st": 1,
+    "detail": null
+   },
+   "measure": {
+    "facet": true,
+    "squares": 26.6,
+    "waste": 12,
+    "pitch": "4/12",
+    "shape": "hip and gable roof",
+    "planes": 7,
+    "drawn": false,
+    "pitchMeasured": true
+   }
+  },
+  "report": "Squares, measured 26.6 2,469 sq ft plan Order with waste 29.8 12% waste, hips and valleys Pitch, hip and gable roof 4/12 4/12 main Facets 7 planes measured Stories 1 from LiDAR roof height TOP-DOWN DIAGRAM lengths in ft 26 12 25 20 12 24 12 10 24 25 14 39 17 35 7 21 25 7 A \u00b7 4/12 B \u00b7 4/12 C \u00b7 4/12 D \u00b7 4/12 E \u00b7 4/12 F \u00b7 4/12 G \u00b7 14/12 N 20 ft Ridge Hip Valley Eave Rake Step flashing Wall flashing EDGE LENGTHS Edge Length Confidence Ridges 39 ft 87% Hips 90 ft 87% Valleys 29 ft 87% Eaves 187 ft 87% Rakes 21 ft 87% Flashing 17 ft 87% MATERIALS Drip edge eaves + rakes 208 ft Starter eaves + rakes 208 ft Ridge cap ridges + hips 129 ft Shingles 12% waste 29.8 sq CONFIDENCE Squares 87% Pitch 87% Facets 87% Stories 86% Verify on site. Measured from 2018 LiDAR roof returns and the building outline, not a field measurement. Order from these numbers only after the roof is walked."
+ },
+ "m207416": {
+  "errs": [],
+  "rec": {
+   "titleH": "~47.7 sq (est.), hip roof, pitch est. (no LiDAR)",
+   "titleP": "Estimated, lower confidence: roof planes drawn from LiDAR (2018), 13 facets, pitch est. 8/12. Drag to turn it, click a plane to measure it.",
+   "focus": "Total~47.7sq (est.)Pitch est.No LiDARPlanes13",
+   "tfoot": "Total8/124,765 sq ft~47.7",
+   "rows": 13,
+   "rsub": "New hit 1-story Richardson, TX 75082 Wyndsor Estates No III Owner name not available",
+   "tag": null,
+   "report": "Squares, est.~47.73,973 sq ft plan Order with waste54.915% waste, hips and valleys Pitch, hip and gable roof8/128/12 main Facets13planes, est. Stories1from LiDAR roof heightTop-down diagram lengths in ft1130313112152931332630281229925988144317243770A \u00b7 8/12B \u00b7 8/12C \u00b7 8/12D \u00b7 8/12E \u00b7 8/12F \u00b7 8/12G \u00b7 8/12H \u00b7 6/12I \u00b7 7/12J \u00b7 8/12K \u00b7 6/12L \u00b7 6/12M \u00b7 13/12N20 ftRidgeHipValleyEaveRakeStep flashingWall flashingEdge lengthsEdgeLengthConfidenceRidges40 ft86%Hips315 ft86%Valleys34 ft86%Eaves230 ft86%Rakes59 ft86%Flashing0 ft86%Materials Drip edge eaves + rakes289 ft Starter eaves + rakes289 ft Ridge cap ridges + hips355 ft Shingles 15% waste54.9 sqConfidence Squares86%Pitch86% Facets86%Stories95% Low",
+   "proposal": "",
+   "next": "Next taskToday, noon to 8 pmSend the first textOn the Jun 2 storm list. Built 1997, no reroof permit on file. Texting closed at 8 pm and opens again at 9 am. DoneBook",
+   "stamp": null,
+   "roof": {
+    "sq": 47.7,
+    "p": 8,
+    "p2": 0,
+    "f": 13,
+    "st": 1,
+    "detail": null
+   },
+   "measure": {
+    "facet": false,
+    "squares": 47.7,
+    "waste": 15,
+    "pitch": "8/12",
+    "shape": "hip roof",
+    "planes": 13,
+    "drawn": false,
+    "pitchMeasured": false
+   }
+  },
+  "report": "Squares, est. ~47.7 3,973 sq ft plan Order with waste 54.9 15% waste, hips and valleys Pitch, hip and gable roof 8/12 8/12 main Facets 13 planes, est. Stories 1 from LiDAR roof height TOP-DOWN DIAGRAM lengths in ft 11 30 31 31 12 15 29 31 33 26 30 28 12 29 9 25 9 8 8 14 43 17 24 37 70 A \u00b7 8/12 B \u00b7 8/12 C \u00b7 8/12 D \u00b7 8/12 E \u00b7 8/12 F \u00b7 8/12 G \u00b7 8/12 H \u00b7 6/12 I \u00b7 7/12 J \u00b7 8/12 K \u00b7 6/12 L \u00b7 6/12 M \u00b7 13/12 N 20 ft Ridge Hip Valley Eave Rake Step flashing Wall flashing EDGE LENGTHS Edge Length Confidence Ridges 40 ft 86% Hips 315 ft 86% Valleys 34 ft 86% Eaves 230 ft 86% Rakes 59 ft 86% Flashing 0 ft 86% MATERIALS Drip edge eaves + rakes 289 ft Starter eaves + rakes 289 ft Ridge cap ridges + hips 355 ft Shingles 15% waste 54.9 sq CONFIDENCE Squares 86% Pitch 86% Facets 86% Stories 95% Lower confidence. The roof planes are drawn from LiDAR, but the figures here are shown as estimates (est.). Ver"
+ },
+ "m164153": {
+  "errs": [],
+  "rec": {
+   "titleH": "54.7 sq measured, hip and gable roof, pitch 12/12 + 7/12",
+   "titleP": "Measured from LiDAR roof facets (2018): 25 facets, each at its own pitch and height, 12/12 + 7/12. Drag to turn it, click a plane to measure it.",
+   "focus": "Total54.7sq measuredPitch12/12 + 7/12Facets25",
+   "tfoot": "Total12/12 + 7/125,472 sq ft54.7",
+   "rows": 25,
+   "rsub": "New hit 2-story Plano, TX 75025 Whiffletree V Owner name not available",
+   "tag": null,
+   "report": "Squares, measured54.75,472 sq ft of roof, range 51.6 to 57.8 Order with waste6417% waste, hips and valleys Pitch, hip and gable roof12/12 + 7/1212/12 56%7/12 36%11/12 5% Facets25planes measured Stories2from LiDAR roof heightTop-down diagram lengths in ft1112811152115142015212992011910241517971162084310117131610261813222887796149108248792681172418181834A \u00b7 12/12B \u00b7 12/12C \u00b7 12/12D \u00b7 7/12E \u00b7 12/12F \u00b7 7/12G \u00b7 12/12H \u00b7 7/12I \u00b7 7/12J \u00b7 7/12K \u00b7 11/12L \u00b7 7/12M \u00b7 12/12N \u00b7 12/12O \u00b7 12/12P \u00b7 7/12Q \u00b7 7/12R \u00b7 7/12S \u00b7 12/12T \u00b7 12/12U \u00b7 9/12V \u00b7 2/12W \u00b7 10/12X \u00b7 9/12Y \u00b7 12/12N20 ftRidgeHipValleyEaveRakeStep flashingWall flashingEdge lengthsEdgeLengthConfidenceRidges77 ft58%Hips263 ft48%Valleys160 ft38%Eave",
+   "proposal": "",
+   "next": "Next taskToday, noon to 8 pmSend the first textOn the Jun 2 storm list. Built 1992, no reroof permit on file. Texting closed at 8 pm and opens again at 9 am. DoneBook",
+   "stamp": null,
+   "roof": {
+    "sq": 54.7,
+    "p": 12,
+    "p2": 7,
+    "f": 25,
+    "st": 2,
+    "detail": true
+   },
+   "measure": {
+    "facet": true,
+    "squares": 54.7,
+    "waste": 17,
+    "pitch": "12/12 + 7/12",
+    "shape": "hip and gable roof",
+    "planes": 25,
+    "drawn": false,
+    "pitchMeasured": true
+   }
+  },
+  "report": "Squares, measured 54.7 5,472 sq ft of roof, range 51.6 to 57.8 Order with waste 64 17% waste, hips and valleys Pitch, hip and gable roof 12/12 + 7/12 12/12 56%7/12 36%11/12 5% Facets 25 planes measured Stories 2 from LiDAR roof height TOP-DOWN DIAGRAM lengths in ft 11 12 8 11 15 21 15 14 20 15 21 29 9 20 11 9 10 24 15 17 9 7 11 6 20 8 43 10 11 7 13 16 10 26 18 13 22 28 8 7 7 9 6 14 9 10 8 24 8 7 9 26 8 11 7 24 18 18 18 34 A \u00b7 12/12 B \u00b7 12/12 C \u00b7 12/12 D \u00b7 7/12 E \u00b7 12/12 F \u00b7 7/12 G \u00b7 12/12 H \u00b7 7/12 I \u00b7 7/12 J \u00b7 7/12 K \u00b7 11/12 L \u00b7 7/12 M \u00b7 12/12 N \u00b7 12/12 O \u00b7 12/12 P \u00b7 7/12 Q \u00b7 7/12 R \u00b7 7/12 S \u00b7 12/12 T \u00b7 12/12 U \u00b7 9/12 V \u00b7 2/12 W \u00b7 10/12 X \u00b7 9/12 Y \u00b7 12/12 N 20 ft Ridge Hip Valley Eave Rake Step flashing Wall flashing EDGE LENGTHS Edge Length Confidence Ridges 77 ft 58% Hips 263 ft 48% Valleys 160 ft 38% Eaves 234 ft 58% Rakes 140 ft 43% Step flashing 59 ft 23% Wall flashing 33 ft 23% MAT"
+ }
+}

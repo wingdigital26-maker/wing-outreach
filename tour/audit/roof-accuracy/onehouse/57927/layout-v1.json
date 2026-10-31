@@ -1,0 +1,119 @@
+{
+ "image": "gtrace/57927/google.png",
+ "ft_per_px": 0.194,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     480,
+     393
+    ],
+    [
+     677,
+     393
+    ],
+    [
+     677,
+     625
+    ],
+    [
+     480,
+     625
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "notes": "main hip, 38 by 45 ft, N face is one dark triangle to the ridge N end near (580,473), S face triangle to about (580,523), short N-S ridge at x 580; W eave at x 480 runs from y 440 to 625"
+  },
+  {
+   "name": "garage",
+   "rect_px": [
+    [
+     413,
+     380
+    ],
+    [
+     523,
+     380
+    ],
+    [
+     523,
+     493
+    ],
+    [
+     413,
+     493
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "notes": "W garage wing, hip at the W end with hips meeting near (463,430), E-W ridge dies into the main W slope; its N eave sits about 2 ft N of the main N eave"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    434,
+    497
+   ],
+   [
+    480,
+    497
+   ],
+   [
+    480,
+    600
+   ],
+   [
+    434,
+    600
+   ]
+  ],
+  [
+   [
+    413,
+    341
+   ],
+   [
+    677,
+    341
+   ],
+   [
+    677,
+    380
+   ],
+   [
+    413,
+    380
+   ]
+  ],
+  [
+   [
+    380,
+    341
+   ],
+   [
+    413,
+    341
+   ],
+   [
+    413,
+    482
+   ],
+   [
+    380,
+    482
+   ]
+  ]
+ ],
+ "notes": "L-plan: main hip N-S plus garage hip E-W on the W; confidence high; the trace includes the N and W ground shadows and the open patio, flagged as exclusions. Exclusions: open patio with furniture and umbrella inside the traced outline, no roof over it; ground shadow N of the eaves, the trace overshoots the roof by about 7 ft here; shadow on the driveway W of the garage, trace overshoots the garage W eave by about 6 ft"
+}

@@ -1,0 +1,267 @@
+  [signin 1440] overflowX=0 clipped=0 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+signin errors: ['http400: https://wbtrsujvprbdojmxlkpe.supabase.co/auth/v1/token?grant_type=password', 'error: Failed to load resource: the server responded with a status of 400 () @ jvprbdojmxlkpe.supabase.co/auth/v1/token?grant_type=password']
+intro hash after 11.5s: #/daily errors: []
+TODAY LOAD 1440: first text -1.0s, first card -1.0s (+1.5s settle)
+  [today 1440] overflowX=0 clipped=0 small=15 suspect=11 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "10", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 26, "oy": 26}
+     overlaps {"a": "7697 Fossil Ridge Dr", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 174, "oy": 16}
+     overlaps {"a": "Clancy · 1.14 in hail · Built 1975, no reroof permit on file (county r", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "
+     overlaps {"a": "1.14\"", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 42, "oy": 15}
+     overlaps {"a": "8559 Hummingbird Dr", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 174, "oy": 8}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "43.9 sq10 planes, red took the hail", "ox": 193, "oy": 16}
+     small {"t": "2", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+     small {"t": "3", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+     small {"t": "4", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+     small {"t": "5", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+  interact fail button[data-a=text] Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("button[data-a=text]").fir
+  [05-today-email 1440] overflowX=0 clipped=0 small=15 suspect=11 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "10", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 26, "oy": 26}
+     overlaps {"a": "7697 Fossil Ridge Dr", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 174, "oy": 16}
+     overlaps {"a": "Clancy · 1.14 in hail · Built 1975, no reroof permit on file (county r", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "
+     overlaps {"a": "1.14\"", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 42, "oy": 15}
+     overlaps {"a": "8559 Hummingbird Dr", "b": "Follow-ups due first, then the storm's best homes by score. Homes you ", "ox": 174, "oy": 8}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "43.9 sq10 planes, red took the hail", "ox": 193, "oy": 16}
+     small {"t": "2", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+     small {"t": "3", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+     small {"t": "4", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+     small {"t": "5", "fs": 10.5, "cls": "stop maplibregl-marker maplibregl-marker"}
+  interact fail button[data-a=skip] Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("button[data-a=skip]").fir
+  interact fail #tabInbox Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#tabInbox").first
+    - l
+  interact fail #mExp Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#mExp").first
+    - locat
+  not visible: button[data-a=roof]
+today errors: []
+storm switch ~93.5s
+  [storms 1440] overflowX=0 clipped=0 small=4 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+     small {"t": "OpenFreeMap © OpenMapTiles Data from OpenStreetMap", "fs": 9, "cls": "maplibregl-ctrl-attrib-inner"}
+     small {"t": "OpenFreeMap", "fs": 9, "cls": ""}
+     small {"t": "© OpenMapTiles", "fs": 9, "cls": ""}
+     small {"t": "OpenStreetMap", "fs": 9, "cls": ""}
+  [storms-selected 1440] overflowX=0 clipped=0 small=4 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+     small {"t": "OpenFreeMap © OpenMapTiles Data from OpenStreetMap", "fs": 9, "cls": "maplibregl-ctrl-attrib-inner"}
+     small {"t": "OpenFreeMap", "fs": 9, "cls": ""}
+     small {"t": "© OpenMapTiles", "fs": 9, "cls": ""}
+     small {"t": "OpenStreetMap", "fs": 9, "cls": ""}
+  storm search fail Locator.fill: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#q").
+  [storms-mapclick 1440] overflowX=0 clipped=0 small=4 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+     small {"t": "OpenFreeMap © OpenMapTiles Data from OpenStreetMap", "fs": 9, "cls": "maplibregl-ctrl-attrib-inner"}
+     small {"t": "OpenFreeMap", "fs": 9, "cls": ""}
+     small {"t": "© OpenMapTiles", "fs": 9, "cls": ""}
+     small {"t": "OpenStreetMap", "fs": 9, "cls": ""}
+crm switch ~66.7s
+  [crm-inbox 1440] overflowX=0 clipped=1 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+     clipped {"t": "Stage", "sw": 43, "cw": 1, "cls": "vh"}
+  crm list items 13
+  [crm-pipeline 1440] overflowX=0 clipped=2 small=0 suspect=0 overlaps=0 lowContrast=6 hrefHash=0 emptyBtns=0
+     clipped {"t": "Search the board", "sw": 125, "cw": 1, "cls": "vh"}
+     clipped {"t": "Sort", "sw": 26, "cw": 1, "cls": "vh"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+  pipe card fail Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#pipePane [data-id], .pca
+  not visible button[data-t=act]
+  not visible button[data-t=notes]
+  not visible button[data-t=contact]
+  not visible button[data-m=dims]
+  not visible #bExplode
+  not visible button[data-p=home]
+crm/storm errors: ['warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a29c2e68-9f30-48ea-a7d7-452cdb12a6a6', 'warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a29c2e68-9f30-48ea-a7d7-452cdb12a6a6', 'warning: deck: Attribute instanceFillColors is normalized @ http://127.0.0.1:4886/tour/vendor/deck.gl@9.0.38/dist.min.js', 'warning: [.WebGL-0x792c069bea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html', 'warning: [.WebGL-0x792c069bea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html']
+ask switch ~64.3s
+  [ask 1440] overflowX=0 clipped=0 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+  [ask-answer 1440] overflowX=0 clipped=0 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+ALL console errors: ["warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a29c2e68-9f30-48ea-a7d7-452cdb12a6a6", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a29c2e68-9f30-48ea-a7d7-452cdb12a6a6", "warning: deck: Attribute instanceFillColors is normalized @ http://127.0.0.1:4886/tour/vendor/deck.gl@9.0.38/dist.min.js", "warning: [.WebGL-0x792c069bea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html", "warning: [.WebGL-0x792c069bea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/4e6cf11f-3f3f-450c-abd5-d93ab5c3747c", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/4e6cf11f-3f3f-450c-abd5-d93ab5c3747c", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/4e6cf11f-3f3f-450c-abd5-d93ab5c3747c"]
+  [signin 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=6 lowContrast=0 hrefHash=0 emptyBtns=0
+     overlaps {"a": "Storms", "b": "Jackson Roofing", "ox": 60, "oy": 14}
+     overlaps {"a": "Storms", "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall", "ox": 60, "oy": 28}
+     overlaps {"a": "CRM", "b": "Jackson Roofing", "ox": 88, "oy": 14}
+     overlaps {"a": "CRM", "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall", "ox": 88, "oy": 28}
+     overlaps {"a": "Ask", "b": "Jackson Roofing", "ox": 65, "oy": 14}
+     overlaps {"a": "Ask", "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall", "ox": 65, "oy": 28}
+signin errors: []
+intro hash after 11.5s: #/daily errors: []
+TODAY LOAD 390: first text -1.0s, first card -1.0s (+1.5s settle)
+  [today 390] overflowX=0 clipped=0 small=15 suspect=11 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "43.9 sq10 planes, red took the hail", "ox": 55, "oy": 13}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 87, "oy": 32}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 78, "oy": 12}
+     overlaps {"a": "7290 Ash St", "b": "7175 Maple St", "ox": 226, "oy": 15}
+     overlaps {"a": "7290 Ash St", "b": "43.8 sq10 planes, red took the hail", "ox": 66, "oy": 21}
+     overlaps {"a": "7290 Ash St", "b": "Measure", "ox": 17, "oy": 24}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+     small {"t": "Roof record", "fs": 10.5, "cls": ""}
+     small {"t": "Pitch", "fs": 10.5, "cls": ""}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+  interact fail button[data-a=text] Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("button[data-a=text]").fir
+  [05-today-email 390] overflowX=0 clipped=0 small=15 suspect=11 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "43.9 sq10 planes, red took the hail", "ox": 55, "oy": 13}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "Day 1 email", "ox": 49, "oy": 5}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 87, "oy": 32}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 78, "oy": 12}
+     overlaps {"a": "Measure", "b": "Appel Noelle. No email address on file for this homeowner: you add it ", "ox": 79, "oy": 23}
+     overlaps {"a": "Measure", "b": "Day 1 email", "ox": 79, "oy": 5}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+     small {"t": "Roof record", "fs": 10.5, "cls": ""}
+     small {"t": "Pitch", "fs": 10.5, "cls": ""}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+  [06-today-skip 390] overflowX=0 clipped=0 small=15 suspect=11 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "Measure", "b": "Home 3 of 50", "ox": 79, "oy": 24}
+     overlaps {"a": "Measure", "b": "Home 4 of 50", "ox": 76, "oy": 17}
+     overlaps {"a": "Measure", "b": "Home 5 of 50", "ox": 76, "oy": 17}
+     overlaps {"a": "Measure", "b": "Home 6 of 50", "ox": 76, "oy": 17}
+     overlaps {"a": "Measure", "b": "Home 7 of 50", "ox": 76, "oy": 17}
+     overlaps {"a": "Measure", "b": "Home 8 of 50", "ox": 76, "oy": 17}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+     small {"t": "Roof record", "fs": 10.5, "cls": ""}
+     small {"t": "Pitch", "fs": 10.5, "cls": ""}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+  interact fail #tabInbox Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#tabInbox").first
+    - l
+  interact fail #mExp Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#mExp").first
+    - locat
+  [09-today-roof 390] overflowX=0 clipped=0 small=15 suspect=11 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "7290 Ash St", "ox": 62, "oy": 12}
+     overlaps {"a": "Measure", "b": "Home 3 of 50", "ox": 79, "oy": 24}
+     overlaps {"a": "Measure", "b": "Home 4 of 50", "ox": 76, "oy": 17}
+     overlaps {"a": "Measure", "b": "Home 5 of 50", "ox": 76, "oy": 17}
+     overlaps {"a": "Measure", "b": "Home 6 of 50", "ox": 76, "oy": 17}
+     overlaps {"a": "Measure", "b": "Home 7 of 50", "ox": 76, "oy": 17}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+     small {"t": "Roof record", "fs": 10.5, "cls": ""}
+     small {"t": "Pitch", "fs": 10.5, "cls": ""}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+  m interact fail #openList Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#openList").first
+    - l
+  m interact fail #openRoute Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#openRoute").first
+    - 
+  m interact fail #openPipe Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#openPipe").first
+    - l
+today errors: ['warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/31f398d6-45ee-49e7-bdb7-f2cf9959dcd9']
+storm switch ~67.5s
+  [storms 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=2 lowContrast=0 hrefHash=0 emptyBtns=0
+     overlaps {"a": "No hail in the last 3 days", "b": "Undo", "ox": 58, "oy": 21}
+     overlaps {"a": "271,032 homes in four counties. Last storm Jun 2, 125 days ago, 6,546 ", "b": "Undo", "ox": 58, "oy": 17}
+  storm search fail Locator.fill: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#q").
+  [storms-mapclick 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=2 lowContrast=0 hrefHash=0 emptyBtns=0
+     overlaps {"a": "No hail in the last 3 days", "b": "Undo", "ox": 58, "oy": 21}
+     overlaps {"a": "271,032 homes in four counties. Last storm Jun 2, 125 days ago, 6,546 ", "b": "Undo", "ox": 58, "oy": 17}
+crm switch ~67.0s
+  [crm-inbox 390] overflowX=0 clipped=1 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+     clipped {"t": "Stage", "sw": 43, "cw": 1, "cls": "vh"}
+  crm list items 13
+  crm act fail button[data-act=text] Locator.click: Timeout 1500ms exceeded.
+Call log:
+  - waiting for locator("#sheetClose:visible").fir
+  crm act fail button[data-act=email] Locator.click: Timeout 1500ms exceeded.
+Call log:
+  - waiting for locator("#sheetClose:visible").fir
+  crm act fail button[data-act=book] Locator.click: Timeout 1500ms exceeded.
+Call log:
+  - waiting for locator("#sheetClose:visible").fir
+  crm act fail #bMore Locator.click: Timeout 1500ms exceeded.
+Call log:
+  - waiting for locator("#sheetClose:visible").fir
+  [crm-pipeline 390] overflowX=0 clipped=2 small=0 suspect=0 overlaps=0 lowContrast=2 hrefHash=0 emptyBtns=0
+     clipped {"t": "Search the board", "sw": 125, "cw": 1, "cls": "vh"}
+     clipped {"t": "Sort", "sw": 27, "cw": 1, "cls": "vh"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+  [crm-home 390] overflowX=0 clipped=0 small=4 suspect=0 overlaps=5 lowContrast=0 hrefHash=0 emptyBtns=0
+     overlaps {"a": "Planes", "b": "Text", "ox": 59, "oy": 17}
+     overlaps {"a": "Edges", "b": "Text", "ox": 59, "oy": 17}
+     overlaps {"a": "Dimensions", "b": "Text", "ox": 12, "oy": 17}
+     overlaps {"a": "Dimensions", "b": "Email", "ox": 39, "oy": 17}
+     overlaps {"a": "Hail", "b": "Email", "ox": 51, "oy": 17}
+     small {"t": "B", "fs": 9.5, "cls": ""}
+     small {"t": "D", "fs": 9.5, "cls": ""}
+     small {"t": "G", "fs": 9.5, "cls": ""}
+     small {"t": "H", "fs": 9.5, "cls": ""}
+  [38-crm-home-activity 390] overflowX=0 clipped=1 small=1 suspect=0 overlaps=1 lowContrast=0 hrefHash=0 emptyBtns=0
+     clipped {"t": "Search the board", "sw": 125, "cw": 1, "cls": "vh"}
+     overlaps {"a": "Hold a home, then drag it to a new stage, or use Move to. Tap a home t", "b": "No phone on file: email or knock", "ox": 319, "oy": 16}
+     small {"t": "Aug ’25", "fs": 10.5, "cls": ""}
+  [39-crm-home-notes 390] overflowX=0 clipped=1 small=0 suspect=0 overlaps=1 lowContrast=0 hrefHash=0 emptyBtns=0
+     clipped {"t": "Search the board", "sw": 125, "cw": 1, "cls": "vh"}
+     overlaps {"a": "Hold a home, then drag it to a new stage, or use Move to. Tap a home t", "b": "No phone on file: email or knock", "ox": 319, "oy": 16}
+  crm tab fail button[data-t=contact] Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("button[data-t=contact]:vi
+  crm tab fail button[data-m=dims] Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("button[data-m=dims]:visib
+  [42-crm-roof-explode 390] overflowX=0 clipped=1 small=0 suspect=0 overlaps=3 lowContrast=0 hrefHash=0 emptyBtns=0
+     clipped {"t": "Search the board", "sw": 125, "cw": 1, "cls": "vh"}
+     overlaps {"a": "Hold a home, then drag it to a new stage, or use Move to. Tap a home t", "b": "No phone on file: email or knock", "ox": 319, "oy": 17}
+     overlaps {"a": "Hold a home, then drag it to a new stage, or use Move to. Tap a home t", "b": "Text", "ox": 138, "oy": 9}
+     overlaps {"a": "Hold a home, then drag it to a new stage, or use Move to. Tap a home t", "b": "Email", "ox": 95, "oy": 9}
+  not visible button[data-p=home]
+crm/storm errors: ['warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/31f398d6-45ee-49e7-bdb7-f2cf9959dcd9', 'warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a0609a80-92e5-46fb-b1e2-a7d2a766b63c', 'warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a0609a80-92e5-46fb-b1e2-a7d2a766b63c', 'warning: deck: Attribute instanceFillColors is normalized @ http://127.0.0.1:4886/tour/vendor/deck.gl@9.0.38/dist.min.js', 'warning: [.WebGL-0x11ac001b0200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html', 'warning: [.WebGL-0x11ac001b0200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html']
+ask switch ~65.4s
+  [ask 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+  [ask-answer 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+ALL console errors: ["warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/31f398d6-45ee-49e7-bdb7-f2cf9959dcd9", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a0609a80-92e5-46fb-b1e2-a7d2a766b63c", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/a0609a80-92e5-46fb-b1e2-a7d2a766b63c", "warning: deck: Attribute instanceFillColors is normalized @ http://127.0.0.1:4886/tour/vendor/deck.gl@9.0.38/dist.min.js", "warning: [.WebGL-0x11ac001b0200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html", "warning: [.WebGL-0x11ac001b0200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/273496b5-52d9-4767-b5c3-19843426d9f3", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/273496b5-52d9-4767-b5c3-19843426d9f3", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/273496b5-52d9-4767-b5c3-19843426d9f3"]

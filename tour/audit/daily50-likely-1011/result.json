@@ -1,0 +1,1357 @@
+{
+ "n": 50,
+ "source": "precomputed",
+ "fileBuilt": "2026-10-11",
+ "fileStale": false,
+ "mode": "always-on",
+ "homesScored": 271032,
+ "candidates": 2400,
+ "excluded": {
+  "won": 0,
+  "notNow": 0,
+  "optedOut": 0,
+  "contacted24h": 0,
+  "inCadenceNotDue": 0,
+  "reroofedAfterStorm": 0,
+  "cooldown": 0,
+  "activeDeal": 0
+ },
+ "factors": {
+  "roofAge": 50,
+  "hail": 26,
+  "neighbours": 37,
+  "size": 50,
+  "owner": 50
+ },
+ "fromStorm": {
+  "2025-03-25": 10,
+  "2026-06-02": 6,
+  "no hail": 24,
+  "2026-04-27": 5,
+  "2025-08-12": 2,
+  "2025-05-18": 3
+ },
+ "spread": {
+  "streetCap": 3,
+  "neighbourhoodCap": 4,
+  "cityCap": {
+   "Allen": 9,
+   "Frisco": 18,
+   "McKinney": 17,
+   "Plano": 21,
+   "Richardson": 8,
+   "Rockwall": 5
+  },
+  "cellDeg": 0.02,
+  "passes": 1,
+  "rounds": 1,
+  "skippedByCaps": 40,
+  "poolCells": 214,
+  "cells": 50,
+  "streets": 49,
+  "neighbourhoods": 44,
+  "cities": {
+   "Allen": 9,
+   "McKinney": 10,
+   "Frisco": 9,
+   "Richardson": 8,
+   "Rockwall": 5,
+   "Plano": 9
+  }
+ },
+ "cities": {
+  "Allen": 9,
+  "McKinney": 10,
+  "Frisco": 9,
+  "Richardson": 8,
+  "Rockwall": 5,
+  "Plano": 9
+ },
+ "neighbourhoods": 44,
+ "cells2km": 50,
+ "lonSpan": 0.422,
+ "latSpan": 0.356,
+ "picks": [
+  {
+   "n": 1,
+   "address": "1524 Yorkshire Dr, Allen, TX 75002",
+   "nb": "bethany ridge estates",
+   "score": 84.2,
+   "parts": {
+    "roofAge": 40,
+    "hail": 9.2,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 26 years old (built 2000, no reroof permit on file)",
+    "19 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 47 squares (LiDAR measured, est.)",
+    "1.35 in hail on Mar 25, 2025",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Mar 2025)"
+   ],
+   "hail": 1.35,
+   "roofYear": 2000,
+   "squares": 46.7,
+   "neighbours": 19,
+   "ownerOccupied": true
+  },
+  {
+   "n": 2,
+   "address": "301 N College St, McKinney, TX 75069",
+   "nb": "mckinney outlots",
+   "score": 83.6,
+   "parts": {
+    "roofAge": 40,
+    "hail": 8.6,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1920, no reroof permit on file",
+    "12 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 49 squares (LiDAR measured, est.)",
+    "1.25 in hail on Mar 25, 2025"
+   ],
+   "hail": 1.25,
+   "roofYear": 1920,
+   "squares": 48.5,
+   "neighbours": 12,
+   "ownerOccupied": true
+  },
+  {
+   "n": 3,
+   "address": "6337 Burnham St, Frisco, TX 75034",
+   "nb": "frisco square",
+   "score": 82.1,
+   "parts": {
+    "roofAge": 40,
+    "hail": 16.5,
+    "neighbours": 5.6,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 22 years old (built 2004, no reroof permit on file)",
+    "1.41 in hail on Jun 2, the newest storm",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 79 squares (LiDAR measured, est.)",
+    "3 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Hit by 3 storms of 1 in or more (May 2024, Sep 2024, Jun 2026)"
+   ],
+   "hail": 1.41,
+   "roofYear": 2004,
+   "squares": 78.7,
+   "neighbours": 3,
+   "ownerOccupied": true
+  },
+  {
+   "n": 4,
+   "address": "2670 Daffodil Dr, Richardson, TX 75082",
+   "nb": "springpark north",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 35 years old (built 1991, no reroof permit on file)",
+    "8 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 47 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 1991,
+   "squares": 47.2,
+   "neighbours": 8,
+   "ownerOccupied": true
+  },
+  {
+   "n": 5,
+   "address": "4768 S Hwy205, Rockwall, TX 75032",
+   "nb": "a0080",
+   "score": 70.6,
+   "parts": {
+    "roofAge": 28,
+    "hail": 22.6,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1985, no reroof permit on file",
+    "2.15 in hail on Apr 27",
+    "Owner lives here (tax bill mails to the home)",
+    "Large roof, about 69 squares (LiDAR measured, est.)",
+    "Hit by 2 storms of 1 in or more (May 2024, Apr 2026)"
+   ],
+   "hail": 2.15,
+   "roofYear": 1985,
+   "squares": 68.9,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 6,
+   "address": "3441 Michael Dr, Plano, TX 75023",
+   "nb": "forest creek estates",
+   "score": 69.2,
+   "parts": {
+    "roofAge": 40,
+    "hail": 9.2,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1985, no reroof permit on file",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 61 squares (LiDAR measured, est.)",
+    "1.09 in hail on Aug 12, 2025",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 3 storms of 1 in or more (May 2024, May 2024, Aug 2025)"
+   ],
+   "hail": 1.09,
+   "roofYear": 1985,
+   "squares": 60.9,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 7,
+   "address": "1406 Fieldstone Dr, Allen, TX 75002",
+   "nb": "morningside",
+   "score": 83.1,
+   "parts": {
+    "roofAge": 40,
+    "hail": 8.1,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 26 years old (built 2000, no reroof permit on file)",
+    "13 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 47 squares (LiDAR measured, est.)",
+    "1.19 in hail on Mar 25, 2025"
+   ],
+   "hail": 1.19,
+   "roofYear": 2000,
+   "squares": 47,
+   "neighbours": 13,
+   "ownerOccupied": true
+  },
+  {
+   "n": 8,
+   "address": "1109 Ashhurst Ln, McKinney, TX 75071",
+   "nb": "lacima haven",
+   "score": 82.4,
+   "parts": {
+    "roofAge": 40,
+    "hail": 7.4,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 22 years old (built 2004, no reroof permit on file)",
+    "11 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 67 squares (LiDAR measured, est.)",
+    "1 in hail on May 18, 2025",
+    "Steep roof, pitch est. 12/12 (LiDAR estimate)"
+   ],
+   "hail": 1,
+   "roofYear": 2004,
+   "squares": 66.6,
+   "neighbours": 11,
+   "ownerOccupied": true
+  },
+  {
+   "n": 9,
+   "address": "6458 Memorial Dr, Frisco, TX 75034",
+   "nb": "chapel creek",
+   "score": 81.8,
+   "parts": {
+    "roofAge": 40,
+    "hail": 12.4,
+    "neighbours": 9.4,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 23 years old (built 2003, no reroof permit on file)",
+    "1.06 in hail on Jun 2, the newest storm",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 95 squares (LiDAR measured, est.)",
+    "5 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Steep roof, pitch est. 9/12 (LiDAR estimate)",
+    "Hit by 3 storms of 1 in or more (May 2024, Sep 2024, Jun 2026)"
+   ],
+   "hail": 1.06,
+   "roofYear": 2003,
+   "squares": 95,
+   "neighbours": 5,
+   "ownerOccupied": true
+  },
+  {
+   "n": 10,
+   "address": "3301 Hayley Ct, Richardson, TX 75082",
+   "nb": "sharp estates",
+   "score": 73.1,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 13.1,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 23 years old (built 2003, no reroof permit on file)",
+    "7 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 58 squares (LiDAR measured, est.)"
+   ],
+   "hail": null,
+   "roofYear": 2003,
+   "squares": 57.7,
+   "neighbours": 7,
+   "ownerOccupied": true
+  },
+  {
+   "n": 11,
+   "address": "4754 Parkwood Dr, Rockwall, TX 75032",
+   "nb": "benton woods",
+   "score": 70.6,
+   "parts": {
+    "roofAge": 28,
+    "hail": 22.6,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 30 years old if original (built 1996, no county permit records)",
+    "2.01 in hail on Apr 27",
+    "Owner lives here (tax bill mails to the home)",
+    "Large roof, about 81 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Apr 2026)"
+   ],
+   "hail": 2.01,
+   "roofYear": 1996,
+   "squares": 80.9,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 12,
+   "address": "3901 Woodlawn Ln, Plano, TX 75025",
+   "nb": "estates of forest creek",
+   "score": 69.2,
+   "parts": {
+    "roofAge": 40,
+    "hail": 9.2,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 38 years old (built 1988, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 59 squares (LiDAR measured, est.)",
+    "1.09 in hail on Aug 12, 2025",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)",
+    "Hit by 3 storms of 1 in or more (May 2024, May 2024, Aug 2025)"
+   ],
+   "hail": 1.09,
+   "roofYear": 1988,
+   "squares": 59.4,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 13,
+   "address": "4404 San Fernando Ln, McKinney, TX 75070",
+   "nb": "seville",
+   "score": 82.1,
+   "parts": {
+    "roofAge": 40,
+    "hail": 10,
+    "neighbours": 15,
+    "size": 7.1,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 36 years old (built 1990, no reroof permit on file)",
+    "8 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "1.46 in hail on Mar 25, 2025",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 36 squares (LiDAR measured, est.)"
+   ],
+   "hail": 1.46,
+   "roofYear": 1990,
+   "squares": 36.4,
+   "neighbours": 8,
+   "ownerOccupied": true
+  },
+  {
+   "n": 14,
+   "address": "925 Spring Brook Dr, Allen, TX 75002",
+   "nb": "fountain park sixth",
+   "score": 81.8,
+   "parts": {
+    "roofAge": 40,
+    "hail": 6.8,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1985, no reroof permit on file",
+    "8 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 49 squares (LiDAR measured, est.)",
+    "1 in hail on Mar 25, 2025",
+    "Steep roof, pitch est. 9/12 (LiDAR estimate)"
+   ],
+   "hail": 1,
+   "roofYear": 1985,
+   "squares": 49.2,
+   "neighbours": 8,
+   "ownerOccupied": true
+  },
+  {
+   "n": 15,
+   "address": "7419 Chinaberry Ln, Frisco, TX 75033",
+   "nb": "meadow hill estates",
+   "score": 80.2,
+   "parts": {
+    "roofAge": 40,
+    "hail": 12.3,
+    "neighbours": 9.4,
+    "size": 8.6,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 24 years old (built 2002, no reroof permit on file)",
+    "1.05 in hail on Jun 2, the newest storm",
+    "Owner lives here (homestead exemption)",
+    "5 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Large roof, about 41 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 4 storms of 1 in or more (Mar 2024, May 2024, Sep 2024, Jun 2026)"
+   ],
+   "hail": 1.05,
+   "roofYear": 2002,
+   "squares": 40.7,
+   "neighbours": 5,
+   "ownerOccupied": true
+  },
+  {
+   "n": 16,
+   "address": "4427 Kelly Dr, Richardson, TX 75082",
+   "nb": "mackenzie meadows",
+   "score": 73.1,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 13.1,
+    "size": 9.9,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 25 years old (built 2001, no reroof permit on file)",
+    "7 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 45 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 2001,
+   "squares": 44.8,
+   "neighbours": 7,
+   "ownerOccupied": true
+  },
+  {
+   "n": 17,
+   "address": "1216 Benton Woods Dr, Rockwall, TX 75032",
+   "nb": "benton woods",
+   "score": 70.6,
+   "parts": {
+    "roofAge": 28,
+    "hail": 22.6,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 29 years old if original (built 1997, no county permit records)",
+    "2.37 in hail on Apr 27",
+    "Owner lives here (tax bill mails to the home)",
+    "Large roof, about 61 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Apr 2026)"
+   ],
+   "hail": 2.37,
+   "roofYear": 1997,
+   "squares": 61,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 18,
+   "address": "1901 Hillcrest Dr, Plano, TX 75074",
+   "nb": "briarwood east",
+   "score": 61.9,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 1.9,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1973, no reroof permit on file",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 46 squares (LiDAR measured, est.)",
+    "1 neighbour reroofed in the last 12 months (within 1/4 mile)"
+   ],
+   "hail": null,
+   "roofYear": 1973,
+   "squares": 46.3,
+   "neighbours": 1,
+   "ownerOccupied": true
+  },
+  {
+   "n": 19,
+   "address": "5438 Widgeon Way, Frisco, TX 75034",
+   "nb": "starwood",
+   "score": 79.9,
+   "parts": {
+    "roofAge": 40,
+    "hail": 12.4,
+    "neighbours": 7.5,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 29 years old (built 1997, no reroof permit on file)",
+    "1.06 in hail on Jun 2, the newest storm",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 59 squares (LiDAR measured, est.)",
+    "4 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 3 storms of 1 in or more (May 2024, Sep 2024, Jun 2026)"
+   ],
+   "hail": 1.06,
+   "roofYear": 1997,
+   "squares": 59.4,
+   "neighbours": 4,
+   "ownerOccupied": true
+  },
+  {
+   "n": 20,
+   "address": "1619 Fir Harbor Ct, Allen, TX 75002",
+   "nb": "villages at maxwell creek",
+   "score": 79.6,
+   "parts": {
+    "roofAge": 40,
+    "hail": 7.3,
+    "neighbours": 15,
+    "size": 7.3,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 24 years old (built 2002, no reroof permit on file)",
+    "9 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "1.07 in hail on Mar 25, 2025",
+    "Large roof, about 37 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Mar 2025)"
+   ],
+   "hail": 1.07,
+   "roofYear": 2002,
+   "squares": 36.8,
+   "neighbours": 9,
+   "ownerOccupied": true
+  },
+  {
+   "n": 21,
+   "address": "6805 Bountiful Grove Dr, McKinney, TX 75070",
+   "nb": "harvest bend",
+   "score": 79.5,
+   "parts": {
+    "roofAge": 40,
+    "hail": 8.6,
+    "neighbours": 15,
+    "size": 5.8,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 22 years old (built 2004, no reroof permit on file)",
+    "12 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "1.26 in hail on Mar 25, 2025",
+    "About 33 squares (LiDAR measured, est.)"
+   ],
+   "hail": 1.26,
+   "roofYear": 2004,
+   "squares": 32.5,
+   "neighbours": 12,
+   "ownerOccupied": true
+  },
+  {
+   "n": 22,
+   "address": "320 Canyon Ridge Dr, Richardson, TX 75080",
+   "nb": "canyon creek country club",
+   "score": 71.3,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 11.3,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1971, no reroof permit on file",
+    "6 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 70 squares (LiDAR measured, est.)"
+   ],
+   "hail": null,
+   "roofYear": 1971,
+   "squares": 69.7,
+   "neighbours": 6,
+   "ownerOccupied": true
+  },
+  {
+   "n": 23,
+   "address": "2844 Fm549, Rockwall, TX 75032",
+   "nb": "lofland lake estates",
+   "score": 70.6,
+   "parts": {
+    "roofAge": 28,
+    "hail": 22.6,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 30 years old if original (built 1996, no county permit records)",
+    "2.09 in hail on Apr 27",
+    "Owner lives here (tax bill mails to the home)",
+    "Large roof, about 56 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 12/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Apr 2026)"
+   ],
+   "hail": 2.09,
+   "roofYear": 1996,
+   "squares": 55.6,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 24,
+   "address": "3109 Harvard Ct, Plano, TX 75093",
+   "nb": "creeks of willow bend",
+   "score": 60,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 22 years old (built 2004, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 91 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Sep 2024)"
+   ],
+   "hail": null,
+   "roofYear": 2004,
+   "squares": 91,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 25,
+   "address": "7672 Fossil Ridge Dr, Frisco, TX 75034",
+   "nb": "hickory springs",
+   "score": 79,
+   "parts": {
+    "roofAge": 40,
+    "hail": 13.3,
+    "neighbours": 5.6,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 27 years old (built 1999, no reroof permit on file)",
+    "1.14 in hail on Jun 2, the newest storm",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 77 squares (LiDAR measured, est.)",
+    "3 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Hit by 3 storms of 1 in or more (May 2024, Sep 2024, Jun 2026)"
+   ],
+   "hail": 1.14,
+   "roofYear": 1999,
+   "squares": 76.5,
+   "neighbours": 3,
+   "ownerOccupied": true
+  },
+  {
+   "n": 26,
+   "address": "5420 Ivyridge Ln, McKinney, TX 75071",
+   "nb": "robinson ridge",
+   "score": 77.6,
+   "parts": {
+    "roofAge": 40,
+    "hail": 8,
+    "neighbours": 11.3,
+    "size": 8.3,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 22 years old (built 2004, no reroof permit on file)",
+    "6 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 40 squares (LiDAR measured, est.)",
+    "1.08 in hail on May 18, 2025",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)"
+   ],
+   "hail": 1.08,
+   "roofYear": 2004,
+   "squares": 39.8,
+   "neighbours": 6,
+   "ownerOccupied": true
+  },
+  {
+   "n": 27,
+   "address": "1805 Green Meadow Cir, Allen, TX 75002",
+   "nb": "fair meadow",
+   "score": 75.3,
+   "parts": {
+    "roofAge": 40,
+    "hail": 7.8,
+    "neighbours": 7.5,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1982, no reroof permit on file",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 59 squares (LiDAR measured, est.)",
+    "1.14 in hail on Mar 25, 2025",
+    "4 neighbours reroofed in the last 12 months (within 1/4 mile)"
+   ],
+   "hail": 1.14,
+   "roofYear": 1982,
+   "squares": 59.2,
+   "neighbours": 4,
+   "ownerOccupied": true
+  },
+  {
+   "n": 28,
+   "address": "5720 Southern Cross Dr, Rockwall, TX 75032",
+   "nb": "chandlers landing",
+   "score": 70.6,
+   "parts": {
+    "roofAge": 28,
+    "hail": 22.6,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 34 years old if original (built 1992, no county permit records)",
+    "2.22 in hail on Apr 27",
+    "Owner lives here (tax bill mails to the home)",
+    "Large roof, about 51 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Apr 2026)"
+   ],
+   "hail": 2.22,
+   "roofYear": 1992,
+   "squares": 50.6,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 29,
+   "address": "327 Ridgebriar Dr, Richardson, TX 75080",
+   "nb": "canyon creek country club",
+   "score": 69.5,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 11.3,
+    "size": 8.2,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1970, no reroof permit on file",
+    "6 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 40 squares (LiDAR measured, est.)"
+   ],
+   "hail": null,
+   "roofYear": 1970,
+   "squares": 39.6,
+   "neighbours": 6,
+   "ownerOccupied": true
+  },
+  {
+   "n": 30,
+   "address": "1716 Cliffview Dr, Plano, TX 75093",
+   "nb": "cliffs of gleneagles",
+   "score": 60,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 32 years old (built 1994, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 84 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 12/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Sep 2024)"
+   ],
+   "hail": null,
+   "roofYear": 1994,
+   "squares": 83.6,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 31,
+   "address": "4969 Buena Vista Dr, Frisco, TX 75034",
+   "nb": "starwood",
+   "score": 76.9,
+   "parts": {
+    "roofAge": 40,
+    "hail": 13.1,
+    "neighbours": 3.8,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 24 years old (built 2002, no reroof permit on file)",
+    "1.12 in hail on Jun 2, the newest storm",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 87 squares (LiDAR measured, est.)",
+    "2 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 3 storms of 1 in or more (May 2024, Sep 2024, Jun 2026)"
+   ],
+   "hail": 1.12,
+   "roofYear": 2002,
+   "squares": 86.9,
+   "neighbours": 2,
+   "ownerOccupied": true
+  },
+  {
+   "n": 32,
+   "address": "7104 Langmuir Dr, McKinney, TX 75071",
+   "nb": "brightwood",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 7.5,
+    "neighbours": 7.5,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 23 years old (built 2003, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 49 squares (LiDAR measured, est.)",
+    "1.01 in hail on May 18, 2025",
+    "4 neighbours reroofed in the last 12 months (within 1/4 mile)"
+   ],
+   "hail": 1.01,
+   "roofYear": 2003,
+   "squares": 49,
+   "neighbours": 4,
+   "ownerOccupied": true
+  },
+  {
+   "n": 33,
+   "address": "402 Keith Dr, Allen, TX 75002",
+   "nb": "allenwood estates",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1962, no reroof permit on file",
+    "14 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 59 squares (LiDAR measured, est.)"
+   ],
+   "hail": null,
+   "roofYear": 1962,
+   "squares": 59,
+   "neighbours": 14,
+   "ownerOccupied": true
+  },
+  {
+   "n": 34,
+   "address": "2908 Wren Ln, Richardson, TX 75082",
+   "nb": "whitechapel",
+   "score": 68.6,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 9.4,
+    "size": 9.2,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 36 years old (built 1990, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "5 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Large roof, about 43 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 1990,
+   "squares": 42.7,
+   "neighbours": 5,
+   "ownerOccupied": true
+  },
+  {
+   "n": 35,
+   "address": "6512 Indian Trl, Plano, TX 75024",
+   "nb": "shoal creek",
+   "score": 60,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 31 years old (built 1995, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 72 squares (LiDAR measured, est.)",
+    "Hit by 3 storms of 1 in or more (May 2024, May 2024, Sep 2024)"
+   ],
+   "hail": null,
+   "roofYear": 1995,
+   "squares": 72,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 36,
+   "address": "13 Carter Ct, Allen, TX 75002",
+   "nb": "twin mills",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 26 years old (built 2000, no reroof permit on file)",
+    "8 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 60 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 2000,
+   "squares": 60,
+   "neighbours": 8,
+   "ownerOccupied": true
+  },
+  {
+   "n": 37,
+   "address": "4921 Highlands Dr, McKinney, TX 75070",
+   "nb": "eldorado heights",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 28 years old (built 1998, no reroof permit on file)",
+    "8 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 81 squares (LiDAR measured, est.)"
+   ],
+   "hail": null,
+   "roofYear": 1998,
+   "squares": 81.1,
+   "neighbours": 8,
+   "ownerOccupied": true
+  },
+  {
+   "n": 38,
+   "address": "15304 Plum Ln, Frisco, TX 75072",
+   "nb": "russwood acres",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 26 years old (built 2000, no reroof permit on file)",
+    "12 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 77 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 9/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 2000,
+   "squares": 76.8,
+   "neighbours": 12,
+   "ownerOccupied": true
+  },
+  {
+   "n": 39,
+   "address": "5601 Baskerville Dr, Richardson, TX 75082",
+   "nb": "wyndsor estates",
+   "score": 67.5,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 7.5,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 28 years old (built 1998, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 49 squares (LiDAR measured, est.)",
+    "4 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Steep roof, pitch est. 9/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 1998,
+   "squares": 48.6,
+   "neighbours": 4,
+   "ownerOccupied": true
+  },
+  {
+   "n": 40,
+   "address": "1308 Eastwick Ln, Plano, TX 75093",
+   "nb": "kings court of willow bend",
+   "score": 60,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 32 years old (built 1994, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 71 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 1994,
+   "squares": 70.5,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 41,
+   "address": "411 N College St, McKinney, TX 75069",
+   "nb": "mckinney outlots",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1965, no reroof permit on file",
+    "10 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 61 squares (LiDAR measured, est.)"
+   ],
+   "hail": null,
+   "roofYear": 1965,
+   "squares": 60.5,
+   "neighbours": 10,
+   "ownerOccupied": true
+  },
+  {
+   "n": 42,
+   "address": "7882 Daylily Way, Frisco, TX 75033",
+   "nb": "meadow hill estates",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 25 years old (built 2001, no reroof permit on file)",
+    "8 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 46 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)",
+    "Hit by 3 storms of 1 in or more (Mar 2024, May 2024, Sep 2024)"
+   ],
+   "hail": null,
+   "roofYear": 2001,
+   "squares": 45.5,
+   "neighbours": 8,
+   "ownerOccupied": true
+  },
+  {
+   "n": 43,
+   "address": "1815 Armstrong Dr, Allen, TX 75002",
+   "nb": "stacy ridge estates",
+   "score": 74.8,
+   "parts": {
+    "roofAge": 40,
+    "hail": 7.3,
+    "neighbours": 7.5,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 23 years old (built 2003, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 51 squares (LiDAR measured, est.)",
+    "4 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "1.06 in hail on Mar 25, 2025",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)"
+   ],
+   "hail": 1.06,
+   "roofYear": 2003,
+   "squares": 50.5,
+   "neighbours": 4,
+   "ownerOccupied": true
+  },
+  {
+   "n": 44,
+   "address": "3605 Tanner Ln, Richardson, TX 75082",
+   "nb": "mackenzie meadows",
+   "score": 67.5,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 7.5,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 31 years old (built 1995, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 45 squares (LiDAR measured, est.)",
+    "4 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 1995,
+   "squares": 45.4,
+   "neighbours": 4,
+   "ownerOccupied": true
+  },
+  {
+   "n": 45,
+   "address": "3841 Ranch Estates Dr, Plano, TX 75074",
+   "nb": "ranch estates",
+   "score": 60,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1970, no reroof permit on file",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 78 squares (LiDAR measured, est.)"
+   ],
+   "hail": null,
+   "roofYear": 1970,
+   "squares": 77.8,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 46,
+   "address": "607 N Church St, McKinney, TX 75069",
+   "nb": "w",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Older home, built 1910, no reroof permit on file",
+    "10 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 58 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 1910,
+   "squares": 58.2,
+   "neighbours": 10,
+   "ownerOccupied": true
+  },
+  {
+   "n": 47,
+   "address": "9636 Sean Dr, Frisco, TX 75035",
+   "nb": "smith estates",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 26 years old (built 2000, no reroof permit on file)",
+    "8 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 47 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)",
+    "Hit by 3 storms of 1 in or more (May 2024, May 2024, Sep 2024)"
+   ],
+   "hail": null,
+   "roofYear": 2000,
+   "squares": 46.7,
+   "neighbours": 8,
+   "ownerOccupied": true
+  },
+  {
+   "n": 48,
+   "address": "933 South Fork Dr, Allen, TX 75013",
+   "nb": "waterford trails",
+   "score": 74.1,
+   "parts": {
+    "roofAge": 40,
+    "hail": 7.9,
+    "neighbours": 7.5,
+    "size": 8.8,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 23 years old (built 2003, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 41 squares (LiDAR measured, est.)",
+    "1.15 in hail on Mar 25, 2025",
+    "4 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Steep roof, pitch est. 8/12 (LiDAR estimate)"
+   ],
+   "hail": 1.15,
+   "roofYear": 2003,
+   "squares": 41.3,
+   "neighbours": 4,
+   "ownerOccupied": true
+  },
+  {
+   "n": 49,
+   "address": "6429 Shady Oaks Ln, Plano, TX 75093",
+   "nb": "cypress point",
+   "score": 60,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 0,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 31 years old (built 1995, no reroof permit on file)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 69 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 10/12 (LiDAR estimate)",
+    "Hit by 2 storms of 1 in or more (May 2024, Sep 2024)"
+   ],
+   "hail": null,
+   "roofYear": 1995,
+   "squares": 69.3,
+   "neighbours": 0,
+   "ownerOccupied": true
+  },
+  {
+   "n": 50,
+   "address": "8505 Beech Ln, McKinney, TX 75072",
+   "nb": "hackberry ridge",
+   "score": 75,
+   "parts": {
+    "roofAge": 40,
+    "hail": 0,
+    "neighbours": 15,
+    "size": 10,
+    "owner": 10
+   },
+   "why": [
+    "Roof is about 26 years old (built 2000, no reroof permit on file)",
+    "9 neighbours reroofed in the last 12 months (within 1/4 mile)",
+    "Owner lives here (homestead exemption)",
+    "Large roof, about 51 squares (LiDAR measured, est.)",
+    "Steep roof, pitch est. 9/12 (LiDAR estimate)"
+   ],
+   "hail": null,
+   "roofYear": 2000,
+   "squares": 51.1,
+   "neighbours": 9,
+   "ownerOccupied": true
+  }
+ ],
+ "rowText": [
+  "1 1524 Yorkshire Dr Games \u00b7 Roof 26 yrs old \u00b7 19 nearby reroofs \u00b7 Owner lives here \u00b7 ~47 sq \u00b7 1.35 in hail Mar 25, 2025 \u00b7 Steep 8/12 \u00b7 2 storms 1.35\"",
+  "2 301 N College St Mccune \u00b7 Built 1920 \u00b7 12 nearby reroofs \u00b7 Owner lives here \u00b7 ~49 sq \u00b7 1.25 in hail Mar 25, 2025 1.25\"",
+  "3 6337 Burnham St Judkins \u00b7 Roof 22 yrs old \u00b7 1.41 in hail Jun 2 \u00b7 Owner lives here \u00b7 ~79 sq \u00b7 3 nearby reroofs \u00b7 3 storms 1.41\"",
+  "4 2670 Daffodil Dr Larkin \u00b7 Roof 35 yrs old \u00b7 8 nearby reroofs \u00b7 Owner lives here \u00b7 ~47 sq \u00b7 Steep 8/12",
+  "5 4768 S Hwy205 Humphrey \u00b7 Built 1985 \u00b7 2.15 in hail Apr 27 \u00b7 Owner lives here \u00b7 ~69 sq \u00b7 2 storms 2.15\"",
+  "6 3441 Michael Dr Rosenbaum \u00b7 Built 1985 \u00b7 Owner lives here \u00b7 ~61 sq \u00b7 1.09 in hail Aug 12, 2025 \u00b7 Steep 8/12 \u00b7 3 storms 1.09\"",
+  "7 1406 Fieldstone Dr Walston \u00b7 Roof 26 yrs old \u00b7 13 nearby reroofs \u00b7 Owner lives here \u00b7 ~47 sq \u00b7 1.19 in hail Mar 25, 2025 1.19\"",
+  "8 1109 Ashhurst Ln Harris \u00b7 Roof 22 yrs old \u00b7 11 nearby reroofs \u00b7 Owner lives here \u00b7 ~67 sq \u00b7 1 in hail May 18, 2025 \u00b7 Steep 12/12 1.00\""
+ ],
+ "askText": "",
+ "errors": [
+  "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+  "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+ ]
+}

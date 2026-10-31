@@ -1,0 +1,2831 @@
+[
+ {
+  "round": 1,
+  "rows": [
+   "5921",
+   "36436",
+   "32361",
+   "10524",
+   "428"
+  ],
+  "status": "done",
+  "method": "frozen at commit 993d57f",
+  "counts": {
+   "passed": 0,
+   "needs_work": 5,
+   "failed": 0
+  },
+  "reasons": {
+   "5921": [
+    "LiDAR fit 66% of the roof within 1 ft of the drawn faces"
+   ],
+   "36436": [
+    "LiDAR fit 78% of the roof within 1 ft of the drawn faces"
+   ],
+   "32361": [
+    "LiDAR fit 55% of the roof within 1 ft of the drawn faces"
+   ],
+   "10524": [
+    "LiDAR fit 75% of the roof within 1 ft of the drawn faces"
+   ],
+   "428": [
+    "LiDAR fit 47% of the roof within 1 ft of the drawn faces"
+   ]
+  },
+  "notes": "Fresh, bigger and more complex roofs (47-68 squares): face layout wrong on all 5 (LiDAR fit 47-78%). 428 Google capture has a Maps info card over the photo (capture bug). Photo-painted 3D (photo3d.png) works. Next rules from these failures: (1) capture must close the Maps side cards; (2) complex roofs need the LiDAR's own segmentation to lead where photo patches disagree (fit < 85%): fall back to LiDAR faces + plane-intersection straightening."
+ },
+ {
+  "round": 2,
+  "rows": [
+   "33165",
+   "46572",
+   "34027",
+   "56739",
+   "31311"
+  ],
+  "status": "done",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 49449,
+  "pool": 55420,
+  "spares": [
+   "62832",
+   "1898",
+   "8350",
+   "53986",
+   "6100",
+   "34912",
+   "144894"
+  ],
+  "swaps": [
+   {
+    "out": "6782",
+    "why": "Maps UI over the photo: 0.9% card pixels inside the outline, 0 UI boxes left",
+    "into": "56739"
+   },
+   {
+    "out": "7116",
+    "why": "no 2020 points: s hit 0\n22:23:22 3396592: read in 4s\n22:23:22 0 of 1 homes have points\n22:23:22   no points: collin-tx:7116 no 2020 points in the box (hole or edge of the data)",
+    "into": "164265"
+   },
+   {
+    "out": "164265",
+    "why": "no 2020 points: hit 0\n22:26:19 3396582: read in 2s\n22:26:19 0 of 1 homes have points\n22:26:19   no points: collin-tx:164265 no 2020 points in the box (hole or edge of the data)",
+    "into": "31311"
+   }
+  ],
+  "started": "2026-10-20 21:24",
+  "notes": "Gate corrected before any round-2 scoring (deepdive 10-20): off-axis is checked on the snapped planes + ridges, not raw line angles. Swap note: 6782 was refused by the pixel card test because of a bright white metal carport roof (false positive; no UI left on the page). 7116 and 164265 have no 2020 points (data hole).",
+  "counts": {
+   "passed": 4,
+   "needs_work": 1,
+   "failed": 0
+  },
+  "reasons": {
+   "33165": [
+    "LiDAR fit 67% of the roof within 1 ft of the drawn faces"
+   ],
+   "46572": [],
+   "34027": [],
+   "56739": [],
+   "31311": []
+  },
+  "lead": {
+   "33165": {
+    "photo_fit": 0.452,
+    "route": "lidar",
+    "lidar_fit": 0.668,
+    "density": 5.9,
+    "min_pts": 10,
+    "regions": 71,
+    "lidar_faces": 31,
+    "photo_splits": 1
+   },
+   "46572": {
+    "photo_fit": 0.915,
+    "route": "photo"
+   },
+   "34027": {
+    "photo_fit": 0.902,
+    "route": "photo"
+   },
+   "56739": {
+    "photo_fit": 0.715,
+    "route": "lidar",
+    "lidar_fit": 0.959,
+    "density": 3.7,
+    "min_pts": 12,
+    "regions": 16,
+    "lidar_faces": 9,
+    "photo_splits": 0
+   },
+   "31311": {
+    "photo_fit": 0.604,
+    "route": "lidar",
+    "lidar_fit": 0.927,
+    "density": 4.9,
+    "min_pts": 12,
+    "regions": 15,
+    "lidar_faces": 7,
+    "photo_splits": 0
+   }
+  },
+  "finished": "2026-10-20 22:36",
+  "visual": {
+   "33165": "needs work: big multi-wing roof, LiDAR fit 67%, 28 faces, layout cluttered vs the photo",
+   "46572": "ok: hips/valleys on the photo's lines (photo route, 91%); one small 2/12 piece in the app",
+   "34027": "needs work: roof under trees/shade, pitches 2-4/12 look too flat, lower-right hip/valley lines not on the photo",
+   "56739": "ok: hips and ridges on the photo's lines (LiDAR led, 96%), clean app view",
+   "31311": "needs work: two parallel ridges ~4 ft apart make a thin strip face the photo does not show (LiDAR led, 93%)"
+  },
+  "counts_by_eye": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "app_display_issue": "fresh homes: app header shows 'pitch 0/12' and caption says LiDAR (2018) (no template json); geometry is ours",
+  "top_failures": [
+   "thin strip faces between near-parallel ridges (31311)",
+   "trees/shade over the roof: flat-looking pitches, wrong lines (34027)",
+   "very complex multi-wing roofs still under 85% fit (33165)"
+  ],
+  "rescore_new_gates": {
+   "counts": {
+    "passed": 1,
+    "needs_work": 4,
+    "failed": 0
+   },
+   "note": "re-scored with the corrected gates (outline sanity, photo line fit <= 1.0 ft): only 56739 passes, matching the deepdive's eye check (1 clean). 34027 is the right building (county footprint IoU 0.81) but fails on lines (1.6 ft)."
+  },
+  "lean_check": "46572 line_fit 3.0 ft: mostly wrong structure, not lean. Best lean (cap 0.35) only reaches 1.25 ft at the cap; lean would also wrongly rescue 31311 (2.2 -> 0.98, wrong by eye). Line gate kept without lean.",
+  "eye_check": "deepdive + build session: 56739 clean; 46572 close (header bug, lines 3 ft); 31311, 34027, 33165 wrong / needs work"
+ },
+ {
+  "round": 3,
+  "rows": [
+   "783",
+   "149197",
+   "224",
+   "38831",
+   "55125"
+  ],
+  "status": "done",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 55208,
+  "pool": 55412,
+  "spares": [
+   "32339",
+   "15298",
+   "9853",
+   "34581",
+   "147508",
+   "40999",
+   "3167",
+   "58766",
+   "28791"
+  ],
+  "swaps": [
+   {
+    "out": "164311",
+    "why": "no 2020 points: hit 0\n23:01:13 3396582: read in 3s\n23:01:13 0 of 1 homes have points\n23:01:13   no points: collin-tx:164311 no 2020 points in the box (hole or edge of the data)",
+    "into": "55125"
+   }
+  ],
+  "started": "2026-10-20 23:00",
+  "counts": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "reasons": {
+   "783": [
+    "lines 1.35 ft from the photo edges"
+   ],
+   "149197": [],
+   "224": [
+    "lines 1.28 ft from the photo edges"
+   ],
+   "38831": [
+    "LiDAR fit 84% of the roof within 1 ft of the drawn faces",
+    "1 faces under 30 sq ft",
+    "lines 2.79 ft from the photo edges",
+    "eaves 1.74 ft from the photo edges"
+   ],
+   "55125": [
+    "lines 1.67 ft from the photo edges"
+   ]
+  },
+  "lead": {
+   "783": {
+    "photo_fit": 0.861,
+    "route": "photo"
+   },
+   "149197": {
+    "photo_fit": 0.819,
+    "route": "lidar",
+    "lidar_fit": 0.903,
+    "density": 4.4,
+    "min_pts": 12,
+    "regions": 29,
+    "lidar_faces": 16,
+    "photo_splits": 1
+   },
+   "224": {
+    "photo_fit": 0.801,
+    "route": "lidar",
+    "lidar_fit": 0.972,
+    "density": 2.2,
+    "min_pts": 12,
+    "regions": 12,
+    "lidar_faces": 8,
+    "photo_splits": 0
+   },
+   "38831": {
+    "photo_fit": 0.43,
+    "route": "lidar",
+    "lidar_fit": 0.842,
+    "density": 3.6,
+    "min_pts": 12,
+    "regions": 39,
+    "lidar_faces": 20,
+    "photo_splits": 0
+   },
+   "55125": {
+    "photo_fit": 0.797,
+    "route": "lidar",
+    "lidar_fit": 0.905,
+    "density": 11.6,
+    "min_pts": 10,
+    "regions": 61,
+    "lidar_faces": 7,
+    "photo_splits": 0
+   }
+  },
+  "finished": "2026-10-20 23:11",
+  "visual": {
+   "783": "ok: main hip X and the garage wing on the photo's creases (gate says lines 1.35 ft)",
+   "149197": "needs work: gates pass but lines cluttered, wedge faces, odd pieces in the app",
+   "224": "needs work: simple hip roof drawn with diagonal lines across the right half",
+   "38831": "failed: jagged faces, holes in the 3D",
+   "55125": "needs work: main hips right, extra valleys at the bottom, thin spike in the app"
+  },
+  "counts_by_eye": {
+   "passed": 1,
+   "needs_work": 3,
+   "failed": 1
+  },
+  "running_right_by_eye": {
+   "round1": 0,
+   "round2": 1,
+   "round3": 1,
+   "total": 2
+  },
+  "top_failures": [
+   "simple hip roofs get extra diagonal faces from the LiDAR route (224, 55125)",
+   "gates and eye disagree both ways: lines gate rejects a good roof (783 1.35 ft), passes a cluttered one (149197)",
+   "complex roofs still jagged (38831)"
+  ],
+  "next_rule_proposed": "pick the model that agrees with BOTH sources: candidates photo faces / LiDAR faces / clean blocks / outline skeleton; keep those with LiDAR fit >= 85%, then the lowest photo line_fit, fewer faces on ties within 0.2 ft",
+  "line_gate_note": "line gate set to 1.5 ft from the by-eye verdicts (deepdive 10-20): 56739 0.8 right, 783 1.35 right, 55125 1.67 partly wrong, 46572 3.0 wrong; eave gate stays 1.0 ft"
+ },
+ {
+  "round": 4,
+  "rows": [
+   "66037",
+   "22669",
+   "8396",
+   "37271",
+   "64304"
+  ],
+  "status": "done",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 56302,
+  "pool": 55406,
+  "spares": [
+   "48701",
+   "142444",
+   "8604",
+   "37714",
+   "8255",
+   "53019",
+   "9388"
+  ],
+  "swaps": [
+   {
+    "out": "11971",
+    "why": "no 2020 points:  hit 0\n23:20:54 3396592: read in 4s\n23:20:54 0 of 1 homes have points\n23:20:54   no points: collin-tx:11971 no 2020 points in the box (hole or edge of the data)",
+    "into": "37271"
+   },
+   {
+    "out": "15950",
+    "why": "no 2020 points:  hit 0\n23:20:58 3396592: read in 3s\n23:20:58 0 of 1 homes have points\n23:20:58   no points: collin-tx:15950 no 2020 points in the box (hole or edge of the data)",
+    "into": "150059"
+   },
+   {
+    "out": "150059",
+    "why": "no 2020 points: home not found",
+    "into": "64304"
+   }
+  ],
+  "started": "2026-10-20 23:18",
+  "counts": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "reasons": {
+   "66037": [],
+   "22669": [
+    "lines 2.12 ft from the photo edges"
+   ],
+   "8396": [
+    "lines 2.18 ft from the photo edges"
+   ],
+   "37271": [
+    "lines 2.2 ft from the photo edges"
+   ],
+   "64304": [
+    "lines 2.03 ft from the photo edges"
+   ]
+  },
+  "lead": {
+   "66037": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.733,
+      "faces": 8,
+      "line_fit": 0.78
+     },
+     "lidar": {
+      "fit": 0.902,
+      "faces": 16,
+      "line_fit": 1.41
+     },
+     "blocks": {
+      "fit": 0.838,
+      "faces": 11,
+      "line_fit": 1.57
+     },
+     "skeleton": {
+      "fit": 0.641,
+      "faces": 12,
+      "line_fit": 1.67
+     }
+    },
+    "density": 8.4,
+    "min_pts": 10,
+    "regions": 47
+   },
+   "22669": {
+    "route": "blocks",
+    "cands": {
+     "photo": {
+      "fit": 0.921,
+      "faces": 8,
+      "line_fit": 2.98
+     },
+     "lidar": {
+      "fit": 0.955,
+      "faces": 8,
+      "line_fit": 2.53
+     },
+     "blocks": {
+      "fit": 0.961,
+      "faces": 8,
+      "line_fit": 2.12
+     },
+     "skeleton": {
+      "fit": 0.659,
+      "faces": 5,
+      "line_fit": 2.2
+     }
+    }
+   },
+   "8396": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.933,
+      "faces": 2,
+      "line_fit": 2.27
+     },
+     "lidar": {
+      "fit": 0.999,
+      "faces": 4,
+      "line_fit": 2.18
+     },
+     "blocks": {
+      "fit": 0.99,
+      "faces": 4,
+      "line_fit": 2.47
+     },
+     "skeleton": {
+      "fit": 0.936,
+      "faces": 5,
+      "line_fit": 1.44
+     }
+    },
+    "density": 11.2,
+    "min_pts": 10,
+    "regions": 54
+   },
+   "37271": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.98,
+      "faces": 8,
+      "line_fit": 2.2
+     },
+     "lidar": {
+      "fit": 0.934,
+      "faces": 9,
+      "line_fit": 2.19
+     },
+     "blocks": {
+      "fit": 0.808,
+      "faces": 12,
+      "line_fit": 2.27
+     },
+     "skeleton": {
+      "fit": 0.775,
+      "faces": 7,
+      "line_fit": 2.05
+     }
+    }
+   },
+   "64304": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.923,
+      "faces": 5,
+      "line_fit": 1.89
+     },
+     "lidar": {
+      "fit": 0.98,
+      "faces": 9,
+      "line_fit": 2.03
+     },
+     "blocks": {
+      "fit": 0.661,
+      "faces": 7,
+      "line_fit": 1.76
+     },
+     "skeleton": {
+      "fit": 0.392,
+      "faces": 3,
+      "line_fit": 1.39
+     }
+    },
+    "density": 4.3,
+    "min_pts": 12,
+    "regions": 13
+   }
+  },
+  "finished": "2026-10-20 23:30",
+  "visual": {
+   "66037": "failed: gates pass but faces jagged, holes in the 3D, stray wall pieces in the app",
+   "22669": "failed: outline takes in the pool/patio below the house (outline check passed it)",
+   "8396": "ok: gable ridge and the small wing match the photo (line gate 2.18 ft, looks right)",
+   "37271": "needs work: skewed outline, lines only partly on the photo",
+   "64304": "needs work: retraced from the county footprint, which covers only part of the wide building"
+  },
+  "counts_by_eye": {
+   "passed": 1,
+   "needs_work": 2,
+   "failed": 2
+  },
+  "running_right_by_eye": {
+   "round1": 0,
+   "round2": 1,
+   "round3": 1,
+   "round4": 1,
+   "total": 3
+  },
+  "top_failures": [
+   "outline errors now dominate: pool/patio inside (22669), partial county footprint (64304), skewed trace (37271)",
+   "LiDAR faces jagged yet passing the gates (66037)",
+   "line gate reads ~2 ft on most homes including ones right by eye (8396): registration, not shape"
+  ],
+  "next_rule_proposed": "outline first: LiDAR roof-height mask (returns > 7 ft above ground, smoothed) must cover >= 90% of the outline and the outline must cover >= 90% of it; pool/patio/flat low areas cut, missing roof added, before any faces. Gate the LiDAR faces on jaggedness (perimeter / sqrt(area) per face)",
+  "round5_prep_notes": "LiDAR roof-height mask: only ADDS missing roof (mask > 10% outside the photo outline -> outline = mask); it cannot cut, it misses low wings on homes right by eye (783/224/56739: 68-79% of outline in mask) and keeps patio covers at roof height (22669). Line fit now after a bounded rigid shift (+-3 ft): 8396 2.18->0.18, 783 1.35->1.06, 46572 3.0->1.39, 31311 2.21->1.06 -> gate 1.0 ft after the shift (1.5 would pass 46572 + 31311, both wrong by eye; 783 right by eye fails at 1.06). Jaggedness gate: area on faces with perimeter/sqrt(area) > 6.5 <= 10% (66037 0.19, 22669 0.16), holes <= 1%."
+ },
+ {
+  "round": 5,
+  "rows": [
+   "59767",
+   "5696",
+   "64162",
+   "12727",
+   "62819"
+  ],
+  "status": "done",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 57342,
+  "pool": 55398,
+  "spares": [
+   "65480",
+   "31313",
+   "155297",
+   "13593",
+   "175714",
+   "155769",
+   "43401",
+   "56857"
+  ],
+  "swaps": [
+   {
+    "out": "15331",
+    "why": "no 2020 points:  hit 0\n23:35:49 3396592: read in 4s\n23:35:49 0 of 1 homes have points\n23:35:49   no points: collin-tx:15331 no 2020 points in the box (hole or edge of the data)",
+    "into": "52648"
+   },
+   {
+    "out": "52648",
+    "why": "no 2020 points: home not found",
+    "into": "62819"
+   }
+  ],
+  "started": "2026-10-20 23:35",
+  "counts": {
+   "passed": 2,
+   "needs_work": 3,
+   "failed": 0
+  },
+  "reasons": {
+   "59767": [
+    "outline is not this building (footprint IoU 0.72)",
+    "6.8% of the outline not covered by faces (holes)"
+   ],
+   "5696": [],
+   "64162": [],
+   "12727": [
+    "outline is not this building (footprint IoU 0.746)",
+    "lines 1.12 ft from the photo edges (after a [-2.75, 2.0] ft shift)",
+    "2 stray pieces (faces in more than one piece)"
+   ],
+   "62819": [
+    "1 faces under 30 sq ft",
+    "lines 1.57 ft from the photo edges (after a [-2.5, 2.75] ft shift)",
+    "eaves 2.03 ft from the photo edges",
+    "2.7% of the outline not covered by faces (holes)"
+   ]
+  },
+  "lead": {
+   "59767": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.721,
+      "faces": 10,
+      "line_fit": 0.58
+     },
+     "lidar": {
+      "fit": 0.958,
+      "faces": 18,
+      "line_fit": 0.84
+     },
+     "blocks": {
+      "fit": 0.585,
+      "faces": 7,
+      "line_fit": 1.14
+     },
+     "skeleton": {
+      "fit": 0.723,
+      "faces": 7,
+      "line_fit": 0.66
+     }
+    },
+    "density": 6.6,
+    "min_pts": 10,
+    "regions": 43
+   },
+   "5696": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.708,
+      "faces": 7,
+      "line_fit": 0.65
+     },
+     "lidar": {
+      "fit": 0.942,
+      "faces": 14,
+      "line_fit": 0.73
+     },
+     "blocks": {
+      "fit": 0.852,
+      "faces": 7,
+      "line_fit": 0.69
+     },
+     "skeleton": {
+      "fit": 0.82,
+      "faces": 6,
+      "line_fit": 0.67
+     }
+    },
+    "density": 6.6,
+    "min_pts": 10,
+    "regions": 26
+   },
+   "64162": {
+    "route": "blocks",
+    "cands": {
+     "photo": {
+      "fit": 0.879,
+      "faces": 5,
+      "line_fit": 0.31
+     },
+     "lidar": {
+      "fit": 0.878,
+      "faces": 10,
+      "line_fit": 1.14
+     },
+     "blocks": {
+      "fit": 0.869,
+      "faces": 4,
+      "line_fit": 0.48
+     },
+     "skeleton": {
+      "fit": 0.809,
+      "faces": 5,
+      "line_fit": 0.77
+     }
+    }
+   },
+   "12727": {
+    "route": "blocks",
+    "cands": {
+     "photo": {
+      "fit": 0.684,
+      "faces": 8,
+      "line_fit": 1.27
+     },
+     "lidar": {
+      "fit": 0.937,
+      "faces": 11,
+      "line_fit": 1.17
+     },
+     "blocks": {
+      "fit": 0.925,
+      "faces": 9,
+      "line_fit": 1.12
+     },
+     "skeleton": {
+      "fit": 0.691,
+      "faces": 8,
+      "line_fit": 1.25
+     }
+    }
+   },
+   "62819": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.717,
+      "faces": 6,
+      "line_fit": 1.43
+     },
+     "lidar": {
+      "fit": 0.891,
+      "faces": 14,
+      "line_fit": 1.57
+     },
+     "blocks": {
+      "fit": 0.519,
+      "faces": 8,
+      "line_fit": 1.28
+     },
+     "skeleton": {
+      "fit": 0.32,
+      "faces": 5,
+      "line_fit": 1.75
+     }
+    },
+    "density": 7.0,
+    "min_pts": 10,
+    "regions": 41
+   }
+  },
+  "finished": "2026-10-20 23:54",
+  "visual": {
+   "59767": "failed: the photo trace runs into the neighbour's roof (gate caught it: footprint IoU 0.72); holes; app shot timed out",
+   "5696": "needs work: lower hips right, top half cluttered with valleys (gates passed it)",
+   "64162": "ok: one clean hip roof on the photo's lines (clean blocks, 4 faces)",
+   "12727": "needs work: main hip + garage wing right, extra valleys top right, notch top left",
+   "62819": "failed: jagged faces, lines not on the photo"
+  },
+  "counts_by_eye": {
+   "passed": 1,
+   "needs_work": 2,
+   "failed": 2
+  },
+  "running_right_by_eye": {
+   "round1": 0,
+   "round2": 1,
+   "round3": 1,
+   "round4": 1,
+   "round5": 1,
+   "total": 4
+  },
+  "top_failures": [
+   "photo trace spills onto the neighbour (59767; the footprint gate catches it but there is no automatic fix that works)",
+   "LiDAR faces cluttered on cut-up roofs (5696, 62819) even when the gates pass",
+   "extra valleys on otherwise right hips (12727)"
+  ],
+  "gates_vs_eye": "gates 2/5 (5696, 64162), eye 1/5 (64162): 5696 passes the gates but is cluttered"
+ },
+ {
+  "round": 6,
+  "rows": [
+   "53110",
+   "57927",
+   "52803",
+   "46941",
+   "8659"
+  ],
+  "status": "done (OLD + NEW)",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 59921,
+  "pool": 55391,
+  "spares": [
+   "43414",
+   "159991",
+   "7899",
+   "57890"
+  ],
+  "swaps": [
+   {
+    "out": "2623",
+    "why": "no 2020 points: s hit 0\n00:18:50 3396592: read in 5s\n00:18:50 0 of 1 homes have points\n00:18:50   no points: collin-tx:2623 no 2020 points in the box (hole or edge of the data)",
+    "into": "149954"
+   },
+   {
+    "out": "149531",
+    "why": "no 2020 points: hit 0\n00:18:56 3396582: read in 4s\n00:18:56 0 of 1 homes have points\n00:18:56   no points: collin-tx:149531 no 2020 points in the box (hole or edge of the data)",
+    "into": "5151"
+   },
+   {
+    "out": "6960",
+    "why": "no 2020 points: s hit 0\n00:19:02 3396592: read in 5s\n00:19:02 0 of 1 homes have points\n00:19:02   no points: collin-tx:6960 no 2020 points in the box (hole or edge of the data)",
+    "into": "52803"
+   },
+   {
+    "out": "149954",
+    "why": "no 2020 points: 00:22:29 0 of 1 homes have points\n00:22:29   no points: collin-tx:149954 2020 tile not downloaded: 3396584",
+    "into": "46941"
+   },
+   {
+    "out": "5151",
+    "why": "Maps UI over the photo: 1.3% card pixels inside the outline, 0 UI boxes left",
+    "into": "4097"
+   },
+   {
+    "out": "4097",
+    "why": "no 2020 points: s hit 0\n00:26:28 3396592: read in 4s\n00:26:28 0 of 1 homes have points\n00:26:28   no points: collin-tx:4097 no 2020 points in the box (hole or edge of the data)",
+    "into": "8659"
+   }
+  ],
+  "started": "2026-10-21 00:18",
+  "counts": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "reasons": {
+   "53110": [],
+   "57927": [
+    "lines 1.02 ft from the photo edges (after a [3.0, -2.75] ft shift)",
+    "eaves 1.63 ft from the photo edges"
+   ],
+   "52803": [
+    "28% of the roof on jagged faces",
+    "8.6% of the outline not covered by faces (holes)"
+   ],
+   "46941": [
+    "eaves 1.98 ft from the photo edges"
+   ],
+   "8659": [
+    "lines 1.14 ft from the photo edges (after a [-3.0, 3.0] ft shift)"
+   ]
+  },
+  "lead": {
+   "53110": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.936,
+      "faces": 4,
+      "line_fit": 0.36
+     },
+     "lidar": {
+      "fit": 0.986,
+      "faces": 7,
+      "line_fit": 0.39
+     },
+     "blocks": {
+      "fit": 0.973,
+      "faces": 5,
+      "line_fit": 0.47
+     },
+     "skeleton": {
+      "fit": 0.945,
+      "faces": 4,
+      "line_fit": 0.58
+     }
+    }
+   },
+   "57927": {
+    "route": "skeleton",
+    "cands": {
+     "photo": {
+      "fit": 0.945,
+      "faces": 8,
+      "line_fit": 1.27
+     },
+     "lidar": {
+      "fit": 0.952,
+      "faces": 9,
+      "line_fit": 1.11
+     },
+     "blocks": {
+      "fit": 0.95,
+      "faces": 9,
+      "line_fit": 1.23
+     },
+     "skeleton": {
+      "fit": 0.913,
+      "faces": 7,
+      "line_fit": 1.02
+     }
+    }
+   },
+   "52803": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.802,
+      "faces": 8,
+      "line_fit": 0.31
+     },
+     "lidar": {
+      "fit": 0.913,
+      "faces": 12,
+      "line_fit": 0.56
+     },
+     "blocks": {
+      "fit": 0.796,
+      "faces": 9,
+      "line_fit": 0.75
+     },
+     "skeleton": {
+      "fit": 0.633,
+      "faces": 6,
+      "line_fit": 1.05
+     }
+    },
+    "density": 6.7,
+    "min_pts": 10,
+    "regions": 34
+   },
+   "46941": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.576,
+      "faces": 3,
+      "line_fit": 1.38
+     },
+     "lidar": {
+      "fit": 0.942,
+      "faces": 8,
+      "line_fit": 0.81
+     },
+     "blocks": {
+      "fit": 0.619,
+      "faces": 5,
+      "line_fit": 1.54
+     },
+     "skeleton": {
+      "fit": 0.721,
+      "faces": 5,
+      "line_fit": 0.65
+     }
+    },
+    "density": 4.0,
+    "min_pts": 12,
+    "regions": 18
+   },
+   "8659": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.957,
+      "faces": 2,
+      "line_fit": 1.14
+     },
+     "lidar": {
+      "fit": 0.995,
+      "faces": 4,
+      "line_fit": 1.2
+     },
+     "blocks": {
+      "fit": 0.979,
+      "faces": 4,
+      "line_fit": 1.21
+     },
+     "skeleton": {
+      "fit": 0.95,
+      "faces": 3,
+      "line_fit": 1.85
+     }
+    }
+   }
+  },
+  "finished": "2026-10-21 00:35",
+  "visual": {
+   "53110": "ok: hip + the north diamond on the photo",
+   "57927": "needs work: cluttered NW wing",
+   "52803": "needs work: jagged, holes",
+   "46941": "needs work: cross hip partly right, eaves 2 ft off",
+   "8659": "ok: gable on the photo"
+  },
+  "visual_new": {
+   "53110": "needs work: the north diamond is a 45-deg piece; snapping rectangles to the house axes squares it off",
+   "57927": "close: clean main hip + garage wing like the photo, but LiDAR fit only 46%",
+   "52803": "needs work: cleaner than OLD but LiDAR fit 33% (piece heights wrong)",
+   "46941": "needs work: shape partly right, fit 68%",
+   "8659": "ok: gable + front shed, fit 93%, lines 0.24 ft"
+  },
+  "counts_by_eye": {
+   "passed": 2,
+   "needs_work": 3,
+   "failed": 0
+  },
+  "counts_by_eye_new": {
+   "passed": 1,
+   "close": 1,
+   "needs_work": 3,
+   "failed": 0
+  },
+  "new_scores": {
+   "53110": {
+    "fit": 0.902,
+    "squares": 36.6,
+    "line_fit": 0.59,
+    "faces": 5
+   },
+   "57927": {
+    "fit": 0.455,
+    "squares": 30.0,
+    "line_fit": 1.09,
+    "faces": 8
+   },
+   "52803": {
+    "fit": 0.329,
+    "squares": 31.1,
+    "line_fit": 0.97,
+    "faces": 11
+   },
+   "46941": {
+    "fit": 0.678,
+    "squares": 36.2,
+    "line_fit": 1.12,
+    "faces": 12
+   },
+   "8659": {
+    "fit": 0.933,
+    "squares": 25.8,
+    "line_fit": 0.24,
+    "faces": 3
+   }
+  },
+  "running_right_by_eye": {
+   "round1": 0,
+   "round2": 1,
+   "round3": 1,
+   "round4": 1,
+   "round5": 1,
+   "round6": 2,
+   "total": 6
+  },
+  "new_lessons": [
+   "rectangles snapped to the house axes cannot hold 45-deg pieces (53110 diamond): allow 45-deg rectangles",
+   "low LiDAR fit on multi-piece layouts (52803 33%, 57927 46%): overlapping rectangles take returns from the lower pieces; fit each piece only on returns not explained by a higher piece / inside its own non-overlapping part"
+  ],
+  "new_practice_rerun": {
+   "note": "after the round-6 lessons (practice, not fresh): 45-deg pieces, top-surface refit (3 passes), hairline-crack fix before the one-building cut, one layout shift onto the LiDAR roof (+-8 ft: the photo leans), line gate centred on that shift; chooser NEW > OLD > needs work",
+   "shown": {
+    "53110": "old",
+    "57927": "new",
+    "52803": "needs work",
+    "46941": "needs work",
+    "8659": "new"
+   },
+   "by_eye": {
+    "53110": "OLD shown, right (NEW's 45-deg diamond lands partly outside the roof)",
+    "57927": "NEW shown, right: main hip + garage wing",
+    "52803": "needs work: NEW heights off (fit 43%)",
+    "46941": "needs work: NEW close (fit 84%)",
+    "8659": "NEW shown, right"
+   },
+   "right_shown": 3
+  },
+  "new_practice_v2": {
+   "layouts": "re-read v2 (one primitive per rectangle, level, half-hips)",
+   "shown": {
+    "53110": "old",
+    "57927": "new",
+    "52803": "needs work",
+    "46941": "needs work",
+    "8659": "needs work",
+    "164787": "needs work",
+    "117590": "needs work",
+    "64242": "needs work",
+    "57613": "needs work",
+    "10709": "old"
+   },
+   "new_passes": [
+    "57927"
+   ],
+   "note": "NEW passes 1/10 on rounds 6-7 with the v2 layouts; 8659 lost its pass (74%). 10709 main rectangle still spans 11 ft of height (best single primitive 36%)"
+  },
+  "hybrid_practice": {
+   "rows": "rounds 6-7 (10 homes)",
+   "shown": {
+    "53110": "hybrid",
+    "57927": "needs work",
+    "52803": "needs work",
+    "46941": "needs work",
+    "8659": "hybrid",
+    "164787": "needs work",
+    "117590": "needs work",
+    "64242": "needs work",
+    "57613": "needs work",
+    "10709": "old"
+   },
+   "by_eye": "right 53110, 8659 (hybrid); close 57927, 46941, 117590, 10709 (jagged edges / holes carried from the LiDAR faces); messy 52803, 64242, 164787, 57613",
+   "shown_right": 3
+  }
+ },
+ {
+  "round": 7,
+  "rows": [
+   "164787",
+   "117590",
+   "64242",
+   "57613",
+   "10709"
+  ],
+  "status": "done (OLD + NEW + chooser)",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 63053,
+  "pool": 55380,
+  "spares": [
+   "35950",
+   "162823",
+   "3903",
+   "4482",
+   "42267",
+   "140890"
+  ],
+  "swaps": [
+   {
+    "out": "139921",
+    "why": "no 2020 points: hit 0\n01:10:59 3396582: read in 3s\n01:10:59 0 of 1 homes have points\n01:10:59   no points: collin-tx:139921 no 2020 points in the box (hole or edge of the data)",
+    "into": "64242"
+   },
+   {
+    "out": "2685",
+    "why": "no 2020 points: s hit 0\n01:12:14 3396592: read in 4s\n01:12:14 0 of 1 homes have points\n01:12:14   no points: collin-tx:2685 no 2020 points in the box (hole or edge of the data)",
+    "into": "57613"
+   },
+   {
+    "out": "61239",
+    "why": "Maps UI over the photo: 0.8% card pixels inside the outline, 0 UI boxes left",
+    "into": "162472"
+   },
+   {
+    "out": "162472",
+    "why": "no 2020 points: hit 0\n01:18:49 3396582: read in 2s\n01:18:49 0 of 1 homes have points\n01:18:49   no points: collin-tx:162472 no 2020 points in the box (hole or edge of the data)",
+    "into": "10709"
+   }
+  ],
+  "started": "2026-10-21 01:10",
+  "counts": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "reasons": {
+   "164787": [
+    "lines 1.28 ft from the photo edges (after a [-2.75, -0.25] ft shift)",
+    "24% of the roof on planes facing off the house axes"
+   ],
+   "117590": [
+    "lines 1.46 ft from the photo edges (after a [-3.0, -2.75] ft shift)",
+    "28% of ridge length off the house axes"
+   ],
+   "64242": [
+    "1 faces under 30 sq ft",
+    "outline is not this building (footprint IoU 0.531)",
+    "lines 1.82 ft from the photo edges (after a [-1.0, 3.0] ft shift)",
+    "eaves 1.54 ft from the photo edges",
+    "13% of the roof on jagged faces",
+    "20.0% of the outline not covered by faces (holes)"
+   ],
+   "57613": [
+    "outline is not this building (footprint IoU 0.726)",
+    "lines 1.15 ft from the photo edges (after a [-3.0, -1.5] ft shift)"
+   ],
+   "10709": []
+  },
+  "lead": {
+   "164787": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.541,
+      "faces": 7,
+      "line_fit": 1.23
+     },
+     "lidar": {
+      "fit": 0.929,
+      "faces": 12,
+      "line_fit": 1.28
+     },
+     "blocks": {
+      "fit": 0.769,
+      "faces": 8,
+      "line_fit": 1.41
+     },
+     "skeleton": {
+      "fit": 0.79,
+      "faces": 7,
+      "line_fit": 1.5
+     }
+    },
+    "density": 5.5,
+    "min_pts": 10,
+    "regions": 29
+   },
+   "117590": {
+    "route": "skeleton",
+    "cands": {
+     "photo": {
+      "fit": 0.851,
+      "faces": 3,
+      "line_fit": 0.64
+     },
+     "lidar": {
+      "fit": 0.908,
+      "faces": 7,
+      "line_fit": 0.7
+     },
+     "blocks": {
+      "fit": 0.906,
+      "faces": 7,
+      "line_fit": 1.04
+     },
+     "skeleton": {
+      "fit": 0.91,
+      "faces": 6,
+      "line_fit": 1.46
+     }
+    }
+   },
+   "64242": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.682,
+      "faces": 7,
+      "line_fit": 1.11
+     },
+     "lidar": {
+      "fit": 0.866,
+      "faces": 14,
+      "line_fit": 1.82
+     },
+     "blocks": {
+      "fit": 0.575,
+      "faces": 5,
+      "line_fit": 1.37
+     },
+     "skeleton": {
+      "fit": 0.617,
+      "faces": 4,
+      "line_fit": 2.01
+     }
+    },
+    "density": 8.4,
+    "min_pts": 10,
+    "regions": 32
+   },
+   "57613": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.745,
+      "faces": 6,
+      "line_fit": 1.31
+     },
+     "lidar": {
+      "fit": 0.942,
+      "faces": 9,
+      "line_fit": 1.15
+     },
+     "blocks": {
+      "fit": 0.89,
+      "faces": 9,
+      "line_fit": 1.23
+     },
+     "skeleton": {
+      "fit": 0.446,
+      "faces": 6,
+      "line_fit": 1.17
+     }
+    },
+    "density": 4.1,
+    "min_pts": 12,
+    "regions": 17
+   },
+   "10709": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.774,
+      "faces": 9,
+      "line_fit": 0.76
+     },
+     "lidar": {
+      "fit": 0.906,
+      "faces": 14,
+      "line_fit": 0.75
+     },
+     "blocks": {
+      "fit": 0.827,
+      "faces": 12,
+      "line_fit": 1.0
+     },
+     "skeleton": {
+      "fit": 0.628,
+      "faces": 9,
+      "line_fit": 1.0
+     }
+    },
+    "density": 7.3,
+    "min_pts": 10,
+    "regions": 34
+   }
+  },
+  "finished": "2026-10-21 01:29",
+  "visual": {
+   "164787": "needs work: cluttered",
+   "117590": "close: hip + front dormer roughly right",
+   "64242": "failed: jagged, holes, outline off",
+   "57613": "close-ish: hips right, extra lines W",
+   "10709": "ok: cross hips + NW wing on the photo (passes gates)"
+  },
+  "visual_new": {
+   "164787": "needs work: clean diagonal hip + wing, fit 55%",
+   "117590": "close: main hip right, stray valley stub bottom-left (fit 81%)",
+   "64242": "failed: fit 29%",
+   "57613": "failed: two hips side by side + a strip, not the photo's roof",
+   "10709": "failed: main piece fitted FLAT (0/12, fit 19%)"
+  },
+  "shown": {
+   "164787": "needs work",
+   "117590": "needs work",
+   "64242": "needs work",
+   "57613": "needs work",
+   "10709": "old"
+  },
+  "counts_by_eye": {
+   "old_right": 1,
+   "new_right": 0,
+   "shown_right": 1
+  },
+  "new_scores": {
+   "164787": {
+    "fit": 0.547,
+    "squares": 33.2,
+    "line_fit": 1.19,
+    "faces": 12
+   },
+   "117590": {
+    "fit": 0.814,
+    "squares": 43.0,
+    "line_fit": 1.2,
+    "faces": 12
+   },
+   "64242": {
+    "fit": 0.293,
+    "squares": 31.5,
+    "line_fit": 1.62,
+    "faces": 8
+   },
+   "57613": {
+    "fit": 0.433,
+    "squares": 26.7,
+    "line_fit": 1.1,
+    "faces": 8
+   },
+   "10709": {
+    "fit": 0.25,
+    "squares": 36.4,
+    "line_fit": 1.28,
+    "faces": 5
+   }
+  },
+  "running_right_by_eye": {
+   "round1": 0,
+   "round2": 1,
+   "round3": 1,
+   "round4": 1,
+   "round5": 1,
+   "round6": 2,
+   "round7": 1,
+   "total": 7
+  },
+  "new_lessons": [
+   "a piece may only be flat when its returns are flat (10709 main fitted 0/12 at 19%)",
+   "coarse layouts (one rectangle over a cut-up roof) cannot fit: the reader should split until each rectangle is one primitive (57613, 64242)"
+  ]
+ },
+ {
+  "round": 8,
+  "rows": [
+   "58915",
+   "43154",
+   "31351",
+   "58673",
+   "32509"
+  ],
+  "status": "done (OLD + HYBRID + chooser)",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 65791,
+  "pool": 55371,
+  "spares": [
+   "59344",
+   "2094",
+   "2126",
+   "3484",
+   "38322",
+   "148507",
+   "57219"
+  ],
+  "swaps": [
+   {
+    "out": "154085",
+    "why": "no 2020 points: hit 0\n01:56:37 3396582: read in 2s\n01:56:37 0 of 1 homes have points\n01:56:37   no points: collin-tx:154085 no 2020 points in the box (hole or edge of the data)",
+    "into": "117284"
+   },
+   {
+    "out": "6923",
+    "why": "no 2020 points: s hit 0\n02:00:35 3396592: read in 3s\n02:00:35 0 of 1 homes have points\n02:00:35   no points: collin-tx:6923 no 2020 points in the box (hole or edge of the data)",
+    "into": "58673"
+   },
+   {
+    "out": "117284",
+    "why": "Maps UI over the photo: 2.6% card pixels inside the outline, 0 UI boxes left",
+    "into": "32509"
+   }
+  ],
+  "started": "2026-10-21 01:56",
+  "counts": {
+   "passed": 3,
+   "needs_work": 2,
+   "failed": 0
+  },
+  "reasons": {
+   "58915": [
+    "LiDAR fit 69% of the roof within 1 ft of the drawn faces",
+    "outline is not this building (footprint IoU 0.645)",
+    "lines 1.65 ft from the photo edges (after a [2.25, -2.0] ft shift)",
+    "eaves 1.96 ft from the photo edges",
+    "20% of the roof on jagged faces"
+   ],
+   "43154": [
+    "1 faces under 30 sq ft",
+    "42% of the roof on jagged faces",
+    "4.0% of the outline not covered by faces (holes)"
+   ],
+   "31351": [],
+   "58673": [],
+   "32509": []
+  },
+  "lead": {
+   "58915": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.358,
+      "faces": 6,
+      "line_fit": 2.1
+     },
+     "lidar": {
+      "fit": 0.693,
+      "faces": 12,
+      "line_fit": 1.65
+     },
+     "blocks": {
+      "fit": 0.492,
+      "faces": 9,
+      "line_fit": 1.93
+     },
+     "skeleton": {
+      "fit": 0.444,
+      "faces": 8,
+      "line_fit": 2.32
+     }
+    },
+    "density": 6.0,
+    "min_pts": 10,
+    "regions": 45
+   },
+   "43154": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.761,
+      "faces": 7,
+      "line_fit": 0.71
+     },
+     "lidar": {
+      "fit": 0.917,
+      "faces": 14,
+      "line_fit": 0.73
+     },
+     "blocks": {
+      "fit": 0.615,
+      "faces": 10,
+      "line_fit": 0.87
+     },
+     "skeleton": {
+      "fit": 0.523,
+      "faces": 7,
+      "line_fit": 1.11
+     }
+    },
+    "density": 8.3,
+    "min_pts": 10,
+    "regions": 42
+   },
+   "31351": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.716,
+      "faces": 4,
+      "line_fit": 0.25
+     },
+     "lidar": {
+      "fit": 0.953,
+      "faces": 9,
+      "line_fit": 0.45
+     },
+     "blocks": {
+      "fit": 0.96,
+      "faces": 9,
+      "line_fit": 0.48
+     },
+     "skeleton": {
+      "fit": 0.743,
+      "faces": 6,
+      "line_fit": 1.01
+     }
+    },
+    "density": 6.9,
+    "min_pts": 10,
+    "regions": 30
+   },
+   "58673": {
+    "route": "skeleton",
+    "cands": {
+     "photo": {
+      "fit": 0.973,
+      "faces": 9,
+      "line_fit": 0.61
+     },
+     "lidar": {
+      "fit": 0.89,
+      "faces": 10,
+      "line_fit": 0.82
+     },
+     "blocks": {
+      "fit": 0.86,
+      "faces": 9,
+      "line_fit": 1.14
+     },
+     "skeleton": {
+      "fit": 0.938,
+      "faces": 9,
+      "line_fit": 0.58
+     }
+    }
+   },
+   "32509": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.791,
+      "faces": 9,
+      "line_fit": 0.47
+     },
+     "lidar": {
+      "fit": 0.905,
+      "faces": 16,
+      "line_fit": 0.63
+     },
+     "blocks": {
+      "fit": 0.652,
+      "faces": 8,
+      "line_fit": 1.32
+     },
+     "skeleton": {
+      "fit": 0.484,
+      "faces": 5,
+      "line_fit": 1.1
+     }
+    },
+    "density": 9.4,
+    "min_pts": 10,
+    "regions": 47
+   }
+  },
+  "finished": "2026-10-21 02:16",
+  "visual": {
+   "58915": "failed: outline not this building (IoU 0.65), lines off",
+   "43154": "failed: jagged, holes",
+   "31351": "close: main gable + W hips right, extra valleys on the right (gates pass)",
+   "58673": "close: cut-up roof, creases mostly followed (gates pass)",
+   "32509": "needs work: cluttered wedges (gates pass)"
+  },
+  "counts_by_eye_old": {
+   "right": 0,
+   "close": 2,
+   "needs_work": 1,
+   "failed": 2
+  },
+  "shown": {
+   "58915": "needs work",
+   "43154": "hybrid",
+   "31351": "needs work",
+   "58673": "old",
+   "32509": "hybrid"
+  },
+  "visual_hybrid": {
+   "58915": "failed: photo registration off (~15 ft, lighting inverted)",
+   "43154": "close: cleaner than OLD, some lines off (shown: hybrid)",
+   "31351": "close: gable + W wing right, eaves 1.2 ft",
+   "58673": "close: similar to OLD",
+   "32509": "right: cross hips on the photo's creases (shown: hybrid)"
+  },
+  "counts_by_eye_shown": {
+   "right": 2,
+   "close": 2,
+   "failed": 1
+  },
+  "right_shown": [
+   "32509 (hybrid)",
+   "58673 (old)"
+  ],
+  "running_right_by_eye": {
+   "round1": 0,
+   "round2": 1,
+   "round3": 1,
+   "round4": 1,
+   "round5": 1,
+   "round6": 2,
+   "round7": 1,
+   "round8": 2,
+   "total": 9
+  },
+  "hybrid_practice_v2": {
+   "changes": "border rebuild (keep plane-intersection cut faces at >= 85%), hole fill, eaves scored with their own bounded shift (lean is smaller at eave height)",
+   "gates": {
+    "57927": "needs work",
+    "46941": "hybrid",
+    "117590": "hybrid",
+    "10709": "old",
+    "58673": "hybrid",
+    "31351": "hybrid"
+   },
+   "by_eye": "right 46941, 58673, 31351; close 117590 (passes gates, jagged bottom lines); 57927 33% jagged; 10709 OLD shown"
+  }
+ },
+ {
+  "round": 9,
+  "rows": [
+   "33416",
+   "144768",
+   "9441",
+   "31648",
+   "58489"
+  ],
+  "status": "done (OLD + HYBRID + chooser)",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 70404,
+  "pool": 55363,
+  "spares": [
+   "6709",
+   "1936",
+   "162008",
+   "48368",
+   "22578",
+   "50601"
+  ],
+  "swaps": [
+   {
+    "out": "149643",
+    "why": "no 2020 points: hit 0\n03:15:27 3396582: read in 2s\n03:15:27 0 of 1 homes have points\n03:15:27   no points: collin-tx:149643 no 2020 points in the box (hole or edge of the data)",
+    "into": "144768"
+   },
+   {
+    "out": "1812",
+    "why": "no 2020 points: s hit 0\n03:15:32 3396592: read in 4s\n03:15:32 0 of 1 homes have points\n03:15:32   no points: collin-tx:1812 no 2020 points in the box (hole or edge of the data)",
+    "into": "9441"
+   },
+   {
+    "out": "11434",
+    "why": "no 2020 points:  hit 0\n03:15:36 3396592: read in 3s\n03:15:36 0 of 1 homes have points\n03:15:36   no points: collin-tx:11434 no 2020 points in the box (hole or edge of the data)",
+    "into": "31648"
+   },
+   {
+    "out": "55154",
+    "why": "Maps UI over the photo: 0.6% card pixels inside the outline, 0 UI boxes left",
+    "into": "58489"
+   }
+  ],
+  "started": "2026-10-21 03:13",
+  "counts": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "reasons": {
+   "33416": [],
+   "144768": [
+    "segmentation suspect: face brightness does not follow facing (rms 23.2)"
+   ],
+   "9441": [
+    "lines 1.32 ft from the photo edges (after a [3.0, -0.25] ft shift)"
+   ],
+   "31648": [
+    "segmentation suspect: face brightness does not follow facing (rms 21.4)"
+   ],
+   "58489": [
+    "outline is not this building (footprint IoU 0.698)"
+   ]
+  },
+  "lead": {
+   "33416": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.512,
+      "faces": 4,
+      "line_fit": 0.85
+     },
+     "lidar": {
+      "fit": 0.901,
+      "faces": 12,
+      "line_fit": 0.79
+     },
+     "blocks": {
+      "fit": 0.556,
+      "faces": 4,
+      "line_fit": 1.28
+     },
+     "skeleton": {
+      "fit": 0.736,
+      "faces": 7,
+      "line_fit": 1.02
+     }
+    },
+    "density": 4.1,
+    "min_pts": 12,
+    "regions": 22
+   },
+   "144768": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.855,
+      "faces": 7,
+      "line_fit": 0.8
+     },
+     "lidar": {
+      "fit": 0.9,
+      "faces": 11,
+      "line_fit": 0.73
+     },
+     "blocks": {
+      "fit": 0.677,
+      "faces": 7,
+      "line_fit": 1.49
+     },
+     "skeleton": {
+      "fit": 0.577,
+      "faces": 5,
+      "line_fit": 1.69
+     }
+    }
+   },
+   "9441": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.99,
+      "faces": 7,
+      "line_fit": 1.32
+     },
+     "lidar": {
+      "fit": 0.982,
+      "faces": 8,
+      "line_fit": 1.56
+     },
+     "blocks": {
+      "fit": 0.826,
+      "faces": 8,
+      "line_fit": 1.48
+     },
+     "skeleton": {
+      "fit": 0.907,
+      "faces": 8,
+      "line_fit": 1.17
+     }
+    }
+   },
+   "31648": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.94,
+      "faces": 8,
+      "line_fit": 0.75
+     },
+     "lidar": {
+      "fit": 0.952,
+      "faces": 10,
+      "line_fit": 0.84
+     },
+     "blocks": {
+      "fit": 0.936,
+      "faces": 11,
+      "line_fit": 0.82
+     },
+     "skeleton": {
+      "fit": 0.689,
+      "faces": 8,
+      "line_fit": 0.99
+     }
+    }
+   },
+   "58489": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.862,
+      "faces": 5,
+      "line_fit": 0.38
+     },
+     "lidar": {
+      "fit": 0.928,
+      "faces": 9,
+      "line_fit": 0.48
+     },
+     "blocks": {
+      "fit": 0.83,
+      "faces": 11,
+      "line_fit": 1.14
+     },
+     "skeleton": {
+      "fit": 0.834,
+      "faces": 8,
+      "line_fit": 1.05
+     }
+    },
+    "density": 4.2,
+    "min_pts": 12,
+    "regions": 17
+   }
+  },
+  "finished": "2026-10-21 03:32",
+  "shown": {
+   "33416": "hybrid",
+   "144768": "needs work",
+   "9441": "needs work",
+   "31648": "needs work",
+   "58489": "needs work"
+  },
+  "visual_hybrid": {
+   "33416": "close: shown hybrid; main hip + garage right, right side cluttered with valleys",
+   "144768": "close: hybrid cleaner; fails outline IoU 0.68 only because the patio cover was rightly excluded",
+   "9441": "right-ish: hybrid ridges/hips on the photo, lines 1.23 ft",
+   "31648": "right: both models (main hip, front hip, back wing); fails the new segmentation gate at rms 21.4",
+   "58489": "right: hybrid, neighbour strip excluded; fails outline IoU 0.745"
+  },
+  "counts_by_eye": {
+   "right_any_model": 3,
+   "right_shown": 0,
+   "close": 2
+  },
+  "gate_note": "3 right-by-eye models blocked by gates just past their limits (sun rms 21.4 > 20, IoU 0.745 < 0.75, lines 1.23 > 1.0) or by a correct exclusion lowering footprint IoU",
+  "running_right_by_eye": {
+   "shown": 11,
+   "any_model": 12
+  },
+  "rescore_band": {
+   "rules": "(a) footprint IoU against the footprint minus the reader's exclusions; (b) borderline band sun_rms 20-25, IoU 0.70-0.75, lines 1.0-1.25 ft: at most one gate borderline, all others clean",
+   "flips_all_rounds_2_9": [
+    {
+     "row": "9441",
+     "to": "hybrid shown",
+     "eye": "right-ish"
+    },
+    {
+     "row": "31648",
+     "to": "hybrid shown",
+     "eye": "right"
+    }
+   ],
+   "tightened": "line band 1.3 -> 1.25: at 1.3 round-3 224 (wrong by eye, OLD lines 1.28) flipped to shown",
+   "shown_now": {
+    "33416": "hybrid",
+    "144768": "needs work",
+    "9441": "hybrid",
+    "31648": "hybrid",
+    "58489": "needs work"
+   }
+  }
+ },
+ {
+  "round": 10,
+  "rows": [
+   "50599",
+   "59811",
+   "34286",
+   "12735",
+   "15249"
+  ],
+  "status": "done (OLD + HYBRID + chooser)",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 73448,
+  "pool": 55354,
+  "spares": [
+   "36065",
+   "33487",
+   "35218",
+   "45867",
+   "8480",
+   "59543",
+   "175179",
+   "7551",
+   "59388"
+  ],
+  "swaps": [
+   {
+    "out": "11715",
+    "why": "no 2020 points:  hit 0\n04:04:15 3396592: read in 4s\n04:04:15 0 of 1 homes have points\n04:04:15   no points: collin-tx:11715 no 2020 points in the box (hole or edge of the data)",
+    "into": "15249"
+   }
+  ],
+  "started": "2026-10-21 04:04",
+  "counts": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "reasons": {
+   "50599": [],
+   "59811": [
+    "outline is not this building (footprint IoU 0.636)",
+    "25% of the roof on jagged faces",
+    "10.1% of the outline not covered by faces (holes)",
+    "faces face the wrong way: S-facing faces darker than N-facing in the photo (lighting inverted)",
+    "segmentation suspect: face brightness does not follow facing (rms 33.5)",
+    "44% of ridge length off the house axes"
+   ],
+   "34286": [
+    "outline is not this building (footprint IoU 0.55)",
+    "lines 2.16 ft from the photo edges (after a [-2.5, -2.25] ft shift)",
+    "eaves 1.78 ft from the photo edges",
+    "15% of the roof on jagged faces",
+    "2.6% of the outline not covered by faces (holes)",
+    "15% of the roof on planes facing off the house axes"
+   ],
+   "12735": [
+    "lines 1.7 ft from the photo edges (after a [-2.5, 3.0] ft shift)"
+   ],
+   "15249": [
+    "outline is not this building (footprint IoU 0.469)",
+    "lines 3.35 ft from the photo edges (after a [3.0, 0.0] ft shift)",
+    "7.6% of the outline not covered by faces (holes)"
+   ]
+  },
+  "lead": {
+   "50599": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.774,
+      "faces": 12,
+      "line_fit": 0.92
+     },
+     "lidar": {
+      "fit": 0.944,
+      "faces": 15,
+      "line_fit": 0.91
+     },
+     "blocks": {
+      "fit": 0.813,
+      "faces": 16,
+      "line_fit": 1.15
+     },
+     "skeleton": {
+      "fit": 0.472,
+      "faces": 11,
+      "line_fit": 0.99
+     }
+    },
+    "density": 11.1,
+    "min_pts": 10,
+    "regions": 55
+   },
+   "59811": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.451,
+      "faces": 8,
+      "line_fit": 0.68
+     },
+     "lidar": {
+      "fit": 0.888,
+      "faces": 24,
+      "line_fit": 0.96
+     },
+     "blocks": {
+      "fit": 0.628,
+      "faces": 17,
+      "line_fit": 0.91
+     },
+     "skeleton": {
+      "fit": 0.486,
+      "faces": 9,
+      "line_fit": 0.78
+     }
+    },
+    "density": 5.8,
+    "min_pts": 10,
+    "regions": 52
+   },
+   "34286": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.806,
+      "faces": 5,
+      "line_fit": 2.03
+     },
+     "lidar": {
+      "fit": 0.972,
+      "faces": 10,
+      "line_fit": 2.16
+     },
+     "blocks": {
+      "fit": 0.584,
+      "faces": 6,
+      "line_fit": 1.61
+     },
+     "skeleton": {
+      "fit": 0.672,
+      "faces": 5,
+      "line_fit": 1.62
+     }
+    },
+    "density": 8.8,
+    "min_pts": 10,
+    "regions": 23
+   },
+   "12735": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.931,
+      "faces": 5,
+      "line_fit": 1.7
+     },
+     "lidar": {
+      "fit": 0.973,
+      "faces": 9,
+      "line_fit": 1.9
+     },
+     "blocks": {
+      "fit": 0.898,
+      "faces": 7,
+      "line_fit": 2.4
+     },
+     "skeleton": {
+      "fit": 0.872,
+      "faces": 8,
+      "line_fit": 2.66
+     }
+    }
+   },
+   "15249": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.768,
+      "faces": 4,
+      "line_fit": 0.61
+     },
+     "lidar": {
+      "fit": 1.0,
+      "faces": 8,
+      "line_fit": 3.35
+     },
+     "blocks": {
+      "fit": 0.856,
+      "faces": 9,
+      "line_fit": 2.69
+     },
+     "skeleton": {
+      "fit": 0.566,
+      "faces": 5,
+      "line_fit": 3.95
+     }
+    },
+    "density": 8.0,
+    "min_pts": 10,
+    "regions": 18
+   }
+  },
+  "finished": "2026-10-21 04:29",
+  "shown": {
+   "50599": "old",
+   "59811": "needs work",
+   "34286": "needs work",
+   "12735": "hybrid",
+   "15249": "needs work"
+  },
+  "visual_hybrid": {
+   "50599": "needs work: OLD shown (passes gates) but cluttered round the turret; tile roof",
+   "59811": "failed: outline wrong (two buildings), lighting + segmentation gates flag it",
+   "34286": "needs work: modern low-slope house, outline IoU 0.50",
+   "12735": "close: hybrid shown; main hip right, extra diagonal valleys bottom-left",
+   "15249": "needs work: lines 2 ft off, outline IoU 0.53"
+  },
+  "counts_by_eye": {
+   "right_shown": 0,
+   "close": 1,
+   "needs_work": 3,
+   "failed": 1
+  },
+  "gates_vs_eye": "2 shown by the gates (50599 old, 12735 hybrid), neither right by eye",
+  "running_right_by_eye": {
+   "shown": 11,
+   "any_model": 12
+  }
+ },
+ {
+  "round": 11,
+  "rows": [
+   "10519",
+   "61372",
+   "58124",
+   "56682",
+   "33709"
+  ],
+  "status": "done (OLD + HYBRID + chooser); last rule round of this session",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 92187,
+  "pool": 55348,
+  "spares": [
+   "15348",
+   "146863",
+   "42391",
+   "40966",
+   "48605",
+   "53197",
+   "65138",
+   "59087",
+   "48593",
+   "154865"
+  ],
+  "swaps": [],
+  "started": "2026-10-21 09:16",
+  "counts": {
+   "passed": 3,
+   "needs_work": 2,
+   "failed": 0
+  },
+  "reasons": {
+   "10519": [],
+   "61372": [
+    "LiDAR fit 78% of the roof within 1 ft of the drawn faces",
+    "lines 1.03 ft from the photo edges (after a [-1.75, -2.5] ft shift)",
+    "segmentation suspect: face brightness does not follow facing (rms 24.3)"
+   ],
+   "58124": [],
+   "56682": [
+    "lines 1.84 ft from the photo edges (after a [-1.25, 3.0] ft shift)",
+    "42% of the roof on jagged faces",
+    "2 stray pieces (faces in more than one piece)"
+   ],
+   "33709": []
+  },
+  "lead": {
+   "10519": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.726,
+      "faces": 4,
+      "line_fit": 0.48
+     },
+     "lidar": {
+      "fit": 0.894,
+      "faces": 9,
+      "line_fit": 0.7
+     },
+     "blocks": {
+      "fit": 0.932,
+      "faces": 12,
+      "line_fit": 0.74
+     },
+     "skeleton": {
+      "fit": 0.77,
+      "faces": 9,
+      "line_fit": 1.17
+     }
+    },
+    "density": 5.4,
+    "min_pts": 10,
+    "regions": 27
+   },
+   "61372": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.518,
+      "faces": 6,
+      "line_fit": 0.44
+     },
+     "lidar": {
+      "fit": 0.777,
+      "faces": 22,
+      "line_fit": 1.03
+     },
+     "blocks": {
+      "fit": 0.607,
+      "faces": 11,
+      "line_fit": 1.44
+     },
+     "skeleton": {
+      "fit": 0.506,
+      "faces": 9,
+      "line_fit": 1.62
+     }
+    },
+    "density": 11.0,
+    "min_pts": 10,
+    "regions": 85
+   },
+   "58124": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.883,
+      "faces": 5,
+      "line_fit": 0.73
+     },
+     "lidar": {
+      "fit": 0.945,
+      "faces": 7,
+      "line_fit": 0.56
+     },
+     "blocks": {
+      "fit": 0.874,
+      "faces": 5,
+      "line_fit": 0.86
+     },
+     "skeleton": {
+      "fit": 0.908,
+      "faces": 9,
+      "line_fit": 1.36
+     }
+    },
+    "density": 4.2,
+    "min_pts": 12,
+    "regions": 18
+   },
+   "56682": {
+    "route": "blocks",
+    "cands": {
+     "photo": {
+      "fit": 0.811,
+      "faces": 6,
+      "line_fit": 1.07
+     },
+     "lidar": {
+      "fit": 0.919,
+      "faces": 9,
+      "line_fit": 0.55
+     },
+     "blocks": {
+      "fit": 0.872,
+      "faces": 8,
+      "line_fit": 1.84
+     },
+     "skeleton": {
+      "fit": 0.769,
+      "faces": 8,
+      "line_fit": 1.46
+     }
+    }
+   },
+   "33709": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.927,
+      "faces": 2,
+      "line_fit": 0.78
+     },
+     "lidar": {
+      "fit": 0.936,
+      "faces": 3,
+      "line_fit": 0.68
+     },
+     "blocks": {
+      "fit": 0.935,
+      "faces": 5,
+      "line_fit": 0.88
+     },
+     "skeleton": {
+      "fit": 0.854,
+      "faces": 4,
+      "line_fit": 0.56
+     }
+    }
+   }
+  },
+  "finished": "2026-10-21 10:00",
+  "shown": {
+   "10519": "old",
+   "61372": "needs work",
+   "58124": "old",
+   "56682": "hybrid",
+   "33709": "hybrid"
+  },
+  "visual_hybrid": {
+   "10519": "close: OLD shown; main hip right, extra lines",
+   "61372": "failed: both models jagged / cluttered",
+   "58124": "close: OLD shown; hips mostly on the creases, extra lines",
+   "56682": "right: HYBRID shown, main hip + NW upper block, clean (OLD cluttered)",
+   "33709": "wrong but SHOWN: roof under trees, HYBRID is a bare gable; the app warns the outline may not match"
+  },
+  "counts_by_eye": {
+   "right_shown": 1,
+   "close_shown": 2,
+   "wrong_shown": 1,
+   "failed": 1
+  },
+  "running_right_by_eye": {
+   "shown": 12,
+   "of_fresh_homes": 55
+  }
+ },
+ {
+  "round": "pick-1",
+  "rows": [
+   "33709",
+   "10709",
+   "56682",
+   "31648",
+   "52803"
+  ],
+  "status": "done",
+  "method": "candidate-and-pick v1 (cap.py: template wings, Fable picks form per wing, LiDAR fits)",
+  "visual": {
+   "33709": "wrong: under trees; reader picked hips, LiDAR says gable (45% fit); extra north piece",
+   "10709": "wrong: cluttered overlapping boxes, fake NE piece by the pool",
+   "56682": "wrong: one pyramid; the photo shows a cross-hip with a W wing and a south projection (candidates too coarse)",
+   "31648": "close: main hip + NW wing roughly right, extra valleys along the bottom",
+   "52803": "wrong: drawing turned ~10 deg off the house, rear part partial"
+  },
+  "counts_by_eye": {
+   "passed": 0,
+   "close": 1,
+   "failed": 4
+  },
+  "sheet": "onehouse/templates/test1-sheet.png"
+ },
+ {
+  "round": "shape-1",
+  "rows": [
+   "10519",
+   "58124",
+   "117590",
+   "43154",
+   "31351"
+  ],
+  "status": "done",
+  "method": "shape-right simplify (simplify.py) on the best existing model",
+  "visual": {
+   "10519": "close: main hip + NW hip wing right; one small extra ridge/valley piece in the SE",
+   "58124": "wrong: outline takes in a big NE block that is not this roof (footprint IoU 0.51)",
+   "117590": "wrong: over-merged into one big 10/12 plane with a wall slab",
+   "43154": "wrong: still cluttered (12 faces), the simplify kept LiDAR-distinct small planes",
+   "31351": "close: main N-S gable right, west side pieces cluttered"
+  },
+  "counts_by_eye": {
+   "passed": 0,
+   "close": 2,
+   "failed": 3
+  },
+  "sheet": "onehouse/templates/shape1-sheet.png"
+ },
+ {
+  "round": 12,
+  "rows": [
+   "116507",
+   "37228",
+   "34243",
+   "56630",
+   "54316"
+  ],
+  "status": "done (sound roofs)",
+  "method": "sound.py: skeleton + LiDAR pitch, detailed OLD shown only when sound + accurate",
+  "seed": 35752,
+  "pool": 55343,
+  "spares": [
+   "156056",
+   "10568",
+   "147438",
+   "9941",
+   "162840",
+   "59729",
+   "34296"
+  ],
+  "swaps": [
+   {
+    "out": "155205",
+    "why": "no 2020 points:  0\n21:51:26 3396582: read in 1438s\n21:51:26 0 of 1 homes have points\n21:51:26   no points: collin-tx:155205 no 2020 points in the box (hole or edge of the data)",
+    "into": "34243"
+   },
+   {
+    "out": "142444",
+    "why": "no 2020 points: hit 0\n21:51:33 3396582: read in 5s\n21:51:33 0 of 1 homes have points\n21:51:33   no points: collin-tx:142444 no 2020 points in the box (hole or edge of the data)",
+    "into": "56630"
+   },
+   {
+    "out": "155932",
+    "why": "no 2020 points: hit 0\n21:51:38 3396582: read in 4s\n21:51:38 0 of 1 homes have points\n21:51:38   no points: collin-tx:155932 no 2020 points in the box (hole or edge of the data)",
+    "into": "54316"
+   }
+  ],
+  "started": "2026-10-21 21:22",
+  "counts": {
+   "passed": 1,
+   "needs_work": 4,
+   "failed": 0
+  },
+  "reasons": {
+   "116507": [
+    "outline is not this building (footprint IoU 0.716)"
+   ],
+   "37228": [
+    "segmentation suspect: face brightness does not follow facing (rms 26.2)"
+   ],
+   "34243": [
+    "outline is not this building (footprint IoU 0.515)",
+    "lines 1.24 ft from the photo edges (after a [0.5, -1.5] ft shift)",
+    "segmentation suspect: face brightness does not follow facing (rms 41.7)"
+   ],
+   "56630": [],
+   "54316": [
+    "LiDAR fit 74% of the roof within 1 ft of the drawn faces"
+   ]
+  },
+  "lead": {
+   "116507": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.928,
+      "faces": 4,
+      "line_fit": 0.79
+     },
+     "lidar": {
+      "fit": 0.984,
+      "faces": 7,
+      "line_fit": 0.88
+     },
+     "blocks": {
+      "fit": 0.874,
+      "faces": 6,
+      "line_fit": 1.39
+     },
+     "skeleton": {
+      "fit": 0.847,
+      "faces": 6,
+      "line_fit": 0.52
+     }
+    },
+    "density": 9.3,
+    "min_pts": 10,
+    "regions": 13
+   },
+   "37228": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.909,
+      "faces": 5,
+      "line_fit": 0.77
+     },
+     "lidar": {
+      "fit": 0.931,
+      "faces": 7,
+      "line_fit": 1.21
+     },
+     "blocks": {
+      "fit": 0.884,
+      "faces": 7,
+      "line_fit": 0.64
+     },
+     "skeleton": {
+      "fit": 0.515,
+      "faces": 4,
+      "line_fit": 1.26
+     }
+    }
+   },
+   "34243": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.551,
+      "faces": 7,
+      "line_fit": 1.7
+     },
+     "lidar": {
+      "fit": 0.923,
+      "faces": 14,
+      "line_fit": 1.24
+     },
+     "blocks": {
+      "fit": 0.661,
+      "faces": 14,
+      "line_fit": 2.01
+     },
+     "skeleton": {
+      "fit": 0.52,
+      "faces": 6,
+      "line_fit": 1.32
+     }
+    },
+    "density": 9.7,
+    "min_pts": 10,
+    "regions": 26
+   },
+   "56630": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.904,
+      "faces": 4,
+      "line_fit": 0.32
+     },
+     "lidar": {
+      "fit": 0.966,
+      "faces": 7,
+      "line_fit": 0.43
+     },
+     "blocks": {
+      "fit": 0.901,
+      "faces": 7,
+      "line_fit": 0.6
+     },
+     "skeleton": {
+      "fit": 0.903,
+      "faces": 4,
+      "line_fit": 0.56
+     }
+    },
+    "density": 5.7,
+    "min_pts": 10,
+    "regions": 25
+   },
+   "54316": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.741,
+      "faces": 5,
+      "line_fit": 0.43
+     },
+     "lidar": {
+      "fit": 0.688,
+      "faces": 7,
+      "line_fit": 0.45
+     },
+     "blocks": {
+      "fit": 0.708,
+      "faces": 11,
+      "line_fit": 0.63
+     },
+     "skeleton": {
+      "fit": 0.622,
+      "faces": 4,
+      "line_fit": 0.55
+     }
+    }
+   }
+  },
+  "finished": "2026-10-21 22:12",
+  "visual": {
+   "116507": "SOUND: yes. SHAPE: close (main N-S roof right, front garage piece rough)",
+   "37228": "SOUND: no, a stray line sticks out of the 3D. SHAPE: wrong, the outline takes in the pergola/patio at the NW",
+   "34243": "SOUND: yes but blocky (20 faces). SHAPE: wrong, cut-up roof, outline off",
+   "56630": "SOUND: yes. SHAPE: right (main hip + wing)",
+   "54316": "SOUND: yes. SHAPE: wrong, tree-covered house, the outline came out as a big 45-degree diamond"
+  },
+  "counts_by_eye": {
+   "sound": 4,
+   "shape_right": 1,
+   "shape_close": 1,
+   "shape_wrong": 3
+  },
+  "sheet": "onehouse/templates/sound1-sheet.png"
+ },
+ {
+  "round": 13,
+  "rows": [
+   "41137",
+   "37990",
+   "64655",
+   "33583",
+   "33483"
+  ],
+  "status": "done (sound roofs)",
+  "method": "sound.py frozen at the photo-fallback commit",
+  "seed": 39145,
+  "pool": 55335,
+  "spares": [
+   "46962",
+   "60523",
+   "37954",
+   "150024",
+   "22712",
+   "60830"
+  ],
+  "swaps": [
+   {
+    "out": "50198",
+    "why": "Maps UI over the photo: 1.9% card pixels inside the outline, 0 UI boxes left",
+    "into": "15583"
+   },
+   {
+    "out": "150057",
+    "why": "no 2020 points: home not found",
+    "into": "64655"
+   },
+   {
+    "out": "4070",
+    "why": "no 2020 points: s hit 0\n22:22:39 3396592: read in 4s\n22:22:39 0 of 1 homes have points\n22:22:39   no points: collin-tx:4070 no 2020 points in the box (hole or edge of the data)",
+    "into": "33583"
+   },
+   {
+    "out": "15583",
+    "why": "no 2020 points:  hit 0\n22:24:47 3396592: read in 5s\n22:24:47 0 of 1 homes have points\n22:24:47   no points: collin-tx:15583 no 2020 points in the box (hole or edge of the data)",
+    "into": "33483"
+   }
+  ],
+  "started": "2026-10-21 22:19",
+  "counts": {
+   "passed": 0,
+   "needs_work": 5,
+   "failed": 0
+  },
+  "reasons": {
+   "41137": [
+    "100% of ridge length off the house axes"
+   ],
+   "37990": [
+    "LiDAR fit 82% of the roof within 1 ft of the drawn faces",
+    "lines 1.08 ft from the photo edges (after a [-3.0, 0.75] ft shift)",
+    "segmentation suspect: face brightness does not follow facing (rms 28.2)",
+    "37% of ridge length off the house axes"
+   ],
+   "64655": [
+    "lines 1.15 ft from the photo edges (after a [-2.5, -3.0] ft shift)",
+    "segmentation suspect: face brightness does not follow facing (rms 37.0)",
+    "16% of ridge length off the house axes"
+   ],
+   "33583": [
+    "segmentation suspect: face brightness does not follow facing (rms 24.5)"
+   ],
+   "33483": [
+    "LiDAR fit 82% of the roof within 1 ft of the drawn faces",
+    "lines 1.2 ft from the photo edges (after a [-2.5, 2.75] ft shift)",
+    "faces face the wrong way: S-facing faces darker than N-facing in the photo (lighting inverted)",
+    "segmentation suspect: face brightness does not follow facing (rms 46.0)"
+   ]
+  },
+  "lead": {
+   "41137": {
+    "route": "photo",
+    "cands": {
+     "photo": {
+      "fit": 0.945,
+      "faces": 5,
+      "line_fit": 0.86
+     },
+     "lidar": {
+      "fit": 0.961,
+      "faces": 7,
+      "line_fit": 1.58
+     },
+     "blocks": {
+      "fit": 0.908,
+      "faces": 5,
+      "line_fit": 1.62
+     },
+     "skeleton": {
+      "fit": 0.918,
+      "faces": 5,
+      "line_fit": 1.76
+     }
+    }
+   },
+   "37990": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.509,
+      "faces": 6,
+      "line_fit": 1.04
+     },
+     "lidar": {
+      "fit": 0.821,
+      "faces": 15,
+      "line_fit": 1.08
+     },
+     "blocks": {
+      "fit": 0.536,
+      "faces": 12,
+      "line_fit": 2.22
+     },
+     "skeleton": {
+      "fit": 0.567,
+      "faces": 6,
+      "line_fit": 1.49
+     }
+    },
+    "density": 5.3,
+    "min_pts": 10,
+    "regions": 41
+   },
+   "64655": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.59,
+      "faces": 5,
+      "line_fit": 0.79
+     },
+     "lidar": {
+      "fit": 0.929,
+      "faces": 17,
+      "line_fit": 1.15
+     },
+     "blocks": {
+      "fit": 0.794,
+      "faces": 12,
+      "line_fit": 1.01
+     },
+     "skeleton": {
+      "fit": 0.307,
+      "faces": 3,
+      "line_fit": 9.0
+     }
+    },
+    "density": 3.5,
+    "min_pts": 12,
+    "regions": 23
+   },
+   "33583": {
+    "route": "blocks",
+    "cands": {
+     "photo": {
+      "fit": 0.802,
+      "faces": 9,
+      "line_fit": 0.92
+     },
+     "lidar": {
+      "fit": 0.908,
+      "faces": 14,
+      "line_fit": 0.79
+     },
+     "blocks": {
+      "fit": 0.865,
+      "faces": 14,
+      "line_fit": 0.5
+     },
+     "skeleton": {
+      "fit": 0.42,
+      "faces": 7,
+      "line_fit": 1.22
+     }
+    }
+   },
+   "33483": {
+    "route": "lidar",
+    "cands": {
+     "photo": {
+      "fit": 0.646,
+      "faces": 7,
+      "line_fit": 1.54
+     },
+     "lidar": {
+      "fit": 0.82,
+      "faces": 13,
+      "line_fit": 1.2
+     },
+     "blocks": {
+      "fit": 0.601,
+      "faces": 11,
+      "line_fit": 1.76
+     },
+     "skeleton": {
+      "fit": 0.298,
+      "faces": 4,
+      "line_fit": 1.54
+     }
+    },
+    "density": 4.4,
+    "min_pts": 12,
+    "regions": 19
+   }
+  },
+  "finished": "2026-10-21 22:40",
+  "visual": {
+   "41137": "SOUND: yes. SHAPE: right (plain hip; detailed model shown)",
+   "37990": "SOUND: yes. SHAPE: wrong, a plain box over a cut-up house (LiDAR fit 9%: two levels fell back to one)",
+   "64655": "SOUND: yes. SHAPE: wrong, partial and loose (fit 65%)",
+   "33583": "SOUND: no, a flat slab beside the roof in the app. SHAPE: close (main hip + W wing), fit 9%",
+   "33483": "SOUND: yes but busy. SHAPE: wrong, 17 cluttered faces (fit 45%)"
+  },
+  "counts_by_eye": {
+   "sound": 4,
+   "shown_right": 1,
+   "shown_close": 1,
+   "shown_wrong": 3,
+   "check_house": 0
+  },
+  "sheet": "onehouse/templates/sound-r13-sheet.png"
+ },
+ {
+  "round": 14,
+  "rows": [
+   "33024",
+   "54351",
+   "146072",
+   "52465",
+   "36662"
+  ],
+  "status": "stopped (Jack 10-22: roof-improvement work paused; prepared only, not judged)",
+  "method": "frozen: rules of round 1 + (1) Maps UI hidden before capture, card check; (2) LiDAR leads under 85% fit",
+  "seed": 42152,
+  "pool": 55326,
+  "spares": [
+   "41091",
+   "2127",
+   "162632",
+   "170071",
+   "47879",
+   "148008",
+   "175290",
+   "149326"
+  ],
+  "swaps": [
+   {
+    "out": "148075",
+    "why": "no 2020 points: hit 0\n23:15:54 3396582: read in 3s\n23:15:54 0 of 1 homes have points\n23:15:54   no points: collin-tx:148075 no 2020 points in the box (hole or edge of the data)",
+    "into": "52465"
+   },
+   {
+    "out": "11545",
+    "why": "no 2020 points: 23:15:55 0 of 1 homes have points\n23:15:55   no points: collin-tx:11545 2020 tile not downloaded: 3396601",
+    "into": "36662"
+   }
+  ],
+  "started": "2026-10-21 23:09"
+ }
+]

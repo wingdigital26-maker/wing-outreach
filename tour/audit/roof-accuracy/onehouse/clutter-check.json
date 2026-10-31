@@ -1,0 +1,278 @@
+{
+ "current_gates": {
+  "shown_right": {
+   "n": 12,
+   "homes": [
+    "56739:old",
+    "53110:hybrid",
+    "57927:new",
+    "46941:hybrid",
+    "8659:hybrid",
+    "10709:old",
+    "31351:hybrid",
+    "58673:hybrid",
+    "32509:hybrid",
+    "9441:hybrid",
+    "31648:hybrid",
+    "58489:hybrid"
+   ]
+  },
+  "shown_wrong": {
+   "n": 7,
+   "homes": [
+    "149197:old",
+    "5696:old",
+    "117590:hybrid",
+    "43154:hybrid",
+    "33416:hybrid",
+    "50599:old",
+    "12735:hybrid"
+   ]
+  },
+  "blocked_right": {
+   "n": 4,
+   "homes": [
+    "46572",
+    "783",
+    "8396",
+    "64162"
+   ]
+  },
+  "blocked_wrong": {
+   "n": 27,
+   "homes": [
+    "5921",
+    "36436",
+    "32361",
+    "10524",
+    "428",
+    "33165",
+    "34027",
+    "31311",
+    "224",
+    "38831",
+    "55125",
+    "66037",
+    "22669",
+    "37271",
+    "64304",
+    "59767",
+    "12727",
+    "62819",
+    "52803",
+    "164787",
+    "64242",
+    "57613",
+    "58915",
+    "144768",
+    "59811",
+    "34286",
+    "15249"
+   ]
+  }
+ },
+ "with_clutter_gate": {
+  "shown_right": {
+   "n": 10,
+   "homes": [
+    "56739:old",
+    "53110:old",
+    "57927:new",
+    "46941:hybrid",
+    "8659:hybrid",
+    "31351:hybrid",
+    "58673:hybrid",
+    "9441:hybrid",
+    "31648:hybrid",
+    "58489:hybrid"
+   ]
+  },
+  "shown_wrong": {
+   "n": 3,
+   "homes": [
+    "117590:hybrid",
+    "43154:hybrid",
+    "33416:old"
+   ]
+  },
+  "blocked_right": {
+   "n": 6,
+   "homes": [
+    "46572",
+    "783",
+    "8396",
+    "64162",
+    "10709",
+    "32509"
+   ]
+  },
+  "blocked_wrong": {
+   "n": 31,
+   "homes": [
+    "5921",
+    "36436",
+    "32361",
+    "10524",
+    "428",
+    "33165",
+    "34027",
+    "31311",
+    "149197",
+    "224",
+    "38831",
+    "55125",
+    "66037",
+    "22669",
+    "37271",
+    "64304",
+    "59767",
+    "5696",
+    "12727",
+    "62819",
+    "52803",
+    "164787",
+    "64242",
+    "57613",
+    "58915",
+    "144768",
+    "50599",
+    "59811",
+    "34286",
+    "12735",
+    "15249"
+   ]
+  }
+ },
+ "density_limit": 74.2,
+ "n_homes": 50,
+ "clutter_flags": {
+  "5921:old": [
+   "75 ft lines/1000 sq ft > 74"
+  ],
+  "36436:old": [
+   "101 ft lines/1000 sq ft > 74"
+  ],
+  "32361:old": [
+   "81 ft lines/1000 sq ft > 74"
+  ],
+  "10524:old": [
+   "104 ft lines/1000 sq ft > 74"
+  ],
+  "149197:old": [
+   "98 ft lines/1000 sq ft > 74"
+  ],
+  "38831:old": [
+   "85 ft lines/1000 sq ft > 74"
+  ],
+  "66037:old": [
+   "114 ft lines/1000 sq ft > 74"
+  ],
+  "22669:old": [
+   "109 ft lines/1000 sq ft > 74"
+  ],
+  "37271:old": [
+   "83 ft lines/1000 sq ft > 74"
+  ],
+  "64304:old": [
+   "95 ft lines/1000 sq ft > 74"
+  ],
+  "59767:old": [
+   "98 ft lines/1000 sq ft > 74"
+  ],
+  "5696:old": [
+   "104 ft lines/1000 sq ft > 74"
+  ],
+  "12727:old": [
+   "139 ft lines/1000 sq ft > 74"
+  ],
+  "53110:hybrid": [
+   "14 interior lines > 1.5 x 7 + 2"
+  ],
+  "57927:hybrid": [
+   "127 ft lines/1000 sq ft > 74",
+   "34 interior lines > 1.5 x 12 + 2"
+  ],
+  "52803:hybrid": [
+   "124 ft lines/1000 sq ft > 74"
+  ],
+  "52803:new": [
+   "89 ft lines/1000 sq ft > 74"
+  ],
+  "52803:old": [
+   "142 ft lines/1000 sq ft > 74"
+  ],
+  "46941:new": [
+   "83 ft lines/1000 sq ft > 74"
+  ],
+  "8659:new": [
+   "18 interior lines > 1.5 x 4 + 2"
+  ],
+  "164787:new": [
+   "83 ft lines/1000 sq ft > 74"
+  ],
+  "64242:hybrid": [
+   "103 ft lines/1000 sq ft > 74"
+  ],
+  "64242:new": [
+   "96 ft lines/1000 sq ft > 74"
+  ],
+  "64242:old": [
+   "116 ft lines/1000 sq ft > 74"
+  ],
+  "57613:new": [
+   "82 ft lines/1000 sq ft > 74"
+  ],
+  "10709:old": [
+   "75 ft lines/1000 sq ft > 74"
+  ],
+  "58915:hybrid": [
+   "82 ft lines/1000 sq ft > 74",
+   "36 interior lines > 1.5 x 15 + 2"
+  ],
+  "58915:old": [
+   "105 ft lines/1000 sq ft > 74"
+  ],
+  "43154:old": [
+   "89 ft lines/1000 sq ft > 74"
+  ],
+  "58673:old": [
+   "96 ft lines/1000 sq ft > 74"
+  ],
+  "32509:hybrid": [
+   "94 ft lines/1000 sq ft > 74",
+   "52 interior lines > 1.5 x 23 + 2"
+  ],
+  "32509:old": [
+   "123 ft lines/1000 sq ft > 74"
+  ],
+  "33416:hybrid": [
+   "32 interior lines > 1.5 x 15 + 2"
+  ],
+  "50599:old": [
+   "76 ft lines/1000 sq ft > 74"
+  ],
+  "59811:hybrid": [
+   "81 ft lines/1000 sq ft > 74",
+   "39 interior lines > 1.5 x 22 + 2"
+  ],
+  "59811:old": [
+   "180 ft lines/1000 sq ft > 74"
+  ],
+  "34286:hybrid": [
+   "17 interior lines > 1.5 x 4 + 2"
+  ],
+  "34286:old": [
+   "133 ft lines/1000 sq ft > 74"
+  ],
+  "12735:hybrid": [
+   "16 interior lines > 1.5 x 5 + 2"
+  ],
+  "15249:hybrid": [
+   "91 ft lines/1000 sq ft > 74",
+   "22 interior lines > 1.5 x 12 + 2"
+  ],
+  "15249:old": [
+   "91 ft lines/1000 sq ft > 74"
+  ]
+ }
+}

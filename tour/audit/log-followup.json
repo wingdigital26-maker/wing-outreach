@@ -1,0 +1,332 @@
+[
+ [
+  "desk shell chat after orb click",
+  []
+ ],
+ [
+  "desk chat Q 'what happened overnight'",
+  ""
+ ],
+ [
+  "desk chat Q 'show me the Alvarez home'",
+  ""
+ ],
+ [
+  "desk chat Q 'who is next'",
+  ""
+ ],
+ [
+  "desk chat Q 'book an inspection at 413 S Pickard'",
+  ""
+ ],
+ [
+  "desk chat Q 'how many homes did Sep 12 hit'",
+  ""
+ ],
+ [
+  "desk frame after asking to show Alvarez / book",
+  "/c4-command-deck/deck.html"
+ ],
+ [
+  "desk Esc closes chat?",
+  "none"
+ ],
+ [
+  "desk shell Ctrl K: new visible dialog/palette?",
+  [
+   "wmp"
+  ]
+ ],
+ [
+  "desk storm Ctrl K focus before/after",
+  [
+   "BODY.",
+   "INPUT. | "
+  ]
+ ],
+ [
+  "desk storm ask bar typed+enter: active el / text",
+  "INPUT homes over 1.5 in | body has typed text=false"
+ ],
+ [
+  "desk storm: Esc after selecting storm clears it?",
+  ""
+ ],
+ [
+  "desk storm page errors",
+  [
+   "STH is not defined",
+   "ST is not defined",
+   "ST is not defined",
+   "ST is not defined",
+   "ST is not defined"
+  ]
+ ],
+ [
+  "desk deep link ?tab=daily",
+  [
+   "/c4-command-deck/deck.html",
+   "desktop"
+  ]
+ ],
+ [
+  "desk deep link ?tab=home&mode=phone",
+  [
+   "/c5-home/index.html",
+   "phone"
+  ]
+ ],
+ [
+  "desk deep link ?tab=storm",
+  [
+   "/1b-storm-theater.html",
+   "desktop"
+  ]
+ ],
+ [
+  "desk deep link ?tab=ask",
+  [
+   "/c2-nimbus/index.html",
+   "desktop"
+  ]
+ ],
+ [
+  "desk deep link ?tab=nope",
+  [
+   "/1a-storm-intro.html",
+   "desktop"
+  ]
+ ],
+ [
+  "desk phone-mode geometry",
+  {
+   "dock": [
+    933,
+    101,
+    100
+   ],
+   "frame": [
+    525,
+    115,
+    390,
+    721
+   ],
+   "win": [
+    1440,
+    900
+   ]
+  }
+ ],
+ [
+  "desk browser Back after 2 tab clicks",
+  "hung/ERR Page.go_back: Timeout 8000ms exceeded.\nCall log:\n  - waiting for navigation unti url=product.html?tab=daily&mode=phone"
+ ],
+ [
+  "desk home Book: text len before/after, new visible dialog",
+  [
+   1791,
+   1791,
+   []
+  ]
+ ],
+ [
+  "desk deck keyboard (arrows/n/enter/space) changed card?",
+  [
+   "413 S. Pickard Avenue",
+   "413 S. Pickard Avenue"
+  ]
+ ],
+ [
+  "desk deck Find an address",
+  "NOTHING happened"
+ ],
+ [
+  "desk deck avatar C",
+  "NOTHING happened"
+ ],
+ [
+  "desk deck pipeline stage",
+  "NOTHING happened"
+ ],
+ [
+  "desk deck Directions",
+  "NOTHING happened"
+ ],
+ [
+  "desk record.html live controls",
+  "1 with inline handlers of 19 buttons"
+ ],
+ [
+  "desk deck/record errors",
+  [
+   "STH is not defined"
+  ]
+ ],
+ [
+  "phone shell chat after orb click",
+  []
+ ],
+ [
+  "phone chat Q 'what happened overnight'",
+  ""
+ ],
+ [
+  "phone chat Q 'show me the Alvarez home'",
+  ""
+ ],
+ [
+  "phone chat Q 'who is next'",
+  ""
+ ],
+ [
+  "phone chat Q 'book an inspection at 413 S Pickard'",
+  ""
+ ],
+ [
+  "phone chat Q 'how many homes did Sep 12 hit'",
+  ""
+ ],
+ [
+  "phone frame after asking to show Alvarez / book",
+  "/c4-command-deck/deck.html"
+ ],
+ [
+  "phone Esc closes chat?",
+  "none"
+ ],
+ [
+  "phone shell Ctrl K: new visible dialog/palette?",
+  [
+   "wmp"
+  ]
+ ],
+ [
+  "phone storm Ctrl K focus before/after",
+  [
+   "BODY.loaded",
+   "INPUT. | "
+  ]
+ ],
+ [
+  "phone storm ask bar typed+enter: active el / text",
+  "INPUT homes over 1.5 in | body has typed text=false"
+ ],
+ [
+  "phone storm esc",
+  "ERR Locator.click: Timeout 2500ms exceeded.\nCall log:\n  - waiting for locator(\"#show\")\n    - locator res"
+ ],
+ [
+  "phone storm page errors",
+  []
+ ],
+ [
+  "phone deep link ?tab=daily",
+  [
+   "/c4-command-deck/deck.html",
+   "desktop"
+  ]
+ ],
+ [
+  "phone deep link ?tab=home&mode=phone",
+  [
+   "/c5-home/index.html",
+   "phone"
+  ]
+ ],
+ [
+  "phone deep link ?tab=storm",
+  [
+   "/1b-storm-theater.html",
+   "desktop"
+  ]
+ ],
+ [
+  "phone deep link ?tab=ask",
+  [
+   "/c2-nimbus/index.html",
+   "desktop"
+  ]
+ ],
+ [
+  "phone deep link ?tab=nope",
+  [
+   "/1a-storm-intro.html",
+   "desktop"
+  ]
+ ],
+ [
+  "phone phone-mode geometry",
+  {
+   "dock": [
+    276,
+    766,
+    100
+   ],
+   "frame": [
+    12,
+    143,
+    366,
+    637
+   ],
+   "win": [
+    390,
+    844
+   ]
+  }
+ ],
+ [
+  "phone browser Back after 2 tab clicks",
+  "hung/ERR Page.go_back: Timeout 8000ms exceeded.\nCall log:\n  - waiting for navigation unti url=product.html?tab=daily&mode=phone"
+ ],
+ [
+  "phone home Book: text len before/after, new visible dialog",
+  [
+   1615,
+   1615,
+   [
+    "sheet:Plane"
+   ]
+  ]
+ ],
+ [
+  "phone deck keyboard (arrows/n/enter/space) changed card?",
+  [
+   "413 S. Pickard Avenue",
+   "413 S. Pickard Avenue"
+  ]
+ ],
+ [
+  "phone deck Find an address",
+  "not visible"
+ ],
+ [
+  "phone deck avatar C",
+  "not visible"
+ ],
+ [
+  "phone deck pipeline stage",
+  "NOTHING happened"
+ ],
+ [
+  "phone deck Directions",
+  "NOTHING happened"
+ ],
+ [
+  "phone route sheet controls",
+  [
+   null,
+   "OpenFreeMap",
+   "\u00a9 OpenMapTiles",
+   "OpenStreetMap",
+   null
+  ]
+ ],
+ [
+  "phone record.html live controls",
+  "1 with inline handlers of 19 buttons"
+ ],
+ [
+  "phone deck/record errors",
+  []
+ ]
+]

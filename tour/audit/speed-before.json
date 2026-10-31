@@ -1,0 +1,69 @@
+{
+ "res": {
+  "daily": {
+   "cold": {
+    "shell": 300,
+    "paint": 17053,
+    "ready": 17370,
+    "bytes": 1014893,
+    "reqs": 31,
+    "sw": 0,
+    "third": 12
+   },
+   "repeat": {
+    "shell": 136,
+    "paint": 723,
+    "ready": 9736,
+    "bytes": -1,
+    "reqs": 31,
+    "sw": 0,
+    "third": 12
+   }
+  },
+  "storm": {
+   "cold": {
+    "shell": 332,
+    "paint": 2040,
+    "ready": 20244,
+    "bytes": 5642955,
+    "reqs": 37,
+    "sw": 0,
+    "third": 16
+   },
+   "repeat": {
+    "shell": 92,
+    "paint": 307,
+    "ready": 3966,
+    "bytes": 432592,
+    "reqs": 37,
+    "sw": 0,
+    "third": 16
+   }
+  },
+  "home": {
+   "cold": {
+    "shell": 288,
+    "paint": 1566,
+    "ready": 6073,
+    "bytes": 668502,
+    "reqs": 23,
+    "sw": 0,
+    "third": 3
+   },
+   "repeat": {
+    "shell": 204,
+    "paint": 791,
+    "ready": 4955,
+    "bytes": 104,
+    "reqs": 23,
+    "sw": 0,
+    "third": 3
+   }
+  }
+ },
+ "errors": [
+  "daily: console Failed to load resource: net::ERR_NETWORK_CHANGED",
+  "daily: console Failed to load resource: net::ERR_NETWORK_CHANGED",
+  "daily: pageerror maplibregl is not defined"
+ ]
+}

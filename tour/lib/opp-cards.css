@@ -1,0 +1,83 @@
+/* opp-cards.css: the Opportunity Score on cards, rows, the breakdown dialog and Nimbus's why card (lib/opp-cards.js). Quiet:
+   ink and warm grey, green only for a high score. */
+:root{--opc-ink:#17181C;--opc-slate:#767B88;--opc-line:#E8E6E1;--opc-line-2:#F0EEE9;--opc-green:#1F8A4C;--opc-green-soft:#E6F4EB;--opc-tint:#FAF8F4}
+.opc-ring{position:relative;display:inline-grid;place-items:center;width:var(--s,40px);height:var(--s,40px);flex:none;line-height:1}
+.opc-ring svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.opc-ring circle{fill:none;stroke:var(--opc-line);stroke-width:3.5}
+.opc-ring circle.v{stroke:#3B3F49;stroke-linecap:round}
+.opc-ring.hi circle.v{stroke:var(--opc-green)}
+.opc-ring.lo circle.v{stroke:#A9ADB7}
+.opc-ring b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:calc(var(--s,40px) * .42);color:var(--opc-ink);font-variant-numeric:tabular-nums}
+.opc-ring.hi b{color:var(--opc-green)}
+.opc-conf{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;border:1px solid var(--opc-line);font-size:11px;font-weight:500;color:var(--opc-slate);white-space:nowrap;background:#fff}
+.opc-conf.High{color:var(--opc-green);background:var(--opc-green-soft);border-color:transparent}
+/* the line on a house card */
+.opc-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 0 10px;margin:0 0 10px;border-bottom:1px solid var(--opc-line-2)}
+.opc-why{display:inline-flex;align-items:center;gap:10px;font:inherit;color:inherit;background:none;border:0;padding:4px 6px 4px 2px;border-radius:10px;cursor:pointer;text-align:left}
+.opc-why:hover{background:var(--opc-tint)}
+.opc-why span{display:flex;flex-direction:column;line-height:1.2}
+.opc-why b{font-size:12.5px;font-weight:500;color:var(--opc-ink)}
+.opc-why small{font-size:11.5px;color:var(--opc-slate);margin-top:2px}
+/* a row chip (Up next, the pipeline) */
+.opc-sc{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--opc-ink);font-variant-numeric:tabular-nums}
+.opc-sc .opc-ring{--s:22px}
+.opc-sc .opc-ring b{display:none}
+.opc-sc.hi{color:var(--opc-green)}
+/* the breakdown dialog */
+.opc-dlg{border:1px solid var(--opc-line);border-radius:14px;padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100vh - 40px);background:#fff;color:var(--opc-ink);box-shadow:0 24px 60px -30px rgba(23,24,28,.35);font-family:'Inter',system-ui,sans-serif}
+.opc-dlg::backdrop{background:rgba(23,24,28,.35)}
+.opc-bd{padding:18px 20px 16px}
+.opc-bdh{display:flex;align-items:center;gap:14px;position:relative;padding-right:36px}
+.opc-bdh h3{margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:22px;letter-spacing:-.005em}
+.opc-bdh p{margin:3px 0 0;font-size:13px;color:var(--opc-slate);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.opc-x{position:absolute;right:-6px;top:-4px;width:32px;height:32px;border:0;background:none;font-size:22px;line-height:1;color:var(--opc-slate);cursor:pointer;border-radius:8px}
+.opc-x:hover{background:var(--opc-tint)}
+.opc-rows{margin-top:14px;max-height:56vh;overflow:auto}
+.opc-row{display:grid;grid-template-columns:150px 1fr 64px;gap:8px 12px;align-items:center;padding:10px 0;border-top:1px solid var(--opc-line-2);font-size:13px}
+.opc-row .k{font-weight:500}
+.opc-row .bar{height:5px;border-radius:3px;background:var(--opc-line-2);overflow:hidden}
+.opc-row .bar i{display:block;height:100%;background:#3B3F49;border-radius:3px}
+.opc-row .p{text-align:right;font-variant-numeric:tabular-nums;color:var(--opc-ink)}
+.opc-row.slot .p,.opc-row.slot .k{color:var(--opc-slate)}
+.opc-row .ev{grid-column:1 / -1;font-size:12.5px;color:var(--opc-slate);line-height:1.45}
+.opc-row .ev em{font-style:normal;color:#9A6700}
+.opc-foot{margin:12px 0 0;font-size:11.5px;color:var(--opc-slate);line-height:1.45}
+/* Nimbus's why card */
+.opc-card{border:1px solid var(--opc-line);border-radius:12px;background:#fff;padding:12px 14px;margin:4px 0;max-width:420px}
+.opc-ch{display:flex;align-items:center;gap:12px}
+.opc-ch b{display:block;font-size:14px;font-weight:600}
+.opc-ch small{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--opc-slate);margin-top:2px}
+.opc-rs{list-style:none;margin:10px 0 0;padding:0;counter-reset:r}
+.opc-rs li{padding:8px 0;border-top:1px solid var(--opc-line-2);font-size:13px}
+.opc-rs li b{font-weight:500}
+.opc-rs li>span{float:right;color:var(--opc-slate);font-variant-numeric:tabular-nums;font-size:12px}
+.opc-rs li p{margin:3px 0 0;font-size:12.5px;color:var(--opc-slate);line-height:1.4}
+.opc-rs li em{font-style:normal;color:#9A6700}
+.opc-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.opc-b{font:inherit;font-size:12.5px;font-weight:500;height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--opc-line);background:#fff;color:var(--opc-ink);cursor:pointer}
+.opc-b:hover{background:var(--opc-tint)}
+.opc-b.pri{background:var(--opc-ink);border-color:var(--opc-ink);color:#fff}
+@media (max-width:599px){ .opc-row{grid-template-columns:1fr 60px} .opc-row .bar{grid-column:1 / -1;order:3} .opc-rows{max-height:50vh} }
+/* the number sits dead centre whatever the host page does to <b> */
+.opc-ring b{position:absolute;inset:0;display:grid;place-items:center;margin:0;padding:0;width:auto;letter-spacing:0;text-transform:none}
+/* inside Nimbus's chat thread: real buttons, not links */
+.nbd-m .opc-card{display:block;margin:6px 0 2px}
+.nbd-m .opc-card b{display:inline;width:auto;font-size:inherit;letter-spacing:0;text-transform:none;padding:0}
+.nbd-m .opc-ch b{display:block;font-size:14px;font-weight:600}
+.nbd-m .opc-b,.nbd-m .opc-b:hover{text-decoration:none;display:inline-flex;align-items:center}
+.nbd-m .opc-b.pri{background:#17181C;color:#fff}
+.nbd-m .opc-rs li>span{float:right}
+.nbd-m span .opc-b{font:inherit;font-size:12.5px !important;font-weight:500 !important;text-decoration:none !important;color:var(--opc-ink) !important;border:1px solid var(--opc-line) !important;background:#fff !important;padding:0 12px !important;height:32px;border-radius:8px}
+.nbd-m span .opc-b.pri{background:var(--opc-ink) !important;border-color:var(--opc-ink) !important;color:#fff !important}
+/* score + confidence tooltips (lib/opp-tips.js, Floating UI, loop 6): quiet, hairline, same type as the cards */
+.opt-tip{position:fixed;left:0;top:0;z-index:80;width:max-content;max-width:280px;padding:10px 12px;background:#fff;border:1px solid var(--opc-line,#E6E8EC);border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,.10);font-size:12.5px;line-height:1.4;color:var(--opc-ink,#17181C);opacity:0;pointer-events:none;transition:opacity .12s}
+.opt-tip.on{opacity:1}
+.opt-tip b{display:block;font-weight:600;margin-bottom:4px}
+.opt-tip p{margin:0;color:var(--opc-slate,#5B6170)}
+.opt-tip ul{list-style:none;margin:0 0 6px;padding:0}
+.opt-tip li{display:flex;justify-content:space-between;gap:16px;padding:2px 0}
+.opt-tip li em{font-style:normal;color:var(--opc-slate,#5B6170);font-variant-numeric:tabular-nums}
+.opt-tip .opt-f{font-size:11.5px}
+.opt-a{position:absolute;width:9px;height:9px;background:#fff;border-left:1px solid var(--opc-line,#E6E8EC);border-top:1px solid var(--opc-line,#E6E8EC);transform:rotate(45deg)}
+.opt-tip[data-s=top] .opt-a{transform:rotate(225deg)}
+@media (prefers-reduced-motion:reduce){.opt-tip{transition:none}}

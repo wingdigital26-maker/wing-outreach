@@ -1,0 +1,630 @@
+{
+ "built": "2026-10-16",
+ "note": "Daily 50 of 2026-10-15 + 32 homes nearest 3312 Caleo Ct (collin-tx 164153); points = a LiDAR point cache exists",
+ "homes": [
+  {
+   "region": "collin-tx",
+   "row": 1954,
+   "gi": 1954,
+   "set": "daily",
+   "stop": 1,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 70053,
+   "gi": 70053,
+   "set": "daily",
+   "stop": 2,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 35276,
+   "gi": 35276,
+   "set": "daily",
+   "stop": 3,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 206483,
+   "gi": 206483,
+   "set": "daily",
+   "stop": 4,
+   "points": true
+  },
+  {
+   "region": "rockwall-tx",
+   "row": 23,
+   "gi": 255766,
+   "set": "daily",
+   "stop": 5,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 130356,
+   "gi": 130356,
+   "set": "daily",
+   "stop": 6,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 10524,
+   "gi": 10524,
+   "set": "daily",
+   "stop": 7,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 97049,
+   "gi": 97049,
+   "set": "daily",
+   "stop": 8,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 34780,
+   "gi": 34780,
+   "set": "daily",
+   "stop": 9,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 205330,
+   "gi": 205330,
+   "set": "daily",
+   "stop": 10,
+   "points": true
+  },
+  {
+   "region": "rockwall-tx",
+   "row": 68,
+   "gi": 255811,
+   "set": "daily",
+   "stop": 11,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 153987,
+   "gi": 153987,
+   "set": "daily",
+   "stop": 12,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 83996,
+   "gi": 83996,
+   "set": "daily",
+   "stop": 13,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 5921,
+   "gi": 5921,
+   "set": "daily",
+   "stop": 14,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 32361,
+   "gi": 32361,
+   "set": "daily",
+   "stop": 15,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 204869,
+   "gi": 204869,
+   "set": "daily",
+   "stop": 16,
+   "points": true
+  },
+  {
+   "region": "rockwall-tx",
+   "row": 48,
+   "gi": 255791,
+   "set": "daily",
+   "stop": 17,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 166093,
+   "gi": 166093,
+   "set": "daily",
+   "stop": 18,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 36436,
+   "gi": 36436,
+   "set": "daily",
+   "stop": 19,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 15574,
+   "gi": 15574,
+   "set": "daily",
+   "stop": 20,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 79958,
+   "gi": 79958,
+   "set": "daily",
+   "stop": 21,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 200871,
+   "gi": 200871,
+   "set": "daily",
+   "stop": 22,
+   "points": true
+  },
+  {
+   "region": "rockwall-tx",
+   "row": 5321,
+   "gi": 261064,
+   "set": "daily",
+   "stop": 23,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 173943,
+   "gi": 173943,
+   "set": "daily",
+   "stop": 24,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 35469,
+   "gi": 35469,
+   "set": "daily",
+   "stop": 25,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 103512,
+   "gi": 103512,
+   "set": "daily",
+   "stop": 26,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 4957,
+   "gi": 4957,
+   "set": "daily",
+   "stop": 27,
+   "points": false
+  },
+  {
+   "region": "rockwall-tx",
+   "row": 2558,
+   "gi": 258301,
+   "set": "daily",
+   "stop": 28,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 200985,
+   "gi": 200985,
+   "set": "daily",
+   "stop": 29,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 189060,
+   "gi": 189060,
+   "set": "daily",
+   "stop": 30,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 36251,
+   "gi": 36251,
+   "set": "daily",
+   "stop": 31,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 428,
+   "gi": 428,
+   "set": "daily",
+   "stop": 32,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 77282,
+   "gi": 77282,
+   "set": "daily",
+   "stop": 33,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 206911,
+   "gi": 206911,
+   "set": "daily",
+   "stop": 34,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 188969,
+   "gi": 188969,
+   "set": "daily",
+   "stop": 35,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 15292,
+   "gi": 15292,
+   "set": "daily",
+   "stop": 36,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 70059,
+   "gi": 70059,
+   "set": "daily",
+   "stop": 37,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 67062,
+   "gi": 67062,
+   "set": "daily",
+   "stop": 38,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 207704,
+   "gi": 207704,
+   "set": "daily",
+   "stop": 39,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 147750,
+   "gi": 147750,
+   "set": "daily",
+   "stop": 40,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 71943,
+   "gi": 71943,
+   "set": "daily",
+   "stop": 41,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 32591,
+   "gi": 32591,
+   "set": "daily",
+   "stop": 42,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 14003,
+   "gi": 14003,
+   "set": "daily",
+   "stop": 43,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 204682,
+   "gi": 204682,
+   "set": "daily",
+   "stop": 44,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 191766,
+   "gi": 191766,
+   "set": "daily",
+   "stop": 45,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 116210,
+   "gi": 116210,
+   "set": "daily",
+   "stop": 46,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 62645,
+   "gi": 62645,
+   "set": "daily",
+   "stop": 47,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 30154,
+   "gi": 30154,
+   "set": "daily",
+   "stop": 48,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 171979,
+   "gi": 171979,
+   "set": "daily",
+   "stop": 49,
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 70302,
+   "gi": 70302,
+   "set": "daily",
+   "stop": 50,
+   "points": false
+  },
+  {
+   "region": "collin-tx",
+   "row": 164153,
+   "gi": 164153,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164155,
+   "gi": 164155,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164151,
+   "gi": 164151,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164201,
+   "gi": 164201,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164203,
+   "gi": 164203,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164157,
+   "gi": 164157,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164205,
+   "gi": 164205,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164199,
+   "gi": 164199,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164150,
+   "gi": 164150,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164154,
+   "gi": 164154,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164152,
+   "gi": 164152,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164156,
+   "gi": 164156,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164207,
+   "gi": 164207,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164159,
+   "gi": 164159,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164197,
+   "gi": 164197,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164158,
+   "gi": 164158,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164148,
+   "gi": 164148,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164200,
+   "gi": 164200,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164149,
+   "gi": 164149,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164198,
+   "gi": 164198,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164209,
+   "gi": 164209,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164160,
+   "gi": 164160,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164161,
+   "gi": 164161,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164195,
+   "gi": 164195,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164180,
+   "gi": 164180,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164229,
+   "gi": 164229,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164202,
+   "gi": 164202,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164196,
+   "gi": 164196,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164231,
+   "gi": 164231,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164182,
+   "gi": 164182,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164227,
+   "gi": 164227,
+   "set": "near",
+   "points": true
+  },
+  {
+   "region": "collin-tx",
+   "row": 164233,
+   "gi": 164233,
+   "set": "near",
+   "points": true
+  }
+ ]
+}

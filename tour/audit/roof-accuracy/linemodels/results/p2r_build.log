@@ -1,0 +1,48 @@
+running install
+/usr/local/lib/python3.13/dist-packages/setuptools/_distutils/cmd.py:90: SetuptoolsDeprecationWarning: setup.py install is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` directly.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        This deprecation is overdue, please update your project and remove deprecated
+        calls to avoid build errors in the future.
+
+        See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.
+        ********************************************************************************
+
+!!
+  self.initialize_options()
+running build
+running build_ext
+W1022 04:17:51.018000 1702 torch/utils/cpp_extension.py:680] Attempted to use ninja as the BuildExtension backend but we could not find ninja.. Falling back to using the slow distutils backend.
+building 'pc_util' extension
+creating build/temp.linux-x86_64-cpython-313/src
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/ball_query.cpp -o build/temp.linux-x86_64-cpython-313/src/ball_query.o -g -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -std=c++17
+/usr/local/cuda/bin/nvcc -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/ball_query_gpu.cu -o build/temp.linux-x86_64-cpython-313/src/ball_query_gpu.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O2 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -gencode=arch=compute_75,code=compute_75 -gencode=arch=compute_75,code=sm_75 -std=c++17
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/cluster.cpp -o build/temp.linux-x86_64-cpython-313/src/cluster.o -g -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -std=c++17
+/usr/local/cuda/bin/nvcc -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/cluster_gpu.cu -o build/temp.linux-x86_64-cpython-313/src/cluster_gpu.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O2 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -gencode=arch=compute_75,code=compute_75 -gencode=arch=compute_75,code=sm_75 -std=c++17
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/group_points.cpp -o build/temp.linux-x86_64-cpython-313/src/group_points.o -g -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -std=c++17
+/usr/local/cuda/bin/nvcc -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/group_points_gpu.cu -o build/temp.linux-x86_64-cpython-313/src/group_points_gpu.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O2 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -gencode=arch=compute_75,code=compute_75 -gencode=arch=compute_75,code=sm_75 -std=c++17
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/interpolate.cpp -o build/temp.linux-x86_64-cpython-313/src/interpolate.o -g -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -std=c++17
+/usr/local/cuda/bin/nvcc -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/interpolate_gpu.cu -o build/temp.linux-x86_64-cpython-313/src/interpolate_gpu.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O2 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -gencode=arch=compute_75,code=compute_75 -gencode=arch=compute_75,code=sm_75 -std=c++17
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/pointnet2_api.cpp -o build/temp.linux-x86_64-cpython-313/src/pointnet2_api.o -g -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -std=c++17
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -g -fwrapv -O2 -fPIC -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/sampling.cpp -o build/temp.linux-x86_64-cpython-313/src/sampling.o -g -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -std=c++17
+/usr/local/cuda/bin/nvcc -I/usr/local/lib/python3.13/dist-packages/torch/include -I/usr/local/lib/python3.13/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/usr/include/python3.13 -c src/sampling_gpu.cu -o build/temp.linux-x86_64-cpython-313/src/sampling_gpu.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -O2 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=pc_util -gencode=arch=compute_75,code=compute_75 -gencode=arch=compute_75,code=sm_75 -std=c++17
+creating build/lib.linux-x86_64-cpython-313
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -g -fwrapv -O2 -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -g -fwrapv -O2 build/temp.linux-x86_64-cpython-313/src/ball_query.o build/temp.linux-x86_64-cpython-313/src/ball_query_gpu.o build/temp.linux-x86_64-cpython-313/src/cluster.o build/temp.linux-x86_64-cpython-313/src/cluster_gpu.o build/temp.linux-x86_64-cpython-313/src/group_points.o build/temp.linux-x86_64-cpython-313/src/group_points_gpu.o build/temp.linux-x86_64-cpython-313/src/interpolate.o build/temp.linux-x86_64-cpython-313/src/interpolate_gpu.o build/temp.linux-x86_64-cpython-313/src/pointnet2_api.o build/temp.linux-x86_64-cpython-313/src/sampling.o build/temp.linux-x86_64-cpython-313/src/sampling_gpu.o -L/usr/local/lib/python3.13/dist-packages/torch/lib -L/usr/local/cuda/lib64 -L/usr/lib/x86_64-linux-gnu -lc10 -ltorch -ltorch_cpu -ltorch_python -lcudart -lc10_cuda -ltorch_cuda -o build/lib.linux-x86_64-cpython-313/pc_util.cpython-313-x86_64-linux-gnu.so
+running install_lib
+copying build/lib.linux-x86_64-cpython-313/pc_util.cpython-313-x86_64-linux-gnu.so -> /usr/local/lib/python3.13/dist-packages
+running install_egg_info
+running egg_info
+creating pc_util.egg-info
+writing pc_util.egg-info/PKG-INFO
+writing dependency_links to pc_util.egg-info/dependency_links.txt
+writing top-level names to pc_util.egg-info/top_level.txt
+writing manifest file 'pc_util.egg-info/SOURCES.txt'
+reading manifest file 'pc_util.egg-info/SOURCES.txt'
+writing manifest file 'pc_util.egg-info/SOURCES.txt'
+Copying pc_util.egg-info to /usr/local/lib/python3.13/dist-packages/pc_util-1.0-py3.13.egg-info
+running install_scripts

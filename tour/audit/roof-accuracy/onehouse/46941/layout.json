@@ -1,0 +1,155 @@
+{
+ "image": "gtrace/46941/google.png",
+ "ft_per_px": 0.1901,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     453,
+     408
+    ],
+    [
+     693,
+     408
+    ],
+    [
+     693,
+     635
+    ],
+    [
+     453,
+     635
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "main hip 46 by 43 ft, short E-W ridge near y 520, dark N face about 8/12; its NW quarter is covered by the rear_left block"
+  },
+  {
+   "name": "front",
+   "rect_px": [
+    [
+     357,
+     505
+    ],
+    [
+     600,
+     505
+    ],
+    [
+     600,
+     635
+    ],
+    [
+     357,
+     635
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "long S block, E-W ridge near y 570, hipped at the W end near x 420, E end dies into the main S face; its N face about 6.5/12 (371 sq ft)"
+  },
+  {
+   "name": "rear_left",
+   "rect_px": [
+    [
+     453,
+     408
+    ],
+    [
+     611,
+     408
+    ],
+    [
+     611,
+     520
+    ],
+    [
+     453,
+     520
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "NW block beside the driveway notch: dark N hip triangle with base from x 453 to 558 on the N eave and apex near (533,473), so a short N-S ridge near x 533 running S into the main; v1 rect was too narrow (ridge on its E edge, fit 40%)"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    355,
+    638
+   ],
+   [
+    693,
+    638
+   ],
+   [
+    693,
+    668
+   ],
+   [
+    355,
+    668
+   ]
+  ],
+  [
+   [
+    338,
+    488
+   ],
+   [
+    357,
+    488
+   ],
+   [
+    357,
+    665
+   ],
+   [
+    338,
+    665
+   ]
+  ],
+  [
+   [
+    400,
+    400
+   ],
+   [
+    453,
+    400
+   ],
+   [
+    453,
+    500
+   ],
+   [
+    400,
+    500
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "dark flat strip with a white fascia line along the S side, rear patio cover, not the main roof",
+  "lawn and shadow W of the front block, trace overshoots about 4 ft",
+  "driveway notch NW of the main, concrete not roof"
+ ],
+ "notes": "1-story: main E-W hip, long E-W front hip on the SW, and a NW block with a N-S ridge (rect widened so the ridge is centred). Confidence medium-high on main and front, medium on rear_left."
+}

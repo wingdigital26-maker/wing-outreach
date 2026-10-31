@@ -1,0 +1,156 @@
+{
+ "testset": {
+  "totals": {
+   "homes": 82,
+   "year_built": 82,
+   "permit": 4,
+   "permit_mckinney": 4,
+   "permit_or_new": 5,
+   "built_2011_on": 1
+  },
+  "permit_years": {
+   "2015": 1,
+   "2016": 1,
+   "2017": 2
+  },
+  "by_city": {
+   "Allen": {
+    "homes": 9,
+    "year_built": 9
+   },
+   "Frisco": {
+    "homes": 9,
+    "year_built": 9
+   },
+   "McKinney": {
+    "homes": 10,
+    "year_built": 10,
+    "permit": 4,
+    "permit_or_new": 4
+   },
+   "Plano": {
+    "homes": 41,
+    "year_built": 41,
+    "permit_or_new": 1
+   },
+   "Richardson": {
+    "homes": 8,
+    "year_built": 8
+   },
+   "Rockwall": {
+    "homes": 5,
+    "year_built": 5
+   }
+  }
+ },
+ "collin-tx": {
+  "totals": {
+   "homes": 207724,
+   "year_built": 207702,
+   "permit": 21484,
+   "permit_collin": 11111,
+   "permit_or_new": 68037,
+   "built_2011_on": 50516,
+   "permit_mckinney": 10373
+  },
+  "permit_years": {
+   "2015": 291,
+   "2016": 464,
+   "2017": 8119,
+   "2018": 63,
+   "2019": 263,
+   "2020": 317,
+   "2021": 347,
+   "2022": 308,
+   "2023": 5489,
+   "2024": 2356,
+   "2025": 2022,
+   "2026": 1445
+  },
+  "by_city": {
+   "Allen": {
+    "homes": 31268,
+    "year_built": 31268,
+    "permit": 6548,
+    "permit_or_new": 11623
+   },
+   "Frisco": {
+    "homes": 35816,
+    "year_built": 35816,
+    "permit_or_new": 16323,
+    "permit": 1868
+   },
+   "McKinney": {
+    "homes": 61253,
+    "year_built": 61231,
+    "permit_or_new": 34376,
+    "permit": 12538
+   },
+   "Plano": {
+    "homes": 72072,
+    "year_built": 72072,
+    "permit": 358,
+    "permit_or_new": 5196
+   },
+   "Richardson": {
+    "homes": 7315,
+    "year_built": 7315,
+    "permit": 172,
+    "permit_or_new": 519
+   }
+  }
+ },
+ "denton-tx": {
+  "totals": {
+   "homes": 28198,
+   "year_built": 28198,
+   "built_2011_on": 11581,
+   "permit_or_new": 11581
+  },
+  "permit_years": {},
+  "by_city": {
+   "Frisco": {
+    "homes": 26219,
+    "year_built": 26219,
+    "permit_or_new": 11414
+   },
+   "Plano": {
+    "homes": 1979,
+    "year_built": 1979,
+    "permit_or_new": 167
+   }
+  }
+ },
+ "dallas-tx": {
+  "totals": {
+   "homes": 19821,
+   "year_built": 19821,
+   "built_2011_on": 877,
+   "permit_or_new": 877
+  },
+  "permit_years": {},
+  "by_city": {
+   "Richardson": {
+    "homes": 19821,
+    "year_built": 19821,
+    "permit_or_new": 877
+   }
+  }
+ },
+ "rockwall-tx": {
+  "totals": {
+   "homes": 15289,
+   "year_built": 15289,
+   "built_2011_on": 3149,
+   "permit_or_new": 3149
+  },
+  "permit_years": {},
+  "by_city": {
+   "Rockwall": {
+    "homes": 15289,
+    "year_built": 15289,
+    "permit_or_new": 3149
+   }
+  }
+ }
+}

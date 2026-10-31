@@ -1,0 +1,132 @@
+{
+ "36436": {
+  "row": "36436",
+  "shift_ft": [
+   1.0,
+   2.5
+  ],
+  "contour_share": 0.631,
+  "share_at_zero": 0.51,
+  "global_max": 0.767,
+  "light_before": -2.0,
+  "light_after": -5.8,
+  "verdict": "registration off"
+ },
+ "33165": {
+  "row": "33165",
+  "shift_ft": [
+   -3.5,
+   1.5
+  ],
+  "contour_share": 0.784,
+  "share_at_zero": 0.742,
+  "global_max": 0.868,
+  "light_before": -26.1,
+  "light_after": 8.2,
+  "verdict": "registration off"
+ },
+ "149197": {
+  "row": "149197",
+  "shift_ft": [
+   1.0,
+   0.5
+  ],
+  "contour_share": 0.743,
+  "share_at_zero": 0.712,
+  "global_max": 0.919,
+  "light_before": 4.8,
+  "light_after": 3.8,
+  "verdict": "registration off"
+ },
+ "64304": {
+  "row": "64304",
+  "shift_ft": [
+   0.5,
+   -0.5
+  ],
+  "contour_share": 0.863,
+  "share_at_zero": 0.828,
+  "global_max": 0.863,
+  "light_before": -3.5,
+  "light_after": -6.0,
+  "verdict": "registration off"
+ },
+ "46941": {
+  "row": "46941",
+  "shift_ft": [
+   0.0,
+   0.0
+  ],
+  "contour_share": 0.702,
+  "share_at_zero": 0.702,
+  "global_max": 0.798,
+  "light_before": 16.5,
+  "light_after": 16.5,
+  "verdict": "registration off"
+ },
+ "64242": {
+  "row": "64242",
+  "shift_ft": [
+   1.0,
+   1.0
+  ],
+  "contour_share": 0.648,
+  "share_at_zero": 0.59,
+  "global_max": 0.8,
+  "light_before": 9.9,
+  "light_after": 17.8,
+  "verdict": "registration off"
+ },
+ "57613": {
+  "row": "57613",
+  "shift_ft": [
+   1.0,
+   2.5
+  ],
+  "contour_share": 0.797,
+  "share_at_zero": 0.739,
+  "global_max": 0.862,
+  "light_before": -32.1,
+  "light_after": 2.2,
+  "verdict": "registration off"
+ },
+ "58915": {
+  "row": "58915",
+  "shift_ft": [
+   -1.0,
+   0.0
+  ],
+  "contour_share": 0.719,
+  "share_at_zero": 0.698,
+  "global_max": 0.826,
+  "light_before": -71.8,
+  "light_after": -72.7,
+  "verdict": "registration off"
+ },
+ "56739": {
+  "row": "56739",
+  "shift_ft": [
+   0.0,
+   -0.5
+  ],
+  "contour_share": 0.827,
+  "share_at_zero": 0.817,
+  "global_max": 0.919,
+  "light_before": 84.8,
+  "light_after": 82.8,
+  "verdict": "ok as is"
+ },
+ "64162": {
+  "row": "64162",
+  "shift_ft": [
+   -2.5,
+   -6.0
+  ],
+  "contour_share": 0.977,
+  "share_at_zero": 0.645,
+  "global_max": 0.977,
+  "light_before": 78.0,
+  "light_after": 39.0,
+  "verdict": "register"
+ }
+}

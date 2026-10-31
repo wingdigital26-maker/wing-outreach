@@ -1,0 +1,129 @@
+{
+ "image": "gtrace/46941/google.png",
+ "ft_per_px": 0.1901,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     453,
+     408
+    ],
+    [
+     693,
+     408
+    ],
+    [
+     693,
+     635
+    ],
+    [
+     453,
+     635
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "notes": "main hip 46 by 43 ft, near pyramid, NE and SE hips meet at about (583,505), short E-W ridge just E of centre; dark N face"
+  },
+  {
+   "name": "front",
+   "rect_px": [
+    [
+     357,
+     505
+    ],
+    [
+     600,
+     505
+    ],
+    [
+     600,
+     635
+    ],
+    [
+     357,
+     635
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1.0,
+    0.0
+   ],
+   "gable_ends": [],
+   "notes": "long S block, E-W ridge at about y 562 from the W hip end near x 407 running E into the main S slope; dark N face trapezoid from x 387 to 527"
+  },
+  {
+   "name": "rear left",
+   "rect_px": [
+    [
+     450,
+     408
+    ],
+    [
+     530,
+     408
+    ],
+    [
+     530,
+     505
+    ],
+    [
+     450,
+     505
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.0,
+    1.0
+   ],
+   "gable_ends": [],
+   "notes": "small NW block beside the driveway notch, dark N triangle to a point near (530,438), lit face below; ridge taken N-S, could be a short E-W ridge instead"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    355,
+    638
+   ],
+   [
+    693,
+    638
+   ],
+   [
+    693,
+    668
+   ],
+   [
+    355,
+    668
+   ]
+  ],
+  [
+   [
+    338,
+    488
+   ],
+   [
+    357,
+    488
+   ],
+   [
+    357,
+    665
+   ],
+   [
+    338,
+    665
+   ]
+  ]
+ ],
+ "notes": "main pyramid hip plus a long E-W front hip block on the SW and a small NW block; confidence medium-high; the S strip from y 638 to 665 inside the trace is a patio cover. Exclusions: dark flat strip with a white fascia line along the S side, reads as a rear patio cover or awning, not the main roof; lawn and shadow W of the front block W eave, the trace overshoots by about 4 ft"
+}

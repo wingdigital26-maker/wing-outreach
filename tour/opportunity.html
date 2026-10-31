@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Opportunity Score | Wing Outreach</title>
+<style>
+@font-face{font-family:Montserrat;font-weight:600;src:url(lib/st-fonts/montserrat-600.woff2) format("woff2")}
+:root{--ink:#0B1020;--blue:#2757E6;--canvas:#EEF0F3;--line:#D5D9E0;--slate:#5A6378;--tint:#F1F5FA;--hi:#1F8A4C;--md:#B07A00;--lo:#B3262E;--r:10px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;background:#fff;border-bottom:1px solid var(--line)}
+header h1{font:600 18px Montserrat,sans-serif;margin:0}header .sub{color:var(--slate);font-size:13px}
+header a{margin-left:auto;color:var(--blue);text-decoration:none;font-weight:600}
+main{max-width:1060px;margin:0 auto;padding:18px 16px 40px}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sum div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;min-width:140px}
+.sum b{display:block;font:600 22px Montserrat,sans-serif}.sum span{color:var(--slate);font-size:12.5px}
+.note{color:var(--slate);font-size:12.5px;margin:0 0 14px}
+.list{display:grid;gap:10px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.top{display:grid;grid-template-columns:auto 64px 1fr auto;gap:14px;align-items:center;padding:12px 16px}
+.rank{font:600 13px Montserrat,sans-serif;color:var(--slate);width:24px;text-align:right}
+.ring{position:relative;width:64px;height:64px}.ring svg{display:block}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font:600 20px Montserrat,sans-serif}
+.addr{font-weight:600;font-size:15px}.where{color:var(--slate);font-size:13px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.chip{font-size:12px;border-radius:999px;padding:2px 9px;background:var(--tint);color:var(--ink)}
+.conf{font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;color:#fff;white-space:nowrap}
+.conf.High{background:var(--hi)}.conf.Medium{background:var(--md)}.conf.Low{background:var(--lo)}
+.side{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.side a{font-size:12.5px;color:var(--blue);text-decoration:none;font-weight:600}
+details{border-top:1px solid var(--line)}
+summary{cursor:pointer;padding:9px 16px;font-size:13px;font-weight:600;color:var(--blue);list-style:none}
+summary::-webkit-details-marker{display:none}summary::after{content:" +"}details[open] summary::after{content:" -"}
+.bd{padding:2px 16px 14px;display:grid;gap:10px}
+.row{display:grid;grid-template-columns:150px 1fr 70px;gap:12px;align-items:start}
+.row .k{font-weight:600}.row .p{text-align:right;font-weight:600}
+.bar{height:8px;border-radius:4px;background:var(--tint);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--blue)}
+.ev{grid-column:2/4;color:var(--slate);font-size:12.5px;margin-top:-4px}
+.ev .est{color:var(--md);font-weight:600}
+.why{font-size:12.5px;color:var(--slate)}
+.loading{padding:40px;text-align:center;color:var(--slate)}
+@media(max-width:640px){.top{grid-template-columns:56px 1fr}.rank{display:none}.ring{width:56px;height:56px}.side{grid-column:1/3;flex-direction:row;justify-content:space-between;align-items:center}
+.row{grid-template-columns:1fr auto;grid-template-areas:'k p' 'b b' 'e e';gap:4px 10px}.row .k{grid-area:k}.row .p{grid-area:p}.row>div:not(.ev){grid-area:b}.row .bar{margin-top:0}.ev{grid-area:e;margin-top:0}}
+</style>
+</head>
+<body>
+<header><h1>Opportunity Score</h1><span class="sub" id="sub">Top 50 homes to contact now</span><a href="product.html">Back to Wing Outreach</a></header>
+<main>
+  <div class="sum" id="sum"></div>
+  <p class="note" id="note"></p>
+  <div class="list" id="list"><p class="loading">Scoring every home in the service area...</p></div>
+</main>
+<script src="lib/rc-state.js"></script>
+<script src="lib/brand.js"></script>
+<script>if (window.applyRoofer && window.rooferKey) applyRoofer(rooferKey());</script>
+<script src="lib/rc-copy.js"></script>
+<script src="lib/rc-proof.js"></script>
+<script src="lib/st-meta.js"></script>
+<script src="lib/rc-scores.js"></script>
+<script src="lib/opp-score.js"></script>
+<script src="lib/opp-data.js"></script>
+<script>
+(function () {
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const ORDER = ['roofAge', 'hail', 'wind', 'purchase', 'neighbors', 'jobValue', 'material', 'owner'];
+  const colr = v => v >= 70 ? '#1F8A4C' : v >= 45 ? '#2757E6' : '#5A6378';
+  function ring(v) {
+    const r = 27, c = 2 * Math.PI * r, f = Math.max(0, Math.min(100, v)) / 100;
+    return `<div class="ring" role="img" aria-label="Score ${v} of 100"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="${r}" fill="none" stroke="#E6E8ED" stroke-width="7"/>
+      <circle cx="32" cy="32" r="${r}" fill="none" stroke="${colr(v)}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${c * f} ${c}" transform="rotate(-90 32 32)"/></svg><b>${v}</b></div>`;
+  }
+  function card(s, i, addr) {
+    const h = s.home, P = s.parts;
+    const rows = ORDER.filter(k => P[k].max > 0 || k === 'material' || k === 'owner').map(k => {
+      const p = P[k], w = p.max ? Math.round(100 * p.pts / p.max) : 0;
+      return `<div class="row"><span class="k">${esc(p.label)}</span><div><div class="bar"><i style="width:${w}%"></i></div></div><span class="p">${p.max ? p.pts + ' / ' + p.max : 'slot'}</span>
+        <div class="ev">${p.lines.map(esc).join(' ')}${p.estimated && p.max ? ' <span class="est">Estimated.</span>' : ''}</div></div>`;
+    }).join('');
+    const hailP = P.hail.storm, chips = [hailP ? hailP.inches.toFixed(2) + ' in hail ' + hailP.iso.slice(0, 7) : null,
+      P.roofAge.years != null ? Math.floor(P.roofAge.years) + ' yr roof' + (P.roofAge.estimated ? ' (est.)' : '') : 'roof age unknown',
+      P.wind.gust ? P.wind.gust.mph + ' mph wind' : null, h.squares ? h.squares + ' sq' : null, h.nbr.count ? h.nbr.count + ' re-roofs nearby' : null].filter(Boolean);
+    const page = window.RCP ? 'proof/?h=' + RCP.token(h.gi) + '&preview=1' : null;
+    return `<article class="card"><div class="top"><span class="rank">${i + 1}</span>${ring(s.total)}
+      <div><div class="addr">${esc(addr && addr.addr || 'Home ' + h.gi)}</div><div class="where">${esc([h.city, h.zip].filter(Boolean).join(' '))}${h.type ? ' · ' + esc(h.type) : ''}</div>
+      <div class="chips">${chips.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div></div>
+      <div class="side"><span class="conf ${s.confidence}" title="${esc(s.confWhy)}">${s.confidence} confidence</span>${page ? `<a href="${page}" target="_blank" rel="noopener">Home page</a>` : ''}</div></div>
+      <details><summary>Why ${s.total}</summary><div class="bd">${rows}<p class="why">Confidence ${esc(s.confidence)}: ${esc(s.confWhy)}</p></div></details></article>`;
+  }
+  const t0 = performance.now();
+  (window.RCS ? RCS.ready().catch(() => null) : Promise.resolve()).then(() => OPPD.top({ limit: 50 })).then(R => {
+    const ms = Math.round(performance.now() - t0);
+    const drop = Object.keys(R.dropped).map(k => `${R.dropped[k].toLocaleString()} ${k.toLowerCase()}`).join(', ');
+    const conf = { High: 0, Medium: 0, Low: 0 }; R.ranked.forEach(s => conf[s.confidence]++);
+    $('#sum').innerHTML = `<div><b>${R.n.toLocaleString()}</b><span>homes in the service area</span></div><div><b>${R.ranked[0] ? R.ranked[0].total : 0}</b><span>top score</span></div>
+      <div><b>${R.ranked.length ? R.ranked[R.ranked.length - 1].total : 0}</b><span>50th place</span></div><div><b>${conf.High} / ${conf.Medium} / ${conf.Low}</b><span>High / Medium / Low confidence</span></div>`;
+    $('#note').textContent = `Radar through ${R.asOf || 'unknown'}, wind through ${R.windBuilt || 'unknown'}. Left out before ranking: ${drop || 'none'}. Recent purchase, roof material and owner-occupied are not loaded yet, so they add 0 points for every home. Scored in ${(ms / 1000).toFixed(1)} s.`;
+    return Promise.all(R.ranked.map(s => window.STM && STM.facts ? STM.facts(s.gi).catch(() => null) : null)).then(F => {
+      $('#list').innerHTML = R.ranked.map((s, i) => card(s, i, F[i])).join('');
+    });
+  }).catch(e => { $('#list').innerHTML = `<p class="loading">Could not score: ${esc(e.message)}</p>`; });
+})();
+</script>
+</body>
+</html>

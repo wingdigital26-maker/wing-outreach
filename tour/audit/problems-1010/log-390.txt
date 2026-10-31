@@ -1,0 +1,95 @@
+  [signin 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=6 lowContrast=0 hrefHash=0 emptyBtns=0
+     overlaps {"a": "Storms", "b": "Jackson Roofing", "ox": 60, "oy": 14}
+     overlaps {"a": "Storms", "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall", "ox": 60, "oy": 28}
+     overlaps {"a": "CRM", "b": "Jackson Roofing", "ox": 88, "oy": 14}
+     overlaps {"a": "CRM", "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall", "ox": 88, "oy": 28}
+     overlaps {"a": "Ask", "b": "Jackson Roofing", "ox": 65, "oy": 14}
+     overlaps {"a": "Ask", "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall", "ox": 65, "oy": 28}
+signin errors: ['http400: https://wbtrsujvprbdojmxlkpe.supabase.co/auth/v1/token?grant_type=password', 'error: Failed to load resource: the server responded with a status of 400 () @ jvprbdojmxlkpe.supabase.co/auth/v1/token?grant_type=password']
+intro hash after 11.5s: #/daily errors: []
+TODAY LOAD 390: first text -1.0s, first card -1.0s (+1.5s settle)
+  [today 390] overflowX=0 clipped=0 small=15 suspect=11 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "43.9 sq10 planes, red took the hail", "ox": 55, "oy": 13}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 87, "oy": 32}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 78, "oy": 12}
+     overlaps {"a": "7290 Ash St", "b": "7175 Maple St", "ox": 226, "oy": 15}
+     overlaps {"a": "7290 Ash St", "b": "43.8 sq10 planes, red took the hail", "ox": 66, "oy": 21}
+     overlaps {"a": "7290 Ash St", "b": "Measure", "ox": 17, "oy": 24}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+     small {"t": "Roof record", "fs": 10.5, "cls": ""}
+     small {"t": "Pitch", "fs": 10.5, "cls": ""}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+  [04-today-text 390] overflowX=0 clipped=0 small=15 suspect=12 overlaps=15 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013", "m": "555-0"}
+     suspect {"t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01", "m": "555-0"}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "43.9 sq10 planes, red took the hail", "ox": 55, "oy": 13}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "Cold homeowner: you send it yourselfDay 1 text from the outreach libra", "ox": 49, "oy": 23}
+     overlaps {"a": "45 sq8 planes, red took the hail", "b": "Cold homeowner: you send it yourself", "ox": 35, "oy": 11}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 87, "oy": 32}
+     overlaps {"a": "Measure", "b": "Measure", "ox": 78, "oy": 12}
+     overlaps {"a": "Measure", "b": "Appel Noelle, (972) 555-0100 (sample phone)", "ox": 79, "oy": 7}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+     small {"t": "Roof record", "fs": 10.5, "cls": ""}
+     small {"t": "Pitch", "fs": 10.5, "cls": ""}
+     small {"t": "Hail at home", "fs": 10.5, "cls": ""}
+  interact fail #tabInbox Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#tabInbox").first
+    - l
+  m interact fail #openList Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#openList").first
+    - l
+  m interact fail #openRoute Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#openRoute").first
+    - 
+  m interact fail #openPipe Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#openPipe").first
+    - l
+today errors: ['warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/2025a3fc-024f-49b9-9ee0-f1e7bfe580c9']
+storm switch ~145.1s
+  [storms 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=2 lowContrast=0 hrefHash=0 emptyBtns=0
+     overlaps {"a": "No hail in the last 3 days", "b": "Undo", "ox": 58, "oy": 21}
+     overlaps {"a": "271,032 homes in four counties. Last storm Jun 2, 125 days ago, 6,546 ", "b": "Undo", "ox": 58, "oy": 17}
+  storm search fail Locator.fill: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("#q").
+  [storms-mapclick 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=2 lowContrast=0 hrefHash=0 emptyBtns=0
+     overlaps {"a": "No hail in the last 3 days", "b": "Undo", "ox": 58, "oy": 21}
+     overlaps {"a": "271,032 homes in four counties. Last storm Jun 2, 125 days ago, 6,546 ", "b": "Undo", "ox": 58, "oy": 17}
+crm switch ~65.1s
+  [crm-inbox 390] overflowX=0 clipped=1 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+     clipped {"t": "Stage", "sw": 43, "cw": 1, "cls": "vh"}
+  crm list items 13
+  crm act fail button[data-act=text] Locator.click: Timeout 1500ms exceeded.
+Call log:
+  - waiting for locator("#sheetClose:visible").fir
+  [crm-pipeline 390] overflowX=0 clipped=2 small=0 suspect=0 overlaps=0 lowContrast=2 hrefHash=0 emptyBtns=0
+     clipped {"t": "Search the board", "sw": 125, "cw": 1, "cls": "vh"}
+     clipped {"t": "Sort", "sw": 27, "cw": 1, "cls": "vh"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+     contrast {"t": "0", "ratio": 2.33, "fs": 11, "fg": "rgb(163, 170, 186)", "bg": "rgb(255,255,255)"}
+  pipe card fail Locator.click: Timeout 4000ms exceeded.
+Call log:
+  - waiting for locator("#pipePane [data-id], .pca
+  [40-crm-home-contact 390] overflowX=0 clipped=0 small=0 suspect=1 overlaps=2 lowContrast=0 hrefHash=0 emptyBtns=0
+     suspect {"t": "(972) 555-0118 (sample)", "m": "555-0"}
+     overlaps {"a": "Radar max, Jun 2", "b": "Text", "ox": 105, "oy": 20}
+     overlaps {"a": "1.41 in", "b": "Book", "ox": 31, "oy": 16}
+crm/storm errors: ['warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/2025a3fc-024f-49b9-9ee0-f1e7bfe580c9', 'warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/736bc9a9-09c9-4439-919b-6f03781c4e5a', 'warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/736bc9a9-09c9-4439-919b-6f03781c4e5a', 'warning: deck: Attribute instanceFillColors is normalized @ http://127.0.0.1:4886/tour/vendor/deck.gl@9.0.38/dist.min.js', 'warning: [.WebGL-0x343c00dbbc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html', 'warning: [.WebGL-0x343c00dbbc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html']
+ask switch ~64.2s
+  [ask 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+  [ask-answer 390] overflowX=0 clipped=0 small=0 suspect=0 overlaps=0 lowContrast=0 hrefHash=0 emptyBtns=0
+ALL console errors: ["warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/2025a3fc-024f-49b9-9ee0-f1e7bfe580c9", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/736bc9a9-09c9-4439-919b-6f03781c4e5a", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/736bc9a9-09c9-4439-919b-6f03781c4e5a", "warning: deck: Attribute instanceFillColors is normalized @ http://127.0.0.1:4886/tour/vendor/deck.gl@9.0.38/dist.min.js", "warning: [.WebGL-0x343c00dbbc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html", "warning: [.WebGL-0x343c00dbbc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/f3766a76-6697-4d81-aae1-7b1ec64be705", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/f3766a76-6697-4d81-aae1-7b1ec64be705", "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/f3766a76-6697-4d81-aae1-7b1ec64be705"]

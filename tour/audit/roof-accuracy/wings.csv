@@ -1,0 +1,78 @@
+region,row,result,at
+collin-tx,15292,"21:35:50 collin-tx 15292 W on C +3 refit/tidy: 2 blocks, 0 ridges, 10 faces, face 71.8%, fit 53.0, clean 56s",2026-10-17T21:35
+collin-tx,204869,"21:36:07 collin-tx 204869 W main 5 +4 refit/eq2/fix2: 4 blocks, 1 ridges, 10 faces, face 71.4%, fit 57.6, clean 73s",2026-10-17T21:36
+collin-tx,1954,"21:36:13 collin-tx 1954 W on C +1 refit/C/fix2: 3 blocks, 0 ridges, 10 faces, face 77.1%, fit 67.9, clean 23s",2026-10-17T21:36
+collin-tx,206483,"21:38:35 collin-tx 206483 W main 3 +6/pop-drop/fix4: 3 blocks, 3 ridges, 11 faces, face 63.5%, fit 35.6, clean 141s",2026-10-17T21:38
+rockwall-tx,23,"21:38:37 rockwall-tx 23 W main 4 +5/eq2: 2 blocks, 6 ridges, 15 faces, face 57.5%, fit 47.0, clean 82s",2026-10-17T21:38
+collin-tx,34780,"21:41:25 collin-tx 34780 W on C refit/eq3.5/fix2: 5 blocks, 4 ridges, 18 faces, face 70.0%, fit 55.6, clean 132s",2026-10-17T21:41
+collin-tx,205330,"21:41:35 collin-tx 205330 W main 3 +8 refit/pop-drop/fix4: 2 blocks, 1 ridges, 13 faces, face 69.9%, fit 61.2, clean 143s",2026-10-17T21:41
+collin-tx,153987,"21:41:57 collin-tx 153987 W on C refit: 3 blocks, 1 ridges, 13 faces, face 79.1%, fit 69.7, clean 25s",2026-10-17T21:41
+collin-tx,15574,"21:45:19 collin-tx 15574 W on C +1/C/fix2: 1 blocks, 0 ridges, 7 faces, face 75.8%, fit 67.9, clean 14s",2026-10-17T21:45
+collin-tx,166093,"21:45:40 collin-tx 166093 W main 6 +3 refit/eq2/fix2: 2 blocks, 2 ridges, 7 faces, face 86.3%, fit 86.5, clean 35s",2026-10-17T21:45
+rockwall-tx,5321,"21:47:12 rockwall-tx 5321 W main 3 +4/eq2/fix4: 4 blocks, 3 ridges, 10 faces, face 76.5%, fit 65.3, clean 91s",2026-10-17T21:47
+collin-tx,36436,"21:47:26 collin-tx 36436 W on C +2/C/fix1: 4 blocks, 3 ridges, 11 faces, face 80.8%, fit 68.0, clean 142s",2026-10-17T21:47
+collin-tx,173943,"21:47:47 collin-tx 173943 W on C +1/pop-drop/fix2: 6 blocks, 3 ridges, 12 faces, face 77.8%, fit 57.2, clean 109s",2026-10-17T21:47
+collin-tx,200985,"21:50:35 collin-tx 200985 W main 3 +3 refit/C/fix2: 3 blocks, 3 ridges, 3 faces, face 82.1%, fit 61.0, clean 46s",2026-10-17T21:50
+collin-tx,36251,"21:51:51 collin-tx 36251 W on C refit/C/fix2: 6 blocks, 7 ridges, 27 faces, face 78.9%, fit 74.8, clean 123s",2026-10-17T21:51
+collin-tx,206911,"21:52:00 collin-tx 206911 W on C refit: 2 blocks, 0 ridges, 5 faces, face 85.3%, fit 64.4, clean 8s",2026-10-17T21:52
+collin-tx,428,"21:52:14 collin-tx 428 W on C refit/eq3.5/fix1: 4 blocks, 6 ridges, 6 faces, face 81.6%, fit 7.8, clean 99s",2026-10-17T21:52
+collin-tx,207704,"21:53:04 collin-tx 207704 W main 4 +5/eq2/fix1: 2 blocks, 0 ridges, 7 faces, face 74.2%, fit 65.3, clean 51s",2026-10-17T21:53
+collin-tx,147750,"21:53:41 collin-tx 147750 W main 2 +4 refit/C/fix2: 5 blocks, 3 ridges, 14 faces, face 78.2%, fit 53.5, clean 86s",2026-10-17T21:53
+collin-tx,204682,"21:55:08 collin-tx 204682 W on C: 2 blocks, 0 ridges, 8 faces, face 78.3%, fit 45.8, clean 48s",2026-10-17T21:55
+collin-tx,32591,"21:55:19 collin-tx 32591 W on C +2 refit/nudge0-0.25: 4 blocks, 2 ridges, 9 faces, face 78.5%, fit 77.2, clean 59s",2026-10-17T21:55
+collin-tx,164153,"21:57:10 collin-tx 164153 W main 1 +6 refit/tidy/fix2: 5 blocks, 0 ridges, 19 faces, face 70.3%, fit 53.9, clean 110s",2026-10-17T21:57
+collin-tx,171979,"21:57:31 collin-tx 171979 W on C +2 refit/pop-drop: 3 blocks, 2 ridges, 13 faces, face 50.9%, fit 40.4, clean 142s",2026-10-17T21:57
+collin-tx,164201,"21:59:49 collin-tx 164201 W on C +3/tidy/fix3: 4 blocks, 1 ridges, 12 faces, face 80.1%, fit 71.0, clean 137s",2026-10-17T21:59
+collin-tx,164205,"22:00:30 collin-tx 164205 W on C +1 refit: 5 blocks, 2 ridges, 15 faces, face 74.4%, fit 54.8, clean 25s",2026-10-17T22:00
+collin-tx,164157,"22:01:34 collin-tx 164157 W main 2 +4 refit/eq2/fix2/nudge1+0.25: 4 blocks, 3 ridges, 9 faces, face 82.9%, fit 72.5, clean 89s",2026-10-17T22:01
+collin-tx,164154,"22:02:09 collin-tx 164154 W main 2 +2 refit/C/fix1: 3 blocks, 2 ridges, 7 faces, face 88.4%, fit 76.9, clean 27s",2026-10-17T22:02
+collin-tx,164152,"22:04:33 collin-tx 164152 W on C: 5 blocks, 3 ridges, 13 faces, face 62.7%, fit 55.3, clean 143s",2026-10-17T22:04
+collin-tx,164207,"22:08:13 collin-tx 164207 W on C +1 refit: 3 blocks, 1 ridges, 14 faces, face 75.3%, fit 64.4, clean 29s",2026-10-17T22:08
+collin-tx,164197,"22:08:29 collin-tx 164197 W on C: 4 blocks, 2 ridges, 12 faces, face 80.9%, fit 58.9, clean 45s",2026-10-17T22:08
+collin-tx,164149,"22:12:28 collin-tx 164149 W main 6 +6 refit/tidy/fix2: 5 blocks, 1 ridges, 15 faces, face 70.4%, fit 53.0, clean 142s",2026-10-17T22:12
+collin-tx,164195,"22:14:01 collin-tx 164195 W main 1 +2: 3 blocks, 3 ridges, 8 faces, face 83.0%, fit 65.5, clean 24s",2026-10-17T22:14
+collin-tx,164209,"22:15:13 collin-tx 164209 W on C refit/pop-drop: 4 blocks, 0 ridges, 12 faces, face 73.0%, fit 53.8, clean 112s",2026-10-17T22:15
+collin-tx,164202,"22:16:58 collin-tx 164202 W on C: 3 blocks, 2 ridges, 15 faces, face 72.3%, fit 57.0, clean 104s",2026-10-17T22:16
+collin-tx,164196,"22:17:05 collin-tx 164196 W main 2 +4 refit/eq3.5/fix2: 3 blocks, 1 ridges, 10 faces, face 87.0%, fit 66.5, clean 80s",2026-10-17T22:17
+collin-tx,164227,"22:17:53 collin-tx 164227 W main 3 +1: 2 blocks, 2 ridges, 4 faces, face 79.0%, fit 69.0, clean 8s",2026-10-17T22:17
+collin-tx,164233,"22:18:31 collin-tx 164233 W main 5 +2/C/fix1: 3 blocks, 4 ridges, 10 faces, face 76.4%, fit 52.9, clean 46s",2026-10-17T22:18
+collin-tx,164156,"22:21:17 collin-tx 164156 W on C +3/eq2/fix4: 2 blocks, 3 ridges, 10 faces, face 43.3%, fit 42.8, clean 135s",2026-10-17T22:21
+collin-tx,164151,"22:21:24 collin-tx 164151 W main 2 +5 refit: 6 blocks, 1 ridges, 15 faces, face 71.8%, fit 52.8, not clean: r6_looks 142s",2026-10-17T22:21
+collin-tx,10524,"22:21:41 collin-tx 10524 W main 6 +5 refit/C/fix3: 3 blocks, 2 ridges, 12 faces, face 57.8%, fit 43.6, not clean: edges 159s",2026-10-17T22:21
+collin-tx,164180,"22:22:30 collin-tx 164180 W on C +1 refit/C/fix2: 3 blocks, 0 ridges, 7 faces, face 86.0%, fit 70.6, not clean: edges 48s",2026-10-17T22:22
+collin-tx,164158,"22:23:39 collin-tx 164158 W main 1 +6 refit/eq2/fix4: 4 blocks, 1 ridges, 16 faces, face 63.8%, fit 41.9, clean 142s",2026-10-17T22:23
+collin-tx,164198,"22:25:13 collin-tx 164198 W main 4 +6 refit/pop-drop/fix2: 3 blocks, 4 ridges, 23 faces, face 29.7%, fit 27.2, not clean: edges 163s",2026-10-17T22:25
+collin-tx,189060,"22:29:36 collin-tx 189060 W main 2 +6: 7 blocks, 4 ridges, 25 faces, face 68.1%, fit 57.0, not clean: r1_solid 162s",2026-10-17T22:29
+collin-tx,164229,"22:27:41 cloud vs outline shift +1.00,-0.25 m, ground 223.42 m |                  ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\wjack\roof-command-sell\scripts\roofs\wings.py"", line 389, in run_one
+    best = best or first; ok, msg = best[""edges""]; d = best[""d""]
+                                    ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable",2026-10-17T22:29
+collin-tx,191766,timeout,2026-10-17T22:31
+collin-tx,200871,timeout,2026-10-17T22:32
+collin-tx,32361,"22:32:40 cloud vs outline shift +1.50,-1.25 m, ground 200.20 m | \scripts\roofs\wings.py"", line 440, in main
+    def homes(rows):
+    
+  File ""C:\Users\wjack\roof-command-sell\scripts\roofs\wings.py"", line 389, in run_one
+    if ok and v[""clean_rules""]: best = v; break
+                                ^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable",2026-10-17T22:32
+collin-tx,35469,"22:35:01 collin-tx 35469 W main 2 +6: 6 blocks, 8 ridges, 19 faces, face 73.8%, fit 65.8, clean 143s",2026-10-17T22:35
+collin-tx,5921,"22:36:47 collin-tx 5921 W on C refit: 3 blocks, 1 ridges, 11 faces, face 80.1%, fit 74.3, not clean: edges 79s",2026-10-17T22:36
+rockwall-tx,48,"22:37:51 rockwall-tx 48 W main 6 +5 refit/eq2/fix1: 5 blocks, 1 ridges, 17 faces, face 66.0%, fit 43.6, not clean: r4_sizes, edges 142s",2026-10-17T22:37
+rockwall-tx,2558,"22:37:52 rockwall-tx 2558 W main 2 +1: 2 blocks, 0 ridges, 5 faces, face 63.0%, fit 39.2, clean 144s",2026-10-17T22:37
+rockwall-tx,68,"22:38:22 rockwall-tx 68 W main 5 +2 refit/C/fix3: 3 blocks, 4 ridges, 13 faces, face 59.9%, fit 38.1, clean 92s",2026-10-17T22:38
+collin-tx,130356,"22:42:03 collin-tx 130356 W main 4 +6/C/fix2: 6 blocks, 2 ridges, 11 faces, face 75.0%, fit 50.6, clean 142s",2026-10-17T22:42
+collin-tx,164231,"22:42:03 collin-tx 164231 W main 2 +7 refit/eq2/fix4: 3 blocks, 4 ridges, 13 faces, face 65.8%, fit 37.6, clean 142s",2026-10-17T22:42
+collin-tx,35276,"22:42:32 collin-tx 35276 W main 6 +6 refit/pitch7/eq2/fix3: 5 blocks, 11 ridges, 23 faces, face 70.8%, fit 53.0, not clean: edges 171s",2026-10-17T22:42
+collin-tx,164148,"22:44:25 collin-tx 164148 W main 4 +6/pitch12/eq2/fix4: 2 blocks, 1 ridges, 17 faces, face 55.2%, fit 25.2, clean 142s",2026-10-17T22:44
+collin-tx,164155,"22:44:32 collin-tx 164155 W on C/pitch12/C/fix3: 2 blocks, 1 ridges, 16 faces, face 46.7%, fit 16.8, not clean: edges 118s",2026-10-17T22:44
+collin-tx,164150,"22:44:45 collin-tx 164150 W on C +3 refit/pitch12/eq2/fix2: 3 blocks, 0 ridges, 15 faces, face 47.5%, fit 12.0, not clean: edges 161s",2026-10-17T22:44
+collin-tx,164159,"22:44:51 collin-tx 164159 W on C +1 at 11/12/C/fix3: 2 blocks, 0 ridges, 11 faces, face 73.9%, fit 51.8, clean 25s",2026-10-17T22:44
+collin-tx,164160,"22:46:54 collin-tx 164160 W main 5 +4/pitch9/eq2/fix2: 4 blocks, 1 ridges, 11 faces, face 56.8%, fit 38.5, clean 142s",2026-10-17T22:46
+collin-tx,164161,"22:47:48 collin-tx 164161 W on C +1 refit at 11/12: 2 blocks, 0 ridges, 8 faces, face 55.8%, fit 17.5, clean 35s",2026-10-17T22:47
+collin-tx,164182,"22:49:34 collin-tx 164182 W on C +2 at 11/12/C/fix3: 3 blocks, 0 ridges, 11 faces, face 77.3%, fit 54.9, clean 141s",2026-10-17T22:49
+collin-tx,164199,"22:49:35 collin-tx 164199 W main 3 +3/C/fix4: 3 blocks, 1 ridges, 11 faces, face 71.2%, fit 50.3, clean 142s",2026-10-17T22:49
+collin-tx,164200,"22:50:15 collin-tx 164200 W main 4 +5 refit at 7/12/eq2/fix2: 2 blocks, 0 ridges, 8 faces, face 47.2%, fit 28.5, clean 144s",2026-10-17T22:50
+collin-tx,164203,"22:51:26 collin-tx 164203 W main 1 +2/pitch12/pop-drop: 1 blocks, 0 ridges, 15 faces, face 64.2%, fit 15.0, clean 111s",2026-10-17T22:51
+collin-tx,188969,"22:51:58 collin-tx 188969 W on C +2 refit/pitch12/C/fix3: 4 blocks, 0 ridges, 17 faces, face 69.2%, fit 20.8, clean 142s",2026-10-17T22:51

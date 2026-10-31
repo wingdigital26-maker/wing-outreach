@@ -1,0 +1,132 @@
+{
+ "image": "gtrace/10519/google.png",
+ "ft_per_px": 0.204,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     410.4,
+     467.1
+    ],
+    [
+     684.0,
+     346.4
+    ],
+    [
+     777.6,
+     558.7
+    ],
+    [
+     504.0,
+     679.4
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.915,
+    -0.404
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Main E-W (rotated) hip; dark north face meets ridge about 100 px south of the north eave; south face long and bright. SE corner of the plan is cut at 45 deg (excluded). SW part is under tree shadow but is roof."
+  },
+  {
+   "name": "south_wing",
+   "rect_px": [
+    [
+     539.0,
+     530.6
+    ],
+    [
+     644.2,
+     484.2
+    ],
+    [
+     694.6,
+     598.6
+    ],
+    [
+     589.4,
+     645.0
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.404,
+    0.915
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Possible south wing with ridge along v (brightness step at u about 65 near the south eave). Overlaps main; medium-low confidence."
+  },
+  {
+   "name": "garage",
+   "rect_px": [
+    [
+     306.5,
+     392.7
+    ],
+    [
+     449.3,
+     329.7
+    ],
+    [
+     498.5,
+     441.4
+    ],
+    [
+     355.8,
+     504.3
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.915,
+    -0.404
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "West wing (garage side, cars parked west of it). Dark north face, ridge about v=-50, lit south face; valleys into main north face."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    728,
+    470
+   ],
+   [
+    752,
+    482
+   ],
+   [
+    792,
+    566
+   ],
+   [
+    674,
+    606
+   ]
+  ],
+  [
+   [
+    382.2,
+    494.8
+   ],
+   [
+    416.0,
+    479.9
+   ],
+   [
+    435.0,
+    522.9
+   ],
+   [
+    401.2,
+    537.9
+   ]
+  ]
+ ],
+ "notes": "Rotated (about 24 deg) single-story hip home. Sun from SW (ground shadow is navy B-R 65+ north and east of the house). Three regions: main hip, west garage wing, probable south wing. Confidence medium: south wing existence is the main doubt; SE 45-deg cut is clear."
+}

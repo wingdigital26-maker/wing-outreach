@@ -1,0 +1,106 @@
+{
+ "mckinney_reroof_share_by_era": {
+  "1980s": {
+   "homes": 1516,
+   "share_with_reroof_2015_on": 0.266
+  },
+  "1990s": {
+   "homes": 9125,
+   "share_with_reroof_2015_on": 0.308
+  },
+  "2000s": {
+   "homes": 22362,
+   "share_with_reroof_2015_on": 0.282
+  },
+  "2010-2013": {
+   "homes": 5300,
+   "share_with_reroof_2015_on": 0.249
+  },
+  "2014 on": {
+   "homes": 17140,
+   "share_with_reroof_2015_on": 0.07
+  },
+  "before 1980": {
+   "homes": 3140,
+   "share_with_reroof_2015_on": 0.157
+  }
+ },
+ "collin-tx": {
+  "built_floor": 147152,
+  "sure_low": 147152,
+  "homes": 207724,
+  "flag_hit_not_replaced": 95164,
+  "permit": 21484,
+  "sure_high": 21484,
+  "built_recent": 39068,
+  "sure_medium": 39068,
+  "unknown": 20,
+  "sure_none": 20
+ },
+ "denton-tx": {
+  "built_recent": 8843,
+  "sure_medium": 8843,
+  "homes": 28198,
+  "flag_hit_not_replaced": 27989,
+  "built_floor": 19355,
+  "sure_low": 19355
+ },
+ "dallas-tx": {
+  "built_floor": 19242,
+  "sure_low": 19242,
+  "homes": 19821,
+  "flag_hit_not_replaced": 772,
+  "built_recent": 579,
+  "sure_medium": 579
+ },
+ "rockwall-tx": {
+  "built_floor": 12770,
+  "sure_low": 12770,
+  "homes": 15289,
+  "flag_hit_not_replaced": 7767,
+  "built_recent": 2519,
+  "sure_medium": 2519
+ },
+ "radar_hail_vs_permits_collin": {
+  "2024-03-14": {
+   "hit_homes": 2740,
+   "permit_after_hit": 0.035,
+   "permit_after_not_hit": 0.04
+  },
+  "2024-05-22": {
+   "hit_homes": 9828,
+   "permit_after_hit": 0.054,
+   "permit_after_not_hit": 0.034
+  },
+  "2024-05-27": {
+   "hit_homes": 5545,
+   "permit_after_hit": 0.041,
+   "permit_after_not_hit": 0.035
+  },
+  "2024-06-02": {
+   "hit_homes": 1027,
+   "permit_after_hit": 0.019,
+   "permit_after_not_hit": 0.036
+  },
+  "2024-09-24": {
+   "hit_homes": 5119,
+   "permit_after_hit": 0.038,
+   "permit_after_not_hit": 0.031
+  },
+  "2025-03-25": {
+   "hit_homes": 5984,
+   "permit_after_hit": 0.066,
+   "permit_after_not_hit": 0.025
+  },
+  "2025-05-18": {
+   "hit_homes": 532,
+   "permit_after_hit": 0.03,
+   "permit_after_not_hit": 0.023
+  }
+ },
+ "testset": {
+  "built_floor": 78,
+  "flag": 60,
+  "permit": 4
+ }
+}

@@ -1,0 +1,346 @@
+{
+ "image": "gtrace/50599/google.png",
+ "ft_per_px": 0.19602,
+ "pieces": [
+  {
+   "name": "tower",
+   "rect_px": [
+    [
+     480,
+     275
+    ],
+    [
+     600,
+     275
+    ],
+    [
+     600,
+     390
+    ],
+    [
+     480,
+     390
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "2-story front tower, ridge N-S, dark north hip face"
+  },
+  {
+   "name": "turret",
+   "rect_px": [
+    [
+     455,
+     360
+    ],
+    [
+     530,
+     360
+    ],
+    [
+     530,
+     425
+    ],
+    [
+     455,
+     425
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "round conical turret on tower's SW corner; treat as pyramid hip"
+  },
+  {
+   "name": "ne_wing",
+   "rect_px": [
+    [
+     585,
+     315
+    ],
+    [
+     700,
+     315
+    ],
+    [
+     700,
+     470
+    ],
+    [
+     585,
+     470
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "NE wing, ridge N-S near x=640, dark north hip face"
+  },
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     395,
+     390
+    ],
+    [
+     700,
+     390
+    ],
+    [
+     700,
+     560
+    ],
+    [
+     395,
+     560
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "main body, ridge E-W at y~470 from x~495 to 635, west face runs full height"
+  },
+  {
+   "name": "south_wing",
+   "rect_px": [
+    [
+     395,
+     560
+    ],
+    [
+     670,
+     560
+    ],
+    [
+     670,
+     655
+    ],
+    [
+     395,
+     655
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "1-story south section, ridge cap visible at y~600 x 440-620"
+  },
+  {
+   "name": "sw_ell",
+   "rect_px": [
+    [
+     395,
+     600
+    ],
+    [
+     490,
+     600
+    ],
+    [
+     490,
+     705
+    ],
+    [
+     395,
+     705
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "SW projection, tile pan lines run E-W so it slopes E/W, ridge N-S x~445"
+  },
+  {
+   "name": "se_low",
+   "rect_px": [
+    [
+     620,
+     560
+    ],
+    [
+     700,
+     560
+    ],
+    [
+     700,
+     655
+    ],
+    [
+     620,
+     655
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "SE low piece under the main east eave line at y~560, slopes east"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    355,
+    380
+   ],
+   [
+    397,
+    380
+   ],
+   [
+    397,
+    720
+   ],
+   [
+    355,
+    720
+   ]
+  ],
+  [
+   [
+    400,
+    262
+   ],
+   [
+    480,
+    262
+   ],
+   [
+    480,
+    360
+   ],
+   [
+    455,
+    360
+   ],
+   [
+    455,
+    390
+   ],
+   [
+    400,
+    390
+   ]
+  ],
+  [
+   [
+    600,
+    262
+   ],
+   [
+    628,
+    262
+   ],
+   [
+    628,
+    318
+   ],
+   [
+    600,
+    318
+   ]
+  ],
+  [
+   [
+    700,
+    300
+   ],
+   [
+    730,
+    300
+   ],
+   [
+    730,
+    710
+   ],
+   [
+    700,
+    710
+   ]
+  ],
+  [
+   [
+    350,
+    703
+   ],
+   [
+    492,
+    703
+   ],
+   [
+    492,
+    785
+   ],
+   [
+    350,
+    785
+   ]
+  ],
+  [
+   [
+    490,
+    650
+   ],
+   [
+    585,
+    650
+   ],
+   [
+    585,
+    708
+   ],
+   [
+    490,
+    708
+   ]
+  ],
+  [
+   [
+    585,
+    652
+   ],
+   [
+    702,
+    652
+   ],
+   [
+    702,
+    705
+   ],
+   [
+    585,
+    705
+   ]
+  ]
+ ],
+ "notes": "Tile hip-roof Florida style home. Trace overshoots: west ground shadow band, pool deck shadow NW of tower, east side strip, lawn SW, concrete pad and patio cover on the south. Confidence medium: tower and NE wing high; the split of the south section (south_wing / sw_ell / se_low) read from ridge caps and tile pan directions, medium."
+}

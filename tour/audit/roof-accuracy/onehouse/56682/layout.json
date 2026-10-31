@@ -1,0 +1,129 @@
+{
+ "image": "gtrace/56682/google.png",
+ "ft_per_px": 0.205,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     446,
+     418
+    ],
+    [
+     696,
+     418
+    ],
+    [
+     696,
+     632
+    ],
+    [
+     446,
+     632
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "Main near-square hip: NE hip line from the NE corner to about (580,507), SE hip to about (640,597); short E-W ridge. South eave at y about 628 west of x=612 and about 605 east of it (notched SE corner, excluded)."
+  },
+  {
+   "name": "nw_upper",
+   "rect_px": [
+    [
+     446,
+     418
+    ],
+    [
+     560,
+     418
+    ],
+    [
+     560,
+     522
+    ],
+    [
+     446,
+     522
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "Raised NW hip: own lit west hip-end, dark north face, ridge about y=466 from x 497 to 547, own south eave line at y about 522 over the main roof. Read as 2-story block; could be a same-level front hip."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    422,
+    463
+   ],
+   [
+    446,
+    463
+   ],
+   [
+    446,
+    612
+   ],
+   [
+    422,
+    612
+   ]
+  ],
+  [
+   [
+    445,
+    630
+   ],
+   [
+    612,
+    630
+   ],
+   [
+    612,
+    606
+   ],
+   [
+    698,
+    606
+   ],
+   [
+    698,
+    630
+   ],
+   [
+    672,
+    656
+   ],
+   [
+    447,
+    656
+   ]
+  ],
+  [
+   [
+    681,
+    416
+   ],
+   [
+    698,
+    416
+   ],
+   [
+    698,
+    434
+   ]
+  ]
+ ],
+ "notes": "Axis-aligned hip home. Main hip (E-W ridge, nearly square plan) plus a raised NW hip block with its own eave line. Trace overshoots: west side-yard strip, south patio strip, SE notch; all excluded. Confidence medium-high on regions; level of the NW block is the doubt."
+}

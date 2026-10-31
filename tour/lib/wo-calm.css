@@ -1,0 +1,39 @@
+/* Wing Outreach calm skin (10-29): one quiet canvas, soft white cards, serif display headings, sans body.
+   Loaded LAST on every screen so it sits over dk.css / rc-console.css / crm.css without touching the Nimbus card files.
+   Reference: .visual/refs/seo-agent-video (light left sidebar, soft cards, big clean numbers, lots of air). */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+:root{
+  --wo-serif:'Instrument Serif',Georgia,'Iowan Old Style','Times New Roman',serif;
+  --wo-sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --wo-ink:#17181C; --wo-ink-2:#3B3F49; --wo-slate:#767B88; --wo-line:#E8E6E1; --wo-line-2:#F0EEE9; --wo-tint:#FAF8F4; --wo-paper:#fff;
+  --wo-green:#1F8A4C; --wo-green-soft:#E6F4EB;
+  --wo-shadow:0 1px 2px rgba(23,24,28,.03), 0 8px 24px -16px rgba(23,24,28,.14);
+}
+/* the canvas: one flat warm white instead of the grey gradient */
+html body{background:var(--wo-tint) !important;color:var(--wo-ink)}
+html body::before{display:none}
+/* display headings in the serif, body stays Inter */
+html body h1,html body .hello h1,html body .hd h1,html body .hd h2,html body .clh h2,html body .sh b{font-family:var(--wo-serif);font-weight:400;letter-spacing:-.005em}
+/* one title face on every screen (10-30): Leads, Calendar and Customers titles in the serif too */
+html body .pph h3,html body .calh h2,html body .pch h2{font-family:var(--wo-serif);font-weight:400;letter-spacing:-.005em;font-size:24px;line-height:1.15}
+html body .pch h2 small{font-family:var(--font,Inter,system-ui,sans-serif)}
+html body h1{font-size:34px}
+/* big clean numbers */
+html body .sum b,html body .ring .v b,html body .tile .n{font-family:var(--wo-serif);font-weight:400;letter-spacing:-.01em}
+/* soft white cards: a hairline border and a shadow that barely shows */
+html body .paper,html body .pan,html body .queue,html body .mapwrap,html body .deck>*,html body .card{border:1px solid var(--wo-line);box-shadow:var(--wo-shadow);border-radius:14px}
+html body .pill.line,html body .chip{border-color:var(--wo-line)}
+/* the Today header bar inside the deck frame (the shell owns the real header): calm and flat */
+html body>.app>header.bar,html body>.app>.bar{background:transparent;border-bottom:0;backdrop-filter:none}
+/* list rules */
+html body .row,html body .nx li,html body .qlist>*{border-color:var(--wo-line-2)}
+/* the gradient wash some screens paint under the page */
+html body .wash,html body .stage-bg{display:none}
+/* the accent that was navy: kept, but tabs and primary buttons sit on the dark ink, not blue */
+html body .tabs button.on,html body .vtabs button[aria-pressed="true"],html body .seg button.on{background:var(--wo-ink);color:#fff}
+html body .seg button.on{background:#fff;color:var(--wo-ink)}
+@media (max-width:599px){ html body h1{font-size:28px} }
+/* panel titles read as titles, not labels (Pages, Reports, CRM) */
+html body .hd h1{font-size:26px;line-height:1.1}
+html body .hd h2,html body .clh h2{font-size:19px}
+html body .sum b{font-size:30px}

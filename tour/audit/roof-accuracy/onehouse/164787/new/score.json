@@ -1,0 +1,29 @@
+{
+ "row": "164787",
+ "fit": 0.572,
+ "squares": 33.3,
+ "line_fit": 1.23,
+ "faces": 15,
+ "outline": {
+  "footprint_iou": 0.634,
+  "footprint_inside": true,
+  "line_fit_ft": 1.23,
+  "eave_fit_ft": 0.88,
+  "line_fit_raw_ft": 1.28,
+  "photo_shift_ft": [
+   -0.75,
+   0.5
+  ],
+  "photo": "google.png",
+  "jagged_share": 0.274,
+  "holes_share": 0.0
+ },
+ "log": [
+  "layout shifted (-2.0, -3.5) ft onto the LiDAR roof (IoU 0.76)",
+  "main: hip ridge v, hips ['v0', 'v1'], pitch 7/12, eave 20.8 ft, fit 60% on its top-surface returns",
+  "east_wing: hip ridge v, hips ['v0', 'v1'], pitch 8/12, eave 11.7 ft, fit 98% on its top-surface returns",
+  "se_cross: hip ridge u, hips ['u0', 'u1'], pitch 4/12, eave 22.7 ft, fit 69% on its top-surface returns",
+  "sw_wing: hip ridge v, hips ['v0', 'v1'], pitch 1/12, eave 23.8 ft, fit 36% on its top-surface returns",
+  "one-building cut removed 10 sq ft"
+ ]
+}

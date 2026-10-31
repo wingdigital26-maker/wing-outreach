@@ -1,0 +1,46 @@
+shot today-skeleton 390
+skeleton: {"h1": "Good evening", "mStops": "", "skel": true}
+shot today 390
+today: {"h1": "Good eveningChris", "mStops": "0 sent, 0 scheduled, 50 to go", "pitch": "Est. 6/12estimated, no LiDAR", "row": "17290 Ash StAppel \u00b7 1.31 in hail \u00b7 Built 1945, no reroof permit on file (county records from 2023) \u00b7 Large roof, about 4", "owner": "Frisco, TX 75034. Frisco Original Donation. Noelle Appel, (972) 555-0100 (sample phone)."}
+shot today-email 390
+email: {"why": "Add your mailing address to send emails.", "ro": false, "mail": "dbtn pri off"}
+orb/email dialog: {"tuck": true, "opacity": "0", "covers": ["Open in Mail"]}
+no element .deck .act button[data-act="text"]
+shot storms-early 390
+shot storms-3s 390
+shot storms 390
+no element #show
+shot crm 390
+crm: {"head": null, "sub": null, "msgs": "Pick a home on the leftIts texts, emails and replies show here, with the next touch ready to send. The house and its roo", "empty": true}
+no element #clist .crow
+shot crm-thread 390
+thread row: null
+orb/thread: {"tuck": false, "opacity": "1", "covers": []}
+shot ask 390
+ask: {"fresh": true, "hello": "block:Good evening, Chris. Ask me about a storm, a street or a home on your list.", "q": "none:Which streets got hit hardest Jun 2?", "meta": "none:7:42 am", "chips": ["Hardest hit streets", "Today's list", "What is booked?"]}
+shot ask-streets 390
+ask streets: {"q": "Which streets got hit hardest?", "meta": "Chris, 8:22 pm", "ans": "Five streets took the most homes at 1 inch or larger.  has the most.", "cards": 5}
+ask fallback: {"ans": "I do not have that one yet. I can open the storm map, show the latest storm, bring up today's list or your next stop, an", "src": "Nimbus answers from the storms, the homes and your pipeline on this device."}
+errors: ['Failed to load resource: net::ERR_CONNECTION_REFUSED']
+shot today-skeleton 1440
+skeleton: {"h1": "Good evening", "mStops": "", "skel": true}
+shot today 1440
+today: {"h1": "Good eveningChris", "mStops": "0 sent, 0 scheduled, 50 to go", "pitch": "Est. 6/12estimated, no LiDAR", "row": "17290 Ash StAppel \u00b7 1.31 in hail \u00b7 Built 1945, no reroof permit on file (county records from 2023) \u00b7 Large roof, about 4", "owner": "Frisco, TX 75034. Frisco Original Donation. Noelle Appel, (972) 555-0100 (sample phone)."}
+shot today-email 1440
+email: {"why": "Add your mailing address to send emails.", "ro": false, "mail": "dbtn pri off"}
+orb/email dialog: {"tuck": true, "opacity": "0", "covers": []}
+shot storms-early 1440
+shot storms-3s 1440
+shot storms 1440
+storm mid-flight: {"n": "6,546", "hhN": "6,546", "hhMax": "1.41 in", "hhTop": "12", "wait": false, "sub": "Jun 2 storm, homes at 1 inch or larger in this part of the map."}
+shot storms-selected 1440
+storm selected: {"n": "6,546", "hhN": "6,546", "hhMax": "1.41 in", "hhTop": "12", "wait": false, "sub": "Jun 2 storm, homes at 1 inch or larger in this part of the map."}
+orb/storms: {"tuck": false, "opacity": "1", "covers": []}
+shot crm 1440
+crm: {"head": "7290 Ash St", "sub": "Noelle Appel \u00b7 Frisco 75034 \u00b7 (972) 555-0100 (sample phone) \u00b7 Not contacted yet", "msgs": "Nothing on record yet for this home.", "empty": false}
+shot ask 1440
+ask: {"fresh": true, "hello": "block:Good evening, Chris. Ask me about a storm, a street or a home on your list.", "q": "none:Which streets got hit hardest Jun 2?", "meta": "none:7:42 am", "chips": ["Hardest hit streets", "Today's list", "What is booked?"]}
+shot ask-streets 1440
+ask streets: {"q": "Which streets got hit hardest?", "meta": "Chris, 8:32 pm", "ans": "Five streets took the most homes at 1 inch or larger. Sunflower Ln has the most.", "cards": 5}
+ask fallback: {"ans": "I do not have that one yet. I can open the storm map, show the latest storm, bring up today's list or your next stop, an", "src": "Nimbus answers from the storms, the homes and your pipeline on this device."}
+errors: ['Failed to load resource: net::ERR_CONNECTION_REFUSED', 'Failed to load resource: net::ERR_CONNECTION_REFUSED']

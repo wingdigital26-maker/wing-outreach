@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roof Command Idea Board</title>
+<meta name="description" content="Best reference for each of the 10 details Jack approved for Roof Command, plus 8 new ideas ranked by impact per effort. Research only, 2026-10-10.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F8; --card:#FFFFFF; --ink:#0E1B3D; --slate:#5D6982; --line:#D9E0EC;
+  --cobalt:#2757E6; --cobalt-soft:#E6ECFD; --teal:#0FA3A3; --teal-soft:#E0F5F5;
+  --gold-ink:#8a7442; --gold-soft:#F6F1E6; --red-soft:#FBE7E7; --red:#B3262E;
+  --radius:22px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#071230; --card:#0E1B3D; --ink:#EDF1F8; --slate:#9AA7C2; --line:#1E2C55;
+    --cobalt:#5B82FF; --cobalt-soft:#15245A; --teal:#2FD1D1; --teal-soft:#0F3A3F;
+    --gold-ink:#CDB98F; --gold-soft:#2B2A22; --red-soft:#3A1A1E; --red:#F08A8F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#071230; --card:#0E1B3D; --ink:#EDF1F8; --slate:#9AA7C2; --line:#1E2C55;
+  --cobalt:#5B82FF; --cobalt-soft:#15245A; --teal:#2FD1D1; --teal-soft:#0F3A3F;
+  --gold-ink:#CDB98F; --gold-soft:#2B2A22; --red-soft:#3A1A1E; --red:#F08A8F;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;line-height:1.5;padding:40px 16px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-weight:300;font-size:clamp(30px,4vw,44px);letter-spacing:-0.035em;margin:0 0 8px}
+h2{font-weight:300;font-size:clamp(24px,3vw,32px);letter-spacing:-0.03em;margin:48px 0 6px}
+.sub{color:var(--slate);max-width:760px;margin:0 0 24px;font-size:16px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;color:var(--slate);font-size:13px;margin-bottom:24px}
+.legend b{color:var(--ink);font-weight:600}
+.top5{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin:0 0 28px;border:1px solid var(--line)}
+.top5 h3{margin:0 0 10px;font-weight:600;font-size:15px;color:var(--slate)}
+.top5 ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.top5 li b{font-weight:600}
+.top5 li span{color:var(--slate)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.grid.small{grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.card{background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;position:relative}
+.card.top{box-shadow:0 0 0 2px var(--cobalt) inset}
+.rank{position:absolute;top:14px;left:14px;background:var(--ink);color:var(--bg);font-weight:700;font-size:13px;padding:4px 10px;border-radius:999px;font-variant-numeric:tabular-nums;z-index:2}
+.badge-top{position:absolute;top:14px;right:14px;background:var(--cobalt);color:#fff;font-weight:600;font-size:12px;padding:4px 10px;border-radius:999px;z-index:2}
+.badge-ok{position:absolute;top:14px;left:14px;background:var(--teal-soft);color:var(--teal);font-weight:600;font-size:12px;padding:4px 10px;border-radius:999px;z-index:2}
+.shot{aspect-ratio:16/10;background:var(--cobalt-soft);display:block;width:100%;object-fit:cover;object-position:top}
+.shot.missing{display:flex;align-items:center;justify-content:center;color:var(--slate);font-size:13px;padding:12px;text-align:center}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.small .body{padding:14px 16px 16px;gap:6px}
+.body h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-0.01em}
+.small .body h3{font-size:16px}
+.body p{margin:0;font-size:14px}
+.small .body p{font-size:13px}
+.body p.why{color:var(--slate)}
+.k{font-weight:600;color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--cobalt-soft);color:var(--cobalt)}
+.chip.s,.chip.real{background:var(--teal-soft);color:var(--teal)}
+.chip.m,.chip.care{background:var(--gold-soft);color:var(--gold-ink)}
+.chip.l{background:var(--red-soft);color:var(--red)}
+.ref{font-size:13px;color:var(--slate);margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+.ref a{color:var(--cobalt);text-decoration:none;word-break:break-all}
+.ref a:hover{text-decoration:underline}
+.score{font-variant-numeric:tabular-nums;color:var(--slate);font-size:12px}
+.foot{color:var(--slate);font-size:13px;margin-top:40px;max-width:760px}
+@media (max-width:420px){.grid,.grid.small{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Roof Command: the details that say "built for me"</h1>
+  <p class="sub">Research board for the Jackson Roofing build (Plano, TX). Part A is the single best reference to build each already-approved detail against. Part B is eight new ideas beyond that set, ranked by how strongly each says "high tech, personal, mine" divided by effort (S=1, M=2, L=3). Nothing invents a number: every detail runs on data the app already holds (homes, MESH hail swaths, Daily 50, texts, replies, inspections) or on live public feeds. Captured 2026-10-10. The app's map is MapLibre, so Mapbox-only features are noted as custom work.</p>
+  <div class="legend">
+    <span><b>Effort</b> S under a day, M 1 to 3 days, L a week or more</span>
+    <span><b>Perf</b> risk on a low-end laptop or phone</span>
+    <span><b>Real</b> only existing or live data; <b>Care</b> real data, labels must stay honest</span>
+  </div>
+
+  <h2>A. Approved by Jack: the reference to build each one against</h2>
+  <p class="sub">One reference per detail, chosen for the exact behaviour to copy, not the brand.</p>
+  <div class="grid small">
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/arc.jpg" alt="Arc" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>arc.net blocked headless capture</div>'">
+      <div class="body"><h3>Welcome</h3>
+        <p class="why">Copy Arc's per-space theming: the accent is sampled from Jackson's logo and tints every chip, line and ring, so the UI reads as his. Pair with the "Hi Cody" greeting layout already in the Dashboards V2 kit.</p>
+        <div class="ref">Arc, <a href="https://arc.net/">arc.net</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/deckgl-trips.jpg" alt="deck.gl trips" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>deck.gl timed out in headless capture</div>'">
+      <div class="body"><h3>Storm replay</h3>
+        <p class="why">Copy deck.gl's TripsLayer timing model: a scrubber drives a single clock, trails fade by age, homes brighten the instant the swath edge crosses them. Replay the swath; never invent per-house hits.</p>
+        <div class="ref">deck.gl TripsLayer, <a href="https://deck.gl/examples/trips-layer">deck.gl/examples/trips-layer</a>; Kepler.gl playback, <a href="https://kepler.gl/demo">kepler.gl/demo</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/eagleview.jpg" alt="EagleView" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>eagleview.com blocked headless capture</div>'">
+      <div class="body"><h3>Roof builds itself</h3>
+        <p class="why">Copy EagleView's report staging: footprint first, planes rise in order, ridge last, then measurements label in. Hover's capture flow shows the same "your house, measured" tone. One hail-size badge, no fake impact dots.</p>
+        <div class="ref">EagleView, <a href="https://www.eagleview.com/">eagleview.com</a>; Hover, <a href="https://hover.to/">hover.to</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/flighty.jpg" alt="Flighty" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>flighty.com blocked headless capture</div>'">
+      <div class="body"><h3>Mission briefing</h3>
+        <p class="why">Copy Flighty's pre-flight card: three facts in three beats (which storm, how many streets, first stop), then the deck fans out. Flighty proves a briefing can be a second long and still feel considered.</p>
+        <div class="ref">Flighty, <a href="https://flighty.com/">flighty.com</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/raycast.jpg" alt="Raycast" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>raycast.com blocked headless capture</div>'">
+      <div class="body"><h3>Nimbus reacts</h3>
+        <p class="why">Copy the Siri orb grammar: slow breathing when idle, one teal ripple on a real event (new reply, new storm), faster swirl while answering. Raycast AI shows how to keep the shape small and quiet in a working tool.</p>
+        <div class="ref">Raycast AI, <a href="https://www.raycast.com/">raycast.com</a>; Apple iPhone (Siri, Dynamic Island), <a href="https://www.apple.com/iphone/">apple.com/iphone</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/apple-iphone.jpg" alt="Apple Wallet" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>apple.com blocked headless capture</div>'">
+      <div class="body"><h3>Storm passport</h3>
+        <p class="why">Copy the Apple Wallet pass: fixed header (address), stamp rows beneath (one per hail event with date and MESH size), new stamps press in. Label hail as radar-estimated size, never confirmed damage.</p>
+        <div class="ref">Apple Wallet passes, <a href="https://www.apple.com/iphone/">apple.com/iphone</a>; Flighty passport, <a href="https://flighty.com/">flighty.com</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/windy-radar.jpg" alt="Windy radar" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>windy.com did not finish loading in headless capture</div>'">
+      <div class="body"><h3>Radar sweep</h3>
+        <p class="why">Copy Windy's radar look: one translucent beam, swaths flash as it crosses, newest brightest. Build as a CSS conic-gradient mask over the existing swath layer, one rotation, off under reduced-motion.</p>
+        <div class="ref">Windy radar, <a href="https://www.windy.com/-Radar-radar">windy.com/-Radar-radar</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/vercel.jpg" alt="Vercel" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>vercel.com blocked headless capture</div>'">
+      <div class="body"><h3>Weekly volume reel</h3>
+        <p class="why">Copy Vercel's insight cards for the numbers and Flighty's year review for the swipe pacing: one fact per card, big tabular numeral, honest empty state ("No storms this week") instead of a dressed-up zero.</p>
+        <div class="ref">Vercel, <a href="https://vercel.com/">vercel.com</a>; Flighty, <a href="https://flighty.com/">flighty.com</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/cmdk.jpg" alt="cmdk" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>cmdk.paco.me blocked headless capture</div>'">
+      <div class="body"><h3>Ctrl+K</h3>
+        <p class="why">Copy cmdk directly: grouped results (Homes, Streets, Storms, Actions), arrow keys, Enter to jump. Linear's palette is the behaviour benchmark; Raycast's frosted panel is the look.</p>
+        <div class="ref">cmdk, <a href="https://cmdk.paco.me/">cmdk.paco.me</a>; Linear, <a href="https://linear.app/">linear.app</a></div></div>
+    </article>
+
+    <article class="card"><span class="badge-ok">Approved</span>
+      <img class="shot" src="refs/mapbox-standard.jpg" alt="Mapbox Standard" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>mapbox.com blocked headless capture</div>'">
+      <div class="body"><h3>Time-of-day lighting</h3>
+        <p class="why">Copy Mapbox Standard's four light presets (dawn, day, dusk, night) keyed to Plano local time. The app runs MapLibre, so this is four palette variants of the style plus brighter message lines after dark, not a preset flag.</p>
+        <div class="ref">Mapbox Standard light presets, <a href="https://www.mapbox.com/blog/standard-core-style">mapbox.com/blog/standard-core-style</a></div></div>
+    </article>
+
+  </div>
+
+  <h2>B. New ideas beyond the approved set</h2>
+  <p class="sub">Eight details not yet on the list, ranked by impact per effort. The top five are marked.</p>
+
+  <div class="top5">
+    <h3>Top 5 new, in build order</h3>
+    <ol>
+      <li><b>Booked inspection roll-up</b> <span>the pipeline number rolls like an odometer and the row locks in with a quiet undo toast.</span></li>
+      <li><b>Hold-to-send</b> <span>cold texts go out only on a held button that fills over 600 ms; the human tap rule becomes a feeling.</span></li>
+      <li><b>New storm takeover</b> <span>the hail intro returns only for real news: a storm hit the service area overnight, one button builds today's 50 from it.</span></li>
+      <li><b>Homeowner proof page</b> <span>a Jackson-branded page per home (roof, hail history) Chris can text to the homeowner.</span></li>
+      <li><b>Route draws itself</b> <span>the knock route animates street by street from Jackson's office across Plano.</span></li>
+    </ol>
+  </div>
+
+  <div class="grid">
+
+    <article class="card top"><span class="rank">1</span><span class="badge-top">Top 5</span>
+      <img class="shot" src="refs/number-flow.jpg" alt="NumberFlow" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>number-flow.barvian.me blocked headless capture</div>'">
+      <div class="body">
+        <h3>Booked inspection roll-up</h3>
+        <p><span class="k">Sees:</span> when a reply is marked "inspection booked", the pipeline count rolls digit by digit like an odometer, the row lifts and settles on a spring, and a quiet toast confirms with Undo. No sound, no confetti. <span class="k">Does:</span> Undo within five seconds reverses it.</p>
+        <p class="why">Stripe-grade restraint: the celebration is the number itself moving. It only reflects a real status change, so the counter doubles as the client's trust meter. NumberFlow and Sonner are tiny free libraries.</p>
+        <div class="meta"><span class="chip s">Effort S</span><span class="chip s">Perf none</span><span class="chip real">Real</span><span class="score">impact 4 / effort 1 = 4.0</span></div>
+        <div class="ref">NumberFlow, <a href="https://number-flow.barvian.me/">number-flow.barvian.me</a>; Sonner (Emil Kowalski), <a href="https://sonner.emilkowal.ski/">sonner.emilkowal.ski</a></div>
+      </div>
+    </article>
+
+    <article class="card top"><span class="rank">2</span><span class="badge-top">Top 5</span>
+      <img class="shot" src="refs/rauno.jpg" alt="Rauno Freiberg" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>rauno.me blocked headless capture</div>'">
+      <div class="body">
+        <h3>Hold-to-send</h3>
+        <p><span class="k">Sees:</span> the send button for a cold text has no instant click. Press and hold: a teal ring fills over about 600 ms, the button compresses, and the message leaves on release with a short vibrate on phones. Let go early and it springs back, nothing sent. <span class="k">Does:</span> hold to send, release to cancel.</p>
+        <p class="why">Roof Command's rule is that cold sends are human-tapped. Rauno's hold-to-confirm turns that policy into a tactile moment: deliberate, safe, premium. Also kills accidental sends from a pocket.</p>
+        <div class="meta"><span class="chip s">Effort S</span><span class="chip s">Perf none</span><span class="chip real">Real</span><span class="score">impact 4 / effort 1 = 4.0</span></div>
+        <div class="ref">Rauno Freiberg craft notes, <a href="https://rauno.me/">rauno.me</a>; Emil Kowalski, <a href="https://emilkowal.ski/">emilkowal.ski</a></div>
+      </div>
+    </article>
+
+    <article class="card top"><span class="rank">3</span><span class="badge-top">Top 5</span>
+      <img class="shot" src="refs/windy-radar.jpg" alt="Windy" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>windy.com did not finish loading in headless capture</div>'">
+      <div class="body">
+        <h3>New storm takeover</h3>
+        <p><span class="k">Sees:</span> on the first open after the 08:15 storm refresh finds new hail in the service area, the intro's falling hail returns over a dark panel: storm date, towns hit, MESH max, and the count of homes in Jackson's territory inside the swath. One button: "Build today's 50 from this storm". <span class="k">Does:</span> press it and the Daily 50 regenerates from that swath.</p>
+        <p class="why">The single moment that proves the system watches the sky for him. Fires only on real new swaths from the daily refresh; on quiet days nothing appears, which is what keeps it credible.</p>
+        <div class="meta"><span class="chip m">Effort M</span><span class="chip s">Perf low (particle cap, reduced-motion off)</span><span class="chip real">Real</span><span class="score">impact 5 / effort 2 = 2.5</span></div>
+        <div class="ref">Apple Weather severe alerts; Windy, <a href="https://www.windy.com/-Radar-radar">windy.com/-Radar-radar</a>; Flighty live pushes, <a href="https://flighty.com/">flighty.com</a></div>
+      </div>
+    </article>
+
+    <article class="card top"><span class="rank">4</span><span class="badge-top">Top 5</span>
+      <img class="shot" src="refs/zillow-3d.jpg" alt="Zillow 3D Home" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>zillow.com blocked headless capture</div>'">
+      <div class="body">
+        <h3>Homeowner proof page</h3>
+        <p><span class="k">Sees:</span> on any home card, "Send proof" creates a private link to a one-screen page in Jackson's colours: the homeowner's address, the roof outline, every hail event that touched it with date and radar-estimated size, and a "Book a free inspection" call button. <span class="k">Does:</span> Chris texts the link; the page records when it was opened.</p>
+        <p class="why">Zillow 3D and Hover reports make a house feel documented. Here the document carries Jackson's logo, so the tool is visibly working for his brand in front of his customers. Hail data and roof outline already exist; the page is a template plus a signed link.</p>
+        <div class="meta"><span class="chip m">Effort M</span><span class="chip s">Perf none (static page)</span><span class="chip care">Care: estimated hail, no damage claims, no owner name on the page</span><span class="score">impact 5 / effort 2 = 2.5</span></div>
+        <div class="ref">Zillow 3D Home, <a href="https://www.zillow.com/z/3d-home/">zillow.com/z/3d-home</a>; Hover reports, <a href="https://hover.to/">hover.to</a></div>
+      </div>
+    </article>
+
+    <article class="card top"><span class="rank">5</span><span class="badge-top">Top 5</span>
+      <img class="shot" src="refs/deckgl-trips.jpg" alt="deck.gl trips layer" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>deck.gl timed out in headless capture</div>'">
+      <div class="body">
+        <h3>Route that draws itself from Jackson's base</h3>
+        <p><span class="k">Sees:</span> when the Daily 50 is set, a single line draws from the Jackson office across Plano street by street, lighting each of the 50 homes in drive order as it passes. <span class="k">Does:</span> tap "Open in Maps" for the first stop.</p>
+        <p class="why">deck.gl's trips layer and Flighty's flight path make movement feel planned. The route is the real knock order from js/knock.js, so the line is a promise the app can keep.</p>
+        <div class="meta"><span class="chip m">Effort M</span><span class="chip m">Perf medium (one animated line; static polyline fallback)</span><span class="chip real">Real</span><span class="score">impact 4 / effort 2 = 2.0</span></div>
+        <div class="ref">deck.gl TripsLayer, <a href="https://deck.gl/examples/trips-layer">deck.gl/examples/trips-layer</a>; Flighty, <a href="https://flighty.com/">flighty.com</a></div>
+      </div>
+    </article>
+
+    <article class="card"><span class="rank">6</span>
+      <img class="shot" src="refs/linear.jpg" alt="Linear" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>linear.app rendered blank in headless capture</div>'">
+      <div class="body">
+        <h3>"Why?" chips on every number</h3>
+        <p><span class="k">Sees:</span> hovering or long-pressing any stat shows a small "Why?" chip. Tap it and Nimbus explains the number in one sentence using only the rows behind it ("41 of today's 50 sit on two streets inside the Aug 16 swath"). <span class="k">Does:</span> "Show them" filters the map to those rows.</p>
+        <p class="why">Linear and Vercel make every figure clickable and explainable. The sentence is generated from the query behind the stat, so Nimbus cannot make anything up.</p>
+        <div class="meta"><span class="chip s">Effort S</span><span class="chip s">Perf none</span><span class="chip real">Real</span><span class="score">impact 3 / effort 1 = 3.0</span></div>
+        <div class="ref">Linear, <a href="https://linear.app/">linear.app</a>; Vercel, <a href="https://vercel.com/">vercel.com</a></div>
+      </div>
+    </article>
+
+    <article class="card"><span class="rank">7</span>
+      <img class="shot" src="refs/emil-kowalski.jpg" alt="Emil Kowalski" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>emilkowal.ski blocked headless capture</div>'">
+      <div class="body">
+        <h3>Haptic-feel buttons and card physics</h3>
+        <p><span class="k">Sees:</span> every primary button presses in to 0.97 scale on pointer-down and springs back on release; Daily 50 cards drag with inertia and snap; on phones a 10 ms vibrate on confirm actions. <span class="k">Does:</span> nothing new, it just feels solid.</p>
+        <p class="why">The Emil Kowalski layer: craft you feel before you can name it. Pure CSS transitions plus one spring curve; navigator.vibrate is free on Android and ignored elsewhere.</p>
+        <div class="meta"><span class="chip s">Effort S</span><span class="chip s">Perf none</span><span class="chip real">Real</span><span class="score">impact 3 / effort 1 = 3.0</span></div>
+        <div class="ref">Emil Kowalski, <a href="https://emilkowal.ski/">emilkowal.ski</a>; Rauno Freiberg, <a href="https://rauno.me/">rauno.me</a></div>
+      </div>
+    </article>
+
+    <article class="card"><span class="rank">8</span>
+      <img class="shot" src="refs/stripe.jpg" alt="Stripe" onerror="this.outerHTML='<div class=&quot;shot missing&quot;>stripe.com blocked headless capture</div>'">
+      <div class="body">
+        <h3>Cursor-lit glass</h3>
+        <p><span class="k">Sees:</span> on desktop, frosted panels carry a faint light that follows the cursor across their surface, and the panel under the pointer lifts a few pixels; on touch the light sits where the thumb last was. <span class="k">Does:</span> nothing; it makes the glass look like glass.</p>
+        <p class="why">Stripe and Rauno's spotlight cards sell "material" cheaply: one radial gradient driven by two CSS variables. It is the difference between flat cards and a surface. Low priority because it is pure polish.</p>
+        <div class="meta"><span class="chip s">Effort S</span><span class="chip s">Perf low (CSS vars, one listener; off on touch)</span><span class="chip real">Real</span><span class="score">impact 2 / effort 1 = 2.0</span></div>
+        <div class="ref">Stripe, <a href="https://stripe.com/">stripe.com</a>; Rauno Freiberg, <a href="https://rauno.me/">rauno.me</a></div>
+      </div>
+    </article>
+
+  </div>
+
+  <p class="foot">Left off on purpose: fake AI agents, invented homeowner names, confetti, sound, green status dots, any per-facet "damage detected" marks, and anything that sends without a human hand. Reference screenshots live in refs/ beside this file; a few sites block headless capture and their cards say so.</p>
+</div>
+</body>
+</html>

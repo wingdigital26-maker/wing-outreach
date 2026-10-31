@@ -1,0 +1,7 @@
+{"row": "33709", "wings": [
+ {"id": 1, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.55},
+ {"id": 2, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.5},
+ {"id": 3, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.6}],
+ "missing": "W1 is drawn as one box over the whole main house but the leaf-off photo shows the east part (toward the street) as a lower/separate garage block; a small porch/entry notch at the SW corner between W3 and the main block",
+ "guess_ok": false,
+ "notes": "Heavy tree cover; main E-W ridge expected on W1, not the N-S ridge the guess draws; W2 reads as a rear bump with its own hip"}

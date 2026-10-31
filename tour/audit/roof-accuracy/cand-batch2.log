@@ -1,0 +1,80 @@
+09:19:05 45 homes to build, 3 at once
+09:19:14 ('collin-tx', 204869) 09:19:14 collin-tx 204869 {"B": "not clean: edges", "C": "clean", "D": "clean", "E": "clean"} 8s
+09:19:16 ('collin-tx', 166093) 09:19:16 collin-tx 166093 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 10s
+09:19:26 ('rockwall-tx', 48) 09:19:25 rockwall-tx 48 {"B": "not clean: r6_looks, edges", "C": "not clean: r4_sizes, r6_looks", "D": "not clean: r6_looks, edges", "E": "clean"} 20s
+09:19:27 ('collin-tx', 15574) 09:19:27 collin-tx 15574 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 11s
+09:19:33 ('collin-tx', 36436) 09:19:33 collin-tx 36436 {"B": "not clean: r6_looks", "C": "not clean: r4_sizes, r6_looks, edges", "D": "not clean: edges", "E": "not clean: r6_looks"} 19s
+09:19:48 ('rockwall-tx', 5321) 09:19:47 rockwall-tx 5321 {"B": "not clean: r6_looks", "C": "not clean: r1_solid, r4_sizes, r6_looks", "D": "clean", "E": "clean"} 20s
+09:20:11 ('collin-tx', 200871) 09:20:11 collin-tx 200871 {"B": "not clean: r6_looks", "C": "not clean: edges", "D": "clean", "E": "not clean: r1_solid, r6_looks, edges"} 45s
+09:20:33 ('collin-tx', 173943) 09:20:33 collin-tx 173943 {"B": "clean", "C": "clean", "D": "not clean: r1_solid, r6_looks", "E": "not clean: r1_solid, r6_looks, edges"} 59s
+09:20:36 ('rockwall-tx', 2558) 09:20:36 rockwall-tx 2558 {"B": "not clean: r6_looks", "C": "not clean: r2_walls, r4_sizes, r6_looks", "D": "not clean: r6_looks", "E": "clean"} 23s
+09:20:49 ('collin-tx', 35469) 09:20:48 collin-tx 35469 {"B": "not clean: r2_walls, edges", "C": "not clean: r4_sizes, edges", "D": "not clean: r4_sizes, r6_looks, edges", "E": "not clean: r6_looks, edges"} 60s
+09:21:09 ('collin-tx', 200985) 09:21:09 collin-tx 200985 {"B": "clean", "C": "not clean: r4_sizes", "D": "clean", "E": "clean"} 35s
+09:21:30 ('collin-tx', 189060) 09:21:30 collin-tx 189060 {"B": "clean", "C": "not clean: r2_walls, r4_sizes, r6_looks", "D": "not clean: edges", "E": "not clean: edges"} 53s
+09:21:32 ('collin-tx', 36251) 09:21:32 collin-tx 36251 {"B": "not clean: r6_looks", "C": "clean", "D": "not clean: r1_solid, edges", "E": "not clean: r1_solid, r6_looks, edges"} 43s
+09:21:46 ('collin-tx', 206911) 09:21:46 collin-tx 206911 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 16s
+09:21:47 ('collin-tx', 428) 09:21:47 collin-tx 428 {"B": "not clean: r6_looks", "C": "not clean: r2_walls", "D": "not clean: r2_walls, r6_looks, edges", "E": "not clean: r2_walls, r6_looks"} 37s
+09:22:04 ('collin-tx', 207704) 09:22:04 collin-tx 207704 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 16s
+09:22:16 ('collin-tx', 15292) 09:22:15 collin-tx 15292 {"B": "not clean: r6_looks", "C": "clean", "D": "not clean: r6_looks, edges", "E": "not clean: r4_sizes, r6_looks"} 29s
+09:22:19 ('collin-tx', 188969) 09:22:19 collin-tx 188969 {"B": "clean", "C": "clean", "D": "not clean: r4_sizes", "E": "not clean: r4_sizes, r6_looks, edges"} 46s
+09:22:30 ('collin-tx', 147750) 09:22:30 collin-tx 147750 {"B": "clean", "C": "not clean: r2_walls, r4_sizes, r6_looks", "D": "clean", "E": "clean"} 26s
+09:22:44 ('collin-tx', 204682) 09:22:44 collin-tx 204682 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 25s
+09:22:44 ('collin-tx', 171979) deferred
+09:22:44 ('collin-tx', 164153) deferred
+09:22:44 ('collin-tx', 164151) deferred
+09:22:44 ('collin-tx', 164201) deferred
+09:22:44 ('collin-tx', 164203) deferred
+09:22:44 ('collin-tx', 164157) deferred
+09:22:44 ('collin-tx', 164205) deferred
+09:22:44 ('collin-tx', 164199) deferred
+09:22:44 ('collin-tx', 164150) deferred
+09:22:44 ('collin-tx', 164154) deferred
+09:22:44 ('collin-tx', 164152) deferred
+09:22:44 ('collin-tx', 164156) deferred
+09:22:44 ('collin-tx', 164207) deferred
+09:22:44 ('collin-tx', 164159) deferred
+09:22:44 ('collin-tx', 164197) deferred
+09:22:44 ('collin-tx', 164158) deferred
+09:22:44 ('collin-tx', 164148) deferred
+09:22:44 ('collin-tx', 164200) deferred
+09:22:44 ('collin-tx', 164149) deferred
+09:22:44 ('collin-tx', 164198) deferred
+09:22:44 ('collin-tx', 164209) deferred
+09:22:44 ('collin-tx', 164160) deferred
+09:22:44 ('collin-tx', 164161) deferred
+09:22:44 ('collin-tx', 32591) 09:22:44 collin-tx 32591 {"B": "not clean: edges", "C": "clean", "D": "clean", "E": "clean"} 28s
+09:23:01 ('collin-tx', 191766) 09:23:01 collin-tx 191766 {"B": "clean", "C": "not clean: r4_sizes, r6_looks", "D": "clean", "E": "clean"} 30s
+09:23:02 23 homes to build, 3 at once
+09:23:33 ('collin-tx', 171979) 09:23:33 collin-tx 171979 {"B": "not clean: r6_looks", "C": "clean", "D": "not clean: r6_looks", "E": "not clean: r6_looks"} 31s
+09:23:35 ('collin-tx', 164153) 09:23:35 collin-tx 164153 {"B": "not clean: r6_looks", "C": "clean", "D": "clean", "E": "not clean: r1_solid, r6_looks, edges"} 33s
+09:23:42 ('collin-tx', 164151) 09:23:42 collin-tx 164151 {"B": "clean", "C": "not clean: r1_solid, r4_sizes", "D": "not clean: r6_looks, edges", "E": "not clean: r6_looks"} 40s
+09:23:50 ('collin-tx', 164201) 09:23:50 collin-tx 164201 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 17s
+09:23:56 ('collin-tx', 164157) 09:23:56 collin-tx 164157 {"B": "clean", "C": "clean", "D": "clean", "E": "no model"} 13s
+09:23:58 ('collin-tx', 164203) 09:23:58 collin-tx 164203 {"B": "clean", "C": "not clean: r2_walls, r6_looks, edges", "D": "clean", "E": "clean"} 22s
+09:24:20 ('collin-tx', 164205) 09:24:20 collin-tx 164205 {"B": "clean", "C": "clean", "D": "not clean: r4_sizes", "E": "not clean: r4_sizes"} 29s
+09:24:27 ('collin-tx', 164199) 09:24:27 collin-tx 164199 {"B": "clean", "C": "not clean: r4_sizes, r6_looks, edges", "D": "clean", "E": "not clean: r4_sizes"} 31s
+09:24:48 ('collin-tx', 164150) 09:24:48 collin-tx 164150 {"B": "not clean: edges", "C": "clean", "D": "not clean: r6_looks, edges", "E": "not clean: r4_sizes, r6_looks"} 49s
+09:24:49 ('collin-tx', 164154) 09:24:49 collin-tx 164154 {"B": "clean", "C": "not clean: r6_looks, edges", "D": "not clean: r6_looks, edges", "E": "not clean: r6_looks"} 29s
+09:24:49 ('collin-tx', 164152) 09:24:49 collin-tx 164152 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 21s
+09:25:07 ('collin-tx', 164159) 09:25:06 collin-tx 164159 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 17s
+09:25:11 ('collin-tx', 164207) 09:25:11 collin-tx 164207 {"B": "clean", "C": "clean", "D": "clean", "E": "clean"} 21s
+09:25:11 ('collin-tx', 164156) 09:25:11 collin-tx 164156 {"B": "clean", "C": "not clean: r6_looks", "D": "not clean: r6_looks", "E": "clean"} 22s
+09:25:33 ('collin-tx', 164197) 09:25:33 collin-tx 164197 {"B": "not clean: r6_looks", "C": "clean", "D": "clean", "E": "not clean: r4_sizes, r6_looks, edges"} 26s
+09:25:36 ('collin-tx', 164148) 09:25:36 collin-tx 164148 {"B": "clean", "C": "not clean: r6_looks", "D": "not clean: edges", "E": "not clean: r1_solid"} 25s
+09:25:42 ('collin-tx', 164158) 09:25:42 collin-tx 164158 {"B": "not clean: r1_solid, r6_looks", "C": "not clean: r6_looks", "D": "not clean: r1_solid, r6_looks", "E": "not clean: r1_solid, r2_walls, edges"} 31s
+09:26:06 ('collin-tx', 164200) 09:26:06 collin-tx 164200 {"B": "clean", "C": "not clean: r2_walls, r4_sizes, r6_looks, edges", "D": "not clean: r2_walls", "E": "not clean: r4_sizes"} 33s
+09:26:12 ('collin-tx', 164198) 09:26:12 collin-tx 164198 {"B": "not clean: r6_looks, edges", "C": "clean", "D": "not clean: edges", "E": "not clean: r1_solid, r6_looks"} 30s
+09:26:13 ('collin-tx', 164149) 09:26:13 collin-tx 164149 {"B": "clean", "C": "not clean: r1_solid, r4_sizes, r6_looks, edges", "D": "not clean: r6_looks", "E": "not clean: r6_looks, edges"} 36s
+09:26:24 ('collin-tx', 164161) 09:26:24 collin-tx 164161 {"B": "not clean: edges", "C": "clean", "D": "clean", "E": "clean"} 11s
+09:26:26 ('collin-tx', 164209) 09:26:26 collin-tx 164209 {"B": "not clean: edges", "C": "not clean: r6_looks", "D": "not clean: r4_sizes, edges", "E": "not clean: r1_solid, edges"} 20s
+09:27:00 ('collin-tx', 164160) 09:27:00 collin-tx 164160 {"B": "not clean: r6_looks", "C": "not clean: r2_walls, r3_lines, r4_sizes, r6_looks, edges", "D": "not clean: r1_solid, r4_sizes", "E": "not clean: r1_solid, r4_sizes, edges"} 47s
+09:27:00 1 homes to build, 3 at once
+09:27:12 ('collin-tx', 164157) 09:27:12 collin-tx 164157 {"B": "clean", "C": "clean", "D": "clean", "E": "no model"} 11s
+09:27:12 1 homes to build, 3 at once
+09:27:24 ('collin-tx', 164157) 09:27:24 collin-tx 164157 {"B": "clean", "C": "clean", "D": "clean", "E": "no model"} 11s
+09:27:25 1 homes to build, 3 at once
+09:27:34 ('collin-tx', 164157) 09:27:34 collin-tx 164157 {"B": "clean", "C": "clean", "D": "clean", "E": "no model"} 9s
+09:27:34 1 homes to build, 3 at once
+09:27:46 ('collin-tx', 164157) 09:27:46 collin-tx 164157 {"B": "clean", "C": "clean", "D": "clean", "E": "no model"} 11s
+09:27:46 1 homes to build, 3 at once
+09:27:58 ('collin-tx', 164157) 09:27:58 collin-tx 164157 {"B": "clean", "C": "clean", "D": "clean", "E": "no model"} 11s

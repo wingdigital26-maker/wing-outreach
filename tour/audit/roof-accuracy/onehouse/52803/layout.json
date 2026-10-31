@@ -1,0 +1,167 @@
+{
+ "image": "gtrace/52803/google.png",
+ "ft_per_px": 0.206,
+ "pieces": [
+  {
+   "name": "front",
+   "rect_px": [
+    [
+     408,
+     425
+    ],
+    [
+     521,
+     416
+    ],
+    [
+     540,
+     647
+    ],
+    [
+     427,
+     656
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.077,
+    0.997
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "front N-S hip body 23 by 47 ft, ridge near x 475, S hips meet near (479,597); W face dark, E face lit; N end dies into the rear S face"
+  },
+  {
+   "name": "rear_left",
+   "rect_px": [
+    [
+     403,
+     347
+    ],
+    [
+     505,
+     339
+    ],
+    [
+     518,
+     500
+    ],
+    [
+     416,
+     508
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.997,
+    -0.077
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "rear W half, E-W ridge near y 428, hipped at the W end; N face about 8/12 (LiDAR 232 sq ft); S face continues the rear_right S face"
+  },
+  {
+   "name": "rear_right",
+   "rect_px": [
+    [
+     500,
+     339
+    ],
+    [
+     612,
+     331
+    ],
+    [
+     628,
+     544
+    ],
+    [
+     516,
+     553
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0.997,
+    -0.077
+   ],
+   "gable_ends": [],
+   "level": 2,
+   "notes": "rear E half, E-W ridge near y 425, hipped at the E end; N face about 7.5/12 (217 sq ft), big lit S face about 7/12 down to the patio line"
+  },
+  {
+   "name": "north_cross",
+   "rect_px": [
+    [
+     467,
+     341
+    ],
+    [
+     533,
+     336
+    ],
+    [
+     540,
+     430
+    ],
+    [
+     474,
+     435
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0.077,
+    0.997
+   ],
+   "gable_ends": [
+    "N"
+   ],
+   "level": 2,
+   "notes": "narrow steep N-S cross on the N face, ridge near x 500, lit E face and dark W face about 16/12 per LiDAR (223 and 181 sq ft); gable end at the N eave where the trace shows a V notch; lowest confidence piece, could be a hip end instead"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    533,
+    550
+   ],
+   [
+    627,
+    542
+   ],
+   [
+    634,
+    640
+   ],
+   [
+    540,
+    647
+   ]
+  ],
+  [
+   [
+    393,
+    345
+   ],
+   [
+    408,
+    345
+   ],
+   [
+    427,
+    656
+   ],
+   [
+    412,
+    656
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "rear brick patio with a small flat pool equipment cover, SE corner",
+  "W wall seen in the oblique image, trace overshoots the W eave by about 3 ft"
+ ],
+ "notes": "House tilted about 4 deg (u=[0.997,-0.077]). Rear is a 2-story E-W hip split into W and E halves (v1 rear_left only reached y 507 and fit 15%), plus a steep N cross gable that v1 missed; front N-S hip body is the 1-story part. Confidence medium-low: oblique imagery and the cross element."
+}

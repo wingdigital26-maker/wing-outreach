@@ -1,0 +1,57 @@
+{
+ "homes_scored": 1094,
+ "permit_homes": 446,
+ "control_homes": 608,
+ "by_pair": {
+  "2015-2016": {
+   "permit_homes": 16,
+   "auc": 0.515,
+   "caught_at_90pct_control": 0.0,
+   "caught_at_95pct_control": 0.0,
+   "median_change_permit": 1.17,
+   "median_change_control": 0.99
+  },
+  "2016-2018": {
+   "permit_homes": 420,
+   "auc": 0.509,
+   "caught_at_90pct_control": 0.105,
+   "caught_at_95pct_control": 0.048,
+   "median_change_permit": 1.45,
+   "median_change_control": 1.41
+  },
+  "2018-2020": {
+   "permit_homes": 1,
+   "auc": 0.211,
+   "caught_at_90pct_control": 0.0,
+   "caught_at_95pct_control": 0.0,
+   "median_change_permit": 0.48,
+   "median_change_control": 1.13
+  },
+  "2020-2022": {
+   "permit_homes": 9,
+   "auc": 0.411,
+   "caught_at_90pct_control": 0.0,
+   "caught_at_95pct_control": 0.0,
+   "median_change_permit": 1.41,
+   "median_change_control": 1.88
+  }
+ },
+ "self_test": {
+  "right_window_is_biggest_change": 113,
+  "of": 446,
+  "share": 0.253,
+  "chance": 0.25
+ },
+ "detector_top5pct": {
+  "flags": 215,
+  "on_a_permit_home_in_that_window": 20,
+  "permit_homes_flagged_in_right_window": 20,
+  "permit_homes": 446
+ },
+ "steadiness_no_permit_homes": {
+  "2015-2016": 0.89,
+  "2016-2018": 0.736,
+  "2018-2020": 0.762,
+  "2020-2022": 0.585
+ }
+}

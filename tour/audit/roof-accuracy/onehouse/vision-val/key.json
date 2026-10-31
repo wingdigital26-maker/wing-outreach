@@ -1,0 +1,392 @@
+{
+ "v00": {
+  "row": "66037",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: gates pass but faces jagged, holes in the 3D, stray wall pieces in the app"
+ },
+ "v01": {
+  "row": "33416",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "close: shown hybrid; main hip + garage right, right side cluttered with valleys"
+ },
+ "v02": {
+  "row": "8396",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: gable ridge and the small wing match the photo (line gate 2.18 ft, looks right)"
+ },
+ "v03": {
+  "row": "31648",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "right: both models (main hip, front hip, back wing); fails the new segmentation gate at rms 21.4"
+ },
+ "v04": {
+  "row": "8659",
+  "model": "new",
+  "eye_right": true,
+  "eye": "ok: gable + front shed, fit 93%, lines 0.24 ft"
+ },
+ "v05": {
+  "row": "46941",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: cross hip partly right, eaves 2 ft off"
+ },
+ "v06": {
+  "row": "53110",
+  "model": "new",
+  "eye_right": false,
+  "eye": "needs work: the north diamond is a 45-deg piece; snapping rectangles to the house axes squares it off"
+ },
+ "v07": {
+  "row": "64242",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: jagged, holes, outline off"
+ },
+ "v08": {
+  "row": "58915",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: outline not this building (IoU 0.65), lines off"
+ },
+ "v09": {
+  "row": "46941",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "practice note"
+ },
+ "v10": {
+  "row": "33165",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: big multi-wing roof, LiDAR fit 67%, 28 faces, layout cluttered vs the photo"
+ },
+ "v11": {
+  "row": "57927",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "practice note"
+ },
+ "v12": {
+  "row": "46572",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: hips/valleys on the photo's lines (photo route, 91%); one small 2/12 piece in the app"
+ },
+ "v13": {
+  "row": "5696",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: lower hips right, top half cluttered with valleys (gates passed it)"
+ },
+ "v14": {
+  "row": "8659",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: gable on the photo"
+ },
+ "v15": {
+  "row": "53110",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: hip + the north diamond on the photo"
+ },
+ "v16": {
+  "row": "22669",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: outline takes in the pool/patio below the house (outline check passed it)"
+ },
+ "v17": {
+  "row": "144768",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "close: hybrid cleaner; fails outline IoU 0.68 only because the patio cover was rightly excluded"
+ },
+ "v18": {
+  "row": "12735",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "close: hybrid shown; main hip right, extra diagonal valleys bottom-left"
+ },
+ "v19": {
+  "row": "10709",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: cross hips + NW wing on the photo (passes gates)"
+ },
+ "v20": {
+  "row": "43154",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: jagged, holes"
+ },
+ "v21": {
+  "row": "10709",
+  "model": "new",
+  "eye_right": false,
+  "eye": "failed: main piece fitted FLAT (0/12, fit 19%)"
+ },
+ "v22": {
+  "row": "53110",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "practice note"
+ },
+ "v23": {
+  "row": "57613",
+  "model": "new",
+  "eye_right": false,
+  "eye": "failed: two hips side by side + a strip, not the photo's roof"
+ },
+ "v24": {
+  "row": "46941",
+  "model": "new",
+  "eye_right": false,
+  "eye": "needs work: shape partly right, fit 68%"
+ },
+ "v25": {
+  "row": "12727",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: main hip + garage wing right, extra valleys top right, notch top left"
+ },
+ "v26": {
+  "row": "9441",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "right-ish: hybrid ridges/hips on the photo, lines 1.23 ft"
+ },
+ "v27": {
+  "row": "64162",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: one clean hip roof on the photo's lines (clean blocks, 4 faces)"
+ },
+ "v28": {
+  "row": "58915",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "failed: photo registration off (~15 ft, lighting inverted)"
+ },
+ "v29": {
+  "row": "58673",
+  "model": "old",
+  "eye_right": false,
+  "eye": "close: cut-up roof, creases mostly followed (gates pass)"
+ },
+ "v30": {
+  "row": "55125",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: main hips right, extra valleys at the bottom, thin spike in the app"
+ },
+ "v31": {
+  "row": "38831",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: jagged faces, holes in the 3D"
+ },
+ "v32": {
+  "row": "31351",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "close: gable + W wing right, eaves 1.2 ft"
+ },
+ "v33": {
+  "row": "117590",
+  "model": "new",
+  "eye_right": false,
+  "eye": "close: main hip right, stray valley stub bottom-left (fit 81%)"
+ },
+ "v34": {
+  "row": "64242",
+  "model": "new",
+  "eye_right": false,
+  "eye": "failed: fit 29%"
+ },
+ "v35": {
+  "row": "34286",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "needs work: modern low-slope house, outline IoU 0.50"
+ },
+ "v36": {
+  "row": "59811",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "failed: outline wrong (two buildings), lighting + segmentation gates flag it"
+ },
+ "v37": {
+  "row": "32509",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "right: cross hips on the photo's creases (shown: hybrid)"
+ },
+ "v38": {
+  "row": "64304",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: retraced from the county footprint, which covers only part of the wide building"
+ },
+ "v39": {
+  "row": "224",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: simple hip roof drawn with diagonal lines across the right half"
+ },
+ "v40": {
+  "row": "117590",
+  "model": "old",
+  "eye_right": false,
+  "eye": "close: hip + front dormer roughly right"
+ },
+ "v41": {
+  "row": "32509",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: cluttered wedges (gates pass)"
+ },
+ "v42": {
+  "row": "43154",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "close: cleaner than OLD, some lines off (shown: hybrid)"
+ },
+ "v43": {
+  "row": "164787",
+  "model": "new",
+  "eye_right": false,
+  "eye": "needs work: clean diagonal hip + wing, fit 55%"
+ },
+ "v44": {
+  "row": "31351",
+  "model": "old",
+  "eye_right": false,
+  "eye": "close: main gable + W hips right, extra valleys on the right (gates pass)"
+ },
+ "v45": {
+  "row": "59767",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: the photo trace runs into the neighbour's roof (gate caught it: footprint IoU 0.72); holes; app shot timed out"
+ },
+ "v46": {
+  "row": "58489",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "right: hybrid, neighbour strip excluded; fails outline IoU 0.745"
+ },
+ "v47": {
+  "row": "52803",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: jagged, holes"
+ },
+ "v48": {
+  "row": "52803",
+  "model": "new",
+  "eye_right": false,
+  "eye": "needs work: cleaner than OLD but LiDAR fit 33% (piece heights wrong)"
+ },
+ "v49": {
+  "row": "783",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: main hip X and the garage wing on the photo's creases (gate says lines 1.35 ft)"
+ },
+ "v50": {
+  "row": "34027",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: roof under trees/shade, pitches 2-4/12 look too flat, lower-right hip/valley lines not on the photo"
+ },
+ "v51": {
+  "row": "37271",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: skewed outline, lines only partly on the photo"
+ },
+ "v52": {
+  "row": "8659",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "practice note"
+ },
+ "v53": {
+  "row": "50599",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "needs work: OLD shown (passes gates) but cluttered round the turret; tile roof"
+ },
+ "v54": {
+  "row": "117590",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "practice note"
+ },
+ "v55": {
+  "row": "57927",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: cluttered NW wing"
+ },
+ "v56": {
+  "row": "149197",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: gates pass but lines cluttered, wedge faces, odd pieces in the app"
+ },
+ "v57": {
+  "row": "164787",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: cluttered"
+ },
+ "v58": {
+  "row": "58673",
+  "model": "hybrid",
+  "eye_right": true,
+  "eye": "close: similar to OLD"
+ },
+ "v59": {
+  "row": "31311",
+  "model": "old",
+  "eye_right": false,
+  "eye": "needs work: two parallel ridges ~4 ft apart make a thin strip face the photo does not show (LiDAR led, 93%)"
+ },
+ "v60": {
+  "row": "56739",
+  "model": "old",
+  "eye_right": true,
+  "eye": "ok: hips and ridges on the photo's lines (LiDAR led, 96%), clean app view"
+ },
+ "v61": {
+  "row": "15249",
+  "model": "hybrid",
+  "eye_right": false,
+  "eye": "needs work: lines 2 ft off, outline IoU 0.53"
+ },
+ "v62": {
+  "row": "57927",
+  "model": "new",
+  "eye_right": true,
+  "eye": "close: clean main hip + garage wing like the photo, but LiDAR fit only 46%"
+ },
+ "v63": {
+  "row": "62819",
+  "model": "old",
+  "eye_right": false,
+  "eye": "failed: jagged faces, lines not on the photo"
+ },
+ "v64": {
+  "row": "57613",
+  "model": "old",
+  "eye_right": false,
+  "eye": "close-ish: hips right, extra lines W"
+ }
+}

@@ -1,0 +1,7 @@
+{"row": "52803", "wings": [
+ {"id": 1, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.75},
+ {"id": 2, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.8},
+ {"id": 3, "keep": true, "type": "hip", "ridge": "long", "gable_ends": [], "low_side": null, "sure": 0.75}],
+ "missing": "House is rotated about 10 degrees from north (wings drawn tilted, fine); a small covered entry/porch roof in the SE re-entrant corner where W2 (garage) meets the east part of W1 is not covered; the NW corner of W1 (north of W3's west edge) is where the leaf-off photo shows a short valley, consistent with the guess",
+ "guess_ok": true,
+ "notes": "Hip N-S front block W3 crossing an E-W hip W1, plus a hip garage W2 to the south with its ridge N-S"}

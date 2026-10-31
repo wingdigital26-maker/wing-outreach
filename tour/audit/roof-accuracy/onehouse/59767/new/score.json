@@ -1,0 +1,24 @@
+{
+ "row": "59767",
+ "fit": 0.335,
+ "squares": 40.2,
+ "line_fit": 1.34,
+ "faces": 4,
+ "outline": {
+  "footprint_iou": 0.851,
+  "footprint_inside": true,
+  "line_fit_ft": 1.34,
+  "eave_fit_ft": 0.63,
+  "line_fit_raw_ft": 1.6,
+  "photo_shift_ft": [
+   -1.0,
+   1.0
+  ],
+  "photo": "google.png",
+  "jagged_share": 0.0,
+  "holes_share": 0.0
+ },
+ "log": [
+  "main: hip ridge u, hips ['u0', 'u1'], pitch 8/12, eave 10.9 ft, fit 33%"
+ ]
+}

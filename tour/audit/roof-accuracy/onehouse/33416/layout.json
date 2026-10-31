@@ -1,0 +1,17 @@
+{
+ "image": "gtrace/33416/google.png",
+ "ft_per_px": 0.201,
+ "pieces": [
+  {"name": "main", "rect_px": [[382,291],[642,291],[642,524],[382,524]], "roof": "hip", "ridge_dir_px": [1,0], "gable_ends": [], "level": 2,
+   "notes": "big 2-story hip, nearly a pyramid: hips from the NW corner (402,291) and SW corner (405,522) meet a short E-W ridge near y 405 from x about 497 to 548; the east slope runs on past x 590 with no break line down to a low east eave at x 642 (LiDAR eave there about 9 to 12 ft vs 18 ft on the west), so it stays one piece; SE corner hips down to the south eave at y 524 (pale S-facing triangle apex (590,480)); NE corner (590-642, 297-340) is a dark N-facing facet, not flat"},
+  {"name": "north_gable", "rect_px": [[448,283],[588,283],[588,350],[448,350]], "roof": "gable", "ridge_dir_px": [0,1], "gable_ends": ["N"], "level": 2,
+   "notes": "N-S ridge at x about 517 running from the north eave (ridge reaches the eave at full height, so gabled north) south to y about 346 where it dies into the main north slope; its west slope meets the main north face in the dark valley from (448,291) to (511,346); dark vertical strip at x 520-540 is the chimney shadow (chimney at 520,360), not a face"},
+  {"name": "sw_wing", "rect_px": [[380,522],[500,522],[500,599],[380,599]], "roof": "hip", "ridge_dir_px": [0,1], "gable_ends": [], "level": 1,
+   "notes": "1-story hip on the south of the main SW: hips from (380,599) and (500,600) meet at (438,545), then a very short N-S ridge dies into the main south wall at y about 522; dark N-facing triangle between (438,545) and the wall"}
+ ],
+ "exclude_px": [
+  [[500,524],[645,524],[645,548],[500,548]]
+ ],
+ "exclude_notes": ["white scalloped awning and patio cover along the south eave of the main east half; trace overshoots to y 544 there"],
+ "notes": "2-story hip main with a short E-W ridge, a gabled N-S wing on its north side (west valley), and a 1-story hip wing on the SW. Confidence med-high: the piece split and exclusions are clear; medium on the main ridge direction (nearly a pyramid, LiDAR ridges are short and both N-S and E-W fragments show) and on whether the east slope is one plane to x 642 (no step or wall shadow visible, LiDAR eave height on the east is low)."
+}

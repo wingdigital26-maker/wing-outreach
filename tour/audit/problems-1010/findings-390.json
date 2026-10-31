@@ -1,0 +1,699 @@
+[
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [],
+  "suspect": [],
+  "overlaps": [
+   {
+    "a": "Storms",
+    "b": "Jackson Roofing",
+    "ox": 60,
+    "oy": 14
+   },
+   {
+    "a": "Storms",
+    "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall",
+    "ox": 60,
+    "oy": 28
+   },
+   {
+    "a": "CRM",
+    "b": "Jackson Roofing",
+    "ox": 88,
+    "oy": 14
+   },
+   {
+    "a": "CRM",
+    "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall",
+    "ox": 88,
+    "oy": 28
+   },
+   {
+    "a": "Ask",
+    "b": "Jackson Roofing",
+    "ox": 65,
+    "oy": 14
+   },
+   {
+    "a": "Ask",
+    "b": "Plano, Frisco, Allen, McKinney, Richardson and Rockwall",
+    "ox": 65,
+    "oy": 28
+   }
+  ],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "signin",
+  "vp": "390",
+  "shot": "00-signin-390.png"
+ },
+ {
+  "screen": "today",
+  "vp": "390",
+  "timing": {
+   "first_text_s": -1,
+   "first_card_s": -1
+  }
+ },
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   }
+  ],
+  "suspect": [
+   {
+    "t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Frisco Square Phase 5. Waywind Llc, (972) 555-0134 (",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75033. Julia Gaona Addition. Gaona Julia, (972) 555-0139 (s",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Stonebrook One. Lopez Robert & Maria H, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75033. Western Heights Addition. Chesney Tjay, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Sterling Ranch - Phase One. Tarbert Llc, (972) 555-0",
+    "m": "555-0"
+   }
+  ],
+  "overlaps": [
+   {
+    "a": "45 sq8 planes, red took the hail",
+    "b": "43.9 sq10 planes, red took the hail",
+    "ox": 55,
+    "oy": 13
+   },
+   {
+    "a": "Measure",
+    "b": "Measure",
+    "ox": 87,
+    "oy": 32
+   },
+   {
+    "a": "Measure",
+    "b": "Measure",
+    "ox": 78,
+    "oy": 12
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "7175 Maple St",
+    "ox": 226,
+    "oy": 15
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "43.8 sq10 planes, red took the hail",
+    "ox": 66,
+    "oy": 21
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 17,
+    "oy": 24
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "56.8 sq14 planes, red took the hail",
+    "ox": 64,
+    "oy": 13
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 24
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 18
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "71.1 sq12 planes, red took the hail",
+    "ox": 64,
+    "oy": 13
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 24
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 18
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "72.5 sq14 planes, red took the hail",
+    "ox": 64,
+    "oy": 13
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 24
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 18
+   }
+  ],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "today",
+  "vp": "390",
+  "shot": "03-today-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Hail at home",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Roof record",
+    "fs": 10.5,
+    "cls": ""
+   },
+   {
+    "t": "Pitch",
+    "fs": 10.5,
+    "cls": ""
+   }
+  ],
+  "suspect": [
+   {
+    "t": "Frisco, TX 75034. Frisco Original Donation. Appel Noelle, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Hickory Hills Addition. Gray Jamie, (972) 555-0113 (",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Hickory Springs. Kappaz Philip, (972) 555-0120 (samp",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Frisco Original Donation. Shaw Jimmie R, (972) 555-0",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Hickory Hills Addition. Herron Marc F, (972) 555-013",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75033. Benton Staley Addition. Trevino Sandra, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Frisco Square Phase 5. Waywind Llc, (972) 555-0134 (",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75033. Julia Gaona Addition. Gaona Julia, (972) 555-0139 (s",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Stonebrook One. Lopez Robert & Maria H, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75033. Western Heights Addition. Chesney Tjay, (972) 555-01",
+    "m": "555-0"
+   },
+   {
+    "t": "Frisco, TX 75034. Sterling Ranch - Phase One. Tarbert Llc, (972) 555-0",
+    "m": "555-0"
+   },
+   {
+    "t": "Appel Noelle, (972) 555-0100 (sample phone)",
+    "m": "555-0"
+   }
+  ],
+  "overlaps": [
+   {
+    "a": "45 sq8 planes, red took the hail",
+    "b": "43.9 sq10 planes, red took the hail",
+    "ox": 55,
+    "oy": 13
+   },
+   {
+    "a": "45 sq8 planes, red took the hail",
+    "b": "Cold homeowner: you send it yourselfDay 1 text from the outreach libra",
+    "ox": 49,
+    "oy": 23
+   },
+   {
+    "a": "45 sq8 planes, red took the hail",
+    "b": "Cold homeowner: you send it yourself",
+    "ox": 35,
+    "oy": 11
+   },
+   {
+    "a": "Measure",
+    "b": "Measure",
+    "ox": 87,
+    "oy": 32
+   },
+   {
+    "a": "Measure",
+    "b": "Measure",
+    "ox": 78,
+    "oy": 12
+   },
+   {
+    "a": "Measure",
+    "b": "Appel Noelle, (972) 555-0100 (sample phone)",
+    "ox": 79,
+    "oy": 7
+   },
+   {
+    "a": "Measure",
+    "b": "Cold homeowner: you send it yourselfDay 1 text from the outreach libra",
+    "ox": 79,
+    "oy": 23
+   },
+   {
+    "a": "Measure",
+    "b": "Cold homeowner: you send it yourself",
+    "ox": 65,
+    "oy": 11
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "7175 Maple St",
+    "ox": 226,
+    "oy": 15
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "43.8 sq10 planes, red took the hail",
+    "ox": 66,
+    "oy": 21
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 17,
+    "oy": 24
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "56.8 sq14 planes, red took the hail",
+    "ox": 64,
+    "oy": 13
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 24
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "Measure",
+    "ox": 18,
+    "oy": 18
+   },
+   {
+    "a": "7290 Ash St",
+    "b": "71.1 sq12 planes, red took the hail",
+    "ox": 64,
+    "oy": 13
+   }
+  ],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "04-today-text",
+  "vp": "390",
+  "shot": "04-today-text-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [],
+  "suspect": [],
+  "overlaps": [
+   {
+    "a": "No hail in the last 3 days",
+    "b": "Undo",
+    "ox": 58,
+    "oy": 21
+   },
+   {
+    "a": "271,032 homes in four counties. Last storm Jun 2, 125 days ago, 6,546 ",
+    "b": "Undo",
+    "ox": 58,
+    "oy": 17
+   }
+  ],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "storms",
+  "vp": "390",
+  "shot": "20-storms-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [],
+  "suspect": [],
+  "overlaps": [
+   {
+    "a": "No hail in the last 3 days",
+    "b": "Undo",
+    "ox": 58,
+    "oy": 21
+   },
+   {
+    "a": "271,032 homes in four counties. Last storm Jun 2, 125 days ago, 6,546 ",
+    "b": "Undo",
+    "ox": 58,
+    "oy": 17
+   }
+  ],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "storms-mapclick",
+  "vp": "390",
+  "shot": "24-storms-mapclick-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [
+   {
+    "t": "Stage",
+    "sw": 43,
+    "cw": 1,
+    "cls": "vh"
+   }
+  ],
+  "small": [],
+  "suspect": [],
+  "overlaps": [],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "crm-inbox",
+  "vp": "390",
+  "shot": "30-crm-inbox-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [
+   {
+    "t": "Search the board",
+    "sw": 125,
+    "cw": 1,
+    "cls": "vh"
+   },
+   {
+    "t": "Sort",
+    "sw": 27,
+    "cw": 1,
+    "cls": "vh"
+   }
+  ],
+  "small": [],
+  "suspect": [],
+  "overlaps": [],
+  "lowContrast": [
+   {
+    "t": "0",
+    "ratio": 2.33,
+    "fs": 11,
+    "fg": "rgb(163, 170, 186)",
+    "bg": "rgb(255,255,255)"
+   },
+   {
+    "t": "0",
+    "ratio": 2.33,
+    "fs": 11,
+    "fg": "rgb(163, 170, 186)",
+    "bg": "rgb(255,255,255)"
+   }
+  ],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "crm-pipeline",
+  "vp": "390",
+  "shot": "36-crm-pipeline-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [],
+  "suspect": [
+   {
+    "t": "(972) 555-0118 (sample)",
+    "m": "555-0"
+   }
+  ],
+  "overlaps": [
+   {
+    "a": "Radar max, Jun 2",
+    "b": "Text",
+    "ox": 105,
+    "oy": 20
+   },
+   {
+    "a": "1.41 in",
+    "b": "Book",
+    "ox": 31,
+    "oy": 16
+   }
+  ],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "40-crm-home-contact",
+  "vp": "390",
+  "shot": "40-crm-home-contact-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [],
+  "suspect": [],
+  "overlaps": [],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "ask",
+  "vp": "390",
+  "shot": "50-ask-390.png"
+ },
+ {
+  "overflowX": 0,
+  "clipped": [],
+  "small": [],
+  "suspect": [],
+  "overlaps": [],
+  "lowContrast": [],
+  "hrefHash": 0,
+  "emptyBtns": 0,
+  "screen": "ask-answer",
+  "vp": "390",
+  "shot": "51-ask-answer-390.png"
+ },
+ {
+  "screen": "console",
+  "vp": "390",
+  "errors": [
+   "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/2025a3fc-024f-49b9-9ee0-f1e7bfe580c9",
+   "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/736bc9a9-09c9-4439-919b-6f03781c4e5a",
+   "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/736bc9a9-09c9-4439-919b-6f03781c4e5a",
+   "warning: deck: Attribute instanceFillColors is normalized @ http://127.0.0.1:4886/tour/vendor/deck.gl@9.0.38/dist.min.js",
+   "warning: [.WebGL-0x343c00dbbc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html",
+   "warning: [.WebGL-0x343c00dbbc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @ http://127.0.0.1:4886/tour/1b-storm-theater.html",
+   "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/f3766a76-6697-4d81-aae1-7b1ec64be705",
+   "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/f3766a76-6697-4d81-aae1-7b1ec64be705",
+   "warning: Expected value to be of type number, but found null instead. @ b:http://127.0.0.1:4886/f3766a76-6697-4d81-aae1-7b1ec64be705"
+  ]
+ }
+]

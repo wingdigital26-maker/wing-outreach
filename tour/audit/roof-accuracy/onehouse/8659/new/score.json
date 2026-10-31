@@ -1,0 +1,26 @@
+{
+ "row": "8659",
+ "fit": 0.743,
+ "squares": 25.8,
+ "line_fit": 2.05,
+ "faces": 8,
+ "outline": {
+  "footprint_iou": 0.813,
+  "footprint_inside": true,
+  "line_fit_ft": 2.05,
+  "eave_fit_ft": 0.62,
+  "line_fit_raw_ft": 2.41,
+  "photo_shift_ft": [
+   1.0,
+   6.5
+  ],
+  "photo": "google.png",
+  "jagged_share": 0.0,
+  "holes_share": 0.0
+ },
+ "log": [
+  "layout shifted (+1.0, -3.5) ft onto the LiDAR roof (IoU 0.85)",
+  "main: gable ridge u, hips ['u0', 'u1'], pitch 3/12, eave 10.3 ft, fit 74% on its top-surface returns",
+  "porch: gable ridge v, hips ['v0', 'v1'], pitch 0/12, eave 11.9 ft, fit 64% on its top-surface returns"
+ ]
+}

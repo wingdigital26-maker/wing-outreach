@@ -1,0 +1,15 @@
+09:00:42 roof_blocks 1e485077c5f8: 12 homes, 3 at once, 120 s each
+09:01:11 collin-tx 164161 needs work 27.7 s fails ['r5_measure']
+09:01:57 collin-tx 164160 needs work 73.1 s fails ['r2_walls', 'r4_sizes', 'r5_measure', 'r6_looks', 'edges']
+09:02:15 collin-tx 164209 needs work 90.9 s fails ['r6_looks']
+09:02:41 collin-tx 164195 needs work 86.8 s fails ['r2_walls', 'r4_sizes', 'r5_measure', 'r6_looks', 'edges']
+09:03:19 collin-tx 164180 needs work 80.7 s fails ['edges']
+09:03:42 collin-tx 164229 needs work 85.3 s fails ['r1_solid', 'r2_walls', 'r4_sizes', 'r5_measure', 'r6_looks', 'edges']
+09:04:00 collin-tx 164196 PASS (published) 39.3 s fails []
+09:04:19 collin-tx 164202 needs work 94.3 s fails ['r6_looks']
+09:04:54 collin-tx 164227 PASS (published) 30.9 s fails []
+09:04:54 collin-tx 164233 deferred (time cap)
+09:05:25 collin-tx 164231 needs work 101.2 s fails ['r1_solid', 'r2_walls', 'r4_sizes', 'r6_looks', 'edges']
+09:05:26 collin-tx 164182 needs work 85.1 s fails ['r6_looks']
+09:05:26 done: 2/11 pass every rule; per rule r1_solid 9/11, r2_walls 7/11, r3_lines 11/11, r4_sizes 7/11, r5_measure 7/11, r6_looks 4/11, check_edges 6/11, pass 2/11
+09:05:26 index 14 homes; run log C:\Users\wjack\roof-command-sell\tour\audit\roof-blocks-work\runs\20261016-0905-near32.csv; gate log C:\Users\wjack\roof-command-sell\tour\audit\roof-blocks-work\gate-log.csv

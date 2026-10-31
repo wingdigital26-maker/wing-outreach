@@ -1,0 +1,20 @@
+{
+ "report": {
+  "home": {
+   "screen": "home",
+   "shell": [],
+   "frame": [],
+   "n": 25,
+   "small": []
+  },
+  "home-plane-sheet": {
+   "screen": "home-plane-sheet",
+   "shell": [],
+   "frame": [],
+   "n": 16,
+   "small": []
+  }
+ },
+ "errors": [],
+ "fails": []
+}

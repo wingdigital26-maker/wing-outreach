@@ -1,0 +1,110 @@
+{
+ "image": "gtrace/12735/google.png",
+ "ft_per_px": 0.19104,
+ "pieces": [
+  {
+   "name": "main",
+   "rect_px": [
+    [
+     465,
+     282
+    ],
+    [
+     675,
+     282
+    ],
+    [
+     675,
+     555
+    ],
+    [
+     465,
+     555
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "single hip, ridge N-S near x~565 from y~350 to 470, dark north hip triangle, bright SW hip line visible"
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    415,
+    245
+   ],
+   [
+    467,
+    245
+   ],
+   [
+    467,
+    565
+   ],
+   [
+    415,
+    565
+   ]
+  ],
+  [
+   [
+    415,
+    245
+   ],
+   [
+    705,
+    245
+   ],
+   [
+    705,
+    283
+   ],
+   [
+    415,
+    283
+   ]
+  ],
+  [
+   [
+    676,
+    458
+   ],
+   [
+    706,
+    458
+   ],
+   [
+    706,
+    532
+   ],
+   [
+    676,
+    532
+   ]
+  ],
+  [
+   [
+    440,
+    557
+   ],
+   [
+    702,
+    557
+   ],
+   [
+    702,
+    586
+   ],
+   [
+    440,
+    586
+   ]
+  ]
+ ],
+ "notes": "Dark shingle rectangular hip. Trace overshoots to driveway edge on the west, ground and chimney on the north, ground on the SE and south. An X of lighter bands crosses the centre so a cross ridge may exist; left as one hip region for LiDAR to fill. Confidence medium."
+}

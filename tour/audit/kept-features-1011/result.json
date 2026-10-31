@@ -1,0 +1,168 @@
+{
+ "1440": {
+  "takeover_shown": true,
+  "takeover_text": "New storm: Jun 2, 2026, 6,546 homes",
+  "stormSeen_after": "2026-06-02",
+  "briefing": "50\nhomes\n4\ncities\n2.24\nin, biggest hail on the list\nnewest storm\nJun 2",
+  "briefing_settled": true,
+  "tod_live": "day",
+  "dropped_today": {
+   "radar": false,
+   "welcome": false,
+   "routeDraw": false,
+   "ideas": false,
+   "panel": false,
+   "cmdk": false,
+   "proofchip": false
+  },
+  "takeover_again": false,
+  "nimbus_ping": true,
+  "nimbus_storm": true,
+  "nimbus_glow": true,
+  "orb_fixed": [
+   1352,
+   812
+  ],
+  "replay_btn": true,
+  "replay_lit_85": 6546,
+  "replay_layers": [
+   "replay-band",
+   "replay-front",
+   "replay-lit"
+  ],
+  "replay_after_n": "6,546",
+  "dropped_storm_proof": false,
+  "stamp": "No hail on file | for this address | ~54.8 | sq (est.) | 9/12 | pitch est., LiDAR | 8 | planes",
+  "title": "~54.8 sq (est.), hip roof, pitch est. 9/12",
+  "building_mid": true,
+  "dropped_crm": {
+   "passport": false,
+   "why": false,
+   "hold": false,
+   "ideas": false,
+   "phys": true
+  },
+  "odo": {
+   "up": {
+    "rolls": 1,
+    "dn": 0,
+    "text": "15"
+   },
+   "down": {
+    "rolls": 1,
+    "dn": 1,
+    "text": "13"
+   },
+   "multi": {
+    "rolls": 2,
+    "from": [
+     "",
+     "9"
+    ],
+    "text": "10"
+   },
+   "rapid": {
+    "text": "7",
+    "rolls": 2
+   },
+   "back": "12"
+  },
+  "odo_reduced": {
+   "rolls": 0,
+   "text": "15"
+  },
+  "errors": [
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/collin-tx.json",
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/denton-tx.json",
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/rockwall-tx.json",
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/dallas-tx.json",
+   "requestfailed: http://127.0.0.1:4911/inbox",
+   "console: Failed to load resource: net::ERR_CONNECTION_REFUSED",
+   "requestfailed: http://127.0.0.1:4911/inbox",
+   "console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ]
+ },
+ "390": {
+  "takeover_shown": true,
+  "takeover_text": "New storm: Jun 2, 2026, 6,546 homes",
+  "stormSeen_after": "2026-06-02",
+  "briefing": "50\nhomes\n4\ncities\n2.24\nin, biggest hail on the list\nnewest storm\nJun 2",
+  "briefing_settled": true,
+  "tod_live": "day",
+  "dropped_today": {
+   "radar": false,
+   "welcome": false,
+   "routeDraw": false,
+   "ideas": false,
+   "panel": false,
+   "cmdk": false,
+   "proofchip": false
+  },
+  "takeover_again": false,
+  "nimbus_ping": true,
+  "nimbus_storm": true,
+  "nimbus_glow": true,
+  "orb_fixed": [
+   318,
+   711
+  ],
+  "replay_btn": true,
+  "replay_lit_85": 6546,
+  "replay_layers": [
+   "replay-band",
+   "replay-front",
+   "replay-lit"
+  ],
+  "replay_after_n": "6,546",
+  "dropped_storm_proof": false,
+  "stamp": "No hail on file | for this address | ~54.8 | sq (est.) | 9/12 | pitch est., LiDAR | 8 | planes",
+  "title": "~54.8 sq (est.), hip roof, pitch est. 9/12",
+  "building_mid": true,
+  "dropped_crm": {
+   "passport": false,
+   "why": false,
+   "hold": false,
+   "ideas": false,
+   "phys": true
+  },
+  "odo": {
+   "up": {
+    "rolls": 1,
+    "dn": 0,
+    "text": "15"
+   },
+   "down": {
+    "rolls": 1,
+    "dn": 1,
+    "text": "13"
+   },
+   "multi": {
+    "rolls": 2,
+    "from": [
+     "",
+     "9"
+    ],
+    "text": "10"
+   },
+   "rapid": {
+    "text": "7",
+    "rolls": 2
+   },
+   "back": "12"
+  },
+  "odo_reduced": {
+   "rolls": 0,
+   "text": "15"
+  },
+  "errors": [
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/collin-tx.json",
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/denton-tx.json",
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/rockwall-tx.json",
+   "requestfailed: http://127.0.0.1:4886/tour/lib/st-data-dfw/private/dallas-tx.json",
+   "requestfailed: http://127.0.0.1:4911/inbox",
+   "console: Failed to load resource: net::ERR_CONNECTION_REFUSED",
+   "requestfailed: http://127.0.0.1:4911/inbox",
+   "console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+  ]
+ }
+}

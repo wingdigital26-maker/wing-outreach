@@ -1,0 +1,54 @@
+/* Wing Outreach shell (10-29): the screens live in a light, calm LEFT SIDEBAR; the top bar keeps the roofer, the search,
+   "Powered by Wing Digital" and the account. Loaded after the shell's own <style> and rc-console.css. Nimbus is untouched:
+   his dock and panel are positioned by nimbus-shell.js over the stage. */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+:root{--wo-serif:'Instrument Serif',Georgia,'Iowan Old Style','Times New Roman',serif;--wo-tint:#FAF8F4;--wo-line:#E8E6E1;--wo-ink:#17181C;--wo-slate:#767B88;--wo-green:#1F8A4C}
+html[data-rc] body,body{background:var(--wo-tint) !important;color:var(--wo-ink)}
+/* top bar: flat and quiet */
+body>header{background:var(--wo-tint);backdrop-filter:none;border-bottom:1px solid var(--wo-line);height:60px;padding:0 20px}
+body>header .co b{font-family:var(--wo-sans,'Inter',system-ui,sans-serif);font-size:14.5px}
+body>header .co .mark{border-radius:9px;width:32px;height:32px}
+body>header .find{background:#fff;border-color:var(--wo-line)}
+body>header .sig b{color:var(--wo-ink)}
+body>header .me{border-color:var(--wo-line)}
+@media (min-width:900px){ html[data-rc] body>header .sig{display:flex} }
+/* the stage row: sidebar + screen */
+main#main{display:flex;align-items:stretch;gap:0;padding:0 !important}
+.side{flex:none;width:216px;display:flex;flex-direction:column;padding:16px 10px 16px 14px;border-right:1px solid var(--wo-line);background:var(--wo-tint);min-height:0;overflow:auto}
+.side .grp{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--wo-slate);padding:14px 10px 6px}
+.side .grp:first-child{padding-top:2px}
+/* the nav lives inside the sidebar now: the header pill styles are undone here (incl. the 900 px order:5 that put the Nimbus footer above WORK on tablet, loop 6) */
+.side nav#nav{order:0;flex:none;display:flex;flex-direction:column;gap:2px;margin:0;padding:0;border:0;background:transparent;border-radius:0;max-width:none;overflow:visible}
+.side nav#nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;height:36px;padding:0 10px;border-radius:9px;font-size:13.5px;font-weight:450;color:var(--wo-ink);background:transparent;transition:background .15s}
+.side nav#nav button:hover{background:rgba(23,24,28,.05);color:var(--wo-ink)}
+.side nav#nav button.on{background:#fff;color:var(--wo-ink);box-shadow:0 1px 2px rgba(23,24,28,.06);border:1px solid var(--wo-line);height:36px}
+.side nav#nav button .ic{width:16px;height:16px;flex:none;color:var(--wo-slate)}
+.side nav#nav button.on .ic{color:var(--wo-ink)}
+.side nav#nav button .ic svg{width:100%;height:100%;display:block}
+.side nav#nav button .n{margin-left:auto;font-size:11px;color:var(--wo-slate);font-variant-numeric:tabular-nums}
+.side nav#nav .grp{pointer-events:none}
+.side .sfoot{margin-top:auto;padding:12px 10px 0;font-size:11.5px;color:var(--wo-slate);line-height:1.5}
+.side .sfoot b{display:block;color:var(--wo-ink);font-weight:500}
+main#main .stage{flex:1;min-width:0;border-radius:0;box-shadow:none;background:#fff;border-left:0}
+/* tablet: narrower sidebar, labels kept */
+@media (max-width:1180px){ .side{width:190px} }
+@media (max-width:900px){
+  body>header{height:auto;padding:8px 14px}
+  body>header nav{display:none}
+}
+/* phone: the sidebar becomes a scrolling strip over the screen */
+@media (max-width:719px){
+  main#main{flex-direction:column}
+  .side{width:auto;flex-direction:row;align-items:center;gap:6px;padding:8px 10px;border-right:0;border-bottom:1px solid var(--wo-line);overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+  .side::-webkit-scrollbar{display:none}
+  .side{box-sizing:border-box;min-height:61px;flex:none}   /* loop 17: the strip's room is held before its buttons land (Calendar and Customers in the shell at 375 moved 44px, CLS 0.05) */
+  /* more screens to the right: the strip fades at that edge until it is scrolled to the end (product.html sets the classes) */
+  .side.more-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent)}
+  .side.more-l.more-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 44px),transparent)}
+  .side.more-l:not(.more-r){-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px);mask-image:linear-gradient(90deg,transparent,#000 28px)}
+  .side .grp,.side .sfoot{display:none}
+  .side nav#nav{flex-direction:row;gap:4px}
+  .side nav#nav button{width:auto;height:40px;padding:0 12px;white-space:nowrap;font-size:14px}
+  .side nav#nav button .n{display:none}
+  main#main .stage{border-radius:0}
+}

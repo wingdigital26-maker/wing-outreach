@@ -1,0 +1,22 @@
+{
+ "row": "58915",
+ "mode": "hybrid",
+ "shown": "needs work",
+ "new_pass": false,
+ "new_why": [
+  "fit 69%",
+  "lines 1.38 ft",
+  "18% jagged",
+  "eaves 1.75 ft",
+  "outline vs footprint IoU 0.605",
+  "photo registration off (lighting inverted)"
+ ],
+ "old_pass": false,
+ "old_why": [
+  "fit 69%",
+  "lines 1.65 ft",
+  "20% jagged",
+  "eaves 1.96 ft",
+  "outline vs footprint IoU 0.645"
+ ]
+}

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Messages map, direction tiles (prototype, not the app)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../../vendor/maplibre-gl@4.7.1/maplibre-gl.css">
+<style>
+@font-face{font-family:'Instrument Sans';src:url(../../c4-command-deck/fonts/instrument-sans-var-latin.woff2) format('woff2');font-weight:300 700}
+@font-face{font-family:'Plex Mono';src:url(../../c4-command-deck/fonts/ibm-plex-mono-400-latin.woff2) format('woff2')}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;font-family:'Instrument Sans',system-ui,sans-serif;color:#0B1020;background:#E4E7EC}
+#map{position:absolute;inset:0}
+.wrap{position:absolute;inset:0;overflow:hidden}
+.ui{position:absolute;inset:0;pointer-events:none}
+.reach{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.pills{position:absolute;left:22px;top:22px;display:flex;gap:8px;align-items:center}
+.pill{height:30px;padding:0 13px;border-radius:999px;background:#fff;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;box-shadow:0 2px 8px rgba(11,16,32,.08)}
+.pill.dk{background:#0B1020;color:#fff}
+.leg{position:absolute;left:22px;top:66px;width:238px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.96);box-shadow:0 8px 24px -10px rgba(11,16,32,.25);font-size:12.5px;display:grid;gap:7px}
+.leg .k{display:flex;align-items:center;gap:9px;font-weight:600}
+.leg .k i{flex:none;display:inline-block}
+.leg .h{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6B7280;font-weight:600;margin-top:2px}
+.leg .n{font-size:12px;color:#5A6378;font-weight:500;line-height:1.4}
+i.bm{width:22px;height:5px;border-radius:3px;background:#fff;box-shadow:inset 0 0 0 1.6px #1F6FE0,0 0 0 2.5px rgba(31,111,224,.16)}
+i.pd{width:20px;height:0;border-top:2px dashed rgba(31,111,224,.75)}
+i.ch{width:20px;height:0;border-top:1.6px dashed rgba(31,111,224,.45)}
+i.dot{width:9px;height:9px;border-radius:50%}
+i.dot.hit{background:rgba(13,108,153,.65)} i.dot.all{background:rgba(108,118,140,.45)}
+.card{position:absolute;left:22px;right:22px;bottom:22px;background:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 10px 30px -14px rgba(11,16,32,.35);font-size:14px}
+.card b{display:block;font-size:15px} .card small{color:#5A6378;font-size:13px}
+.card .go{margin-left:auto;height:38px;padding:0 16px;border-radius:999px;background:#1F6FE0;color:#fff;font-weight:700;display:flex;align-items:center}
+.stop{width:24px;height:24px;border-radius:50%;background:#fff;border:1.6px solid #9AA1B0;color:#5A6378;display:grid;place-items:center;font-size:10.5px;font-weight:800;box-shadow:0 1px 3px rgba(14,27,61,.2)}
+.stop.sent{width:32px;height:32px;background:#0D6C99;border:2px solid #fff;color:#fff;font-size:12px;box-shadow:0 0 0 4px rgba(31,111,224,.2),0 3px 8px rgba(14,27,61,.3)}
+.stop.sched{border:1.8px dashed #1F6FE0;color:#0B47A8;background:#fff}
+.hq{width:32px;height:32px;border-radius:10px;background:#0B1020;color:#fff;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 2px 8px rgba(11,16,32,.3)}
+.hq svg{width:18px;height:18px}
+.hql{position:absolute;left:40px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:12.5px;font-weight:700;background:rgba(255,255,255,.94);padding:4px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(11,16,32,.12)}
+.counters{display:none}
+.hql{color:#0B1020}
+.tag{position:absolute;right:22px;top:22px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7280;background:rgba(255,255,255,.8);padding:5px 10px;border-radius:999px;font-weight:600}
+.reach path{fill:none;stroke-linecap:round}
+.reach .cs{stroke:rgba(31,111,224,.4);stroke-width:1.6;stroke-dasharray:7 5;stroke-linejoin:round}
+.reach .bh{stroke:rgba(31,111,224,.14);stroke-width:12}
+.reach .bg{stroke:#1F6FE0;stroke-width:3.6}
+.reach .bc{stroke:#fff;stroke-width:1.3}
+.reach .pl{stroke:rgba(31,111,224,.65);stroke-width:2;stroke-dasharray:4 5}
+.reach .pulse{stroke:#fff;stroke-width:3;stroke-dasharray:4 96;animation:mv 3.2s linear infinite}
+@keyframes mv{to{stroke-dashoffset:-100}}
+
+/* ---------- A: dark glass night map, glowing message arcs ---------- */
+body.A{background:#070B16;color:#E8EDF7}
+.A .pill{background:rgba(255,255,255,.08);color:#E8EDF7;backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);box-shadow:none}
+.A .pill.dk{background:rgba(120,190,255,.18);color:#BFE0FF;border-color:rgba(120,190,255,.35)}
+.A .leg{background:rgba(12,18,34,.62);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);color:#E8EDF7;box-shadow:0 20px 50px -20px rgba(0,0,0,.8)}
+.A .leg .h{color:#8FA3C7} .A .leg .n{color:#A9B6CF}
+.A i.bm{background:#0B1830;box-shadow:inset 0 0 0 1.6px #5EC8FF,0 0 10px rgba(94,200,255,.6)}
+.A i.pd{border-top-color:rgba(94,200,255,.8)} .A i.ch{border-top-color:rgba(140,170,220,.5)}
+.A i.dot.hit{background:#5EC8FF;box-shadow:0 0 8px #5EC8FF} .A i.dot.all{background:rgba(140,160,200,.45)}
+.A .card{background:rgba(12,18,34,.7);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);color:#E8EDF7}
+.A .card small{color:#A9B6CF} .A .card .go{background:#5EC8FF;color:#06111F;box-shadow:0 0 24px rgba(94,200,255,.45)}
+.A .stop{background:rgba(12,18,34,.85);border-color:rgba(160,180,220,.55);color:#C9D4EA}
+.A .stop.sent{background:#5EC8FF;border-color:#fff;color:#06111F;box-shadow:0 0 0 4px rgba(94,200,255,.25),0 0 22px rgba(94,200,255,.7)}
+.A .stop.sched{border-color:#5EC8FF;color:#BFE0FF;background:rgba(12,18,34,.85)}
+.A .hq{background:#5EC8FF;color:#06111F;border-color:#fff;box-shadow:0 0 26px rgba(94,200,255,.7)}
+.A .hql{background:rgba(12,18,34,.8);color:#E8EDF7;border:1px solid rgba(255,255,255,.12)}
+.A .tag{background:rgba(255,255,255,.08);color:#A9B6CF}
+.A .reach .cs{stroke:rgba(140,170,220,.45)}
+.A .reach .bh{stroke:rgba(94,200,255,.22);stroke-width:16}
+.A .reach .bg{stroke:#5EC8FF;stroke-width:3.2;filter:drop-shadow(0 0 6px rgba(94,200,255,.9))}
+.A .reach .bc{stroke:#fff;stroke-width:1.1}
+.A .reach .pl{stroke:rgba(94,200,255,.7)}
+
+/* ---------- B: light refined current palette, animated arcs, vertical legend ---------- */
+body.B{background:#EEF1F5}
+.B .pill{box-shadow:0 1px 2px rgba(11,16,32,.06),0 8px 24px -12px rgba(11,16,32,.25);border:1px solid rgba(11,16,32,.05)}
+.B .leg{border-radius:18px;padding:16px 18px;gap:9px;box-shadow:0 1px 2px rgba(11,16,32,.06),0 24px 50px -24px rgba(11,16,32,.35)}
+.B .leg .k{font-size:13px}
+.B .reach .bh{stroke:rgba(13,108,153,.12);stroke-width:14}
+.B .reach .bg{stroke:url(#gB);stroke-width:3.4}
+.B .reach .bc{stroke:rgba(255,255,255,.9);stroke-width:1}
+.B .stop.sent{background:#0D6C99;box-shadow:0 0 0 5px rgba(13,108,153,.16),0 6px 14px -6px rgba(11,16,32,.45)}
+.B .card{border-radius:20px;box-shadow:0 1px 2px rgba(11,16,32,.06),0 24px 50px -24px rgba(11,16,32,.4)}
+.B .card .go{background:#0D6C99}
+
+/* ---------- C: bolder, the signal room: ink map, range rings, ribbons, big counters ---------- */
+body.C{background:#0E1526;color:#F2F5FA}
+.C .pills{display:none} .C .counters{display:flex}
+.C .counters{position:absolute;left:22px;top:22px;display:flex;gap:18px;font-family:'Plex Mono',monospace}
+.C .counters div{padding:10px 16px;border-radius:12px;background:rgba(242,245,250,.06);border:1px solid rgba(242,245,250,.12);min-width:118px}
+.C .counters b{display:block;font-size:34px;line-height:1;font-weight:400;color:#FFD166;letter-spacing:-.02em}
+.C .counters span{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9FB0CC;margin-top:5px}
+.C .counters div.s b{color:#7CF5B3} .C .counters div.t b{color:#F2F5FA}
+.C .leg{top:112px;background:rgba(14,21,38,.82);border:1px solid rgba(242,245,250,.12);color:#F2F5FA;font-family:'Plex Mono',monospace;font-size:12px;border-radius:10px}
+.C .leg .h{color:#9FB0CC} .C .leg .n{color:#9FB0CC}
+.C i.bm{background:#0E1526;box-shadow:inset 0 0 0 2px #7CF5B3} .C i.pd{border-top:2px dashed #FFD166} .C i.ch{border-top:1.6px dashed rgba(159,176,204,.6)}
+.C i.dot.hit{background:#FF7A59;box-shadow:0 0 8px rgba(255,122,89,.8)} .C i.dot.all{background:rgba(159,176,204,.4)}
+.C .card{background:rgba(14,21,38,.86);border:1px solid rgba(242,245,250,.12);color:#F2F5FA;font-family:'Plex Mono',monospace;border-radius:10px}
+.C .card small{color:#9FB0CC} .C .card .go{background:#7CF5B3;color:#0E1526;border-radius:8px}
+.C .stop{background:#0E1526;border:1.4px solid rgba(159,176,204,.6);color:#C7D2E6;border-radius:4px;font-family:'Plex Mono',monospace;font-weight:400}
+.C .stop.sent{background:#7CF5B3;border-color:#0E1526;color:#0E1526;border-radius:4px;box-shadow:0 0 0 3px rgba(124,245,179,.3),0 0 18px rgba(124,245,179,.6)}
+.C .stop.sched{border:1.6px dashed #FFD166;color:#FFD166}
+.C .hq{background:#FFD166;color:#0E1526;border-radius:6px;border-color:#0E1526;box-shadow:0 0 24px rgba(255,209,102,.6)}
+.C .hql{background:rgba(14,21,38,.85);color:#F2F5FA;font-family:'Plex Mono',monospace;border-radius:6px}
+.C .tag{background:rgba(242,245,250,.08);color:#9FB0CC}
+.C .reach .cs{stroke:rgba(159,176,204,.5)}
+.C .reach .bh{stroke:rgba(124,245,179,.18);stroke-width:18}
+.C .reach .bg{stroke:#7CF5B3;stroke-width:4.4}
+.C .reach .bc{stroke:rgba(14,21,38,.6);stroke-width:1}
+.C .reach .pl{stroke:#FFD166;stroke-width:2.2}
+.C .reach .ring{fill:none;stroke:rgba(255,209,102,.35);stroke-width:1;stroke-dasharray:2 6}
+.C .reach .sweep{fill:url(#sw)}
+</style></head>
+<body>
+<div class="wrap"><div id="map"></div>
+<svg class="reach" id="reach"><defs>
+  <linearGradient id="gB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1F6FE0"/><stop offset="1" stop-color="#0D6C99"/></linearGradient>
+  <radialGradient id="sw"><stop offset="0" stop-color="rgba(255,209,102,.22)"/><stop offset="1" stop-color="rgba(255,209,102,0)"/></radialGradient>
+</defs><g id="gC"></g><g id="gL"></g></svg>
+<div class="ui">
+  <div class="pills"><span class="pill dk">Messages today</span><span class="pill" id="pc">12 sent, 3 scheduled, 35 to go</span><span class="pill" id="ph">2,224 homes hit by the storm</span></div>
+  <div class="counters" id="counters"><div class="s"><b>12</b><span>Sent</span></div><div><b>3</b><span>Scheduled</span></div><div class="t"><b>35</b><span>To go</span></div></div>
+  <div class="leg">
+    <div class="h">Lines</div>
+    <div class="k"><i class="bm"></i>Sent</div><div class="k"><i class="pd"></i>Scheduled</div><div class="k"><i class="ch"></i>Route order</div>
+    <div class="h">Homes</div>
+    <div class="k"><i class="dot hit"></i>Hit by the storm</div><div class="k"><i class="dot all"></i>Every home in the area</div>
+    <div class="n" id="ln">12 homes reached today: 12 texts. 3 scheduled.</div>
+  </div>
+  <div class="card"><div><b id="ca">Home 13</b><small id="cs">Next message goes here, then the home after it</small></div><span class="go">Text</span></div>
+  <span class="tag">Prototype, sample state, not the app</span>
+</div></div>
+<script src="../../vendor/maplibre-gl@4.7.1/maplibre-gl.js"></script>
+<script src="../../vendor/deck.gl@9.0.38/dist.min.js"></script>
+<script>
+// Direction tiles for the Today messages map. Real data: the Daily 50 dumped by tour/audit/_map_smoke.py (sample-today.json),
+// every home from lib/st-data-dfw/homes.bin, the storm's hit homes from its hail file. State is SAMPLE (12 sent, 3 scheduled)
+// so each tile shows all three lines; the app itself only ever shows what was really sent.
+const DIR = new URLSearchParams(location.search).get('dir') || 'B'; document.body.className = DIR;
+const DATA = '../../lib/st-data-dfw/';
+const PAL = { A:{bg:'#070B16',water:'#0A1328',land:'#0B1120',road:'#1C2742',road2:'#141D33',label:'#6F82A8',halo:'#070B16',all:[120,140,190,60],hit:[94,200,255,170]},
+              B:{bg:'#E3E6EC',water:'#CDD3DC',land:'#E8EBF0',road:'#FFFFFF',road2:'#F5F6F8',label:'#737B8F',halo:'#ECEEF2',all:[108,118,140,66],hit:[13,108,153,140]},
+              C:{bg:'#0E1526',water:'#0B1222',land:'#111A2E',road:'#22304F',road2:'#19243D',label:'#7D8FB0',halo:'#0E1526',all:[159,176,204,55],hit:[255,122,89,190]} }[DIR];
+const map = new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/positron', center:[-96.75,33.02], zoom:11, pitch:DIR==='C'?55:44, bearing:DIR==='A'?150:130, antialias:true, attributionControl:{compact:true}, maxPitch:75 });
+function restyle(){ let first=null; map.getStyle().layers.forEach(l=>{ try{
+  if(l.type==='background') map.setPaintProperty(l.id,'background-color',PAL.bg);
+  if(l.type==='fill' && /water/.test(l.id)) map.setPaintProperty(l.id,'fill-color',PAL.water);
+  else if(l.type==='fill' && /landuse|park|wood|grass|residential/.test(l.id)) map.setPaintProperty(l.id,'fill-color',PAL.land);
+  else if(l.type==='fill') map.setPaintProperty(l.id,'fill-opacity',0.35);
+  if(l.type==='line' && /road|highway|street|bridge|tunnel|path|rail/.test(l.id)) map.setPaintProperty(l.id,'line-color',/motorway|trunk|primary/.test(l.id)?PAL.road:PAL.road2);
+  if(l.type==='line' && /boundary|admin/.test(l.id)) map.setPaintProperty(l.id,'line-color',PAL.road2);
+  if(l.type==='symbol' && (/poi|housenum|shield|oneway|airport|transit|station|ferry/.test(l.id) || (l.layout&&l.layout['icon-image']))) { map.setLayoutProperty(l.id,'visibility','none'); return; }
+  if(l.type==='symbol'){ if(!first) first=l.id; map.setPaintProperty(l.id,'text-color',PAL.label); map.setPaintProperty(l.id,'text-opacity',0.8); map.setPaintProperty(l.id,'text-halo-color',PAL.halo); }
+  if(/building/.test(l.id)) map.setLayoutProperty(l.id,'visibility','none');
+}catch(e){} }); return first; }
+const S = { homes:[], hq:null, all:null, nAll:0, hit:null, nHit:0 };
+const svg = document.getElementById('reach'), gC = document.getElementById('gC'), gL = document.getElementById('gL');
+const el=(n,a)=>{ const e=document.createElementNS('http://www.w3.org/2000/svg',n); for(const k in a) e.setAttribute(k,a[k]); return e; };
+const curve=(a,b,bow,lift)=>{ const dx=b.x-a.x, dy=b.y-a.y, d=Math.hypot(dx,dy)||1, nx=-dy/d, ny=dx/d, up=Math.min(d*lift, Math.max(0,(Math.min(a.y,b.y)-70)*2));
+  return `M${a.x},${a.y} Q${(a.x+b.x)/2+nx*d*bow},${(a.y+b.y)/2+ny*d*bow-up} ${b.x},${b.y}`; };
+let markers=[];
+function draw(){ const box=map.getContainer().getBoundingClientRect(); svg.setAttribute('viewBox',`0 0 ${box.width} ${box.height}`); svg.setAttribute('width',box.width); svg.setAttribute('height',box.height);
+  gC.innerHTML=''; gL.innerHTML=''; const a=map.project(S.hq);
+  if (DIR==='C'){ [900,1800,2700].forEach(r=>{ const p=map.project([S.hq[0]+r/88000, S.hq[1]]); gC.appendChild(el('ellipse',{class:'ring',cx:a.x,cy:a.y,rx:Math.abs(p.x-a.x),ry:Math.abs(p.x-a.x)*.62})); });
+    gC.appendChild(el('circle',{class:'sweep',cx:a.x,cy:a.y,r:Math.abs(map.project([S.hq[0]+2700/88000,S.hq[1]]).x-a.x)})); }
+  const pts=[a].concat(S.homes.map(h=>map.project(h.loc))); gC.appendChild(el('path',{class:'cs',d:pts.map((p,k)=>(k?'L':'M')+p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')}));
+  S.homes.forEach((h,k)=>{ const b=map.project(h.loc); if (h.sent){ const side=k%2?1:-1, d=curve(a,b,.08*side,.42); ['bh','bg','bc','pulse'].forEach(c=>{ const p=el('path',{class:c,d, pathLength:'100'}); if(c==='pulse') p.style.animationDelay=(-Math.random()*3).toFixed(2)+'s'; gL.appendChild(p); }); }
+    else if (h.sched){ gL.appendChild(el('path',{class:'pl',d:curve(a,b,-.06,.3)})); } });
+}
+function pins(){ markers.forEach(m=>m.remove()); markers=[];
+  S.homes.forEach(h=>{ const e=document.createElement('div'); e.className='stop'+(h.sent?' sent':h.sched?' sched':''); e.textContent=h.n; markers.push(new maplibregl.Marker({element:e}).setLngLat(h.loc).addTo(map)); });
+  const q=document.createElement('div'); q.className='hq'; q.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9h-5.5v-6h-5v6H4z"/></svg><span class="hql">Jackson Roofing, Plano</span>';
+  markers.push(new maplibregl.Marker({element:q}).setLngLat(S.hq).addTo(map));
+  // nudge overlapping pins apart (same idea as the app)
+  const ps=markers.slice(0,-1).map(m=>map.project(m.getLngLat())), off=ps.map(()=>[0,0]), D=30;
+  for(let r=0;r<6;r++) for(let i=0;i<ps.length;i++) for(let j=i+1;j<ps.length;j++){ const ax=ps[i].x+off[i][0],ay=ps[i].y+off[i][1],bx=ps[j].x+off[j][0],by=ps[j].y+off[j][1]; let dx=bx-ax,dy=by-ay,d=Math.hypot(dx,dy); if(d>=D) continue; if(d<1){dx=1;dy=0;d=1;} const p=(D-d)/2; off[i][0]-=dx/d*p; off[i][1]-=dy/d*p; off[j][0]+=dx/d*p; off[j][1]+=dy/d*p; }
+  markers.slice(0,-1).forEach((m,i)=>m.setOffset(off[i]));
+}
+Promise.all([fetch('sample-today.json').then(r=>r.json()), fetch(DATA+'catalog.json').then(r=>r.json()), fetch(DATA+'homes.bin').then(r=>r.arrayBuffer()), fetch(DATA+'meta/hail/collin-tx/2025-08-12.bin').then(r=>r.ok?r.arrayBuffer():null)]).then(([sm,cat,buf,hb])=>{
+  S.hq=sm.hq; S.homes=sm.homes.filter(h=>h.loc).map((h,k)=>Object.assign({},h,{sent:k<12?'text':null, sched:k>=12&&k<15}));   // sample state for the look
+  const n=cat.total, xy=new Float32Array(buf,0,n*2), type=new Uint8Array(buf,n*8,n), out=new Float32Array(n*2); let m=0;
+  for(let i=0;i<n;i++){ if((type[i]&127)>4) continue; out[m*2]=xy[i*2]; out[m*2+1]=xy[i*2+1]; m++; } S.all=out.subarray(0,m*2); S.nAll=m;
+  const r=cat.regions.find(r=>r.id==='collin-tx'); if(hb&&r){ const hail=new Uint8Array(hb), pos=[]; for(let j=0;j<r.count;j++){ if(hail[j]<100) continue; const gi=r.offset+j; if((type[gi]&127)>4) continue; pos.push(xy[gi*2],xy[gi*2+1]); } S.hit=new Float32Array(pos); S.nHit=pos.length/2; }
+  const b=new maplibregl.LngLatBounds(); S.homes.forEach(h=>b.extend(h.loc)); b.extend(S.hq); if(sm.hitBox){ b.extend([sm.hitBox[0],sm.hitBox[1]]); b.extend([sm.hitBox[2],sm.hitBox[3]]); }
+  const start=()=>{ const labelId=restyle();
+    const ov=new deck.MapboxOverlay({interleaved:true, layers:[
+      new deck.ScatterplotLayer({id:'all', beforeId:labelId, data:{length:S.nAll, attributes:{getPosition:{value:S.all,size:2}}}, radiusUnits:'meters', getRadius:7, radiusMinPixels:1, radiusMaxPixels:2.4, getFillColor:PAL.all, antialiasing:false}),
+      new deck.ScatterplotLayer({id:'hit', beforeId:labelId, data:{length:S.nHit, attributes:{getPosition:{value:S.hit,size:2}}}, radiusUnits:'meters', getRadius:DIR==='C'?16:11, radiusMinPixels:DIR==='C'?2.6:1.8, radiusMaxPixels:6, getFillColor:PAL.hit, antialiasing:true})
+    ]}); map.addControl(ov);
+    map.fitBounds(b,{padding:{top:120,bottom:120,left:300,right:90}, pitch:map.getPitch(), bearing:map.getBearing(), duration:0});
+    pins(); draw(); map.on('move',draw); map.on('moveend',pins);
+    const h=S.homes[12]; document.getElementById('ca').textContent='Home 13, '+h.addr; document.getElementById('cs').textContent='Text scheduled, in 27m, then '+S.homes[15].addr;
+    setTimeout(()=>{ window.__ready=true; }, 1500); };
+  if (map.loaded()) start(); else map.on('load', start);
+});
+</script>
+</body></html>

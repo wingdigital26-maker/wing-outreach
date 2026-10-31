@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>CRM direction A: Glass deck</title>
+<style>
+@font-face{font-family:'Instrument Sans';src:url(../../lib/st-fonts/instrument-sans-var-latin.woff2) format('woff2');font-weight:400 700}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Instrument Sans',system-ui,sans-serif;color:#0B1020;
+  background:radial-gradient(900px 500px at 70% -10%,#DCE6FF 0%,rgba(220,230,255,0) 60%),radial-gradient(700px 500px at 10% 110%,#C9D8FF 0%,rgba(201,216,255,0) 60%),linear-gradient(160deg,#AEB8CC 0%,#D8DEE8 45%,#EEF1F6 100%)}
+.top{height:64px;display:flex;align-items:center;gap:16px;padding:0 24px;backdrop-filter:blur(14px);background:rgba(255,255,255,.42);border-bottom:1px solid rgba(255,255,255,.6)}
+.mark{width:36px;height:36px;border-radius:10px;background:#0D6C99}
+.top b{font-size:15px}.top small{display:block;color:#465065;font-size:12px}
+.nav{margin-left:16px;display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.8)}
+.nav span{padding:7px 16px;border-radius:999px;font-size:13.5px;font-weight:500;color:#465065}.nav span.on{background:#0B1020;color:#fff}
+.wrap{display:grid;grid-template-columns:330px 1fr 450px;gap:18px;padding:18px 24px;height:836px}
+.g{background:rgba(255,255,255,.66);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:0 30px 70px -30px rgba(11,16,32,.35),inset 0 1px 0 #fff;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.h{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 10px}
+.h h2{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5A6378}
+.search{margin:4px 16px 10px;height:40px;border-radius:14px;background:rgba(255,255,255,.75);border:1px solid rgba(11,16,32,.08);display:flex;align-items:center;padding:0 14px;font-size:13px;color:#5A6378}
+.fil{display:flex;gap:4px;margin:0 16px 10px;flex-wrap:wrap}
+.fil span{height:28px;padding:0 11px;border-radius:999px;font-size:12px;font-weight:600;color:#465065;background:rgba(255,255,255,.6);display:inline-flex;align-items:center;gap:6px}
+.fil span.on{background:#0B1020;color:#fff}
+.fil i{font-style:normal;font-size:10px;background:rgba(255,255,255,.25);padding:1px 6px;border-radius:999px}
+.row{margin:0 10px;padding:12px 12px;border-radius:18px;display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:start}
+.row.on{background:linear-gradient(135deg,#1F47C9,#2757E6);color:#fff;box-shadow:0 18px 40px -16px rgba(39,87,230,.7)}
+.av{width:40px;height:40px;border-radius:14px;background:rgba(39,87,230,.12);display:grid;place-items:center;color:#2757E6;font-weight:700;font-size:12px}
+.row.on .av{background:rgba(255,255,255,.2);color:#fff}
+.row b{font-size:13.5px;display:block}.row small{font-size:12px;opacity:.75;display:block;margin-top:1px}
+.row .t{font-size:11px;opacity:.65;float:right}
+.row p{font-size:12.5px;margin-top:5px;line-height:1.35;opacity:.9}
+.chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(11,16,32,.06);margin-top:5px}
+.row.on .chip{background:rgba(255,255,255,.2)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2757E6;margin-right:6px}
+/* conversation */
+.cv .h{align-items:flex-start}
+.cv .h b{font-size:20px;display:block}.cv .h small{display:block;font-size:12.5px;color:#5A6378;margin-top:3px}
+.stage{display:flex;gap:6px;margin:0 22px 14px}
+.stage span{flex:1;height:6px;border-radius:3px;background:rgba(11,16,32,.1)}
+.stage span.dn{background:#2757E6}.stage span.on{background:linear-gradient(90deg,#2757E6,rgba(39,87,230,.25))}
+.stl{display:flex;justify-content:space-between;margin:-8px 22px 10px;font-size:11px;color:#5A6378}
+.acts{display:flex;gap:8px;margin:0 22px 14px}
+.acts span{height:36px;padding:0 14px;border-radius:12px;background:rgba(255,255,255,.8);border:1px solid rgba(11,16,32,.08);font-size:12.5px;font-weight:600;display:inline-flex;align-items:center}
+.msgs{flex:1;min-height:0;padding:10px 22px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0))}
+.day{text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5A6378;font-family:ui-monospace,Consolas,monospace}
+.m{max-width:70%;padding:12px 15px;border-radius:20px;font-size:13.5px;line-height:1.45}
+.m.out{align-self:flex-end;background:linear-gradient(135deg,#1F47C9,#2757E6);color:#fff;border-bottom-right-radius:6px;box-shadow:0 18px 40px -18px rgba(39,87,230,.8)}
+.m.in{align-self:flex-start;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,1);border-bottom-left-radius:6px}
+.m small{display:block;font-size:11px;opacity:.7;margin-top:6px}
+.m.sys{align-self:center;font-size:12px;color:#5A6378;background:rgba(255,255,255,.5);border-radius:999px;padding:6px 14px}
+.next{margin:0 16px 16px;padding:14px 16px;border-radius:20px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 14px 30px -20px rgba(11,16,32,.3)}
+.next .l{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:rgba(11,16,32,.06)}
+.seg span{padding:4px 11px;border-radius:999px;font-size:12px;font-weight:600;color:#5A6378}.seg span.on{background:#fff;color:#0B1020}
+.next textarea{width:100%;margin-top:10px;border:1px solid rgba(11,16,32,.1);border-radius:12px;padding:10px;font:inherit;font-size:13px;height:66px;resize:none;background:#fff}
+.next .b{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:#5A6378}
+.pri{height:40px;padding:0 16px;border-radius:12px;background:#0B1020;color:#fff;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:8px}
+/* home */
+.house{margin:6px 14px 0;height:330px;border-radius:22px;position:relative;overflow:hidden;background:radial-gradient(60% 70% at 50% 60%,rgba(39,87,230,.14),rgba(39,87,230,0) 70%)}
+.house img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
+.house .glow{position:absolute;left:12%;right:12%;bottom:18px;height:40px;border-radius:50%;background:radial-gradient(closest-side,rgba(39,87,230,.45),rgba(39,87,230,0));filter:blur(8px)}
+.house .hud{position:absolute;left:14px;top:14px;background:rgba(11,16,32,.85);color:#fff;border-radius:12px;padding:8px 12px;font-size:12px}
+.house .hud b{display:block;font-size:18px;letter-spacing:-.02em}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 14px 0}
+.kpi div{background:rgba(255,255,255,.8);border:1px solid #fff;border-radius:16px;padding:12px 12px}
+.kpi span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5A6378;font-family:ui-monospace,Consolas,monospace}
+.kpi b{display:block;font-size:19px;font-weight:600;letter-spacing:-.02em;margin-top:4px}
+.kpi small{font-size:11px;color:#5A6378}
+.fact{margin:12px 14px 0;display:grid;gap:6px;font-size:13px}
+.fact div{display:flex;justify-content:space-between;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.55)}
+.fact span{color:#5A6378}
+.book{margin:14px 14px 0;height:46px;border-radius:14px;background:linear-gradient(135deg,#1F47C9,#2757E6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;box-shadow:0 18px 40px -16px rgba(39,87,230,.8)}
+.tag{position:absolute;right:24px;top:14px;font-size:11px;color:#465065;background:rgba(255,255,255,.7);padding:4px 10px;border-radius:999px;border:1px solid #fff}
+</style></head><body>
+<div class="top"><div class="mark"></div><div><b>Jackson Roofing</b><small>Roof Command, Plano, Frisco, Allen, McKinney, Richardson and Rockwall</small></div>
+  <div class="nav"><span>Today</span><span>Storms</span><span class="on">CRM</span><span>Ask</span></div><span class="tag">Direction A: Glass deck (prototype)</span></div>
+<div class="wrap">
+  <div class="g">
+    <div class="h"><h2>Inbox</h2><span class="mono">2 homes</span></div>
+    <div class="search">Search address or owner</div>
+    <div class="fil"><span class="on">All</span><span>Due today <i>1</i></span><span>Overdue</span><span>Replied <i>1</i></span><span>Opted out</span></div>
+    <div class="row on"><div class="av">OM</div><div><span class="t">just now</span><b>3405 O Malley Ct</b><small>Wang Andy · Plano</small><p><span class="dot" style="background:#fff"></span>Reply: “Who is this?”</p><span class="chip">Day 3 due Sat</span> <span class="chip">Contacted</span></div></div>
+    <div class="row"><div class="av">OM</div><div><span class="t">2 days ago</span><b>3501 O Malley Ct</b><small>Meeds Michael V &amp; Kimberly · Plano</small><p>Drafted: “Hi, this is Chris with Jackson Roofing in Plano. Radar put hail around…”</p><span class="chip">Day 3 due today</span> <span class="chip">Contacted</span></div></div>
+    <div class="row"><div class="av">RW</div><div><span class="t">3 days ago</span><b>3713 Roundtree Way</b><small>Olivarez Rolando &amp; Yolanda · Plano</small><p>Email drafted: “Your roof after the Aug 12 hail”</p><span class="chip">Day 7 due Mon</span> <span class="chip">Contacted</span></div></div>
+  </div>
+  <div class="g cv">
+    <div class="h"><div><b>3405 O Malley Ct</b><small>Wang Andy · Plano 75023 · (972) 555-0100 (sample phone) · Day 3 follow-up due Sat, Oct 10</small></div><span class="pri" style="background:#2757E6">Contacted</span></div>
+    <div class="stage"><span class="dn"></span><span class="on"></span><span></span><span></span><span></span></div>
+    <div class="stl"><span>New hit</span><span>Contacted</span><span>Inspection</span><span>Proposal</span><span>Won</span></div>
+    <div class="acts"><span>Log a reply</span><span>Opt out</span><span>Open home record</span></div>
+    <div class="msgs">
+      <div class="day">Today</div>
+      <div class="m out">Hi, this is Chris with Jackson Roofing in Plano. Radar put hail around 1.1 inches (quarter size) at 3405 O Malley Ct on Aug 12, 2025. Built 1987, no reroof permit in county records since. Would you want a free inspection? Text STOP and I won't text again.<small>Text drafted in Messages · 11:00 am</small></div>
+      <div class="m in">Who is this?<small>Text reply · 11:04 am</small></div>
+      <div class="m sys">Stage: Contacted · 11:00 am</div>
+    </div>
+    <div class="next"><div class="l"><span>Suggested answer: Asked who this is</span><span class="seg"><span class="on">Text</span><span>Email</span></span></div>
+      <textarea>This is Chris with Jackson Roofing in Plano. I reached out about the Aug 12, 2025 hail at 3405 O Malley Ct. Happy to answer anything, or text STOP and I won't text again.</textarea>
+      <div class="b"><span>Goes from your phone, so replies come to you.</span><span class="pri">Open in Messages</span></div></div>
+  </div>
+  <div class="g">
+    <div class="h"><div><b style="font-size:17px">3405 O Malley Ct</b><small style="display:block;font-size:12px;color:#5A6378">Plano, TX 75023 · Forest Creek Estates Phase III</small></div><span class="mono">Home</span></div>
+    <div class="house"><img src="roof-crop.png" alt=""><div class="glow"></div><div class="hud"><span class="mono" style="color:#C3CADB">Roof</span><b>59.8 sq</b>hip roof, 10/12 LiDAR</div></div>
+    <div class="kpi"><div><span>Hail</span><b>1.09 in</b><small>Aug 12, 2025 radar</small></div><div><span>Roof</span><b>1987</b><small>no reroof permit</small></div><div><span>Pitch</span><b>10/12</b><small>LiDAR 2018</small></div></div>
+    <div class="fact"><div><span>Owner</span><b>Wang Andy, homestead</b></div><div><span>Texts</span><b>Not yet opted in</b></div><div><span>Stage</span><b>Contacted, 2 days</b></div></div>
+    <div class="book">Book inspection</div>
+  </div>
+</div>
+</body></html>

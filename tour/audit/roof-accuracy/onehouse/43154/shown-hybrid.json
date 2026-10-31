@@ -1,0 +1,12 @@
+{
+ "row": "43154",
+ "mode": "hybrid",
+ "shown": "hybrid",
+ "new_pass": true,
+ "new_why": [],
+ "old_pass": false,
+ "old_why": [
+  "42% jagged",
+  "4.0% holes"
+ ]
+}

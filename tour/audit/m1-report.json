@@ -1,0 +1,47 @@
+{
+ "report": {
+  "storm-record": {
+   "screen": "storm-record",
+   "shell": [],
+   "frame": [],
+   "n": 18,
+   "small": []
+  },
+  "home": {
+   "screen": "home",
+   "shell": [],
+   "frame": [],
+   "n": 26,
+   "small": [
+    "BUTTON.chip \"Hail\" 39x44"
+   ]
+  },
+  "home-plane-sheet": {
+   "screen": "home-plane-sheet",
+   "shell": [],
+   "frame": [],
+   "n": 16,
+   "small": []
+  },
+  "ask": {
+   "screen": "ask",
+   "shell": [],
+   "frame": [],
+   "n": 16,
+   "small": [
+    "BUTTON.pin on maplibregl-marker maplibregl-marker-anchor-center \"1\" 30x30",
+    "BUTTON.pin maplibregl-marker maplibregl-marker-anchor-center \"2\" 30x30",
+    "BUTTON.pin maplibregl-marker maplibregl-marker-anchor-center \"3\" 30x30",
+    "BUTTON.pin maplibregl-marker maplibregl-marker-anchor-center \"4\" 30x30",
+    "BUTTON.pin maplibregl-marker maplibregl-marker-anchor-center \"5\" 30x30",
+    "INPUT. \"\" 264x20"
+   ]
+  },
+  "nimbus": {
+   "screen": "nimbus",
+   "shell": []
+  }
+ },
+ "errors": [],
+ "fails": []
+}

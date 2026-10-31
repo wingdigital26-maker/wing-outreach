@@ -1,0 +1,206 @@
+{
+ "image": "gtrace/31351/google.png",
+ "ft_per_px": 0.2,
+ "pieces": [
+  {
+   "name": "main_gable",
+   "rect_px": [
+    [
+     855,
+     443
+    ],
+    [
+     1094,
+     443
+    ],
+    [
+     1094,
+     722
+    ],
+    [
+     855,
+     722
+    ]
+   ],
+   "roof": "gable",
+   "ridge_dir_px": [
+    0,
+    1
+   ],
+   "gable_ends": [
+    "N",
+    "S"
+   ],
+   "level": 1,
+   "notes": "big low-pitch (6/12) gable, ridge N-S at x 965 (LiDAR z 21), straight eaves at both ends, no hip diagonals visible; west face and east face each about 950 sqft."
+  },
+  {
+   "name": "se_cross",
+   "rect_px": [
+    [
+     1000,
+     610
+    ],
+    [
+     1094,
+     610
+    ],
+    [
+     1094,
+     722
+    ],
+    [
+     1000,
+     722
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "small cross piece on the SE of the east face, ridge E-W about y 650 (LiDAR z 16), dark triangle at y 600-650 is its north face."
+  },
+  {
+   "name": "nw_wing",
+   "rect_px": [
+    [
+     738,
+     443
+    ],
+    [
+     925,
+     443
+    ],
+    [
+     925,
+     576
+    ],
+    [
+     738,
+     576
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "NW wing, ridge E-W at y 508 (LiDAR z 17), dark north face, lit south wedge, valleys into the main west face at x 925; west hip end at x 738 under trees."
+  },
+  {
+   "name": "sw_piece",
+   "rect_px": [
+    [
+     785,
+     648
+    ],
+    [
+     860,
+     648
+    ],
+    [
+     860,
+     722
+    ],
+    [
+     785,
+     722
+    ]
+   ],
+   "roof": "hip",
+   "ridge_dir_px": [
+    1,
+    0
+   ],
+   "gable_ends": [],
+   "level": 1,
+   "notes": "small SW piece under the trees, LiDAR ridge z 14 at y 690, faces z 12; low confidence, mostly hidden by canopy."
+  }
+ ],
+ "exclude_px": [
+  [
+   [
+    738,
+    500
+   ],
+   [
+    800,
+    500
+   ],
+   [
+    800,
+    740
+   ],
+   [
+    738,
+    740
+   ]
+  ],
+  [
+   [
+    800,
+    578
+   ],
+   [
+    855,
+    578
+   ],
+   [
+    855,
+    648
+   ],
+   [
+    800,
+    648
+   ]
+  ],
+  [
+   [
+    940,
+    598
+   ],
+   [
+    972,
+    598
+   ],
+   [
+    972,
+    645
+   ],
+   [
+    940,
+    645
+   ]
+  ],
+  [
+   [
+    850,
+    722
+   ],
+   [
+    1070,
+    722
+   ],
+   [
+    1070,
+    735
+   ],
+   [
+    850,
+    735
+   ]
+  ]
+ ],
+ "exclude_notes": [
+  "tree canopy over the west side",
+  "flat cover z 9 and tree shade between the NW wing and the SW piece",
+  "chimney and label box on the ridge",
+  "trace overshoots the south eave (eave at y 720)"
+ ],
+ "notes": "Simple big N-S gable with a NW hip wing, a small SE cross hip, and a tree-hidden SW piece. Confidence HIGH on the main gable and NW wing, LOW on the SW piece."
+}

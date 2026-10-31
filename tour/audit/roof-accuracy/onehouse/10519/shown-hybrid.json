@@ -1,0 +1,11 @@
+{
+ "row": "10519",
+ "mode": "hybrid",
+ "shown": "old",
+ "new_pass": false,
+ "new_why": [
+  "outline vs footprint IoU 0.652"
+ ],
+ "old_pass": true,
+ "old_why": []
+}

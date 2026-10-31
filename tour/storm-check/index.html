@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Did hail hit your roof? Free storm check</title>
+<meta name="description" content="Type your address and see every hail storm on radar at your home, your roof size and age, and ask for a free inspection. Free, no sign-up.">
+<link rel="stylesheet" href="../proof/proof.css">
+<link rel="stylesheet" href="sc.css">
+</head>
+<body>
+<!-- The storm-check page (10-26, docs/INTENT-LEADS.md). Public, inbound: the page a homeowner lands on from the roofer's
+     Google Business Profile, a search result, a yard-sign QR or a storm ad. Every fact is a public record with its source:
+     NOAA MRMS radar hail at the address, the county appraisal roll, city re-roof permits, USGS LiDAR roof size. No owner
+     name is ever loaded. The form is the only thing that collects anything, and only what the homeowner types; the text
+     consent box is optional and unticked. sc.js paints it; lib/rc-webleads.js tracks the source and saves the lead.
+     No analytics, ad pixels or session replay on this page. -->
+<header class="top">
+  <div class="brand"><div class="mark" data-r="logo"></div><span class="nm" data-r="name"></span></div>
+  <span class="kind">Free storm check</span>
+</header>
+
+<main class="wrap" id="main">
+  <section class="hero sc-hero">
+    <h1>Did hail hit your roof?</h1>
+    <p class="sc-lede">Type your address. We check it against NOAA radar for every storm on file, show your roof's size and age from public records, and you decide if you want a free inspection. No sign-up.</p>
+    <form id="search" class="sc-search" autocomplete="off" role="search">
+      <label for="q" class="fld">Your street address
+        <input id="q" type="text" placeholder="e.g. 2300 Parkhaven Dr" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list" autocapitalize="off" spellcheck="false">
+      </label>
+      <ul id="sugg" class="sc-sugg" role="listbox" hidden></ul>
+      <p class="hint" id="hint" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <p class="loading" id="loading" hidden>Reading the radar for this address...</p>
+
+  <article id="doc" hidden>
+    <section class="hero">
+      <p class="eyebrow">Storm record for</p>
+      <h2 class="sc-addr" id="addr"></h2>
+      <div class="big" id="big"></div>
+      <p class="src"><span class="chip">Source</span><span id="bigSrc"></span></p>
+    </section>
+
+    <section class="card">
+      <h2>Your roof on record</h2>
+      <dl class="facts" id="roof"></dl>
+    </section>
+
+    <section class="card" id="priceCard" hidden>
+      <h2>Ballpark, before anyone climbs up</h2>
+      <div id="price"></div>
+    </section>
+
+    <section class="card" id="histCard" hidden>
+      <h2>Every storm with hail at this address</h2>
+      <div id="hist"></div>
+    </section>
+
+    <section class="card plain">
+      <h2>What this means, and what it doesn't</h2>
+      <ul class="mean" id="mean"></ul>
+    </section>
+  </article>
+
+  <section class="card plain" id="none" hidden>
+    <h2>No records for that address yet</h2>
+    <p>We only have radar records for homes in our service area. You can still ask for a free inspection below and we will look it up by hand.</p>
+  </section>
+
+  <section class="cta" id="book" hidden>
+    <h2>Want someone to look at it?</h2>
+    <p>A free roof inspection from <b data-r="name"></b>: photos of every slope and a straight answer on whether there is damage. No cost, no obligation.</p>
+    <form id="form" novalidate>
+      <label class="fld">Your name<input id="fName" type="text" autocomplete="name" maxlength="120"></label>
+      <label class="fld" id="fAddrWrap" hidden>Address of the home<input id="fAddr" type="text" autocomplete="street-address" maxlength="300"></label>
+      <label class="fld">Mobile number<input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(972) 555-0123"></label>
+      <label class="fld">Email <span class="opt">(optional)</span><input id="fEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></label>
+      <fieldset class="when"><legend>Best time for a visit</legend><div class="pills" id="when"></div></fieldset>
+      <label class="fld">Anything we should know? <span class="opt">(optional)</span><textarea id="fNote" rows="2" maxlength="1000"></textarea></label>
+      <!-- honeypot: people never see or fill it; bots do -->
+      <label class="sc-hp" aria-hidden="true">Company<input id="fCo" type="text" tabindex="-1" autocomplete="off"></label>
+      <label class="consent"><input type="checkbox" id="fAgree" aria-labelledby="consentText"><span id="consentText"></span></label>
+      <p class="hint" id="fWhy" role="alert" hidden></p>
+      <button type="submit" class="go" id="bSend">Request my free inspection</button>
+      <p class="hint">Leave the box unticked and we will only reply by email about this request.</p>
+    </form>
+    <div class="done" id="done" hidden tabindex="-1"></div>
+  </section>
+
+  <footer class="fine">
+    <p id="srcs"></p>
+    <p><b>Your information:</b> we keep only what you type in the form, to answer this request. We never sell or share it, and there are no ad trackers on this page. To have it deleted, reply STOP to any text or email <span data-r="name"></span>.</p>
+    <p class="made">Storm check by <span data-r="name"></span> with Roof Command.</p>
+  </footer>
+</main>
+
+<script src="../lib/rc-state.js"></script>
+<script src="../lib/brand.js"></script>
+<script>/* the roofer brands the page (lib/brand.js) */ applyRoofer(rooferKey());</script>
+<script src="../lib/rc-copy.js"></script>
+<script src="../lib/st-meta.js"></script>
+<script src="../lib/rc-roof.js"></script>
+<script src="../lib/rc-hail.js"></script>
+<script src="../lib/rc-proof.js"></script>
+<script>/* GO LIVE (docs/INTENT-LEADS.md "Go-live steps"): paste the endpoint scripts/deploy_web_lead_fn.py prints. null = demo, nothing leaves the page. */
+window.RCWL_ENDPOINT = null; window.RCWL_COMPANY = 'jackson';</script>
+<script src="../lib/rc-webleads.js"></script>
+<script src="sc.js"></script>
+</body>
+</html>
