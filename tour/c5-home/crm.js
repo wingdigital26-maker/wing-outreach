@@ -121,7 +121,7 @@
   const firstName = o => { if (!o || BIZ.test(o)) return null; const m = /,\s*([A-Za-z'-]{2,})/.exec(String(o)) || /^([A-Za-z'-]{2,})\b/.exec(String(o).trim()); return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase() : null; };
   function facts(h) {
     return { id: h.id, street: h.addr, city: h.city, zip: h.zip, stormISO: h.storm || null, hail: h.hail != null ? +h.hail : null, roofYear: h.year || null,
-      permit: h.permit ? String(h.permit).slice(0, 4) : null, squares: h.sq || null, pitch: null, first: firstName(h.owner),
+      permit: h.permit ? String(h.permit).slice(0, 4) : null, squares: null, pitch: null, first: firstName(h.owner),
       source: h.past ? 'past' : h.optin ? 'form' : undefined, textConsent: !!h.textConsent, optedOut: RC.optedOut(h.id) };
   }
   const audOf = h => h.past ? 'past' : h.optin ? 'optin' : 'cold';
@@ -359,23 +359,17 @@
     const roof = h.roofAge || (h.year ? 'Built ' + h.year : mine ? 'Checking the county record' : 'Not on file');
     // re-roof line only where the city's permit list is complete (McKinney, Allen: lib/st-meta.js reroof), else nothing
     const rr = mine && H.rec && H.rec.reroof, permit = rr ? (rr.none ? 'No re-roof permit since ' + rr.since : (rr.done ? 'Re-roofed ' : 'Re-roof permit ') + rr.date) : '';
-    const meas = h.sqMeasured != null ? h.sqMeasured : !!(mine && H.measure && H.measure.facet);   // measured from LiDAR roof facets: no ~, no est.
-    const sq = h.sq != null ? String(h.sq) : mine && H.measure === null ? 'No outline' : mine && H.measure && H.measure.squares == null ? 'Not measured' : 'Measuring';
-    const pitch = h.pitch ? h.pitch : (mine && H.measure === null ? 'No outline' : 'Measuring');
-    const tip = window.RealRoof ? RealRoof.tip(mine && H.measure) : 'Estimated from public building outlines and 2018 LiDAR. Verify on site.';
     const strip = RC.STAGES.map((s, i) => `<button type="button" class="cst${i < idx ? ' dn' : ''}${i === idx && !arch ? ' on' : ''}" data-s="${s[0]}" aria-current="${i === idx ? 'step' : 'false'}"><span class="d">${i < idx ? ICON.check : i + 1}</span><b>${esc(s[1])}</b></button>`).join('');
-    // 10-17: the few facts a roofer needs while texting (hail, roof, squares), Book, then the rest behind More
+    // 10-17: the few facts a roofer needs while texting (hail, roof), Book, then the rest behind More
     const facts = `<div class="cstg-row"><span>Stage</span>${stageSelect(id)}</div><div class="ckpi">` +   // the stage row shows on the phone sheet, where the thread header has no room for it
       `<div><span>Hail</span>${h.hail != null ? `<b>${h.hail.toFixed(2)} in</b><small>${esc(h.hailDate)}</small>` : '<b class="sm">Not on file</b>'}</div>` +
       `<div><span>Roof</span>${h.year ? `<b>${esc(String(h.year))}</b><small>${esc(permit)}</small>` : `<b class="sm">${esc(roof)}</b><small>${esc(permit)}</small>`}</div>` +
-      `<div><span>Squares</span><b${/^\d/.test(sq) ? '' : ' class="sm"'} title="${esc(tip)}">${esc(sq)}</b><small>${h.sq != null ? 'estimate, LiDAR' : ''}</small></div></div>` +
+      `</div>` +   // 11-01: roof squares were an estimate; the panel shows only facts on file
       `<div class="cact book">${b ? `<p class="cnote"><span class="ic">${ICON.cal}</span>Inspection ${esc(RC.when(b))}</p><button type="button" class="cbtn" data-a="ics"><span class="ic">${ICON.cal}</span>Add to calendar</button><button type="button" class="cbtn pri" data-a="book">Reschedule</button>` : `<button type="button" class="cbtn pri" data-a="book"><span class="ic">${ICON.cal}</span>Book inspection</button>`}</div>` +
       `<details class="cmore"${chf.__more ? ' open' : ''}><summary><span>More about this home</span><span class="ic">${ICON.chev}</span></summary>` +
       `<div class="cfg">` +
       `<div><span>Owner</span><b>${OWNDATA ? (h.owner ? RC.blurHTML(h.owner) + (h.homestead ? ', homestead' : '') : RC.OWNER_NONE) : 'Owner name not available'}</b></div>` +
       (RC.tracedRows ? RC.tracedRows(h.addr, h.zip) : '') +
-      `<div><span>Pitch</span><b title="${esc(tip)}">${esc(String(pitch))}${h.pitch ? ', LiDAR' : ''}</b></div>` +
-      `<div><span>Roof shape</span><b>${esc(mine && H.measure && H.measure.checking ? 'Being checked' : mine && H.measure && H.measure.shape ? H.measure.shape : 'Not on file')}</b></div>` +
       `<div><span>Texts</span><b>${h.past ? 'Past customer' : h.optin ? 'Opted in' : RC.optedOut(id) ? 'Opted out' : 'Not yet opted in'}</b></div></div>` +
       `<div class="cstrip" role="group" aria-label="Stage">${strip}</div>${arch ? '<p class="cnote">Parked in Not now on the Pipeline.</p>' : ''}` +
       (/^m\d+$/.test(id) ? `<button type="button" class="cbtn wide" data-a="hailrep"><span class="ic">${ICON.doc}</span>Storm report for the homeowner</button>` : '') +

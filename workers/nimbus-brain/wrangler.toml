@@ -1,0 +1,15 @@
+# Nimbus cloud brain. Deploy only with Jack's yes (see README.md).
+name = "nimbus-brain"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+MODEL = "claude-sonnet-5-5"
+MAX_OUTPUT_TOKENS = "1024"
+DAILY_USD_CAP = "5"
+ALLOWED_ORIGINS = "http://localhost:4965,http://127.0.0.1:4965"
+
+# Daily spend counter. Create with: npx wrangler kv namespace create SPEND, then paste the id here.
+# [[kv_namespaces]]
+# binding = "SPEND"
+# id = "<id>"

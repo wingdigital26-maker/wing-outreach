@@ -627,6 +627,10 @@ label.dlab{display:block}
 }
 @media (max-width:640px){ .app .deck .card .ph .bl i{display:none}
   .act{gap:6px}.act button{gap:6px;padding:0 6px;font-size:15px}.act .ic{width:17px;height:17px} }
+/* loop 28: map about 25% wider, list + house card about 15% narrower */
+@media (min-width:1381px){ .main{grid-template-columns:255px minmax(360px,408px) minmax(0,1fr)} }
+@media (min-width:641px) and (max-width:1380px){ .main{grid-template-columns:231px minmax(340px,374px) minmax(0,1fr)}
+  .app .deck .card .cb .facts b{white-space:nowrap;font-size:16px} .app .deck .card .cb .facts b i{display:block;margin:2px 0 0} .app .deck .card .cb .facts div{padding-left:10px;padding-right:8px} }
 </style>
 <link rel="stylesheet" href="../lib/rc-console.css"><!-- polish direction B: Ops Console -->
 <link rel="stylesheet" href="simple.css"><!-- Today simplified (Jack 10-26): one hero, a clear house band, one-line rows, a calmer map -->

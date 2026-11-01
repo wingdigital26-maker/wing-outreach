@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="cal.css"><!-- the built-in calendar view (cal.js) -->
 <link rel="stylesheet" href="customers.css"><!-- Past customers view (customers.js) -->
 <link rel="stylesheet" href="features.css">
+<link rel="stylesheet" href="house.css">
 <link rel="stylesheet" href="../lib/rc-physical.css">
 <script type="importmap">
 {"imports":{
@@ -17,10 +18,7 @@
   "three/addons/":"../vendor/three@0.170.0/examples/jsm/"
 }}
 </script>
-<script>/* three.js + the 3D roof are warmed early only when the first view shows the roof (Home, Inbox); Leads, Calendar and
-   Customers fetch their own scripts first and get three.js after (loop 4, 10-30) */
-(function () { try { const q = new URLSearchParams(location.search), v = q.get('view') || ((q.get('home') || q.get('id')) ? 'home' : 'inbox'); if (v !== 'home' && v !== 'inbox') return;
-  ['../vendor/three@0.170.0/build/three.module.min.js', '../vendor/three@0.170.0/examples/jsm/controls/OrbitControls.js', '../vendor/three@0.170.0/examples/jsm/environments/RoomEnvironment.js', 'home.js'].forEach(h => { const l = document.createElement('link'); l.rel = 'modulepreload'; l.href = h; document.head.appendChild(l); }); } catch (e) { } })();</script>
+
 <style>/* first-open skeletons (loop 4): the panes show their shape right away; the real rows replace them (innerHTML) */
 .wo-skel{display:block}
 .wo-skel i{display:block;border-radius:6px;background:linear-gradient(90deg,#EEF0F3 25%,#F6F7F9 50%,#EEF0F3 75%);background-size:200% 100%;animation:woSk 1.3s linear infinite}
@@ -267,7 +265,7 @@ mo.observe(st,{attributes:true,attributeFilter:['class']});st.addEventListener('
 <script src="../lib/rc-automation.js"></script>
 <script src="../lib/rc-features.js"></script><!-- kept features switchboard (10-11) -->
 <script src="features.js"></script><!-- roof-build stamp, odometer counts -->
-<script type="module" src="home.js"></script>
+<script src="house.js"></script><!-- the house page: satellite photo + facts on file, no 3D or estimated roof (Jack 11-01) -->
 <script>/* plain words on every CRM screen (Jack 10-26); Home facts and the measurements tab keep their detail */ if (window.RCPLAIN) RCPLAIN.watch(document.body);</script>
 </body>
 </html>

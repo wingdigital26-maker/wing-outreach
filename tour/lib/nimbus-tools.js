@@ -113,12 +113,12 @@
     now = new Date(now || Date.now());
     let day = null;
     if (/\btoday\b|this afternoon|this evening|tonight/.test(t)) day = new Date(now);
-    else if (/\btomorrow\b/.test(t)) day = new Date(now.getTime() + DAY);
+    else if (/\btomorrow\b/.test(t)) day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);   // calendar days, not 24 h blocks: on a DST night those landed a day early
     const wd = WD.findIndex(w => new RegExp('\\b' + w + '\\b|\\b' + w.slice(0, 3) + '\\b').test(t));
     if (!day && wd >= 0) {
       let add = (wd - now.getDay() + 7) % 7; if (add === 0) add = 7;
       if (/\bnext\b/.test(t) && add < 7 && new RegExp('next ' + WD[wd]).test(t) && add <= 2) add += 7;
-      day = new Date(now.getTime() + add * DAY);
+      day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add);
     }
     const md = new RegExp('\\b(' + MON.map(m => m.toLowerCase()).join('|') + ')[a-z]*\\s+(\\d{1,2})(?:st|nd|rd|th)?\\b').exec(t);
     if (!day && md) {
@@ -136,7 +136,7 @@
       else if (!ap && h >= 1 && h <= 6) h += 12;   // "at 3" means 3 pm for an inspection
     }
     if (h == null || h > 23 || m > 59) return { day, iso: null, needTime: !!day };
-    if (!day) { day = new Date(now); if (h * 60 + m <= now.getHours() * 60 + now.getMinutes()) day = new Date(now.getTime() + DAY); }
+    if (!day) { day = new Date(now); if (h * 60 + m <= now.getHours() * 60 + now.getMinutes()) day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); }
     const at = new Date(day.getFullYear(), day.getMonth(), day.getDate(), h, m, 0, 0);
     return { day: at, iso: at.toISOString(), needTime: false };
   }

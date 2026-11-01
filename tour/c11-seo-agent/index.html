@@ -38,6 +38,18 @@ a:focus-visible,button:focus-visible{outline:2px solid #2757E6;outline-offset:2p
 .st b{display:block;font-weight:500;color:var(--ink)}
 .st span{display:block;font-size:11.5px;color:var(--slate);margin-top:2px}
 .st.wait b{color:var(--slate)}
+/* compact tracker (default); Expand shows the full stepper */
+.stw{display:flex;align-items:center;gap:10px;margin:0 0 14px}
+.stw .steps{flex:1;min-width:0}
+.steps.mini{display:flex;flex-wrap:nowrap;gap:6px 14px;margin:0;padding:0;overflow:hidden}
+.steps.mini::before{display:none}
+.steps.mini .st{padding:0;display:flex;align-items:center;gap:6px;font-size:12px;white-space:nowrap}
+.steps.mini .st i{position:static;transform:none;width:18px;height:18px;font-size:10px}
+.steps.mini .st.done i svg{width:10px;height:10px}
+.steps.mini .st span{display:none}
+.stx{flex:none;border:1px solid var(--line);background:var(--paper);border-radius:8px;font:inherit;font-size:12px;padding:4px 10px;color:var(--ink);cursor:pointer}
+.stx:hover{border-color:var(--slate)}
+.stw.open{align-items:flex-start}
 
 /* cards */
 .grid{min-width:0;display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:start}
@@ -184,7 +196,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #2757E6;outline-offset:2p
 .note{margin:8px 0 0;font-size:12px;color:var(--slate);line-height:1.45}
 .note.bad{color:var(--red)}
 @media (prefers-reduced-motion:reduce){.doc>*,.st.done i svg,.trk li i svg{animation:none}.trk li i,.push,.acts button,.acts a,.bld,.go,.push .row button{transition:none;transform:none}}
-@media (max-width:1099px){ .grid{grid-template-columns:1fr} .card{min-height:0} }
+@media (max-width:859px){ .grid{grid-template-columns:1fr} .card{min-height:0} }
 @media (max-width:359px){ .steps{grid-template-columns:repeat(5,1fr);padding:0} .st b{font-size:10px} .trk{grid-template-columns:repeat(3,1fr);gap:6px} .acts{grid-template-columns:1fr} .cols{display:none} .kw li{grid-template-columns:auto 1fr auto;gap:4px 8px} .kw li .t{grid-column:1/-1} .kw li .st2{justify-self:start} .url{display:none} }
 @media (max-width:719px){
   .wrap{padding:16px 14px 130px}
@@ -210,7 +222,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #2757E6;outline-offset:2p
     <div><p class="k">Growth</p><h1>Nimbus <b>SEO</b></h1></div>
     <div class="r" id="topr"></div>
   </div>
-  <div class="steps" id="steps" aria-label="How Nimbus works"></div>
+  <div class="stw" id="stw"><div class="steps mini" id="steps" aria-label="How Nimbus works"></div><button class="stx" id="stx" type="button" aria-expanded="false" aria-controls="steps">Expand</button></div>
   <div class="grid" id="grid">
     <section class="card" aria-labelledby="h-kw">
       <div class="ch"><div><h2 id="h-kw">Trending near you</h2><p id="kwsub">Local roofing searches Nimbus tracks</p></div><span class="chip g" id="kwpick"></span></div>
@@ -226,6 +238,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #2757E6;outline-offset:2p
   <div class="tiles" id="tiles"></div>
   <p class="foot" id="foot"></p>
 </main>
+<script>
+(function(){const b=document.getElementById('stx'),st=document.getElementById('steps'),w=document.getElementById('stw');
+b.addEventListener('click',()=>{const open=st.classList.toggle('mini')===false;w.classList.toggle('open',open);b.textContent=open?'Collapse':'Expand';b.setAttribute('aria-expanded',open);});})();
+</script>
 <script>
 (function(){
   const $=id=>document.getElementById(id);

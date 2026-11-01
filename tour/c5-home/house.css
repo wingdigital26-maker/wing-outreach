@@ -1,0 +1,94 @@
+/* house.css: the house page (house.js). Satellite photo first, facts around it, Wing blue, no status dots. */
+:root{--hb:#0D6C99;--hb-d:#0A5679;--hb-t:#E8F2F7;--hink:#0F1B26;--hsub:#4F5D6B;--hline:#E3E8EE;--hbg:#F6F8FA}
+
+/* the old record (3D roof, measurement tabs, stage strip) is gone from view; its buttons stay in the page for rec.js */
+body.house-on .rh,body.house-on #steps,body.house-on main.main,body.house-on .stick{display:none!important}
+#stage,.chstage{display:none!important}
+.house{display:none}
+body.house-on[data-view="home"] .house{display:block}
+
+.house{max-width:1280px;margin:0 auto;padding:20px 24px 48px;color:var(--hink);font-family:var(--font,Montserrat,system-ui,sans-serif)}
+.house h1,.house h2{font-family:var(--font,Inter,system-ui,sans-serif);margin:0;font-weight:600;letter-spacing:-.01em}
+.house .none{color:var(--hsub);margin:6px 0 0;font-size:15px}
+
+.hh{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.hh h1{font-size:30px;line-height:1.15}
+.hh p{margin:4px 0 0;font-size:16px;color:var(--hsub)}
+.hh-a{display:flex;gap:10px;flex-wrap:wrap}
+.hb{font:600 16px/1 inherit;font-family:inherit;min-height:48px;padding:0 22px;border-radius:10px;border:1px solid var(--hline);background:#fff;color:var(--hink);cursor:pointer}
+.hb:hover{border-color:var(--hb)}
+.hb.p{background:var(--hb);border-color:var(--hb);color:#fff}
+.hb.p:hover{background:var(--hb-d)}
+.hb:focus-visible,.stg button:focus-visible,.hmap-z button:focus-visible,.hlink:focus-visible{outline:3px solid #9CC9DE;outline-offset:2px}
+
+.hgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:stretch}
+.hmap{position:relative;margin:0;border-radius:14px;overflow:hidden;background:#1b2229;min-height:520px;display:flex;flex-direction:column;align-items:stretch}
+.hmap-c{flex:1;width:100%;min-height:480px}
+.hmap figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 14px;background:#fff;border:1px solid var(--hline);border-top:0;border-radius:0 0 14px 14px;font-size:13px;color:var(--hsub)}
+.hmap figcaption .cr{font-size:11.5px}
+.hmap-z{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:6px;z-index:2}
+.hmap-z button{min-width:44px;min-height:44px;border:0;border-radius:10px;background:#fff;color:var(--hink);font:600 18px/1 inherit;font-family:inherit;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.hmap-z button[data-z="0"]{font-size:13px;padding:0 10px}
+.hpin{display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.hpin span{background:var(--hb);color:#fff;font:600 14px/1 var(--font,Montserrat,system-ui);padding:8px 12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.35);white-space:nowrap}
+.hpin::after{content:'';width:0;height:0;border:8px solid transparent;border-top-color:var(--hb);margin-top:-1px}
+
+.hside{display:flex;flex-direction:column;gap:16px}
+.hcard{background:#fff;border:1px solid var(--hline);border-radius:14px;padding:18px}
+.hcard h2,.hstorm h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--hsub)}
+.own{font-size:28px;font-weight:600;margin:8px 0 2px}
+.own-s{margin:0;font-size:14px;color:var(--hsub)}
+.stg{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.stg button{font:500 14px/1 inherit;font-family:inherit;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--hline);background:#fff;color:var(--hink);cursor:pointer}
+.stg button[aria-pressed="true"]{background:var(--hb);border-color:var(--hb);color:#fff;font-weight:600}
+.hist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.hist li{display:flex;justify-content:space-between;gap:10px;font-size:14px;border-top:1px solid var(--hline);padding-top:8px}
+.hist b{font-weight:500}.hist span{color:var(--hsub);white-space:nowrap}
+
+.hfacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:20px 0 0;background:var(--hline);border:1px solid var(--hline);border-radius:14px;overflow:hidden}
+.hf{background:#fff;padding:16px 18px;margin:0}
+.hf dt{font-size:13px;color:var(--hsub);text-transform:uppercase;letter-spacing:.05em}
+.hf dd{margin:6px 0 0;font-size:22px;font-weight:600}
+.hf dd em{font-style:normal;font-weight:500;font-size:15px;color:var(--hsub);margin-left:6px}
+.hf small{display:block;margin-top:4px;font-size:12px;color:var(--hsub)}
+
+.hstorm{margin-top:20px;background:#fff;border:1px solid var(--hline);border-radius:14px;padding:20px}
+.hs-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 16px}
+.hs-sum div{background:var(--hb-t);border-radius:10px;padding:14px}
+.hs-sum b{display:block;font-size:28px;color:var(--hb-d)}
+.hs-sum span{font-size:14px;color:var(--hsub)}
+.hs-t{width:100%;border-collapse:collapse;font-size:15px}
+.hs-t th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--hsub);font-weight:500;padding:0 8px 8px 0;border-bottom:1px solid var(--hline)}
+.hs-t td{padding:10px 8px 10px 0;border-bottom:1px solid var(--hline);vertical-align:middle}
+.hs-t td small{display:block;font-size:12px;color:var(--hsub)}
+.hs-t tr.big b{color:var(--hb-d)}
+.hs-t .hsbar{width:45%}
+.hs-t td.hsbar{background:linear-gradient(#9CC9DE,#9CC9DE) left center/var(--w) 10px no-repeat;background-clip:content-box}
+.hs-t tr.big td.hsbar{background-image:linear-gradient(var(--hb),var(--hb))}
+.hlink{margin-top:12px;background:none;border:0;padding:8px 0;color:var(--hb);font:600 15px/1 inherit;font-family:inherit;cursor:pointer;min-height:40px}
+.hstorm .src{margin:10px 0 0;font-size:12px;color:var(--hsub)}
+
+@media (max-width:900px){
+  .hgrid{grid-template-columns:1fr}
+  .hmap{min-height:380px}.hmap-c{min-height:340px}
+  .hfacts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .house{padding:14px 16px 40px}
+  .hh h1{font-size:24px}
+  .hh-a{width:100%}.hh-a .hb{flex:1;padding:0 10px}
+  .hmap{min-height:300px}.hmap-c{min-height:270px}
+  .hf dd{font-size:18px}
+  .hs-sum b{font-size:22px}
+  .hs-t .hsbar{width:30%}
+}
+
+/* the app's older skins style bare figures, panels and marker divs; the house page sets its own */
+.house .hmap{padding:0;border:0}
+.house .hmap figcaption{margin:0}
+.house .hpin{background:none!important;padding:0!important;width:auto!important;height:auto!important;border:0!important;box-shadow:none!important}
+.house .hb{display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.house .hs-t{table-layout:fixed}
+.house .hs-t th:nth-child(1){width:34%}.house .hs-t th:nth-child(2){width:18%}
+.house .hs-t td.hsbar{width:auto;padding-right:0}
+.house .hmap{min-height:0;background:#fff}

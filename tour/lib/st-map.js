@@ -45,6 +45,16 @@ let fpMaskOf=null;                              // fpItems the point colours wer
 // or a moveend then only changes uniforms (opacity, radius), not 200k points of geometry
 let homesData=null, homesDataFp=null, hitData=null;
 const container=(n,cols)=>({length:n,attributes:{getPosition:{value:STH.xy,size:2},getFillColor:{value:cols,size:4}}});
+// loop 28 (Jack: Storms still laggy): far out a home is under a pixel, so the dots thin by zoom: 1 in 8 below z10, 1 in 4 to z11,
+// 1 in 2 to z12, every home from z12 (where picking turns on). Hit homes always stay. A thinned container keeps the source home
+// ids (ids), so a hover or click maps back with ids[index]. Built once per storm and stride, switched only on moveend.
+const thinStride=z=>z<10?8:z<11?4:z<12?2:1;
+function thinned(base,k){ if(k<=1||!base) return base; const T=base.__thin||(base.__thin={}); if(T[k]) return T[k];
+  const cols=base.attributes.getFillColor.value, n=STH.n, xy=STH.xy; const keep=i=>i%k===0||cols[i*4+3]>=200; let c=0; for(let i=0;i<n;i++) if(keep(i)) c++;
+  const ids=new Uint32Array(c), x2=new Float32Array(c*2), c2=new Uint8Array(c*4);
+  for(let i=0,j=0;i<n;i++) if(keep(i)){ ids[j]=i; x2[j*2]=xy[i*2]; x2[j*2+1]=xy[i*2+1]; c2[j*4]=cols[i*4]; c2[j*4+1]=cols[i*4+1]; c2[j*4+2]=cols[i*4+2]; c2[j*4+3]=cols[i*4+3]; j++; }
+  return T[k]={length:c,ids,attributes:{getPosition:{value:x2,size:2},getFillColor:{value:c2,size:4}}}; }
+const homeId=(d,i)=>i>=0&&d&&d.ids?d.ids[i]:i;
 // a home's point hides only once its own outline is actually drawn, so zooming in never leaves a gap
 function pointColors(){ if(fpMaskOf===fpItems) return homesDataFp; colorsFp.set(colors); for(let j=0;j<fpItems.length;j++) colorsFp[fpItems[j].i*4+3]=0; fpMaskOf=fpItems; homesDataFp=container(STH.n,colorsFp); return homesDataFp; }
 let colors=null, colorsFp=null, hitIdx=null, hitXY=null, hitEl=null, hitCol=null, bands=null, ribGeo=null, denGeo=null;
@@ -120,12 +130,13 @@ const EMPTY={type:'FeatureCollection',features:[]};
 function layers(){ if(!STH.xy||hideHomes) return []; const z=map.getZoom(); const fpOn=z>=FPZ; const storm=!!hail;
   const L=[]; const colR=z<12.5?11:z<13.5?8.5:6.5, colEl=z<12.5?2.2:z<13.5?1.5:1;
   // the storm you were on, fading out under the new one (same geometry containers it had, so nothing is re-uploaded)
-  if(prev&&xf<1){ L.push(new deck.ScatterplotLayer({id:'homes-prev',beforeId:labelId,data:prev.homes,radiusUnits:'meters',getRadius:prev.storm?4.6:4.2,radiusMinPixels:z<12?0.9:1.3,radiusMaxPixels:4.5,stroked:false,antialiasing:true,pickable:false,opacity:fade*(1-xf)}));
+  if(prev&&xf<1){ L.push(new deck.ScatterplotLayer({id:'homes-prev',beforeId:labelId,data:thinned(prev.homes,thinStride(z)),radiusUnits:'meters',getRadius:prev.storm?4.6:4.2,radiusMinPixels:z<12?0.9:1.3,radiusMaxPixels:4.5,stroked:false,antialiasing:true,pickable:false,opacity:fade*(1-xf)}));
     if(prev.storm&&prev.hit&&prev.hit.length) L.push(new deck.ColumnLayer({id:'hit-prev',beforeId:labelId,data:prev.hit,diskResolution:4,radius:colR,angle:45,extruded:true,elevationScale:colEl,radiusUnits:'meters',pickable:false,opacity:fade*0.96*(1-xf),material:{ambient:0.62,diffuse:0.5,shininess:12,specularColor:[255,255,255]}})); }
-  L.push(new deck.ScatterplotLayer({id:'homes',beforeId:labelId,data:fpOn&&fpItems.length?pointColors():homesData,
+  const hd=fpOn&&fpItems.length?pointColors():thinned(homesData,thinStride(z));
+  L.push(new deck.ScatterplotLayer({id:'homes',beforeId:labelId,data:hd,
     radiusUnits:'meters',getRadius:storm?4.6:4.2,radiusMinPixels:z<12?0.9:1.3,radiusMaxPixels:4.5,stroked:false,antialiasing:true,pickable:z>=12,autoHighlight:z>=12,   /* zoomed out a home is under a pixel: no picking pass over 271k points on every mouse move (10-26) */
     highlightColor:[39,87,230,255],opacity:fade*xf,
-    onHover:info=>deckHover(info.index,info,fpOn),onClick:info=>{ if(info.index>=0&&!(fpOn&&fpSent.has(info.index))) selectHome(info.index,true); return true; }}));
+    onHover:info=>deckHover(homeId(hd,info.index),info,fpOn),onClick:info=>{ const i=homeId(hd,info.index); if(i>=0&&!(fpOn&&fpSent.has(i))) selectHome(i,true); return true; }}));
   if(storm&&hitIdx.length&&!(fpOn&&fpItems.length)) L.push(new deck.ColumnLayer({id:'hit',beforeId:labelId,data:hitData,
     diskResolution:4,radius:colR,angle:45,extruded:true,elevationScale:colEl,radiusUnits:'meters',pickable:true,opacity:fade*0.96*xf,material:{ambient:0.62,diffuse:0.5,shininess:12,specularColor:[255,255,255]},
     onHover:info=>deckHover(info.index>=0?hitIdx[info.index]:-1,info,fpOn),onClick:info=>{ if(info.index>=0) selectHome(hitIdx[info.index],true); return true; }}));
@@ -266,6 +277,10 @@ onStyle(()=>{
       map.on('moveend',()=>{ const e=waiting; waiting=null; if(e) pm(e); }); } }catch(e){}
   const m=document.createElement('div'); m.className='marker'; marker=new maplibregl.Marker({element:m}).setLngLat([0,0]).addTo(map);
   requestAnimationFrame(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')));
+  // loop 28: the swath heatmap re-renders its offscreen density texture every frame of a camera move; hide it while the
+  // camera moves and bring it back on moveend (the hex cells stay, they are cheap pre-tessellated fills)
+  { let ribHid=false; map.on('movestart',()=>{ if(map.getLayer('rib')&&map.getLayoutProperty('rib','visibility')==='visible'){ map.setLayoutProperty('rib','visibility','none'); ribHid=true; } });
+    map.on('moveend',()=>{ if(ribHid){ ribHid=false; if(map.getLayer('rib')&&map.getPaintProperty('rib','heatmap-opacity')>0) map.setLayoutProperty('rib','visibility','visible'); } }); }
   map.on('move',()=>{ zoomHint(); }); map.on('moveend',()=>{ if(hhWait===2) hhWait=false; refreshFp(false); redraw(); paintHH();
     try{ const c=map.getCenter(); sessionStorage.setItem('st-cam',JSON.stringify({center:[c.lng,c.lat],zoom:map.getZoom(),pitch:map.getPitch(),bearing:map.getBearing()})); }catch(e){} });
   map.on('zoom',()=>{ const z=map.getZoom(); if((z>=FPZ)!==(fpItems.length>0||fpBox!==null)) { refreshFp(true); redraw(); } });

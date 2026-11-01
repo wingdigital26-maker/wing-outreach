@@ -110,6 +110,7 @@ html[data-rc] body[data-screen="daily"]>header .wstorm{display:none}
 <script src="lib/st-meta.js"></script><!-- the county roll copies: the header search reads them on every screen -->
 <script src="lib/rc-find.js"></script>
 <script src="lib/rc-scores.js"></script><!-- RCS: search, score, explain-evidence, save-segment, assign (for Nimbus; 10-26) --><!-- header search: every home, street, ZIP, city, owner; results open in the CRM -->
+<script>window.NIMBUS_CLOUD = '';   /* Nimbus cloud brain URL (workers/nimbus-brain, after deploy.ps1). Empty = laptop server or built-in brain */</script>
 <script src="lib/nimbus-tools.js"></script><script src="lib/nimbus-settings.js"></script><script src="lib/nimbus-data.js"></script><script src="lib/nimbus-brain.js"></script><script src="lib/nimbus-assistant.js"></script><script src="lib/nimbus-truck.js"></script><script src="lib/nimbus-talk.js"></script><script src="lib/nimbus-ops.js"></script><script src="lib/rc-push.js"></script><!-- Nimbus assistant: talk, he runs the app (tools ring what they touch; nothing sends) -->
 <script>
 /* One shell, real routes. #/opening (About), #/storm, #/storm/<iso>, #/daily, #/daily/<n>, #/ask (?q=, opens the Nimbus panel), and the CRM:

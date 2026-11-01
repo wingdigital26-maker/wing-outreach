@@ -4,7 +4,8 @@
    - VOICE IN: the browser's own speech recognition (free); where a browser has none, the local server's /stt (Groq Whisper,
      free tier). VOICE OUT: the browser's voice (free) by default; ElevenLabs through the local server only when chosen in
      settings, and the server refuses before the free tier's cap.
-   - BRAIN: Claude through the local server (scripts/nimbus/server.py, 127.0.0.1:4913: keys stay there) when it runs; else the
+   - BRAIN: the cloud brain first (workers/nimbus-brain, a Cloudflare Worker: works on a phone with no laptop; its URL is
+     window.NIMBUS_CLOUD or localStorage rc.nimbus.cloud), else Claude through the local server (scripts/nimbus/server.py, 127.0.0.1:4913: keys stay there) when it runs; else the
      built-in brain (lib/nimbus-brain.js). The public build never calls the server: it is demo mode, labelled so.
    - ACTIONS: every tool call is lib/nimbus-tools.js: it rings what it touches on screen, and this panel lists each action with
      Undo. Nothing sends: a text or email opens as a draft and a person taps Send.
@@ -17,6 +18,8 @@
   const LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   const PUBLIC = (() => { try { return !!(window.RCT_AUTH && RCT_AUTH.public); } catch (e) { return false; } })();
   const SERVER = 'http://127.0.0.1:4913', USE_SERVER = LOCAL && !PUBLIC && new URLSearchParams(location.search).get('nimbus') !== 'local';
+  const CLOUD = (() => { try { return (localStorage.getItem('rc.nimbus.cloud') || window.NIMBUS_CLOUD || '').replace(/\/+$/, ''); } catch (e) { return window.NIMBUS_CLOUD || ''; } })();
+  let BASE = SERVER;   // which brain answered the last health check: CLOUD or SERVER
   const OWNER = (((window.ROOFERS || {})[RC.rooferKey()] || {}).owner) || '';
   const PREF = 'nbvPrefs', COACHED = 'nbvCoached', LOGK = 'nimbusLog';
   const prefs = Object.assign({ speak: true, voice: 'browser', brief: true }, RC.__get(PREF, {}) || {});
@@ -28,6 +31,16 @@
   let health = null, healthAt = 0, healthTried = false;
   const localSvcOn = () => !!(window.RC && RC.localSvc && RC.localSvc());
   function checkHealth(force) {
+    if (CLOUD && new URLSearchParams(location.search).get('nimbus') !== 'local') {   // the cloud brain needs no local services
+      if (!force && BASE === CLOUD && health && Date.now() - healthAt < 20000) return Promise.resolve(health);
+      const ctl = new AbortController(); setTimeout(() => ctl.abort(), 2500);
+      return fetch(CLOUD + '/health', { signal: ctl.signal }).then(r => r.ok ? r.json() : null).catch(() => null)
+        .then(h => { if (h && h.brain_ok) { BASE = CLOUD; health = h; healthAt = Date.now(); healthTried = true; paintMode(); return h; }
+          if (BASE === CLOUD) { BASE = SERVER; health = null; healthAt = 0; } return localHealth(force); });
+    }
+    return localHealth(force);
+  }
+  function localHealth(force) {
     if (!USE_SERVER || !!!(window.RC && RC.localSvc && RC.localSvc())) return Promise.resolve(null);   // loop 19: no probe unless the local services are switched on (?localsvc=1 once)
     if (!force && Date.now() - healthAt < 20000) return Promise.resolve(health);
     if ((function(k){try{return Date.now()-(+localStorage.getItem('rc.off.'+k)||0)<6e5}catch(e){return false}})('brain') && force !== 'open') return Promise.resolve(null);   // the local server was off a moment ago: skip; opening the panel asks again (loop 6)
@@ -266,7 +279,7 @@
   }
   function paintMode() {
     if (!modeEl) return;
-    const brain = brainLive() ? 'Claude brain' : PUBLIC || !LOCAL ? 'Demo mode, built-in answers' : 'Built-in brain';
+    const brain = brainLive() ? (BASE === CLOUD ? 'Claude brain (online)' : 'Claude brain') : PUBLIC || !LOCAL ? 'Demo mode, built-in answers' : 'Built-in brain';
     const v = health && health.voice || {}, voice = prefs.voice === 'eleven' && v.elevenlabs ? 'ElevenLabs voice, ' + RC.fmt(v.left) + ' characters left' : 'browser voice';
     modeEl.className = 'nbv-mode' + (brainLive() ? ' live' : '');
     modeEl.textContent = brain + ' · ' + voice;   // plain words, no status dot (house rule; loop 8)
@@ -282,7 +295,7 @@
       ${(() => { const vs = rankedVoices(), cur = bestVoice(); if (!vs.length) return '<p>No browser voices found yet.</p>';
         return `<label>Browser voice <select id="nbvBVoice">${vs.map(x => `<option value="${esc(x.name)}"${cur && cur.name === x.name ? ' selected' : ''}>${esc(x.name.replace(/^Microsoft\s+/, '').replace(/\s*-\s*English.*$/, ''))}${isNatural(x) ? ' (natural)' : ''}</option>`).join('')}</select></label> <button type="button" class="lnk" id="nbvSample">Play sample</button>`; })()}
       <p>${el ? 'ElevenLabs stops on its own before the free monthly limit, then the browser voice takes over.' : USE_SERVER ? 'Start the Nimbus server for the ElevenLabs voice and the Claude brain: python scripts/nimbus/server.py' : 'Demo mode: built-in answers and your browser\'s voice. No keys, nothing leaves this device.'}</p>
-      <p>${brainLive() ? 'Brain: Claude (' + esc(health.model) + ') on this computer\'s Nimbus server.' : 'Brain: built-in. It knows the app and its buttons; open questions work best with the Claude brain.'}</p>
+      <p>${brainLive() ? 'Brain: Claude (' + esc(health.model) + ')' + (BASE === CLOUD ? ', online. Works on your phone too.' : ' on this computer\'s Nimbus server.') : 'Brain: built-in. It knows the app and its buttons; open questions work best with the Claude brain.'}</p>
       <fieldset class="nbv-call"><legend>Nimbus can call me (you and your team only, never homeowners)</legend>
         <label>My cell <input type="tel" id="nbvCallPhone" autocomplete="tel" placeholder="(972) 555-0100" value="${esc((RC.setting('callMe', {}) || {}).phone || '')}"></label>
         <label><input type="checkbox" data-call="briefing"${((RC.setting('callMe', {}) || {}).calls || []).indexOf('briefing') >= 0 ? ' checked' : ''}> Morning briefing call</label>
@@ -555,6 +568,11 @@
   // one streamed step (server /chat_stream, Server-Sent Events): text deltas are spoken a sentence at a time; the final
   // message (with any tool calls) arrives at the end. Falls back to /chat when the stream is not there.
   async function chatStep(body, st) {
+    if (BASE === CLOUD) {   // the cloud brain answers one whole step (no stream); the reply is spoken when the turn ends
+      const x = await fetch(CLOUD + '/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      if (!x.ok) throw new Error('cloud chat ' + x.status);
+      return x.json();
+    }
     const r = await fetch(SERVER + '/chat_stream', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(() => null);
     if (!r || !r.ok || !r.body) { const x = await fetch(SERVER + '/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); if (!x.ok) throw new Error('chat ' + x.status); return x.json(); }
     const rd = r.body.getReader(), dec = new TextDecoder(); let buf = '', said = '', final = null;
@@ -573,6 +591,14 @@
     if (said.trim() && st) { st.push(said); spokeStream = true; }
     if (!final) throw new Error('stream ended without a message');
     return final;
+  }
+  // a tool result for the model: always valid JSON (the old .slice(0, 4000) cut it mid-string); big data is shortened, not cut
+  function resultJSON(x) {
+    const base = { ok: !!x.ok, said: x.say || '' }, full = JSON.stringify(Object.assign({}, base, { data: x.data || null }));
+    if (full.length <= 12000) return full;
+    const d = x.data, cut = v => Array.isArray(v) ? v.slice(0, 15) : v;
+    const s2 = JSON.stringify(Object.assign({}, base, { data: d && typeof d === 'object' && !Array.isArray(d) ? Object.fromEntries(Object.entries(d).map(([k, v]) => [k, cut(v)])) : cut(d), note: 'lists shortened to the first 15' }));
+    return s2.length <= 12000 ? s2 : JSON.stringify(Object.assign({}, base, { note: 'data too large to include' }));
   }
   async function claudeTurn(text, runCall) {
     const ctx = Tools.context();
@@ -594,7 +620,7 @@
       for (const u of uses) {
         const x = await runCall(u.name, u.input || {});
         if (x.say) says.push(x.say);
-        results.push({ type: 'tool_result', tool_use_id: u.id, is_error: !x.ok || undefined, content: JSON.stringify({ ok: !!x.ok, said: x.say || '', data: x.data || null }).slice(0, 4000) });
+        results.push({ type: 'tool_result', tool_use_id: u.id, is_error: !x.ok || undefined, content: resultJSON(x) });
       }
       history.push({ role: 'user', content: results });
       if (d.stop_reason === 'plan') return (texts.join(' ') || says.join(' ')).trim();
