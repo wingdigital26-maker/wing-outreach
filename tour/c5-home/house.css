@@ -2,7 +2,7 @@
 :root{--hb:#0D6C99;--hb-d:#0A5679;--hb-t:#E8F2F7;--hink:#0F1B26;--hsub:#4F5D6B;--hline:#E3E8EE;--hbg:#F6F8FA}
 
 /* the old record (3D roof, measurement tabs, stage strip) is gone from view; its buttons stay in the page for rec.js */
-body.house-on .rh,body.house-on #steps,body.house-on main.main,body.house-on .stick{display:none!important}
+body.house-on[data-view="home"] .rh,body.house-on[data-view="home"] #steps,body.house-on[data-view="home"] main.main,body.house-on[data-view="home"] .stick{display:none!important}
 #stage,.chstage{display:none!important}
 .house{display:none}
 body.house-on[data-view="home"] .house{display:block}
