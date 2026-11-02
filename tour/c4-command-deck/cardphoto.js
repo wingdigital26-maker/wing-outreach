@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   if (!window.RCIMG) return;
-  let view = '3d';   // Jack 10-26 round 2: "I never want the photo to be the default": 3D on every load, the photo one tap away (not remembered)
+  const view = 'photo';   // Jack 11-01: satellite only, the 3D model and its measurements are gone
   const css = document.createElement('style');
   css.textContent = `
 .ph .phot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;pointer-events:none;background:#D9DEE6}
@@ -23,7 +23,7 @@ html.cardphoto .ph .rlink{z-index:2}
 
   const homeOf = id => { try { return (typeof HOMES !== 'undefined' ? HOMES : []).find(h => h.id === id) || null; } catch (e) { return null; } };
   function dress(card) {
-    const ph = card.querySelector('.ph'); if (!ph || ph.querySelector('.phseg')) return;
+    const ph = card.querySelector('.ph'); if (!ph || ph.querySelector('.phot')) return;
     const h = homeOf(card.dataset.id); if (!h || !h.loc) return;
     const r = ph.getBoundingClientRect(), w = Math.max(240, r.width || 480), hh = Math.max(120, r.height || 240);
     const hy = 24, hx = hy * w / hh;   // about 48 m of ground top to bottom: the whole house and its yard
@@ -31,16 +31,14 @@ html.cardphoto .ph .rlink{z-index:2}
     const img = document.createElement('img'); img.className = 'phot'; img.alt = 'The roof from above'; img.decoding = 'async'; img.loading = 'lazy';
     img.src = p.src; if (p.fallback) img.onerror = () => { img.onerror = null; img.src = p.fallback; cr.textContent = RCIMG.NAIP_CREDIT; };
     const cr = document.createElement('span'); cr.className = 'phcred'; cr.textContent = p.credit;
-    const seg = document.createElement('div'); seg.className = 'phseg'; seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', 'Roof picture');
-    seg.innerHTML = '<button type="button" data-cv="3d">3D</button><button type="button" data-cv="photo">Photo</button>';
-    ph.prepend(img); ph.append(cr, seg); mark();
+    ph.prepend(img); ph.append(cr); mark();
   }
   function mark() {
     document.documentElement.classList.toggle('cardphoto', view === 'photo');
     document.querySelectorAll('.ph .phseg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cv === view)));
   }
   document.addEventListener('click', e => { const b = e.target.closest('.ph .phseg [data-cv]'); if (!b) return; e.preventDefault(); e.stopPropagation();
-    view = b.dataset.cv; mark(); if (view === '3d') dispatchEvent(new Event('resize')); }, true);
+    mark(); }, true);
   let t = null;
   const run = () => { t = null; document.querySelectorAll('#deck .card[data-id]').forEach(c => { if (+c.dataset.d <= 2 || c.dataset.d == null) dress(c); }); };
   const deck = document.getElementById('deck');

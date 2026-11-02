@@ -899,7 +899,7 @@ const homeHref = h => '#home-'+encodeURIComponent(h.id);   // every way out goes
 const pretty = p => p ? `(${p.slice(2,5)}) ${p.slice(5,8)}-${p.slice(8)}` : '';
 function phHTML(h){
   // Jack 10-17: the roof band carries two labels only, "Home n of 50" and the squares line; hail is in the facts row below
-  return `<a class="rlink" href="${homeHref(h)}" data-a="home" aria-label="Open home: ${esc(h.addr)}">${platedRoof(h.spec)}</a><span class="open">Open home</span><div class="tr"><span class="pill glass">Home ${h.n} of ${TOTAL}</span></div><div class="bl"><span class="sw"></span>Red planes<i>took the hail</i></div><button class="ex" data-a="roof"><span class="ic">${I.expand}</span>Measure</button>`;
+  return `<a class="rlink" href="${homeHref(h)}" data-a="home" aria-label="Open home: ${esc(h.addr)}">${platedRoof(h.spec)}</a><span class="open">Open home</span><div class="tr"><span class="pill glass">Home ${h.n} of ${TOTAL}</span></div>`;
 }
 function actHTML(h){
   // Text leads: one tap opens the day's draft (RC.copy); Email second; Skip. After a hand-off: what went, then Next stop.
@@ -941,7 +941,7 @@ function cbHTML(h,i){
     <div class="facts">
       <div title="${hailOk(h.hail)?esc(h.hail+' in, NOAA radar estimate for this home'):'No hail on file for this home'}"><small>Hail</small><b>${hailOk(h.hail)?RCPLAIN.hail(h.hail):'None on file'}</b></div>
       <div><small>Roof</small><b>${roof}</b></div>
-      <div title="${esc('Pitch '+(h.pitch||'6/12')+(h.pitchMeasured?', LiDAR estimate':', estimate')+'. Verify on site.')}"><small>Slope</small><b>${RCPLAIN.slope(h.pitch||'6/12')||'Not known'}</b></div>
+      <div><small>Built</small><b>${h.year||'Not on file'}</b></div>
     </div>
     <p class="why">${RCPLAIN.words(why(h,i))}</p>${RCPLAIN.words(tipFor(h))}
     <div class="act">${actHTML(h)}</div>`;
@@ -1024,7 +1024,7 @@ const hpop = document.getElementById('hpop');
 function homePopHTML(h){
   const sent = RC.activity().find(a=>a.id===h.id && a.dir==='out' && (a.ch==='text'||a.ch==='email') && today(a.at)), sch = RC.scheduledFor(h.id);
   const line = sent ? `${sent.ch==='email'?'Email':'Text'} sent ${fmtTime(sent.at)}` : sch ? `Text scheduled, <span data-due="${esc(sch.due)}" data-fmt="short">${esc(RC.countdown(sch.due,'short'))}</span>` : skippedToday(h.id) ? 'Skipped today' : `Home ${h.n} of ${HOMES.length} today`;
-  const facts = [hailOk(h.hail) ? `${h.hail} in hail` : null, h.roofAge || null, h.sq ? `about ${Math.round(h.sq)} squares (est.)` : null].filter(Boolean).join(', ');
+  const facts = [hailOk(h.hail) ? `${h.hail} in hail` : null, h.roofAge || null].filter(Boolean).join(', ');
   const who = h.owner || (RC.ownersAllowed && RC.ownersAllowed() ? RC.OWNER_NONE : '');
   return `<div class="bp-h"><span class="bp-ch"><span class="ic">${I.map || I.text}</span>${esc(line)}</span><button type="button" class="bp-x" aria-label="Close">${I.close}</button></div>` +
     `<div class="bp-to"><span class="bp-l">Home ${h.n}</span><b>${esc(h.addr)}</b><span class="bp-who">${esc([h.city, h.zip].filter(Boolean).join(' '))}${who ? ', ' + esc(who) : ''}</span></div>` +
@@ -1138,7 +1138,7 @@ function copyFacts(h){
   // the home's OWN storm, and only when it took 1 in+ hail (a no-hail home's text never names another storm's hail)
   return { id:h.id, street:h.addr, city:h.city, zip:h.zip, stormISO: hailOk(h.hail) ? (h.storm || (h.pick && h.pick.storm) || null) : null,
     hail: hailOk(h.hail) ? +h.hail : null, roofYear: h.year || null, permit: h.permit ? String(h.permit).slice(0,4) : null,
-    squares: (h.pick && h.pick.squares) || h.sq || null, pitch: h.pitchMeasured && h.spec && h.spec.rise ? h.spec.rise : null, first: firstName(h.owner),
+    squares: null, pitch: null, first: firstName(h.owner),
     source: h.past ? 'past' : h.optin ? 'form' : undefined, textConsent: !!h.textConsent, optedOut: RC.optedOut(h.id) };
 }
 const stepIdx = day => !day || day <= 1 ? 0 : day <= 3 ? 1 : day <= 7 ? 2 : day < 60 ? 3 : Math.round(day/30) + 2;
