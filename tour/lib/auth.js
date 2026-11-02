@@ -31,7 +31,7 @@
   var q = new URLSearchParams(location.search);
   if (!CFG.PUBLIC && LOCAL) { if (q.get("dev") === "1") ss.set(DEVK, "1"); else if (q.get("dev") === "0") ss.del(DEVK); }
   // localhost skips the gate by default; ?dev=0 brings the sign-in back for testing it
-  var DEV = !CFG.PUBLIC && LOCAL && q.get("dev") !== "0";
+  var DEV = q.get("dev") !== "0"; // temporary public share: no login on this copy
 
   // ---- screen-page guard (public build): a signed-out visitor never loads a screen on its own
   if (me && me.hasAttribute("data-guard")) {
