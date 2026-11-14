@@ -20,7 +20,7 @@
     if (!f || !f.addr || !h.length) { $('#loading').textContent = 'No storm records are on file for this address yet.'; return; }
     const street = f.addr, place = f.place || (f.city ? f.city + ', TX' : '');
     $('#addr').textContent = street + (place ? ', ' + place : '');
-    document.title = 'Your roof, ' + street;
+    document.title = 'Storm record, ' + street;
 
     // the storm this page is about: the newest storm with 1 in+ radar hail here, else the biggest hail on file
     const hits = h.filter(x => x.inches >= 1), top = h.slice().sort((a, b) => b.inches - a.inches)[0];
@@ -51,7 +51,7 @@
     if (f.year) rows.push(['Year built', String(f.year), f.county ? f.county + ' appraisal roll' : 'county appraisal roll']);
     if (f.reroof && !f.reroof.none && f.reroof.date) rows.push(['Last re-roof permit', f.reroof.date, (f.reroof.means ? f.reroof.means + '. ' : '') + (f.reroof.src || 'city permit records')]);
     else if (f.reroof && f.reroof.none) rows.push(['Re-roof permits', 'None on file', f.reroof.text + ' (' + (f.reroof.src || 'city permit records') + ')']);
-    if (f.roof && f.roof.sq) rows.push(['Roof size', 'About ' + (Math.round(f.roof.sq * 10) / 10) + ' squares', 'A LiDAR estimate from aerial survey data, typically within about 10% of permit records; a measurement is taken before any final quote. (1 square = 100 sq ft)']);
+    if (f.roof && f.roof.sq) rows.push(['Roof size', 'About ' + (Math.round(f.roof.sq * 10) / 10) + ' squares', 'A LiDAR estimate from aerial survey data; a measurement is taken before any final quote. (1 square = 100 sq ft)']);
     if (f.subdivision) rows.push(['Neighborhood', f.subdivision, '']);
     $('#roof').innerHTML = rows.length ? rows.map(([a, b, n]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}${n ? `<span class="note">${esc(n)}</span>` : ''}</dd></div>`).join('')
       : '<div><dt>Roof records</dt><dd>Not on file</dd></div>';
@@ -94,7 +94,7 @@
     const J = u => fetch(RC.dataRoot + u).then(r => r.ok ? r.json() : null).catch(() => null);
     Promise.all([S0 ? RCH.area(gi, { radius: 402, iso: S0.iso }) : null, J('meta/permits.json'), J('meta/turnover.json')]).then(([A, P, T]) => {
       const reg = RC.catalog.regions.find(r => gi >= r.offset && gi < r.offset + r.count), out = [];
-      const tr = T && T.rows && reg && (reg.id === 'collin-tx' || reg.id === 'collin2-tx') ? T.rows[String(gi - reg.offset)] : null;
+      const tr = T && T.rows && reg && reg.id === 'collin-tx' ? T.rows[String(gi - reg.offset)] : null;
       if (tr && tr[0] > 0) out.push(`<div class="stat"><b>${RC.fmt(tr[0])}</b><span>${tr[0] === 1 ? 'neighbor' : 'neighbors'} within about a block</span></div>
         <p>re-roofed in the last ${T.days} days (newest permit ${esc(RCH.fmtDay(String(tr[1]).slice(0, 10)))}).</p>`);
       const keys = P && reg ? Object.keys(P).filter(k => k.indexOf(reg.id + ':') === 0) : [];
@@ -145,36 +145,4 @@
     if (!preview) RCP.optout(gi);
     $('#bStop').outerHTML = `<b>Done. ${esc(R.name)} will not contact you again about this address.</b>`;
   };
-
-  // ---------- the house in 3D (10-29): the model Today and the CRM record draw (c4-command-deck/house3d.js on the
-  // lib/real-roof.js spec of this home's county outline + LiDAR). No outline on file = the card stays hidden.
-  function house3D() {
-    if (!window.RealRoof || !window.WebGLRenderingContext) return;
-    RealRoof.mapEntry(gi).then(e => {
-      const sp = e ? RealRoof.spec(e, { seed: gi % 9973 }) : null;
-      if (!sp || sp.none) return;
-      return import('../c4-command-deck/house3d.js').then(m => {
-        const card = $('#h3Card'), host = $('#h3'); card.hidden = false;
-        const ctl = m.create({}); host.appendChild(ctl.canvas); ctl.resize(); ctl.build(sp, gi); ctl.start();
-        window.__proof3d = ctl;
-      });
-    }).catch(() => { $('#h3Card').hidden = true; });
-  }
-  house3D();
-
-  // ---------- material survey: same 1/2/3 answers as the text ("New roof? Reply 1 ...") ----------
-  const SV = { keep: 'keep the same material', switch: 'switch material', unsure: 'not sure yet' };
-  const MAT = { metal: 'metal', tile: 'tile', impact: 'impact-resistant shingle', other: 'something else' };
-  let svA = '', svM = '';
-  function svSave() {
-    if (!preview) RCP.survey(gi, { answer: svA, material: svA === 'switch' ? svM : '', sid });
-    $('#svDone').textContent = `Thanks. ${R.name} will plan on ${svA === 'switch' ? (svM ? MAT[svM] : 'a different material') : svA === 'keep' ? 'the same material' : 'showing you a few options'}.` + (preview ? ' (Preview: nothing was recorded.)' : '');
-    $('#svDone').hidden = false;
-  }
-  $('#sv').onclick = ev => { const b = ev.target.closest('button[data-a]'); if (!b) return; svA = b.dataset.a; svM = '';
-    $('#sv').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    $('#svMat').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', 'false'));
-    $('#svMat').hidden = svA !== 'switch'; svSave(); };
-  $('#svMat').onclick = ev => { const b = ev.target.closest('button[data-m]'); if (!b) return; svM = b.dataset.m;
-    $('#svMat').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); svSave(); };
 })();

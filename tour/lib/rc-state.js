@@ -35,8 +35,8 @@
     try { k = new URLSearchParams(location.search).get('roofer'); } catch (e) { }
     if (!ok(k)) try { if (window.parent !== window) k = new URLSearchParams(window.parent.location.search).get('roofer'); } catch (e) { k = null; }
     if (ok(k)) { try { localStorage.setItem(P + 'roofer', JSON.stringify(k)); } catch (e) { } return k; }
-    k = get('roofer', 'jackson');
-    return ok(k) ? k : 'jackson';
+    k = get('roofer', null);
+    return ok(k) ? k : null;   // no key asked for or kept: lib/brand.js names the default (window.DEFAULT_ROOFER), never this file
   })();
   const base = (function () { const s = document.currentScript && document.currentScript.src; return s ? s.replace(/lib\/rc-state\.js.*$/, '') : '../'; })();
 
@@ -77,15 +77,18 @@
       if (permit) { const y = +String(permit).slice(0, 4); return out({ kind: 'documented', conf: 'high', year: y, age: ay - y, text: `New roof ${y} (re-roof permit)`, why: 're-roof permit on file' }); }
       if (!year) return out({ kind: 'unknown', conf: 'low', year: null, age: null, text: 'Roof age unknown, year built not on file', why: 'no permit, no year built' });
       if (start) return out({ kind: 'likely', conf: 'medium', year: +year, age: ay - year, original: +year >= start,
-        text: +year >= start ? `Original roof, built ${year}` : `Built ${year}, no new roof on record since ${start}`, why: `${city} has a complete re-roof permit list since ${start}` });
+        text: +year >= start ? `Original roof, built ${year}` : `Built ${year}, no new roof on city list (starts ${start})`, why: `${city} has a complete re-roof permit list since ${start}` });
       return out({ kind: 'unknown', conf: 'low', year: +year, age: ay - year, text: `Roof age unknown, built ${year}`, why: `${city || 'This city'} has no complete re-roof permit list, so the roof may have been replaced` });
     },
 
     // ---------- the roofer this tour is branded for (lib/brand.js ROOFERS) ----------
-    // ?roofer=<key> on the shell or any page picks it and keeps it on this device; no param = the kept one, else jackson.
+    // ?roofer=<key> on the shell or any page picks it and keeps it on this device; no param = the kept one, else the default roofer (lib/brand.js DEFAULT_ROOFER, set through __fixRoofer).
     // Frames read the same key the shell stored, so the whole app follows one roofer. lib/brand.js drops unknown keys.
     rooferKey() { return ROOFER; },
-    __fixRoofer(k) { if (k && k !== ROOFER) { ROOFER = k; try { localStorage.setItem(P + 'roofer', JSON.stringify(k)); } catch (e) { } } },
+    // brand.js sets the key every screen runs on. When none was asked for or kept, that is the default roofer: it is not
+    // written to the device (as before, only a key somebody asked for is kept), and a script that ran before brand.js
+    // (rc-layout.js) and read the settings with no roofer yet is told to read them again.
+    __fixRoofer(k) { if (k && k !== ROOFER) { const none = ROOFER === null; ROOFER = k; if (none) fire({ key: 'settings' }); else try { localStorage.setItem(P + 'roofer', JSON.stringify(k)); } catch (e) { } } },
     // which key a data table (ROUTES, ROOFS) holds for the active roofer (Jackson's own data only)
     dataKey() { return ROOFER; },
     // ---------- the roofer's own settings (lib/nimbus-settings.js writes them, by voice or tap; Undo there) ----------
@@ -94,12 +97,22 @@
 
     // ---------- pipeline (one per device) ----------
     // 'handoff' (10-10): a homeowner who asked for a quote, handed to the roofer's owner from Ask ("Sent to Chris")
-    get STAGES() { const o = ((window.ROOFERS || {})[ROOFER] || {}).owner, nm = RC.setting('stageNames', {}) || {};
-      return [['new', 'New hit'], ['called', 'Contacted'], ['handoff', 'Sent to ' + (o || 'owner')], ['inspection', 'Inspection booked'], ['proposal', 'Proposal'], ['won', 'Won']].map(s => [s[0], nm[s[0]] || s[1]]); },
+    get STAGES() { return RC.stagesFrom((get('settings', {}) || {})[ROOFER] || {}); },
+    // the stage list a settings object describes: built-in stages, the roofer's own stages (customStages, each placed after a
+    // stage, always before Won), minus removed ones (removedStages = { key: where its homes went }). Values only, never code.
+    stagesFrom(m) { const o = ((window.ROOFERS || {})[ROOFER] || {}).owner, nm = (m && m.stageNames) || {}, rm = (m && m.removedStages) || {};
+      const l = [['new', 'New hit'], ['called', 'Contacted'], ['handoff', 'Sent to ' + (o || 'owner')], ['inspection', 'Inspection booked'], ['proposal', 'Proposal'], ['won', 'Won']];
+      ((m && m.customStages) || []).forEach(c => { const k = l.findIndex(s => s[0] === c.after); l.splice(k >= 0 ? k + 1 : l.length - 1, 0, [c.key, c.name]); });
+      return l.filter(s => !rm[s[0]]).map(s => [s[0], nm[s[0]] || s[1]]); },
     // loop 17: stage keys are read through RC.stageKey: known aliases (old or hand-edited names) map to their stage, a truly
     // unknown name logs one console warning and still reads as New hit (as before); nothing stored is rewritten
     stage(id, dflt) { const p = get('pipe', {})[id]; return p ? RC.stageKey(p.stage) : (dflt || 'new'); },
     stageKey(k) {
+      const ms = (get('settings', {}) || {})[ROOFER] || {}, rm = ms.removedStages || {};
+      if ((ms.customStages || []).some(c => c.key === k) || rm[k]) return rm[k] || k;
+      const v = RC.__stageKey(k); return rm[v] || v;
+    },
+    __stageKey(k) {
       if (k == null || k === '') return 'new';
       const keys = ['new', 'called', 'handoff', 'inspection', 'proposal', 'won', 'lost'];
       if (keys.indexOf(k) >= 0) return k;
@@ -118,6 +131,7 @@
     history(id) { const p = get('pipe', {})[id]; return p ? p.history : []; },
     setStage(id, stage, what, extra) {
       const all = get('pipe', {}), p = all[id] = all[id] || { stage: 'new', history: [] };
+      const moved = ((((get('settings', {}) || {})[ROOFER] || {}).removedStages) || {})[stage]; if (moved) stage = moved;
       const prev = p.stage; p.stage = stage; Object.assign(p, extra || {});
       p.history.unshift({ at: new Date().toISOString(), what: what || ('Moved to ' + RC.stageName(stage)), kind: 'stage' });
       set('pipe', all); return prev;
@@ -313,12 +327,12 @@
     // secrets, docs/AUTOMATION.md), switched on per company in the CRM inbox (lib/rc-automation.js). Each entry says what
     // happens today and what gets connected at onboarding; `connected` turns true only when a real provider is set up.
     CONNECT: {
-      text: { connected: false, now: 'Texts open in Messages on your phone. You send each one.', onboard: 'A texting number for the roofer (Twilio, A2P 10DLC registration takes 1 to 3 weeks)' },
-      email: { connected: false, now: 'Emails open in your mail app with the draft. You send each one.', onboard: 'An email sender on a sending domain with SPF, DKIM and DMARC (SMTP, Resend or Instantly), plus the mailing address' },
-      replies: { connected: false, now: 'Replies are logged by hand with Log a reply.', onboard: 'The texting number and email reply webhooks (roof-engine inbound-sms and inbound-email)' },
-      calendar: { connected: false, now: 'Booked inspections save as a calendar file (.ics) you open in your calendar.', onboard: 'Calendar sync (Google Calendar write, later)' },
-      phones: { connected: false, now: 'Phone numbers on homes are samples until a skip trace runs.', onboard: 'Tracerfy production key and credits (per trace run, with a yes)' },
-      calls: { connected: false, now: 'No call tracking.', onboard: 'A tracking number that forwards to the owner (roof-engine voice webhook)' }
+      text: { connected: false, now: 'Texts open in Messages on your phone. You send each one.', onboard: 'Wing sets up a texting number for your company. The phone carriers take 1 to 3 weeks to approve it' },
+      email: { connected: false, now: 'Emails open in your mail app with the draft. You send each one.', onboard: 'Wing sets up a sending address on your own web domain, with your mailing address on every email' },
+      replies: { connected: false, now: 'Replies are logged by hand with Log a reply.', onboard: 'Replies to your texting number and sending address show up here on their own' },
+      calendar: { connected: false, now: 'Booked inspections save as a calendar file (.ics) you open in your calendar.', onboard: 'Bookings go straight onto your Google Calendar (coming later)' },
+      phones: { connected: false, now: 'Phone numbers on homes are samples until Wing looks up the real ones.', onboard: 'Wing looks up real phone numbers for your homes, a batch at a time, each with your yes' },
+      calls: { connected: false, now: 'No call tracking.', onboard: 'A tracking number that rings your phone and counts the calls' }
     },
 
     // ---------- Daily 50 additions from the storm map / Nimbus (the deck's own 50 stay in dk.js) ----------
@@ -343,22 +357,25 @@
   };
   // real counts from the catalog (same file the storm map draws from), so a rebuild of the data updates every screen.
   // The catalog is the active roofer's (lib/brand.js dataRoot): brand.js loads right after this file and calls
-  // RC.__dataRoot(); a page without brand.js falls back to lib/st-data-dfw/ at DOMContentLoaded.
+  // RC.__dataRoot(); a page without brand.js has no roofer, so no data folder: its facts stay at zero.
   const dlong = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
   // "Aug 12" this year, "Aug 12, 2025" any other year (Nimbus's chips, updates and answers name the storm by this)
   const dshort = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) + (iso.slice(0, 4) === String(new Date().getFullYear()) ? '' : ', ' + iso.slice(0, 4));
   let startFacts = null;
   RC.factsReady = new Promise(res => { startFacts = root => { if (!startFacts) return; startFacts = null;
-    RC.dataRoot = root || (base + 'lib/st-data-dfw/');
+    RC.dataRoot = root || (window.rooferDataRoot ? rooferDataRoot() : null);
     // the storm every screen defaults to = the NEWEST storm (Jack 10-09): the storm watcher's latest-storm.json when the
     // catalog has it, else the catalog's newest 1 in+ storm. Both fetched no-store so a new storm shows the day it lands.
-    const J = u => fetch(RC.dataRoot + u, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+    const J = u => RC.dataRoot ? fetch(RC.dataRoot + u, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null) : Promise.resolve(null);
     res(Promise.all([J('catalog.json'), J('latest-storm.json')]).then(([c, latest]) => {
       if (!c) return RC.facts;
       if (c) (c&&c.regions||[]).forEach(r=>{ r.name=String(r.name||'').replace(/\s*\(more cities\)/i,''); }); // split county shows the plain county name
       RC.catalog = c; RC.latestStorm = latest || null;
-      const hit = c.storms.filter(x => x.homes_1in > 0).map(x => x.date).sort();
-      RC._showcase = latest && latest.iso && c.storms.some(x => x.date === latest.iso) ? latest.iso : hit.length ? hit[hit.length - 1] : (c.default_storm && c.default_storm.date) || RC._showcase;
+      const hit = c.storms.filter(x => x.homes_1in > 0).map(x => x.date).sort(), top = hit.length ? hit[hit.length - 1] : '';
+      // the feed names the newest storm only while the catalog holds nothing newer (11-11: a stale latest-storm.json kept
+      // the header on Jun 2 while the Storms screen, which reads the catalog, offered the Jul 6 storm)
+      const fed = latest && latest.iso && c.storms.some(x => x.date === latest.iso) ? latest.iso : '';
+      RC._showcase = (fed && fed >= top ? fed : top) || (c.default_storm && c.default_storm.date) || RC._showcase;
       const s = c.storms.find(x => x.date === RC.SHOWCASE);
       RC.facts.homes = c.total; RC.facts.counties = c.regions.length; RC.facts.state = c.state || 'TX';
       if (s) Object.assign(RC.facts.storm, { iso: s.date, d: dshort(s.date), long: dlong(s.date), homes: s.homes_1in, homes075: s.homes_075, max: s.max_in });
@@ -385,8 +402,8 @@
   // Kept in memory only (never localStorage, never the service worker: sw.js passes these requests straight through).
   // Nothing loaded -> null, and screens say "Owner not loaded".
   const PUBLIC_BUILD = false /*@RC_PUBLIC_BUILD@*/;
-  const SB = { URL: 'https://wbtrsujvprbdojmxlkpe.supabase.co',
-    KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidHJzdWp2cHJiZG9qbXhsa3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNjc0MzcsImV4cCI6MjEwNjY0MzQzN30.rzSf_wXbb9W0uajLg_5Ur04VyobSwgz3pLXgFSyG_5I' };
+  const SB = { URL: 'https://demo-no-backend.invalid',
+    KEY: 'DEMO-NO-KEY' };
   const LOCAL = /^(localhost|127\.0\.0\.1|\[::1\]|::1)$/.test(location.hostname);
   const isPublic = () => { if (PUBLIC_BUILD) return true; try { if (window.RCT_AUTH && RCT_AUTH.public) return true; if (window.top.RCT_AUTH && window.top.RCT_AUTH.public) return true; } catch (e) { } return false; };
   const sess = () => { try { const v = JSON.parse(localStorage.getItem('rc.session') || 'null'); return v && v.access_token && (!v.expires_at || v.expires_at > Date.now() / 1000) ? v : null; } catch (e) { return null; } };

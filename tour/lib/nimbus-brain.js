@@ -26,7 +26,7 @@
     }
     if (kind === 'roof') {
       if (f.roof_squares == null) return 'I do not have a roof size for this home yet. On its record, Draw the roof gives one in about a minute.';
-      return 'This roof is about ' + Math.round(f.roof_squares) + ' squares' + (f.roof_measured ? ', from LiDAR' : ', estimated from the house size') + (f.roof_confidence != null ? ', and the model is ' + f.roof_confidence + ' percent sure of the shape' : '') + '. Treat it as within about 10 percent, and measure on the roof before you order.';
+      return 'This roof is about ' + Math.round(f.roof_squares) + ' squares' + (f.roof_measured ? ', from LiDAR' : ', estimated from the house size') + (f.roof_confidence != null ? ', and the model is ' + f.roof_confidence + ' percent sure of the shape' : '') + '. Roof size is an estimate. Order a measurement report before you quote.';
     }
     if (kind === 'hail') {
       if (f.hail_in == null) return 'No radar hail on file for this address.';
@@ -46,6 +46,46 @@
 
   // starting the route: truck mode on a phone (lib/nimbus-truck.js), the route and the first house on a computer
   const startRoute = () => window.NimbusTruck && (innerWidth <= 599 || document.body.classList.contains('nb-phone')) ? [{ name: 'truck_mode', args: {} }] : [{ name: 'show_route', args: {} }, { name: 'open_next_house', args: {} }];
+  // ---------- edits to the app, in plain talk -> one propose_change part ----------
+  const PREFIX = /^(?:(?:please|ok|okay|hey|nimbus|so|yeah|can you|could you|would you|will you|i want you to|i want to|i would like to|id like to|i need you to|lets|let s|go ahead and|just)\s+)+/;
+  const SAY_TEMPLATE = /^(?:change|edit|update|make|set|rewrite)\s+(?:my |the )?(?:first |opening |storm |intro )?(?:text|text message|message|template)(?:\s+message)?\s+(?:to say|to read|to|so it says|say|as)\s+/i;
+  function parseEdit(seg, prev) {
+    let t = norm(seg).replace(PREFIX, '').trim(), m;
+    const L = window.RCLayout, Ns = window.NimbusSettings; if (!L || !Ns) return null;
+    if (/^(put|set) (everything|it all) back\b|^reset (the |my )?(layout|screens?|app)\b|^show everything( again)?$|^undo all my layout\b/.test(t)) return { kind: 'reset_layout' };
+    // stages
+    if ((m = /^(?:add|create|make)(?: me)? (?:a |an |another )?(?:new )?(?:pipeline )?stage(?: called| named| for)? (.+?)(?: (after|before) (.+))?$/.exec(t))) return Object.assign({ kind: 'add_stage', name: m[1].trim() }, m[2] ? { [m[2]]: m[3] } : {});
+    if ((m = /^(?:add|create) (.+?) (?:as a |as a new )?stage(?: (after|before) (.+))?$/.exec(t))) return Object.assign({ kind: 'add_stage', name: m[1].replace(/^(a|an|the|new) /, '').trim() }, m[2] ? { [m[2]]: m[3] } : {});
+    if ((m = /^(?:remove|delete|get rid of|drop|take out|hide)(?: the)?(?: stage(?: called)?)? (.+?)(?: stage)?(?:,? (?:and )?(?:move|put|send) (?:them|those|it|the homes|those homes)(?: all)? (?:to|into|in) (.+))?$/.exec(t)) && (/\bstage\b/.test(t) || (m[2] && /\b(move|put|send)\b/.test(t))))
+      return Object.assign({ kind: 'remove_stage', stage: m[1].trim() }, m[2] ? { move_to: m[2].trim() } : {});
+    // saved lists
+    if ((m = /^save (?:this|these|that|it|what i have|whats on screen)?\s*(?:view|list|filter|search)?\s*(?:as|to|called|named)?\s*(?:my |a |the )?(.+)$/.exec(t)) && /\b(list|view|this|these|as)\b/.test(t)) return { kind: 'save_view', name: m[1].trim() };
+    if ((m = /^(?:delete|remove|get rid of|drop)(?: my| the)? (.+)$/.exec(t)) && Ns.viewNamed(m[1], Ns.views())) return { kind: 'remove_view', name: m[1] };
+    // moving
+    if ((m = /^(?:move|put|bring|place|show)(?: the| my)? (.+?)(?: section| box| part)? (first|last|to the top|at the top|on top|to the bottom|at the bottom|on the bottom|up top)(?: of .+| on .+)?$/.exec(t))) return { kind: 'order', item: m[1], position: /first|top/.test(m[2]) ? 'first' : 'last' };
+    if ((m = /^(?:move|put|place)(?: the| my)? (.+?) (above|below|before|after|under|over) (?:the |my )?(.+)$/.exec(t))) return { kind: 'order', item: m[1], position: /above|before|over/.test(m[2]) ? 'before' : 'after', other: m[3] };
+    // showing and hiding
+    if ((m = /^(?:hide|remove|get rid of|take off|take away|take out|turn off|lose|dont show(?: me)?|do not show(?: me)?|i dont need|i dont want|no more)(?: the| my)? (.+)$/.exec(t))) { const s = L.find(m[1]); return s ? { kind: 'section', section: s.key, show: false } : { kind: 'unknown', verb: 'hide', what: m[1] }; }
+    if ((m = /^(?:bring back|unhide|put back|restore|show)(?: the| my)? (.+?)(?: again| back)?$/.exec(t))) {
+      const s = L.find(m[1]); const hid = s && (Ns.get().hiddenSections || []).indexOf(s.key) >= 0;
+      if (s && (hid || !/^show/.test(t))) return { kind: 'section', section: s.key, show: true };
+      return null;
+    }
+    // "hide customers and reports": the second part borrows the first part's verb
+    if (prev && prev.kind === 'section') { const s = L.find(t); if (s) return { kind: 'section', section: s.key, show: prev.show }; }
+    return null;
+  }
+  function parseEdits(raw) {
+    const parts = norm(raw).split(/\s*(?:\band then\b|\bthen\b|\band also\b|\band\b|\balso\b)\s*/).filter(Boolean);
+    const whole = parseEdit(raw);
+    // a stage move sentence keeps its "and move them to X"
+    if (whole && (whole.kind === 'remove_stage' || whole.kind === 'add_stage') && /\b(move|put|send) (them|those|it|the homes)\b/.test(norm(raw))) return { changes: [whole], missed: [] };
+    const out = [], missed = []; let prev = null, any = false;
+    parts.forEach(p => { const c = parseEdit(p, prev); if (c && c.kind !== 'unknown') { out.push(c); prev = c; any = true; } else missed.push(p); });
+    if (!any) return whole && whole.kind === 'unknown' ? { unknown: whole } : null;
+    return { changes: out, missed };
+  }
+  const WING_OFFER = "I can't change that one myself. Want me to send it to Wing?";
   // ---------- intents: what was said -> which tool ----------
   const ASKING = /^(what|whats|why|how|explain|tell me about|what does|whats the|is the|does)\b/;
   function think(raw, state) {
@@ -61,17 +101,25 @@
         if (/^(yes|yeah|yep|sure|ok|okay|do it|go|go ahead|lets go|start it|please|yes please)\b/.test(t)) return { calls: state.offer === 'inbox' ? [{ name: 'open_screen', args: { screen: 'inbox' } }] : startRoute() };
         if (/^(no|nope|not now|later|no thanks)\b/.test(t)) return { calls: [], say: 'Okay. I\'m here when you need me.' };
       }
+      if (state && state.pending === 'wing') {
+        if (/^(yes|yeah|yep|sure|ok|okay|send it|please|do it|go ahead)\b/.test(t)) return { calls: [{ name: 'request_change', args: { text: state.text } }] };
+        if (/^(no|nope|not now|never mind|nevermind|forget it|no thanks)\b/.test(t)) return { calls: [], say: 'Okay, I left it alone.' };
+      }
+      if (state && state.pending === 'stage_where') {
+        if (/^(no|nope|cancel|never mind|nevermind|forget it)\b/.test(t)) return { calls: [], say: 'Okay, I left the stage alone.' };
+        return { calls: [{ name: 'propose_change', args: { changes: [{ kind: 'remove_stage', stage: state.stage, move_to: t.replace(/^(?:move |put |send )?(?:them |those |it )?(?:all )?(?:to |into |in )?(?:the )?/, '').replace(/ stage$/, '') }] } }] };
+      }
       if (state && state.pending === 'customer') {
         if (/\b(no|cancel|never mind|nevermind)\b/.test(t)) return { calls: [], say: 'Okay, I did not add anyone.' };
         const p = parseCustomer(raw);
         return p.name && p.address ? { calls: [{ name: 'add_past_customer', args: p }] } : { calls: [], say: 'I need a name and a street address. For example: Maria Lopez, 412 Oak Street.', state: { pending: 'customer' } };
       }
       if (/^(stop|cancel|never mind|nevermind|quiet|shh|thats all|thanks|thank you|ok thanks)$/.test(t)) return { calls: [], say: /thank/.test(t) ? 'Anytime.' : '' };
-      if (any(t, ['undo', 'take that back', 'reverse that'])) return { calls: [{ name: 'undo_last', args: {} }] };
+      if (/\bundo\b/.test(t) || any(t, ['take that back', 'reverse that'])) return { calls: [{ name: 'undo_last', args: {} }] };
       if (/\b(talk mode|voice mode|talk to nimbus|just talk|hands off the screen)\b/.test(t)) return { calls: [{ name: 'talk_mode', args: {} }] };
       if (/\b(truck mode|drive mode|driving mode|hands free|handsfree)\b/.test(t)) return { calls: [{ name: 'truck_mode', args: {} }] };
       if (/\b(start|begin|lets do) (the |my |todays )?route\b/.test(t)) return { calls: startRoute() };
-      if (!/\b(turn off|turn on|off|disable|stop|no more)\b/.test(t) && /\b(whats (goin|going) on|whats up|whats new|catch me up|brief me|briefing|morning report|how are we looking|whats the plan|what do i have today|what have i got)\b/.test(t)) return { calls: [{ name: 'briefing', args: {} }] };
+      if (!/\b(turn off|turn on|off|disable|stop|no more|hide|bring back|remove|delete)\b/.test(t) && /\b(whats on(?: for)?(?: today)?|whats (goin|going) on|whats up|whats new|catch me up|brief me|briefing|morning report|how are we looking|whats the plan|what do i have today|what have i got)\b/.test(t)) return { calls: [{ name: 'briefing', args: {} }] };
       if (any(t, ['walk me through', 'show me around', 'give me a tour', 'how do i use', 'how does this screen', 'teach me', 'what am i looking at'])) return { calls: [{ name: 'walkthrough', args: {} }] };
 
       if (state && state.pending === 'keep') {
@@ -96,8 +144,8 @@
         if (st) return { calls: [{ name: 'change_setting', args: { setting: 'stageNames', value: { from: st[1], to: after } } }] };
         if ((m = /\brename (?:the )?(?:stage )?(.+?) (?:to|as) (.+)$/.exec(t))) return { calls: [{ name: 'change_setting', args: { setting: 'stageNames', value: { from: m[1], to: m[2] } } }] };
       }
-      if (/\bbriefing\b/.test(t) && /\b(turn off|off|stop|no more|disable|dont want)\b/.test(t)) return { calls: [{ name: 'change_setting', args: { setting: 'briefing', value: 'off' } }] };
-      if (/\bbriefing\b/.test(t) && /\b(turn on|back on|on|start)\b/.test(t)) return { calls: [{ name: 'change_setting', args: { setting: 'briefing', value: 'on' } }] };
+      if (/\bbriefing\b/.test(t) && /\b(turn off|off|stop|no more|disable|dont want|hide|remove)\b/.test(t)) return { calls: [{ name: 'change_setting', args: { setting: 'briefing', value: 'off' } }] };
+      if (/\bbriefing\b/.test(t) && /\b(turn on|back on|bring back|on|start)\b/.test(t)) return { calls: [{ name: 'change_setting', args: { setting: 'briefing', value: 'on' } }] };
       if (/\b(text|texts|message|messages|drafts?|words?)\b/.test(t) && /\b(casual|friendlier|less formal|more relaxed|like me|laid back)\b/.test(t)) return { calls: [{ name: 'change_setting', args: { setting: 'tone', value: 'casual' } }] };
       if (/\b(text|texts|message|messages|drafts?)\b/.test(t) && /\b(more formal|more professional|standard|normal wording)\b/.test(t)) return { calls: [{ name: 'change_setting', args: { setting: 'tone', value: 'standard' } }] };
       if ((m = /\badd (?:a |an )?(?:column|field|box|spot) (?:for |called |named )?(.+)$/.exec(t))) return { calls: [{ name: 'change_setting', args: { setting: 'customFields', value: { label: m[1].replace(/\b(please|on the record|to the record|to every home)\b/g, '').trim() } } }] };
@@ -110,7 +158,31 @@
         if (val) return { calls: [{ name: 'set_field', args: { field: f.label, value: val } }] };
       }
       if (/\b(what have i changed|my settings|what did i change)\b/.test(t)) return { calls: [{ name: 'my_settings', args: {} }] };
-      if (/^(can you |could you |i want |i need |i wish )?(make|add|build|change|get) (the app|the software|it|roof command)\b/.test(t) || /\b(tell wing|ask wing|request|feature)\b/.test(t)) return { calls: [{ name: 'request_change', args: { text: raw } }] };
+      // rules that never change: say so plainly, before anything tries to act on the words
+      if (/\b(stop line|opt ?out|stop message|the word stop)\b/.test(t) && /\b(remove|delete|change|edit|get rid|take|drop|without|reword|rewrite|shorten)\b/.test(t)) return { calls: [], say: 'The STOP line stays on every text. That one is the law and it cannot be changed. I can change the rest of your first text.' };
+      if (/\b(text|texts|texting|message|messages)\b/.test(t) && /\b(texas|rules?|window|hours|limit)\b/.test(t) && /\b(ignore|remove|turn off|get rid|no|skip|bypass|override)\b/.test(t)) return { calls: [], say: 'Texas allows texts only from 9 in the morning to 8 at night, noon on Sunday. I can narrow those hours, but I can never widen them.' };
+      // the roofer's own first text: his words keep their capitals, so this reads the raw sentence
+      if ((m = SAY_TEMPLATE.exec(String(raw).replace(/^\s*(?:please|can you|could you)\s+/i, '').trim()))) { const body = String(raw).replace(/^\s*(?:please|can you|could you)\s+/i, '').trim().slice(m[0].length).replace(/^["']|["']+$/g, '').trim(); return { calls: [{ name: 'propose_change', args: { changes: [{ kind: 'template', text: body }] } }] }; }
+      if (/\b(standard|original|default|old)\b/.test(t) && /\b(first |opening )?text\b/.test(t) && /\b(back|reset|put|use|go)\b/.test(t)) return { calls: [{ name: 'propose_change', args: { changes: [{ kind: 'template', reset: true }] } }] };
+      // showing a saved list, or filtering Leads for a look (no yes needed: it saves nothing)
+      { const Ns = window.NimbusSettings, vs = Ns ? Ns.views() : [];
+        if ((m = /^(?:show|open|pull up|bring up|go to|load|use)(?: me)?(?: my| the)? (.+)$/.exec(t)) && Ns.viewNamed(m[1], vs)) return { calls: [{ name: 'show_leads', args: { view: m[1] } }] };
+        if (/\b(clear|remove|reset)\b.*\b(filters?)\b|^show (me )?all (my )?leads$/.test(t)) return { calls: [{ name: 'show_leads', args: { clear: true } }] };
+        if ((m = /^(?:filter|narrow)(?: my| the)?(?: leads| list| board)?(?: to| by| for| down to)? (.+)$/.exec(t)) || (m = /^(?:show|give)(?: me)? (.+?) (?:on leads|leads|on the leads|in leads)$/.exec(t))) {
+          const w = m[1].replace(/^(only|just|the|homes in|leads in) /, '').trim();
+          if (/^(todays list|today s list|todays 50|my route|the route)$/.test(w)) return { calls: [{ name: 'show_leads', args: { route: true } }] };
+          if (/^knock again$/.test(w)) return { calls: [{ name: 'show_leads', args: { knock: true } }] };
+          const st = Ns && Ns.stageIn(Ns.get(), w);
+          return { calls: [{ name: 'show_leads', args: st ? { stage: st[1] } : { city: w } }] };
+        }
+      }
+      // ---------- edits to the app: nothing happens until a yes ----------
+      const ed = parseEdits(raw);
+      if (ed && ed.unknown) return { calls: [], say: "I can't " + ed.unknown.verb + ' ' + ed.unknown.what + ' myself. Want me to send it to Wing?', state: { pending: 'wing', text: raw } };
+      if (ed && ed.changes.length) return { calls: [{ name: 'propose_change', args: { changes: ed.changes } }], after: ed.missed.length ? "I didn't catch: " + ed.missed.join(', ') + '.' : '' };
+      // asked Wing by name: send it. Anything else about the app he wants changed: say it plainly and offer, never file it silently.
+      if (/\b(tell wing|ask wing|send (this|it|that) to wing|let wing know|feature request)\b/.test(t)) return { calls: [{ name: 'request_change', args: { text: raw } }] };
+      if (/^(?:(?:can you|could you|please|i want to|i want|i need|i wish|id like|i would like|lets)\s+)*(?:make|add|build|change|get|redesign|recolor|move|hide|remove|turn|rename|put)\b/.test(t) && /\b(the app|the software|roof command|wing outreach|screen|page|button|logo|colors?|font|dark mode|theme|sidebar|menu|layout|tab|report|integration|quickbooks|zapier|column|card|section)\b/.test(t) && !/\b(satellite|street map|inspection|customer|route|stage)\b/.test(t)) return { calls: [], say: WING_OFFER, state: { pending: 'wing', text: raw } };
       // ---------- the morning questions (the Daily 50 queue, lib/nimbus-data.js call_today) ----------
       if (/\bhow many\b.*\b(homes|houses|roofs)\b.*\b(hit|got hit|hailed on)\b/.test(t)) return { calls: [{ name: 'call_today', args: { ask: 'hit' } }] };
       if (/\b(who|which|what) (homes |houses |people |ones )?(do|should|can) i (call|text|reach|contact|hit up)\b/.test(t) || /\b(who|which homes|which houses) (to|should i) call\b/.test(t) || /\bcall (list|today|first)\b/.test(t)) return { calls: [{ name: 'call_today', args: { ask: 'call' } }] };
@@ -121,7 +193,8 @@
       if (/\b(replies|replied|wrote back|texted back|answered)\b/.test(t) && !/\b(lady|guy|man|woman|remember)\b/.test(t)) return { calls: [{ name: 'inbox', args: { show: 'replied' } }] };
       if (/\b(follow ?ups?|whats due|overdue)\b/.test(t)) return { calls: [{ name: 'inbox', args: { show: 'due' } }] };
       if (/\b(results|how are we doing|how did we do|numbers|revenue|how many jobs)\b/.test(t)) return { calls: [{ name: 'results', args: { period: /year/.test(t) ? 'this_year' : /30 days/.test(t) ? 'last_30_days' : 'this_month' } }] };
-      if (/\b(seo|website|blog|blog posts)\b/.test(t)) return { calls: [{ name: 'seo', args: {} }] };
+      // only a question about the SEO work itself: "the lady asked about her website" or "text her about the blog" go on to their own rules
+      if (/\b(seo|website|blog|blog posts)\b/.test(t) && (/^(seo|website|blog|blog posts|my website|my seo|my blog)$/.test(t) || (/\b(how|what|whats|show|any|did|status|doing|published|ranking|traffic|latest|new)\b/.test(t) && !/\b(lady|guy|man|woman|homeowner|couple|text|email|message|asked|wanted|remember|who)\b/.test(t)))) return { calls: [{ name: 'seo', args: {} }] };
       if (/\b(biggest|worst|top|all the) storms?\b/.test(t) || /\bstorms? (this year|last year|this month)\b/.test(t)) return { calls: [{ name: 'storms', args: { period: /last year/.test(t) ? 'last_year' : /this month/.test(t) ? 'this_month' : /ever|all/.test(t) ? 'all' : 'this_year' } }] };
       if (/\bpast customers?\b/.test(t) || (/\breview\b/.test(t) && /\b(ask|asked)\b/.test(t))) return { calls: [{ name: 'past_customers', args: {} }] };
       if ((m = /\b(?:everyone|homes|houses|who is|whos) (?:at|in) (new hit|contacted|inspection|proposal|won|not now|sent to \w+)\b/.exec(t))) return { calls: [{ name: 'find_homes', args: { stage: m[1].replace(/sent to \w+/, 'handoff').replace('new hit', 'new').replace('contacted', 'called') } }] };

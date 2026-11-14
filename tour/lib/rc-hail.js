@@ -11,7 +11,7 @@
    RCH.fmtDay(iso)            -> "Jun 2, 2026" */
 (function () {
   if (window.RCH) return;
-  const base = () => (window.STM && STM.BASE) || (window.rooferDataRoot ? rooferDataRoot() : new URL('st-data-dfw/', document.currentScript ? document.currentScript.src : location.href).href);
+  const base = () => (window.STM && STM.BASE) || rooferDataRoot();
   const J = u => fetch(base() + u).then(r => r.ok ? r.json() : null).catch(() => null);
   const B1 = u => fetch(base() + u).then(r => r.ok ? r.arrayBuffer() : null).catch(() => undefined);
   // one retry after a short pause: a busy local server can refuse a burst of requests (that is not a missing file)

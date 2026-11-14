@@ -326,7 +326,7 @@
   }
   const CHIPS = {
     daily: ["What's going on today?", 'Start truck mode', 'Show me today\'s route', 'Open the next house', 'Why is this house on my list?', 'Text this homeowner the storm message', 'Switch the map to satellite', 'What is the Turnover Radar?'],
-    home: ['Why is this house on my list?', 'How sure is the roof size?', 'Mark this one no answer', 'Book an inspection Tuesday at 3', 'Text this homeowner'],
+    home: ['Why is this house on my list?', 'How much hail hit this house?', 'Mark this one no answer', 'Book an inspection Tuesday at 3', 'Text this homeowner'],
     storm: ['What hit last night?', 'Show me today\'s route', 'What does a dark house mean?'],
     other: ["What's going on today?", 'Show me today\'s route', 'How many inspections this week?', 'What hit last night?', 'Add a past customer']
   };
@@ -351,6 +351,19 @@
     const d = document.createElement('div'); d.className = 'nbv-btns';
     list.forEach(([label, fn, p]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; if (p) b.className = 'p'; b.addEventListener('click', () => { d.remove(); fn(); }); d.appendChild(b); });
     logEl.appendChild(d); scrollEnd(); return d;
+  }
+  // the yes-or-no card for a change: plain lines, the preview when there are words to read, two buttons. Nothing changes until Yes.
+  let propCard = null;
+  function closeProp(word) { if (!propCard) return; const c = propCard; propCard = null; const b = c.querySelector('.nbv-prop-b'); if (b) { const e = document.createElement('em'); e.className = 'nbv-prop-w'; e.textContent = word; b.replaceWith(e); } c.classList.add('done'); }
+  function proposalCard(p) {
+    closeProp('Not changed');
+    const d = document.createElement('div'); d.className = 'nbv-prop'; d.setAttribute('role', 'group'); d.setAttribute('aria-label', 'Change waiting for your yes');
+    const h = document.createElement('b'); h.textContent = p.lines.length > 1 ? 'I will make these changes together' : 'I will make this change'; d.appendChild(h);
+    const ul = document.createElement('ul'); p.lines.forEach(l => { const li = document.createElement('li'); li.textContent = l; ul.appendChild(li); }); d.appendChild(ul);
+    if (p.preview) { const q = document.createElement('p'); q.className = 'nbv-prop-q'; q.textContent = p.preview; d.appendChild(q); }
+    const row = document.createElement('div'); row.className = 'nbv-prop-b';
+    [['Yes, do it', 'p', () => handle('Yes', 'chip')], ['No, leave it', '', () => handle('No', 'chip')]].forEach(([t, cl, fn]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = t; if (cl) b.className = cl; b.addEventListener('click', fn); row.appendChild(b); });
+    d.appendChild(row); logEl.appendChild(d); propCard = d; scrollEnd();
   }
   const scrollEnd = () => { logEl.scrollTop = logEl.scrollHeight; };
   function place() {
@@ -521,13 +534,16 @@
     if (how !== 'voice' || !logEl.lastElementChild || logEl.lastElementChild.textContent !== text) bubble('you', text);
     const think = bubble('nb think', 'Working on it');
     const turn = { at: new Date().toISOString(), screen: Tools.screen(), how, said: text, actions: [], brain: '' };
-    let reply = '', tours = [];
+    let reply = '', tours = [], proposal = null;
     const runCall = async (name, args) => {
       if (panel.classList.contains('nbv-sheet') && !/^(count|home_facts|walkthrough|undo_last)$/.test(name)) panel.classList.add('nbv-peek');   // phone: let the screen show
       const r = await Tools.run(name, args);
-      if (r.ok && !/^(home_facts|walkthrough|count|briefing|truck_mode)$/.test(name)) action(r, name);   // a failed tool says why in the reply
+      if (r.proposal) proposal = r.proposal;
+      if (r.ok && !/^(home_facts|walkthrough|count|briefing|truck_mode|propose_change)$/.test(name)) action(r, name);   // a failed tool says why in the reply
       if (r.tour) tours = r.tour;
       turn.actions.push({ name, args, ok: !!r.ok });
+      if (r.need === 'stage_where') state = { pending: 'stage_where', stage: r.stage };
+      if (r.wing) state = { pending: 'wing', text };
       if (r.need === 'time') state = { pending: 'time', day: '' };
       if (r.need === 'customer') state = { pending: 'customer' };
       if (r.offer) state = { pending: 'offer', offer: r.offer };
@@ -537,7 +553,16 @@
     try {
       if (!health) await checkHealth(); else checkHealth();   // a known server answers at once; the check refreshes in the background
       let usedClaude = false;
-      if (brainLive()) {
+      // a change waiting for a yes: only the roofer's own word applies it, whichever brain is on
+      const waiting = window.NimbusSettings && NimbusSettings.pending, wt = text.toLowerCase().replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim();
+      if (waiting && /^(yes|yeah|yep|yup|sure|ok|okay|do it|go ahead|please do|yes please|yes do it|sounds good|that works|perfect)\b/.test(wt)) {
+        turn.brain = 'yes'; closeProp('Done'); const x = await runCall('confirm_change', {}); reply = x.say || ''; usedClaude = true; state = null;
+        history.push({ role: 'user', content: [{ type: 'text', text }] }, { role: 'assistant', content: [{ type: 'text', text: reply }] });
+      } else if (waiting && /^(no|nope|nah|cancel|dont|do not|never mind|nevermind|not now|leave it|no leave it|no thanks|forget it)\b/.test(wt)) {
+        turn.brain = 'no'; NimbusSettings.cancelProposal(); closeProp('Not changed'); reply = 'Okay, I left it the way it was.'; usedClaude = true; state = null;
+        history.push({ role: 'user', content: [{ type: 'text', text }] }, { role: 'assistant', content: [{ type: 'text', text: reply }] });
+      } else if (waiting) { NimbusSettings.cancelProposal(); closeProp('Not changed'); }
+      if (!usedClaude && brainLive()) {
         try { reply = await claudeTurn(text, runCall); usedClaude = true; turn.brain = 'claude'; }
         catch (e) { console.warn('[nimbus] Claude brain failed, using the built-in brain', e); checkHealth(true); }
       }
@@ -556,6 +581,7 @@
     think.remove();
     if (panel.classList.contains('nbv-sheet')) panel.classList.toggle('nbv-peek', turn.actions.some(x => x.ok && x.name !== 'count' && x.name !== 'home_facts'));
     if (reply) bubble('nb', reply);
+    if (proposal) proposalCard(proposal);
     turn.reply = reply; logTurn(turn);
     busy = false;
     replyFns.forEach(f => { try { f(turn); } catch (e) { } });

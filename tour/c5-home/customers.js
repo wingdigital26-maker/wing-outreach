@@ -30,11 +30,11 @@
 
   // ---------- the list ----------
   const SEED = [
-    { id: 'pc-s1', name: 'Alex Sample', phone: '(972) 555-0101', email: 'alex.sample@example.com', gi: 222352, addr: '3726 Navarro Way', city: 'Frisco', zip: '75034', jobDate: '2026-06-20', jobType: 'Full re-roof, architectural shingles', flows: { review: { s: 'done', at: '2026-07-02T15:00:00Z' }, referral: { s: 'asked', at: '2026-07-10T15:00:00Z' } } },
-    { id: 'pc-s2', name: 'Jordan Sample', phone: '(972) 555-0102', email: 'jordan.sample@example.com', gi: 35368, addr: '8502 Holly St', city: 'Frisco', zip: '75034', jobDate: '2026-07-08', jobType: 'Full re-roof', flows: { review: { s: 'asked', at: '2026-07-15T15:00:00Z' } } },
-    { id: 'pc-s3', name: 'Casey Sample', phone: '(972) 555-0103', email: '', gi: 243978, addr: '202 Dublin Dr', city: 'Richardson', zip: '75080', jobDate: '2026-05-12', jobType: 'Hail repair and gutters', flows: { review: { s: 'done', at: '2026-05-20T15:00:00Z' }, referral: { s: 'done', at: '2026-06-01T15:00:00Z', note: 'Neighbor on Dublin Dr' }, testimonial: { s: 'done', at: '2026-06-03T15:00:00Z' } } },
-    { id: 'pc-s4', name: 'Morgan Sample', phone: '(972) 555-0104', email: 'morgan.sample@example.com', gi: 259636, addr: '174 Lakeside Dr', city: 'Rockwall', zip: '75032', jobDate: '2026-08-02', jobType: 'Full re-roof, impact-rated shingles', flows: {} },
-    { id: 'pc-s5', name: 'Riley Sample', phone: '(972) 555-0105', email: 'riley.sample@example.com', gi: 34209, addr: '5706 Grosseto Dr', city: 'Frisco', zip: '75034', jobDate: '2026-09-15', jobType: 'Full re-roof', flows: { testimonial: { s: 'replied', at: '2026-09-25T15:00:00Z' } } }
+    { id: 'pc-s1', name: 'Alex Sample', phone: '(972) 555-0101', email: 'alex.sample@example.com', gi: 222352, addr: '5717 Creekview Dr', city: 'Frisco', zip: '75034', jobDate: '2026-06-20', jobType: 'Full re-roof, architectural shingles', flows: { review: { s: 'done', at: '2026-07-02T15:00:00Z' }, referral: { s: 'asked', at: '2026-07-10T15:00:00Z' } } },
+    { id: 'pc-s2', name: 'Jordan Sample', phone: '(972) 555-0102', email: 'jordan.sample@example.com', gi: 35368, addr: '6430 Boyton Canyon Rd', city: 'Frisco', zip: '75034', jobDate: '2026-07-08', jobType: 'Full re-roof', flows: { review: { s: 'asked', at: '2026-07-15T15:00:00Z' } } },
+    { id: 'pc-s3', name: 'Casey Sample', phone: '(972) 555-0103', email: '', gi: 243978, addr: '6507 Stonebridge Dr', city: 'Richardson', zip: '75080', jobDate: '2026-05-12', jobType: 'Hail repair and gutters', flows: { review: { s: 'done', at: '2026-05-20T15:00:00Z' }, referral: { s: 'done', at: '2026-06-01T15:00:00Z', note: 'Neighbor on Dublin Dr' }, testimonial: { s: 'done', at: '2026-06-03T15:00:00Z' } } },
+    { id: 'pc-s4', name: 'Morgan Sample', phone: '(972) 555-0104', email: 'morgan.sample@example.com', gi: 259636, addr: '3032 S Fm549', city: 'Rockwall', zip: '75032', jobDate: '2026-08-02', jobType: 'Full re-roof, impact-rated shingles', flows: {} },
+    { id: 'pc-s5', name: 'Riley Sample', phone: '(972) 555-0105', email: 'riley.sample@example.com', gi: 34209, addr: '4563 Shady Oaks Cir', city: 'Frisco', zip: '75034', jobDate: '2026-09-15', jobType: 'Full re-roof', flows: { testimonial: { s: 'replied', at: '2026-09-25T15:00:00Z' } } }
   ].map(c => Object.assign(c, { sample: true }));
   function list() {
     let l = RC.__get(K, null);
@@ -75,10 +75,9 @@
   }
   function render() {
     if (!active()) return;
-    root.removeAttribute('aria-busy');
     const l = list();
     if (!l.length) {
-      root.innerHTML = `<div class="pch"><h2>Customers<small>Your past jobs: reviews, referrals and testimonials, plus the neighbors to knock.</small></h2></div>
+      root.innerHTML = `<div class="pch"><h2>Past customers<small>Your past jobs: reviews, referrals and testimonials, plus the neighbors to knock.</small></h2></div>
         <div class="pcempty"><b>No past customers yet</b><p>Bring in your past jobs from a spreadsheet (CSV: name, phone, email, address, job date, job type) or add one by hand. They stay on this device.</p>
         <button type="button" class="pcb pri" data-p="import">Import a CSV</button><button type="button" class="pcb" data-p="add">Add a customer</button>
         <ol><li><b>Ask for a review.</b> One tap opens the text with your Google link filled in. You send it.</li><li><b>Ask for a referral.</b> A neighbor they send becomes a new lead on your pipeline.</li><li><b>Knock the neighbors.</b> The homes around each past job, street by street.</li></ol></div>`;
@@ -88,7 +87,7 @@
     const rows = l.filter(c => (!ql || [c.name, c.addr, c.city, c.phone, c.email, c.jobType].join(' ').toLowerCase().includes(ql)) &&
       (show === 'all' || (show === 'todo' ? FLOWS.some(f => !flowOf(c, f[0]).s) : FLOWS.some(f => flowOf(c, f[0]).s === 'replied'))))
       .sort((a, b) => String(b.jobDate || '').localeCompare(String(a.jobDate || '')));
-    root.innerHTML = `<div class="pch"><h2>Customers<small>Texts and emails open on your phone with the words filled in. You tap send.</small></h2>
+    root.innerHTML = `<div class="pch"><h2>Past customers<small>Texts and emails open on your phone with the words filled in. You tap send.</small></h2>
         <button type="button" class="pcb" data-p="import">Import CSV</button><button type="button" class="pcb pri" data-p="add">Add a customer</button></div>
       <div class="pcsum">${summary(l).map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('')}</div>
       <div class="pcset"><span>Google review link</span><input id="pcRev" type="url" inputmode="url" placeholder="https://g.page/r/... (from your Google Business Profile, Ask for reviews)" value="${esc(reviewUrl())}" aria-label="Google review link"><button type="button" class="pcb sm" data-p="saverev">Save</button></div>
@@ -123,7 +122,7 @@
       const noTo = ch === 'sms' ? !c.phone : !c.email;
       open(hd(`${name} ask: ${esc(c.name || 'customer')}`, ch === 'sms' ? esc(c.phone || 'Get phone') : esc(c.email || 'Get email')) +
         `<div class="bd"><div class="seg" role="group" aria-label="Send by"><button type="button" data-ch="sms" aria-pressed="${ch === 'sms'}">Text</button><button type="button" data-ch="email" aria-pressed="${ch === 'email'}">Email</button></div>
-        ${k === 'review' && !reviewUrl() ? '<p class="warn">Add your Google review link on the Customers page first, so the text carries it.</p>' : ''}
+        ${k === 'review' && !reviewUrl() ? '<p class="warn">Add your Google review link on the Past customers page first, so the text carries it.</p>' : ''}
         ${ch === 'sms' && !inHours && tw ? `<p class="warn">Outside your texting hours. ${esc(tw.label || '')}</p>` : ''}
         ${ch === 'email' ? `<label>Subject<input id="pcSj" value="${esc(w.subject)}"></label>` : ''}<label>Message<textarea id="pcBody">${esc(w.body)}</textarea></label>
         <p class="note">${ch === 'sms' ? 'Opens Messages on your phone with this filled in. You press send.' : 'Opens your mail app with this filled in. You press send.'} Marked Asked when you tap.</p></div>
@@ -247,8 +246,8 @@
 
   // ---------- knock the neighbors: the homes around a past job, street by street ----------
   let hbP = null;
-  const homesBin = () => hbP || (hbP = fetch((window.STM ? STM.BASE : '../lib/st-data-dfw/') + 'homes.bin').then(r => r.ok ? r.arrayBuffer() : null).catch(() => null));
-  const catP = () => fetch((window.STM ? STM.BASE : '../lib/st-data-dfw/') + 'catalog.json').then(r => r.json());
+  const homesBin = () => hbP || (hbP = fetch((window.STM ? STM.BASE : rooferDataRoot()) + 'homes.bin').then(r => r.ok ? r.arrayBuffer() : null).catch(() => null));
+  const catP = () => fetch((window.STM ? STM.BASE : rooferDataRoot()) + 'catalog.json').then(r => r.json());
   function resolve(c) {
     if (c.gi != null) return Promise.resolve(c.gi);
     if (!window.STM || !c.addr) return Promise.resolve(null);

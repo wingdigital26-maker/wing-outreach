@@ -45,7 +45,7 @@
     function size(){ c.width = innerWidth; c.height = innerHeight; }
     size(); addEventListener('resize', size);
     var s = 7; function R(){ s = (s*16807) % 2147483647; return s/2147483647; }
-    var P = []; for(var i=0;i<(innerWidth<600?220:380);i++) P.push({x:R()*c.width, y:R()*c.height, len:10+R()*24, a:0.08+R()*0.34, v:1.6+R()*2.6, w:R()<0.14?1.5:0.9});
+    var P = []; for(var i=0;i<(innerWidth<600?120:180);i++) P.push({x:R()*c.width, y:R()*c.height, len:10+R()*24, a:0.08+R()*0.34, v:1.6+R()*2.6, w:R()<0.14?1.5:0.9});
     function draw(){
       g.clearRect(0,0,c.width,c.height); var cx = c.width/2, cy = c.height*0.46, kx = Math.min(360, c.width*0.3), ky = c.height*0.26;
       for(var i=0;i<P.length;i++){ var p = P[i], depth = p.y/c.height;
@@ -54,7 +54,7 @@
           g.strokeStyle = 'rgba(70,80,101,'+a+')'; g.lineWidth = p.w; g.beginPath(); g.moveTo(p.x,p.y); g.lineTo(p.x-p.len*0.18, p.y-p.len); g.stroke();
           g.fillStyle = 'rgba(39,87,230,'+Math.min(1,a+0.2)+')'; g.beginPath(); g.arc(p.x,p.y,0.9+depth*1.3,0,7); g.fill(); }
         if(!reduced){ p.y += p.v*(0.5+depth); p.x -= p.v*0.18; if(p.y > c.height+30){ p.y = -30; p.x = R()*c.width; } } }
-      if(!reduced && !ended) requestAnimationFrame(draw);
+      if(!reduced && !ended) requestAnimationFrame(function(){ requestAnimationFrame(draw); });   // every other frame: the hail is texture, the piece keeps the frame budget
     }
     draw();
   })();
@@ -88,6 +88,10 @@
   function showBeat(name){
     if(ended) return;
     docEl.classList.add('beat-on');
+    /* 11-02: once the headline has faded, take it out of flow and ask the piece engine to refit, so the piece centres in the
+       free band above the beat at every window size (it used to keep the hero fit: above the headline at 1280x720, on top of
+       the greeting at 1440x900) */
+    if(!docEl.classList.contains('beat-fit')) setTimeout(function(){ docEl.classList.add('beat-fit'); try{ window.dispatchEvent(new Event('resize')); }catch(e){} }, 450);
     var el = document.getElementById('beat-'+name);
     if(current && current !== el){ current.classList.remove('in'); current.classList.add('out'); }
     current = el;
@@ -95,9 +99,6 @@
     if(BEAT || HOLD) return;
     /* the greeting follows the info (or storm) beat on the first open and the short opening; the About replay has no greeting */
     var GREET = WAIT || SHORT;
-    /* loop 19: on the first open, once Today has said it is ready the info beat is the last one (the storm and greeting
-       beats added ~5 s to a handoff the roofer was waiting on); a slow Today still gets the full set while it loads */
-    if(name === 'info' && WAIT && goAsked){ setTimeout(beatsOver, 1300); return; }
     if(name === 'info') setTimeout(function(){ STORM ? showBeat('storm') : GREET ? showBeat('hi') : beatsOver(); }, SHORT ? (STORM ? 1200 : 1500) : (STORM ? 1300 : 1600));
     else if(name === 'storm') setTimeout(function(){ GREET ? showBeat('hi') : beatsOver(); }, SHORT ? 2400 : 3400);
     else setTimeout(beatsOver, 1800);   /* the greeting is on for at least this long, then stays up through the hold */
@@ -143,6 +144,7 @@
   function end(){
     if(ended) return; ended = true;
     clearTimeout(cueT); clearTimeout(stillT); docEl.classList.remove('loading'); docEl.classList.remove('skip-on');
+    if(window.parent === window) docEl.classList.add('solo');   // the fade-out is for the standalone page; in the shell Today rises over the still-painted opening
     document.body.classList.add('go');
     try{ sessionStorage.setItem('rc.introSeen', '1'); }catch(e){}
     try{ window.parent.postMessage({type:'intro-done'}, '*'); }catch(e){}

@@ -83,7 +83,7 @@
       RC.remember(Object.assign({ id: key, addr: lead.addr, city: lead.city, zip: lead.zip, from: 'website' }, gi != null ? { gi } : {},
         lead.name ? { webName: lead.name } : {}, ph && !(RC.recall(key) || {}).phone ? { phone: pretty(ph), phoneBy: 'homeowner (storm-check page)' } : {}));
       // an inspection request is a hot lead: straight to the hand-off stage, like the Proof Page's Book button (RCP.ask)
-      if (!had || RC.stageKey(had.stage) === 'new' || RC.stageKey(had.stage) === 'called') RC.setStage(key, 'handoff', (lead.name ? lead.name + ' (their own name, typed on the form) asked' : 'Asked') + ' for a free inspection on the storm-check page' + (lead.when ? ' (' + lead.when.toLowerCase() + ')' : ''),
+      if (!had || had.stage === 'new' || had.stage === 'called') RC.setStage(key, 'handoff', (lead.name ? lead.name + ' (their own name, typed on the form) asked' : 'Asked') + ' for a free inspection on the storm-check page' + (lead.when ? ' (' + lead.when.toLowerCase() + ')' : ''),
         had && had.source ? {} : { source: 'website', sourceDetail: lead.source_detail });
       else RC.note(key, 'Asked again for a free inspection on the storm-check page');
       RC.note(key, `Came from ${LABEL[T.channel] || T.channel}${T.first.utm_campaign ? ', campaign "' + T.first.utm_campaign + '"' : ''}${T.channel !== T.lastChannel ? ' (last visit: ' + (LABEL[T.lastChannel] || T.lastChannel) + ')' : ''}`);

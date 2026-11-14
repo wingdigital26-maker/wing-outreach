@@ -82,12 +82,6 @@
     const gi = mm ? +mm[1] : rec.gi != null ? +rec.gi : null, me = rawId;
     if (OWNDATA && gi != null) RC.owner(gi).then(o => { if (me !== rawId || !o) return; rec.owner = o.name; rec.homestead = o.homestead;
       first = ownerFirst(o.name); if (window.renderRecord) window.renderRecord(); });
-    // loading state until the county record lands (a reload on #/crm/home/<id> flashed a placeholder city, owner and facts)
-    const loading = gi != null && !!window.STM; document.body.classList.toggle('rloading', loading);
-    const done = () => { if (me !== rawId) return; document.body.classList.remove('rloading');
-      // the CRM's Home tab names the street once it is known (it said Home while the record loaded)
-      const hl = document.getElementById('vHomeLbl'), hb = document.getElementById('vHome');
-      if (hl && hb && hb.getAttribute('aria-pressed') === 'true' && !matchMedia('(max-width:640px)').matches && rec.addr && !/^(Home from|Stop |Today's list)/.test(rec.addr)) hl.textContent = rec.addr; };
     window.HOME_READY = gi != null && window.STM ? STM.facts(gi, rec.lon, rec.lat).then(f => {
       if (me !== rawId) return;
       if (f.addr) { rec.addr = f.addr; rec.place = f.place; }
@@ -95,7 +89,7 @@
       Object.assign(rec, { subdivision: f.subdivision || rec.subdivision, sqft: f.sqft || rec.sqft, year: f.year, permit: f.permit, reroof: f.reroof || null, lidarBefore: f.lidarBefore || null, roofAge: f.roofAge, pitchNote: f.pitch.note, county: f.county || rec.county, gi, roof: f.roof || null });
       window.HOME.roof = rec.roof;   // home.js: the eave rises to the LiDAR story count; the stories chip and the Roof report read it too
       place = rec.place || place; if (window.renderRecord) window.renderRecord();
-    }).catch(() => {}).then(done) : Promise.resolve();
+    }).catch(() => {}) : Promise.resolve();
   }
   // "Rudloff, Paula Jean" -> "Paula"; a trust, company or LLC gives no first name
   function ownerFirst(n) { n = String(n || ''); if (/▒/.test(n)) return '';   // hidden until messaged: no first name in a draft if (/\b(trust|llc|inc|ltd|lp|co|company|estate|bank|homes|properties)\b/i.test(n)) return '';
@@ -124,7 +118,6 @@
 
   // ---------- header bits (per home) ----------
   const crumb = $('#crumb'), stopnav = $('#stopnav');
-  window.rcRenderHead = () => { try { renderHead(); } catch (e) {} };
   function renderHead() {
   document.title = (window.crmView && crmView() !== 'home' ? 'CRM' : rec.addr) + ' | Roof Command';
   if (kind === 'daily') crumb.innerHTML = `<button type="button" class="lnk" data-go="daily">Today's 50</button><span>/</span>Stop ${n}<span>/</span><em>${esc(rec.addr)}</em>`;
@@ -141,15 +134,10 @@
   else if (kind === 'map') { stopnav.hidden = false;   // a home with a thread came from the CRM inbox; one without came from the storm map
     const inInbox = window.crmView && RC.history(id).length > 0;
     stopnav.innerHTML = inInbox ? `<button type="button" data-go="inbox">${ic('back')}Back to inbox</button>` : `<button type="button" data-go="storm">${ic('back')}Back to storm map</button>`; }
-  // the screen the roofer actually opened this home from (product.html keeps it as RC_FROM): the back button returns there
-  let from = null; try { from = parent !== window && parent.RC_FROM; } catch (e) {}
-  const back = stopnav.querySelector('button');
-  if (from && from.hash && from.label && back && from.screen !== 'daily') { back.dataset.go = 'from'; back.innerHTML = `${ic('back')}<span class="lng">Back to </span>${esc(from.label === 'Storms' ? 'storm map' : from.label)}`; }
   }
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-go]'); if (!b) return;
     const g = b.dataset.go;
-    if (g === 'from') { try { const f = parent.RC_FROM; if (f && f.hash) { parent.location.hash = f.hash; return; } } catch (e) {} }
     if (g === 'inbox') { if (window.crmSetView) window.crmSetView('inbox', false, rawId); return; }
     if (g === 'daily') RC.go('daily', { n });
     else if (g === 'storm') RC.go('storm', { iso: rec.storm || STORM.iso });
@@ -159,8 +147,7 @@
   // ---------- switch home in place: shell route messages, Next stop, browser Back ----------
   // The CRM (crm.js) owns the view: 'inbox' (three panes), 'pipeline' (the board) or 'home' (this record). Every route
   // this page announces carries the view with the id, so the shell's URL (#/crm/inbox/<id>, #/crm/home/<id>) stays true.
-  // loop 18: before crm.js has set its view, the URL's own view stands (a cold #/crm/customers was announced as the record)
-  const curView = () => (window.crmView ? window.crmView() : (new URLSearchParams(location.search).get('view') || 'home'));
+  const curView = () => (window.crmView ? window.crmView() : 'home');
   function announce(push) {
     const view = curView(), u = new URL(location.href); u.searchParams.delete('id');
     if (rawId) u.searchParams.set('home', rawId); else u.searchParams.delete('home');
@@ -174,9 +161,6 @@
     if (newId === rawId) return;
     if (dlg.open) dlg.close();
     toast.hidden = true; filter = 'all';
-    // the old home's roof numbers never flash on the new home: clear the roof panel now, home.js redraws it once built (10-30)
-    ['titleH', 'focus', 'labels', 'areaTotal'].forEach(k => { const e = document.getElementById(k); if (e) e.innerHTML = ''; });
-    const pill = document.getElementById('measPill'); if (pill) pill.textContent = 'Loading';
     load(newId); renderAll();
     if (window.__switchHome) window.__switchHome();
     if (quiet) return;
@@ -219,17 +203,11 @@
   function draft() {
     // this home's own storm day (the inbox composer and the Next task already use it); the catalog default only when the record has none
     // a home with no 1 in+ hail on file gets no storm line (never another storm's date)
-    const st = String(rec.addr || '').split(',')[0].trim();   // name the street (the email already does); never the placeholder
-    const hs = hail != null && /^\d{4}-\d{2}-\d{2}/.test(rec.storm || '') ? ` The ${sday(rec.storm)} storm dropped hail on ${st && !/^(Home from|Stop |Today's list)/.test(st) ? st : 'your street'}.` : '';
-    // every message carries the home's page (same RCP.link the email uses) and the material survey (Jack 10-29); survey drops if it runs past ~320
-    const g = proofGi(), lk = g != null && window.RCP ? ' Your roof: ' + RCP.link(g) : '';
-    const sv = ' New roof? Reply 1 to keep the material, 2 to switch, 3 unsure.';
-    const t = (s) => `Hi${first ? ' ' + first : ''}, this is ${REP} with ${CO}.${hs} Want a free roof check this week?${lk}${s}${LIC ? ' ' + LIC + '.' : ''} Reply STOP to opt out.`;
-    return t(sv).length <= 320 ? t(sv) : t('');
+    const hs = hail != null && /^\d{4}-\d{2}-\d{2}/.test(rec.storm || '') ? ` The ${sday(rec.storm)} storm dropped hail on your street.` : '';
+    return `Hi${first ? ' ' + first : ''}, this is ${REP} with ${CO}.${hs} Want a free roof check this week?${LIC ? ' ' + LIC + '.' : ''} Reply STOP to opt out.`;
   }
   function textDlg() {
-    const c0 = RC.canText(id, tel || null), noLink = window.RCP && RCP.linkReady && !RCP.linkReady(),
-      c = noLink && c0.ok ? { ok: false, reason: 'Set your public site first' } : c0, can = c.ok;   // never a localhost link in a text (10-30)
+    const c = RC.canText(id, tel || null), can = c.ok;
     open('Text draft', `<p class="dl">${optin ? (rec.customer ? 'Past customer, texts allowed.' : 'Opted in to texts.') : 'Cold homeowner: you send it yourself from your phone, one home at a time.'} ${esc(RC.textWindow().line)}</p>
       <textarea id="smsBody" rows="4" class="draft">${esc(draft())}</textarea>
       <div class="drow">${can ? `<a class="pbtn" id="smsGo" href="#">${ic('text')}Open in Messages</a>` : `<button type="button" class="pbtn" disabled>${ic('text')}${esc(c.reason)}</button>`}<button type="button" id="smsCopy">Copy draft</button></div>`, body => {
@@ -281,10 +259,10 @@
     const C = RC.copy, f = C ? C.factsFromStop(rec, { id, street: rec.addr ? String(rec.addr).split(',')[0] : '', stormISO: rec.storm || null, optedOut: RC.optedOut(id) }) : null;
     const r = C ? C.next(f, 0, optin ? 'optin' : 'cold', 'email') : { blocked: 'no outreach library' };
     const ok = !!r.body && !r.blocked;
-    const why = r.blocked === 'opted out' ? 'This homeowner opted out. No more emails.' : r.missing && r.missing.includes('mailingAddress') && r.missing.includes('homeLink') ? 'Add your mailing address and your public site to send emails.' : r.missing && r.missing.includes('mailingAddress') ? 'Add your mailing address to send emails.' : r.blocked ? 'Email is held back: ' + r.blocked + '.' : '';
+    const why = r.blocked === 'opted out' ? 'This homeowner opted out. No more emails.' : r.missing && r.missing.includes('mailingAddress') ? 'Add your mailing address to send emails.' : r.blocked ? 'Email is held back: ' + r.blocked + '.' : '';
     open('Email draft', `<p class="dl">Your email opens with the draft. Type the homeowner's address there.</p>
       ${r.body ? `<input id="mSubj" class="draft" value="${esc(r.subject || '')}" aria-label="Subject"><textarea id="mBody" rows="7" class="draft" aria-label="Email">${esc(r.body)}</textarea>` : ''}
-      ${why ? `<p class="dl">${RC.setupLink(esc(why))}</p>` : ''}
+      ${why ? `<p class="dl">${esc(why)}</p>` : ''}
       <div class="drow">${ok ? `<a class="pbtn" id="mGo" href="#">${ic('mail')}Open in Mail</a>` : `<button type="button" class="pbtn" disabled>${ic('mail')}Open in Mail</button>`}</div>`, body => {
       const go = body.querySelector('#mGo');
       if (go) go.onclick = () => { const sj = body.querySelector('#mSubj').value, bd = body.querySelector('#mBody').value;
@@ -301,60 +279,24 @@
   function book(t) {
     t = t && t.id ? t : null;
     const tid = t ? t.id : id, taddr = t ? t.addr : rec.addr;
-    const cur = RC.booking(tid), base = cur ? new Date(cur) : null;
-    const dstr = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-    // the calendar's working hours and slot length (cal.js), so this dialog never offers a time the calendar calls closed,
-    // and only the slots that are still open that day (ahead of now, not held by another home), the same way the Calendar shows them
-    const CH = window.calHours, cfg = CH ? CH.config() : null, step = cfg ? cfg.slot_minutes : 60;
-    const winOf = d => { if (!cfg) return d.getDay() === 0 ? null : [9, 17]; const w = cfg.hours[String(d.getDay())]; return Array.isArray(w) && w.length === 2 && w[1] > w[0] ? w : null; };
-    const curT = base ? `${pad(base.getHours())}:${pad(base.getMinutes())}` : '';
-    function slotsFor(ds) {
-      const d = new Date(`${ds}T00:00:00`), w = isNaN(d) ? null : winOf(d), out = [];
-      if (w) for (let m = w[0] * 60; m + step <= w[1] * 60; m += step) {
-        const tt = `${pad(Math.floor(m / 60))}:${pad(m % 60)}`, at = new Date(`${ds}T${tt}:00`);
-        if (at.getTime() <= Date.now()) continue;
-        if (window.calTaken && window.calTaken(at.toISOString(), tid)) continue;
-        out.push(tt);
-      }
-      // an old booking outside the hours still shows its own time on its own day
-      if (base && ds === dstr(base) && !out.includes(curT)) { out.push(curT); out.sort(); }
-      return out;
-    }
-    // first day offered: the booked day, else the next working day (from tomorrow) that still has an open slot
-    let ds = base ? dstr(base) : '';
-    if (!ds) { const d = new Date(); for (let i = 1; i <= 60; i++) { d.setDate(d.getDate() + 1); if (slotsFor(dstr(d)).length) { ds = dstr(d); break; } } if (!ds) { const d2 = new Date(Date.now() + 864e5); ds = dstr(d2); } }
-    const now = new Date(), today = dstr(now);
-    if (ds < today) ds = today;
+    const cur = RC.booking(tid), base = cur ? new Date(cur) : new Date(Date.now() + 864e5);
+    const ds = `${base.getFullYear()}-${pad(base.getMonth() + 1)}-${pad(base.getDate())}`;
+    const slots = []; for (let h = 8; h <= 19; h++) for (const m of [0, 30]) slots.push(`${pad(h)}:${pad(m)}`);
+    const curT = cur ? `${pad(base.getHours())}:${pad(base.getMinutes())}` : '17:30';
+    const now = new Date(), today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
     const lbl = t => { const [h, m] = t.split(':').map(Number); return `${h % 12 || 12}:${pad(m)} ${h < 12 ? 'am' : 'pm'}`; };
-    const optsFor = (day, sel) => { const sl = slotsFor(day); return sl.length ? sl.map(t => `<option value="${t}"${t === sel ? ' selected' : ''}>${lbl(t)}</option>`).join('') : `<option value="" disabled selected>${winOf(new Date(`${day}T00:00:00`)) ? 'No open times that day' : 'Closed that day'}</option>`; };
-    // quick picks: the next 3 days that still have an open slot (today counts while it has one), one tap each
-    const quick = () => { const out = [], d = new Date(); for (let i = 0; i < 60 && out.length < 3; i++) { const k = dstr(d); if (slotsFor(k).length) out.push(k); d.setDate(d.getDate() + 1); } return out; };
-    const qLbl = k => { const d = new Date(`${k}T00:00:00`); return k === today ? 'Today' : k === dstr(new Date(Date.now() + 864e5)) ? 'Tomorrow' : d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }); };
-    const qHTML = sel => { const q = quick(); return q.length ? q.map(k => `<button type="button" data-day="${k}" aria-pressed="${k === sel}">${esc(qLbl(k))}</button>`).join('') : ''; };
     let done = false;
-    open(cur ? 'Reschedule the inspection' : 'Book an inspection', `<p class="dl">${esc(taddr)}. ${cur ? 'Booked for ' + esc(RC.when(cur)) + '.' : 'Pick a day and time with the homeowner.'}${cfg ? ' ' + esc(CH.hoursLine(cfg)) : ''}</p>
-      <div class="bkq" role="group" aria-label="Next open days">${qHTML(ds)}</div>
-      <div class="pick"><label class="fl">Day<input type="date" id="bkD" value="${ds}" min="${today}"></label><label class="fl">Time<select id="bkT">${optsFor(ds, curT)}</select></label></div>
+    open(cur ? 'Reschedule the inspection' : 'Book an inspection', `<p class="dl">${esc(taddr)}. ${cur ? 'Booked for ' + esc(RC.when(cur)) + '.' : 'Pick a day and time with the homeowner.'}</p>
+      <div class="pick"><label class="fl">Day<input type="date" id="bkD" value="${ds < today ? today : ds}" min="${today}"></label><label class="fl">Time<select id="bkT">${slots.map(t => `<option value="${t}"${t === curT ? ' selected' : ''}>${lbl(t)}</option>`).join('')}</select></label></div>
       <div class="drow"><button type="button" class="pbtn" id="bkGo">${ic('cal')}${cur ? 'Move the inspection' : 'Book it'}</button>${t ? '<button type="button" id="bkNo">Cancel</button>' : ''}</div>`, body => {
       const no = body.querySelector('#bkNo'); if (no) no.onclick = () => dlg.close();
-      const dI = body.querySelector('#bkD'), tI = body.querySelector('#bkT');
-      const qB = body.querySelector('.bkq');
-      const redo = () => { if (dI.value) tI.innerHTML = optsFor(dI.value, tI.value || curT); qB.innerHTML = qHTML(dI.value); };
-      dI.addEventListener('change', redo);
-      qB.addEventListener('click', e => { const b = e.target.closest('[data-day]'); if (!b) return; dI.value = b.dataset.day; redo(); });
-      // the Calendar (this frame or another one) books or cancels while this is open: the open times follow
-      const off = RC.on(ev => { if (!done && (!ev || !ev.key || ev.key === 'pipe')) redo(); });
-      dlg.addEventListener('close', off, { once: true });
       body.querySelector('#bkGo').onclick = () => {
         const dIn = body.querySelector('#bkD'), d = dIn.value, tm = body.querySelector('#bkT').value;
         // a day is required and the time cannot already be past (an inspection is booked ahead, never backdated)
-        if (d && !tm) { const tIn0 = body.querySelector('#bkT'); tIn0.setCustomValidity('No open time that day. Pick another day.'); tIn0.reportValidity(); dIn.addEventListener('input', () => tIn0.setCustomValidity(''), { once: true }); return; }
         const at = d ? new Date(`${d}T${tm}:00`) : null;
         if (!at || isNaN(at) || at.getTime() < Date.now()) { dIn.setCustomValidity(d ? 'Pick a day and time that is still ahead.' : 'Pick a day.'); dIn.reportValidity(); dIn.addEventListener('input', () => dIn.setCustomValidity(''), { once: true }); return; }
         // no double booking: the calendar (cal.js) holds the one rule every booking goes through (another home's slot, same length)
-        const tIn = body.querySelector('#bkT');
-        if (cfg && !CH.inHours(cfg, at.getTime()) && !(base && at.getTime() === base.getTime())) { tIn.setCustomValidity('That is outside your working hours. ' + CH.hoursLine(cfg)); tIn.reportValidity(); tIn.addEventListener('change', () => tIn.setCustomValidity(''), { once: true }); dIn.addEventListener('input', () => tIn.setCustomValidity(''), { once: true }); return; }
-        if (window.calTaken && window.calTaken(at.toISOString(), tid)) { tIn.setCustomValidity('That time is already booked for another home. Pick another.'); tIn.reportValidity(); tIn.addEventListener('change', () => tIn.setCustomValidity(''), { once: true }); return; }
+        const tIn = body.querySelector('#bkT'); if (window.calTaken && window.calTaken(at.toISOString(), tid)) { tIn.setCustomValidity('That time is already booked for another home. Pick another.'); tIn.reportValidity(); tIn.addEventListener('change', () => tIn.setCustomValidity(''), { once: true }); return; }
         const iso = at.toISOString(), prev = RC.stage(tid, dflt), prevB = RC.booking(tid), prevA = archivedOf(tid);
         done = true;
         // same history line as RC.book; a home parked in Not now comes back to the board when it is booked
@@ -424,7 +366,7 @@
   }
   function renderSteps() {
     const st = RC.stage(id, dflt), idx = RC.STAGES.findIndex(s => s[0] === st), hist = RC.history(id);
-    stepsEl.innerHTML = RC.STAGES.map((s, i) => `<button type="button" class="st${i < idx ? ' dn' : ''}${i === idx ? ' on' : ''}" data-s="${s[0]}" aria-current="${i === idx ? 'step' : 'false'}" title="${esc(s[1])}"><span class="d">${i < idx ? I.check : i + 1}</span><span><b>${s[1]}</b><small>${esc(stepSub(s[0], hist))}</small></span></button>`).join('');
+    stepsEl.innerHTML = RC.STAGES.map((s, i) => `<button type="button" class="st${i < idx ? ' dn' : ''}${i === idx ? ' on' : ''}" data-s="${s[0]}" aria-current="${i === idx ? 'step' : 'false'}"><span class="d">${i < idx ? I.check : i + 1}</span><span><b>${s[1]}</b><small>${esc(stepSub(s[0], hist))}</small></span></button>`).join('');
   }
   stepsEl.onclick = e => {
     const b = e.target.closest('[data-s]'); if (!b) return;
@@ -553,7 +495,7 @@
   const isKnock = h => /^Knocked: /.test(h.what || '');   // At the door (knock.js), 10-19
   const isNote = h => h.kind === 'note' && !isCall(h) && !isText(h) && !isKnock(h) && !/^(Task done|Email)/.test(h.what);
   let filter = 'all';
-  function fmtDay(iso) { return (d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + (d.getFullYear() !== new Date().getFullYear() ? ' ’' + String(d.getFullYear()).slice(2) : ''))(new Date(iso)); }
+  function fmtDay(iso) { return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
   function evHTML(h) {
     const d = new Date(h.at), icon = h.kind === 'storm' ? 'hail' : isKnock(h) ? 'door' : isCall(h) ? 'phone' : isText(h) ? 'text' : h.kind === 'email' ? 'mail' : h.kind === 'stage' ? 'check' : h.kind === 'doc' ? 'doc' : 'note';
     return `<div class="ev${h.hot ? ' hot' : ''}"><div class="dt"><small>${d.toLocaleDateString('en-US', { month: 'short' })}${d.getFullYear() !== new Date().getFullYear() ? ' ’' + String(d.getFullYear()).slice(2) : ''}</small><b>${d.getDate()}</b></div><div><div class="et">${ic(icon)}<span>${esc(h.what.split('. ')[0])}</span><time>${d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase()}</time></div>${h.what.indexOf('. ') > 0 ? `<div class="ed">${esc(h.what.slice(h.what.indexOf('. ') + 2))}</div>` : ''}<div class="who">By ${esc(h.who || REP)}</div></div></div>`;

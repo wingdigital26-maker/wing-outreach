@@ -17,7 +17,7 @@
    Steps 4 and up are light check-ins that alternate between two wordings so nobody gets the same text twice running.
 
    homeFacts (every field optional except street; a template leaves out any sentence whose fact is missing):
-     id, first (first name if known, else no name), street ("3704 Morning Dove Dr"), city, zip,
+     id, first (first name if known, else no name), street ("7330 Morning Dove Dr"), city, zip,
      stormISO ("2025-08-12"), hail (inches at the home, radar estimate), roofYear (year built / roof year),
      permit (year of the last reroof permit on record; null = none on record), squares, pitch (rise, 10 = 10/12),
      rep, roofer, rooferCity, phone (roofer's call/text number), mailingAddress (roofer's physical address, emails),
@@ -31,9 +31,6 @@
 
   const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const TEXT_MAX = 300;
-  // a text that carries the home's page link may run to 3 SMS segments (Jack 10-29: link + survey on every message)
-  const TEXT_MAX_LINK = 400;
-  const capFor = body => (/[?&]h=[0-9a-z]+/.test(body) ? TEXT_MAX_LINK : TEXT_MAX);
 
   // ---------- fact helpers ----------
   const nowOf = f => (f && f.now ? new Date(f.now) : new Date());
@@ -102,24 +99,12 @@
   const whoIn = f => `${f.rep} with ${f.roofer}${f.rooferCity ? ' in ' + f.rooferCity : ''}`;
   const STOP_COLD = 'Text STOP and I won\'t text again.';
   const STOP_OPT = 'Reply STOP to opt out.';
-  // material survey on every message (Jack 10-29): replies 1/2/3 are tagged by scripts/send (sendlib.parse_survey)
-  const SURVEY_T = 'New roof? Reply 1 to keep the same material, 2 to switch (metal, tile, impact), 3 not sure.';
-  // every message carries the home's own page (Jack 10-29): its 3D roof, roof facts, the survey and the free inspection
-  // (tour/proof/?h=<token>, lib/rc-proof.js RCP.link). Overrides the old "no links in a cold text" rule.
-  const PAGE_T = 'See your home in 3D and its roof facts:', PAGE_SHORT = 'Your roof:';
-  const pageLine = f => (f.link ? PAGE_T + ' ' + f.link : '');
-  const SURVEY_SHORT = 'New roof? Reply 1 to keep the material, 2 to switch, 3 unsure.';
-  const SURVEY_E = "One quick question so we bring the right samples: if you replace the roof, do you want the same material or something different? Reply 1 to keep the same, 2 to switch (metal, tile, impact-resistant shingle), or 3 if you're not sure.";
   const join = parts => parts.filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
   // a text over the limit drops its optional sentences (marked with a leading '?') from the end until it fits
   function fit(parts) {
     let p = parts.slice();
     const txt = () => join(p.map(x => (x && x[0] === '?' ? x.slice(1) : x)));
-    const lim = capFor(txt());
-    for (let i = p.length - 1; i >= 0 && txt().length > lim; i--) if (p[i] && p[i][0] === '?') p[i] = '';
-    // still long (long names): the survey keeps its question but loses the material examples
-    if (txt().length > lim) p = p.map(x => (x === SURVEY_T ? SURVEY_SHORT : x));
-    if (txt().length > lim) p = p.map(x => (x && x.indexOf(PAGE_T) === 0 ? PAGE_SHORT + x.slice(PAGE_T.length) : x));
+    for (let i = p.length - 1; i >= 0 && txt().length > TEXT_MAX; i--) if (p[i] && p[i][0] === '?') p[i] = '';
     return txt();
   }
   const opt = s => (s ? '?' + s : '');
@@ -131,8 +116,7 @@
     const addr = f.mailingAddress || '[your mailing address]';
     const foot = (aud === 'cold' ? `This is a marketing email from ${f.roofer}, ${addr}.` : `${f.roofer}, ${addr}.`) +
       `\nTo stop these emails, reply "unsubscribe"${f.unsubUrl ? ' or use ' + f.unsubUrl : ''} and we'll take you off the list.`;
-    const page = f.link && !paras.some(x => x && x.indexOf(f.link) >= 0) ? `Here is a page made for your home: a 3D model of the house, the roof facts on record, the storm record, and a one-tap way to book the free inspection. No login:\n${f.link}` : '';
-    return [greet, ...paras.filter(Boolean), page, SURVEY_E, sign, foot].filter(Boolean).join('\n\n');
+    return [greet, ...paras.filter(Boolean), sign, foot].join('\n\n');
   }
 
   // ---------- templates ----------
@@ -143,25 +127,25 @@
   // ===== cold, text (no links, roofer named in the first words, STOP line on every one) =====
   add('cold.text.d1', 'cold', 'text', 'd1', f => fit([
     `${hi(f)}, this is ${whoIn(f)}.`, S.hailAt(f), opt(S.roofShort(f)), opt(S.route(f)),
-    'Would you want a free inspection?', pageLine(f), SURVEY_T, STOP_COLD]));
+    'Would you want a free inspection?', STOP_COLD]));
   add('cold.text.d3', 'cold', 'text', 'd3', f => fit([
     `${hi(f)}, ${f.rep} at ${f.roofer} again about ${f.street}.`,
     `If you'd like someone to look at the roof after the ${stormDate(f) || 'last'} hail, I can set up a free inspection.`,
-    opt(S.callLine(f)), pageLine(f), SURVEY_T, STOP_COLD]));
+    opt(S.callLine(f)), STOP_COLD]));
   add('cold.text.d7', 'cold', 'text', 'd7', f => fit([
     `${hi(f)}, it's ${who(f)}. Last note on ${f.street} for a while.`, opt(S.measureShort(f)),
-    'If you ever want it looked at in person, the free inspection offer stands.', opt(S.callLine(f)), pageLine(f), SURVEY_T, STOP_COLD]));
+    'If you ever want it looked at in person, the free inspection offer stands.', opt(S.callLine(f)), STOP_COLD]));
   add('cold.text.d30', 'cold', 'text', 'd30', f => fit([
     `${hi(f)}, ${who(f)} checking in on ${f.street}.`,
     `If anything has come up with the roof since the ${stormDate(f) || 'last'} storm, a free inspection is still on the table.`,
-    opt(S.callLine(f)), pageLine(f), SURVEY_T, STOP_COLD]), 'checkin');
+    opt(S.callLine(f)), STOP_COLD]), 'checkin');
   add('cold.text.checkin_a', 'cold', 'text', 'd60+', f => fit([
     `${hi(f)}, ${who(f)}.`, S.season(f) || 'Quick check-in.',
-    `If you'd like the roof at ${f.street} looked at, the free inspection still stands.`, opt(S.callLine(f)), pageLine(f), SURVEY_T, STOP_COLD]), 'checkin');
+    `If you'd like the roof at ${f.street} looked at, the free inspection still stands.`, opt(S.callLine(f)), STOP_COLD]), 'checkin');
   add('cold.text.checkin_b', 'cold', 'text', 'd60+', f => fit([
     `${hi(f)}, it's ${who(f)}.`,
-    `After a storm, if you want the roof at ${f.street} checked, ${f.phone ? 'call or text ' + f.phone + ' and ' : ''}we'll look at it free.`,
-    pageLine(f), SURVEY_T, STOP_COLD]), 'checkin');
+    `If a storm comes through and you want someone to check the roof at ${f.street}, ${f.phone ? 'call or text ' + f.phone + ' and ' : ''}we'll come look at no charge.`,
+    STOP_COLD]), 'checkin');
 
   // ===== cold, email (a person sends it; CAN-SPAM ad line, physical address, unsubscribe) =====
   add('cold.email.d1', 'cold', 'email', 'd1', f => ({
@@ -208,19 +192,19 @@
     ? (f.pastJobYear ? `Thanks again for having us out in ${f.pastJobYear}.` : '')
     : 'Thanks for checking your address with us.');
   add('optin.text.d1', 'optin', 'text', 'd1', f => fit([
-    `${hi(f)}, it's ${who(f)}.`, opt(optThanks(f)), S.hailAt(f), opt(S.route(f)), 'Want me to set up a free inspection? Reply with a day that works.', pageLine(f), SURVEY_T, STOP_OPT]));
+    `${hi(f)}, it's ${who(f)}.`, opt(optThanks(f)), S.hailAt(f), opt(S.route(f)), 'Want me to set up a free inspection? Reply with a day that works.', STOP_OPT]));
   add('optin.text.d3', 'optin', 'text', 'd3', f => fit([
-    `${hi(f)}, ${f.rep} at ${f.roofer}. Following up on the free inspection for ${f.street}. What day works for you?`, pageLine(f), SURVEY_T, STOP_OPT]));
+    `${hi(f)}, ${f.rep} at ${f.roofer}. Following up on the free inspection for ${f.street}. What day works for you?`, STOP_OPT]));
   add('optin.text.d7', 'optin', 'text', 'd7', f => fit([
     `${hi(f)}, ${f.rep} at ${f.roofer}.`, opt(S.measureShort(f)), opt(S.roofShort(f)),
-    `Happy to look at ${f.street} in person whenever you're ready.`, pageLine(f), SURVEY_T, STOP_OPT]));
+    `Happy to look at ${f.street} in person whenever you're ready.`, STOP_OPT]));
   add('optin.text.d30', 'optin', 'text', 'd30', f => fit([
-    `${hi(f)}, ${who(f)} checking in. The free inspection for ${f.street} is still open if you want it.`, opt(S.callLine(f)), pageLine(f), SURVEY_T, STOP_OPT]), 'checkin');
+    `${hi(f)}, ${who(f)} checking in. The free inspection for ${f.street} is still open if you want it.`, opt(S.callLine(f)), STOP_OPT]), 'checkin');
   add('optin.text.checkin_a', 'optin', 'text', 'd60+', f => fit([
     `${hi(f)}, ${who(f)}.`, S.season(f) || 'Just checking in.',
-    `If you want the roof at ${f.street} looked at, reply and we'll set a time.`, pageLine(f), SURVEY_T, STOP_OPT]), 'checkin');
+    `If you want the roof at ${f.street} looked at, reply and we'll set a time.`, STOP_OPT]), 'checkin');
   add('optin.text.checkin_b', 'optin', 'text', 'd60+', f => fit([
-    `${hi(f)}, ${who(f)}. If a storm comes through and you want someone to check ${f.street}, reply here${f.phone ? ' or call ' + f.phone : ''}.`, pageLine(f), SURVEY_T, STOP_OPT]), 'checkin');
+    `${hi(f)}, ${who(f)}. If a storm comes through and you want someone to check ${f.street}, reply here${f.phone ? ' or call ' + f.phone : ''}.`, STOP_OPT]), 'checkin');
 
   // ===== opted in / past customers, email =====
   const optIntro = f => (f.source === 'past'
@@ -282,8 +266,6 @@
     if (!o.phone && r.phone) o.phone = r.phone;
     if (!o.mailingAddress && r.mailingAddress) o.mailingAddress = r.mailingAddress;
     if (o.first) o.first = String(o.first).trim().split(/\s+/)[0];
-    // the home's page link: from the home index (gi, or id m<gi>) once lib/rc-proof.js is loaded
-    if (!o.link && root.RCP) { const m = /^m?(\d+)$/.exec(String(o.gi != null ? o.gi : o.id != null ? o.id : '')); if (m) o.link = root.RCP.link(+m[1], o.sid || null); }
     // when the county's permit records start (the Daily 50 engine knows it per home); unknown = no "since" claim
     if (o.permitsFrom === undefined && o.id != null && root.RC && root.RC.permitCoverage) { const pc = root.RC.permitCoverage(o.id); o.permitsFrom = pc && pc.from ? pc.from : null; }
     return o;
@@ -305,7 +287,6 @@
     if (!f.street) m.push('street');
     if (!f.phone && t.ch === 'text' && t.kind !== 'reply') m.push('phone');
     if (t.ch === 'email' && t.kind !== 'reply' && !f.mailingAddress) m.push('mailingAddress');
-    if (root.RCP && root.RCP.LINK_HOLE && f.link === root.RCP.LINK_HOLE) m.push('homeLink');   // never a localhost link (10-30)
     return m;
   }
 
@@ -316,18 +297,28 @@
       .replace('Want me to set up a free inspection? Reply with a day that works.', 'Want a free look at the roof? Just text me a day that works.')
       .replace(/Radar put hail around/, 'Looks like hail around');
   }
+  // the roofer's own first text (settings.templates.firstText, edited through Nimbus): his words first, then the code adds what can
+  // never change: the company name when he left it out, and the STOP line. Follow-ups stay as written.
+  const FIRST_FILL = { street: f => f.street, first: f => f.first || '', company: f => f.roofer, rep: f => f.rep, city: f => f.city || '' };
+  function firstTextOf(t, f) {
+    if (t.id !== 'cold.text.d1' && t.id !== 'optin.text.d1') return null;
+    let own = null; try { const m = typeof RC !== 'undefined' && RC.setting ? RC.setting('templates', null) : null; own = m && m.firstText; } catch (e) { }
+    if (!own) return null;
+    let body = String(own).replace(/\{(street|first|company|rep|city)\}/g, (x, k) => FIRST_FILL[k](f) || '').replace(/\s+/g, ' ').trim();
+    if (f.roofer && body.toLowerCase().indexOf(String(f.roofer).toLowerCase()) < 0) body = f.roofer + ' here. ' + body;
+    return fit([body, t.aud === 'cold' ? STOP_COLD : STOP_OPT]);
+  }
   function render(templateId, homeFacts) {
     const t = T[templateId]; if (!t) throw new Error('rc-copy: no template ' + templateId);
     const f = withDefaults(homeFacts);
-    const out = t.fn(f), isText = t.ch === 'text';
+    const own = firstTextOf(t, f), out = own != null ? own : t.fn(f), isText = t.ch === 'text';
     const res = { id: t.id, audience: t.aud, channel: t.ch, step: t.step, kind: t.kind,
       subject: isText ? null : out.subject, body: isText ? out : out.body };
     if (isText && typeof RC !== 'undefined' && RC.setting && RC.setting('tone') === 'casual') res.body = casual(res.body);   // the roofer's tone (settings)
     res.chars = res.body.length;
     const miss = missing(t, f);
     if (miss.length) res.missing = miss;
-    if (isText && res.chars > capFor(res.body)) res.blocked = 'text is over ' + capFor(res.body) + ' characters';
-    else if (miss.includes('homeLink')) res.blocked = 'set your public site first, so the home page link works';
+    if (isText && res.chars > TEXT_MAX) res.blocked = 'text is over ' + TEXT_MAX + ' characters';
     else if (miss.length) res.blocked = 'needs ' + miss.join(', ');
     return res;
   }
@@ -340,7 +331,7 @@
   const AUD = { cold: 'cold', optin: 'optin', 'opted-in': 'optin', opted_in: 'optin', past: 'optin' };
 
   const api = {
-    TEXT_MAX, TEXT_MAX_LINK, templates: T, stormDate, hailSize, factsFromStop, dayOf, channelFor,
+    TEXT_MAX, templates: T, stormDate, hailSize, factsFromStop, dayOf, channelFor,
     // the cadence: step index -> day, the template key and the fixed channel for that touch
     cadence: [0, 1, 2, 3, 4, 5].map(s => ({ step: s, day: dayOf(s), key: keyOf(s), channel: channelFor(s) })),
     // set these to look homes up by id and to read the opt-out list (the Daily 50 owns both)

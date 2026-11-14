@@ -17,7 +17,7 @@
   const SEEN = 'rc.pipe.seen';     // when each home first showed on this board (this device): time in New hit without history
   const VIEW = 'rc.pipe.view';     // this viewer's sort and lane choice (a convenience, safe to lose)
   const DAY = 864e5, STALE_DAYS = 3;
-  const fmtDay = iso => (d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + (d.getFullYear() !== new Date().getFullYear() ? ' ’' + String(d.getFullYear()).slice(2) : ''))(new Date(iso));   // year shows when it isn't this year
+  const fmtDay = iso => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   // storm day with its year when it was not this year (rec.js homeDay), the same words as the stage strip
   const stormDay = (iso, short) => window.homeDay ? window.homeDay(iso, short) : fmtStorm(iso);
   const fmtStorm = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
@@ -96,6 +96,7 @@
   // one figure per home: today's list's squares (the LiDAR facet measure when there is one, else the outline estimate)
   // for a home on it; else the open record's measure, else squares a screen kept for this home. Unknown stays unknown.
   function squares(h) {
+    return null;   // 11-01: roof sizes were estimates, no card or stage total shows one
     if (h.sq !== undefined) return h.sq;
     const H = window.HOME;
     if (H && H.rawId === h.id && H.measure && H.measure.squares) return H.measure.squares;
@@ -117,15 +118,16 @@
 
   // ---------- view state: search, filters, sort, lane ----------
   const view = Object.assign({ sort: 'new', lane: false }, jget(VIEW, {}));
-  if (['new', 'score', 'hail', 'age'].indexOf(view.sort) < 0) view.sort = 'new';
-  const F = { q: '', city: '', storm: '', sub: '', route: false, knock: false, stage: '' };   // stage: a count tile picked (J 10-30), '' = every open stage
+  if (['new', 'hail', 'age'].indexOf(view.sort) < 0) view.sort = 'new';
+  const F = { q: '', city: '', storm: '', sub: '', stage: '', route: false, knock: false };
   const saveView = () => jset(VIEW, { sort: view.sort, lane: !!view.lane });
-  const filtering = () => !!(F.q || F.city || F.storm || F.sub || F.route || F.knock || F.stage);
+  const filtering = () => !!(F.q || F.city || F.storm || F.sub || F.route || F.knock);
   const nFilters = () => (F.city ? 1 : 0) + (F.storm ? 1 : 0) + (F.sub ? 1 : 0) + (F.route ? 1 : 0) + (F.knock ? 1 : 0);
   function matches(h) {
     if (F.city && h.city !== F.city) return false;
     if (F.storm && h.storm !== F.storm) return false;
     if (F.sub && h.sub !== F.sub) return false;
+    if (F.stage && RC.stage(h.id) !== F.stage) return false;
     if (F.route && h.stop == null && !DP.has(h.id)) return false;   // today's list: the Daily 50 picks (old route stops still count)
     if (F.knock) { const k = RC.history(h.id).find(x => /^Knocked: /.test(x.what || '')); if (!k || !/not home/.test(k.what)) return false; }   // knock again (10-19)
     if (F.q) {
@@ -138,19 +140,16 @@
 
   // ---------- markup ----------
   const counts = $('#pcount'), cols = $('#pcols'), tabN = $('#pipeN'), pane = $('#pipePane');
-  const tools = document.getElementById('ptools') || document.createElement('div'); tools.className = 'ptools'; tools.id = 'ptools';   // index.html holds an empty one so the phone board does not jump when this lands
+  const tools = document.createElement('div'); tools.className = 'ptools'; tools.id = 'ptools';
   tools.innerHTML = `<label class="psrch">${ICON.search}<span class="vh">Search the board</span><input type="search" id="pq" placeholder="Address or owner" autocomplete="off" enterkeyhint="search"></label>
     <button type="button" class="ptb" id="pfBtn" aria-expanded="false" aria-controls="pfp">${ICON.filter}<span>Filter</span><i id="pfN" hidden></i></button>
-    <label class="ptb psort"><span class="vh">Sort</span><select id="psort" aria-label="Sort cards"><option value="new">Newest</option><option value="score">Highest score</option><option value="hail">Most hail</option><option value="age">Longest in stage</option></select>${ICON.chev}</label>
+    <label class="ptb psort"><span class="vh">Sort</span><select id="psort" aria-label="Sort cards"><option value="new">Newest</option><option value="hail">Most hail</option><option value="age">Longest in stage</option></select>${ICON.chev}</label>
     <button type="button" class="ptb pfb" id="pfullBtn" aria-pressed="false" title="Open full board" aria-label="Open full board">${ICON.expand}<span>Open full board</span></button>`;
   const fp = document.createElement('div'); fp.className = 'pfp'; fp.id = 'pfp'; fp.hidden = true; fp.setAttribute('role', 'group'); fp.setAttribute('aria-label', 'Filters');
   const shown = document.createElement('p'); shown.className = 'pshow'; shown.hidden = true; shown.setAttribute('aria-live', 'polite');
   counts.before(tools, fp, shown);
   // the columns sit in a wrapper that carries the side fades and the arrow buttons (the columns themselves scroll)
   const wrap = document.createElement('div'); wrap.className = 'pwrap'; cols.before(wrap); wrap.appendChild(cols);
-  // loop 17: hold the skeleton's height while the board fills in (the wrapper first laid out 136px tall, then grew to
-  // the real columns, so the cards dropped ~15px); released once the first columns have painted
-  { const held = cols.offsetHeight; if (held > 0) { wrap.style.minHeight = held + 'px'; setTimeout(() => requestAnimationFrame(() => { wrap.style.minHeight = ''; }), 1200); } }
   const navL = document.createElement('button'), navR = document.createElement('button');
   navL.type = navR.type = 'button'; navL.className = 'pnav l'; navR.className = 'pnav r';
   navL.setAttribute('aria-label', 'Earlier stages'); navR.setAttribute('aria-label', 'Later stages'); navL.title = 'Earlier stages'; navR.title = 'Later stages';
@@ -178,7 +177,7 @@
     const chip = (k, n, label) => `<span class="${n ? '' : 'z'}" title="${n} ${label}${n === 1 ? '' : 's'} logged on this device">${ICON[k]}${n}</span>`;
     return `<article class="pc${cur ? ' cur' : ''}${stale ? ' stale' : ''}${won ? ' won' : ''}${arch ? ' parked' : ''}" data-id="${esc(h.id)}" title="${stale ? esc(staleTip(st, days)) : arch ? 'Parked in Not now. Restore puts it back in ' + esc(sName) + '.' : 'Drag to a new stage, click to open'}">
       <button type="button" class="pco"${cur ? ' aria-current="true"' : ''}>${won ? `<span class="pwon">Won${sd ? ', signed ' + fmtDay(sd + (sd.length === 10 ? 'T12:00:00' : '')) : ''}</span>` : ''}<b>${esc(h.addr)}</b>${h.city ? `<small class="pcc">${esc(h.city)}${h.stop ? ', stop ' + h.stop : ''}</small>` : ''}${own ? `<span class="pown">${esc(own)}</span>` : ''}
-        <span class="pmeta">${oppChip(h)}${h.hail != null ? `<span class="phail"${h.storm ? ` title="${h.hail.toFixed(2)} in hail on radar, storm of ${esc(stormDay(h.storm))}"` : ' title="Hail on radar"'}>${h.hail.toFixed(2)} in${h.storm ? `<i>${esc(stormDay(h.storm, true))}</i>` : ' hail'}</span>` : ''}${sq != null ? (meas ? `<span class="psq" title="Measured from LiDAR roof facets. Verify on site.">${sq} sq measured</span>` : `<span class="psq" title="Estimated from public building outlines and 2018 LiDAR. Verify on site.">~${sq} sq (est.)</span>`) : ''}</span>
+        <span class="pmeta">${h.hail != null ? `<span class="phail"${h.storm ? ` title="${h.hail.toFixed(2)} in hail on radar, storm of ${esc(stormDay(h.storm))}"` : ' title="Hail on radar"'}>${h.hail.toFixed(2)} in${h.storm ? `<i>${esc(stormDay(h.storm, true))}</i>` : ' hail'}</span>` : ''}${sq != null ? (meas ? `<span class="psq" title="Measured from LiDAR roof facets. Verify on site.">${sq} sq measured</span>` : `<span class="psq" title="Estimated from public building outlines and 2018 LiDAR. Verify on site.">~${sq} sq (est.)</span>`) : ''}</span>
         <span class="prow"><span class="page${stale ? ' late' : ''}" title="${esc(ageTip)}">${esc(age)}</span><span class="pch" aria-label="${ch.text} texts, ${ch.email} emails">${chip('text', ch.text, 'text')}${chip('email', ch.email, 'email')}</span></span>
         <span class="plast"${la ? ` title="${esc(la.t)}, ${esc(fmtDay(la.at))}"` : ''}>${la ? `<time>${esc(fmtDay(la.at))}</time>` + esc(st === 'inspection' && RC.booking(h.id) ? la.t.replace(/^(Inspection booked) for .*$/, '$1') : la.t) : 'No action yet'}</span>
         <span class="pnext"><em>Next</em>${esc(nextStep(h, st))}</span></button>
@@ -186,14 +185,9 @@
     </article>`;
   }
   const sqText = l => { const k = l.filter(h => squares(h) != null), t = Math.round(k.reduce((a, h) => a + squares(h), 0));   // a stage total in whole squares (visual check 10-23)
-    return { t: k.length ? '~' + t.toLocaleString('en-US') + ' sq (est.)' : l.length ? 'Not estimated' : '', tip: k.length ? `~${t} estimated squares in this stage${k.length < l.length ? ', ' + (l.length - k.length) + ' not estimated yet' : ''}. Estimated from public building outlines and 2018 LiDAR. Verify on site. No prices set, so squares only.` : '' }; };
-  // the Opportunity Score (lib/opp-cards.js) per card: scored once per home as the board paints, -1 while unknown
-  const oppOf = h => { const s = h.gi != null && window.OPPC ? OPPC.peek(h.gi) : null; return s ? s.total : -1; };
-  let oppT = 0; const oppWant = h => { if (h.gi == null || !window.OPPC) return; OPPC.prime(h.gi).then(s => { if (s && !oppT) oppT = setTimeout(() => { oppT = 0; render(true); }, 150); }); };
-  const oppChip = h => { const s = h.gi != null && window.OPPC ? OPPC.peek(h.gi) : null; if (!s) { oppWant(h); return ''; } return `<span class="opc-sc ${OPPC.tone(s.total)}" title="Opportunity score ${s.total} of 100, ${s.confidence} confidence. Click the card, then the ring, for the breakdown">${OPPC.ring(s.total, 22)}Score ${s.total}/100</span>`; };
+    return { t: k.length ? '~' + t.toLocaleString('en-US') + ' sq (est.)' : '', tip: k.length ? `~${t} estimated squares in this stage${k.length < l.length ? ', ' + (l.length - k.length) + ' not estimated yet' : ''}. Estimated from public building outlines and 2018 LiDAR. Verify on site. No prices set, so squares only.` : '' }; };
   function sortList(l) {
     const rec = h => { const la = lastAction(h.id); return la ? la.at : stageSince(h.id) || ''; };
-    if (view.sort === 'score') return l.sort((a, b) => oppOf(b) - oppOf(a) || (a.stop || pos(a)) - (b.stop || pos(b)));
     if (view.sort === 'hail') return l.sort((a, b) => (b.hail == null ? -1 : b.hail) - (a.hail == null ? -1 : a.hail) || (a.stop || pos(a)) - (b.stop || pos(b)));
     if (view.sort === 'age') return l.sort((a, b) => (stageSince(a.id) || '9').localeCompare(stageSince(b.id) || '9') || (a.stop || pos(a)) - (b.stop || pos(b)));
     return l.sort((a, b) => rec(b).localeCompare(rec(a)) || (a.stop || pos(a)) - (b.stop || pos(b)));
@@ -224,56 +218,76 @@
     Object.keys(by).forEach(k => sortList(by[k])); sortList(lane);
     const live = all.filter(h => !archived(h.id)).length, total = list.length - lane.length;
     const month = new Date().toISOString().slice(0, 7), wonMonth = by.won.filter(h => (signedOn(h.id) || '').slice(0, 7) === month).length;
-    const tile = (k, label, n, tip) => `<button type="button" class="pcn${F.stage === k ? ' hot' : ''}" data-jump="${k}" aria-pressed="${F.stage === k}" title="${esc(tip)}"><b>${n}</b><span>${esc(label)}</span><i style="--w:${total ? Math.round(Math.min(n, total) / total * 100) : 0}%"></i></button>`;
-    const cHTML = RC.STAGES.map(s => tile(s[0], s[1], by[s[0]].length, `${s[1]}: ${by[s[0]].length}. Click to show only these, click again for all`)).join('')
-      + tile('lost', 'Not now', lane.length, `Not now: ${lane.length} parked, never deleted. Click to show them`);
-    // J 10-30: one dense table instead of stage columns. A tile picks the stage shown; no tile = every open stage.
-    const rows = F.stage === 'lost' ? lane : F.stage ? by[F.stage] || [] : sortList(RC.STAGES.reduce((a, s) => a.concat(by[s[0]]), []));
-    const opts = (st, arch) => RC.STAGES.map(s => `<option value="${s[0]}"${s[0] === st && !arch ? ' selected' : ''}>${esc(s[1])}</option>`).join('') + `<option value="lost"${arch ? ' selected' : ''}>Not now</option>`;
-    const rowHTML = h => { const arch = archived(h.id), st = RC.stage(h.id);
-      return `<tr class="pc${h.id === cur ? ' cur' : ''}${arch ? ' parked' : ''}" data-id="${esc(h.id)}" title="Click to open ${esc(h.addr)}">
-        <td class="ta"><button type="button" class="pco"${h.id === cur ? ' aria-current="true"' : ''}><b>${esc(h.addr)}</b>${h.city ? `<small class="pcc">${esc(h.city)}${h.stop ? ', stop ' + h.stop : ''}</small>` : ''}</button></td>
-        <td class="ts">${oppChip(h)}</td>
-        <td class="th">${h.hail != null ? `<span class="phail">${h.hail.toFixed(2)} in</span>${h.storm ? `<small>${esc(stormDay(h.storm, true))}</small>` : ''}` : '<small>No hail on file</small>'}</td>
-        <td class="tg"><select class="pst" aria-label="Stage for ${esc(h.addr)}">${opts(st, arch)}</select></td>
-        <td class="tn">${esc(nextStep(h, st))}</td></tr>`; };
-    const kHTML = `<table class="ptbl"><thead><tr><th scope="col">Home</th><th scope="col">Score</th><th scope="col">Hail</th><th scope="col">Stage</th><th scope="col">Next step</th></tr></thead>
-      <tbody>${rows.length ? rows.map(rowHTML).join('') : `<tr class="pnone"><td colspan="5">${filtering() ? 'No homes match' : F.stage === 'lost' ? 'Nothing parked. Pick Not now in a row\'s stage when a homeowner says not now.' : 'No homes here yet'}</td></tr>`}</tbody></table>`;
+    const cHTML = RC.STAGES.map(s => { const n = by[s[0]].length; return `<button type="button" class="pcn" data-drop="${s[0]}" data-jump="${s[0]}" title="${esc(s[1])}: ${n}"><b>${n}</b><span>${esc(s[1])}</span><i style="--w:${total ? Math.round(n / total * 100) : 0}%"></i></button>`; }).join('');
+    const kHTML = RC.STAGES.map(s => { const l = by[s[0]], n = l.length, sq = sqText(l);
+      return `<section class="pcol" data-drop="${s[0]}" aria-label="${esc(s[1])}, ${n} ${n === 1 ? 'home' : 'homes'}">
+      <h4><span class="pnm">${esc(s[1])}</span><span class="pnum">${n}</span></h4>
+      <p class="psub">${sq.t ? `<span title="${esc(sq.tip)}">${esc(sq.t)}</span>` : ''}${s[0] === 'won' ? `<span class="pmo">${wonMonth} this month</span>` : ''}</p>
+      <div class="pls">${n ? l.map(h => cardHTML(h, h.id === cur, s[0])).join('') + (n > 1 ? `<p class="pend">End of ${esc(s[1])}, ${n} homes</p>` : '') : `<p class="pempty">${filtering() ? 'No homes match here' : 'No homes here yet'}</p>`}</div></section>`; }).join('')
+      + `<section class="pcol plane${view.lane ? ' open' : ''}" data-drop="lost" aria-label="Not now, ${lane.length} parked">
+      <h4><button type="button" class="plt" aria-expanded="${view.lane ? 'true' : 'false'}" title="Deals that went quiet. Parked here, never deleted."><span class="pnm">Not now</span><span class="pnum">${lane.length}</span>${ICON.chev}</button></h4>
+      ${view.lane ? `<p class="psub"><span>Parked, never deleted</span></p><div class="pls">${lane.length ? lane.map(h => cardHTML(h, h.id === cur, RC.stage(h.id))).join('') : `<p class="pempty">${filtering() ? 'No parked homes match' : 'Nothing parked. Use Move to, Not now, when a homeowner says not now.'}</p>`}</div>` : ''}</section>`;
     const sHTML = filtering() ? `Showing ${list.length} of ${all.length} homes` : '';
     const html = cHTML + '|' + kHTML + '|' + sHTML;
     pfN.hidden = !nFilters(); pfN.textContent = nFilters();
     tabN.textContent = live;
-    { const pk = all.length - live, t = `${live} open ${live === 1 ? 'lead' : 'leads'} (every stage from New hit to Won)` + (pk ? `. ${pk} in Not now ${pk === 1 ? 'is' : 'are'} not counted.` : '.');   // the Leads count = the stage columns added up; Not now sits outside it (loop 16)
-      tabN.title = t; tabN.setAttribute('aria-label', t); const vp = document.getElementById('vPipeN'); if (vp) { vp.title = t; vp.setAttribute('aria-label', t); } }
     if (!force && html === lastHTML) return;
     lastHTML = html;
-    const keepV = cols.scrollTop;
+    const keep = cols.scrollLeft, keepV = [...cols.querySelectorAll('.pls')].map(l => l.scrollTop);
     counts.innerHTML = cHTML; cols.innerHTML = kHTML;
     const pc = $('#pfCount', fp); if (pc) pc.textContent = sHTML;
     shown.hidden = !sHTML || !fp.hidden; shown.innerHTML = sHTML ? `<span>${esc(sHTML)}</span><button type="button" id="pClearAll">Clear</button>` : '';
-    cols.scrollTop = keepV;
+    cols.scrollLeft = keep; cols.querySelectorAll('.pls').forEach((l, i) => { l.scrollTop = keepV[i] || 0; });
     // the open home moved stage (Book, the strip, Move to) or another home opened (first paint, Next stop, a reload):
     // bring its column and card into view
     const curSt = cur ? (archived(cur) ? 'lost' : RC.stage(cur)) : null;
     // (or the list re-sorted under a kept scroll position, e.g. the record's measure arriving, and the open card slid out of view)
-    const hidden = () => { const c = cols.querySelector(`.pc[data-id="${CSS.escape(cur)}"]`); if (!c) return false; const r = c.getBoundingClientRect(), o = cols.getBoundingClientRect(); return r.top < o.top + 30 || r.bottom > o.bottom; };
+    const hidden = () => { const c = cols.querySelector(`.pc[data-id="${CSS.escape(cur)}"]`), l = c && c.closest('.pls'); return !!(c && l && (c.offsetTop - l.offsetTop < l.scrollTop || c.offsetTop - l.offsetTop + c.offsetHeight > l.scrollTop + l.clientHeight)); };
     if (cur && (cur !== seenCur.id || curSt !== seenCur.st || hidden())) showCard(cur, cur === seenCur.id);   // a move glides, an open jumps
     seenCur.id = cur; seenCur.st = curSt;
     edges();
   }
   const seenCur = { id: null, st: null };
   function showCard(id, glide) {
+    const how = glide ? 'smooth' : 'auto';
     const c = cols.querySelector(`.pc[data-id="${CSS.escape(id)}"]`); if (!c) return;
-    const r = c.getBoundingClientRect(), o = cols.getBoundingClientRect(), head = 34;   // the sticky header row
-    if (r.top < o.top + head || r.bottom > o.bottom) cols.scrollTo({ top: Math.max(0, cols.scrollTop + r.top - o.top - head - 4), behavior: glide ? 'smooth' : 'auto' });
+    const col = c.closest('.pcol'), l = c.closest('.pls');
+    const vis = col.offsetLeft - cols.offsetLeft >= cols.scrollLeft && col.offsetLeft - cols.offsetLeft + col.offsetWidth <= cols.scrollLeft + cols.clientWidth;
+    if (!vis) cols.scrollTo({ left: col.offsetLeft - cols.offsetLeft - 16, behavior: how });
+    if (l && (c.offsetTop - l.offsetTop < l.scrollTop || c.offsetTop - l.offsetTop + c.offsetHeight > l.scrollTop + l.clientHeight)) l.scrollTo({ top: Math.max(0, c.offsetTop - l.offsetTop - 8), behavior: how });
     setTimeout(edges, 450);
   }
-  // list scroll cue: a soft fade at the foot while more rows sit below (no side arrows: the list never scrolls sideways)
+  // scroll cues: a soft fade on the side with more columns (plus arrows on desktop), and at the foot of a column that
+  // has more cards below; the last card is followed by "End of <stage>"
   function edges() {
-    wrap.classList.remove('fl', 'fr'); navL.hidden = navR.hidden = true;
-    wrap.classList.toggle('fb', cols.scrollHeight - cols.clientHeight - cols.scrollTop > 14);
+    const max = cols.scrollWidth - cols.clientWidth, sl = cols.scrollLeft;
+    const more = sl < max - 18;   // the last 16px are the board's own right padding, not a hidden column
+    wrap.classList.toggle('fl', sl > 4); wrap.classList.toggle('fr', more);
+    navL.hidden = !(sl > 4); navR.hidden = !more;
+    // more than the list's own 10px foot padding still below = more cards: fade the foot
+    cols.querySelectorAll('.pls').forEach(l => l.classList.toggle('fb', l.scrollHeight - l.clientHeight - l.scrollTop > 14));
   }
   window.renderPipe = render;
+  // saved views (settings.savedViews, made by talking to Nimbus): one row of plain buttons above the board
+  const viewsEl = document.createElement('div'); viewsEl.id = 'pviews'; viewsEl.className = 'pviews'; viewsEl.setAttribute('role', 'group'); viewsEl.setAttribute('aria-label', 'Saved lists');
+  counts.parentNode.insertBefore(viewsEl, counts);
+  const sameF = v => ['city', 'storm', 'sub', 'stage'].every(k => (v[k] || '') === F[k]) && ['route', 'knock'].every(k => !!v[k] === F[k]) && !F.q;
+  function paintViews() {
+    const l = RC.setting('savedViews', []) || [];
+    viewsEl.hidden = !l.length;
+    viewsEl.innerHTML = l.map(v => `<button type="button" data-view-id="${esc(v.id)}" aria-pressed="${sameF(v.filter || {})}">${esc(v.name)}</button>`).join('');
+  }
+  viewsEl.addEventListener('click', e => { const b = e.target.closest('[data-view-id]'); if (!b) return; const v = (RC.setting('savedViews', []) || []).find(x => x.id === b.dataset.viewId); if (!v) return; if (sameF(v.filter || {})) clearFilters(); else window.pipeFilters.set(v.filter || {}); });
+  // what Nimbus reads ("save this as...") and sets ("show my Plano list"): only these known filter fields
+  window.pipeFilters = {
+    get: () => ({ city: F.city, storm: F.storm, sub: F.sub, route: F.route, knock: F.knock, stage: F.stage || '', sort: view.sort }),
+    set(f) { F.city = f.city || ''; F.storm = f.storm || ''; F.sub = f.sub || ''; F.stage = f.stage || ''; F.route = !!f.route; F.knock = !!f.knock; F.q = ''; if (q) q.value = '';
+      if (f.sort && [...sortSel.options].some(o => o.value === f.sort)) { view.sort = f.sort; sortSel.value = f.sort; saveView(); }
+      optKey = ''; render(true); paintViews(); },
+    shown: () => cols.querySelectorAll('article.pc').length
+  };
+  RC.on(d => { if (d && d.key === 'settings') { render(true); paintViews(); } });
+  setTimeout(paintViews, 0);
   if (RC.queueReady) RC.queueReady.then(ok => { if (ok) render(true); });   // the day's 50 land after the first paint
 
   // ---------- toolbar ----------
@@ -287,7 +301,7 @@
     if (t.id === 'pfCity') F.city = t.value; else if (t.id === 'pfStorm') F.storm = t.value; else if (t.id === 'pfSub') F.sub = t.value; else if (t.id === 'pfRoute') F.route = t.checked; else if (t.id === 'pfKnock') F.knock = t.checked;
     render(true);
   });
-  function clearFilters() { F.q = F.city = F.storm = F.sub = F.stage = ''; F.route = false; F.knock = false; q.value = ''; optKey = ''; render(true); }
+  function clearFilters() { F.q = F.city = F.storm = F.sub = F.stage = ''; F.route = false; F.knock = false; q.value = ''; optKey = ''; render(true); paintViews(); }
   fp.addEventListener('click', e => { if (e.target.closest('#pfClear')) clearFilters(); });
   shown.addEventListener('click', e => { if (e.target.closest('#pClearAll')) { clearFilters(); q.focus(); } });
 
@@ -347,7 +361,7 @@
     });
     window.homeDialogEl.addEventListener('close', () => { if (!done) { render(true); say(name + ' stays in ' + (parked ? 'Not now' : RC.stageName(prev)) + '.'); refocus(id); } }, { once: true });
   }
-  function refocus(id) { const c = cols.querySelector(`.pc[data-id="${CSS.escape(id)}"]`); if (c) { showCard(id, false); const s = c.querySelector('.pst'); if (s) s.focus({ preventScroll: true }); } }
+  function refocus(id) { const c = cols.querySelector(`.pc[data-id="${CSS.escape(id)}"]`); if (c) { c.scrollIntoView({ block: 'nearest', inline: 'nearest' }); c.querySelector('.pmv').focus({ preventScroll: true }); } }
 
   // ---------- open a card in the record ----------
   cols.addEventListener('click', e => {
@@ -356,9 +370,8 @@
     const rs = e.target.closest('[data-restore]'); if (rs) { restore(rs.closest('.pc').dataset.id, e.detail === 0 ? 'key' : 'click'); return; }
     const mv = e.target.closest('.pmv'); if (mv) { openMenu(mv); return; }
     const ic = e.target.closest('[data-ics]'); if (ic) { if (window.homeIcs(ic.closest('.pc').dataset.id)) say('Calendar file saved. Open it to add the inspection to your calendar.'); return; }
-    if (e.target.closest('.pst')) return;
-    const o = e.target.closest('.pc'); if (!o || !o.dataset.id) return;
-    const id = o.dataset.id;
+    const o = e.target.closest('.pco'); if (!o) return;
+    const id = o.closest('.pc').dataset.id;
     if (document.body.classList.contains('pfull')) setFull(false);
     if (window.crmOpenHome) window.crmOpenHome(id);   // the CRM: a card opens that home's record
     else if (window.switchHome) window.switchHome(id);
@@ -366,14 +379,8 @@
   });
   counts.addEventListener('click', e => {
     const b = e.target.closest('[data-jump]'); if (!b || suppress) { suppress = false; return; }
-    F.stage = F.stage === b.dataset.jump ? '' : b.dataset.jump; cols.scrollTop = 0; render(true);
-    const nb = counts.querySelector(`[data-jump="${b.dataset.jump}"]`); if (nb) nb.focus();
-  });
-
-  cols.addEventListener('change', e => {
-    const sel = e.target.closest('.pst'); if (!sel) return;
-    const id = sel.closest('.pc').dataset.id;
-    if (!move(id, sel.value, 'menu')) render(true);   // no change: put the select back
+    const c = cols.querySelector(`.pcol[data-drop="${b.dataset.jump}"]`);
+    if (c) cols.scrollTo({ left: c.offsetLeft - cols.offsetLeft - 12, behavior: 'smooth' });
   });
 
   // ---------- Move to menu (keyboard and screen reader path) ----------
@@ -416,7 +423,7 @@
 
   // ---------- drag and drop (pointer events: mouse and pen move to start, touch long-presses) ----------
   let pd = null, suppress = false, ghost = null, over = null, raf = 0;
-  if (false) cols.addEventListener('pointerdown', e => {   // J 10-30: drag is off, the stage select in each row moves a home
+  cols.addEventListener('pointerdown', e => {
     if (e.button !== 0 || e.target.closest('.pmv,.prs,.plt,.pcal')) return;
     const card = e.target.closest('.pc'); if (!card) return;
     pd = { card, id: card.dataset.id, x: e.clientX, y: e.clientY, pid: e.pointerId, touch: e.pointerType === 'touch', t: 0 };
@@ -520,7 +527,7 @@
   if (recTab) window.setTab = t => { if (document.body.classList.contains('pfull')) setFull(false); showPane('home'); recTab(t); };
   window.showPane = showPane;
   // a home record opens on This home (its hail, next task, roof); the board has its own Pipeline view (10-19)
-  showPane(document.body.dataset.view === 'pipeline' ? 'pipe' : 'home');   // the Leads view keeps its pane on: switching it off then on again dropped the pane's 20px gap for a frame (loop 16, Leads 375 CLS)
+  showPane('home');
 
   // ---------- keep in step: this screen, other screens (storage event), owner names loading, the clock ----------
   RC.on(() => render());

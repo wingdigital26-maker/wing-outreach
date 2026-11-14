@@ -11,8 +11,9 @@
   'use strict';
   if (typeof map === 'undefined' || !window.STH || !window.RCLINES) return;
   const KEY = 'rc-mapview', Qv = new URLSearchParams(location.search);
-  let mode = Qv.get('view') === 'sat' || Qv.get('view') === '3d' ? Qv.get('view') : (() => { try { return localStorage.getItem(KEY) || '3d'; } catch (e) { return '3d'; } })();
-  const DATA = window.rooferDataRoot ? rooferDataRoot() : 'lib/st-data-dfw/';
+  // Jack 11-02: Storms always opens on 3D houses, whatever was picked last time (the toggle still works for the visit)
+  let mode = Qv.get('view') === 'sat' || Qv.get('view') === '3d' ? Qv.get('view') : '3d';
+  const DATA = rooferDataRoot();   // lib/brand.js, always loaded before this file
   const LINEZ = 16.2, LABELZ = 18.2;
   const FT = 3.28084, M_LAT = 110540, M_LON = lat => 111320 * Math.cos(lat * Math.PI / 180);
 
@@ -207,7 +208,7 @@
   .viewseg button.on{background:var(--paper);color:#fff}
   .viewseg button:not(.on):hover{color:var(--paper)}
   .r3leg{position:fixed;right:24px;bottom:182px;z-index:5;display:none;padding:9px 12px;border-radius:14px;font-size:11.5px;line-height:1.35;color:var(--paper);max-width:330px}
-  body.view-sat .r3leg,body.view-3d.r3z.storm .r3leg{display:block}   /* loop 27: no roof legend on a house outside a storm */
+  body.view-sat .r3leg,body.view-3d.r3z .r3leg{display:block}
   body.sel .r3leg{display:none!important}
   body.sel .viewseg:not(.mob) button{font-size:0;gap:0;padding:0 9px}
   .r3leg .k{display:flex;flex-wrap:wrap;gap:4px 12px;margin-bottom:4px}
@@ -232,14 +233,11 @@
   const leg = document.createElement('div'); leg.className = 'r3leg glass'; leg.id = 'r3leg'; document.body.appendChild(leg);
   function paintLegend() {
     const z = map.getZoom(); document.body.classList.toggle('r3z', z >= FPZ);
-    leg.classList.toggle('r3leg-cred', mode !== '3d');
-    if (!document.getElementById('r3credcss')) { const s = document.createElement('style'); s.id = 'r3credcss'; s.textContent = '.r3leg.r3leg-cred{background:transparent!important;box-shadow:none!important;border:0!important;backdrop-filter:none!important;padding:2px 6px!important}.r3leg.r3leg-cred small{font-size:10px;color:rgba(255,255,255,.85);text-shadow:0 1px 2px rgba(0,0,0,.6)}'; document.head.appendChild(s); }
     const key = (items) => `<div class="k">${items.map(([c, t]) => `<span><i style="background:${c}"></i>${t}</span>`).join('')}</div>`;
     if (mode === '3d') { leg.innerHTML = key([['rgb(110,117,133)', 'Roof estimate'], ['rgb(120,107,102)', 'Measured model']]) + (MOB
       ? `<small>Own outline, LiDAR height and pitch per house.</small>`
       : `<small>Every house is its own outline, wall height from the LiDAR stories and a clean hip roof at its LiDAR pitch. Brown roofs are measured models that passed the roof checks.</small>`); return; }
-    /* Jack 10-30: no explainer card on the photo; only the imagery credit the provider requires, as a tiny corner line */
-    leg.innerHTML = `<small class="r3cred">${RC.esc(BASEMAP.name !== 'USDA NAIP' ? 'Esri, Maxar' : BASEMAP.credit)}</small>`;
+    leg.innerHTML = `<small>${MOB ? 'Tap a house to open it. ' : 'The aerial photo. Click a house to open it; 3D houses shows each roof shape. '}${RC.esc(MOB && BASEMAP.name !== 'USDA NAIP' ? 'Powered by Esri, Maxar' : BASEMAP.credit)}</small>`;
   }
   R3.basemap = () => ({ name: BASEMAP.name, credit: BASEMAP.credit, key: !!ESRI_KEY });
   R3.stats = () => { let model = 0, pm = 0; R3.recs.forEach(h => { if (isModel(h)) model++; if (h.flags & 1) pm++; }); return { loaded: R3.recs.size, model, pitchMeasured: pm, chunks: chunks.size }; };

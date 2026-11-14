@@ -61,35 +61,37 @@ body[data-view="home"] #ptab{display:none!important}
   // ---------- top: score + why it fits ----------
   const fit = document.createElement('div'); fit.className = 'fit'; fit.hidden = true; fit.setAttribute('aria-live', 'polite');
   addr.insertAdjacentElement('afterend', fit);
-  // round 14: the placeholder (#fitSk in index.html) holds the space until the score is in, then goes
-  const settle = () => { const sk = document.getElementById('fitSk'); if (sk) sk.remove(); document.documentElement.classList.add('rfit'); };
   const P = window.RCPLAIN;
-  const SURE = { high: 'on record', medium: 'likely', low: 'not sure', unknown: 'not sure' };
   function reasons(E) {
     const out = [], p = E.parts || {};
     if (!E.eligibility.ok) out.push(`<li class="fno">Do not contact: ${esc(E.eligibility.reason)}</li>`);
     const big = (E.storms || []).filter(s => s.inches >= 1).sort((a, b) => b.inches - a.inches);
     if (big.length) out.push(`<li>${esc(P ? P.hail(big[0].inches) : big[0].inches.toFixed(2) + ' in')} hail, ${esc(big[0].label)}${big.length > 1 ? ` <i>(${big.length} storms)</i>` : ''}</li>`);
     else if ((E.storms || []).length) out.push(`<li>Small hail only <i>(under 1 inch)</i></li>`);
-    const ra = p.roofAge || {}, m = /about (\d+) years/.exec(ra.plain || ''), conf = String(ra.conf || E.conf || '').toLowerCase();
-    if (m) out.push(`<li>Roof ~${m[1]} yrs <i>(${SURE[conf] || 'likely'})</i></li>`);
-    else if (/just re-roofed|New roof \d{4}/.test(ra.plain || '')) out.push(`<li>Roof is new <i>(on record)</i></li>`);
-    else out.push(`<li>Roof age not sure <i>(no permit list here)</i></li>`);
+    // Today's roof line (11-11): the roof rule's own words (E.roof.text) through RCPLAIN, the same call house.js makes
+    const rt = P ? P.roof(E.roof) : '';
+    if (rt && !/^Roof age unknown/.test(rt)) out.push(`<li>${esc(rt).replace(/ \(([^()]*)\)$/, ' <i>($1)</i>')}</li>`);
+    else out.push(`<li>Roof age unknown${E.roof && E.roof.year ? ' <i>(no permit list here)</i>' : ''}</li>`);
+    // v2 intent signals (11-07): wind, moved in / bought, who lives there, each one short line when it is on file
+    const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+    if ((p.wind || {}).fit) out.push(`<li>${esc(cap(p.wind.fit))}</li>`);
+    if ((p.movedIn || {}).fit) out.push(`<li>${esc(cap(p.movedIn.fit))}</li>`);
+    if ((p.occupancy || {}).fit) out.push(`<li>${esc(cap(p.occupancy.fit))}</li>`);
     const nb = /^(\d+) neighbor/.exec((p.neighborhood || {}).plain || '');
     if (nb && +nb[1] > 0) out.push(`<li>${nb[1]} neighbor${+nb[1] === 1 ? '' : 's'} got a new roof lately</li>`);
     const sq = /About (\d+) squares/.exec((p.roof || {}).plain || '');
-    if (sq && out.length < 4) out.push(`<li>${esc(P ? P.size(sq[1]) : 'About ' + sq[1] + ' squares')}</li>`);
-    return out.slice(0, 4).join('');
+    if (sq && out.length < 6) out.push(`<li>${esc(P ? P.size(sq[1]) : 'About ' + sq[1] + ' squares')}</li>`);
+    return out.slice(0, 6).join('');
   }
   let cur = null;
   const giNow = () => { const H = window.HOME; if (!H) return null; const g = H.rec && H.rec.gi != null ? +H.rec.gi : /^m(\d+)$/.test(H.rawId || '') ? +H.rawId.slice(1) : null; return g >= 0 ? g : null; };
   function update() {
     const gi = giNow(); if (gi === cur) return; cur = gi;
-    if (gi == null || !window.RCS) { fit.hidden = true; if (!document.body.classList.contains('rloading')) settle(); else cur = null; return; }
-    Promise.all([RCS.explain(gi), window.OPPC ? OPPC.get(gi) : null]).then(([E, S]) => { if (gi !== cur || !E) return;   // one score everywhere: the Opportunity Score the cards show (lib/opp-cards.js)
-      fit.innerHTML = (S ? `<div class="fsc" title="Opportunity Score: roof age, hail, wind, neighbors and job size. A ranking, not proof of damage."><small>Score</small><b>${S.total}</b><span>/100</span></div>` : '') + `
+    if (gi == null || !window.RCS) { fit.hidden = true; return; }
+    RCS.explain(gi).then(E => { if (gi !== cur || !E) return;
+      fit.innerHTML = `<div class="fsc" title="Opportunity score: roof age, storm, wind, a recent move-in, who lives there, roof size, your contact and neighbors. A ranking, not proof of damage."><b>${E.score}</b><span>of 100</span><small>Opportunity score</small></div>
         <div class="fwhy"><h2>Why it fits</h2><ul>${reasons(E)}</ul></div>`;
-      fit.hidden = false; settle(); }).catch(() => { if (gi === cur) { fit.hidden = true; settle(); } });
+      fit.hidden = false; }).catch(() => { if (gi === cur) fit.hidden = true; });
   }
   const prev = window.renderRecord; window.renderRecord = function () { if (prev) prev.apply(this, arguments); update(); };
   setInterval(update, 1000);   // a home switched in place (rec.js switchTo)

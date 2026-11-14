@@ -41,7 +41,7 @@
         <table class="mt"><tbody>${rows.map(([a, q, w]) => `<tr><td><b>${esc(a)}</b><small>${esc(w)}</small></td><td class="q">${esc(q)}</td></tr>`).join('')}</tbody></table>
         <p class="mnote">A starting point, not an order. Check the roof on site before you order.</p>`; return; }
     const L = list(m), addr = (H.rec && H.rec.addr) || '';
-    host.innerHTML = `<div class="mh"><div><b>${L.order.toFixed(1)} squares to order</b><span>${m.facet ? 'Measured from LiDAR roof facets' : 'Estimated from the outline and LiDAR'}, pitch ${esc(m.pitch || '')}</span></div>
+    host.innerHTML = `<div class="mh"><div><b>${L.order.toFixed(1)} squares to order</b><span>${m.facet ? 'Estimated from LiDAR roof facets' : 'Estimated from the outline and LiDAR'}, pitch ${esc(m.pitch || '')}</span></div>
         <button type="button" id="matCopy">Copy list</button></div>
       <table class="mt"><tbody>${L.rows.map(([a, q, w]) => `<tr><td><b>${esc(a)}</b>${w ? `<small>${esc(w)}</small>` : ''}</td><td class="q">${esc(q)}</td></tr>`).join('')}</tbody></table>
       <p class="mnote">A starting order, not a supplier quote. Coverage differs by brand: check your shingle and accessory sheets, and the roof on site, before you order.</p>`;

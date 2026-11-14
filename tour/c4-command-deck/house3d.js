@@ -333,41 +333,35 @@ export function create(opts) {
     const home = isPhone() ? V(32.7, 23, 41) : V(26.2, 18.5, 32); target.set(.7, 2.0, 3.4);
     const kf = Math.min(2.3, Math.max(.85, Math.max(PW / 25, PD / 21) * 1.04)); home.sub(target).multiplyScalar(kf);
     dist = home.length(); elev = Math.asin(home.y / dist); radius = dist;
-    fit(); want = 2; wake(); stats.builds++; stats.lastBuildMs = Math.round(performance.now() - t0);
+    fit(); want = 2; stats.builds++; stats.lastBuildMs = Math.round(performance.now() - t0);
     return true;
   }
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
     if (canvas.width !== Math.round(w * renderer.getPixelRatio()) || canvas.height !== Math.round(h * renderer.getPixelRatio())) renderer.setSize(w, h, false);
-    fit(); want = Math.max(want, 1); wake();
+    fit(); want = Math.max(want, 1);
   }
   const ro = new ResizeObserver(() => { resize(); }); ro.observe(canvas);
-  const io = new IntersectionObserver(es => { es.forEach(e => { onScreen = e.isIntersecting; }); if (onScreen) { want = Math.max(want, 1); wake(); } }, { threshold: .05 }); io.observe(canvas);
-  document.addEventListener('visibilitychange', () => { visible = document.visibilityState !== 'hidden'; if (visible) { want = Math.max(want, 1); wake(); } });
+  const io = new IntersectionObserver(es => { es.forEach(e => { onScreen = e.isIntersecting; }); if (onScreen) want = Math.max(want, 1); }, { threshold: .05 }); io.observe(canvas);
+  document.addEventListener('visibilitychange', () => { visible = document.visibilityState !== 'hidden'; if (visible) want = Math.max(want, 1); });
   // drag turns the house; a tap (no drag) is the card's own link
   let px = 0, moved = 0;
   // the canvas sits inside the card's Open-home link: never let the browser start a link drag (Jack 10-17: it "pulls out a link")
   canvas.addEventListener('dragstart', e => e.preventDefault());
   canvas.addEventListener('pointerdown', e => { if (e.button !== 0 && e.pointerType === 'mouse') return; if (e.pointerType === 'mouse') e.preventDefault();
     const a = canvas.closest('a'); if (a) a.draggable = false; dragging = true; moved = 0; px = e.clientX; try { canvas.setPointerCapture(e.pointerId); } catch (err) {} });
-  canvas.addEventListener('pointermove', e => { if (!dragging) return; const dx = e.clientX - px; px = e.clientX; moved += Math.abs(dx); yaw -= dx * .009; setYaw(); want = Math.max(want, 1); wake(); });
+  canvas.addEventListener('pointermove', e => { if (!dragging) return; const dx = e.clientX - px; px = e.clientX; moved += Math.abs(dx); yaw -= dx * .009; setYaw(); want = Math.max(want, 1); });
   const end = () => { if (!dragging) return; dragging = false; holdUntil = performance.now() + 2600; };
   canvas.addEventListener('pointerup', end); canvas.addEventListener('pointercancel', end); canvas.addEventListener('lostpointercapture', end);
   canvas.addEventListener('click', e => { if (moved > 6) { e.preventDefault(); e.stopImmediatePropagation(); moved = 0; } }, true);
-  /* loop 21: the loop sleeps (no animation frame asked) while the card is off screen, the tab is hidden, or the house is
-     still (turn off, paused after a drag, nothing to redraw); wake() starts it again on any of those changing */
-  let running = false, holdT = 0;
-  function wake() { if (!compiled || running) return; running = true; lastT = performance.now(); requestAnimationFrame(loop); }
   function loop(now) {
-    running = false;
-    const dt = Math.min(.05, Math.max(0, now - lastT) / 1000); lastT = now;
+    requestAnimationFrame(loop);
+    const dt = Math.min(.05, (now - lastT) / 1000); lastT = now;
     if (!world || !visible || !onScreen || !canvas.clientWidth || !canvas.isConnected) return;
-    const again = () => { running = true; requestAnimationFrame(loop); };
-    if (window.__mapMoving && !dragging) return again();   // the map is being dragged: give it the GPU (10-17)
+    if (window.__mapMoving && !dragging) return;   // the map is being dragged: give it the GPU (10-17)
     const turning = turn && !dragging && now > holdUntil;
     if (turning) { yaw += dt * .14; setYaw(); }
-    if (!turning && want <= 0) { if (dragging) return again(); if (turn && now <= holdUntil) { clearTimeout(holdT); holdT = setTimeout(wake, holdUntil - now + 10); } return; }
-    again();
+    if (!turning && want <= 0) return;
     if (turning && !dragging && want <= 0 && now - lastDraw < 31) return;   // the idle turn draws at about 30 fps
     if (want > 0) want--;
     lastDraw = now; renderer.render(scene, camera); frames++;
@@ -377,8 +371,8 @@ export function create(opts) {
   // the first frame waits for the shaders (compileAsync): no synchronous compile on the main thread
   function start() {
     if (compiled) return; compiled = true;
-    const go = () => wake();
+    const go = () => requestAnimationFrame(loop);
     if (renderer.compileAsync) renderer.compileAsync(scene, camera).then(go, go); else go();
   }
-  return { canvas, renderer, scene, camera, build, clear, resize, start, stats, setTurn: v => { turn = !!v && !REDUCE; wake(); }, awake: () => running, key: () => key_, markSwitch: () => { stats.lastSwitch = { at: performance.now(), frameAt: null }; } };
+  return { canvas, renderer, scene, camera, build, clear, resize, start, stats, setTurn: v => { turn = !!v && !REDUCE; }, key: () => key_, markSwitch: () => { stats.lastSwitch = { at: performance.now(), frameAt: null }; } };
 }

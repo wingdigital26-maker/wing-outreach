@@ -54,46 +54,72 @@
     return null;
   }
   function pollLog() {
-    if (!!!(window.RC && RC.localSvc && RC.localSvc()) || logFails >= 2 || !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || (function(k){try{return Date.now()-(+localStorage.getItem('rc.off.'+k)||0)<6e5}catch(e){return false}})('send')) return;   /* the send log was not running a moment ago: skip (loop 6) */
+    if (logFails >= 2 || !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) return;
     var ctl = new AbortController(); var t = setTimeout(function () { ctl.abort(); }, 2500);
     fetch(LOG, { signal: ctl.signal, cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
       clearTimeout(t); var n = logCount(j); if (n == null) { logFails++; return; }
       logFails = 0; if (logN != null && n > logN) react('ping'); logN = n;
       setTimeout(pollLog, 45000);
-    }).catch(function () { clearTimeout(t); logFails++; (function(k){try{localStorage.setItem('rc.off.'+k,Date.now())}catch(e){}})('send'); if (logFails < 2) setTimeout(pollLog, 60000); });
+    }).catch(function () { clearTimeout(t); logFails++; if (logFails < 2) setTimeout(pollLog, 60000); });
   }
   /* ---- bookings: inspections booked on this device ---- */
   var bookedN = null;
-  function countBooked() { try { var p = RC.pipeline(); return Object.keys(p).filter(function (k) { return p[k] && (p[k].booked || RC.stageKey(p[k].stage) === 'inspection'); }).length; } catch (e) { return 0; } }
+  function countBooked() { try { var p = RC.pipeline(); return Object.keys(p).filter(function (k) { return p[k] && (p[k].booked || p[k].stage === 'inspection'); }).length; } catch (e) { return 0; } }
   function onRC() {
     var i = countInbound(), b = countBooked();
     if (inboundN != null && i > inboundN) react('ping');
     else if (bookedN != null && b > bookedN) react('glow');
     inboundN = i; bookedN = b;
   }
-  /* ---- storms: the watcher's latest-storm.json against the last one this device saw (its own key: the Today takeover
+  /* ---- storms: the newest storm (the one the header names) against the last one this device saw (its own key: the Today takeover
      keeps the per-user one, RC_FEATURES.stormSeen, and must not be pre-empted by this pulse) ---- */
   var K = 'rc.nimbus.storm';
   function seen() { try { return localStorage.getItem(K) || ''; } catch (e) { return ''; } }
   function mark(iso) { try { localStorage.setItem(K, iso); } catch (e) {} }
-  function checkStorm(latest) {
-    var iso = latest && latest.iso; if (!iso) return;
+  /* 11-11: the storm named here is the one shared answer (RC.SHOWCASE / RC.facts.storm, the storm the header names), in
+     the header's own words ("Jun 2", its home count), never the feed on its own: a stale feed, or a feed date the
+     catalog does not hold, named a storm the header did not. */
+  function dayLabel(iso) {
+    var d = new Date(iso + 'T12:00:00Z'), y = d.getUTCFullYear();
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) + (y !== new Date().getFullYear() ? ', ' + y : '');
+  }
+  // the same rule as lib/rc-state.js: the feed's storm only when the catalog holds it and holds nothing newer with 1 in+ homes
+  function newest(c, feed) {
+    if (!c || !c.storms) return null;
+    var hit = c.storms.filter(function (x) { return x.homes_1in > 0; }).map(function (x) { return x.date; }).sort(), top = hit.length ? hit[hit.length - 1] : '';
+    var fed = feed && feed.iso && c.storms.some(function (x) { return x.date === feed.iso; }) ? feed.iso : '';
+    var iso = fed && fed >= top ? fed : top, s = iso && c.storms.filter(function (x) { return x.date === iso; })[0];
+    return s && s.homes_1in > 0 ? { iso: iso, d: dayLabel(iso), homes: s.homes_1in } : null;
+  }
+  function shared() {
+    var f = RC.facts && RC.facts.storm, iso = RC.SHOWCASE;
+    return f && iso && f.iso === iso && f.homes > 0 ? { iso: iso, d: f.d || dayLabel(iso), homes: f.homes } : null;
+  }
+  function checkStorm(st) {
+    var iso = st && st.iso; if (!iso) return;
     var was = seen();
     if (was && was !== iso) {
       react('storm');
-      try { if (window.Nimbus && Nimbus.say) Nimbus.say({ t: 'New storm on file: ' + iso + (latest.homes_1in ? ', ' + RC.fmt(latest.homes_1in) + ' homes at 1 in+.' : '.'), k: 'Storms', m: 'alert', go: { screen: 'storm', params: { iso: iso } } }, 8000); } catch (e) {}
+      try { if (window.Nimbus && Nimbus.say) Nimbus.say({ t: 'New storm on file: ' + st.d + ', ' + RC.fmt(st.homes) + ' homes at 1 in+.', k: 'Storms', m: 'alert', go: { screen: 'storm', params: { iso: iso } } }, 8000); } catch (e) {}
     }
     mark(iso);
   }
+  /* every 10 minutes: the feed alone (one small file, as before). Only when it names a storm it did not name last time is
+     the catalog read again, and the same rule picks the newest from the fresh pair. */
+  var feedIso = null;
   function pollStorm() {
     if (!RC || !RC.dataRoot) return;
-    fetch(RC.dataRoot + 'latest-storm.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j) checkStorm(j); }).catch(function () {});
+    var J = function (u) { return fetch(RC.dataRoot + u, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
+    J('latest-storm.json').then(function (j) {
+      if (!j || !j.iso || j.iso === feedIso) return;
+      return J('catalog.json').then(function (c) { if (!c) return; feedIso = j.iso; checkStorm(newest(c, j)); });
+    }).catch(function () {});
   }
   function start() {
     if (!RC) return;
     inboundN = countInbound(); bookedN = countBooked();
     RC.on(onRC);
-    if (RC.factsReady) RC.factsReady.then(function () { checkStorm(RC.latestStorm); setInterval(pollStorm, 10 * 60000); });
+    if (RC.factsReady) RC.factsReady.then(function () { feedIso = (RC.latestStorm && RC.latestStorm.iso) || null; checkStorm(shared()); setInterval(pollStorm, 10 * 60000); });
     setTimeout(pollLog, 4000);
     var tries = 0, m = setInterval(function () { if (mount() || ++tries > 40) clearInterval(m); }, 250);
   }

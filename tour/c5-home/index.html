@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Roof Command</title>
-<script src="../lib/rc-frame-pause.js"></script><!-- parked by the shell = no drawing -->
+<script src="../lib/rc-frame-pause.js"></script><script src="../lib/rc-fetch-memo.js"></script><!-- one download per data file per page (11-02) --><!-- parked by the shell = no drawing -->
 <link rel="stylesheet" href="home.css">
 <link rel="stylesheet" href="crm.css">
 <link rel="stylesheet" href="cal.css"><!-- the built-in calendar view (cal.js) -->
 <link rel="stylesheet" href="customers.css"><!-- Past customers view (customers.js) -->
 <link rel="stylesheet" href="features.css">
-<link rel="stylesheet" href="house.css">
 <link rel="stylesheet" href="../lib/rc-physical.css">
 <script type="importmap">
 {"imports":{
@@ -18,102 +17,59 @@
   "three/addons/":"../vendor/three@0.170.0/examples/jsm/"
 }}
 </script>
-
-<style>/* first-open skeletons (loop 4): the panes show their shape right away; the real rows replace them (innerHTML) */
-.wo-skel{display:block}
-.wo-skel i{display:block;border-radius:6px;background:linear-gradient(90deg,#EEF0F3 25%,#F6F7F9 50%,#EEF0F3 75%);background-size:200% 100%;animation:woSk 1.3s linear infinite}
-@keyframes woSk{from{background-position:200% 0}to{background-position:-200% 0}}
-@media (prefers-reduced-motion:reduce){.wo-skel i{animation:none}}
-/* rec.js: a home opened cold by id waits for its county record; no placeholder city, owner or facts flash first (round 12) */
-body.rloading #keyf,body.rloading #rsub,body.rloading #facts,body.rloading #vPipeN{visibility:hidden}
-/* round 13: the street without its city and ZIP no longer flashes; the title is a shimmer bar of its own, and the facts
-   bar hangs under the title (was top:52px of the block, which ran through a two-line title on a phone) */
-body.rloading #addr{position:relative;color:transparent;min-height:1.1em;max-width:min(520px,90%);border-radius:8px;background:linear-gradient(90deg,#EEF0F3 25%,#F6F7F9 50%,#EEF0F3 75%);background-size:200% 100%;animation:woSk 1.3s linear infinite}
-body.rloading #addr::after{content:'';position:absolute;left:0;top:calc(100% + 14px);width:min(420px,80%);height:14px;border-radius:6px;background:inherit;background-size:200% 100%;animation:woSk 1.3s linear infinite}
-/* round 14: the head holds its final height while the page settles, so Explode and the 3D panel do not jump (was 627 to
-   927 to 984 px, CLS 0.45). The title keeps one line, the score + Why it fits block has a placeholder (#fitSk, condense.js
-   removes it), the stop buttons keep their row, and the stage bar is its final 46 px from the first paint. */
-#keyf{display:none!important}
-body.rloading #addr{white-space:nowrap}
-#addr:empty{min-height:1.1em}
-html:not(.rfit) #stopnav:empty{display:flex!important;height:36px}
-.rt .fit.sk{display:flex;gap:16px;margin-top:14px;min-height:127px;max-width:760px}
-.rt .fit.sk i{display:block;border-radius:12px;background:linear-gradient(90deg,#EEF0F3 25%,#F6F7F9 50%,#EEF0F3 75%);background-size:200% 100%;animation:woSk 1.3s linear infinite}
-.rt .fit.sk i:first-child{flex:none;width:104px;height:106px}.rt .fit.sk i+i{flex:1;max-width:340px;height:110px;border-radius:8px}
-#addr:has(+#fitSk)::after{display:none}
-@media (max-width:640px){.rt .fit.sk{min-height:119px}}
-.steps:empty{min-height:46px}
-html:not(.rfit) #rsub:empty{min-height:26px}
-.steps .st small{display:none}
-.steps .st{min-height:0!important;padding-top:9px!important;padding-bottom:9px!important}
-/* the 3D roof's own placeholder until the house first draws (home.js adds .building / .none, or fires rc:roofbuilt) */
-#stageSk{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none;background:#F1F2F5}
-#stageSk i{position:absolute;inset:14px;height:auto;min-height:0;margin:0;border-radius:10px}
-#stageSk b{position:relative;font:500 14px/1.3 var(--sans,system-ui);color:#5B6472;background:#fff;border-radius:999px;padding:8px 14px;box-shadow:0 1px 2px rgba(16,24,40,.06)}
-.wo-skel.rows i{height:52px;margin:0 0 10px}
-.wo-skel.msgs i{height:44px;margin:14px 18px;width:55%}.wo-skel.msgs i:nth-child(2n){margin-left:auto;width:45%}
-.wo-skel.stage i{height:calc(100% - 28px);min-height:240px;margin:14px}
-.wo-skel.cols{display:flex;gap:12px;flex:1;min-width:100%}.wo-skel.cols i{flex:1;height:460px;border-radius:10px}
-.wo-skel.cal{padding:16px 18px}.wo-skel.cal .t{height:34px;width:320px;margin-bottom:14px}.wo-skel.cal .g{height:520px}
-.wo-skel.pcs{padding:20px 24px}.wo-skel.pcs .t{height:26px;width:180px;margin-bottom:8px}.wo-skel.pcs .s{height:14px;width:420px;max-width:90%;margin-bottom:22px}.wo-skel.pcs .r{height:56px;margin-bottom:10px}
-</style>
 <link rel="preload" href="assets/fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/montserrat-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../lib/rc-console.css"><!-- polish direction B: Ops Console -->
-<link rel="stylesheet" href="../lib/opp-cards.css"><link rel="stylesheet" href="../lib/wo-calm.css"><!-- calm skin (DESIGN-RULES.md, 10-29) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../lib/rc-apprules.css"><!-- app rules (11-02) -->
+<link rel="stylesheet" href="house.css"><!-- the house page, after the skin so its own surfaces win -->
 </head>
 <body>
 <script>/* the view is known before anything paints (crm.js runs last): an inbox or a board never flashes a home record first */
-try { if (window.self !== window.top) document.documentElement.classList.add('embedded'); } catch (e) { document.documentElement.classList.add('embedded'); }   /* inside the shell from the first paint (rec.js set it late) */
-try { const q = new URLSearchParams(location.search), v = q.get('view'); document.body.dataset.view = v === 'pipeline' || v === 'home' || v === 'inbox' || v === 'calendar' || v === 'customers' ? v : (q.get('home') || q.get('id')) ? 'home' : 'inbox'; } catch (e) { }
-/* nothing logged and nothing scheduled on this device = the inbox opens empty: the home pane skips the stage skeleton, so its "The house shows here" never jumps up (loop 15) */
-try { const pp = JSON.parse(localStorage.getItem('rc.t.pipe') || '{}'), sc = JSON.parse(localStorage.getItem('rc.t.sched') || '[]'); if (!(sc && sc.length) && !Object.keys(pp).some(k => pp[k] && pp[k].history && pp[k].history.length)) document.body.dataset.inboxEmpty = '1'; } catch (e) { }</script>
+try { const q = new URLSearchParams(location.search), v = q.get('view'); document.body.dataset.view = v === 'pipeline' || v === 'home' || v === 'inbox' || v === 'calendar' || v === 'customers' ? v : (q.get('home') || q.get('id')) ? 'home' : 'inbox'; } catch (e) { }</script>
 <header class="bar">
   <div class="rd" data-r="logo"></div>
-  <div class="co"><b data-r="name">Jackson Roofing</b><span class="sub">Roof Command</span></div>
+  <div class="co"><b data-r="name">&nbsp;</b><span class="sub">Roof Command</span></div>
   <nav class="crumb" id="crumb" aria-label="Breadcrumb"></nav>
 </header>
 
 <!-- CRM views: Inbox (three panes) | Pipeline (the board) | Home (this record). crm.js owns the switch; the 3D stage moves between the home pane and the record. -->
 <nav class="vtabs" id="vtabs" aria-label="CRM views">
   <button type="button" data-v="inbox" aria-pressed="true"><span class="ic" data-ci="text"></span>Inbox<i id="vInN" hidden></i></button>
-  <button type="button" data-v="pipeline" aria-pressed="false"><span class="ic" data-ci="layers"></span>Leads<i id="vPipeN" hidden></i></button>
+  <button type="button" data-v="pipeline" aria-pressed="false"><span class="ic" data-ci="layers"></span>Pipeline<i id="vPipeN" hidden></i></button>
   <button type="button" data-v="calendar" aria-pressed="false"><span class="ic" data-ci="cal"></span>Calendar</button>
-  <button type="button" data-v="customers" aria-pressed="false" id="vCust"><span class="ic" data-ci="check"></span><span class="lg">Customers</span><span class="sh">Customers</span></button>
+  <button type="button" data-v="customers" aria-pressed="false" id="vCust"><span class="ic" data-ci="check"></span><span class="lg">Past customers</span><span class="sh">Customers</span></button>
   <button type="button" data-v="home" aria-pressed="false" id="vHome"><span class="ic" data-ci="roof"></span><span id="vHomeLbl">Home</span></button>
 </nav>
-<script>/* the right tab is lit before crm.js runs (it used to show Inbox for a few seconds) */
-document.querySelectorAll('#vtabs [data-v]').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === document.body.dataset.view ? 'true' : 'false'));</script>
 
 <div class="crm" id="crm" data-screen="list">
   <aside class="cl" id="cl" aria-label="Inbox">
     <div class="clh"><h2>Inbox</h2><span id="autoSlot"></span><small id="clN"></small></div>
     <label class="csearch"><span class="ic" data-ci="search"></span><input type="search" id="cq" placeholder="Search address or owner" aria-label="Search the inbox by address or owner" autocomplete="off"></label>
     <div class="cfil" id="cfil" role="group" aria-label="Show"></div>
-    <div class="clist" id="clist" role="list"><div class="wo-skel rows" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="clist" id="clist" role="list"></div>
   </aside>
   <section class="cv" id="cv" aria-label="Conversation">
     <div class="cvh" id="cvh"></div>
-    <div class="cvm" id="cvm"><div class="wo-skel msgs" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+    <div class="cvm" id="cvm"></div>
     <div class="cvf" id="cvf"></div>
   </section>
   <aside class="ch" id="ch" aria-label="This home">
     <div class="chh" id="chh"></div>
-    <div class="chstage" id="chstage"><div class="wo-skel stage" aria-hidden="true"><i></i></div></div>
+    <div class="chstage" id="chstage"></div>
     <div class="chf" id="chf"></div>
   </aside>
 </div>
 
 <!-- the calendar view (cal.js paints it): every booked inspection, book, move, cancel; nothing sends -->
-<section class="cal" id="cal" aria-label="Calendar"><div class="wo-skel cal" aria-hidden="true"><i class="t"></i><i class="g"></i></div></section>
+<section class="cal" id="cal" aria-label="Calendar"></section>
 <!-- Past customers (customers.js, 10-26): import / add past jobs, review, referral and testimonial asks (you tap send), neighbors to knock -->
-<section class="pc" id="pc" aria-label="Past customers" aria-busy="true"><div class="wo-skel pcs" aria-hidden="true"><i class="t"></i><i class="s"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div></section>
+<section class="pc" id="pc" aria-label="Past customers"></section>
 
 <section class="rh">
   <div class="rt">
     <div class="stopnav" id="stopnav" hidden></div>
     <h1 id="addr"></h1>
-    <div class="fit sk" id="fitSk" aria-hidden="true"><i></i><i></i></div><!-- condense.js swaps in the score + Why it fits -->
     <div class="kf" id="keyf" aria-label="Key facts"></div><!-- rec.js keyFacts (Jack 10-23: key facts first) -->
     <div class="sub" id="rsub"></div>
     <div class="proofst" id="proofSt" hidden></div><!-- rec.js renderProof: Proof Page sent / opened / consent (Bet 3, 10-23) -->
@@ -136,7 +92,6 @@ document.querySelectorAll('#vtabs [data-v]').forEach(b => b.setAttribute('aria-p
 <main class="main">
   <div class="left">
   <section class="stage" id="stage" aria-label="Roof X-Ray">
-    <div class="wo-skel" id="stageSk" aria-hidden="true"><i></i><b>Loading the 3D roof</b></div>
     <canvas id="gl"></canvas>
     <div class="title" id="title">
       <h2 id="titleH"></h2>
@@ -162,13 +117,13 @@ document.querySelectorAll('#vtabs [data-v]').forEach(b => b.setAttribute('aria-p
   </div>
   <aside class="col">
     <div class="ptab" id="ptab" role="tablist" aria-label="Right side">
-      <button type="button" role="tab" data-p="pipe" aria-controls="pipePane" aria-selected="true">Leads<i id="pipeN">0</i></button>
+      <button type="button" role="tab" data-p="pipe" aria-controls="pipePane" aria-selected="true">Pipeline<i id="pipeN">0</i></button>
       <button type="button" role="tab" data-p="home" aria-controls="homePane" aria-selected="false">This home</button>
     </div>
     <section class="pane pipe on" id="pipePane" role="tabpanel" aria-label="Pipeline">
-      <div class="pph"><h3>Leads</h3><p><span class="mse">Change a stage in its row. Click a home to open it.</span><span class="tch">Change a stage in its row. Tap a home to open it.</span></p></div>
-      <div class="ptools" id="ptools"></div><div class="pcount" id="pcount" aria-label="Homes per stage"></div>
-      <div class="pcols" id="pcols"><div class="wo-skel cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="pph"><h3>Pipeline</h3><p><span class="mse">Drag a home to a new stage, or use Move to. Click a home to open it.</span><span class="tch">Hold a home, then drag it to a new stage, or use Move to. Tap a home to open it.</span></p></div>
+      <div class="pcount" id="pcount" aria-label="Homes per stage"></div>
+      <div class="pcols" id="pcols"></div>
     </section>
     <div class="pane" id="homePane" role="tabpanel" aria-label="This home">
     <section class="next" id="next" aria-label="Next task"></section>
@@ -229,11 +184,11 @@ document.querySelectorAll('#vtabs [data-v]').forEach(b => b.setAttribute('aria-p
 <div class="toast" id="toast" role="status" hidden></div>
 <dialog class="dlg" id="dlg" aria-labelledby="dlgTitle"><div class="dh"><b id="dlgTitle"></b><button type="button" id="dlgClose" aria-label="Close"><span class="ic" data-i="close"></span></button></div><div id="dlgBody"></div></dialog>
 
-<script src="../lib/rc-state.js"></script>
+<script src="../lib/rc-state.js"></script><script src="../lib/rc-layout.js"></script>
 <script src="../lib/brand.js"></script>
 <script src="../lib/rc-copy.js"></script>
 <script src="../lib/rc-proof.js"></script><!-- Proof Page: link, send dialog, opened / consent log (Bet 3, 10-23) -->
-<script>/* optional traced file: skipped for 10 min after a 404 (loop 6) */try{if(Date.now()-(+localStorage.getItem('rc.off.traced')||0)>6e5)document.write('<script src="../lib/rc-traced.js" onerror="try{localStorage.setItem(\'rc.off.traced\',Date.now())}catch(e){}this.remove()"><\/script>')}catch(e){}</script><!-- git-ignored; written by scripts/leads/tracerfy.py, absent = nothing shown -->
+<script src="../lib/rc-traced.js" onerror="this.remove()"></script><!-- git-ignored; written by scripts/leads/tracerfy.py, absent = nothing shown -->
 <script src="../lib/rc-traced-ui.js"></script>
 <script>/* the roofer brands the page (lib/brand.js) */ applyRoofer(rooferKey()); document.documentElement.style.setProperty('--accent-hi', activeRoofer().accentHi || activeRoofer().accent);</script>
 <script src="../lib/rc-roof.js"></script>
@@ -245,15 +200,11 @@ document.querySelectorAll('#vtabs [data-v]').forEach(b => b.setAttribute('aria-p
 <script src="../c4-command-deck/inbox.js"></script><!-- read-only: Inbox.classify, the one reply classifier Today and the CRM share -->
 <script src="draw.js"></script><!-- Draw the roof: outline tracing on the satellite view for homes with no outline on file -->
 <script src="../lib/rc-plain.js"></script>
-<script>/* round 13: #stageSk comes off when the house first draws, when there is no roof to draw, or after 20 s */
-(function(){var st=document.getElementById('stage'),sk=document.getElementById('stageSk');if(!st||!sk)return;
-var off=function(){if(sk.parentNode)sk.remove();mo.disconnect();};var mo=new MutationObserver(function(){if(/(building|none|swap)/.test(st.className))off();});
-mo.observe(st,{attributes:true,attributeFilter:['class']});st.addEventListener('rc:roofbuilt',off,{once:true});setTimeout(off,20000);})();</script>
 <script src="rec.js"></script>
 <script src="aerial.js"></script><!-- the record opens on the aerial photo with the roof edges; 3D model one tap away (Jack 10-26) -->
 <script src="../lib/rc-hail.js"></script><!-- one home's hail on every storm + neighbors who took the same hail (10-19) -->
 <script src="hailpanel.js"></script>
-<script src="../lib/rc-scores.js"></script><script src="../lib/opp-score.js"></script><script src="../lib/opp-data.js"></script><script src="../lib/opp-cards.js"></script><script src="../vendor/floating-ui@1.8.0/floating-ui.core.umd.min.js"></script><script src="../vendor/floating-ui@1.8.0/floating-ui.dom.umd.min.js"></script><script src="../lib/opp-tips.js"></script><script src="evidence.js"></script><!-- Opportunity Score v2 on pipeline cards (10-29) --><!-- the Opportunity Score evidence card (lib/rc-scores.js RCS.explain, 10-26) -->
+<script src="../lib/rc-intent.js"></script><script src="../lib/rc-scores.js"></script><script src="evidence.js"></script><!-- the Opportunity Score evidence card (lib/rc-scores.js RCS.explain, 10-26) -->
 <script src="knock.js"></script><!-- At the door: Not home / Talked / Not interested / Book, each logged with Undo (10-19) -->
 <script src="materials.js"></script><!-- Materials tab: a starting order from the measured roof (10-19) -->
 <script src="pipe.js"></script>
@@ -265,7 +216,9 @@ mo.observe(st,{attributes:true,attributeFilter:['class']});st.addEventListener('
 <script src="../lib/rc-automation.js"></script>
 <script src="../lib/rc-features.js"></script><!-- kept features switchboard (10-11) -->
 <script src="features.js"></script><!-- roof-build stamp, odometer counts -->
-<script src="house.js"></script><!-- the house page: satellite photo + facts on file, no 3D or estimated roof (Jack 11-01) -->
+<script src="house.js"></script>
+<script>/* the 3D roof (three.js, 0.7 MB + the model) loads after the first paint, on an idle slot; the pane shows the satellite photo until the model has drawn (Jack 11-02, load time) */
+addEventListener('load',()=>{ (window.requestIdleCallback||setTimeout)(()=>{ import('./home.js').catch(()=>{}); },{timeout:3000}); });</script><!-- the 3D roof (three.js) for the inbox home pane, 3D by default with Satellite one click away (Jack 11-02); the house page keeps its satellite hero (house.css hides #stage there) --><!-- the house page: satellite photo + facts on file, no 3D or estimated roof (Jack 11-01) -->
 <script>/* plain words on every CRM screen (Jack 10-26); Home facts and the measurements tab keep their detail */ if (window.RCPLAIN) RCPLAIN.watch(document.body);</script>
 </body>
 </html>

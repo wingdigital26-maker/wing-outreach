@@ -13,19 +13,38 @@
   document.body.classList.add('house-on');
 
   let map = null, mapP = null, shownId = null, showAll = false;
+  const watched = new WeakSet(), settled = new WeakSet();   // each home's county-facts promise: asked once, then answered
+  let fitOpen = false;   // Score details fold-out stays open across re-renders
   const loadMap = () => mapP || (mapP = new Promise((ok, no) => {
     const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '../vendor/maplibre-gl@4.7.1/maplibre-gl.css'; document.head.appendChild(l);
     const s = document.createElement('script'); s.src = '../vendor/maplibre-gl@4.7.1/maplibre-gl.js'; s.onload = () => ok(window.maplibregl); s.onerror = no; document.head.appendChild(s);
   }));
   const plainInitials = n => String(n || '').replace(/&.*$/, '').split(/\s+/).filter(Boolean).map(w => w.charAt(0).toUpperCase() + '.').slice(0, 3).join(' ');
-  const yrs = y => { const n = new Date().getFullYear() - y; return n + (n === 1 ? ' year' : ' years') + ' old'; };
+  // the HOUSE's age from the county year built, said as "37 years ago" so it cannot be read as the roof's age (11-11)
+  const yrs = y => { const n = new Date().getFullYear() - y; return n < 1 ? 'this year' : n + (n === 1 ? ' year' : ' years') + ' ago'; };
   const day = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
   const ago = iso => { const m = Math.round((Date.now() - Date.parse(iso + 'T12:00:00Z')) / 2629800000); return m < 1 ? 'this month' : m < 24 ? m + ' months ago' : Math.floor(m / 12) + ' years ago'; };
   const press = a => { const b = $('.rh .acts [data-act="' + a + '"]'); if (b) b.click(); };
 
   function fact(label, value, src) {
-    return `<div class="hf"><dt>${esc(label)}</dt><dd>${value}</dd>${src ? `<small>${esc(src)}</small>` : ''}</div>`;
+    const fk = { 'Built': 'built', 'Living area': 'area', 'Last re-roof': 'reroof', 'Neighborhood': 'hood' }[label] || '';
+    return `<div class="hf"${fk ? ` data-f="${fk}"` : ''}><dt>${esc(label)}</dt><dd>${value}</dd>${src ? `<small>${esc(src)}</small>` : ''}</div>`;
   }
+
+  // the record's next task (rec.js renderNext into #next, hidden with the old page) shows beside the photo; Done and Book
+  // press the record's own buttons, so nothing new is written here. The 11-01 port dropped it and left the column empty.
+  function mirrorNext() {
+    const src = document.getElementById('next'), card = $('#hNextCard', root), box = $('#hNext', root);
+    if (!src || !card || !box) return;
+    const h4 = src.querySelector('h4'), why = src.querySelector('.why'), due = src.querySelector('.due');
+    if (!h4) { card.hidden = true; return; }
+    const btns = [...src.querySelectorAll('.row button')];
+    box.innerHTML = `<p class="due">${esc(due ? due.textContent.trim() : '')}</p><h3>${h4.innerHTML}</h3>${why ? `<p class="why">${why.innerHTML}</p>` : ''}` +
+      (btns.length ? `<div class="row">${btns.map((b, i) => `<button type="button" data-i="${i}">${esc(b.textContent.trim())}</button>`).join('')}</div>` : '');
+    box.querySelectorAll('[data-i]').forEach(b => b.onclick = () => { const t = src.querySelectorAll('.row button')[+b.dataset.i]; if (t) t.click(); });
+    card.hidden = false;
+  }
+  (function watchNext() { const src = document.getElementById('next'); if (!src) return; new MutationObserver(() => { if (root.isConnected && $('#hNext', root)) mirrorNext(); }).observe(src, { childList: true, subtree: true, characterData: true }); })();
 
   function render() {
     const H = window.HOME; if (!H || !H.rec) return;
@@ -34,8 +53,15 @@
     const cad = r.county ? String(r.county).replace(/,.*$/, '').replace(/ County$/, '') + ' County appraisal roll' : 'County appraisal roll';
     const rr = r.reroof;
     // a re-roof shows only when a permit is on file; otherwise Unknown (Jack: never an old value standing in)
-    const reroofV = rr && !rr.none && rr.text ? esc(rr.text) : 'Unknown';
-    const reroofS = rr && !rr.none ? rr.src : rr && rr.since ? 'No permit on file since ' + rr.since + (rr.src ? ' (' + rr.src + ')' : '') : 'No permit records for this city';
+    // until the county facts have answered (rec.js HOME_READY) these rows say "Checking", never "Unknown" or "No permit
+    // records for this city" for a home that has them (11-11). After that: no permit answer in a city with a full permit
+    // list means the list did not load; only a city without a list is told "No permit records for this city".
+    const hr = window.HOME_READY, wait = !('reroof' in r) && !!hr && !settled.has(hr);
+    if (wait && !watched.has(hr)) { watched.add(hr); Promise.resolve(hr).then(() => { settled.add(hr); if (window.HOME_READY === hr && root.isConnected) render(); }); }
+    const covered = !!(RC.ROOF_COVERAGE || {})[String(r.city || '').trim().toLowerCase()];
+    const reroofV = wait ? 'Checking' : rr && !rr.none && rr.text ? esc(rr.text) : 'Unknown';
+    const reroofS = wait ? '' : rr && !rr.none ? rr.src : rr && rr.since ? 'No permit on file since ' + rr.since + (rr.src ? ' (' + rr.src + ')' : '') : covered ? 'The permit record did not load' : r.city ? 'No permit records for this city' : '';
+    const unk = wait ? 'Checking' : 'Unknown';
     const stage = RC.stage(id, 'new'), hist = RC.history(id) || [], booked = RC.booking(id);
 
     root.innerHTML = `
@@ -57,12 +83,20 @@
           <figcaption><span id="hCap">Satellite photo</span><span class="cr">${esc(window.RCIMG ? RCIMG.credit() : '')}</span></figcaption>
         </figure>
         <aside class="hside">
-          <section class="hcard">
+          <section class="hcard" data-sec="owner">
             <h2>Owner</h2>
             <p class="own" id="hOwn">Loading</p>
             <p class="own-s" id="hOwnS"></p>
           </section>
-          <section class="hcard">
+          <section class="hcard hfit" data-sec="fit" id="hFit" hidden>
+            <h2>Why it fits</h2>
+            <div id="hFitB"></div>
+          </section>
+          <section class="hcard" data-sec="next" id="hNextCard" hidden>
+            <h2>Next task</h2>
+            <div id="hNext"></div>
+          </section>
+          <section class="hcard" data-sec="stage">
             <h2>Where this lead is</h2>
             <div class="stg" role="group" aria-label="Stage">${RC.STAGES.map(s => `<button type="button" data-st="${esc(s[0])}" aria-pressed="${s[0] === stage}">${esc(s[1])}</button>`).join('')}</div>
             ${hist.length ? `<ol class="hist">${hist.slice(0, 6).map(h => `<li><b>${esc(h.what || '')}</b><span>${h.at ? esc(new Date(h.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })) : ''}</span></li>`).join('')}</ol>` : '<p class="none">Nothing done with this house yet.</p>'}
@@ -70,16 +104,17 @@
         </aside>
       </div>
       <dl class="hfacts">
-        ${fact('Built', r.year ? `${r.year} <em>${yrs(r.year)}</em>` : 'Unknown', cad)}
-        ${fact('Living area', r.sqft ? (+r.sqft).toLocaleString('en-US') + ' sq ft' : 'Unknown', cad)}
+        ${fact('Built', r.year ? `<span style="display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px">${r.year} <em style="margin-left:0;white-space:nowrap">${yrs(r.year)}</em></span>` : unk, cad)/* "37 years ago" stays whole: on a narrow tile it drops under the year, "ago" is never left alone (11-12) */}
+        ${fact('Living area', r.sqft ? (+r.sqft).toLocaleString('en-US') + ' sq ft' : unk, cad)}
         ${fact('Last re-roof', reroofV, reroofS)}
-        <div class="hf" id="hHome"><dt>Owner lives here</dt><dd>Checking</dd><small>Homestead exemption, ${esc(cad)}</small></div>
-        <div class="hf" id="hCty"><dt>County</dt><dd>${esc(String(r.county || 'Unknown').replace(/, TX$/, ''))}</dd><small></small></div>
-        ${fact('Neighborhood', r.subdivision ? esc(r.subdivision) : 'Unknown', cad)}
+        <div class="hf" data-f="lives" id="hHome"><dt>Owner lives here</dt><dd>Checking</dd><small>Homestead exemption, ${esc(cad)}</small></div>
+        <div class="hf" data-f="county" id="hCty"><dt>County</dt><dd>${r.county ? esc(String(r.county).replace(/, TX$/, '')) : unk}</dd><small></small></div>
+        ${fact('Neighborhood', r.subdivision ? esc(r.subdivision) : unk, cad)}
       </dl>
       <section class="hstorm" id="hStorm"><h2>Hail at this house</h2><p class="none">Loading the radar record</p></section>`;
 
     root.querySelectorAll('[data-h]').forEach(b => b.onclick = () => press(b.dataset.h));
+    mirrorNext();
     root.querySelectorAll('[data-st]').forEach(b => b.onclick = () => {
       if (b.dataset.st === stage) return;
       RC.setStage(id, b.dataset.st, 'Stage set to ' + RC.stageName(b.dataset.st)); render();
@@ -94,8 +129,38 @@
       // the initials file carries no homestead flag, so there it is unknown, never "No"
       const known = o && !o.initialsOnly, lives = known ? !!o.homestead : r.homestead === true ? true : null;
       $('#hOwnS', root).textContent = o && o.name ? 'Initials only.' + (lives ? ' Lives at this house.' : '') : '';
-      const hh = $('#hHome dd', root); if (hh) hh.textContent = lives == null ? 'Unknown' : lives ? 'Yes' : 'No';
+      const hh = $('#hHome dd', root); if (hh) hh.textContent = lives == null ? unk : lives ? 'Yes' : 'No';
     });
+
+    // Why it fits (11-07, intent signals): the Opportunity Score and its short reasons, from lib/rc-scores.js (RCS.explain).
+    // Facts the data has (radar hail, permit-based roof age, airport gusts, county deed / homestead dates, occupancy flags);
+    // no roof size estimate. Hidden when the score files are not there.
+    if (window.RCS) RCS.explain(gi).then(E => {
+      const card = $('#hFit', root), box = $('#hFitB', root); if (!card || !box || !E || (window.HOME && HOME.id) !== id) return;
+      const NAMES = { roofAge: 'Roof age', storm: 'Hail', wind: 'Wind', movedIn: 'Moved in', occupancy: 'Who lives there', neighborhood: 'Neighbors', crm: 'Your contact' };
+      const p = E.parts || {}, li = [], cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+      const big = (E.storms || []).filter(x => x.inches >= 1).sort((a, b) => b.inches - a.inches)[0];
+      if (big) li.push(`Hail ${big.inches.toFixed(2)} in, ${big.label}`);
+      // the roof line is Today's line: the roof rule's own words (E.roof.text, RC.roofEvidence) through RCPLAIN, so an age
+      // from the year built reads "Roof likely ~37 yrs", a high-evidence permit "Roof 5 yrs (permit)", any other permit
+      // "Roof likely ~7 yrs (permit not confirmed)", and a city with no permit list "Roof age unknown", as Today's row does
+      // (11-12: the line used to be left out there, so Today said "Roof age unknown" and this card said nothing)
+      const ra = window.RCPLAIN ? RCPLAIN.roof(E.roof) : '';
+      if (ra) li.push(ra);
+      ['wind', 'movedIn', 'occupancy'].forEach(k => { if ((p[k] || {}).fit) li.push(cap(p[k].fit)); });
+      const nb = /^(\d+) neighbor/.exec((p.neighborhood || {}).plain || ''); if (nb && +nb[1] > 0) li.push(`${nb[1]} neighbor${+nb[1] === 1 ? '' : 's'} re-roofed lately`);
+      box.innerHTML = `<p class="fs"><b>${E.score}</b> of 100 <span>Opportunity score</span></p>` + (li.length ? `<ul>${li.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p class="none">Nothing stands out yet.</p>') +
+        (E.eligibility && !E.eligibility.ok ? `<p class="no">Do not contact: ${esc(E.eligibility.reason)}</p>` : '') +
+        `<details class="fd"${fitOpen ? ' open' : ''}><summary>Score details</summary><dl>${['roofAge', 'storm', 'wind', 'movedIn', 'occupancy', 'neighborhood', 'crm'].filter(k => p[k] && p[k].max).map(k => {
+          const q = p[k], pts = Math.round(q.pts * 10) / 10;
+          return `<div><dt>${esc(NAMES[k])}<b>${k === 'occupancy' && pts > 0 ? '+' : ''}${pts} of ${k === 'occupancy' ? '±' : ''}${q.max}</b></dt><dd>${esc(q.plain)}<small>${esc(q.detail)}</small></dd></div>`; }).join('')}</dl>` +
+        `<p class="fn">The score also counts roof size, an estimate kept off this page. A ranking, not proof of damage.</p></details>`;
+      card.hidden = false;
+      const fd = $('#hFit details', root); if (fd) fd.ontoggle = () => { fitOpen = fd.open; };
+      // owner lives here: when the owner file has no answer, use the occupancy flag (homestead OR mailing address = this house)
+      const occ = RCS.intent ? (RCS.intent(gi) || {}).occ : 0, hh = $('#hHome dd', root);
+      if (hh && occ && /Checking|Unknown/.test(hh.textContent)) { hh.textContent = occ === 1 ? 'Likely yes' : 'Likely no (investor)'; const sm = $('#hHome small', root); if (sm) sm.textContent = 'Homestead or owner mailing address, county roll'; }
+    }).catch(() => {});
 
     // the county's own property ID (CAD roll), for looking the house up on the appraisal site
     if (window.STM) STM.meta(gi).then(m => { const c = $('#hCty small', root); if (c && m && m.cadId) c.textContent = 'Property ID ' + m.cadId; });
@@ -121,7 +186,7 @@
     });
 
     drawMap(r);
-    shownId = id; sig = id + '|' + stage + '|' + hist.length + '|' + booked;
+    shownId = id; sig = id + '|' + stage + '|' + hist.length + '|' + booked + '|' + factSig(r);
   }
 
   function drawMap(r) {
@@ -145,8 +210,12 @@
   const sw = window.switchHome;
   if (sw) window.switchHome = function () { const out = sw.apply(this, arguments); Promise.resolve(window.HOME_READY).then(() => setTimeout(render, 60)); return out; };
   let sig = '';
+  // the county facts (rec.js HOME_READY) can land after the first draw of a home opened in place: they are part of the
+  // signature, so the block never stays on "Built Unknown" / "No permit records for this city" for a home that has them (11-11)
+  function factSig(r) { const rr = r && r.reroof; return r ? [r.year || '', r.sqft || '', r.county || '', r.subdivision || '', rr ? (rr.none ? 'none' + (rr.since || '') : rr.text || '') : ''].join('~') : ''; }
   setInterval(() => { const H = window.HOME; if (!H || document.body.dataset.view !== 'home') return;
-    const s = H.id + '|' + RC.stage(H.id, 'new') + '|' + (RC.history(H.id) || []).length + '|' + RC.booking(H.id);
+    const s = H.id + '|' + RC.stage(H.id, 'new') + '|' + (RC.history(H.id) || []).length + '|' + RC.booking(H.id) + '|' + factSig(H.rec);
     if (s !== sig) { sig = s; render(); } }, 1200);
+  if (RC.on) RC.on(d => { if (d && d.key === 'settings' && document.body.dataset.view === 'home') render(); });   // a stage added or renamed by Nimbus shows at once
   Promise.resolve(window.HOME_READY).then(render);
 })();

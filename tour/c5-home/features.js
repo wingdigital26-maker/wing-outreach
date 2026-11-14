@@ -44,11 +44,11 @@
     const hail = d.hail != null ? `<div class="rc-sh"><i style="--d:${Math.max(10, Math.min(34, Math.round(d.hail * 16)))}px"></i><b>${d.hail.toFixed(2)} in</b><small>hail, ${esc(d.hailDate)}, radar</small></div>` : `<div class="rc-sh"><b class="sm">No hail on file</b><small>for this address</small></div>`;
     // a measured home (LiDAR roof facets) says measured and shows both pitches; an outline estimate keeps est.
     // roof shape being checked: the LiDAR record's squares and pitch only (estimates), no section count; no record, no size
-    if (d.checking) return d.lidarYear ? `${hail}<div class="rc-sm" title="Estimated from ${d.lidarYear} LiDAR. Verify on site."><div><b>~${esc(String(d.squares))}</b><small>sq est., LiDAR</small></div><div><b>${esc(d.pitch)}</b><small>pitch, LiDAR</small></div></div>`
+    if (d.checking) return d.lidarYear ? `${hail}<div class="rc-sm" title="Estimated from ${d.lidarYear} LiDAR. Roof size is an estimate. Order a measurement report before you quote."><div><b>~${esc(String(d.squares))}</b><small>sq est., LiDAR</small></div><div><b>${esc(d.pitch)}</b><small>pitch, LiDAR</small></div></div>`
       : `${hail}<div class="rc-sm"><div><b class="sm">Roof size not measured</b><small>no LiDAR for this home</small></div></div>`;
-    if (d.facet) return `${hail}<div class="rc-sm" title="Measured from LiDAR roof facets. Verify on site."><div><b>${esc(String(d.squares))}</b><small>sq est., LiDAR</small></div><div><b>${esc(d.pitch)}</b><small>pitch, LiDAR</small></div><div><b>${d.planes}</b><small>${d.outline ? 'sections' : 'facets'}</small></div></div>`;
+    if (d.facet) return `${hail}<div class="rc-sm" title="Estimated from LiDAR roof facets. Roof size is an estimate. Order a measurement report before you quote."><div><b>${esc(String(d.squares))}</b><small>sq est., LiDAR</small></div><div><b>${esc(d.pitch)}</b><small>pitch, LiDAR</small></div><div><b>${d.planes}</b><small>${d.outline ? 'sections' : 'facets'}</small></div></div>`;
     const pitch = d.pitchGap ? `<b>No LiDAR</b><small>pitch est.</small>` : `<b>${esc(d.pitch)}</b><small>pitch est.${d.pitchMeasured ? ', LiDAR' : ''}</small>`;
-    return `${hail}<div class="rc-sm" title="Estimated from public building outlines and 2018 LiDAR. Verify on site."><div><b>~${esc(String(d.squares))}</b><small>sq (est.)</small></div><div>${pitch}</div><div><b>${d.planes}</b><small>planes</small></div></div>`;
+    return `${hail}<div class="rc-sm" title="Estimated from public building outlines and 2018 LiDAR. Roof size is an estimate. Order a measurement report before you quote."><div><b>~${esc(String(d.squares))}</b><small>sq (est.)</small></div><div>${pitch}</div><div><b>${d.planes}</b><small>planes</small></div></div>`;
   }
   function onBuilt(e) {
     if (!on('roofBuild')) return;

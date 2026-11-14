@@ -43,7 +43,7 @@
       const rep = hist.find(h => h.dir === 'in'); if (rep && inR(rep.at, a, b)) r.replies++;
       const ins = hist.find(h => /^Inspection booked/.test(h.what || '')); if (ins && inR(ins.at, a, b)) r.inspections++;
       if (p.proposalSent && inR(p.proposalSent, a, b)) r.proposals++;
-      if (RC.stageKey(p.stage) === 'won') { const w = day(p.signed) || (hist.filter(h => h.kind === 'stage' && /^Won/.test(h.what || '')).pop() || {}).at;
+      if (p.stage === 'won') { const w = day(p.signed) || (hist.filter(h => h.kind === 'stage' && /^Won/.test(h.what || '')).pop() || {}).at;
         if (w && inR(w, a, b)) { r.won++; r.revenue += Math.max(0, +p.jobValue || 0); } }
     });
     const list = SOURCES.map(s => rows[s[0]]).filter(Boolean);

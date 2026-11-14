@@ -22,8 +22,8 @@
 
   // the per-facet LiDAR record (lib/rc-roof.js via STM.facts) when the batch measured this home with good confidence (m 1):
   // its squares, pitch and edge lengths replace the outline estimate; m 2 / 0 / none keep the outline estimate
-  const EST_TIP = 'Estimated from public building outlines and 2018 LiDAR. Verify on site.';
-  const FACET_TIP = 'Measured from LiDAR roof facets (2018/2020). Verify on site.';
+  const EST_TIP = 'Estimated from public building outlines and 2018 LiDAR. Roof size is an estimate. Order a measurement report before you quote.';
+  const FACET_TIP = 'Estimated from LiDAR roof facets (2018/2020). Roof size is an estimate. Order a measurement report before you quote.';
   const facetRec = entry => { const r = entry && entry.facts && entry.facts.roof; return r && r.sq > 0 && (r.facets || (r.est && r.report)) ? r : null; };
   const fpt = FR => (window.RCROOF ? RCROOF.words(FR).pitch : '') || FR.pitch + '/12';   // "12/12 + 7/12": main and secondary
   const tip = x => (x &&(x.facet || (x.M && x.M.facet) || (x.spec && x.spec.facet)) ? FACET_TIP : EST_TIP);
@@ -80,7 +80,7 @@
     return { V, R };
   }
   // ---------- COPLANAR MERGE (10-14): one flat roof plane is one facet ----------
-  // Overlapping massing blocks can leave two facets on the SAME plane meeting along a seam (Caleo: the main block's west
+  // Overlapping massing blocks can leave two facets on the SAME plane meeting along a seam (Reference: the main block's west
   // slope split in two where main-ew and main-ns overlap). Drawn as two facets, the seam gets trim on both sides, a cap and
   // an edge line: a fake band across a flat slope. Adjacent facets whose planes agree (normals within COPLANAR_DEG, plane
   // offsets within COPLANAR_FT) are unioned into one polygon before anything else is built from them. Returns
@@ -232,8 +232,8 @@
       planes, edges, fp, drive: [r2(x1 - dw - 3), r2(x1 - 3)], yb: r2(yb), hit: [], eaveFt: r2(base), blocks: [], steps: [], meshWalls, clean: true,
       sqft: entry.sqft, source: entry.source || 'building outline', pitchMeasured: !!FR.facets,
       squares: FR.sq, waste: FR.waste != null ? FR.waste : null, pitchText: pt,
-      label: `Measured from LiDAR roof facets (${FR.year || 2018}), built as one solid model: ${planes.length} facets, ${pt}`,
-      pitchNote: `${pt}, measured from LiDAR roof facets ${FR.year || 2018}`,
+      label: `Estimated from LiDAR roof facets (${FR.year || 2018}), built as one solid model: ${planes.length} facets, ${pt}`,
+      pitchNote: `${pt}, estimated from LiDAR roof facets ${FR.year || 2018}`,
       facet: !!FR.facets, facetRec: FR
     };
     out.caps = capStrips(out);   // cap bars as facet strips: drawn by c5-home, checked by scripts/dfw/check_edges.mjs
@@ -361,23 +361,25 @@
       steps: steps.map(q => q.map(p => P3(p, p[2]))),
       sqft: entry.sqft, source: entry.source || 'building outline', pitchMeasured: !!FR.facets,
       squares: FR.sq, waste: FR.waste != null ? FR.waste : null, pitchText: pt,
-      label: FR.facets ? `Measured from LiDAR roof facets (${FR.year || 2018}): ${planes.length} facets, each at its own pitch and height, ${pt}` : `Estimated, lower confidence: roof planes drawn from LiDAR (${FR.year || 2018}), ${planes.length} facets, pitch est. ${pt}`,
-      pitchNote: FR.facets ? `${pt}, measured from LiDAR roof facets ${FR.year || 2018}` : `pitch est. ${pt}, from LiDAR roof facets ${FR.year || 2018}`,
+      label: FR.facets ? `Estimated from LiDAR roof facets (${FR.year || 2018}): ${planes.length} facets, each at its own pitch and height, ${pt}` : `Estimated, lower confidence: roof planes drawn from LiDAR (${FR.year || 2018}), ${planes.length} facets, pitch est. ${pt}`,
+      pitchNote: FR.facets ? `${pt}, estimated from LiDAR roof facets ${FR.year || 2018}` : `pitch est. ${pt}, from LiDAR roof facets ${FR.year || 2018}`,
       facet: !!FR.facets, facetRec: FR
     };
   }
 
   // ---------- WHICH 3D MODEL A HOME GETS (one place, 10-15) ----------
   // 'model'  : a full measured model that passed the roof gate: a solid-block model (geometry_ft.mesh, scripts/dfw/roof_blocks.py
-  //            or lib/roof-blocks/, gate r1-r6) on a full report (totals). Caleo (3312 Caleo Ct) is the first. Drawn facet by facet.
+  //            or lib/roof-blocks/, gate r1-r6) on a full report (totals). Reference (5040 Reference Ct) is the first. Drawn facet by facet.
   // 'outline': everything else with a building outline: the clean house from the outline (walls + hip roof from the roof
   //            solver, js/roofplan.js) at the MEASURED pitch, total squares from the LiDAR record, sections scaled to that total.
   //            Raw per-facet LiDAR rings are never drawn as the 3D roof (they read as shards).
   // 'none'   : no outline on file.
+  // 11-12 (Jack): a usable mesh always shows; the gate data stays on the report but no longer hides the model
+  function meshOk(f) { try { return !/NaN|null/.test(JSON.stringify(f).slice(0, 400000)); } catch (e) { return false; } }
   function modelFor(entry) {
     if (!entry || !entry.ring_ft) return 'none';
     const FR = facetRec(entry), d = FR && FR.report, g = d && d.geometry_ft;
-    if (g && g.mesh && g.mesh.roof && g.mesh.roof.length && d.totals && (!d.gate || d.gate.pass !== false)) return 'model';
+    if (g && g.mesh && g.mesh.roof && g.mesh.roof.length && d.totals && meshOk(g.mesh.roof)) return 'model';
     return 'outline';
   }
   // ---------- the outline, made buildable: square, rectilinear, no jogs under JOG_FT ----------
@@ -513,8 +515,8 @@
       // the plain stand-in, "roof shape being checked", never a solver shape presented as this home's roof
       checking: true,
       label: FR ? `Roof shape being checked; squares and pitch estimated from ${FR.year || 2018} LiDAR` : 'Roof shape being checked; no LiDAR roof record for this home',
-      sectionsNote: FR ? 'Sections from the building outline, total measured from LiDAR' : null,
-      pitchNote: FR ? `${fpt(FR)}, measured from LiDAR roof facets ${FR.year || 2018}` : entry.pitch && entry.pitch.note || null,
+      sectionsNote: FR ? 'Sections from the building outline, total estimated from LiDAR' : null,
+      pitchNote: FR ? `${fpt(FR)}, estimated from LiDAR roof facets ${FR.year || 2018}` : entry.pitch && entry.pitch.note || null,
       facet: !!FR, facetRec: FR || null
     };
   }
@@ -522,10 +524,10 @@
     return { none: true, real: false, seed: seed || 1, planes: [], edges: [], hit: [], fp: [[0, 0], [1, 0], [1, 1], [0, 1]], drive: [0, 0], yb: 1, rise: 6,
       label: 'No outline on file for this home' };
   }
-  // ---------- storm map homes ('m<global index>'): their own footprint from lib/st-data-dfw/fp tiles ----------
+  // ---------- storm map homes ('m<global index>'): their own footprint from the roofer's data folder, fp tiles ----------
   // Same tiles the storm map draws (format in shoot_st_data.py). Resolves to a roofs-*.json style entry, or null
   // when the home has no outline on file. Pitch is assumed 6/12 (no LiDAR in the tour mirror).
-  const DATA = window.rooferDataRoot ? rooferDataRoot() : new URL('st-data-dfw/', document.currentScript ? document.currentScript.src : location.href.replace(/[^/]*$/, '') + '../lib/').href;
+  const DATA = rooferDataRoot();   // lib/brand.js, always loaded before this file (scripts/dfw/check_edges.mjs hands node its own)
   let catP = null; const tileP = {}, cache = {};
   const fetchBuf = u => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.arrayBuffer(); });
   function decode(buf, tr, tc) {
@@ -549,20 +551,14 @@
     // center: the ring's centroid in lon/lat (ring_ft is feet east / north of it), so a view can lay the outline on imagery
     return { ring_ft: r.map(p => [r2(p[0] - cx), r2(p[1] - cy)]), center: [lon0 + cx / kx, lat0 + cy / ky], sqft: Math.round(Math.abs(A)), source: window.rooferDataRoot ? 'Overture Maps building outline' : 'Microsoft building footprint', pitch: { rise: 6, measured: false } };
   }
-  // loop 17: the outline alone (no county facts). Overview drew nothing for ~40 s because every card waited on
-  // STM.facts (permit files, LiDAR tiles) before its outline, and the rest of the list waited on the first card's facts.
-  // The footprint tile lands in about a second; it is cached here so mapCached() draws it, and mapEntry() adds the facts.
-  const ringP = {}, ocache = {};
-  function mapOutline(i, lon, lat) {
+  function mapEntry(i, lon, lat) {
     i = +i; if (!(i >= 0)) return Promise.resolve(null);
     if (i in cache) return Promise.resolve(cache[i]);
-    if (i in ocache) return Promise.resolve(ocache[i]);
-    if (ringP[i]) return ringP[i];
     // no position given (record opened cold by its id): look it up in homes.bin instead of calling it "no outline"
     if (!isFinite(+lon) || !isFinite(+lat) || lon === null || lat === null || lon === '' || lat === '')
-      return window.STM && STM.lonlat ? STM.lonlat(i).then(p => (p && isFinite(p[0]) ? mapOutline(i, p[0], p[1]) : null)) : Promise.resolve(null);
+      return window.STM && STM.lonlat ? STM.lonlat(i).then(p => (p && isFinite(p[0]) ? mapEntry(i, p[0], p[1]) : null)) : Promise.resolve(null);
     catP = catP || fetch(DATA + 'catalog.json').then(r => r.json());
-    return (ringP[i] = catP.then(cat => {
+    return catP.then(cat => {
       const R = cat.regions.slice().reverse().find(r => i >= r.offset); if (!R) return null;
       const tr0 = Math.floor(lat / 0.05), tc0 = Math.floor(lon / 0.05), keys = [];
       for (const [dr, dc] of [[0, 0], [0, -1], [0, 1], [-1, 0], [1, 0]]) if ((R.tiles || []).some(t => t.tr === tr0 + dr && t.tc === tc0 + dc)) keys.push([tr0 + dr, tc0 + dc]);
@@ -570,19 +566,12 @@
         tileP[key] = tileP[key] || fetchBuf(DATA + 'fp/' + key + '.bin').then(b => decode(b, tr, tc)).catch(() => new Map());
         return tileP[key].then(m => { const ring = m.get(i - R.offset); return ring && ring.length >= 3 ? toEntry(ring) : next(k + 1); }); };
       return next(0);
-    }).catch(() => null).then(e => (ocache[i] = e)));
-  }
-  function mapEntry(i, lon, lat) {
-    i = +i; if (!(i >= 0)) return Promise.resolve(null);
-    if (i in cache) return Promise.resolve(cache[i]);
-    if (!isFinite(+lon) || !isFinite(+lat) || lon === null || lat === null || lon === '' || lat === '')
-      return window.STM && STM.lonlat ? STM.lonlat(i).then(p => (p && isFinite(p[0]) ? mapEntry(i, p[0], p[1]) : null)) : Promise.resolve(null);
-    return mapOutline(i, lon, lat).then(e => {
+    }).catch(() => null).then(e => {
       if (!e || !window.STM) return e;
       return STM.facts(i, +lon, +lat).then(f => { e.pitch = f.pitch; e.facts = f; return e; }).catch(() => e);
     }).then(e => (cache[i] = e));
   }
-  const mapCached = i => (+i in cache ? cache[+i] : +i in ocache ? ocache[+i] : undefined);
+  const mapCached = i => (+i in cache ? cache[+i] : undefined);
   // the numbers a roofer quotes from: squares, planes, edge lengths (3D, ft) and the wall lengths of the outline (ft)
   function measure(sp, entry) {
     if (!sp || sp.none) return null;
@@ -625,5 +614,5 @@
     const L20 = 20 * s; o.push(`<g transform="translate(14,${Math.round(H - 14)})"><line x1="0" y1="0" x2="${num(L20)}" y2="0" stroke="#0E1B3D" stroke-width="2"/><text x="${num(L20 / 2)}" y="-5" class="rr-el" fill="#0E1B3D">20 ft</text></g>`);
     o.push('</svg>'); return o.join('');
   }
-  window.RealRoof = { spec, modelFor, planSVG, regularRing, JOG_FT, none, label, mapEntry, mapOutline, mapCached, measure, tip, EST_TIP, FACET_TIP, meshSpec, meshEdges, mergeCoplanar, edgeStrip, capStrips, CAP_W, ETOL, COPLANAR_DEG, COPLANAR_FT, SEAM_DEG };
+  window.RealRoof = { spec, modelFor, planSVG, regularRing, JOG_FT, none, label, mapEntry, mapCached, measure, tip, EST_TIP, FACET_TIP, meshSpec, meshEdges, mergeCoplanar, edgeStrip, capStrips, CAP_W, ETOL, COPLANAR_DEG, COPLANAR_FT, SEAM_DEG };
 })();

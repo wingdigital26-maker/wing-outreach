@@ -1,0 +1,626 @@
+/* rc-apprules.css: the app rules look (Jack approved 2026-11-02, .visual/APP-RULES.md). Loaded LAST on the shell and on
+   every screen, after rc-console.css. Same app, same JS, same skeleton: this sheet only changes tokens, surfaces,
+   type and motion. One family (Geist, Inter fallback), five sizes (12/13/15/22/48), white sidebar, grey canvas,
+   white borderless cards, full-round pills, one blue. Nothing here names a roofer: the accent still comes from
+   lib/brand.js (--accent) but the ONE blue is --a-blue. Light only. */
+
+:root{
+  --a-ink:#111318; --a-muted:#6b7079; --a-canvas:#f1f2f4; --a-card:#ffffff; --a-dark:#0d0e12;
+  --a-blue:#1d5cf0; --a-navy:#1b2a5c; --a-sky:#4f8dff; --a-black:#111318;
+  --a-hair:rgba(17,19,24,.08); --a-hair-2:rgba(17,19,24,.06);
+  --a-shadow:0 1px 2px rgba(16,24,40,.04),0 4px 16px rgba(16,24,40,.05);
+  --a-r:24px; --a-r-tile:12px; --a-r-pill:999px;
+  --a-pad:24px; --a-gap:20px; --a-sect:32px;
+  --a-ease:cubic-bezier(.22,1,.36,1); --a-in:350ms; --a-tween:700ms; --a-press:150ms;
+  --a-font:'Geist','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  /* the five sizes and their line heights */
+  --a-12:12px; --a-13:13px; --a-15:15px; --a-22:22px; --a-48:48px;
+  --a-lh12:16px; --a-lh13:18px; --a-lh15:22px; --a-lh22:28px; --a-lh48:52px;
+  /* the old sheets' tokens, pointed at the new palette so every screen follows without a rewrite */
+  --c-ink:var(--a-ink); --c-blue:var(--a-blue); --c-canvas:var(--a-canvas); --c-line:var(--a-hair); --c-line-2:var(--a-hair-2);
+  --c-slate:var(--a-muted); --c-tint:#eef3ff; --c-shadow:none; --c-mono:var(--a-font);
+  --c-r:var(--a-r); --c-r2:var(--a-r-tile); --c-r3:var(--a-r-pill);
+  --paper:var(--a-ink); --muted:var(--a-muted); --blue:var(--a-blue); --hair:var(--a-hair); --bar:var(--a-canvas);
+  --font:var(--a-font); --ink:var(--a-ink);
+}
+html[data-rc]{font-family:var(--a-font)}
+html[data-rc] body{font-family:var(--a-font);color:var(--a-ink);font-size:var(--a-13);line-height:var(--a-lh13);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+html[data-rc] button,html[data-rc] input,html[data-rc] select,html[data-rc] textarea{font-family:var(--a-font)}
+/* the console's ALL CAPS microlabels become sentence case 12px */
+html[data-rc] .c-lbl{text-transform:none;letter-spacing:.01em;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted)}
+
+/* =========================================================== SHELL (product.html) =========================================================== */
+/* the header element stays (lib/rc-find.js and auth read body>header) but it IS the left sidebar: a 260px white column.
+   Below 700px it becomes the bottom tab bar (phone rule). */
+html[data-rc="shell"] body{display:grid;grid-template-columns:260px minmax(0,1fr);grid-template-rows:100vh;grid-template-rows:100dvh;background:#fff;
+  background-image:none}
+html[data-rc="shell"] body>header{position:relative;height:auto;grid-row:1;grid-column:1;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:var(--a-pad) var(--a-pad) 20px;
+  background:#fff;border:0;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none;overflow:hidden auto;min-height:0}
+html[data-rc="shell"] body>header .co{gap:12px;flex:none;order:0;margin-bottom:28px;min-width:0}
+html[data-rc="shell"] body>header .co .mark{width:32px;height:32px;border-radius:var(--a-r-tile);background:var(--a-blue)}
+html[data-rc="shell"] body>header .co .mark.rc-wide{border-radius:var(--a-r-tile)!important;height:32px;padding:0 6px!important}
+html[data-rc="shell"] body>header .co b{font-size:var(--a-15);line-height:var(--a-lh15);font-weight:600;letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-rc="shell"] body>header .co small{display:none}
+/* greeting (22px) and one status line */
+html[data-rc="shell"] body>header .sb-greet{order:1;margin:0 0 28px}
+html[data-rc="shell"] body>header .sb-greet b{display:block;font-size:var(--a-22);line-height:var(--a-lh22);font-weight:600;letter-spacing:-.02em}
+html[data-rc="shell"] body>header .sb-greet small{display:block;margin-top:6px;font-size:var(--a-13);line-height:var(--a-lh13);color:var(--a-muted)}
+html[data-rc="shell"] body>header .sb-lbl{order:2;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);margin:0 0 8px}
+/* nav rows: full round, active row filled near black */
+html[data-rc="shell"] body>header nav{order:3;flex-direction:column;gap:4px;margin:0;padding:0;background:transparent;border:0;border-radius:0;overflow:visible;max-width:none;flex:none}
+html[data-rc="shell"] body>header nav button{display:flex;align-items:center;width:100%;min-height:44px;padding:0 18px;border-radius:var(--a-r-pill);font-size:var(--a-15);line-height:var(--a-lh15);font-weight:500;letter-spacing:-.005em;color:var(--a-ink);background:transparent;box-shadow:none;text-align:left;
+  transition:background var(--a-press) var(--a-ease),transform var(--a-press) var(--a-ease)}
+html[data-rc="shell"] body>header nav button:hover{background:var(--a-canvas);color:var(--a-ink)}
+html[data-rc="shell"] body>header nav button:active{transform:scale(.96)}
+html[data-rc="shell"] body>header nav button.on{background:var(--a-dark);color:#fff;box-shadow:none}
+/* the newest storm chip: a plain white pill under the nav (the sidebar status line says the same; the chip opens it) */
+html[data-rc="shell"] body>header .wstorm{order:4;display:flex;width:auto;align-self:flex-start;margin-top:12px;height:36px;padding:0 16px;border:0;border-radius:var(--a-r-pill);background:var(--a-canvas);color:var(--a-muted);font-size:var(--a-13);line-height:var(--a-lh13)}
+html[data-rc="shell"] body>header .wstorm[hidden]{display:none}
+html[data-rc="shell"] body>header .wstorm .k{font-size:var(--a-12);letter-spacing:.01em;text-transform:none}
+html[data-rc="shell"] body>header .wstorm b{color:var(--a-ink)}
+html[data-rc="shell"] body>header .wstorm:hover{background:#e6e8ec}
+html[data-rc="shell"] body>header .sp{order:5;flex:1}
+/* search: a full-round input in the sidebar */
+html[data-rc="shell"] body>header .find{order:6;width:100%;height:40px;padding:0 14px;border-radius:var(--a-r-pill);border:0;background:var(--a-canvas);color:var(--a-muted);margin-bottom:16px;box-shadow:none}
+html[data-rc="shell"] body>header .find:focus-within{box-shadow:0 0 0 2px var(--a-blue);border-color:transparent}
+html[data-rc="shell"] body>header .find input{font-size:var(--a-13)}
+html[data-rc="shell"] body>header .find::after{display:none}
+html[data-rc="shell"] body>header .sig{display:none}
+/* the user chip pinned at the bottom */
+html[data-rc="shell"] body>header .sb-user{order:7;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--a-r);background:var(--a-canvas);cursor:pointer;flex:none}
+html[data-rc="shell"] body>header .sb-user .me{width:40px;height:40px;border:0;border-radius:50%;background:var(--a-blue);color:#fff;font-size:var(--a-13);font-weight:600;flex:none}
+html[data-rc="shell"] body>header .sb-who{min-width:0}
+html[data-rc="shell"] body>header .sb-who b{display:block;font-size:var(--a-13);line-height:var(--a-lh13);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-rc="shell"] body>header .sb-who small{display:block;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted)}
+/* the canvas: grey, 24px radius, the stage sits on it */
+html[data-rc="shell"] body>main{grid-row:1;grid-column:2;padding:12px 12px 12px 0;min-height:0;align-items:stretch}
+html[data-rc="shell"] body>main>.stage{border-radius:var(--a-r);background:var(--a-canvas);box-shadow:none;overflow:hidden}
+html[data-rc="shell"] body>main.phone>.stage{border-radius:28px}
+html[data-rc="shell"] body>main>.stage>.frame{background:var(--a-canvas);transition:opacity var(--a-in) var(--a-ease),transform var(--a-in) var(--a-ease),visibility 0s linear var(--a-in)}
+html[data-rc="shell"] body>main>.stage>.frame{transform:translateY(12px)}
+html[data-rc="shell"] body>main>.stage>.frame.on{transform:none}
+/* search results: white card, no border */
+html[data-rc="shell"] .fres{border:0;border-radius:16px;box-shadow:var(--a-shadow),0 18px 40px -18px rgba(16,24,40,.25)}
+/* Nimbus: the orb stays; its bubble and panel take the card radius */
+html[data-rc="shell"] .nb-bubble,html[data-rc="shell"] .nb-ask,html[data-rc="shell"] .nbv{border-radius:16px;border:0;box-shadow:var(--a-shadow),0 18px 50px rgba(16,24,40,.16)}
+/* tighter sidebar on short windows so the user chip never falls off */
+@media (max-height:760px){
+  html[data-rc="shell"] body>header{padding:16px 16px 14px}
+  html[data-rc="shell"] body>header .co{margin-bottom:16px}
+  html[data-rc="shell"] body>header .sb-greet{margin-bottom:16px}
+  html[data-rc="shell"] body>header nav button{min-height:38px}
+  html[data-rc="shell"] body>header .wstorm{display:none}
+  html[data-rc="shell"] body>header .find{margin-bottom:10px}
+  html[data-rc="shell"] body>header .sb-user{padding:8px 10px}
+}
+@media (max-width:1180px){ html[data-rc="shell"] body{grid-template-columns:224px minmax(0,1fr)} html[data-rc="shell"] body>header{padding:20px 16px 16px} }
+/* under 700px (the 600x626 pane and phones): the sidebar is a bottom tab bar; the search is a round button in it */
+@media (max-width:699px){
+  html[data-rc="shell"] body{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
+  html[data-rc="shell"] body>header{grid-row:2;grid-column:1;flex-direction:row;align-items:center;gap:4px;padding:5px 8px calc(6px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--a-hair);overflow:visible;height:auto;min-height:56px}
+  html[data-rc="shell"] body>header .co,html[data-rc="shell"] body>header .sb-greet,html[data-rc="shell"] body>header .sb-lbl,html[data-rc="shell"] body>header .wstorm,html[data-rc="shell"] body>header .sp,html[data-rc="shell"] body>header .sb-who{display:none}
+  html[data-rc="shell"] body>header nav{flex-direction:row;flex:1 1 auto;gap:2px;order:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+  /* 44px tall (the bar stays 56px: 1 line + 5 + 44 + 6); equal shares, but never narrower than the word plus its side padding, so the
+     dark pill never touches "Page plan" (at 540px the word was 60.8px in a 60.6px tab) */
+  html[data-rc="shell"] body>header nav button{flex:1 1 0;min-width:auto;justify-content:center;min-height:44px;padding:0 10px;font-size:var(--a-13);text-align:center;white-space:nowrap}
+  html[data-rc="shell"] body>header .find{order:2;width:40px;height:40px;padding:0;margin:0;justify-content:center;flex:none}
+  html[data-rc="shell"] body>header .find input{display:none}
+  html[data-rc="shell"] body>header .sb-user{order:3;padding:0;background:transparent;flex:none;margin-left:2px}
+  html[data-rc="shell"] body>header .sb-user .me{width:36px;height:36px}
+  html[data-rc="shell"] body>main{grid-row:1;grid-column:1;padding:8px 8px 0}
+  html[data-rc="shell"] body>main>.stage{border-radius:16px}
+  html[data-rc="shell"] body.finding>header .find{top:8px;bottom:auto}
+}
+
+/* =========================================================== TODAY (c4-command-deck/deck.html) =========================================================== */
+html[data-rc="today"] body{background:var(--a-canvas)}
+html[data-rc="today"] .app{height:auto;min-height:100vh;display:flex;flex-direction:column;overflow:visible;--g:var(--a-pad)}
+html[data-rc="today"] .embed .app{grid-template-rows:none}
+/* page header: title 22px with a 13px sub line; the greeting lives in the shell's sidebar */
+html[data-rc="today"] .app .head{display:flex;align-items:flex-end;gap:16px;padding:var(--a-pad) var(--a-pad) 0}
+html[data-rc="today"] .app .head .hello h1{font-size:var(--a-22);line-height:var(--a-lh22);font-weight:600;letter-spacing:-.02em;color:var(--a-ink);display:block}
+html[data-rc="today"] .app .head .hello h1 #greet,html[data-rc="today"] .app .head .hello h1 .rep{display:none}
+html[data-rc="today"] #hello::after{content:none}
+html[data-rc="today"] .app .head .hello{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 12px}
+html[data-rc="today"] .app .head .hello h1{grid-column:1;grid-row:1}
+html[data-rc="today"] .app .head .hello .pgsub{grid-column:1;grid-row:2}
+html[data-rc="today"] .app .head .hello #hdMore{grid-column:2;grid-row:1 / span 2;margin:0}
+html[data-rc="today"] .app .head .hello .pgsub{display:block;margin-top:4px;font-size:var(--a-13);line-height:var(--a-lh13);color:var(--a-muted)}
+html[data-rc="today"] .app .head #hdMore,html[data-rc="today"] .app .head .mtog{margin-left:0;vertical-align:0;font-size:var(--a-13);color:var(--a-ink);background:#fff;border-radius:var(--a-r-pill);min-height:36px;padding:0 16px}
+/* overview: hero row then four cards */
+html[data-rc="today"] .ov{display:flex;flex-direction:column;gap:var(--a-gap);padding:var(--a-gap) var(--a-pad) 0;max-width:none;width:100%}   /* Jack 11-02: fill the width, no empty column on the right */
+html[data-rc="today"] .ov[hidden]{display:none}
+html[data-rc="today"] .ov-row1{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr);gap:var(--a-gap);align-items:stretch}
+html[data-rc="today"] .ov-hero,html[data-rc="today"] .ov-panel,html[data-rc="today"] .ov-card{opacity:0;transform:translateY(12px);transition:opacity var(--a-in) var(--a-ease),transform var(--a-in) var(--a-ease)}
+html[data-rc="today"] .ov.in .ov-hero{opacity:1;transform:none}
+html[data-rc="today"] .ov.in .ov-panel{opacity:1;transform:none;transition-delay:60ms}
+html[data-rc="today"] .ov.in .ov-card{opacity:1;transform:none;transition-delay:calc(120ms + var(--i,0) * 60ms)}
+/* hero: one dark card, the most important number */
+html[data-rc="today"] .ov-hero{position:relative;overflow:hidden;background:var(--a-dark);color:#fff;border-radius:var(--a-r);padding:var(--a-pad);display:flex;flex-direction:column;justify-content:space-between;gap:20px;cursor:pointer;min-height:0}
+html[data-rc="today"] .ov-hero::before{content:"";position:absolute;right:-80px;top:-100px;width:320px;height:320px;border-radius:50%;background:var(--a-blue);filter:blur(90px);opacity:.45;pointer-events:none}
+html[data-rc="today"] .ov-hero>*{position:relative}
+html[data-rc="today"] .ov-top{display:flex;align-items:flex-start;gap:14px}
+html[data-rc="today"] .ov-av{display:flex;flex:none}
+html[data-rc="today"] .ov-av span{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 3px var(--a-dark);color:#fff}
+html[data-rc="today"] .ov-av span+span{margin-left:-10px}
+html[data-rc="today"] .ov-av span svg{width:18px;height:18px}
+html[data-rc="today"] .ov-av .blue,html[data-rc="today"] .ov-leg .s1,html[data-rc="today"] .ov-split .s1{background:var(--a-blue)}
+html[data-rc="today"] .ov-av .sky,html[data-rc="today"] .ov-leg .s2,html[data-rc="today"] .ov-split .s2{background:var(--a-sky)}
+html[data-rc="today"] .ov-av .navy,html[data-rc="today"] .ov-leg .s3,html[data-rc="today"] .ov-split .s3{background:rgba(255,255,255,.28)}
+html[data-rc="today"] .ov-tt{min-width:0;flex:1}
+html[data-rc="today"] .ov-tt b{display:block;font-size:var(--a-15);line-height:var(--a-lh15);font-weight:600;letter-spacing:-.005em}
+html[data-rc="today"] .ov-tt small{display:-webkit-box;font-size:var(--a-13);line-height:var(--a-lh13);color:rgba(255,255,255,.55);margin-top:2px;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html[data-rc="today"] .ov-st{display:flex;gap:24px;flex:none;text-align:right}
+html[data-rc="today"] .ov-st small{display:block;font-size:var(--a-12);line-height:var(--a-lh12);color:rgba(255,255,255,.55)}
+html[data-rc="today"] .ov-st b{display:block;font-size:var(--a-15);line-height:var(--a-lh15);font-weight:600;margin-top:2px}
+html[data-rc="today"] .ov-bot small{display:block;font-size:var(--a-12);line-height:var(--a-lh12);color:rgba(255,255,255,.55)}
+html[data-rc="today"] .ov-big{display:block;font-size:var(--a-48);line-height:var(--a-lh48);font-weight:600;letter-spacing:-.035em;margin-top:2px}
+html[data-rc="today"] .ov-q{display:block;font-size:var(--a-13);line-height:var(--a-lh13);color:rgba(255,255,255,.55);margin-top:2px}
+html[data-rc="today"] .ov-split{display:flex;gap:2px;height:6px;margin-top:14px;border-radius:3px;overflow:hidden}
+html[data-rc="today"] .ov-split i{display:block;height:6px;min-width:0;transition:width var(--a-tween) var(--a-ease)}
+html[data-rc="today"] .ov-leg{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:10px;font-size:var(--a-12);line-height:var(--a-lh12);color:rgba(255,255,255,.55)}
+html[data-rc="today"] .ov-leg span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+html[data-rc="today"] .ov-leg i{width:6px;height:6px;border-radius:50%;flex:none}
+html[data-rc="today"] .ov-leg b{color:#fff;font-weight:600}
+/* panel: the next three homes */
+html[data-rc="today"] .ov-panel{background:#fff;border-radius:var(--a-r);padding:var(--a-pad);display:flex;flex-direction:column;gap:8px;min-width:0}
+html[data-rc="today"] .ov-ph{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+html[data-rc="today"] .ov-ph b{font-size:var(--a-15);line-height:var(--a-lh15);font-weight:600}
+html[data-rc="today"] .ov-ph small{font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted)}
+html[data-rc="today"] .ov-rows{display:flex;flex-direction:column;flex:1}
+html[data-rc="today"] .ov-r{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:6px 0;border:0;border-bottom:1px solid var(--a-hair);background:none;text-align:left;color:var(--a-ink);cursor:pointer;border-radius:0}
+html[data-rc="today"] .ov-r:last-child{border-bottom:0}
+html[data-rc="today"] .ov-r:hover .ov-ra b{color:var(--a-blue)}
+html[data-rc="today"] .ov-no{width:28px;height:28px;border-radius:50%;background:var(--a-canvas);display:grid;place-items:center;font-size:var(--a-12);font-weight:600;flex:none}
+html[data-rc="today"] .ov-ra{min-width:0;flex:1}
+html[data-rc="today"] .ov-ra b{display:block;font-size:var(--a-13);line-height:var(--a-lh13);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-rc="today"] .ov-ra small{display:block;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-rc="today"] .ov-empty{font-size:var(--a-13);color:var(--a-muted);padding:8px 0}
+html[data-rc="today"] .ov-more{align-self:flex-start;min-height:36px;padding:0 16px;border:0;border-radius:var(--a-r-pill);background:var(--a-canvas);color:var(--a-ink);font-size:var(--a-13);font-weight:500;cursor:pointer;transition:transform var(--a-press) var(--a-ease),background var(--a-press)}
+html[data-rc="today"] .ov-more:hover{background:#e6e8ec;transform:translateY(-1px)}
+html[data-rc="today"] .ov-more:active{transform:scale(.96)}
+/* the four mini dashboards */
+html[data-rc="today"] .ov-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--a-gap)}
+html[data-rc="today"] .ov-card{display:flex;flex-direction:column;gap:14px;min-width:0;padding:var(--a-pad);border:0;border-radius:var(--a-r);background:#fff;color:var(--a-ink);text-align:left;cursor:pointer;font:inherit;
+  transition:transform var(--a-press) var(--a-ease),box-shadow var(--a-press) var(--a-ease),opacity var(--a-in) var(--a-ease)}
+html[data-rc="today"] .ov.in .ov-card:hover{transform:translateY(-3px);box-shadow:var(--a-shadow)}
+html[data-rc="today"] .ov.in .ov-card:active{transform:scale(.99)}
+html[data-rc="today"] .ov-h{display:flex;align-items:center;gap:12px;min-width:0}
+html[data-rc="today"] .ov-tile{width:40px;height:40px;border-radius:var(--a-r-tile);display:grid;place-items:center;color:#fff;flex:none}
+html[data-rc="today"] .ov-tile svg{width:20px;height:20px}
+html[data-rc="today"] .ov-tile.blue{background:var(--a-blue)} html[data-rc="today"] .ov-tile.navy{background:var(--a-navy)} html[data-rc="today"] .ov-tile.sky{background:var(--a-sky)} html[data-rc="today"] .ov-tile.black{background:var(--a-black)}
+html[data-rc="today"] .ov-ht{min-width:0}
+html[data-rc="today"] .ov-ht b{display:-webkit-box;font-size:var(--a-13);line-height:var(--a-lh13);font-weight:600;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html[data-rc="today"] .ov-ht small{display:block;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-rc="today"] .ov-k{display:flex;align-items:center;gap:14px;min-width:0}
+html[data-rc="today"] .ov-rw{position:relative;width:72px;height:72px;flex:none;display:grid;place-items:center}
+html[data-rc="today"] .ov-ring{position:absolute;inset:0;width:72px;height:72px}
+html[data-rc="today"] .ov-arc{transition:stroke-dashoffset var(--a-tween) var(--a-ease)}
+html[data-rc="today"] .ov-rw i{position:relative;font-style:normal;font-size:var(--a-13);line-height:var(--a-lh13);font-weight:600}
+html[data-rc="today"] .ov-kt{min-width:0}
+html[data-rc="today"] .ov-kt b{display:block;font-size:var(--a-22);line-height:var(--a-lh22);font-weight:600;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-rc="today"] .ov-kt small{display:-webkit-box;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);margin-top:2px;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html[data-rc="today"] .ov-pl{display:flex;justify-content:space-between;gap:8px;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);white-space:nowrap}
+html[data-rc="today"] .ov-pl span:first-child{overflow:hidden;text-overflow:ellipsis;min-width:0}
+html[data-rc="today"] .ov-bar{height:6px;border-radius:3px;background:#e8eaee;margin-top:6px;overflow:hidden}
+html[data-rc="today"] .ov-bar i{display:block;height:6px;width:0;border-radius:3px;background:var(--a-blue);transition:width var(--a-tween) var(--a-ease)}
+html[data-rc="today"] .ov-f{display:flex;justify-content:space-between;gap:8px;padding-top:12px;border-top:1px solid var(--a-hair);font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);white-space:nowrap;margin-top:auto}
+html[data-rc="today"] .ov-f span{overflow:hidden;text-overflow:ellipsis;min-width:0}
+/* the working deck (list, home card, map) sits under the overview at a fixed working height */
+html[data-rc="today"] .app .main{height:clamp(560px,calc(100vh - 80px),820px);flex:none;padding:var(--a-sect) var(--a-pad) var(--a-pad);gap:var(--a-gap);max-width:none;width:100%;grid-template-columns:288px minmax(400px,480px) minmax(0,1fr)}   /* the map takes every spare pixel on the right (Jack 11-02) */
+/* the list head: tabs on one row, the count on its own line under them so "50 left today" is never cut */
+/* Jack 11-02 ("fix this as well"): tabs and the count on ONE line, a normal 40px search box with even margins, the same
+   spacing to the first row at every width; the list card's top stays level with the house card (grid, align stretch) */
+html[data-rc="today"] :is(.app,.sheet) .qh{display:flex;flex:none;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:8px;padding:16px 16px 10px;min-height:0}   /* flex:none: the list pane is a flex column and was crushing the head and the search box */
+html[data-rc="today"] :is(.app,.sheet) .qh small{white-space:nowrap;flex:none;margin:0}
+html[data-rc="today"].embed .queue .find{flex:none;display:flex;align-items:center;height:40px;margin:0 16px 10px;padding:0 14px;border-radius:var(--a-r-pill);border:0;background:var(--a-canvas);box-shadow:none}
+html[data-rc="today"].embed .queue .find input{font-size:var(--a-13);height:40px}
+@media (max-width:1100px){ html[data-rc="today"] .app .qh{padding:14px 12px 8px} html[data-rc="today"] .app .ltabs button{padding:0 10px} html[data-rc="today"].embed .app .queue .find{margin:0 12px 10px} }
+html[data-rc="today"] :is(.app,.sheet) .queue,html[data-rc="today"] :is(.app,.sheet) .mapwrap,html[data-rc="today"] :is(.app,.sheet) .card.paper{border:0;border-radius:var(--a-r);box-shadow:none;background:#fff}
+html[data-rc="today"] :is(.app,.sheet) .ph{border-radius:var(--a-r) var(--a-r) 0 0}
+html[data-rc="today"] :is(.app,.sheet) .ltabs button{font-size:var(--a-13);height:32px;border-radius:var(--a-r-pill);padding:0 14px}
+html[data-rc="today"] :is(.app,.sheet) .ltabs button.on,html[data-rc="today"] :is(.app,.sheet) .ltabs button[aria-selected="true"]{background:var(--a-dark);color:#fff;box-shadow:none}
+html[data-rc="today"] :is(.app,.sheet) .ltabs button i{border-radius:var(--a-r-pill)}
+html[data-rc="today"] :is(.app,.sheet) .ltabs button::after{display:none}
+html[data-rc="today"] :is(.app,.sheet) .qh small{font-size:var(--a-12);letter-spacing:0;text-transform:none}
+html[data-rc="today"] :is(.app,.sheet) .qrow{padding:8px var(--a-pad) 8px 16px;border-bottom:1px solid var(--a-hair-2)}
+html[data-rc="today"] :is(.app,.sheet) .qrow .no{border-radius:50%;font-size:var(--a-12);border-color:var(--a-hair)}
+html[data-rc="today"] :is(.app,.sheet) .qrow .ad{font-size:var(--a-13)}
+html[data-rc="today"] :is(.app,.sheet) .qrow .mt{font-size:var(--a-12)}
+html[data-rc="today"] :is(.app,.sheet) .qrow .hz{font-size:var(--a-12);color:var(--a-ink)}
+html[data-rc="today"] :is(.app,.sheet) .qrow:hover,html[data-rc="today"] :is(.app,.sheet) .qrow.on{background:#eef3ff;box-shadow:inset 2px 0 0 var(--a-blue)}
+html[data-rc="today"] .qfoot{font-size:var(--a-12);border-top:1px solid var(--a-hair)}
+/* the home card */
+html[data-rc="today"] .addr h2{font-size:var(--a-22);line-height:var(--a-lh22);font-weight:600;letter-spacing:-.02em}
+html[data-rc="today"] .addr p{font-size:var(--a-13);line-height:var(--a-lh13);color:var(--a-muted)}
+html[data-rc="today"] .facts{border:0;background:var(--a-canvas);border-radius:16px}
+html[data-rc="today"] .facts div+div{border-left:1px solid var(--a-hair)}
+html[data-rc="today"] .app .deck .card .cb .facts small{font-size:var(--a-12);color:var(--a-muted)}
+html[data-rc="today"] .app .deck .card .cb .facts b{font-size:var(--a-15);line-height:var(--a-lh15)}
+html[data-rc="today"] .app .deck .card .cb .facts b i{font-size:var(--a-12)}
+html[data-rc="today"] .app .deck .card .cb .why{font-size:var(--a-13);line-height:var(--a-lh13)}
+html[data-rc="today"] .act{border:0;background:transparent;padding:0;border-radius:0}
+html[data-rc="today"] .act button{border-radius:var(--a-r-pill);font-size:var(--a-15);font-weight:500;transition:transform var(--a-press) var(--a-ease),background var(--a-press)}
+html[data-rc="today"] .act .pri{background:var(--a-blue);box-shadow:none}
+html[data-rc="today"] .act .pri:hover{background:#1750d6;box-shadow:none}
+html[data-rc="today"] .act .txt{background:var(--a-canvas);border:0}
+html[data-rc="today"] .act .txt:hover{background:#e6e8ec}
+html[data-rc="today"] .act .skp{color:var(--a-muted)}
+html[data-rc="today"] .ph .tl .pill,html[data-rc="today"] .ph .tr .pill,html[data-rc="today"] .ph .bl,html[data-rc="today"] .mtag .pill,html[data-rc="today"] .mexp,html[data-rc="today"] .mleg button{border-radius:var(--a-r-pill)!important;font-size:var(--a-12)!important;letter-spacing:0!important;text-transform:none!important}
+html[data-rc="today"] .mapwrap{background:var(--a-canvas)}
+/* narrow (the 600x626 pane) and short windows: compact hero strip, panel under the cards, 2 x 2 compact cards */
+@media (max-width:939px){
+  html[data-rc="today"] .ov{display:grid;grid-template-columns:minmax(0,1fr)}
+  html[data-rc="today"] .ov-row1{display:contents}
+  html[data-rc="today"] .ov-hero{order:1}
+  html[data-rc="today"] .ov-cards{order:2;grid-template-columns:repeat(2,minmax(0,1fr))}
+  html[data-rc="today"] .ov-panel{order:3}
+}
+@media (max-width:939px),(max-height:760px){
+  html[data-rc="today"] .ov-hero{flex-direction:row;align-items:center;gap:20px;padding:16px 20px}
+  html[data-rc="today"] .ov-hero::before{width:220px;height:220px;top:-80px}
+  html[data-rc="today"] .ov-top{flex:1 1 auto;min-width:0;align-items:center}
+  html[data-rc="today"] .ov-st{display:none}
+  html[data-rc="today"] .ov-bot{flex:none;text-align:right;min-width:120px}
+  html[data-rc="today"] .ov-bot small{display:none}
+  html[data-rc="today"] .ov-big{font-size:var(--a-22);line-height:var(--a-lh22);letter-spacing:-.02em;margin:0}
+  html[data-rc="today"] .ov-q{margin-top:0}
+  html[data-rc="today"] .ov-split,html[data-rc="today"] .ov-leg{display:none}
+  html[data-rc="today"] .ov-tt small{-webkit-line-clamp:1}
+  html[data-rc="today"] .ov-card{padding:16px;gap:10px}
+  html[data-rc="today"] .ov-rw,html[data-rc="today"] .ov-ring{width:56px;height:56px}
+  html[data-rc="today"] .ov-rw i{font-size:var(--a-12)}
+  html[data-rc="today"] .ov-p{display:none}
+  html[data-rc="today"] .ov-f{padding-top:8px}
+  html[data-rc="today"] .ov-kt small{-webkit-line-clamp:1}
+  html[data-rc="today"] .app .head{padding:16px 16px 0}
+  html[data-rc="today"] .ov{padding:12px 16px 0;gap:12px}
+}
+/* a wide but short frame (Jack's 1280x720 laptop): the hero keeps its big number and top stats but drops the split bar;
+   the panel beside it drops its button; cards stay four across with the progress line */
+@media (min-width:940px) and (max-height:760px){
+  html[data-rc="today"] .ov-hero{flex-direction:column;align-items:stretch;gap:16px;padding:20px 24px}
+  html[data-rc="today"] .ov-top{align-items:flex-start}
+  html[data-rc="today"] .ov-st{display:flex}
+  html[data-rc="today"] .ov-bot{text-align:left;min-width:0}
+  html[data-rc="today"] .ov-bot small{display:block}
+  html[data-rc="today"] .ov-big{font-size:var(--a-48);line-height:var(--a-lh48);letter-spacing:-.035em;margin-top:2px}
+  html[data-rc="today"] .ov-tt small{-webkit-line-clamp:2}
+  html[data-rc="today"] .ov-panel{padding:20px 24px;gap:4px}
+  html[data-rc="today"] .ov-more{display:none}
+  html[data-rc="today"] .ov-r{min-height:44px;padding:4px 0}
+  html[data-rc="today"] .ov-card{padding:16px;gap:12px}
+  html[data-rc="today"] .ov-p{display:block}
+  html[data-rc="today"] .ov-k{gap:10px}
+  html[data-rc="today"] .ov-rw,html[data-rc="today"] .ov-ring{width:56px;height:56px}
+  html[data-rc="today"] .ov-kt small{-webkit-line-clamp:2}
+  html[data-rc="today"] .ov{padding:16px var(--a-pad) 0;gap:16px}
+  html[data-rc="today"] .app .head{padding:20px var(--a-pad) 0}
+}
+/* a short frame (the Claude pane when wide, 800x470: the Today frame is about 576x460): the hero is one line (home, address,
+   Open this home) and the four mini dashboards are one thin row across, tile, title and the one figure, so all four sit
+   above the fold with nothing over them (APP-RULES s9) */
+@media (max-height:559px) and (min-width:560px){
+  html[data-rc="today"] .ov{padding:8px 16px 0;gap:8px}
+  html[data-rc="today"] .app .head{padding:10px 16px 0}
+  html[data-rc="today"] .app .head .hello .pgsub{display:none}
+  html[data-rc="today"] .ov-hero{flex-direction:row;align-items:center;gap:14px;padding:10px 16px}
+  html[data-rc="today"] .ov-av,html[data-rc="today"] .ov-tt small,html[data-rc="today"] .ov-st,html[data-rc="today"] .ov-q,html[data-rc="today"] .ov-why,html[data-rc="today"] .ov-split,html[data-rc="today"] .ov-leg{display:none}
+  html[data-rc="today"] .ov-top{flex:none}
+  html[data-rc="today"] .ov-bot{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:12px;text-align:left}
+  html[data-rc="today"] .ov-bot small{display:block;flex:none}
+  html[data-rc="today"] .ov-big{font-size:var(--a-15);line-height:var(--a-lh15);letter-spacing:-.005em;margin:0;min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  html[data-rc="today"] .ov-act{margin:0;flex:none}
+  html[data-rc="today"] .ov-go{min-height:32px;padding:0 12px}
+  html[data-rc="today"] .ov-cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  html[data-rc="today"] .ov-card{padding:10px 12px;gap:4px}
+  html[data-rc="today"] .ov-h{gap:8px;align-items:flex-start}
+  html[data-rc="today"] .ov-tile{width:28px;height:28px;border-radius:8px}
+  html[data-rc="today"] .ov-tile svg{width:14px;height:14px}
+  html[data-rc="today"] .ov-ht small,html[data-rc="today"] .ov-rw,html[data-rc="today"] .ov-kt small,html[data-rc="today"] .ov-p,html[data-rc="today"] .ov-f{display:none}
+  html[data-rc="today"] .ov-k{gap:0;margin:0}
+  html[data-rc="today"] .ov-kt b{font-size:var(--a-15);line-height:var(--a-lh15);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+  html[data-rc="today"] .ov-panel{padding:12px 16px}
+}
+@media (max-width:939px) and (min-height:761px){
+  html[data-rc="today"] .ov-card{padding:20px}
+  html[data-rc="today"] .ov-p{display:block}
+}
+/* frames under 1100px (a 1280 window minus the sidebar): the deck's three columns share the width so the map keeps ~300px */
+@media (max-width:1100px) and (min-width:641px){
+  html[data-rc="today"] .app .main{grid-template-columns:232px minmax(330px,370px) minmax(0,1fr);gap:16px;padding:var(--a-sect) 16px 16px}
+  html[data-rc="today"] .act button{font-size:var(--a-13);gap:6px;padding:0 10px}
+  html[data-rc="today"] .act .skp{flex:.7}
+  html[data-rc="today"] :is(.app,.sheet) .qh{padding:16px 16px 8px}
+  html[data-rc="today"] :is(.app,.sheet) .qrow{padding:8px 14px 8px 12px}
+}
+@media (max-width:640px){
+  html[data-rc="today"] .ov{order:2}
+  html[data-rc="today"] .app{min-height:0}
+  html[data-rc="today"] .app .head{padding:12px 12px 0}
+  html[data-rc="today"] .ov{padding:10px 12px 0;gap:10px}
+  html[data-rc="today"] .ov-cards{gap:10px}
+  html[data-rc="today"] .ov-card{padding:14px;gap:8px}
+  html[data-rc="today"] .ov-hero{padding:12px 16px}
+  html[data-rc="today"] .ov-av span{width:32px;height:32px}
+  html[data-rc="today"] .ov-av span svg{width:14px;height:14px}
+  html[data-rc="today"] .embed .head{padding:12px 12px 0}
+  html[data-rc="today"] .embed .hello h1{font-size:var(--a-22)}
+  html[data-rc="today"] .app .main{height:clamp(480px,calc(100vh - 60px),820px);padding:16px 12px 12px}
+  html[data-rc="today"] .ov-panel{padding:16px}
+}
+@media (max-width:420px){ html[data-rc="today"] .ov-cards{grid-template-columns:minmax(0,1fr)} }
+
+/* info priority (11-02): the hero is the next home and its one action; cards without real progress show no ring */
+html[data-rc="today"] .ov-addr{font-size:var(--a-48);line-height:var(--a-lh48);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[data-rc="today"] .ov-act{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+html[data-rc="today"] .ov-go{min-height:40px;padding:0 20px;border:0;border-radius:var(--a-r-pill);background:var(--a-blue);color:#fff;font:inherit;font-size:var(--a-15);font-weight:500;cursor:pointer;transition:transform var(--a-press) var(--a-ease),background var(--a-press)}
+html[data-rc="today"] .ov-go:hover{background:#3a74ff;transform:translateY(-1px)}
+html[data-rc="today"] .ov-go:active{transform:scale(.96)}
+html[data-rc="today"] .ov-why{font-size:var(--a-12);line-height:var(--a-lh12);color:rgba(255,255,255,.55)}
+html[data-rc="today"] .ov-card.noring .ov-rw{display:none}
+html[data-rc="today"] .ov-card.noring .ov-p{display:none}
+@media (max-width:939px),(max-height:760px){
+  html[data-rc="today"] .ov-addr{font-size:var(--a-22);line-height:var(--a-lh22);letter-spacing:-.02em}
+  html[data-rc="today"] .ov-act{margin-top:8px}
+  html[data-rc="today"] .ov-why{display:none}
+  html[data-rc="today"] .ov-bot{text-align:left;min-width:0;flex:1 1 auto}
+  html[data-rc="today"] .ov-top{flex:0 1 auto;max-width:40%}
+  html[data-rc="today"] .ov-go{min-height:36px;font-size:var(--a-13)}
+}
+@media (min-width:940px) and (max-height:760px){
+  html[data-rc="today"] .ov-addr{font-size:var(--a-48);line-height:var(--a-lh48)}
+  html[data-rc="today"] .ov-act{margin-top:10px}
+  html[data-rc="today"] .ov-why{display:inline}
+  html[data-rc="today"] .ov-top{max-width:none}
+  html[data-rc="today"] .ov-split,html[data-rc="today"] .ov-leg{display:none}
+}
+@media (max-width:640px){
+  html[data-rc="today"] .ov-hero{flex-wrap:wrap;gap:8px 12px}
+  html[data-rc="today"] .ov-top{max-width:none;flex:1 1 100%}
+  html[data-rc="today"] .ov-tt small{display:none}
+  html[data-rc="today"] .ov-act{margin-top:6px}
+}
+
+/* the 600x626 pane and phones: the hero is a short strip (no avatars, no context line), cards tighter, so all four end above the tab bar */
+@media (max-width:640px){
+  html[data-rc="today"] .ov-top{display:none}
+  html[data-rc="today"] .ov-hero{padding:12px 16px}
+  html[data-rc="today"] .ov-bot small{display:block}
+  html[data-rc="today"] .ov-addr{font-size:var(--a-22);line-height:var(--a-lh22)}
+  html[data-rc="today"] .ov-act{margin-top:8px}
+  html[data-rc="today"] .ov-card{padding:12px 14px;gap:6px}
+  html[data-rc="today"] .ov-f{padding-top:6px}
+  html[data-rc="today"] .ov-rw,html[data-rc="today"] .ov-ring{width:48px;height:48px}
+  html[data-rc="today"] .ov-kt b{font-size:var(--a-22)}
+}
+/* under 700px the Nimbus orb sits in the tab bar's right slot (the search pill steps out: Find and Ctrl K still search), and the brief bubble waits until Nimbus is opened, so nothing covers a card */
+@media (max-width:699px){
+  html[data-rc="shell"] .nb-dock{width:40px!important;height:40px!important;right:56px!important;bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;left:auto!important;top:auto!important}
+  html[data-rc="shell"] .nb-dock svg,html[data-rc="shell"] .nb-dock canvas,html[data-rc="shell"] .nb-dock img{width:40px!important;height:40px!important}
+  /* the orb's own frame is laid out for the 94px desktop orb (left -21px, top -19px): at 40px that drew him up and to the left
+     of his slot, on the corner of the last tab. The frame is the slot itself here, so he is drawn where he is tapped. */
+  html[data-rc="shell"] .nb-dock .wm-root{width:40px!important;height:40px!important;left:0!important;top:0!important}
+  html[data-rc="shell"] .nb-bubble{display:none!important}
+  html[data-rc="shell"] body>header .find{display:none}
+  html[data-rc="shell"] body>header .sb-user{margin-left:48px}
+}
+/* phones (529px and under): seven tabs plus Nimbus and the account do not fit one row (measured: the one row needs 526px for
+   every word with its padding; below that it wrapped by accident and the orb sat on "Page plan" and "Results"). Two rows on
+   purpose: the seven tabs take the full width, each as wide as its word and never under 44px, 44px tall; Nimbus and the
+   account keep their corner on the row below, clear of the tabs. From 530px the one row above is back (56px, not 97px). */
+@media (max-width:529px){
+  html[data-rc="shell"] body>header{flex-wrap:wrap;gap:4px;padding-top:6px;padding-left:4px;padding-right:4px}
+  html[data-rc="shell"] body>header nav{flex:1 1 100%;gap:0}
+  html[data-rc="shell"] body>header nav button{flex:1 1 auto;width:auto;min-width:44px;min-height:44px;padding:0 4px;font-size:var(--a-13);white-space:nowrap}
+  html[data-rc="shell"] body>header .sb-user{margin-left:auto;margin-right:4px}
+  html[data-rc="shell"] .nb-dock{bottom:calc(4px + env(safe-area-inset-bottom,0px))!important}
+}
+/* under 360px seven 44px tabs cannot all fit beside "Page plan": each tab is as wide as its word, and all seven stay on screen */
+@media (max-width:359px){
+  html[data-rc="shell"] body>header nav button{min-width:0}
+}
+/* the smallest phones (320px): the words drop one step on the type scale so all seven fit with no sideways scroll */
+@media (max-width:335px){
+  html[data-rc="shell"] body>header nav button{font-size:var(--a-12)}
+}
+
+/* short windows (under 560px tall) at any width: the brief bubble waits until Nimbus is opened, so it never sits over a card */
+@media (max-height:559px){
+  html[data-rc="shell"] .nb-bubble{display:none!important}
+}
+
+/* =========================================================== EVERY SCREEN: shared surfaces =========================================================== */
+/* the one blue: the roofer's accent (lib/brand.js sets it inline) gives way to the app blue on every control */
+html[data-rc]{--accent:#1d5cf0!important;--accent-hi:#1750d6!important;--accent-ink:#1d5cf0!important;--accent-soft:#eef3ff!important;--roofer:#1d5cf0!important}
+html[data-rc]:not([data-rc="shell"]) body{background:var(--a-canvas);background-image:none;background-attachment:scroll}
+/* the console's ALL CAPS microlabels, every screen: sentence case 12px muted */
+html[data-rc] #stat .date,html[data-rc] #stat .row span,html[data-rc] .bands .bb span,html[data-rc] .bands .h,html[data-rc] .about-link,html[data-rc] .zoomhint,html[data-rc] #sh-t,html[data-rc] #ph,
+html[data-rc] .dock .stage span,html[data-rc] .facts span,html[data-rc] .lst .grp,html[data-rc] .ring .v small,html[data-rc] .ckpi span,html[data-rc] .tot small,html[data-rc] .roof th,
+html[data-rc] .fg h3,html[data-rc] .sum span,html[data-rc] .cols,html[data-rc] th,html[data-rc] .mono,html[data-rc] #crm .mday,html[data-rc] #crm .ckpi span,html[data-rc] .pcsum span,html[data-rc] .pcf .t,html[data-rc] .pcd th,html[data-rc] .pcd .grp,
+html[data-rc] #pipePane .pnext em,html[data-rc] .hclock span,html[data-rc] .pcrow .who .tag{text-transform:none!important;letter-spacing:0!important;font-family:var(--a-font)!important}
+html[data-rc] .fg h3,html[data-rc] .sum span,html[data-rc] .cols,html[data-rc] th,html[data-rc] .pcd th,html[data-rc] .pcsum span{font-size:var(--a-12)!important;line-height:var(--a-lh12)!important;font-weight:500!important;color:var(--a-muted)!important}
+/* panels and cards: white, borderless, 24px; segmented tabs and chips: full round */
+html[data-rc] .pan,html[data-rc] .concept,html[data-rc] dialog{border:0!important;border-radius:var(--a-r)!important;box-shadow:none!important;background:#fff}
+html[data-rc] .seg,html[data-rc] .wseg,html[data-rc] .vtabs,html[data-rc] .calseg,html[data-rc] .pcd .seg{border:0!important;border-radius:var(--a-r-pill)!important;background:#fff!important;padding:4px!important;gap:2px!important;box-shadow:none!important}
+html[data-rc] .seg button,html[data-rc] .wseg button,html[data-rc] .vtabs button,html[data-rc] .vtabs .tab,html[data-rc] .calseg button,html[data-rc] .pcd .seg button{border-radius:var(--a-r-pill)!important;font-size:var(--a-13)!important;font-weight:500!important;min-height:36px;box-shadow:none!important;border:0!important}
+html[data-rc] .seg button.on,html[data-rc] .wseg button.on,html[data-rc] .vtabs button.on,html[data-rc] .vtabs [aria-pressed="true"],html[data-rc] .vtabs [data-v][aria-pressed="true"],html[data-rc] .vtabs .tab.on,html[data-rc] .calseg button.on,html[data-rc] .seg button[aria-selected="true"],html[data-rc] .vtabs .tab[aria-selected="true"]{background:var(--a-dark)!important;color:#fff!important}
+html[data-rc] .chips button,html[data-rc] .chip,html[data-rc] .chip-s,html[data-rc] .pill,html[data-rc] .btn,html[data-rc] .cbtn,html[data-rc] #crm .cbtn,html[data-rc] .row .op,html[data-rc] .pcb,html[data-rc] .calbook,html[data-rc] .calnav button,html[data-rc] .read,html[data-rc] .nb,html[data-rc] .lst input,html[data-rc] .cf,html[data-rc] .mapnote,html[data-rc] #crm .csearch,html[data-rc] .pctools input[type=search],html[data-rc] .pctools select,html[data-rc] .fg select,html[data-rc] .fg input[type=text],html[data-rc] .pcset input{border-radius:var(--a-r-pill)!important;border-color:var(--a-hair)!important;box-shadow:none!important}
+html[data-rc] .chips button.on,html[data-rc] .chip.on,html[data-rc] .chips button[aria-pressed="true"]{background:var(--a-dark)!important;color:#fff!important;border-color:transparent!important}
+html[data-rc] .btn.pri,html[data-rc] .btn.p,html[data-rc] .acts a.p,html[data-rc] .stick a.p,html[data-rc] .primary,html[data-rc] .btn.accent,html[data-rc] #crm .cbtn.p{background:var(--a-blue)!important;color:#fff!important;border-color:transparent!important}
+html[data-rc] .btn:active,html[data-rc] .chips button:active,html[data-rc] .seg button:active{transform:scale(.96)}
+html[data-rc] table{font-variant-numeric:tabular-nums}
+html[data-rc] td.n,html[data-rc] td.num,html[data-rc] .sum b{font-variant-numeric:tabular-nums}
+
+/* =========================================================== STORMS (1b-storm-theater.html) =========================================================== */
+html[data-rc="storm"] .stat,html[data-rc="storm"] #stat{border:0!important;border-radius:var(--a-r)!important;background:#fff!important;box-shadow:var(--a-shadow)!important;backdrop-filter:none!important}
+html[data-rc="storm"] #stat .date{font-size:var(--a-12)!important;color:var(--a-muted)!important}
+html[data-rc="storm"] #stat h2,html[data-rc="storm"] #stat .ttl{font-size:var(--a-22)!important;line-height:var(--a-lh22)!important;font-weight:600!important;letter-spacing:-.02em!important}
+html[data-rc="storm"] #stat p,html[data-rc="storm"] #stat .sub{font-size:var(--a-13)!important;line-height:var(--a-lh13)!important;color:var(--a-muted)!important}
+html[data-rc="storm"] .lst .row,html[data-rc="storm"] .slist .row{border:0!important;border-bottom:1px solid var(--a-hair)!important;border-radius:0!important;background:transparent!important}
+html[data-rc="storm"] .lst .row b,html[data-rc="storm"] .slist .row b{font-size:var(--a-13)!important;font-weight:600!important}
+html[data-rc="storm"] .dock,html[data-rc="storm"] .scrub,html[data-rc="storm"] .tl{border:0!important;border-radius:var(--a-r)!important;background:#fff!important;box-shadow:var(--a-shadow)!important;backdrop-filter:none!important}
+html[data-rc="storm"] .dock .stage span,html[data-rc="storm"] #sh-t,html[data-rc="storm"] #ph{font-size:var(--a-12)!important;color:var(--a-muted)!important}
+html[data-rc="storm"] .maplibregl-ctrl-group{border-radius:var(--a-r-pill)!important;box-shadow:var(--a-shadow)!important}
+html[data-rc="storm"] .tip,html[data-rc="storm"] .toast{border:0!important;border-radius:16px!important;box-shadow:var(--a-shadow)!important}
+
+/* the control bar (.nav) fits the frame: it wraps instead of running past the edge; the counties hint only where there is room */
+html[data-rc="storm"] .nav{max-width:calc(100% - 48px);overflow-x:auto;scrollbar-width:none}
+@media (max-width:1100px){
+  html[data-rc="storm"] .nav .zoomhint{display:none}
+  html[data-rc="storm"] .nav{gap:4px;padding:4px}
+  html[data-rc="storm"] .nav .seg button,html[data-rc="storm"] .nav .wseg button{padding:0 10px!important;min-height:34px}
+  html[data-rc="storm"] .nav .nb{padding:0 10px}
+}
+html[data-rc="storm"] .hh,html[data-rc="storm"] .peek{border:0!important;border-radius:var(--a-r)!important;background:#fff!important;box-shadow:var(--a-shadow)!important;backdrop-filter:none!important}
+
+/* Storms, Jack 11-02 round 2 */
+/* 1. the control bar never moves: Fit storm takes the LAST slot when it appears, so nothing left of it shifts; no reveal transform on it */
+html[data-rc="storm"] #nav{transition:none!important;transform:none!important;bottom:150px!important;left:16px!important}
+html[data-rc="storm"] #nav #fit{order:99}
+html[data-rc="storm"] #lst.glass{bottom:150px!important}
+/* 1b. the frame under 600px wide (the 800x470 pane): the bar is a column on the right; pinned by its top, so the Fit storm button
+   joins at the bottom and nothing above it moves */
+@media (max-width:600px){ html[data-rc="storm"] #nav{top:98px!important;bottom:auto!important;left:auto!important;right:14px!important;max-height:calc(100vh - 110px);overflow-y:auto;scrollbar-width:none} }
+/* 2. the timeline: the All / Big hail / 6 months row owns the top 30px; bars start under it */
+html[data-rc="storm"] #tbar{height:116px!important;padding:8px 18px 4px!important}
+html[data-rc="storm"] #tbar .scrub{height:104px!important}
+html[data-rc="storm"] #tbar .sh{top:0!important;height:26px}
+html[data-rc="storm"] #tbar .tick{max-height:40px!important;transform:none!important}
+html[data-rc="storm"] #tbar .hit{top:34px!important}
+html[data-rc="storm"] #tbar .read{bottom:auto!important;top:30px!important}
+/* 3. the service-area panel, condensed: title, one facts line, then the ranked list; explainer sentences go */
+html[data-rc="storm"] .calm .ttl{font-size:var(--a-22)!important;line-height:var(--a-lh22)!important;margin:6px 0 4px!important}
+html[data-rc="storm"] .calm .sub{font-size:var(--a-13)!important;line-height:var(--a-lh13)!important}
+html[data-rc="storm"] .calm .d50{display:none!important}
+html[data-rc="storm"] .calm .pill#show{margin-top:12px!important;min-height:40px!important}
+html[data-rc="storm"] .hard{margin-top:12px!important;padding-top:10px!important}
+html[data-rc="storm"] .hard .hh2{display:none!important}
+html[data-rc="storm"] .hard ol{gap:2px!important}
+html[data-rc="storm"] .hard li button{padding:5px 8px!important;border:0!important;border-bottom:1px solid var(--a-hair)!important;border-radius:0!important}
+@media (min-width:601px){ html[data-rc="storm"] body:not(.storm) .stat{max-height:calc(100vh - 16px - 212px)!important} html[data-rc="storm"] body.storm .stat{max-height:calc(100vh - 16px - 212px)!important;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin} }
+html[data-rc="storm"] .stat{padding:16px 18px!important}
+html[data-rc="storm"] .stat .big{font-size:var(--a-48)!important;line-height:var(--a-lh48)!important;letter-spacing:-.035em!important;margin:6px 0 2px!important;font-weight:600!important}
+html[data-rc="storm"] .stat .lbl{font-size:var(--a-13)!important}
+html[data-rc="storm"] .stat .row{margin-top:12px!important;padding-top:10px!important}
+html[data-rc="storm"] .bands{margin-top:12px!important}
+/* 4. the panel folds to one small box (Jack: shrink into a box, like a toggle): the head row stays, with the date, hail and homes */
+html[data-rc="storm"] .stat .head{gap:8px}
+html[data-rc="storm"] .stat .head .ptog{flex:none;width:28px;height:28px;border:0;border-radius:999px;background:var(--a-canvas);color:var(--a-ink);display:grid;place-items:center;cursor:pointer;margin-left:auto}
+html[data-rc="storm"] .stat .head .ptog svg{width:14px;height:14px;transition:transform .2s ease}
+html[data-rc="storm"] body.pmin .stat .head .ptog svg{transform:rotate(180deg)}
+html[data-rc="storm"] .stat .mini{display:none;font-size:var(--a-13);line-height:var(--a-lh13);color:var(--a-ink);margin-top:2px}
+html[data-rc="storm"] .stat .mini b{font-weight:600}
+html[data-rc="storm"] .stat .mini span{color:var(--a-muted)}
+html[data-rc="storm"] .stat .upd{font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);margin-top:8px}
+html[data-rc="storm"] body.pmin .stat{max-height:none!important;overflow:visible!important;padding:10px 14px 12px!important;width:auto!important;max-width:318px}
+html[data-rc="storm"] body.pmin .stat>*:not(.head):not(.mini){display:none!important}
+html[data-rc="storm"] body.pmin .stat .mini{display:block}
+html[data-rc="storm"] body.pmin .stat .head{min-height:28px}
+/* 5. storm view: the right card is gone; its content lives inside the panel; Clear reads as the way back */
+html[data-rc="storm"] body.storm #hh{display:none!important}
+html[data-rc="storm"] #stat #hh{display:block!important;position:static!important;width:auto!important;max-height:none!important;padding:12px 0 0!important;margin-top:12px;border-top:1px solid var(--a-hair);box-shadow:none!important;border-radius:0!important;overflow:visible!important}
+html[data-rc="storm"] #stat #hh h3{font-size:var(--a-15)!important;font-weight:600!important}
+html[data-rc="storm"] #stat #hh .facts{margin:10px 0 10px!important}
+html[data-rc="storm"] body:not(.storm) #stat #hh{display:none!important}
+html[data-rc="storm"] #stat .head #clear{display:none}
+html[data-rc="storm"] body.storm #stat .head #clear{display:inline-flex;order:5}
+html[data-rc="storm"] body.storm #stat .head .date{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html[data-rc="storm"] #stat .mini .back{margin-left:8px;color:var(--a-blue);font-weight:600;cursor:pointer;background:none;border:0;padding:0;font:inherit}
+
+/* =========================================================== CRM (c5-home) =========================================================== */
+html[data-rc="crm"] #crm .cl,html[data-rc="crm"] #crm .cv,html[data-rc="crm"] #crm .ch,html[data-rc="crm"] body[data-view="pipeline"] .pipe,html[data-rc="crm"] body[data-view="calendar"] .cal,html[data-rc="crm"] body[data-view="customers"] .pc,html[data-rc="crm"] .pcf{border:0!important;border-radius:var(--a-r)!important;background:#fff!important;box-shadow:none!important}
+html[data-rc="crm"] #crm .csteps li,html[data-rc="crm"] #crm .cnext,html[data-rc="crm"] #crm .csugg,html[data-rc="crm"] #crm .creply,html[data-rc="crm"] .next,html[data-rc="crm"] .kf>div{border:0!important;border-radius:16px!important;background:var(--a-canvas)!important;box-shadow:none!important}
+html[data-rc="crm"] #crm .csteps li i,html[data-rc="crm"] #crm .csteps li b:first-child{border-radius:50%}
+html[data-rc="crm"] #crm .ckpi span,html[data-rc="crm"] .tot small{font-size:var(--a-12)!important;color:var(--a-muted)!important}
+html[data-rc="crm"] #crm .ckpi b,html[data-rc="crm"] .tot b{font-size:var(--a-22)!important;line-height:var(--a-lh22)!important;font-weight:600!important;letter-spacing:-.02em!important}
+html[data-rc="crm"] #crm h1,html[data-rc="crm"] #crm h2.title,html[data-rc="crm"] .cl h2,html[data-rc="crm"] .ch h2{font-size:var(--a-22)!important;line-height:var(--a-lh22)!important;font-weight:600!important;letter-spacing:-.02em!important}
+html[data-rc="crm"] #crm .cmenu-l,html[data-rc="crm"] #crm .cqr-l,html[data-rc="crm"] .menu button,html[data-rc="crm"] .menu a{border-radius:12px!important}
+html[data-rc="crm"] .acts button,html[data-rc="crm"] .stick button,html[data-rc="crm"] .drow button,html[data-rc="crm"] .drow a,html[data-rc="crm"] .outs button,html[data-rc="crm"] .next .row button,html[data-rc="crm"] .add,html[data-rc="crm"] .stopnav button,html[data-rc="crm"] .stagetag button,html[data-rc="crm"] .ctl,html[data-rc="crm"] .pnav,html[data-rc="crm"] .pmv,html[data-rc="crm"] .pcal,html[data-rc="crm"] .pwon,html[data-rc="crm"] .psrch,html[data-rc="crm"] .ptb,html[data-rc="crm"] .pfp,html[data-rc="crm"] .pfp select,html[data-rc="crm"] .pcount{border-radius:var(--a-r-pill)!important;border-color:var(--a-hair)!important;box-shadow:none!important}
+html[data-rc="crm"] .fl textarea,html[data-rc="crm"] .fl input,html[data-rc="crm"] .fl select,html[data-rc="crm"] .draft,html[data-rc="crm"] .pcd label input,html[data-rc="crm"] .pcd label select,html[data-rc="crm"] .pcd textarea{border-radius:16px!important;border-color:var(--a-hair)!important}
+html[data-rc="crm"] .legend,html[data-rc="crm"] .pin,html[data-rc="crm"] .dpin,html[data-rc="crm"] .smp,html[data-rc="crm"] .nba,html[data-rc="crm"] .nbw{border-radius:16px!important;border-color:var(--a-hair)!important;box-shadow:var(--a-shadow)!important}
+html[data-rc="crm"] #crm .msg,html[data-rc="crm"] .bubble{border-radius:16px!important}
+html[data-rc="crm"] #crm .cstage select{border-radius:var(--a-r-pill)!important}
+/* the pipeline board columns */
+html[data-rc="crm"] .pc,html[data-rc="crm"] .pcols>*{border:0!important;background:#fff!important;border-radius:var(--a-r)!important}
+
+/* the board (Jack 11-02 "we messed something up"): the columns were pinned at 150px, so every card wrapped its address and
+   chips and the board left a third of the frame empty. Columns now share the frame (grow to fill, never under 190px);
+   under ~1500px the board scrolls sideways inside the page, which APP-RULES 9 allows for kanban boards. */
+html[data-rc="crm"] .pcol:not(.plane){flex:1 1 190px!important;min-width:190px;border-radius:16px!important}
+html[data-rc="crm"] .pcol.plane{border-radius:16px!important}
+html[data-rc="crm"] .pcol.plane.open{flex-basis:190px!important}
+html[data-rc="crm"] .pcols{gap:12px!important}
+html[data-rc="crm"] .pc .pmeta,html[data-rc="crm"] .pc .phail{white-space:nowrap}   /* "1.4 inches  Mar 25" stays one line */
+html[data-rc="crm"] .pc .pmeta{display:flex;gap:8px;overflow:hidden}
+/* the thread header: the address keeps one line next to the stage select (15px, the select capped at 140px) */
+html[data-rc="crm"] #crm .cvt b{font-size:15px!important;line-height:22px!important;letter-spacing:-.005em!important}
+html[data-rc="crm"] #crm .cvt small{font-size:12px!important;line-height:16px!important}
+html[data-rc="crm"] #crm .cvh .cstage select{max-width:140px;height:36px}
+html[data-rc="crm"] #crm .cico,html[data-rc="crm"] #crm .cmenu summary{width:36px;height:36px;padding:0;margin:0;max-width:none}
+/* under 1200px frames (a 1280 window) the thread column is ~370px: the stage select and the house toggle leave the header
+   (the pane's own Stage row takes over, and the pane has Hide panel), so the address keeps its full line */
+@media (max-width:1200px) and (min-width:641px){
+  html[data-rc="crm"] #crm .cvh .cstage,html[data-rc="crm"] #crm .cvh .cico.house{display:none!important}
+  html[data-rc="crm"] #crm .ch .cstg-row{display:flex!important}
+}
+/* the home pane while a thread is open: 3D model first (home.js #stage moved into .chstage), Satellite one click away; a home
+   with no model (.stage.none) shows the photo on its own */
+html[data-rc="crm"] #crm .cseg{display:inline-flex;gap:2px;padding:2px;border-radius:999px;background:var(--a-canvas);margin:0 0 10px}
+html[data-rc="crm"] #crm .cseg button{font:500 12px/16px var(--a-font);border:0;background:none;color:var(--a-muted);min-height:28px;padding:0 12px;border-radius:999px;cursor:pointer}
+html[data-rc="crm"] #crm .cseg button[aria-pressed="true"]{background:var(--a-dark,#111318);color:#fff}
+html[data-rc="crm"] #crm .chstage{display:block;padding:0 14px 0}
+html[data-rc="crm"] #chstage .stage{height:220px;border-radius:16px;border:0;background:var(--a-canvas)}
+html[data-rc="crm"] #chstage .title{display:none!important}   /* the model only: no estimated squares badge (Jack 11-01, no made-up measurements) */
+html[data-rc="crm"] #ch .cphoto{display:block}   /* the poster until the model has drawn */
+html[data-rc="crm"] #ch .chstage{display:none}
+html[data-rc="crm"] #ch[data-d3="on"]:not([data-cv="sat"]):not(:has(#chstage .stage.none)) .chstage{display:block}
+html[data-rc="crm"] #ch[data-d3="on"]:not([data-cv="sat"]):not(:has(#chstage .stage.none)) .cphoto{display:none}
+/* (older note) the house from above (the 3D stage went with the 11-01 port, which left the pane empty) */
+html[data-rc="crm"] #crm .cphoto{position:relative;margin:0 0 14px;border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:#e8eaee}
+html[data-rc="crm"] #crm .cphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+html[data-rc="crm"] #crm .cphoto .cr{position:absolute;right:8px;bottom:6px;max-width:70%;font-size:9.5px;line-height:1.25;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.85);text-align:right}
+html[data-rc="crm"] #crm .cphoto .tag{position:absolute;left:10px;top:10px;background:var(--a-blue);color:#fff;font-size:12px;line-height:16px;font-weight:500;padding:4px 10px;border-radius:999px}
+/* the house page: the next task beside the photo (the record's own task card, mirrored; its buttons press the record's) */
+html[data-rc="crm"] #house .hcard[data-sec="next"] .due{font-size:12px;line-height:16px;color:var(--a-muted);margin:0}
+html[data-rc="crm"] #house .hcard[data-sec="next"] h3{font-size:15px;line-height:22px;font-weight:600;letter-spacing:-.005em;margin:6px 0 0}
+html[data-rc="crm"] #house .hcard[data-sec="next"] p.why{font-size:13px;line-height:18px;color:var(--a-muted);margin:6px 0 0}
+html[data-rc="crm"] #house .hcard[data-sec="next"] .row{display:flex;gap:8px;margin-top:14px}
+html[data-rc="crm"] #house .hcard[data-sec="next"] .row button{flex:1;min-height:36px;border:0;border-radius:999px;font:500 13px/18px var(--a-font);background:var(--a-canvas);color:var(--a-ink);cursor:pointer}
+html[data-rc="crm"] #house .hcard[data-sec="next"] .row button:first-child{background:var(--a-dark,#111318);color:#fff}
+
+/* =========================================================== FIND (c10-find) =========================================================== */
+html[data-rc="find"] .wrap{padding:var(--a-pad) var(--a-pad) 110px}
+html[data-rc="find"] .top h1{font-size:var(--a-22);line-height:var(--a-lh22);font-weight:600;letter-spacing:-.02em}
+html[data-rc="find"] .top p{font-size:var(--a-13);line-height:var(--a-lh13)}
+html[data-rc="find"] .grid{gap:var(--a-gap)}
+html[data-rc="find"] .fg{padding:14px var(--a-pad);border-bottom:1px solid var(--a-hair)}
+html[data-rc="find"] .chips button{background:var(--a-canvas);border-color:transparent!important;font-size:var(--a-13)}
+html[data-rc="find"] .btn{font-size:var(--a-13);min-height:36px}
+html[data-rc="find"] .res,html[data-rc="find"] .rrow,html[data-rc="find"] .hit{border-color:var(--a-hair)!important}
+html[data-rc="find"] .sc,html[data-rc="find"] .score{border-radius:var(--a-r-tile)!important;background:#eef3ff!important;color:var(--a-blue)!important}
+html[data-rc="find"] .tag,html[data-rc="find"] .ev{border-radius:var(--a-r-pill)!important}
+html[data-rc="find"] .maplibregl-ctrl-group{border-radius:var(--a-r-pill)!important;box-shadow:var(--a-shadow)!important}
+
+/* =========================================================== SEO + RESULTS (c8-seo, c9-results) =========================================================== */
+html[data-rc="seo"] .wrap,html[data-rc="results"] .wrap{padding:var(--a-pad);display:flex;flex-direction:column;gap:var(--a-gap)}
+html[data-rc="seo"] .pan,html[data-rc="results"] .pan{margin:0!important}
+html[data-rc="seo"] h1,html[data-rc="results"] h1{font-size:var(--a-22)!important;line-height:var(--a-lh22)!important;font-weight:600!important;letter-spacing:-.02em!important}
+html[data-rc="seo"] .sum,html[data-rc="results"] .sum{border-top:1px solid var(--a-hair)!important}
+html[data-rc="seo"] .sum>div,html[data-rc="results"] .sum>div{border-color:var(--a-hair)!important}
+html[data-rc="seo"] .sum b,html[data-rc="results"] .sum b{font-size:var(--a-22)!important;line-height:var(--a-lh22)!important;font-weight:600!important;letter-spacing:-.02em!important}
+html[data-rc="seo"] th,html[data-rc="results"] th,html[data-rc="seo"] td,html[data-rc="results"] td{border-color:var(--a-hair)!important}
+html[data-rc="seo"] .row .op{font-size:var(--a-13);min-height:36px}
+html[data-rc="results"] .chip{background:var(--a-canvas)!important;border-color:transparent!important}
+html[data-rc="results"] .grid2,html[data-rc="results"] .two{gap:var(--a-gap)!important}
+
+/* =========================================================== NIMBUS PANEL (c2-nimbus) =========================================================== */
+html[data-rc="ask"] .concept,html[data-rc="ask"] .card,html[data-rc="ask"] .ans,html[data-rc="ask"] .bubble{border:0!important;border-radius:16px!important;box-shadow:none!important}
+html[data-rc="ask"] .chip,html[data-rc="ask"] .composer,html[data-rc="ask"] .send,html[data-rc="ask"] .primary,html[data-rc="ask"] .ghost,html[data-rc="ask"] .legend{border-radius:var(--a-r-pill)!important}
+html[data-rc="ask"] .primary,html[data-rc="ask"] .send{background:var(--a-blue)!important;color:#fff!important}
+
+/* =========================================================== reduced motion =========================================================== */
+@media (prefers-reduced-motion:reduce){
+  html[data-rc] *,html[data-rc] *::before,html[data-rc] *::after{animation-duration:0s!important;transition-duration:0s!important}
+  html[data-rc="shell"] body>main>.stage>.frame{transform:none}
+}

@@ -225,7 +225,7 @@
     async run(a) {
       await RC.factsReady;
       const c = RC.catalog; if (!c || !c.storms || !c.storms.length) return { ok: false, say: 'The storm list has not loaded yet.' };
-      const s = c.storms.slice().sort((x, y) => x.date < y.date ? 1 : -1)[0];
+      const s = c.storms.find(x => x.date === RC.SHOWCASE && x.homes_1in > 0) || c.storms.slice().sort((x, y) => x.date < y.date ? 1 : -1)[0];   // the header's storm (RC.SHOWCASE)
       const age = Math.round((Date.now() - Date.parse(s.date + 'T12:00:00')) / DAY);
       if (a.open_map !== false) go('storm', { iso: s.date });
       const lead = age <= 1 ? 'Yes. Hail hit on ' + dayLabel(s.date) + '.' : 'Nothing new last night. The latest hail was ' + dayLabel(s.date) + ', ' + plural(age, 'day') + ' ago.';
@@ -463,6 +463,7 @@
     const rep = window.Nimbus && Nimbus.actions && Nimbus.actions.replied ? Nimbus.actions.replied().length : 0;
     if (rep) parts.push(rep === 1 ? 'One homeowner replied.' : rep + ' homeowners replied.');
     data.replies = rep;
+    if (parts.length === 1) parts.push("Today's list is still loading. Ask me again in a moment.");
     const offer = open ? 'route' : rep ? 'inbox' : null;
     if (offer === 'route') parts.push('Want me to start it?');
     else if (offer === 'inbox') parts.push('Want me to open the replies?');
@@ -488,7 +489,7 @@
     return r;
   }
   // what the model is told: the tool list, Anthropic tool format
-  const schemas = () => Object.keys(T).map(k => ({ name: k, description: T[k].description, input_schema: T[k].input_schema }));
+  const schemas = () => Object.keys(T).filter(k => !T[k].internal).map(k => ({ name: k, description: T[k].description, input_schema: T[k].input_schema }));
   // what is on screen right now, for the model and the built-in brain (no owner names, no phone numbers)
   function context() {
     const id = currentHome(), list = dailyList(), w = RC.textWindow();

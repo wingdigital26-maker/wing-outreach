@@ -41,22 +41,8 @@
     const b = typeof root.BRAND_BASE === 'string' ? root.BRAND_BASE : (typeof BRAND_BASE !== 'undefined' ? BRAND_BASE : '');
     return (b || location.href.replace(/[^/]*$/, '')) + 'proof/';
   }
-  // a draft never carries a local address (10-30): localhost / 127.0.0.1 / a file path means no public site is set yet.
-  // The draft then shows LINK_HOLE (like "[your mailing address]") and Open in Messages / Mail stay off. Set the public
-  // site with the roofer's proofBase (brand.js) or window.RCP_PUBLIC_BASE. No domain is ever guessed.
-  const LINK_HOLE = '[home page link: set your public site]';
-  const isLocal = u => !/^https?:/i.test(u || '') || /^https?:\/\/(localhost|127\.\d+\.\d+\.\d+|\[::1\]|0\.0\.0\.0|[^/]*\.localhost|[^/]*\.test)(:\d+)?(\/|$)/i.test(u);
-  function publicBase() {
-    const r = (root.activeRoofer && root.activeRoofer()) || {};
-    const b = r.proofBase || root.RCP_PUBLIC_BASE || base();
-    return isLocal(b) ? '' : b;
-  }
-  const linkReady = () => !!publicBase();
   const newSid = via => (via === 'email' ? 'e' : via === 'door' ? 'd' : 't') + Date.now().toString(36).slice(-6);
-  const tail_ = (gi, sid) => '?h=' + token(gi) + (sid ? '&s=' + sid : '');
-  // link(): what goes in a draft (the placeholder when local). previewLink(): the rep's own look, may be local.
-  function link(gi, sid) { const b = publicBase(); return b ? b + tail_(gi, sid) : LINK_HOLE; }
-  function previewLink(gi, sid) { return (publicBase() || base()) + tail_(gi, sid); }
+  function link(gi, sid) { return base() + '?h=' + token(gi) + (sid ? '&s=' + sid : ''); }
 
   // ---------- event store ----------
   const load = () => { try { return JSON.parse(localStorage.getItem(LS) || '{}') || {}; } catch (e) { return {}; } };
@@ -116,14 +102,6 @@
       if (st === 'new' || st === 'called') RC.setStage(id, 'handoff', what); else RC.note(id, what); }
     sink({ type: 'ask', gi, at, when: o.when || '', sid: o.sid || null });
   }
-  // the material survey on the page (10-29): keep / switch (+ material) / unsure, the same answers a 1/2/3 text reply gives
-  function survey(gi, o) {
-    o = o || {}; const d = load(), r = rec(d, gi), at = new Date().toISOString();
-    r.survey = { at, answer: o.answer, material: o.material || '', sid: o.sid || null }; save(d);
-    const words = { keep: 'keep the same roof material', switch: 'switch material' + (o.material ? ' (' + o.material + ')' : ''), unsure: 'not sure about material yet' }[o.answer] || o.answer;
-    if (RC) { RC.note(hid(gi), 'Material survey on the Proof Page: ' + words); if (RC.remember) RC.remember({ id: hid(gi), gi, material: o.answer, materialWant: o.material || null }); }
-    sink({ type: 'survey', gi, at, answer: o.answer, material: o.material || '', sid: o.sid || null });
-  }
   function optout(gi) {
     const d = load(), r = rec(d, gi), at = new Date().toISOString(); r.optout = { at }; save(d);
     if (RC) RC.optOut(hid(gi), 'Proof Page');
@@ -168,10 +146,10 @@
     storm: {
       label: 'First touch after a storm', short: 'After the storm',
       text: [
-        { v: 'B', lead: true, gate: 'any', name: 'Short, page attached', fn: f => join([`${hi(f)}, this is ${f.rep} with ${f.roofer}.`, hailLine(f),
-          `I made a page for your house with the radar, your roof and your street.`, STOP]),
-          then: f => join([`It's all public records, no login. If you want the free inspection there's a button at the bottom of the page.`]),
-          why: 'Best for cold texts: short, says what the page is, and the page link rides along (every message carries it since 10-29).' },
+        { v: 'B', lead: true, gate: 'any', name: 'Ask first, link on yes', fn: f => join([`${hi(f)}, this is ${f.rep} with ${f.roofer}.`, hailLine(f),
+          `I made a one page storm record for your house: radar, roof size and your street. Want me to text it over?`, STOP]),
+          then: f => join([`Here it is: ${f.link}`, `It's all public records, no login. If you want the free inspection there's a button at the bottom.`]),
+          why: 'Best for cold texts. No link in the first text from an unknown number (the app\'s rule since 10-09, and links from strangers read as spam). A reply turns it into a conversation, and the link then goes to someone who asked for it.' },
         { v: 'A', gate: 'any', name: 'Link in the first text', fn: f => join([`${hi(f)}, ${f.rep} with ${f.roofer}${f.rooferCity ? ' in ' + f.rooferCity : ''}.`, hailLine(f),
           `Here's the storm record for your house, no login: ${f.link}`, `Free inspection if you want one.`, STOP]),
           why: 'Most direct. Use it when the number is warm (a referral, a past lead) or once the link is on the roofer\'s own domain.' },
@@ -264,29 +242,9 @@
     f = Object.assign({ roofer: r.name || 'our roofing company', rep: r.owner || 'the owner', rooferCity: r.city || '', phone: r.phone || '', mailingAddress: r.mailingAddress || '' }, f || {});
     if (f.first) f.first = String(f.first).trim().split(/\s+/)[0];
     const list = (T[touch] || {})[ch] || [], t = list.find(x => x.v === v) || list.find(x => x.lead) || list[0]; if (!t) return null;
-    const out = t.fn(f), body = tail(typeof out === 'string' ? out : out.body, f, ch);
+    const out = t.fn(f), body = typeof out === 'string' ? out : out.body;
     return { touch, ch, v: t.v, lead: !!t.lead, gate: t.gate, name: t.name, why: t.why, subject: typeof out === 'string' ? null : out.subject, body,
       then: t.then ? t.then(f) : null, chars: body.length, emDash: new RegExp("[" + String.fromCharCode(8211, 8212) + "]").test(body + (out.subject || '')) };
-  }
-  // every message carries the home's page link and the material survey (Jack 10-29). Texts: both go just before the STOP
-  // line; emails: before the signature. A template that already has the link keeps its own wording.
-  const SURVEY_T = 'New roof? Reply 1 to keep the same material, 2 to switch (metal, tile, impact), 3 not sure.';
-  const SURVEY_E = "One quick question so we bring the right samples: if you replace the roof, do you want the same material or something different? Reply 1 to keep the same, 2 to switch (metal, tile, impact-resistant shingle), or 3 if you're not sure.";
-  function tail(body, f, ch) {
-    const hasLink = f.link && body.indexOf(f.link) >= 0, hasSurvey = /1 to keep/.test(body);
-    if (ch === 'text') {
-      const add = join([hasLink || !f.link ? '' : `See your home in 3D and its roof facts: ${f.link}`, hasSurvey ? '' : SURVEY_T]);
-      if (!add) return body;
-      const m = /\s*(Text|Reply) STOP[^]*$/.exec(body);
-      const put = a => (m ? join([body.slice(0, m.index), a, m[0].trim()]) : join([body, a]));
-      const out = put(add);
-      // long names: shorter page label and survey (same 1/2/3 answers), so the text stays within 3 segments
-      return out.length <= 400 ? out : put(add.replace('See your home in 3D and its roof facts:', 'Your roof:').replace(SURVEY_T, 'New roof? Reply 1 to keep the material, 2 to switch, 3 unsure.'));
-    }
-    const parts = body.split('\n\n'), at = Math.max(1, parts.length - 2);   // last two blocks = signature + footer
-    const ins = [hasLink || !f.link ? '' : `Here is a page made for your home: a 3D model of the house, the roof facts on record, the storm record, and a one-tap way to book the free inspection. No login:\n${f.link}`, hasSurvey ? '' : SURVEY_E].filter(Boolean);
-    parts.splice(at, 0, ...ins);
-    return parts.join('\n\n');
   }
   const variants = (touch, ch) => ((T[touch] || {})[ch] || []).map(x => ({ v: x.v, lead: !!x.lead, name: x.name, gate: x.gate }));
 
@@ -308,7 +266,7 @@
 .rcp-dlg .nt{font-size:12.5px;color:#465065;margin:6px 0}.rcp-dlg .nt.no{color:#9A3412}
 .rcp-dlg .rcp-st{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px;padding:0}.rcp-dlg .rcp-st span{font-size:12px;border-radius:999px;padding:3px 9px;background:#F1F3F6;color:#2A3346}
 .rcp-dlg .rcp-st span.on{background:#E7F6EC;color:#14532D}
-.rcp-dlg .row{display:flex;gap:8px;flex-wrap:wrap;margin:12px -16px -16px;position:sticky;bottom:-16px;z-index:1;background:#fff;padding:10px 16px 16px;border-top:1px solid #EEF0F3}
+.rcp-dlg .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .rcp-dlg .row a,.rcp-dlg .row button{flex:1 1 auto;text-align:center;text-decoration:none;border:1px solid #D5DAE1;background:#fff;border-radius:10px;padding:11px 14px;font:600 14px Inter,system-ui,sans-serif;color:#0B1020;cursor:pointer;min-height:44px;box-sizing:border-box}
 .rcp-dlg .row .pri{background:var(--accent,#0D6C99);border-color:var(--accent,#0D6C99);color:#fff}
 .rcp-dlg .row .off{opacity:.45;pointer-events:none}
@@ -344,8 +302,6 @@
       const gateNo = r.gate === 'warm' && !warm ? (ch === 'text' ? 'This text is for homes that replied or ticked the consent box. Cold follow-ups go by email.' : '') : '';
       const block = opted ? 'This homeowner opted out. No more texts or emails.' : ch === 'text' && !o.phone ? 'Get the phone first, or send it by email.'
         : ch === 'text' && !w.isOpen ? w.line + ' You can text ' + (w.label || '') + ' only (Texas law).' : gateNo ? gateNo
-        : !linkReady() && ch === 'email' && !(facts().mailingAddress || ((root.activeRoofer && root.activeRoofer()) || {}).mailingAddress) ? 'Add your mailing address and your public site to send emails. The draft shows where each one goes.'
-        : !linkReady() ? 'Set your public site first: the draft shows where the home page link goes. A local test address never goes in a message.'
         : ch === 'email' && !(facts().mailingAddress || ((root.activeRoofer && root.activeRoofer()) || {}).mailingAddress) ? 'Add your mailing address to send emails (CAN-SPAM). The draft shows where it goes.' : '';
       d.innerHTML = `<div class="rh"><b id="rcpT">Send the Proof Page</b><button type="button" class="rx" aria-label="Close">&times;</button></div><div class="rb">
         <p class="nt">${esc(o.street || '')}${o.city ? ', ' + esc(o.city) : ''}. You send it yourself from your phone or mail app. Nothing sends on its own.</p>
@@ -358,8 +314,8 @@
         <div class="lab">${ch === 'text' ? 'Text' : 'Email'} <span style="text-transform:none;font-weight:500">${r.chars} characters</span></div>
         <textarea id="rcpB" rows="${ch === 'text' ? 5 : 10}">${esc(r.body)}</textarea>
         ${r.then ? `<p class="nt"><b>When they reply yes, send:</b> ${esc(r.then)}</p>` : ''}
-        <p class="lk">Link: <a href="${esc(previewLink(gi, sid))}&preview=1" target="_blank" rel="noopener">${esc(linkReady() ? link(gi, sid) : 'Preview this home page')}</a> (opens as a preview, not counted as a view)</p>
-        ${block ? `<p class="nt no" id="rcpWhy">${RC && RC.setupLink ? RC.setupLink(esc(block)) : esc(block)}</p>` : `<p class="nt">${ch === 'text' ? esc(w.line) + ' ' : ''}Sending it puts it on the home's record${RC && RC.messaged && !RC.messaged(gi) ? ', and the owner\'s full name shows from then on' : ''}.</p>`}
+        <p class="lk">Link: <a href="${esc(link(gi, sid))}&preview=1" target="_blank" rel="noopener">${esc(link(gi, sid))}</a> (opens as a preview, not counted as a view)</p>
+        ${block ? `<p class="nt no" id="rcpWhy">${esc(block)}</p>` : `<p class="nt">${ch === 'text' ? esc(w.line) + ' ' : ''}Sending it puts it on the home's record${RC && RC.messaged && !RC.messaged(gi) ? ', and the owner\'s full name shows from then on' : ''}.</p>`}
         <div class="row"><button type="button" data-x>Close</button><button type="button" id="rcpC">Copy</button>${ch === 'text' ? `<a class="pri${block ? ' off' : ''}" id="rcpGo" href="#"${block ? ' aria-disabled="true" aria-describedby="rcpWhy"' : ''}>Open in Messages</a>` : `<a class="pri${block ? ' off' : ''}" id="rcpGo" href="#"${block ? ' aria-disabled="true" aria-describedby="rcpWhy"' : ''}>Open in Mail</a>`}</div></div>`;
       d.querySelector('.rx').onclick = d.querySelector('[data-x]').onclick = () => d.close();
       d.querySelectorAll('.seg').forEach(g => g.onclick = e => { const b = e.target.closest('button[data-k]'); if (!b) return; const k = b.dataset.k;
@@ -383,6 +339,6 @@
     return d;
   }
 
-  root.RCP = { token, decode, link, previewLink, linkReady, LINK_HOLE, base, newSid, sent, opened, consent, ask, survey, optout, status, statusChips, suggestTouch, consentText, CONSENT_VERSION,
+  root.RCP = { token, decode, link, base, newSid, sent, opened, consent, ask, optout, status, statusChips, suggestTouch, consentText, CONSENT_VERSION,
     templates: T, TOUCHES, variants, render, sendDialog };
 })(typeof window !== 'undefined' ? window : globalThis);

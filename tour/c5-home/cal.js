@@ -63,12 +63,11 @@
   function bookings() {
     const cfg = config(), pipe = RC.pipeline(), out = [];
     Object.keys(pipe).forEach(id => { const p = pipe[id]; if (!p || !p.booked) return; const t = Date.parse(p.booked); if (!isFinite(t)) return;
-      out.push({ id, t, end: t + cfg.slot_minutes * 6e4, stage: p.stage, done: RC.stageKey(p.stage) !== 'inspection' }); });
+      out.push({ id, t, end: t + cfg.slot_minutes * 6e4, stage: p.stage, done: p.stage !== 'inspection' }); });
     return out.sort((a, b) => a.t - b.t);
   }
   // a slot overlaps another home's booking (the public page's rule; the home being moved does not block itself)
   function taken(iso, skipId) { const cfg = config(), t = Date.parse(iso), e = t + cfg.slot_minutes * 6e4; return bookings().some(b => b.id !== skipId && b.t < e && b.end > t); }
-  window.calHours = { config, inHours, hoursLine };   // rec.js: the record's Book dialog offers the same working-hour slots (10-30)
   window.calTaken = taken;   // rec.js: the record's Book dialog refuses a time another home already holds
   // the homes a roofer can book: today's 50, homes added by hand, every home with a record (the same list the board shows)
   function homeIds() {
@@ -79,7 +78,7 @@
   }
 
   // ---------- state ----------
-  let view = isPhone() ? 'day' : 'month', anchor = new Date(), warmed = false;
+  let view = isPhone() ? 'day' : 'week', anchor = new Date(), warmed = false;
   try { const v = JSON.parse(localStorage.getItem(VK) || 'null'); if (v && /^(day|week|month)$/.test(v.view)) view = v.view; } catch (e) { }
   anchor.setHours(0, 0, 0, 0);
   // opened after today's working hours (or on a day off): start on the next working day, not a column of Past (10-19)
@@ -161,25 +160,13 @@
     const line = n ? `${n} inspection${n === 1 ? '' : 's'} ${unit}.` : `No inspections booked ${unit}.`;
     root.innerHTML = `<div class="calh"><div class="calnav"><button type="button" data-c="today">Today</button><button type="button" data-c="prev" aria-label="Earlier">${I.prev}</button><button type="button" data-c="next" aria-label="Later">${I.next}</button><h2>${esc(title())}</h2></div>` +
       `<div class="calseg" role="group" aria-label="View">${['day', 'week', 'month'].map(v => `<button type="button" data-v="${v}" aria-pressed="${v === view}">${v.charAt(0).toUpperCase() + v.slice(1)}</button>`).join('')}</div>` +
-      `<input type="search" class="calq" id="calQ" placeholder="Search address or name" aria-label="Search inspections by address or name" value="${esc(calQ)}">` +
-      `<button type="button" class="calbook" data-c="book"><span class="ic">${I.cal}</span>Book inspection</button></div>` + qHTML() +
+      `<button type="button" class="calbook" data-c="book"><span class="ic">${I.cal}</span>Book inspection</button></div>` +
       `<p class="calnote"><b>${esc(line)}</b> ${esc(hoursLine(cfg))} ${(() => { const c = matchMedia('(pointer:coarse)').matches ? 'Tap' : 'Click';   // phone wording (visual check 10-23)
         return view === 'month' ? c + ' a day to open it.' : c + ' an open hour to book, drag an inspection to move it.'; })()}${view === 'day' ? dirLink(evs) : ''}</p>` +
       (view === 'week' ? weekHTML(cfg, evs, now) : view === 'day' ? dayHTML(cfg, evs, now) : monthHTML(cfg, evs));
     if (!warmed && RC.ownersWarm) { warmed = true; RC.ownersWarm().then(ok => { if (ok) render(); }); }
   }
   window.renderCal = render;
-  /* Jack 10-30: search every booking (any date) by address or owner name; a hit jumps to that day */
-  let calQ = '';
-  function qHTML() {
-    const q = calQ.trim().toLowerCase(); if (!q) return '';
-    const hits = bookings().filter(b => { const h = homeOf(b.id) || {}; return [h.addr, h.city, h.name, h.owner, b.name].filter(Boolean).join(' ').toLowerCase().includes(q); }).sort((a, b) => a.t - b.t);
-    if (!hits.length) return `<div class="calhits"><p>No inspections match "${esc(calQ)}".</p></div>`;
-    return `<div class="calhits">${hits.slice(0, 8).map(b => { const h = homeOf(b.id) || {}, d = new Date(b.t);
-      return `<button type="button" data-jump="${b.t}">${esc(h.addr || 'Home')}${h.city ? ', ' + esc(h.city) : ''} <span>${esc(d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }))} ${esc(tm(b.t))}</span></button>`; }).join('')}</div>`;
-  }
-  root.addEventListener('input', e => { if (e.target.id !== 'calQ') return; calQ = e.target.value; const pos = e.target.selectionStart; render(); const el = root.querySelector('#calQ'); if (el) { el.focus(); el.setSelectionRange(pos, pos); } });
-  root.addEventListener('click', e => { const j = e.target.closest('[data-jump]'); if (!j) return; anchor = new Date(+j.dataset.jump); view = 'day'; calQ = ''; render(); });
   // the day's inspections in time order as one Maps route (10-19): from where the roofer is now, every stop in booked
   // order (Maps takes up to 9 stops in between). Opens Maps; nothing is sent.
   function dirLink(evs) {

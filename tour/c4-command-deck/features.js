@@ -4,7 +4,7 @@
    Reduced motion: no counting, the end states only.
      daylight   the light map's tints follow the roofer's clock (dawn / day / dusk / night); ?hour=19 previews one
      briefing   the Daily 50 counts in under the greeting, then settles
-     newStorm   a takeover sheet when latest-storm.json names a storm this user has not seen; once per storm per user
+     newStorm   a takeover sheet when the newest storm (RC.SHOWCASE, the one the header names) is one this user has not seen; once per storm per user
                 (RC key stormSeen: crm_kv when signed in, this device otherwise); ?replay=storm previews it */
 (function () {
   'use strict';
@@ -57,7 +57,7 @@
     return () => { run = false; };
   }
 
-  /* ---------- new storm takeover: only when latest-storm.json names a storm this user has not seen ---------- */
+  /* ---------- new storm takeover: only when the newest storm (newestStorm() below) is one this user has not seen ---------- */
   function stormTakeover(l) {
     const s = RC.catalog && RC.catalog.storms.find(x => x.date === l.iso) || {};
     const cities = Object.keys(l.cities_1in || {}).filter(c => l.cities_1in[c] > 0).sort((a, b) => l.cities_1in[b] - l.cities_1in[a]);
@@ -77,8 +77,20 @@
       try { if (typeof showToast === 'function') showToast(`Today's 50 rebuilt. The ${esc(d)} storm's hail now counts.`); } catch (e) { } };
     return sh;
   }
+  /* 11-11: the storm the takeover names is the one shared answer (RC.SHOWCASE / RC.facts.storm, the storm the header names),
+     never the watcher's feed on its own: a stale feed named Jun 2 while the header said Jul 6, and a feed date the catalog
+     does not hold named a storm no screen could open. Date and home count are the header's own; the feed adds its city
+     counts only when it is about this same storm, else the catalog's by_city does. Null until a 1 in+ storm is on file. */
+  function newestStorm() {
+    const iso = RC.SHOWCASE, f = RC.facts && RC.facts.storm, s = iso && RC.catalog && RC.catalog.storms.find(x => x.date === iso);
+    if (!s || !(s.homes_1in > 0)) return null;
+    const feed = RC.latestStorm && RC.latestStorm.iso === iso ? RC.latestStorm : null, cities = {};
+    if (feed && feed.cities_1in) Object.assign(cities, feed.cities_1in);
+    else Object.keys(s.by_city || {}).forEach(k => { const n = (s.by_city[k] || {}).homes_1in || 0; if (n > 0) cities[k] = n; });
+    return { iso, date: f && f.iso === iso && f.d ? f.d : iso, homes_1in: s.homes_1in, max_in: s.max_in, cities_1in: cities };
+  }
   function newStormDue() {
-    const l = RC.latestStorm; if (!l || !l.iso) return null;
+    const l = newestStorm(); if (!l) return null;
     if (REPLAY === 'storm') return l;
     const seen = F.stormSeen.get();
     if (!seen) { F.stormSeen.set(l.iso); return null; }   // first visit for this user: nothing is "new" yet
@@ -152,5 +164,5 @@
     else after();
   }, 40000);
   // review hooks: RC_FEATURES.replay('storm' | 'brief')
-  F.replay = what => { if (what === 'storm' && RC.latestStorm) return stormTakeover(RC.latestStorm); if (what === 'brief') { const b = document.getElementById('rcBrief'); if (b) b.remove(); return briefing(); } };
+  F.replay = what => { if (what === 'storm') { const l = newestStorm(); return l ? stormTakeover(l) : undefined; } if (what === 'brief') { const b = document.getElementById('rcBrief'); if (b) b.remove(); return briefing(); } };
 })();

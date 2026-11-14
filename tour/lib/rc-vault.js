@@ -12,8 +12,8 @@
 (function () {
   'use strict';
   if (window.RC_VAULT || !window.RC || !RC.__get) return;
-  const URL_ = 'https://wbtrsujvprbdojmxlkpe.supabase.co';
-  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidHJzdWp2cHJiZG9qbXhsa3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNjc0MzcsImV4cCI6MjEwNjY0MzQzN30.rzSf_wXbb9W0uajLg_5Ur04VyobSwgz3pLXgFSyG_5I';
+  const URL_ = 'https://demo-no-backend.invalid';
+  const KEY = 'DEMO-NO-KEY';
   const GRACE = 20000;
   const off = () => { try { return sessionStorage.getItem('rc.cloud.off') === '1'; } catch (e) { return false; } };
   const sess = () => { try { const v = JSON.parse(localStorage.getItem('rc.session') || 'null'); return v && v.access_token && (!v.expires_at || v.expires_at > Date.now() / 1000 + 20) ? v : null; } catch (e) { return null; } };

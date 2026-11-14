@@ -3,9 +3,6 @@
 /* ---- Booked roll-up: odometer digits. Old digit (::before) and new digit (i) share one grid cell, 1em tall,
    and slide together: up = both move up one em, down = both move down one em. ---- */
 .rc-odo{font-variant-numeric:tabular-nums}
-/* loop 17: inside a stage count (.pcn span is the block label) the digit spans stacked, "50" read 5 over 0 for the roll and the counts grew 15px, dropping the Leads columns */
-.rc-odo > span{display:inline!important;margin:0!important;font:inherit!important;color:inherit!important;white-space:nowrap!important;overflow:visible!important}
-.rc-odo > span.rc-roll{display:inline-grid!important;overflow:hidden!important}
 .rc-roll{display:inline-grid;grid-template-areas:"d";height:1em;line-height:1;overflow:hidden;vertical-align:baseline;position:relative}
 .rc-roll::before{content:attr(data-from);grid-area:d;display:block;height:1em;line-height:1;animation:rcOutUp .55s cubic-bezier(.2,.9,.3,1) both}
 .rc-roll i{grid-area:d;display:block;height:1em;line-height:1;font-style:normal;animation:rcInUp .55s cubic-bezier(.2,.9,.3,1) both}

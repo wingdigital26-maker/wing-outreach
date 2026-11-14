@@ -138,12 +138,13 @@
         data: tot, card: { kind: 'stats', title: 'Results ' + label, stats: [['Reached', tot.reached], ['Replies', tot.replies], ['Inspections', tot.inspections], ['Won', tot.won]] } };
     }
   };
-  // ---------- SEO (lib/seo-jackson.json: what Wing published) ----------
+  // ---------- SEO (the active roofer's published-pages list, lib/brand.js ROOFERS seo: what Wing published) ----------
   T.seo = {
     description: 'The roofer\'s website work Wing publishes: how many blog posts and service pages, what went up this month, what is next.',
     input_schema: obj({}),
     async run() {
-      const d = await fetch('lib/seo-jackson.json').then(r => r.ok ? r.json() : null).catch(() => null);
+      const u = window.rooferSeoUrl ? rooferSeoUrl() : null;
+      const d = !u ? null : await fetch(u).then(r => r.ok ? r.json() : null).catch(() => null);
       if (!d) return { ok: false, say: 'The SEO list did not load.' };
       const c = d.counts || {}, nx = (d.next || [])[0];
       return { ok: true, say: 'Wing has published ' + (c.total || 0) + ' pages for you, ' + (c.blog || 0) + ' blog posts and ' + (c.service || 0) + ' service pages, ' + (c.this_month || 0) + ' this month.' + (nx ? ' Next up: ' + nx.title + '.' : ''),
@@ -213,9 +214,46 @@
     async run(a) { return NimbusSettings.setField(Tools.currentHome(), a.field, a.value); }
   };
   T.request_change = {
-    description: 'Anything the roofer wants the software to do that the settings cannot (a new screen, a report, an integration, a different layout): send it to Wing as a request. Use the roofer\'s own words.',
+    description: 'Anything the roofer wants the software to do that change_setting and propose_change cannot (a new screen, a report, an integration, a new look): say plainly you cannot do it yourself, offer to send it, and on his yes send it to Wing as a request. Use the roofer\'s own words.',
     input_schema: obj({ text: { type: 'string' } }, ['text']),
     async run(a) { return NimbusSettings.request(a.text, Tools.screen()); }
+  };
+  T.propose_change = {
+    description: 'Change how the app looks and works for this roofer: describe the change in plain words first; nothing happens until the roofer says yes (he taps Yes or says yes; do not call anything else for that). All parts of one request go in one call, apply together and undo together. Pass changes, a list of: {kind:"section", section, show:false|true} hide or show a named part ("customers", "reports", "hail" on Leads or the house page, "photo", "built", "summary line"; add "on Leads" or "on the house page" in section when it matters); {kind:"order", item, position:"first"|"last"|"before"|"after", other} move a part on the house page (photo, facts, hail) or one fact (built, county); {kind:"reset_layout"}; {kind:"add_stage", name, after|before}; {kind:"remove_stage", stage, move_to} (a stage with homes in it needs move_to; ask the roofer where they go; New hit, Contacted, Inspection booked and Won cannot be removed); {kind:"save_view", name, filter:{city,stage,route,knock}} a saved list on Leads, leave filter out to save what is filtered on screen; {kind:"remove_view", name}; {kind:"template", text} or {kind:"template", reset:true}: the roofer\'s own first text, fill-ins {street} {first} {company} {rep} {city}, plain words; the STOP line, the company name and the Texas texting hours are never editable; {kind:"setting", setting, value} any change_setting setting. If what he wants is none of these, say so plainly and offer request_change. Never write code, HTML or CSS.',
+    input_schema: { type: 'object', properties: { changes: { type: 'array', items: { type: 'object', properties: { kind: { type: 'string', enum: ['section', 'order', 'reset_layout', 'add_stage', 'remove_stage', 'save_view', 'remove_view', 'template', 'setting'] }, section: { type: 'string' }, show: { type: 'boolean' }, item: { type: 'string' }, position: { type: 'string', enum: ['first', 'last', 'before', 'after'] }, other: { type: 'string' }, name: { type: 'string' }, after: { type: 'string' }, before: { type: 'string' }, stage: { type: 'string' }, move_to: { type: 'string' }, filter: { type: 'object' }, text: { type: 'string' }, reset: { type: 'boolean' }, setting: { type: 'string' }, value: {} }, required: ['kind'] } } }, required: ['changes'] },
+    async run(a) {
+      const r = await NimbusSettings.propose(a.changes || []);
+      if (!r.ok) return { ok: false, say: r.say + (r.cant ? ' Want me to send it to Wing?' : ''), need: r.need, stage: r.stage, wing: !!r.cant };
+      const words = r.lines.map(l => /^[A-Z][a-z]+ /.test(l) ? l.charAt(0).toLowerCase() + l.slice(1) : l).join(', and ');
+      return { ok: true, proposal: { id: r.id, lines: r.lines, preview: r.preview, skipped: r.skipped }, say: (r.skipped && r.skipped.length ? r.skipped.join(' ') + ' ' : '') + 'I will ' + words + '. Should I do it?', data: { waiting_for_yes: true, lines: r.lines } };
+    }
+  };
+  T.confirm_change = {
+    internal: true,   // only the roofer's own yes runs this (the card's button, or a spoken yes in nimbus-assistant.js)
+    description: 'Apply the change waiting for a yes.',
+    input_schema: obj({}),
+    async run() { return NimbusSettings.confirm(); }
+  };
+  T.show_leads = {
+    description: 'Open the Pipeline filtered: a saved list by name (view), or by city, stage, today\'s list (route), or knock again. clear:true shows everything. Has Undo. Changes nothing saved.',
+    input_schema: obj({ view: { type: 'string' }, city: { type: 'string' }, stage: { type: 'string' }, route: { type: 'boolean' }, knock: { type: 'boolean' }, clear: { type: 'boolean' } }),
+    async run(a) {
+      let f = {};
+      if (a.view) { const v = NimbusSettings.viewNamed(a.view, NimbusSettings.views()); if (!v) return { ok: false, say: 'You do not have a list called ' + a.view + '.' + (NimbusSettings.views().length ? ' You have ' + NimbusSettings.views().map(x => x.name).join(', ') + '.' : '') }; f = v.filter; }
+      else if (!a.clear) {
+        if (a.city) { const known = await NimbusSettings.cities(), k = known.find(x => x.toLowerCase() === String(a.city).toLowerCase()); if (!k) return { ok: false, say: 'I could not find ' + a.city + ' in your area.' }; f.city = k; }
+        if (a.stage) { const s = NimbusSettings.stageIn(NimbusSettings.get(), a.stage); if (!s) return { ok: false, say: 'Your stages are ' + RC.STAGES.map(x => x[1]).join(', ') + '.' }; f.stage = s[0]; }
+        if (a.route) f.route = true; if (a.knock) f.knock = true;
+      }
+      Tools.go('home', { view: 'pipeline' });
+      const w = await Tools.waitFor(() => { const x = Tools.win('home'); return x && x.pipeFilters && x; }, 8000);
+      if (!w) return { ok: false, say: 'The Pipeline did not open. Try again.' };
+      const prev = w.pipeFilters.get(); w.pipeFilters.set(f);
+      await new Promise(r => setTimeout(r, 120));
+      const n = w.pipeFilters.shown(), words = NimbusSettings.viewWords(f, NimbusSettings.get());
+      return { ok: true, label: a.clear ? 'Showing all leads' : 'Pipeline: ' + words, say: a.clear ? 'Here are all your leads.' : 'Here are your leads, ' + words + '. ' + plural(n, 'home') + ' showing.', data: { shown: n },
+        undo: () => { const x = Tools.win('home'); if (x && x.pipeFilters) x.pipeFilters.set(prev); } };
+    }
   };
   T.my_settings = {
     description: 'What the roofer has changed so far (route size, cities, texting hours, stage names, tone, fields) and his requests to Wing.',

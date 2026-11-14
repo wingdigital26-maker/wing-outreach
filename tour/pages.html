@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en" data-rc="pages">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page plan | Roof Command</title>
+<!-- Page plan (read only): which SEO pages to make next for a roofer's site, ranked by local demand in the roof data.
+     Data: <the roofer's data folder>/meta/pages/<market>.json from scripts/pages/plan_pages.py (?market=<the roofer's key> by default).
+     Aggregate counts per city and ZIP only. Nothing on this page publishes or writes anything.
+     Layout (Jack 11-14, the Partner Outreach Home): the page to build next in one bar with Open, a strip of the plan's real
+     counts, then the next five ideas and what drives the ranking on the left, one plan status card on the right. Every idea,
+     each idea's reasons and the city numbers open in a sheet. Parts and look: lib/rc-seoplan.css. Icons: lib/rc-icons.js. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="lib/rc-apprules.css">
+<link rel="stylesheet" href="lib/rc-seoplan.css">
+<script src="lib/rc-icons.js"></script>
+<script>if(window.top!==window.self)document.documentElement.classList.add('framed')</script><!-- inside the app shell: the shell draws the sidebar -->
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(lib/st-fonts/inter-var-latin.woff2) format('woff2')}
+/* opened on its own (not inside the app shell): the shell's sidebar and canvas, drawn here */
+html:not(.framed) body{display:grid;grid-template-columns:260px minmax(0,1fr);background:#fff}
+html:not(.framed) .pp-main{padding:12px 12px 12px 0;min-width:0}
+html:not(.framed) .pp-canvas{background:var(--a-canvas);border-radius:var(--a-r);min-width:0}
+html.framed .side{display:none}
+.side{display:flex;flex-direction:column;padding:var(--a-pad) var(--a-pad) 20px;position:sticky;top:0;height:100vh;height:100dvh}
+.co{display:flex;align-items:center;gap:12px;margin-bottom:28px;min-width:0}
+.co .mark{width:32px;height:32px;border-radius:var(--a-r-tile);background:var(--a-blue);display:grid;place-items:center;flex:none}
+.co .mark svg{width:20px;height:20px}
+.co b{font-size:var(--a-15);line-height:var(--a-lh15);font-weight:600;white-space:nowrap}
+.sb-lbl{font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted);margin:0 0 8px}
+.side nav{display:flex;flex-direction:column;gap:4px}
+.side nav a{display:flex;align-items:center;min-height:44px;padding:0 18px;border-radius:var(--a-r-pill);font-size:var(--a-15);line-height:var(--a-lh15);font-weight:500;text-decoration:none;color:var(--a-ink)}
+.side nav a:hover{background:var(--a-canvas)}
+.side nav a.on{background:var(--a-dark);color:#fff}
+.side .note{margin-top:auto;font-size:var(--a-12);line-height:var(--a-lh12);color:var(--a-muted)}
+@media (min-width:940px){ html:not(.framed) .sp{height:calc(100vh - 24px);height:calc(100dvh - 24px)} }
+@media (max-width:1180px){ html:not(.framed) body{grid-template-columns:224px minmax(0,1fr)} .side{padding:20px 16px 16px} }
+@media (max-width:699px){
+  html:not(.framed) body{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
+  .side{grid-row:2;position:sticky;bottom:0;top:auto;height:auto;flex-direction:row;align-items:center;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--a-hair);background:#fff;z-index:5}
+  .co,.sb-lbl,.side .note{display:none}
+  .side nav{flex-direction:row;flex:1;gap:2px;overflow-x:auto;scrollbar-width:none}
+  .side nav a{flex:1 0 auto;justify-content:center;min-height:40px;padding:0 12px;font-size:var(--a-13)}
+  html:not(.framed) .pp-main{grid-row:1;padding:8px 8px 0}
+  html:not(.framed) .pp-canvas{border-radius:16px}
+  html:not(.framed) .sp{padding-bottom:16px}
+}
+</style>
+</head>
+<body>
+<aside class="side" aria-label="Roof Command">
+  <div class="co"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12.5 12 5l9 7.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 11v7.5h11V11" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg></span><b>Roof Command</b></div>
+  <div class="sb-lbl">Screens</div>
+  <nav aria-label="Screens">
+    <a href="product.html#/daily">Today</a>
+    <a href="product.html#/storm">Storms</a>
+    <a href="product.html#/seo">SEO</a>
+    <a href="pages.html" class="on" aria-current="page">Page plan</a>
+  </nav>
+  <p class="note">Read only. Nothing here publishes.</p>
+</aside>
+<div class="pp-main"><div class="pp-canvas">
+<main class="sp" id="sp">
+  <header class="sp-head">
+    <h1 id="h">Page plan</h1>
+    <span class="sp-sub" id="sub"></span>
+    <span class="sp-asof" id="asof"></span>
+  </header>
+  <div id="next"></div>
+  <dl class="sp-strip sp-rise" id="strip" style="--i:1" aria-label="At a glance" hidden></dl>
+  <div class="sp-main" id="mainrow" hidden>
+    <div class="sp-left">
+      <section class="sp-card sp-rise" id="queue" style="--i:2" aria-labelledby="hq" hidden>
+        <div class="sp-ch"><h2 id="hq">Then these</h2><button type="button" class="sp-link" id="allBtn"></button></div>
+        <ol class="sp-list" id="ql"></ol>
+      </section>
+      <section class="sp-card sp-rise" style="--i:3" aria-labelledby="hw">
+        <div class="sp-ch"><h2 id="hw">Why pages rank</h2><button type="button" class="sp-link" id="cityBtn">City numbers</button></div>
+        <dl class="pp-nums" id="why"></dl>
+        <p class="sp-foot" id="wfoot"></p>
+      </section>
+    </div>
+    <aside class="sp-side sp-rise" id="side" style="--i:3" aria-label="Plan status"></aside>
+  </div>
+</main>
+</div></div>
+<dialog class="sp-dlg" id="dIdea" aria-labelledby="diH">
+  <div class="sp-dh"><div><small id="diK"></small><h2 id="diH"></h2></div><button type="button" class="sp-x" data-close aria-label="Close"></button></div>
+  <div class="sp-db" id="diB"></div>
+</dialog>
+<dialog class="sp-dlg wide" id="dAll" aria-labelledby="daH">
+  <div class="sp-dh"><div><small>Highest demand first</small><h2 id="daH">Every page idea</h2></div><button type="button" class="sp-x" data-close aria-label="Close"></button></div>
+  <div class="sp-db">
+    <div class="sp-ch" style="margin-bottom:4px">
+      <span class="sp-note" id="n"></span>
+      <div class="sp-seg" role="group" aria-label="Show">
+        <button type="button" data-f="all" class="on" aria-pressed="true">All</button>
+        <button type="button" data-f="blog" aria-pressed="false">Blog posts</button>
+        <button type="button" data-f="service" aria-pressed="false">Service pages</button>
+      </div>
+    </div>
+    <ol class="sp-list" id="list"></ol>
+  </div>
+</dialog>
+<dialog class="sp-dlg wide" id="dCity" aria-labelledby="dcH">
+  <div class="sp-dh"><div><small>From the roof data</small><h2 id="dcH">Demand by city</h2></div><button type="button" class="sp-x" data-close aria-label="Close"></button></div>
+  <div class="sp-db"><p class="mut">Counts per city. A roof only counts as old when a permit, or the city's complete permit list, backs it up.</p><div class="sp-tbl"><table id="ct"></table></div><p class="mut" id="foot" style="margin-top:12px"></p></div>
+</dialog>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const day=iso=>{const [y,m,d]=String(iso||'').split('-').map(Number);return y?`${MON[m-1]} ${d}, ${y}`:'';};
+  const fmt=n=>Number(n||0).toLocaleString('en-US');
+  const TYPE={blog:'Blog post',service:'Service page'}, TI={blog:'file-text',service:'wrench'};
+  const STATUS={'new':'New page','refresh':'Refresh'};
+  /* what put each idea on the list (plan_pages.py "signal"), in plain words; the tile icon per reason */
+  const SIG={aging:'Old roofs',permits:'Re-roofs rising',purchases:'Recent home sales',hail:'Recent hail',wind:'High wind'};
+  const SIGI={aging:'house',permits:'clipboard-list',purchases:'key-round',hail:'cloud-hail',wind:'wind'};
+  const root=$('sp');
+  let D=null,F='all';
+  const show=()=>requestAnimationFrame(()=>{ root.classList.add('in'); root.querySelectorAll('[data-w]').forEach(b=>{ b.style.width=b.dataset.w+'%'; }); setTimeout(()=>root.classList.add('done'),900); });
+  const sub=i=>`${TYPE[i.page_type]||'Page'} · ${i.city} · ${SIG[i.signal]||i.signal}${i.status==='refresh'?' · refresh':''}`;
+  const row=i=>`<li><button type="button" class="sp-row" data-r="${i.rank}" aria-label="Why ${esc(i.title)} ranks here">
+      <span class="sp-rk">${i.rank}</span><span class="sp-ic">${RCI(TI[i.page_type]||'file-text')}</span>
+      <span class="sp-rt"><b>${esc(i.title)}</b><small>${esc(sub(i))}</small></span>
+      <span class="sp-rv"><span class="sp-bar"><i data-w="${Math.max(2,Math.min(100,Math.round(i.score)))}"></i></span><b>${Math.round(i.score)}</b></span></button></li>`;
+
+  /* the sheet with every idea, filtered by type; the bars are set at once (the sheet has no entrance) */
+  function draw(){
+    const items=D.ideas.filter(i=>F==='all'||i.page_type===F);
+    $('n').textContent=`${items.length} ${items.length===1?'idea':'ideas'}, score out of 100`;
+    $('list').innerHTML=items.length?items.map(row).join(''):'<li><p class="sp-empty">No ideas of this type right now.</p></li>';
+    $('list').querySelectorAll('[data-w]').forEach(b=>{ b.style.width=b.dataset.w+'%'; });
+  }
+  /* one idea: why it ranks, in the planner's own words */
+  function idea(r){
+    const i=D.ideas.find(x=>x.rank===r); if(!i) return;
+    $('diK').textContent=`Idea ${i.rank} of ${D.ideas.length}`; $('diH').textContent=i.title;
+    $('diB').innerHTML=`<div class="sp-tags"><span class="sp-ty blue">${TYPE[i.page_type]}</span><span class="sp-ty">${esc(i.city)}</span><span class="sp-ty">${esc(STATUS[i.status]||i.status)}</span><span class="sp-ty">${esc(SIG[i.signal]||i.signal)}</span></div>
+      <div class="sp-score"><span>Score</span><span class="sp-bar"><i style="width:${Math.max(2,Math.min(100,i.score))}%"></i></span><b>${Math.round(i.score)}<span style="font-size:12px;font-weight:400;color:var(--a-muted)"> of 100</span></b></div>
+      <ul class="sp-why">${i.reasons.map(t=>`<li>${RCI('check')}<span>${esc(t)}</span></li>`).join('')}</ul>
+      <p class="mut">${i.status==='refresh'?'Existing page':'Suggested address'}: /${esc(i.refresh_of||i.slug)}</p>`;
+    $('dIdea').showModal();
+  }
+  function paint(d){
+    D=d; const s=d.sources, R=d.rules, ideas=d.ideas, have=d.already_have||[];
+    $('sub').textContent=d.roofer||''; $('asof').textContent=`Plan built ${day(d.built.slice(0,10))} from the roof data`;
+    const nNew=ideas.filter(i=>i.status==='new').length, nRef=ideas.filter(i=>i.status==='refresh').length;
+    const planned=ideas.length+have.length, live=have.length, withData=d.cities.filter(c=>!c.no_roof_data).length;
+
+    /* 1. the page to build next; Open shows why it ranks first */
+    const top=ideas[0], nx=$('next');
+    if(top){ nx.outerHTML=`<button type="button" class="sp-next sp-rise" id="next" style="--i:0" data-r="${top.rank}"><span class="sp-tile">${RCI(TI[top.page_type]||'file-text')}</span>
+      <span class="sp-nt"><small>Build next</small><b>${esc(top.title)}</b><span>${esc(sub(top))} · score ${Math.round(top.score)} of 100</span></span>
+      <span class="sp-open">Open${RCI('arrow-right')}</span></button>`; $('next').addEventListener('click',()=>idea(top.rank)); }
+    else nx.outerHTML='<div class="sp-next plain sp-rise" id="next" style="--i:0"><span class="sp-nt"><b>No pages left to build</b><span>Every idea in the plan is already on the website.</span></span></div>';
+
+    /* 2. the strip: the plan's own counts */
+    const S=[['Pages planned',fmt(planned)],['Live already',fmt(live)],['Left to build',fmt(nNew)],['To refresh',fmt(nRef)],['Service pages',fmt(ideas.filter(i=>i.page_type==='service').length)],['Blog posts',fmt(ideas.filter(i=>i.page_type==='blog').length)],['Cities with data',`${withData}<span> of ${d.cities.length}</span>`],['Pages on site',fmt(d.published_checked)]];
+    const st=$('strip'); st.hidden=false; st.style.setProperty('--n',S.length); st.innerHTML=S.map(([l,v])=>`<div><dt>${l}</dt><dd>${v}</dd></div>`).join('');
+
+    /* 3 left, card one: ideas 2 to 6 */
+    $('mainrow').hidden=false;
+    if(ideas.length>1){ $('queue').hidden=false; $('ql').innerHTML=ideas.slice(1,6).map(row).join(''); }
+    $('allBtn').textContent=`All ${ideas.length} ideas`;
+
+    /* 3 left, card two: how many ideas each kind of local demand put on the list */
+    const by={}; ideas.forEach(i=>{ by[i.signal]=(by[i.signal]||0)+1; });
+    const keys=Object.keys(SIG).filter(k=>by[k]);
+    $('why').innerHTML=keys.map(k=>`<div><dt>${RCI(SIGI[k])}${SIG[k]}</dt><dd>${by[k]}</dd></div>`).join('');
+    $('wfoot').textContent=`Radar hail through ${day(s.radar_through)}, re-roof permits through ${day(s.permits_through)}. No keyword volumes: Search Console is not connected.`;
+
+    /* 3 right. status: live of planned, the busiest city, ideas per city as bars, the newest data lines */
+    const cities={}; ideas.forEach(i=>{ cities[i.city]=(cities[i.city]||0)+1; });
+    const cs=Object.entries(cities).sort((a,b)=>b[1]-a[1]), mx=Math.max(1,...cs.map(x=>x[1]));
+    const lp=planned?Math.round(live/planned*100):0;
+    $('side').innerHTML=`<div class="sp-sh"><span class="sp-tile black">${RCI('clipboard-list')}</span><div class="sp-st"><b>Plan progress</b><small>${fmt(planned)} pages planned for ${esc(d.roofer||'this roofer')}</small></div></div>
+      <div><div class="sp-steps one"><i data-w="${Math.max(lp,live?2:0)}"></i></div><div class="sp-pl"><span>Live on the website</span><b class="sp-num">${fmt(live)} of ${fmt(planned)}</b></div></div>
+      ${cs.length?`<div class="sp-now"><div><span>Most ideas</span><b>${cs[0][1]} ideas</b></div><b>${esc(cs[0][0])}</b></div>`:''}
+      <div class="sp-fh">Ideas by city</div>
+      <dl class="sp-fun">${cs.map(([c,n])=>`<dt>${esc(c)}</dt><dd class="sp-bar"><i data-w="${Math.round(n/mx*100)}"></i></dd><dd>${n}</dd>`).join('')}</dl>
+      <ul class="sp-log"><li>${RCI('check')}<span>Plan built ${day(d.built.slice(0,10))}</span></li>
+        ${have.slice(0,1).map(i=>`<li>${RCI('arrow-right')}<span>Already live: ${esc(i.title)}</span></li>`).join('')}
+        <li>${RCI('arrow-right')}<span>Radar hail through ${day(s.radar_through)}</span></li></ul>`;
+
+    /* the city sheet */
+    const oy=R.old_years, hasP=d.cities.some(c=>c.purchases_12m!=null);
+    let h=`<thead><tr><th>City</th><th>Homes</th><th>Hail 1 in+<small>12 months</small></th><th>Hail 1 in+<small>90 days</small></th><th>Newest storm</th><th>Roofs ${oy}+ yrs<small>on record</small></th><th>Built ${oy}+ yrs ago<small>roof age unknown</small></th><th>Re-roof permits<small>90 days</small></th><th>Prior average<small>90 days</small></th>${hasP?'<th>Bought<small>12 months</small></th>':''}</tr></thead><tbody>`;
+    h+=d.cities.map(c=>c.no_roof_data?`<tr><td>${esc(c.city)}</td><td class="nd" colspan="${hasP?9:8}">No Roof Command data for this city yet</td></tr>`:
+      `<tr><td>${esc(c.city)}</td><td>${fmt(c.homes)}</td><td>${fmt(c.hail_12m)}</td><td>${fmt(c.hail_90d)}</td><td>${c.hail_last_date?day(c.hail_last_date):'None'}</td><td>${fmt(c.aged_old)}</td><td>${fmt(c.aged_unknown)}</td><td>${fmt(c.permits_90d)}</td><td>${c.permits_base_90d}</td>${hasP?`<td>${c.purchases_12m==null?'':fmt(c.purchases_12m)}</td>`:''}</tr>`).join('');
+    $('ct').innerHTML=h+'</tbody>';
+    $('foot').textContent=`Radar hail is NOAA MRMS, an estimate, not an inspection. Re-roof permits through ${day(s.permits_through)}. Aggregate counts only.`;
+    draw(); show();
+  }
+  document.querySelectorAll('[data-close]').forEach(b=>{ b.innerHTML=RCI('x'); b.addEventListener('click',()=>b.closest('dialog').close()); });
+  document.querySelectorAll('dialog').forEach(g=>g.addEventListener('click',e=>{ if(e.target===g) g.close(); }));
+  document.addEventListener('click',e=>{ const b=e.target.closest('.sp-list [data-r]'); if(!b||!D) return; const g=b.closest('dialog'); if(g) g.close(); idea(+b.dataset.r); });
+  $('allBtn').addEventListener('click',()=>$('dAll').showModal());
+  $('cityBtn').addEventListener('click',()=>$('dCity').showModal());
+  document.querySelector('.sp-seg').addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return; F=b.dataset.f;
+    document.querySelectorAll('.sp-seg button').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);});
+    if(D) draw();
+  });
+  /* the plan is the roofer's own: its key and data folder come from the registry (lib/brand.js rooferKey and
+     rooferDataRoot), the app shell's when this screen is inside it (no extra download), else brand.js is loaded here.
+     ?market=<name> still picks another plan file in the same roofer's folder. A known roofer with no plan file (404) reads
+     "No page plan built yet": nothing failed. Any other failure, or an unknown roofer, keeps the did-not-load line. */
+  const say=(t,x)=>{ $('next').outerHTML=`<div class="sp-next plain sp-rise" id="next" style="--i:0"><span class="sp-nt"><b>${t}</b><span>${x}</span></span></div>`; show(); };
+  const fail=()=>say('The page plan did not load','Run scripts/pages/plan_pages.py, then refresh.');
+  const none=()=>say('No page plan built yet','The plan shows here once it is built from the roof data.');
+  const go=w=>{ if(!w||!w.rooferKey||!w.rooferDataRoot) return fail();
+    const known=!!(w.rooferMissing&&!w.rooferMissing());
+    const market=(new URLSearchParams(location.search).get('market')||w.rooferKey()).replace(/[^a-z0-9-]/gi,'');
+    fetch(`${w.rooferDataRoot()}meta/pages/${market}.json`,{cache:'no-cache'}).then(r=>{if(r.status===404&&known) throw 404; if(!r.ok) throw 0; return r.json();}).then(paint).catch(e=>e===404?none():fail()); };
+  let up=null; try{ if(window.parent!==window&&window.parent.rooferDataRoot) up=window.parent; }catch(e){ up=null; }
+  if(up) go(up);
+  else{ const s=document.createElement('script'); s.src='lib/brand.js'; s.onload=()=>go(window); s.onerror=fail; document.head.appendChild(s); }
+  window.__ready=true;
+})();
+</script>
+</body>
+</html>

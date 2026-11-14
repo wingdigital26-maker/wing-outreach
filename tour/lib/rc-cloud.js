@@ -9,12 +9,12 @@
    keyed by a deterministic client_id (entry.cid), so a retry or a second device never duplicates.
    rc.t.optout / sched / daily / added -> crm_kv. The first sync pushes every local thread not yet in the cloud (one-time
    migration). Local change not yet pushed wins over the cloud; otherwise the cloud wins (snapshot rc.cloud.snap.<company>).
-   window.RC_CLOUD: { status(), syncNow(), companyId } */
+   window.RC_CLOUD: { status(), syncNow(), companyId }; status().fails = syncs failed in a row (the shell's "Not saved" notice, product.html) */
 (function () {
   'use strict';
   if (window.RC_CLOUD || !window.RC || !RC.__set) return;
-  const URL_ = 'https://wbtrsujvprbdojmxlkpe.supabase.co';
-  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidHJzdWp2cHJiZG9qbXhsa3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNjc0MzcsImV4cCI6MjEwNjY0MzQzN30.rzSf_wXbb9W0uajLg_5Ur04VyobSwgz3pLXgFSyG_5I';
+  const URL_ = 'https://demo-no-backend.invalid';
+  const KEY = 'DEMO-NO-KEY';
   const POLL = 15000, KV_KEYS = ['optout', 'sched', 'daily', 'added', 'stormSeen', 'd50skip', 'settings', 'fields', 'wingRequests'];   // d50skip: Today's Skip (Not a fit keeps a home off every later list)   // stormSeen: the newest storm this user has seen (Today's takeover shows once per storm)
   // drawn.<home_key>: a roof outline the roofer drew on the satellite view (c5-home/draw.js), one crm_kv row per home
   const isKv = k => KV_KEYS.indexOf(k) >= 0 || /^drawn\.[A-Za-z0-9_-]+$/.test(k);
@@ -27,7 +27,8 @@
   const TO_CLOUD = { new: 'new', called: 'contacted', handoff: 'sent_to_chris', inspection: 'booked', proposal: 'wants_quote', won: 'won', lost: 'lost' };
   const FROM_CLOUD = { new: 'new', contacted: 'called', replied: 'called', wants_quote: 'proposal', booked: 'inspection', sent_to_chris: 'handoff', called_chris: 'handoff', won: 'won', lost: 'new' };
   // a Contacted home the homeowner answered reads Replied in the cloud (the engine's own stage), still 'called' here
-  const cloudStage = p => p.archived ? 'lost' : p.stage === 'called' && p.replied ? 'replied' : (TO_CLOUD[p.stage] || 'new');
+  const baseStage = k => { let c, n = 0; const l = (RC.setting && RC.setting('customStages', [])) || []; while ((c = l.find(x => x.key === k)) && n++ < 20) k = c.after; return k; };   // the roofer's own stage counts as the built-in stage it follows
+  const cloudStage = p => p.archived ? 'lost' : p.stage === 'called' && p.replied ? 'replied' : (TO_CLOUD[baseStage(p.stage)] || 'new');
 
   // deterministic id for one history entry (FNV-1a, 2 x 32 bit)
   function hash(s) { let a = 0x811c9dc5, b = 0x01000193 ^ 0x5bd1e995; for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); a = Math.imul(a ^ c, 16777619) >>> 0; b = Math.imul(b ^ c, 2246822519) >>> 0; } return a.toString(36) + b.toString(36); }
@@ -35,7 +36,7 @@
   const extras = p => { const o = {}; Object.keys(p || {}).forEach(k => { if (k !== 'history') o[k] = p[k]; }); return o; };
   const sig = p => JSON.stringify(extras(p));
 
-  let company = null, snap = null, since = { t: null, m: null, e: null, k: null }, busy = false, dirty = false, last = { ok: null, at: null, err: null };
+  let company = null, snap = null, since = { t: null, m: null, e: null, k: null }, busy = false, dirty = false, fails = 0, last = { ok: null, at: null, err: null };
   const SNAPK = () => 'rc.cloud.snap.' + company;
   const loadSnap = () => { try { snap = JSON.parse(localStorage.getItem(SNAPK()) || 'null'); } catch (e) { snap = null; } snap = snap || { t: {}, k: {} }; };
   const saveSnap = () => { try { localStorage.setItem(SNAPK(), JSON.stringify(snap)); } catch (e) { } };
@@ -52,7 +53,8 @@
   function findCompany() {
     return api('companies?select=id,slug').then(rows => {
       if (!rows || !rows.length) return null;
-      const want = RC.rooferKey && RC.rooferKey();
+      const want = window.rooferKey ? rooferKey() : (RC.rooferKey && RC.rooferKey());
+      if (!want || (window.rooferMissing && rooferMissing())) return null;   // no roofer yet, or not set up: sync nothing, try again next round
       return (rows.find(r => r.slug === want) || rows[0]).id;
     });
   }
@@ -104,7 +106,7 @@
         const next = Object.assign({}, mp, { history: (p && p.history) || [] });
         // the cloud stage rules (another device or the engine may have moved it); the local key rides in meta.p.stage
         if (t.stage === 'lost') { next.archived = next.archived || t.updated_at; next.stage = next.stage || 'new'; }
-        else { delete next.archived; next.stage = (mp.stage && TO_CLOUD[mp.stage] === t.stage) ? mp.stage : (FROM_CLOUD[t.stage] || 'new'); }
+        else { delete next.archived; next.stage = (mp.stage && TO_CLOUD[baseStage(mp.stage)] === t.stage) ? mp.stage : (FROM_CLOUD[t.stage] || 'new'); }
         if (t.stage === 'replied' && !next.replied) next.replied = t.updated_at;
         if (!p || sig(p) !== sig(next)) { all[id] = next; changed = true; }
         snap.t[id] = sig(next);
@@ -201,14 +203,14 @@
     busy = true; dirty = false;
     const go = company ? Promise.resolve(company) : findCompany().then(c => { company = c; if (c) { loadSnap(); window.RC_CLOUD.companyId = c; } return c; });
     return go.then(c => c ? pull().then(push) : null)
-      .then(() => { last = { ok: true, at: new Date().toISOString(), err: null }; })
-      .catch(e => { last = { ok: false, at: new Date().toISOString(), err: String(e && e.message || e) }; console.warn('[rc-cloud]', last.err); })
+      .then(() => { fails = 0; last = { ok: true, at: new Date().toISOString(), err: null }; })
+      .catch(e => { fails++; last = { ok: false, at: new Date().toISOString(), err: String(e && e.message || e) }; console.warn('[rc-cloud]', last.err); })
       .then(() => { busy = false; if (dirty) setTimeout(sync, 500); });
   }
 
   let t = null;
   RC.on(d => { if (!d || !(d.key === 'pipe' || isKv(d.key)) || d.cloud) return; clearTimeout(t); t = setTimeout(sync, 1500); });
-  window.RC_CLOUD = { status: () => Object.assign({ on: !!(sess() && !off()), company }, last), syncNow: sync, companyId: null };
+  window.RC_CLOUD = { status: () => Object.assign({ on: !!(sess() && !off()), company, fails }, last), syncNow: sync, companyId: null };
   setInterval(() => { if (document.visibilityState !== 'hidden') sync(); }, POLL);
   addEventListener('focus', () => sync());
   setTimeout(sync, 300);

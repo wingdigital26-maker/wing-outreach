@@ -69,9 +69,13 @@ html.about-hold .intro-skip:hover, html.about-hold .intro-skip:focus-visible{bac
 
 /* while a beat is up the piece steps up and in a little, so its foot clears the roofer's name at laptop heights
    (at 1440x900 the slab sat on top of "Jackson Roofing") */
+/* Jack 11-02: the piece sat in the top half (cut under the nav) with an empty band above the greeting. While a beat is up
+   the piece now shrinks to fit the band between the nav and the beat (68% down), centred in it, nothing clipped. */
 @media (min-width:821px){
   #stage{transition:transform .6s ease-out}
-  html.beat-on #stage{transform:translateY(-7vh) scale(.88); transform-origin:50% 45%}
+  html.beat-on #stage{transform:translateY(-9vh) scale(.68); transform-origin:50% 50%}
+  html.beat-fit .split-head, html.beat-fit .hero-line{display:none}
+  html.beat-on .beat{top:66%}
 }
 /* phone: the piece steps further up and the About button gets its own row under the facts (it sat on "Last storm") */
 @media (max-width:820px){
@@ -81,8 +85,9 @@ html.about-hold .intro-skip:hover, html.about-hold .intro-skip:focus-visible{bac
   html.about-mode .beat{bottom:calc(env(safe-area-inset-bottom, 0px) + var(--space-4) + 44px + var(--space-4))}
 }
 
-/* exit: the site's fade, everything at once */
-body.go #stage, body.go #hail, body.go #nav, body.go .hero, body.go .beat, body.go .load, body.go .intro-skip{transition:opacity .4s ease-out; opacity:0}
+/* exit: the site's fade, everything at once, only when this page runs on its own (html.solo). Inside the shell the opening stays
+   painted while Today rises over it: fading it first left a bare grey frame at the handoff (Jack 11-02). */
+html.solo body.go #stage, html.solo body.go #hail, html.solo body.go #nav, html.solo body.go .hero, html.solo body.go .beat, html.solo body.go .load, html.solo body.go .intro-skip{transition:opacity .4s ease-out; opacity:0}
 
 /* the concept label stays tiny and out of the way */
 .concept-tag{position:fixed; right:14px; bottom:10px; z-index:9; font:500 10.5px var(--font-text); padding:4px 9px; border-radius:4px; background:rgba(255,255,255,.8); color:var(--muted); border:1px solid var(--hair)}

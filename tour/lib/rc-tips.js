@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   if (window.RCTIP) return;
-  const root = () => (window.rooferDataRoot ? rooferDataRoot() : (document.currentScript ? new URL('st-data-dfw/', document.currentScript.src).href : '../lib/st-data-dfw/'));
+  const root = () => rooferDataRoot();   // lib/brand.js, always loaded before this file
   const ROOT = root();
   const J = u => fetch(ROOT + u).then(r => r.ok ? r.json() : null).catch(() => null);
   const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -38,7 +38,6 @@
       src: 'City and county re-roof permits, checked every morning.' });
     if (S && S.radar_through) out.push({ k: 'watch', text: `Hail radar checked every morning, through ${day(S.radar_through)}. Newest hail on file: ${day(S.newest_storm)}.`,
       src: 'NOAA MRMS radar hail, the daily storm watcher.' });
-    out.push({ k: 'sq', text: 'Roof sizes come from LiDAR, typically within about 10% of permit records.', src: '36-home Frisco answer key: our squares against roofer permit squares.' });
     const m = mine();
     if (m.reached) out.push({ k: 'you', text: `You reached ${m.reached} home${m.reached === 1 ? '' : 's'} this week${m.booked ? `, ${m.booked} inspection${m.booked === 1 ? '' : 's'} booked` : ''}.`, src: 'Your texts, emails and bookings on this device.' });
     return out;

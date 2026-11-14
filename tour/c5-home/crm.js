@@ -45,14 +45,6 @@
   };
   const OUTL = { no_answer: 'No answer', spoke: 'Spoke with the homeowner', booked: 'Inspection booked', wrong: 'Wrong number', note: 'Call note' };
   const FK = 'rc.crmFilter';
-  // loop 26 N2: the inbox tabs on top (All / Replies / Waiting on them / Not sent), read from the real thread records; the
-  // Show menu under them still narrows by due, overdue, opted out or stage. Unread = a homeowner reply newer than the last
-  // time this device opened the thread (rc.crmSeen)
-  const TABS = [['all', 'All'], ['replies', 'Replies'], ['waiting', 'Waiting on them'], ['notsent', 'Not sent']], TK = 'rc.crmTab', SK = 'rc.crmSeen';
-  const TEMPTY = { replies: 'No replies yet. Answers from homeowners show up here.', waiting: 'No one to wait on. Homes you text or email show here until the homeowner answers.', notsent: 'Every home here has a message out.' };
-  let tab = 'all'; try { const t0 = localStorage.getItem(TK); if (TABS.some(x => x[0] === t0)) tab = t0; } catch (e) { }
-  const seenAll = () => { try { return JSON.parse(localStorage.getItem(SK) || '{}') || {}; } catch (e) { return {}; } };
-  function markSeen(t) { if (!t || !t.lastIn) return; const m = seenAll(); if (m[t.id] && m[t.id] >= t.lastIn.at) return; m[t.id] = t.lastIn.at; try { localStorage.setItem(SK, JSON.stringify(m)); } catch (e) { } }
   const TOUCH = a => a.ch === 'text' || a.ch === 'email';
   const tm = iso => new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase();
   const full = iso => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ', ' + tm(iso);
@@ -138,10 +130,10 @@
   }
 
   // ---------- state ----------
-  let stOpen = false, VIEW = 'inbox', SEL = null, MSG = null, filter = 'all', stageF = '', q = '', chan = 'auto', replying = false, hold = false, warmed = false, qrKind = null;
+  let VIEW = 'inbox', SEL = null, MSG = null, filter = 'all', stageF = '', q = '', chan = 'auto', replying = false, hold = false, warmed = false, qrKind = null;
   const sugg = {};
   try { const f = localStorage.getItem(FK); if (FILTERS.some(x => x[0] === f)) filter = f; } catch (e) { }
-  try { if (localStorage.getItem(HK) === 'off') document.getElementById('crm').dataset.home = 'off'; } catch (e) { }
+  try { localStorage.removeItem(HK); } catch (e) { }   // Jack 11-02: the house panel always stays (Hide panel flipped the layout); an old 'off' choice is forgotten
   const crm = $('#crm'), clist = $('#clist'), cfil = $('#cfil'), cq = $('#cq'), clN = $('#clN'), cvh = $('#cvh'), cvm = $('#cvm'), cvf = $('#cvf'), chh = $('#chh'), chf = $('#chf'), chstage = $('#chstage'), vtabs = $('#vtabs');
   const curId = () => (window.HOME && window.HOME.rawId) || null;
 
@@ -150,19 +142,15 @@
     const by = new Map();
     RC.activity().forEach(a => { let t = by.get(a.id); if (!t) by.set(a.id, t = { id: a.id, all: [] }); t.all.push(a); });
     RC.scheduled().forEach(s => { if (!by.has(s.id)) by.set(s.id, { id: s.id, all: [] }); });
-    const pipe = RC.pipeline(), seen = seenAll();
+    const pipe = RC.pipeline();
     return [...by.values()].map(t => {
       const touches = t.all.filter(TOUCH), c = RC.cadence(t.id), last = touches[0] || t.all[0], out = RC.optedOut(t.id), p = pipe[t.id] || {};
-      const replied = !!(touches[0] && touches[0].dir === 'in') && !out, lastIn = touches.find(a => a.dir === 'in') || null;
-      const sm = seen[t.id], unread = !!lastIn && (!sm || sm < lastIn.at);
-      return Object.assign(t, { touches, lastIn, unread, waiting: !!touches[0] && touches[0].dir !== 'in' && !out, notsent: !touches.some(a => a.dir !== 'in'), c, last, out, replied, sched: RC.scheduledFor(t.id), stage: p.archived ? 'lost' : RC.stage(t.id),
+      const replied = !!(touches[0] && touches[0].dir === 'in') && !out;
+      return Object.assign(t, { touches, c, last, out, replied, sched: RC.scheduledFor(t.id), stage: p.archived ? 'lost' : RC.stage(t.id),
         due: !c.stopped && !!c.lastContact && c.dueToday && !c.overdue, late: !c.stopped && !!c.lastContact && c.overdue });
-    }).sort((a, b) => {   // a reply waiting for an answer floats its thread to the top, newest reply first
-      if (a.replied !== b.replied) return a.replied ? -1 : 1;
-      const ta = a.last ? a.last.at : a.sched ? a.sched.created : '', tb = b.last ? b.last.at : b.sched ? b.sched.created : ''; return ta < tb ? 1 : ta > tb ? -1 : 0; });
+    }).sort((a, b) => { const ta = a.last ? a.last.at : a.sched ? a.sched.created : '', tb = b.last ? b.last.at : b.sched ? b.sched.created : ''; return ta < tb ? 1 : ta > tb ? -1 : 0; });
   }
-  const inTab = t => tab === 'all' || (tab === 'replies' && !!t.lastIn) || (tab === 'waiting' && t.waiting) || (tab === 'notsent' && t.notsent);
-  const pass = t => inTab(t) && (filter === 'all' || (filter === 'due' && t.due) || (filter === 'late' && t.late) || (filter === 'reply' && t.replied) || (filter === 'out' && t.out)) && (!stageF || t.stage === stageF);
+  const pass = t => (filter === 'all' || (filter === 'due' && t.due) || (filter === 'late' && t.late) || (filter === 'reply' && t.replied) || (filter === 'out' && t.out)) && (!stageF || t.stage === stageF);
   const match = t => { if (!q) return true; const h = homeOf(t.id); return [h.addr, h.city, h.subdivision, h.owner || ''].join(' ').toLowerCase().includes(q); };
   // the row's one line: what was said last, plain (a reply as the homeowner wrote it, yours with "You:")
   function lastWords(a) {
@@ -177,32 +165,29 @@
     const t = Date.parse(iso), d0 = new Date(); d0.setHours(0, 0, 0, 0);
     if (t >= +d0) return tm(iso);
     const days = Math.round((+d0 - new Date(t).setHours(0, 0, 0, 0)) / 864e5);
-    return days <= 1 ? 'Yesterday' : days < 7 ? new Date(t).toLocaleDateString('en-US', { weekday: 'short' }) : (d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + (d.getFullYear() !== new Date().getFullYear() ? ' ’' + String(d.getFullYear()).slice(2) : ''))(new Date(t));
+    return days <= 1 ? 'Yesterday' : days < 7 ? new Date(t).toLocaleDateString('en-US', { weekday: 'short' }) : new Date(t).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   }
   function paintList() {
     const ts = threads(), n = { all: ts.length, due: ts.filter(t => t.due).length, late: ts.filter(t => t.late).length, reply: ts.filter(t => t.replied).length, out: ts.filter(t => t.out).length };
     // one compact control: what to show, or one stage
     const cur = stageF ? 's:' + stageF : filter;
-    const tn = { all: ts.length, replies: ts.filter(t => t.lastIn).length, waiting: ts.filter(t => t.waiting).length, notsent: ts.filter(t => t.notsent).length };
-    const tabsH = `<div class="ctabs" role="tablist" aria-label="Inbox">${TABS.map(x => `<button type="button" role="tab" data-tab="${x[0]}" aria-selected="${tab === x[0]}">${esc(x[1])}${x[0] !== 'all' && tn[x[0]] ? ` <span>${tn[x[0]]}</span>` : ''}</button>`).join('')}</div>`;
-    const fh = tabsH + `<label class="cshow"><span class="vh">Show</span><select id="cshow" aria-label="Show">` +
+    const fh = `<label class="cshow"><span class="vh">Show</span><select id="cshow" aria-label="Show">` +
       FILTERS.map(f => `<option value="${f[0]}"${cur === f[0] ? ' selected' : ''}>${f[1]}${f[0] !== 'all' && n[f[0]] ? ' (' + n[f[0]] + ')' : ''}</option>`).join('') +
       `<optgroup label="Stage">${RC.STAGES.map(s => `<option value="s:${s[0]}"${cur === 's:' + s[0] ? ' selected' : ''}>${esc(s[1])}</option>`).join('')}<option value="s:lost"${cur === 's:lost' ? ' selected' : ''}>Not now</option></optgroup></select><span class="ic">${ICON.chev}</span></label>`;
     if (cfil.__h !== fh) { cfil.innerHTML = fh; cfil.__h = fh; }
     const shown = ts.filter(t => pass(t) && match(t));
-    if (tab === 'replies') shown.sort((a, b) => a.lastIn.at < b.lastIn.at ? 1 : a.lastIn.at > b.lastIn.at ? -1 : 0);   // newest answer first
     const rows = shown.map(t => {
-      const h = homeOf(t.id), last = tab === 'replies' ? t.lastIn : t.last, ch = last ? (last.dir === 'in' ? 'reply' : last.ch) : 'sched', first = firstName(h.owner);
+      const h = homeOf(t.id), last = t.last, ch = last ? (last.dir === 'in' ? 'reply' : last.ch) : 'sched', first = firstName(h.owner);
       const at = last ? when(last.at) : t.sched ? RC.countdown(t.sched.due, 'short') : '';
-      return `<button type="button" class="crow${t.replied ? ' rep' : ''}${t.unread ? ' unr' : ''}${t.id === SEL ? ' sel' : ''}" role="listitem" data-id="${esc(t.id)}" aria-current="${t.id === SEL ? 'true' : 'false'}" aria-label="Open the thread for ${esc(h.addr)}${t.replied ? ', a reply is waiting' : ''}">` +
+      return `<button type="button" class="crow${t.replied ? ' rep' : ''}${t.id === SEL ? ' sel' : ''}" role="listitem" data-id="${esc(t.id)}" aria-current="${t.id === SEL ? 'true' : 'false'}" aria-label="Open the thread for ${esc(h.addr)}${t.replied ? ', a reply is waiting' : ''}">` +
         `<span class="cav" data-ch="${ch}"><span class="ic">${esc(initials(h.addr))}</span></span>` +
         `<span class="cb"><span class="ct"><span class="cad"><b>${esc(h.addr)}</b>${first ? `<i>${esc(first)}</i>` : ''}</span><time datetime="${esc(last ? last.at : '')}">${esc(at)}</time></span>` +
         `<span class="clast">${lastWords(last)}</span></span></button>`;
     }).join('');
-    const none = q ? `No home in the inbox matches "${esc(q)}".` : tab !== 'all' && filter === 'all' && !stageF ? TEMPTY[tab] : stageF && filter === 'all' ? 'No homes in that stage have a thread yet.' : EMPTY[filter];
+    const none = q ? `No home in the inbox matches "${esc(q)}".` : stageF && filter === 'all' ? 'No homes in that stage have a thread yet.' : EMPTY[filter];
     // empty list: the same calm block the other two panes use (icon, one bold line, the rest as a sentence)
     const cut = none.indexOf('. '), nh = cut > 0 ? none.slice(0, cut) : none.replace(/\.$/, ''), nb = cut > 0 ? none.slice(cut + 2) : '';
-    const html = rows || (isPhone() && !q && !stageF && filter === 'all' && !threads().length ? startHTML(RC.daily ? RC.daily() : []) : '') || `<div class="cempty cnone"><span class="ic">${ICON[filter === 'reply' || tab === 'replies' ? 'reply' : filter === 'out' ? 'stop' : 'text'] || ICON.text}</span><b>${nh}</b>${nb ? `<p>${nb}</p>` : ''}</div>`;
+    const html = rows || (isPhone() && !q && !stageF && filter === 'all' && !threads().length ? startHTML(RC.daily ? RC.daily() : []) : '') || `<div class="cempty cnone"><span class="ic">${ICON[filter === 'reply' ? 'reply' : filter === 'out' ? 'stop' : 'text'] || ICON.text}</span><b>${nh}</b>${nb ? `<p>${nb}</p>` : ''}</div>`;
     if (clist.__h !== html) { clist.innerHTML = html; clist.__h = html; }
     clN.textContent = ts.length ? ts.length + (ts.length === 1 ? ' home' : ' homes') : '';
     const act = n.due + n.late + n.reply, vi = $('#vInN'); vi.hidden = !act; vi.textContent = act;
@@ -229,70 +214,41 @@
     const p = RC.pipeline()[id] || {}, st = p.archived ? 'lost' : RC.stage(id);
     return `<label class="cstage"><span class="vh">Stage</span><select class="cvStage${st === 'lost' ? ' lost' : ''}" aria-label="Stage">${RC.STAGES.map(s => `<option value="${s[0]}"${st === s[0] ? ' selected' : ''}>${esc(s[1])}</option>`).join('')}<option value="lost"${st === 'lost' ? ' selected' : ''}>Not now</option></select></label>`;
   }
-  // Loop 26 (Jack: "make this more simple to interact with and see what is going out", then "don't show premade drafts"):
-  // the conversation opens with two small buttons, Generate text / Generate email. A tap builds that draft with the same
-  // builders as before (draftFor, the library; Nimbus's draft when one waits) into one Next message card at the top of the
-  // pane: who it goes to, the channel, when, the message as the homeowner sees it (a phone bubble or a mini email), Edit
-  // (inline, auto-grows, no inner scroll) and Open in Messages / Open in Mail. A home sent automatically (the cloud engine
-  // or a scheduled text) shows only its thread. Blockers show only after a draft is built, as one plain line.
-  const HOLE = /\s*\[(home page link|your )[^\]]*\]/gi;
-  const clean = t => String(t || '').replace(HOLE, '').replace(/[ \t]{2,}/g, ' ').trim();
-  const autoSent = id => !!RC.scheduledFor(id) || (RC.history ? RC.history(id) : []).some(x => x.ai || /automation/i.test(x.who || ''));
-  const gen = {}, edits = {}; let editing = false;
-  const ekey = (id, ch) => id + '|' + ch;
-  function genHTML(lab) {
-    return `<section class="cnext ngen"><span class="ngl">${esc(lab || 'Next message')}</span><button type="button" class="cbtn sm" data-a="gen" data-chan="text"><span class="ic">${ICON.text}</span>Generate text</button><button type="button" class="cbtn sm" data-a="gen" data-chan="email"><span class="ic">${ICON.email}</span>Generate email</button></section>`;
-  }
-  function toLine(h, ch) {
-    const nm = h.owner ? (RC.ownerDisplay ? RC.ownerDisplay(h.owner) || h.owner : h.owner) : '', ini = nm && RC.initials ? RC.initials(nm) : '';
-    const who = ini ? RC.blurHTML(ini) : 'the homeowner';
-    const where = ch === 'text' ? (h.phone ? esc(pretty(h.phone)) : 'No phone yet') : 'the address you pick in Mail';
-    return `<span class="nch"><span class="ic">${ch === 'text' ? ICON.text : ICON.email}</span>${ch === 'text' ? 'Text' : 'Email'}</span> to <b>${who}</b> · ${where}`;
-  }
-  function previewHTML(ch, subject, body) {
-    const t = esc(clean(body));
-    return ch === 'text' ? `<div class="nphone"><div class="nbub">${t || '<i>Write your text</i>'}</div></div>`
-      : `<div class="nmail">${subject ? `<b>${esc(subject)}</b>` : ''}<div>${t || '<i>Write your email</i>'}</div></div>`;
-  }
-  function cardHTML(id, h, c) {
-    const ch = gen[id], answer = c.stopped === 'replied' || c.stopped === 'in a deal', other = ch === 'text' ? 'email' : 'text';
-    const ai = aiDraftFor(id), k = ekey(id, ch), ed = editing || (answer && !edits[k]);
-    let body, subject = '', canSend, when, extra = '';
-    const blk = [];
-    if (answer) {
-      body = edits[k] != null ? edits[k] : ai && ai.ch === ch ? ai.body : ''; subject = (ai && ai.subject) || '';
-      const ct = RC.canText(id, h.phone || null);
-      canSend = ch === 'email' || (!!h.phone && ct.ok); if (ch === 'text' && h.phone && !ct.ok) blk.push(esc(ct.reason) + '.');
-      when = (c.stopped === 'replied' ? 'They replied.' : 'In a deal, ' + RC.stageName(RC.stage(id)) + '.') + ' Goes when you tap Open.';
-    } else {
-      const r0 = draftFor(h, ch), r = ai && ai.ch === ch ? Object.assign({}, r0, { body: ai.body, subject: ai.subject || r0.subject }) : r0;
-      body = edits[k] != null ? edits[k] : r.body || ''; subject = r.subject || '';
-      const miss = r.missing || [];
-      if (miss.includes('homeLink') || /\[home page link/i.test(body)) blk.push(RC.setupLink('Add your public site to include the home page link.'));
-      if (ch === 'email' && miss.includes('mailingAddress')) blk.push(RC.setupLink('Add your mailing address to send emails.'));
-      if (ch === 'text') { const ct = RC.canText(id, h.phone || null); canSend = r.canSend && !!h.phone && ct.ok; if (h.phone && !ct.ok) blk.push(esc(ct.reason) + '.'); }
-      else canSend = r.canSend;
-      if (!blk.length && !canSend && r.blocked && !r.noCallback && !/^needs phone/.test(r.blocked)) blk.push(RC.setupLink(esc(r.blocked.charAt(0).toUpperCase() + r.blocked.slice(1))));
-      when = `Day ${r.dayN || c.step || 1}, ${!c.lastContact ? 'first touch' : c.overdue ? c.daysOverdue + ' day' + (c.daysOverdue === 1 ? '' : 's') + ' overdue' : c.dueToday ? 'due today' : 'due ' + dayFmt(c.nextDue)}. Goes when you tap Open.`;
-    }
-    if (ch === 'text' && !h.phone) extra = `<button type="button" class="clink" data-a="record">Next: get the phone number</button>`;
-    const href = ch === 'text' ? smsHref(h.phone || '', clean(body)) : mailHref(subject, clean(body));
-    const lab = ch === 'text' ? 'Open in Messages' : 'Open in Mail';
-    const send = canSend ? `<a class="cbtn pri" data-a="send"${answer ? ' data-mode="answer"' : ''} data-chan="${ch}" href="${href}"><span class="ic">${ICON.send}</span>${lab}</a>` : `<button type="button" class="cbtn pri off" aria-disabled="true"><span class="ic">${ICON.send}</span>${lab}</button>`;
-    const view = ed ? `${ch === 'email' && subject ? `<p class="csubj">${esc(subject)}</p>` : ''}<textarea class="cdraft" rows="2" aria-label="Your ${ch}" placeholder="Write your ${ch}">${esc(body)}</textarea>` : previewHTML(ch, subject, body);
-    return `<section class="cnext ncard" data-chan="${ch}"><div class="nhd"><span class="ngl">${answer ? 'Your answer' : 'Next message'}</span><button type="button" class="clink nx" data-a="ungen" aria-label="Close the draft"><span class="ic">${ICON.close}</span></button></div>` +
-      `<p class="nto">${toLine(h, ch)}</p><p class="nwhen">${esc(when)}</p>${view}` +
-      blk.map(x => `<p class="nblk">${x}</p>`).join('') +
-      `<div class="cact"><div class="nsec">${ch === 'text' ? quickHTML(h) : ''}${extra}<button type="button" class="clink" data-a="gen" data-chan="${other}">Use ${other} instead</button></div>` +
-      (answer ? '' : `<button type="button" class="cbtn sm" data-a="edit">${editing ? 'Done' : 'Edit'}</button>`) + send + `</div></section>`;
+  // a reply or a deal in progress ends the cold cadence: the composer turns into a plain answer box (no library draft,
+  // the person writes it), still under the texting hours, the 3 per 24 h cap and the opt-out
+  function answerHTML(id, h, c) {
+    const ai = aiDraftFor(id), ch = chan === 'email' || (chan === 'auto' && ai && ai.ch === 'email') ? 'email' : 'text', ct = RC.canText(id, h.phone || null);
+    const lab = ai ? 'Nimbus drafted an answer, check it before it goes' : c.stopped === 'replied' ? 'They replied' : 'In a deal, ' + RC.stageName(RC.stage(id));
+    const seg = `<div class="cseg" role="group" aria-label="Channel"><button type="button" data-ch="text" aria-pressed="${ch === 'text'}">Text</button><button type="button" data-ch="email" aria-pressed="${ch === 'email'}">Email</button></div>`;
+    const send = ch === 'text' ? (ct.ok ? `<a class="cbtn pri" data-a="send" data-mode="answer" href="${smsHref(h.phone, '')}"><span class="ic">${ICON.send}</span>Open in Messages</a>` : `<button type="button" class="cbtn pri off" aria-disabled="true"><span class="ic">${ICON.send}</span>Open in Messages</button>`)
+      : `<a class="cbtn pri" data-a="send" data-mode="answer" href="${mailHref('', '')}"><span class="ic">${ICON.send}</span>Open in Mail</a>`;
+    const why = ch === 'text' && !ct.ok ? ct.reason + '.' : '';
+    return `<section class="cnext"><div class="clab"><span>${esc(lab)}</span>${seg}</div><textarea class="cdraft" rows="3" aria-label="Your ${ch}" placeholder="Write your ${ch === 'text' ? 'text' : 'email'}">${ai ? esc(ai.body) : ''}</textarea>` +
+      `<div class="cact">${quickHTML(h)}${why ? `<p class="cnote">${esc(why)}</p>` : ''}${send}</div></section>`;
   }
   function nextHTML(id, h, c) {
-    if (c.stopped === 'not a fit') return `<section class="cnext nx-stop"><p class="cnote">Skipped on Today as not a fit. It stays off the Daily 50 until the skip is undone.</p></section>`;
-    if (c.stopped && c.stopped !== 'replied' && c.stopped !== 'in a deal') return `<section class="cnext nx-stop"><p class="cnote">${c.stopped === 'opted out' ? 'This homeowner opted out. No more texts, emails or follow-ups.' : c.stopped === 'won' ? 'Won. Follow-ups stop here.' : 'Moved to Not now. Follow-ups stop until the home is restored on the Pipeline.'}</p></section>`;
-    if ((c.stopped === 'replied' || c.stopped === 'in a deal') && sugg[id]) return '';   // the suggested answer above is the composer
-    if (!gen[id]) { const ai = aiDraftFor(id); if (ai && (ai.ch === 'text' || ai.ch === 'email')) gen[id] = ai.ch; }   // Nimbus already drafted one
-    if (autoSent(id) && !gen[id]) return '';   // sent automatically: only the thread
-    return gen[id] ? cardHTML(id, h, c) : genHTML(c.stopped === 'replied' ? 'Answer them' : '');
+    if (c.stopped === 'replied' || c.stopped === 'in a deal') return sugg[id] ? '' : answerHTML(id, h, c);   // the suggested answer above is the composer
+    if (c.stopped === 'not a fit') return `<section class="cnext nx-stop"><div class="clab">No next touch</div><p class="cnote">Skipped on Today as not a fit. It stays off the Daily 50 until the skip is undone.</p></section>`;
+    if (c.stopped) return `<section class="cnext nx-stop"><div class="clab">No next touch</div><p class="cnote">${c.stopped === 'opted out' ? 'This homeowner opted out. No more texts, emails or follow-ups.' : c.stopped === 'won' ? 'Won. Follow-ups stop here.' : 'Moved to Not now. Follow-ups stop until the home is restored on the Pipeline.'}</p></section>`;
+    // a reply Nimbus drafted from Ask (lib/rc-ask.js, scripts/voice/server.py) waits here until something newer goes out
+    const r0 = draftFor(h, chan), ai = aiDraftFor(id), r = ai ? Object.assign({}, r0, { body: ai.body, subject: ai.subject || r0.subject }) : r0, ch = chan === 'auto' ? (ai ? ai.ch : r.eff) : chan;   // the segment shows the channel the library chose unless the user picked one
+    const when = !c.lastContact ? 'first touch' : c.overdue ? `${c.daysOverdue} day${c.daysOverdue === 1 ? '' : 's'} overdue` : c.dueToday ? 'due today' : 'due ' + dayFmt(c.nextDue);
+    const seg = `<div class="cseg" role="group" aria-label="Channel"><button type="button" data-ch="text" aria-pressed="${ch === 'text'}">Text</button><button type="button" data-ch="email" aria-pressed="${ch === 'email'}">Email</button></div>`;
+    let send = '', why = '';
+    if (ch === 'text') {
+      const ct = RC.canText(id, h.phone || null);   // texting hours, the 3 per 24 h cap, opt-out
+      if (r.canSend && h.phone && ct.ok) send = `<a class="cbtn pri" data-a="send" href="${smsHref(h.phone, r.body)}"><span class="ic">${ICON.send}</span>Open in Messages</a>`;
+      else send = `<button type="button" class="cbtn pri off" aria-disabled="true"><span class="ic">${ICON.send}</span>Open in Messages</button>`;
+      why = r.blocked === 'opted out' ? 'Opted out.' : !h.phone ? 'Next: get the phone number.' : !r.canSend ? (r.blocked || 'Not ready to send.') : !ct.ok ? ct.reason + '.' : '';
+    } else {
+      if (r.canSend) send = `<a class="cbtn pri" data-a="send" href="${mailHref(r.subject, r.body)}"><span class="ic">${ICON.send}</span>Open in Mail</a>`;
+      else send = `<button type="button" class="cbtn pri off" aria-disabled="true"><span class="ic">${ICON.send}</span>Open in Mail</button>`;
+      why = r.missing && r.missing.includes('mailingAddress') ? 'Add your mailing address to send emails.' : r.blocked || '';
+    }
+    why = why ? why.charAt(0).toUpperCase() + why.slice(1) : '';   // the library's reasons start lowercase ("day 3 goes by email"); here they are sentences
+    return `<section class="cnext"><div class="clab"><span>Day ${r.dayN || c.step} ${ch}, ${esc(when)}</span>${seg}</div>` +
+      (r.body ? (ch === 'email' && r.subject ? `<p class="csubj">${esc(r.subject)}</p>` : '') + `<textarea class="cdraft" rows="${ch === 'email' ? 5 : 3}" aria-label="Next ${ch} draft" ${r.canSend ? '' : 'readonly'}>${esc(r.body)}</textarea>` : '') +
+      `<div class="cact">${quickHTML(h)}${why ? `<p class="cnote">${why}</p>` : ''}${send}</div></section>`;
   }
   function aiDraftFor(id) {
     let all = {}; try { all = JSON.parse(localStorage.getItem('rc.t.aidraft') || '{}'); } catch (e) { }
@@ -335,18 +291,47 @@
     // messages oldest first, grouped by day; a scheduled text last with its countdown
     const recs = RC.activity().filter(a => a.id === id).reverse(), sc = RC.scheduledFor(id);
     let body = '', day = '';
-    // loop 26: only real messages (and calls, bookings, notes) in the thread; stage moves collapse to one muted line
-    const moves = recs.filter(a => a.ch === 'stage'), real = recs.filter(a => a.ch !== 'stage');
-    if (moves.length) { const L = moves[moves.length - 1], line = `<span class="ic">${ICON.stage}</span><span>${esc(L.what)}</span><time>${esc(when(L.at))}</time>`;
-      body += moves.length === 1 ? `<div class="mstage">${line}</div>` : `<details class="mstage"${stOpen ? ' open' : ''}><summary>${line}<em>${moves.length} changes</em></summary><ol>${moves.slice().reverse().map(m => `<li>${esc(m.what)} <time>${esc(full(m.at))}</time></li>`).join('')}</ol></details>`; }
-    real.forEach(a => { const d = dayHead(a.at); if (d !== day) { day = d; body += `<div class="mday"><span>${esc(d)}</span></div>`; } body += bubble(a); });
+    recs.forEach(a => { const d = dayHead(a.at); if (d !== day) { day = d; body += `<div class="mday"><span>${esc(d)}</span></div>`; } body += bubble(a); });
     if (sc) body += `<div class="msg sched" data-sid="${esc(sc.sid)}"><span class="mb">${esc(sc.body)}</span><span class="mm">Scheduled, <span data-due="${esc(sc.due)}">${esc(RC.countdown(sc.due))}</span>, from your phone<button type="button" data-a="unsched">Cancel</button></span></div>`;
-    if (!real.length && !sc) body += `<p class="cnote mnone">${c.stopped ? 'Nothing sent yet.' : autoSent(id) ? 'Nothing sent yet.' : gen[id] ? 'Nothing sent yet. Your first message is ready above.' : 'Nothing sent yet. Generate your first message above.'}</p>`;
+    if (!recs.length && !sc) body = `<p class="cnote mnone">Nothing on record yet for this home.</p>`;
     let pin = false;   // scroll to the newest message only after the composer below has its height (it shrinks the thread)
     if (cvm.__h !== body) { const atEnd = cvm.scrollHeight - cvm.scrollTop - cvm.clientHeight < 40; cvm.innerHTML = body; cvm.__h = body; pin = atEnd || !cvm.__id || cvm.__id !== id; cvm.__id = id; }
     const foot = (replying ? `<section class="creply"><div class="clab"><label for="iRep">What did the homeowner say?</label><button type="button" class="clink" data-a="rcancel">Cancel</button></div><textarea id="iRep" rows="3" placeholder="Paste their text or email, or note what they said"></textarea><div class="cact"><button type="button" class="cbtn pri" data-a="rsave">Save reply</button></div></section>` : '') + suggHTML(id, h) + nextHTML(id, h, c);
     if (cvf.__h !== foot) { const keep = cvf.querySelector('#iRep') ? cvf.querySelector('#iRep').value : null; cvf.innerHTML = foot; cvf.__h = foot; if (keep != null && cvf.querySelector('#iRep')) cvf.querySelector('#iRep').value = keep; }
-    cvf.querySelectorAll('textarea').forEach(grow);
+    if (pin) cvm.scrollTop = cvm.scrollHeight;
+  }
+
+  // ---------- the Hail tile: one rule for every home, the record's own (11-12) ----------
+  // The pane knew hail only for a home on today's 50, so a home that had left the list (it was texted) read "Not on file".
+  // The tile now follows the record that sits beside it: the LATEST storm of 1 inch or more at this address, from the record's
+  // storm list (lib/rc-hail.js RCH.history, the files the open record has already loaded, so no request is added), filtered by
+  // the same expression as c5-home/rec.js keyFacts ("Last 1 in+ hail"; its result is private to rec.js, so it cannot be read
+  // from here). Words: RCPLAIN.hail and Today's date form ("Jun 2" this year, "Mar 2025" before); no such storm = "None on
+  // file", the words the record and Today's card use. "Checking" only while the list loads; a list that fails, comes back
+  // empty or takes over 8 seconds reads "Not available" (it never states "none" without knowing).
+  const hailHist = new Map(), hailWait = new Map(), HAIL_WAIT = 8000;
+  const hailWhen = iso => { iso = String(iso || ''); if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return '';
+    return new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', iso.slice(0, 4) === String(new Date().getFullYear()) ? { month: 'short', day: 'numeric', timeZone: 'UTC' } : { month: 'short', year: 'numeric', timeZone: 'UTC' }); };
+  function hailTile(id, h, mine) {
+    const val = (v, iso, alt) => `<b style="white-space:nowrap">${esc(window.RCPLAIN ? RCPLAIN.hail(v) : (+v).toFixed(2) + ' in')}</b><small>${esc(hailWhen(iso) || alt || '')}</small>`;
+    const word = w => `<b class="sm" style="width:0;min-width:100%">${w}</b>`;   // a word never widens the tile, a hail size may
+    const again = () => { if (SEL === id) paintHome(); };
+    // a sample home (no map id) has no storm list: what this device remembered, as before
+    if (h.gi == null || !window.RCH) return h.hail != null ? val(h.hail, h.storm, h.hailDate) : word('Not on file');
+    let st = hailHist.get(h.gi);
+    if (!st && !mine) {   // the record is still switching to this home: its storm files are asked for once it is the open one
+      if (!hailWait.has(id)) { hailWait.set(id, Date.now()); setTimeout(again, HAIL_WAIT + 100); }
+      return word(Date.now() - hailWait.get(id) > HAIL_WAIT ? 'Not available' : 'Checking');
+    }
+    if (!st) {
+      st = { v: undefined, late: false }; hailHist.set(h.gi, st);
+      RCH.history(h.gi).then(l => { st.v = Array.isArray(l) && l.length ? l : false; again(); }, () => { st.v = false; again(); });
+      setTimeout(() => { if (st.v === undefined) { st.late = true; again(); } }, HAIL_WAIT);
+    }
+    if (st.v === undefined) return word(st.late ? 'Not available' : 'Checking');
+    if (!st.v) return word('Not available');
+    const hit = st.v.filter(x => x.inches >= 1).sort((a, b) => a.iso < b.iso ? 1 : -1)[0];   // = rec.js keyFacts
+    return hit ? val(hit.inches, hit.iso) : word('None on file');
   }
 
   // ---------- the home pane: the record's 3D house plus its facts ----------
@@ -354,16 +339,27 @@
     const id = SEL;
     if (!id) { const e = `<div class="cempty"><span class="ic">${ICON.roof}</span><b>The house shows here</b><p>Pick a thread and the home's roof, hail, roof record and stage follow.</p></div>`; if (chh.__h !== '') { chh.innerHTML = ''; chh.__h = ''; } if (chf.__h !== e) { chf.innerHTML = e; chf.__h = e; } return; }
     const h = homeOf(id), H = window.HOME, mine = !!(H && H.rawId === id), st = RC.stage(id), idx = RC.STAGES.findIndex(s => s[0] === st), b = RC.booking(id), arch = (RC.pipeline()[id] || {}).archived;
-    const head = `<button type="button" class="cback" data-a="tothread" aria-label="Back to the conversation"><span class="ic">${ICON.back}</span></button><div class="cvt"><b>${esc(h.addr)}</b><small>${esc([h.place || [h.city, h.zip].filter(Boolean).join(' '), h.subdivision].filter(Boolean).join(' · '))}</small></div>`;   // loop 25: the X only hid the pane (the thread header's house button does that), so it is gone like Hide panel
+    const head = `<button type="button" class="cback" data-a="tothread" aria-label="Back to the conversation"><span class="ic">${ICON.back}</span></button><div class="cvt"><b>${esc(h.addr)}</b><small>${esc([h.place || [h.city, h.zip].filter(Boolean).join(' '), h.subdivision].filter(Boolean).join(' · '))}</small></div>` +
+      ``;   // Jack 11-02: no close button on the pane; it stays
     if (chh.__h !== head) { chh.innerHTML = head; chh.__h = head; }
     const roof = h.roofAge || (h.year ? 'Built ' + h.year : mine ? 'Checking the county record' : 'Not on file');
     // re-roof line only where the city's permit list is complete (McKinney, Allen: lib/st-meta.js reroof), else nothing
     const rr = mine && H.rec && H.rec.reroof, permit = rr ? (rr.none ? 'No re-roof permit since ' + rr.since : (rr.done ? 'Re-roofed ' : 'Re-roof permit ') + rr.date) : '';
+    // a city with no permit list never gets that line, so the shared roof rule speaks instead ("Roof age unknown"); the city is
+    // the record's own, or the front of its place line ("Plano, TX 75023") when the record carries no city field
+    const city = String(h.city || String(h.place || '').split(',')[0] || '').trim();
+    const noList = h.year && city && !(RC.ROOF_COVERAGE || {})[city.toLowerCase()] && window.RCPLAIN && RC.roofEvidence ? RCPLAIN.roof(RC.roofEvidence(city, h.year, h.permit || null)) : '';
     const strip = RC.STAGES.map((s, i) => `<button type="button" class="cst${i < idx ? ' dn' : ''}${i === idx && !arch ? ' on' : ''}" data-s="${s[0]}" aria-current="${i === idx ? 'step' : 'false'}"><span class="d">${i < idx ? ICON.check : i + 1}</span><b>${esc(s[1])}</b></button>`).join('');
     // 10-17: the few facts a roofer needs while texting (hail, roof), Book, then the rest behind More
-    const facts = `<div class="cstg-row"><span>Stage</span>${stageSelect(id)}</div><div class="ckpi">` +   // the stage row shows on the phone sheet, where the thread header has no room for it
-      `<div><span>Hail</span>${h.hail != null ? `<b>${h.hail.toFixed(2)} in</b><small>${esc(h.hailDate)}</small>` : '<b class="sm">Not on file</b>'}</div>` +
-      `<div><span>Roof</span>${h.year ? `<b>${esc(String(h.year))}</b><small>${esc(permit)}</small>` : `<b class="sm">${esc(roof)}</b><small>${esc(permit)}</small>`}</div>` +
+    const facts = `<div class="cseg" role="group" aria-label="House picture"><button type="button" data-cv="3d" aria-pressed="${paneView === '3d'}">3D</button><button type="button" data-cv="sat" aria-pressed="${paneView === 'sat'}">Satellite</button></div>` +   // Jack 11-02: the 3D model first, like Today; Satellite one click away
+      (h.gi != null && window.RCIMG && window.STM ? `<figure class="cphoto" data-gi="${h.gi}" aria-label="Satellite photo of ${esc(h.addr)}"><span class="tag">This house</span></figure>` : '') +   // 11-02: the house from above (lib/rc-imagery.js, Esri live, NAIP fallback, credit shown)
+      `<div class="cstg-row"><span>Stage</span>${stageSelect(id)}</div><div class="ckpi" style="grid-template-columns:minmax(calc((100% - 24px) / 3),max-content) minmax(0,1fr)">` +   // the stage row shows on the phone sheet, where the thread header has no room for it
+      `<div style="align-content:start"><span>Hail</span>${hailTile(id, h, mine)}</div>` +   // both tiles hang from the top, so the two big figures share a line when one tile has a second small line
+      // 11-12: the year is when the HOUSE was built, so the tile is labelled "Built" (it used to read "Roof / 1989"). Where the
+      // city has no permit list (no re-roof line can come) the shared roof rule says so: "Roof age unknown"
+      // (the tile takes the rest of the row, so its roof line is not cut to "Roof age unk…"; a line longer than the tile, Allen's
+      // "No new roof on city list (starts 2017)" at 209px in 196px, wraps to two even lines instead of losing its year)
+      `<div style="align-content:start"><span>${h.year ? 'Built' : 'Roof'}</span>${h.year ? `<b>${esc(String(h.year))}</b><small style="white-space:normal;text-wrap:balance">${esc(permit || noList)}</small>` : `<b class="sm">${esc(roof)}</b><small>${esc(permit)}</small>`}</div>` +
       `</div>` +   // 11-01: roof squares were an estimate; the panel shows only facts on file
       `<div class="cact book">${b ? `<p class="cnote"><span class="ic">${ICON.cal}</span>Inspection ${esc(RC.when(b))}</p><button type="button" class="cbtn" data-a="ics"><span class="ic">${ICON.cal}</span>Add to calendar</button><button type="button" class="cbtn pri" data-a="book">Reschedule</button>` : `<button type="button" class="cbtn pri" data-a="book"><span class="ic">${ICON.cal}</span>Book inspection</button>`}</div>` +
       `<details class="cmore"${chf.__more ? ' open' : ''}><summary><span>More about this home</span><span class="ic">${ICON.chev}</span></summary>` +
@@ -374,13 +370,27 @@
       `<div class="cstrip" role="group" aria-label="Stage">${strip}</div>${arch ? '<p class="cnote">Parked in Not now on the Pipeline.</p>' : ''}` +
       (/^m\d+$/.test(id) ? `<button type="button" class="cbtn wide" data-a="hailrep"><span class="ic">${ICON.doc}</span>Storm report for the homeowner</button>` : '') +
       `<button type="button" class="cbtn wide" data-a="record"><span class="ic">${ICON.roof}</span>Open the home record</button></details>`;
-    if (chf.__h !== facts) { chf.innerHTML = facts; chf.__h = facts; }
+    if (chf.__h !== facts) { chf.innerHTML = facts; chf.__h = facts; panePhoto(chf.querySelector('.cphoto')); }
+  }
+  let paneView = '3d';   // 3D model by default (Jack 11-02), never remembered; the photo shows on its own when the home has no model (.stage.none)
+  // until the deferred three.js model has drawn its first frames (home.js sets __ready), the pane shows the satellite photo as the poster
+  (function d3watch(){ const ch = $('#ch'); if (ch && window.__ready) { ch.dataset.d3 = 'on'; return; } setTimeout(d3watch, 300); })();
+  document.addEventListener('click', e => { const b = e.target.closest('#ch .cseg [data-cv]'); if (!b) return; paneView = b.dataset.cv; $('#ch').dataset.cv = paneView; document.querySelectorAll('#ch .cseg button').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.cv === paneView))); if (paneView === '3d') requestAnimationFrame(() => { if (window.__refit) window.__refit(); }); });
+  // the pane's satellite photo: about 40 m across at the home's county position, one request per home, kept while the page lives
+  const PHOTO = new Map();
+  function panePhoto(fig) {
+    if (!fig) return; const gi = +fig.dataset.gi;
+    const put = p => { if (!fig.isConnected) return; const img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; img.src = p.src;
+      const cr = document.createElement('span'); cr.className = 'cr'; cr.textContent = p.credit;
+      if (p.fallback) img.onerror = () => { img.onerror = null; img.src = p.fallback; cr.textContent = RCIMG.NAIP_CREDIT; };
+      fig.prepend(img); fig.append(cr); };
+    if (PHOTO.has(gi)) { put(PHOTO.get(gi)); return; }
+    STM.lonlat(gi).then(ll => { if (!ll || !isFinite(ll[0])) return; const p = RCIMG.photo(ll[0], ll[1], 20, 12.5); PHOTO.set(gi, p); put(p); }).catch(() => { });
   }
   // the one 3D stage lives in the home pane while a thread is open, else in the record
   function placeStage() {
     const st = $('#stage'); if (!st) return;
     const want = VIEW === 'inbox' && SEL ? chstage : $('.left'); if (!want) return;
-    const sk = chstage.querySelector('.wo-skel'); if (sk) sk.remove();   // the first-open skeleton (index.html)
     if (st.parentNode !== want) { want.appendChild(st); requestAnimationFrame(() => { if (window.__refit) window.__refit(); }); }
   }
   let auto = false;
@@ -397,10 +407,9 @@
 
   // ---------- selection, views, routes ----------
   function select(id, how) {   // how: 'click' (a history entry) | 'auto' (replace) | 'route' (the shell asked; nothing announced)
-    SEL = id; MSG = null; chan = 'auto'; replying = false; editing = false;
+    SEL = id; MSG = null; chan = 'auto'; replying = false;
     if (id) try { localStorage.setItem('rc.t.lastThread', JSON.stringify(id)); } catch (e) { }   // Ask's "this homeowner"
     if (id && curId() !== id && window.switchHome) window.switchHome(id, true);
-    if (id) markSeen(threads().find(t => t.id === id));
     if (isPhone() && id) crm.dataset.screen = 'thread';
     placeStage(); paint();
     if (how === 'click' && window.homeAnnounce) window.homeAnnounce(true); else if (how === 'auto' && window.homeAnnounce) window.homeAnnounce(false);
@@ -420,12 +429,12 @@
     // put This home back when leaving it
     if (window.showPane) { if (v === 'pipeline') window.showPane('pipe'); else if (was === 'pipeline') window.showPane('home'); }
     if (v === 'pipeline' && window.renderPipe) setTimeout(() => { window.renderPipe(true); dispatchEvent(new Event('resize')); }, 30);
-    if (v === 'home') { const H = window.HOME; $('#vHomeLbl').textContent = !isPhone() && H && H.rec && H.rec.addr && !/^(Home from|Stop |Today's list)/.test(H.rec.addr) && !document.body.classList.contains('rloading') ? H.rec.addr : 'Home'; }
+    if (v === 'home') { const H = window.HOME; $('#vHomeLbl').textContent = !isPhone() && H && H.rec && H.rec.addr ? H.rec.addr : 'Home'; }
     if (v === 'calendar' && window.renderCal) window.renderCal();   // cal.js paints the calendar view
     if (v === 'customers' && window.renderPC) window.renderPC();   // customers.js paints Past customers
     placeStage(); paint();
     if (v !== 'inbox' && window.__refit) requestAnimationFrame(() => window.__refit());
-    try { document.title = (v === 'home' && window.HOME && window.HOME.rec ? window.HOME.rec.addr : v === 'pipeline' ? 'Leads' : v === 'calendar' ? 'Calendar' : v === 'customers' ? 'Customers' : 'CRM') + ' | Roof Command'; } catch (e) { }
+    try { document.title = (v === 'home' && window.HOME && window.HOME.rec ? window.HOME.rec.addr : v === 'pipeline' ? 'Pipeline' : v === 'calendar' ? 'Calendar' : v === 'customers' ? 'Past customers' : 'CRM') + ' | Roof Command'; } catch (e) { }
     if (!quiet && window.homeAnnounce) window.homeAnnounce(was !== v);
   }
   window.crmView = () => VIEW;
@@ -442,7 +451,6 @@
     if (/^s:/.test(v)) { stageF = v.slice(2); filter = 'all'; } else { filter = FILTERS.some(x => x[0] === v) ? v : 'all'; stageF = ''; }
     try { localStorage.setItem(FK, filter); } catch (er) { } paint();
   });
-  cfil.addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; tab = b.dataset.tab; try { localStorage.setItem(TK, tab); } catch (er) { } clist.__h = null; paint(); });
   cq.addEventListener('input', () => { q = cq.value.trim().toLowerCase(); paint(); });
   cq.addEventListener('keydown', e => { if (e.key === 'Escape') { cq.value = ''; q = ''; paint(); } });
   clist.addEventListener('click', e => { if (e.target.closest('[data-a="today"],[data-a="stop1"]')) { onAct(e); return; } const r = e.target.closest('[data-id]'); if (r) select(r.dataset.id, 'click'); });
@@ -491,9 +499,6 @@
     if (a === 'today') { RC.go('daily', {}); return; }
     if (a === 'stop1') { const l = RC.daily ? RC.daily() : []; if (l[0]) select(l[0].id, 'click'); return; }
     if (!id) return;
-    if (a === 'gen') { gen[id] = b.dataset.chan === 'email' ? 'email' : 'text'; editing = false; cvf.__h = null; paint(); return; }
-    if (a === 'ungen') { delete gen[id]; editing = false; cvf.__h = null; paint(); return; }
-    if (a === 'edit') { editing = !editing; cvf.__h = null; paint(); if (editing) { const t = cvf.querySelector('.cdraft'); if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } } return; }
     if (a === 'reply') { replying = true; cvf.__h = null; paint(); const r = cvf.querySelector('#iRep'); r && r.focus(); return; }
     if (a === 'rcancel') { replying = false; cvf.__h = null; paint(); return; }
     if (a === 'rsave') {
@@ -516,21 +521,18 @@
     if (a === 'send') {
       if (b.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
       if (b.dataset.mode === 'answer') {   // a free answer after a reply / in a deal: only what the person typed goes
-        const ta = cvf.querySelector('.cdraft'), h = homeOf(id), body = (ta ? ta.value : edits[ekey(id, b.dataset.chan || 'text')] || '').trim();
+        const ta = cvf.querySelector('.cdraft'), h = homeOf(id), body = ta ? ta.value.trim() : '';
         if (!body) { e.preventDefault(); if (ta) ta.focus(); return; }
-        const ai = aiDraftFor(id), em = b.dataset.chan === 'email', qk = qrKind; qrKind = null;
+        const ai = aiDraftFor(id), em = chan === 'email' || (chan === 'auto' && ai && ai.ch === 'email'), qk = qrKind; qrKind = null;
         if (!em) { b.href = smsHref(h.phone, body); after(() => { if (qk) logAnswer(id, { kind: qk }, body); else RC.logText(id, 'Answer drafted in Messages', { body, to: h.phone }); }); }
         else { b.href = mailHref(ai && ai.subject || '', body); after(() => RC.logEmail(id, 'Email answer drafted', { subject: ai && ai.subject || undefined, body })); }
         return;
       }
-      const bch = b.dataset.chan || 'text', bk = b.closest('.cblk'), ta = (bk || cvf).querySelector('.cdraft'), h = homeOf(id), r = draftFor(h, bch), body = clean((ta && ta.value.trim()) || edits[ekey(id, bch)] || r.body);
-      if (bch === 'text') { b.href = smsHref(h.phone, body); after(() => RC.logText(id, 'Text drafted in Messages', { body, to: h.phone })); }
+      const ta = cvf.querySelector('.cdraft'), h = homeOf(id), r = draftFor(h, chan), body = (ta && ta.value.trim()) || r.body;
+      if ((chan === 'auto' ? r.eff : chan) === 'text') { b.href = smsHref(h.phone, body); after(() => RC.logText(id, 'Text drafted in Messages', { body, to: h.phone })); }
       else { b.href = mailHref(r.subject, body); after(() => RC.logEmail(id, 'Email drafted', { subject: r.subject, body })); }
     }
   }
-  // the edit box grows with its text (no inner scrollbar, one scroll for the whole pane) and keeps the edit across repaints
-  const grow = t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; };
-  cvf.addEventListener('input', e => { const t = e.target; if (!t.matches || !t.matches('textarea')) return; grow(t); if (t.classList.contains('cdraft') && SEL && gen[SEL]) edits[ekey(SEL, gen[SEL])] = t.value; });
   cvh.addEventListener('click', onAct); cvf.addEventListener('click', onAct); chh.addEventListener('click', onAct); chf.addEventListener('click', onAct);
   // Jack 10-26: the house panel folds away with a button you can see ("Hide panel" on it, "Show house" when it is gone),
   // with or without a thread open; the choice is kept on this device (HK)
@@ -550,12 +552,8 @@
 }
 #crm .chide .ic,#crm .chshow .ic{width:15px;height:15px}`;
     document.head.appendChild(st);
-    const hide = document.createElement('button'); hide.type = 'button'; hide.className = 'chide'; hide.innerHTML = 'Hide panel <span aria-hidden="true">&rsaquo;</span>'; hide.setAttribute('aria-label', 'Hide the house panel');
-    const show = document.createElement('button'); show.type = 'button'; show.className = 'chshow'; show.innerHTML = '<span aria-hidden="true">&lsaquo;</span> Show house'; show.setAttribute('aria-label', 'Show the house panel');
-    hide.onclick = show.onclick = toggleHomePane;
-    $('#cv').appendChild(show);   // 10-30 Jack: no Hide panel button on the house pane; Show house stays for a pane hidden earlier on this device
+    // Jack 11-02: no Hide panel / Show house buttons; the panel stays put (toggleHomePane is kept for the header icon only)
   }
-  cvm.addEventListener('toggle', e => { if (e.target.classList.contains('mstage')) stOpen = e.target.open; }, true);
   chf.addEventListener('toggle', e => { if (e.target.classList.contains('cmore')) chf.__more = e.target.open; }, true);   // More stays open across repaints
   // the header's More menu closes on a click elsewhere or Escape
   document.addEventListener('click', e => { document.querySelectorAll('#crm details[open]').forEach(d => { if (!d.contains(e.target) && !d.classList.contains('cmore')) d.open = false; }); });
@@ -565,7 +563,7 @@
   // the scheduled text's countdown ticks
   setInterval(() => { cvm.querySelectorAll('[data-due]').forEach(e => { e.textContent = RC.countdown(e.dataset.due); }); }, 1000);
   setInterval(() => { if (VIEW === 'inbox') { clist.__h = null; paint(); } }, 60000);   // "2 min ago" and due days move with the clock
-  RC.on(d => { if (d.key === 'sched' || d.key === 'optout' || d.key === 'homes' || d.key === 'pipe') paint(); if (d.key === 'aidraft') { cvf.__h = null; paint(); } });
+  RC.on(d => { if (d.key === 'sched' || d.key === 'optout' || d.key === 'homes' || d.key === 'pipe' || d.key === 'settings') paint(); if (d.key === 'aidraft') { cvf.__h = null; paint(); } });
   phoneMQ.addEventListener('change', () => { if (VIEW === 'inbox') { if (!isPhone() && !SEL) { const t = threads()[0]; if (t) select(t.id, 'auto'); } crm.dataset.screen = isPhone() && SEL ? 'thread' : 'list'; } placeStage(); });
 
   // ---------- first paint: ?view= (the shell), else the record when an id was asked for, else the inbox ----------

@@ -13,7 +13,7 @@
   'use strict';
   if (window.RCROOF) return;
   const src = document.currentScript && document.currentScript.src;
-  const BASE = () => window.rooferDataRoot ? rooferDataRoot() : (src ? new URL('st-data-dfw/', src).href : new URL('lib/st-data-dfw/', location.href).href);
+  const BASE = () => rooferDataRoot();   // lib/brand.js, always loaded before this file
   const J = u => fetch(BASE() + u).then(r => r.ok ? r.json() : null).catch(() => null);
   let catP = null; const cat = () => catP || (catP = J('catalog.json'));
   const regOf = (c, i) => { for (let k = c.regions.length - 1; k >= 0; k--) if (i >= c.regions[k].offset) return c.regions[k]; return c.regions[0]; };
@@ -21,7 +21,7 @@
   let didxP = null; const didx = () => didxP || (didxP = J('meta/roof-detail/index.json').then(d => d || {}));
   // solid-block roof models that passed every gate rule (scripts/roofs/build_blocks.py): lib/roof-blocks/index.json
   // {regions: {region: [row, ...]}} + lib/roof-blocks/<region>/<row>.json (same shape as a roof-detail file, with gate.pass).
-  // An approved roof-detail file (Caleo) wins; a home in neither keeps its outline view.
+  // An approved roof-detail file (Reference) wins; a home in neither keeps its outline view.
   const BLK = src ? new URL('roof-blocks/', src).href : new URL('lib/roof-blocks/', location.href).href;
   const BJ = u => fetch(BLK + u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
   let bidxP = null; const bidx = () => bidxP || (bidxP = BJ('index.json').then(d => (d && d.regions) || {}));
@@ -119,6 +119,13 @@
   function gatePass(g) {
     if (!g || g.pass !== true || g.checking) return false;
     const r = g.rules; return !!r && Object.keys(r).length > 0 && Object.values(r).every(v => v === true);
+  }
+  // 11-14 (Jack, "gate it again"): only a model that passes the Reference gate is shown; meshUsable kept for reference. (11-12 showed every usable mesh.)
+  // Unusable = no roof faces or NaN geometry.
+  function meshUsable(d) {
+    const m = d && d.geometry_ft && d.geometry_ft.mesh, f = m && m.roof;
+    if (!f || !f.length) return false;
+    try { return !/NaN|null/.test(JSON.stringify(f).slice(0, 400000)) && f.every(x => x != null); } catch (e) { return false; }
   }
   // the full report for one home when one was rendered (listed in meta/roof-detail/index.json), else the home's facet
   // geometry (no totals: the figures stay the summary row's) when the geometry run measured it, else null
@@ -341,6 +348,6 @@
   const st = document.createElement('style'); st.textContent = css; (document.head || document.documentElement).appendChild(st);
 
   // Jack 10-23: the one line every screen puts by a squares figure (36-home Frisco answer key, tour/audit/roof-accuracy/answer-key/REPORT.md)
-  const SQ_NOTE = 'LiDAR estimate, typically within about 10% of permit records; order a measurement report before you quote';   // Jack 10-23: the safer wording
+  const SQ_NOTE = 'LiDAR estimate; order a measurement report before you quote';   // Jack 10-23: the safer wording
   window.RCROOF = { SQ_NOTE, lookup, cached, detail, geom, stories, chip, eaveFt, diagramSVG, reportHTML, words, shape, pitches, EDGE_COLORS: EC };
 })();

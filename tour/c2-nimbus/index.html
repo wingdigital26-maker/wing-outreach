@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-rc="ask">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Jackson Roofing, Roof Command</title>
-<script src="../lib/rc-frame-pause.js"></script><!-- the Nimbus panel closed = no drawing -->
+<title>Roof Command</title>
+<script src="../lib/rc-frame-pause.js"></script><script src="../lib/rc-fetch-memo.js"></script><!-- one download per data file per page (11-02) --><!-- the Nimbus panel closed = no drawing -->
 <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
 <link rel="stylesheet" href="../vendor/maplibre-gl@4.7.1/maplibre-gl.css">
 <link rel="stylesheet" href="../lib/nimbus-shell.css">
@@ -221,12 +221,14 @@ html.panel .rk{border-radius:4px}
 .pin::before{inset:-8px}
 html.nodata .src,html.nodata .facts{visibility:hidden}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../lib/rc-apprules.css"><!-- app rules (11-02) -->
 </head>
 <body data-sheet="half" class="fresh">
 <header class="bar">
   <div class="brand">
     <div class="logo" id="rlogo"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12.5 12 5l9 7.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 11v7.5h11V11" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M6 21h12" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".55"/></svg></div>
-    <div><b id="rname">Jackson Roofing</b><span id="rarea">Roof Command, Plano, TX</span></div>
+    <div><b id="rname">&nbsp;</b><span id="rarea">Roof Command</span></div>
   </div>
   <div class="pipe" aria-label="Pipeline">
     <div class="pipe-bar"><i id="pb-new" style="flex:1;background:#C9D3EC"></i></div>
@@ -280,10 +282,10 @@ html.nodata .src,html.nodata .facts{visibility:hidden}
 <script src="../lib/brand.js"></script>
 <script src="../lib/rc-features.js"></script>
 <script>/* the roofer brands the page (lib/brand.js) */
-var OWNER=activeRoofer().owner;
+var OWNER=activeRoofer().owner||'';
 { const r=activeRoofer(); document.documentElement.style.setProperty('--roofer',r.accent); rooferMark(document.getElementById('rlogo'),r);
-  const area=()=>{ rarea.textContent='Roof Command, '+r.area; }; area(); addEventListener('rc-area',area);
-  rname.textContent=r.name; rme.textContent=r.owner[0]; rme.title=r.owner; document.title=r.name+', Roof Command'; }</script>
+  const area=()=>{ rarea.textContent='Roof Command'+(r.area?', '+r.area:''); }; area(); addEventListener('rc-area',area);
+  rname.textContent=r.name||''; rme.textContent=(r.owner||'').charAt(0); rme.title=r.owner||''; document.title=(r.name?r.name+', ':'')+'Roof Command'; }</script>
 <script src="../lib/wing-mascot.js"></script>
 <script src="../lib/nimbus-shell.js"></script>
 <script src="../lib/rc-queue.js"></script>
@@ -422,7 +424,7 @@ handle.addEventListener('keydown',e=>{const i=STATES.indexOf(sheet.dataset.state
     const pb=document.getElementById('pb-new'); if(pb) pb.style.flex=String(Math.max(1,c.new));
   }
   paint(); RC.factsReady.then(paint); if(RC.queueReady) RC.queueReady.then(paint); RC.on(paint);
-  document.getElementById('hello').textContent=(RC.greeting?RC.greeting():'Hello')+', '+OWNER+'. Ask me about a storm, a street or a home on your list.';
+  document.getElementById('hello').textContent=(RC.greeting?RC.greeting():'Hello')+(OWNER?', '+OWNER:'')+'. Ask me about a storm, a street or a home on your list.';
   say('Ask me anything about your storms, streets and homes.');
   const input=document.getElementById('ask'), form=document.getElementById('composer'), ans=document.getElementById('answer');
   const qEl=document.querySelector('.sheet .q'), meta=document.querySelector('.sheet .qmeta'), qchip=document.querySelector('.qchip');
@@ -453,7 +455,7 @@ handle.addEventListener('keydown',e=>{const i=STATES.indexOf(sheet.dataset.state
     q=(q||'').trim(); if(!q) return;
     const t=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}).toLowerCase();
     document.body.classList.remove('fresh');
-    qEl.textContent=q; meta.textContent=OWNER+', '+t; if(qchip) qchip.textContent=q;
+    qEl.textContent=q; meta.textContent=(OWNER?OWNER+', ':'')+t; if(qchip) qchip.textContent=q;
     if(isStreets(q)){ document.body.classList.remove('nost'); ans.innerHTML=STREET_HTML; src.innerHTML=STREET_SRC; { const dd=yd(DATA&&DATA.date||RC.SHOWCASE); src.querySelectorAll('.sdate').forEach(e=>e.textContent=dd); } document.getElementById('a-most').hidden=!STREETS.length;
       nim.pulse('excited',2500); if(phone&&sheet.dataset.state==='peek') setSheet('half');
       const s0=STREETS[0]; say(s0?`${s0.name} got it worst: ${s0.homes} homes, hail up to ${s0.max.toFixed(2)} in.`:'Counting the streets.'); return; }

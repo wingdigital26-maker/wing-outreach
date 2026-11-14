@@ -21,7 +21,8 @@
    FUNCTIONS FOR NIMBUS (every call is local and sends nothing; all return plain objects; async ones return Promises):
      RCS.ready()                         -> Promise<RCS>, loads the score files once
      RCS.search(filters)                 -> Promise<{total, shown, homes:[row], counts, filters}>   (filters below)
-     RCS.score(gi)                       -> {gi, score, data, crm, parts:{roofAge,storm,roof,crm,neighborhood}, conf, confWord, built}
+     RCS.score(gi)                       -> {gi, score, data, crm, parts:{roofAge,storm,roof,crm,neighborhood,wind,movedIn,occupancy}, conf, confWord, built}
+                                            (v2, 11-07: wind, moved in / bought and owner-occupied come from the build; rules in lib/rc-intent.js)
      RCS.explain(gi)                     -> Promise<evidence>: plain-word lines + details for every part, sources, refresh time
      RCS.eligibility(gi)                 -> {ok, reason, source}
      RCS.parse(text)                     -> {filters, limit, rep, understood[]}: a plain-English request as filters
@@ -51,7 +52,7 @@
   'use strict';
   if (window.RCS || !window.RC) return;
   const RC = window.RC;
-  const DATA = (window.STM && STM.BASE) || (window.rooferDataRoot ? rooferDataRoot() : RC.base + 'lib/st-data-dfw/');
+  const DATA = (window.STM && STM.BASE) || rooferDataRoot();
   const J = u => fetch(DATA + u).then(r => r.ok ? r.json() : null).catch(() => null);
   const B = u => fetch(DATA + u).then(r => r.ok ? r.arrayBuffer() : null).catch(() => null);
   const get = (k, d) => RC.__get ? RC.__get(k, d) : d, set = (k, v) => RC.__set && RC.__set(k, v);
@@ -96,8 +97,8 @@
     const h = p.history || [], last = h[0] ? h[0].at : null;
     const replied = RC.replied ? RC.replied(id(gi)) : h.some(x => x.dir === 'in');
     const talked = h.some(x => x.kind === 'knock' && /talk|book/i.test(x.what || ''));
-    const status = RC.stageKey(p.stage) === 'won' ? 'won' : RC.stageKey(p.stage) === 'lost' || p.archived ? 'lost' : DEAL[RC.stageKey(p.stage)] ? 'deal' : replied ? 'replied' : RC.stageKey(p.stage) === 'new' ? 'new' : 'contacted';
-    const f = DEAL[RC.stageKey(p.stage)] || replied ? 1 : talked ? 0.5 : h.length ? 0.25 : 0;
+    const status = p.stage === 'won' ? 'won' : p.stage === 'lost' || p.archived ? 'lost' : DEAL[p.stage] ? 'deal' : replied ? 'replied' : p.stage === 'new' ? 'new' : 'contacted';
+    const f = DEAL[p.stage] || replied ? 1 : talked ? 0.5 : h.length ? 0.25 : 0;
     const word = { won: 'Customer (won)', lost: 'Not now', deal: 'In a deal (' + p.stage + ')', replied: 'Replied', new: 'In the pipeline, not contacted', contacted: talked ? 'Talked at the door' : 'Contacted, no answer yet' }[status];
     return { status, pts: Math.round(f * ((M && M.config.weights.crm) || 10) * 10) / 10, word, last, stage: p.stage, touches: h.length };
   }
@@ -117,7 +118,8 @@
   function score(gi, pipe) {
     if (!M) return null;
     const pt = M.pt, crm = crmOf(gi, pipe), data = C.score[gi];
-    const parts = { roofAge: C.pAge[gi] / pt, storm: C.pStorm[gi] / pt, roof: C.pRoof[gi] / pt, crm: crm.pts, neighborhood: C.pNbhd[gi] / pt };
+    const parts = { roofAge: C.pAge[gi] / pt, storm: C.pStorm[gi] / pt, roof: C.pRoof[gi] / pt, crm: crm.pts, neighborhood: C.pNbhd[gi] / pt,
+      wind: C.pWind ? C.pWind[gi] / pt : 0, movedIn: C.pMove ? C.pMove[gi] / pt : 0, occupancy: C.pOcc ? (C.pOcc[gi] - 128) / pt : 0 };
     const conf = CONF[C.conf ? C.conf[gi] : 4] || 'unknown';
     return { gi, score: Math.min(100, Math.round(data + crm.pts)), data, crm: crm.pts, parts, conf, confWord: WORD[conf], built: M.built };
   }
@@ -133,6 +135,14 @@
     return set(Object.assign(e, { source: k === 2 ? `County year built; City of ${city} re-roof permits since ${M.coverage[city] || ''} (none for this home)` : 'County year built only (no complete re-roof permit list here)' }));
   }
   const ptype = gi => M.types[(TYP ? TYP[gi] : C.ptype[gi]) & 127] || '';
+  // v2 intent evidence for one home: wind {mph, src, miles, day}, move {m (absolute month), kind}, occ code; labels from lib/rc-intent.js
+  function intentOf(gi) {
+    const I = window.RCI, w = C.windMph && C.windMph[gi] >= 50 ? { mph: C.windMph[gi], src: M.windSrc[C.windSrc[gi]] || '', miles: C.windMi[gi] / 10, day: M.windDays[C.windDay[gi]] || '' } : null;
+    const mv = C.moveM && C.moveM[gi] ? { m: C.moveM[gi] + (M.moveMonth0 || 1950 * 12), kind: C.moveKind[gi] } : null, occ = C.occ ? C.occ[gi] : 0;
+    // a signal speaks in "why" lines only while it carries points (weights.json); at weight 0 it stays in the data, silent
+    const Wt = (M.config && M.config.weights) || {};
+    return { wind: w, move: mv, occ, windText: I && w && Wt.wind > 0 ? I.windLabel(w) : '', moveText: I && mv && Wt.movedIn > 0 ? I.moveLabel(mv.m, mv.kind) : '', occText: I && Wt.occupancy > 0 ? I.occLabel(occ) : '' };
+  }
 
   // a result row (no owner names)
   function row(gi, pipe, asg) {
@@ -140,7 +150,7 @@
     return { gi, id: id(gi), score: s.score, conf: s.conf, confWord: s.confWord, parts: s.parts, roof: r.text, roofAge: r.age, roofKind: r.kind,
       hail: C.hailMax[gi] ? C.hailMax[gi] / 100 : 0, hailDate: C.hailStorm[gi] < 255 ? M.storms[C.hailStorm[gi]] : null,
       squares: C.sq[gi] || null, pitch: C.pitch[gi] || null, nbr: C.nbr[gi], city: M.cities[C.city[gi]] || '', zip: M.zips[C.zip[gi]] || '',
-      type: ptype(gi), block: C.block[gi] < 65535 ? C.block[gi] : null, eligible: e.ok, why: e.reason, crm: crmOf(gi, pipe).status,
+      type: ptype(gi), block: C.block[gi] < 65535 ? C.block[gi] : null, eligible: e.ok, intent: intentOf(gi), why: e.reason, crm: crmOf(gi, pipe).status,
       rep: a ? a.rep : null, lon: XY ? XY[gi * 2] : null, lat: XY ? XY[gi * 2 + 1] : null };
   }
 
@@ -154,10 +164,9 @@
       const n = M.n, yr = new Date().getFullYear(), pipe = RC.pipeline(), asg = get('assign', {});
       let hailOK = null;
       if (H) {   // best hail per home inside the storm date range
-        const lo = F.stormFrom || '0000', hi = F.stormTo || '9999', minv = Math.round((F.hailMin || 0.75) * 100), ok = new Map();
+        const lo = F.stormFrom || '0000', hi = F.stormTo || '9999', minv = Math.round((F.hailMin || 0.75) * 100), ok = new Set();
         const sOK = M.storms.map(d => d >= lo && d <= hi);
-        // keep each home's biggest hail inside the range, so a card names the storm the search matched (not an older, bigger one)
-        for (let i = 0; i < H.k; i++) if (sOK[H.st[i]] && H.v[i] >= minv) { const p = ok.get(H.gi[i]); if (!p || H.v[i] > p[0]) ok.set(H.gi[i], [H.v[i], H.st[i]]); }
+        for (let i = 0; i < H.k; i++) if (sOK[H.st[i]] && H.v[i] >= minv) ok.add(H.gi[i]);
         hailOK = ok;
       }
       const conf = F.conf && F.conf.length ? new Set(F.conf) : null, types = F.types && F.types.length ? new Set(F.types.map(Number)) : null;
@@ -192,20 +201,22 @@
       const key = F.sort === 'hail' ? (a => C.hailMax[a[1]]) : F.sort === 'age' ? (a => -(C.roofYear[a[1]] || 9999)) : (a => a[0]);
       out.sort((a, b) => key(b) - key(a) || b[0] - a[0] || a[1] - b[1]);
       const lim = F.limit || 200;
-      return { total: out.length, shown: Math.min(lim, out.length), homes: out.slice(0, lim).map(([, gi]) => { const r = row(gi, pipe, asg), m = hailOK && hailOK.get(gi); if (m) { r.rangeHail = m[0] / 100; r.rangeDate = M.storms[m[1]]; } return r; }), counts, filters: F, built: M.built };
+      return { total: out.length, shown: Math.min(lim, out.length), homes: out.slice(0, lim).map(([, gi]) => row(gi, pipe, asg)), counts, filters: F, built: M.built };
     });
   }
 
   // ---------- evidence (the card on the home record, and what Nimbus reads out) ----------
   function explain(gi) {
     return Promise.all([ready(), STM_facts(gi)]).then(([, f]) => hits().then(H => {
-      const s = score(gi), r = roofEv(gi), crm = crmOf(gi), e = eligibility(gi), W = M.config.weights, src = M.sources;
+      const s = score(gi), r = roofEv(gi), crm = crmOf(gi), e = eligibility(gi), W = M.config.weights, src = M.sources, it = intentOf(gi);
       const storms = hitsOf(H, gi).map(h => ({ date: h.iso, label: dlong(h.iso), inches: h.inches, source: 'NOAA MRMS radar hail (1 km grid), an estimate' }));
       const big = storms.filter(h => h.inches >= 1);
       const sq = C.sq[gi], pit = C.pitch[gi], nbr = C.nbr[gi];
       const lines = {
         roofAge: { pts: s.parts.roofAge, max: W.roofAge, conf: r.conf, confWord: r.confWord,
-          plain: r.kind === 'documented' ? (r.just ? `New roof ${r.year}, just re-roofed` : `Roof about ${r.age} years old (re-roofed ${r.year})`) : r.kind === 'likely' ? `Roof likely about ${r.age} years old (${r.text.toLowerCase()})` : r.text,
+          // wording only (11-11): the likely line says the age once ("(built 1989)"; the permit list it rests on is in the detail below);
+          // a permit that may be a repair says so instead of "re-roofed"; a permit that is not high evidence is not stated flat
+          plain: r.kind === 'documented' ? (/may be a repair/.test(r.text) ? r.text : r.conf !== 'high' ? `Roof likely about ${r.age} year${r.age === 1 ? '' : 's'} old (${r.year} permit, not confirmed)` : r.just ? `New roof ${r.year}, just re-roofed` : `Roof about ${r.age} years old (re-roofed ${r.year})`) : r.kind === 'likely' ? `Roof likely about ${r.age} years old (${r.original ? 'original roof, ' : ''}built ${r.year})` : r.text,
           detail: r.why + '. Source: ' + r.source + '.' + (f && f.reroof && f.reroof.permit ? ` Permit ${f.reroof.permit}, ${f.reroof.means || ''}.` : '') },
         storm: { pts: s.parts.storm, max: W.storm,
           plain: big.length ? `${big[0].inches.toFixed(2)} in hail on ${big[0].label}` + (big.length > 1 ? `, hit by ${big.length} storms of 1 in+` : '') : storms.length ? `Up to ${Math.max(...storms.map(x => x.inches)).toFixed(2)} in hail, under 1 in` : 'No hail of 0.75 in or more on file',
@@ -213,6 +224,16 @@
         roof: { pts: s.parts.roof, max: W.roof,
           plain: sq ? `About ${sq} squares${pit >= 7 ? ', steep (' + pit + '/12)' : pit ? ', ' + pit + '/12 pitch' : ''} (estimate)` : 'Roof size not on file',
           detail: 'Size from the building outline or the 2018 LiDAR facets; an estimate until measured on site.' },
+        wind: { pts: s.parts.wind, max: W.wind || 0, fit: it.windText,
+          plain: it.wind ? `${it.wind.mph} mph gust on ${dlong(it.wind.day)}, ${/^NWS/.test(it.wind.src) ? it.wind.src.replace(/^NWS report, /, 'NWS report near ') : 'at ' + it.wind.src} (${it.wind.miles.toFixed(1)} mi away)` : 'No 50 mph+ gust near this home in the last 24 months',
+          detail: 'Peak gust at the nearest of 9 DFW airports when it is within 10 miles (a lone-airport spike is not used), or a measured NWS gust report within 3 miles; best in the last 24 months, not before a later re-roof. Under 50 mph scores 0; 50s low, 60s mid, 70+ high; half for a roof under 10 years, a quarter more for 20+ (only when the roof age is documented). Source: NWS ASOS airports and NWS Fort Worth storm reports (Iowa Environmental Mesonet)' + (M.wind ? `, built ${M.wind}` : '') + '.' },
+        movedIn: { pts: s.parts.movedIn, max: W.movedIn || 0, fit: it.moveText,
+          plain: it.moveText ? it.moveText.charAt(0).toUpperCase() + it.moveText.slice(1) : 'No recent move-in or sale on file',
+          detail: (it.move && it.move.kind === 2 ? 'Deed recorded with Collin CAD (the latest deed date; not every deed is a sale). ' : it.move ? 'Homestead exemption start date from the county appraisal district: when the owner filed it, not the sale date. ' : '') +
+            'New owners often replace the roof in the first two years: full points within 3 months, 4 to 6 months 80%, 7 to 12 60%, 13 to 24 30%. No points when a re-roof permit came within 6 months after it, or on a new build. No date is never a penalty.' },
+        occupancy: { pts: s.parts.occupancy, max: W.occupancy || 0, fit: it.occText,
+          plain: it.occ === 1 ? 'Owner likely lives there' : it.occ === 2 ? 'Likely investor owned (not the owner\'s home)' : 'Not known who lives there',
+          detail: 'Owner-occupied = a homestead exemption, or the owner\'s mailing address is this house (county appraisal rolls). Investor = neither, and a company owner or an out-of-state mailing address. Plus or minus ' + (W.occupancy || 0) + ' points. No names or mailing addresses are kept, only the flag.' },
         crm: { pts: s.parts.crm, max: W.crm, plain: crm.word, detail: crm.last ? `Last touch ${dlong(crm.last.slice(0, 10))}, ${crm.touches} on file (this device).` : 'Nothing logged on this device.' },
         neighborhood: { pts: s.parts.neighborhood, max: W.neighborhood,
           plain: nbr ? `${nbr} neighbor${nbr === 1 ? '' : 's'} within about a block re-roofed in the last ${M.config.neighborhood.days} days` : `No re-roofs within about a block in the last ${M.config.neighborhood.days} days`,
@@ -319,5 +340,5 @@
 
   const RCS = window.RCS = { ready, search, score: gi => score(+gi), explain: gi => explain(+gi), eligibility: gi => eligibility(+gi), parse, describe,
     saveSegment, segments: segs, deleteSegment, segmentQueue, segmentAlerts, reps, addRep, removeRep, assign, unassign, myList, neighborhoods,
-    row: gi => row(+gi), meta: () => M, TYPES: ['Single family', 'Duplex', 'Townhome', 'Condo', 'Mobile home'] };
+    row: gi => row(+gi), intent: gi => M ? intentOf(+gi) : null, meta: () => M, TYPES: ['Single family', 'Duplex', 'Townhome', 'Condo', 'Mobile home'] };
 })();

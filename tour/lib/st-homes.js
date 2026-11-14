@@ -2,12 +2,17 @@
 // built by scripts/dfw from the county appraisal rolls). No owner names are loaded here.
 // Per-home hail, addresses, permits and LiDAR pitch: lib/st-meta.js (read-only copies of the app's own files).
 (function(){
-  const DATA=window.rooferDataRoot?rooferDataRoot():'lib/st-data-dfw/';   // the roofer's own data (lib/brand.js dataRoot)
+  const DATA=rooferDataRoot();   // the roofer's own data (lib/brand.js dataRoot)
   const H={ n:0, xy:null, type:null, cat:null, regions:[], storms:[], ready:null };
   const fetchBuf=u=>fetch(u).then(r=>{ if(!r.ok) throw new Error(u+' '+r.status); return r.arrayBuffer(); });
-  H.ready=Promise.all([fetch(DATA+'catalog.json').then(r=>r.json()),fetchBuf(DATA+'homes.bin')]).then(([cat,buf])=>{
-    // a split county (collin2-tx 'Collin County, TX (more cities)') shows the plain county name
-    (cat=>(cat&&cat.regions||[]).forEach(r=>{ r.name=String(r.name||'').replace(/\s*\(more cities\)/i,''); }))(cat);
+  // a dropped connection gets one more try before the screen says so (H.showFail), never a silent blank map
+  const again=(f,n)=>f().catch(e=>n>0?new Promise(r=>setTimeout(r,1200)).then(()=>again(f,n-1)):Promise.reject(e));
+  const fetchJson=u=>fetch(u).then(r=>{ if(!r.ok) throw new Error(u+' '+r.status); return r.json(); });
+  H.showFail=()=>{ if(document.getElementById('sthFail')) return; const d=document.createElement('div'); d.id='sthFail'; d.setAttribute('role','alert');
+    d.style.cssText='position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:rgba(247,248,250,.86);font-family:inherit';
+    d.innerHTML='<div style="background:#fff;border-radius:14px;padding:24px 26px;max-width:360px;margin:16px;text-align:center;box-shadow:0 8px 30px rgba(11,16,32,.12);color:#0B1020"><b style="display:block;font-size:18px;font-weight:600;margin-bottom:6px">The homes did not load</b><p style="margin:0 0 16px;font-size:14px;line-height:1.5;color:#465065">This is usually a weak connection. Your leads and notes are safe.</p><button type="button" style="font:inherit;font-size:14px;font-weight:600;min-height:44px;padding:0 20px;border:0;border-radius:10px;background:#0B1020;color:#fff;cursor:pointer">Try again</button></div>';
+    d.querySelector('button').onclick=()=>location.reload(); (document.body||document.documentElement).appendChild(d); };
+  H.ready=again(()=>Promise.all([fetchJson(DATA+'catalog.json'),fetchBuf(DATA+'homes.bin')]),1).then(([cat,buf])=>{
     H.cat=cat; H.n=cat.total; H.regions=cat.regions; H.xy=new Float32Array(buf,0,H.n*2); H.type=new Uint8Array(buf,H.n*8,H.n);
     H.storms=cat.storms.map(s=>{ const t=Date.parse(s.date+'T12:00:00Z'); const dt=new Date(t);
       return {iso:s.date,t,n:s.homes_1in,n075:s.homes_075,max:s.max_in,regions:s.regions,lsr:cat.lsr[s.date]||[],
@@ -30,7 +35,7 @@
 
   // ---------- footprint tiles (0.05 degree grid, per region) ----------
   const tiles={}; const tileIndex={};
-  H.ready.then(()=>H.regions.forEach(r=>r.tiles.forEach(t=>{ (tileIndex[t.tr+'_'+t.tc]=tileIndex[t.tr+'_'+t.tc]||[]).push(r); })));
+  H.ready.then(()=>H.regions.forEach(r=>r.tiles.forEach(t=>{ (tileIndex[t.tr+'_'+t.tc]=tileIndex[t.tr+'_'+t.tc]||[]).push(r); })),()=>{});   // this side branch only: no homes = no tile index (an error inside the loop still shows). H.ready itself still rejects for every caller (the "homes did not load" card)
   function decodeTile(buf,r,tr,tc){ const dv=new DataView(buf); const cnt=dv.getUint32(0,true); let o=4; const out=[]; const olon=tc*0.05, olat=tr*0.05;
     for(let k=0;k<cnt;k++){ const idx=dv.getUint32(o,true), sq=dv.getUint16(o+4,true), nv=dv.getUint8(o+6); o+=7; const ring=new Array(nv);
       for(let v=0;v<nv;v++){ ring[v]=[olon+dv.getUint16(o,true)*1e-6, olat+dv.getUint16(o+2,true)*1e-6]; o+=4; }

@@ -7,7 +7,7 @@
   if (window.Radar) return;
   const esc = s => RC.esc(s), MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const day = iso => iso ? MON[+iso.slice(5, 7) - 1] + ' ' + (+iso.slice(8, 10)) : '';
-  const root = () => (window.rooferDataRoot ? rooferDataRoot() : '../lib/st-data-dfw/');
+  const root = () => rooferDataRoot();   // lib/brand.js, always loaded before this file
   let D = null, P = null, host = null, open = null, shown = 40, mapOn = false;
   const J = u => fetch(root() + u).then(r => r.ok ? r.json() : null).catch(() => null);
   // the list reads turnover-streets.json, already fetched at startup by the tidbits (RCTIP.turnover); the full turnover.json

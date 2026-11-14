@@ -15,8 +15,8 @@
   var CFG = {
     PUBLIC: false /*@RC_PUBLIC_BUILD@*/,
     // same project and public anon key as js/config.js (public by design; row level security protects the tables)
-    URL: "https://wbtrsujvprbdojmxlkpe.supabase.co",
-    KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidHJzdWp2cHJiZG9qbXhsa3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNjc0MzcsImV4cCI6MjEwNjY0MzQzN30.rzSf_wXbb9W0uajLg_5Ur04VyobSwgz3pLXgFSyG_5I"
+    URL: "https://demo-no-backend.invalid",
+    KEY: "DEMO-NO-KEY"
   };
   var SK = "rc.session", DEVK = "rc.dev";
   var me = document.currentScript;
@@ -30,8 +30,7 @@
   var LOCAL = /^(localhost|127\.0\.0\.1|\[::1\]|::1)$/.test(location.hostname);
   var q = new URLSearchParams(location.search);
   if (!CFG.PUBLIC && LOCAL) { if (q.get("dev") === "1") ss.set(DEVK, "1"); else if (q.get("dev") === "0") ss.del(DEVK); }
-  // localhost skips the gate by default; ?dev=0 brings the sign-in back for testing it
-  var DEV = q.get("dev") !== "0"; // temporary public share: no login on this copy
+  var DEV = q.get("dev") !== "0"; // public demo: no login, nothing sent, sample data only
 
   // ---- screen-page guard (public build): a signed-out visitor never loads a screen on its own
   if (me && me.hasAttribute("data-guard")) {
@@ -107,7 +106,7 @@
     var co = document.querySelector("header .co"); var mark = co && co.querySelector(".mark");
     var name = co && co.querySelector("b"), area = co && co.querySelector("small");
     return '<div class="rcg-co">' + (mark ? '<span class="' + esc(mark.className) + '" style="' + esc(mark.getAttribute("style") || "") + '" aria-hidden="true">' + mark.innerHTML + "</span>" : "") +
-      "<div><b>" + esc(name ? name.textContent : "Wing Outreach") + "</b><small>" + esc(area && area.textContent !== (name && name.textContent) ? area.textContent : "Wing Outreach") + "</small></div></div>";
+      "<div><b>" + esc(name ? name.textContent : "Roof Command") + "</b><small>" + esc(area && area.textContent !== (name && name.textContent) ? area.textContent : "Roof Command") + "</small></div></div>";
   }
   var wall = null;
   function setInert(on) { ["header", "main", "#note"].forEach(function (s) { var el = document.querySelector(s); if (!el) return; if (on) { el.setAttribute("inert", ""); el.setAttribute("aria-hidden", "true"); } else { el.removeAttribute("inert"); el.removeAttribute("aria-hidden"); } }); }
@@ -122,7 +121,7 @@
           '<label for="rcgPw">New password</label><input id="rcgPw" type="password" autocomplete="new-password" required>' +
           '<label for="rcgPw2">Type it again</label><input id="rcgPw2" type="password" autocomplete="new-password" required>' +
           '<button class="go" type="submit">Save and sign in</button>'
-        : '<h1 id="rcgH">Sign in</h1><p class="lead">Use the email and password for your Wing Outreach account.</p>' +
+        : '<h1 id="rcgH">Sign in</h1><p class="lead">Use the email and password for your Roof Command account.</p>' +
           '<label for="rcgEm">Email</label><input id="rcgEm" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" required>' +
           '<label for="rcgPw">Password</label><input id="rcgPw" type="password" autocomplete="current-password" required>' +
           '<button class="go" type="submit">Sign in</button><button class="lnk" type="button" id="rcgForgot">Forgot password?</button>') +

@@ -5,7 +5,7 @@
   'use strict';
   if (typeof map === 'undefined' || !map) return;
   const btn = document.getElementById('rdBtn'); if (!btn) return;
-  const root = window.rooferDataRoot ? rooferDataRoot() : 'lib/st-data-dfw/';
+  const root = rooferDataRoot();   // lib/brand.js, always loaded before this file
   const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], day = iso => MON[+iso.slice(5, 7) - 1] + ' ' + (+iso.slice(8, 10));
   let D = null, on = false, pop = null;
   const load = () => D ? Promise.resolve(D) : fetch(root + 'meta/turnover.json').then(r => r.ok ? r.json() : null).then(d => (D = d)).catch(() => null);

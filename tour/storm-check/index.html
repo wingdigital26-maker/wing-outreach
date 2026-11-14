@@ -26,7 +26,7 @@
     <p class="sc-lede">Type your address. We check it against NOAA radar for every storm on file, show your roof's size and age from public records, and you decide if you want a free inspection. No sign-up.</p>
     <form id="search" class="sc-search" autocomplete="off" role="search">
       <label for="q" class="fld">Your street address
-        <input id="q" type="text" placeholder="e.g. 2300 Parkhaven Dr" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list" autocapitalize="off" spellcheck="false">
+        <input id="q" type="text" placeholder="e.g. 6008 Parkhaven Dr" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list" autocapitalize="off" spellcheck="false">
       </label>
       <ul id="sugg" class="sc-sugg" role="listbox" hidden></ul>
       <p class="hint" id="hint" aria-live="polite"></p>
@@ -105,7 +105,7 @@
 <script src="../lib/rc-hail.js"></script>
 <script src="../lib/rc-proof.js"></script>
 <script>/* GO LIVE (docs/INTENT-LEADS.md "Go-live steps"): paste the endpoint scripts/deploy_web_lead_fn.py prints. null = demo, nothing leaves the page. */
-window.RCWL_ENDPOINT = null; window.RCWL_COMPANY = 'jackson';</script>
+window.RCWL_ENDPOINT = null; window.RCWL_COMPANY = rooferMissing() ? '' : rooferKey();   /* the active roofer's key (lib/brand.js) */</script>
 <script src="../lib/rc-webleads.js"></script>
 <script src="sc.js"></script>
 </body>

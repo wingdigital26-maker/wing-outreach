@@ -38,15 +38,13 @@ body[data-view="inbox"] #crm[data-home="off"]{grid-template-columns:340px minmax
 #crm .clh h2{font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
 #crm .clh small{font-family:var(--font);font-size:12.5px;letter-spacing:0;text-transform:none;color:var(--slate);margin-left:auto;white-space:nowrap}
 #crm .clh #autoSlot:empty{display:none}
-#crm .clh{min-height:64px}   /* the sending chip lands after load and made the row 12px taller: held (loop 15) */
 #crm .clh #autoSlot>*{font-size:11.5px;color:var(--slate);background:var(--ib-wash);border:0;border-radius:999px;padding:3px 9px;line-height:1.4;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #crm .csearch{display:flex;align-items:center;gap:9px;height:40px;margin:6px 14px 6px;padding:0 13px;border-radius:10px;background:var(--ib-wash);border:1px solid transparent;flex:none;transition:background .2s,border-color .2s,box-shadow .2s}
 #crm .csearch:focus-within{background:#fff;border-color:var(--ib-line);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%,transparent)}
 #crm .csearch .ic{width:16px;height:16px;color:var(--slate);flex:none}
 #crm .csearch input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:14px;color:var(--ink);outline:none;height:100%}
 #crm .csearch input::placeholder{color:var(--slate)}
-#crm .cfil{display:flex;align-items:center;margin:0 14px 6px;padding:0 4px;flex:none;min-height:32px}   /* its filter row lands after load: the room is held (loop 15) */
-body[data-inbox-empty] #chstage>.wo-skel{display:none}
+#crm .cfil{display:flex;align-items:center;margin:0 14px 6px;padding:0 4px;flex:none}
 #crm .cshow{position:relative;display:inline-flex;align-items:center;height:32px;max-width:100%}
 #crm .cshow select{height:32px;border:0;border-radius:8px;background:transparent;font:inherit;font-size:13px;font-weight:600;color:var(--ink-2);padding:0 26px 0 8px;cursor:pointer;-webkit-appearance:none;appearance:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #crm .cshow select:hover,#crm .cshow select:focus-visible{background:var(--ib-wash);outline:none}
@@ -60,8 +58,8 @@ body[data-inbox-empty] #chstage>.wo-skel{display:none}
 #crm .cav .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--ga-soft);color:var(--accent-ink);font-weight:600;font-size:13px;letter-spacing:.02em;position:relative;box-shadow:none}
 #crm .cav .ic svg{display:none}
 #crm .cav .ic::after{display:none}
-#crm .cb{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;min-width:0}
-#crm .ct{display:flex;align-items:baseline;justify-content:space-between;gap:10px;min-width:0}
+#crm .cb{display:grid;gap:3px;min-width:0}
+#crm .ct{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 #crm .cad{min-width:0;display:flex;align-items:baseline;gap:7px;overflow:hidden;white-space:nowrap}
 #crm .cad b{font-size:15px;font-weight:600;line-height:1.3;color:var(--ink);overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0}
 #crm .cad i{font-style:normal;font-size:13px;color:var(--slate);flex:none}
@@ -256,21 +254,9 @@ body[data-view="home"] .stage{background:radial-gradient(55% 60% at 50% 58%,colo
 body[data-view="home"] .main{padding-bottom:96px}   /* clear of the Nimbus orb in the corner */
 body[data-view="home"] .pipe{border-radius:var(--r4)}
 @media (min-width:641px){
-  /* loop 8: all six stages fit at 1440 (Won was cut off at the right edge); narrower, the board scrolls and the
-     right-edge fade plus the step arrow show there is more */
-  body[data-view="pipeline"] .pcol:not(.plane),body[data-view="pipeline"] .pcol.plane.open{flex:1 1 0;min-width:176px}
+  body[data-view="pipeline"] .pcol:not(.plane),body[data-view="pipeline"] .pcol.plane.open{flex:1 0 210px}
   body[data-view="pipeline"] .pcol.plane{flex:0 0 46px}
-  /* loop 22: an empty stage folds to a slim tab (its name and 0, read top to bottom) so a full New hit gets the width;
-     it stays a drop target, and while a card is held every empty stage opens a little so it is easy to hit */
-  body[data-view="pipeline"] .pcol.pempt{flex:0 0 52px;min-width:0;transition:flex-basis .2s}
-  body[data-view="pipeline"] .pcol.pempt h4{writing-mode:vertical-rl;flex-direction:row;justify-content:flex-start;gap:10px;padding:12px 0;margin:0 auto;white-space:nowrap}
-  body[data-view="pipeline"] .pcol.pempt h4 .pnum{writing-mode:horizontal-tb}
-  body[data-view="pipeline"] .pcol.pempt .psub,body[data-view="pipeline"] .pcol.pempt .pls{display:none}
-  body.pdrag[data-view="pipeline"] .pcol.pempt{flex-basis:132px}
-  /* a wide stage lays its cards side by side (a narrow one stays a single column) */
-  body[data-view="pipeline"] .pcol .pls{grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr))}
-  body[data-view="pipeline"] .pcol .pls>.pend,body[data-view="pipeline"] .pcol .pls>.pempty{grid-column:1/-1}
-  body[data-view="pipeline"] #pipePane .phail{height:auto;min-height:26px;flex-wrap:wrap;column-gap:5px;row-gap:0;padding:3px 9px;white-space:nowrap}
+  body[data-view="pipeline"] .pnav{display:none}
 }
 @media (max-width:1380px){
   body[data-view="inbox"] #crm{grid-template-columns:310px minmax(0,1fr) 340px;padding:10px 22px 14px;gap:12px}
@@ -282,13 +268,6 @@ body[data-view="home"] .pipe{border-radius:var(--r4)}
 @media (max-width:1100px){
   body[data-view="inbox"] #crm{grid-template-columns:280px minmax(0,1fr) 320px}
   body[data-view="inbox"] #crm[data-home="off"]{grid-template-columns:280px minmax(0,1fr)}
-}
-/* a narrow window (about 1100 px and under, the frame about 940): the house pane drops under the list and the conversation,
-   so the middle column keeps its width; the page scrolls down to it (10-30) */
-@media (min-width:641px) and (max-width:940px){
-  body[data-view="inbox"]{height:auto;min-height:100vh;overflow-x:hidden;overflow-y:auto}
-  body[data-view="inbox"] #crm,body[data-view="inbox"] #crm[data-home="off"]{grid-template-columns:260px minmax(0,1fr);grid-template-rows:calc(100vh - 80px);grid-auto-rows:auto;flex:none}
-  body[data-view="inbox"] #crm .ch{grid-column:1/-1;min-height:420px}
 }
 /* ---------- phone: stacked screens. list -> conversation -> the house as a sheet ---------- */
 @media (max-width:640px){
@@ -302,7 +281,7 @@ body[data-view="home"] .pipe{border-radius:var(--r4)}
   #crm[data-screen="list"] .cl{display:flex}
   #crm[data-screen="thread"] .cv,#crm[data-screen="home"] .cv{display:flex;background:#fff;border-radius:14px 14px 0 0;border:1px solid var(--ib-line);border-bottom:0;margin:0 8px;height:calc(100% - 4px)}
   body[data-view="inbox"]:has(#crm[data-screen="thread"]) .vtabs,body[data-view="inbox"]:has(#crm[data-screen="home"]) .vtabs{display:none}
-  #crm .clh{padding:12px 18px 6px;min-height:54px}
+  #crm .clh{padding:12px 18px 6px}
   #crm .csearch{height:44px;margin:4px 12px 6px}
   #crm .csearch input{font-size:16px}
   #crm .cfil{margin:0 12px 4px}
@@ -356,83 +335,9 @@ body[data-view="home"] .pipe{border-radius:var(--r4)}
 #crm .csteps i{font-style:normal;width:28px;height:28px;border-radius:6px;background:var(--ink,#0B1020);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
 #crm .csteps b{display:block;font-size:14px;color:var(--ink);margin-bottom:2px}
 #crm .csteps span{font-size:13px;line-height:1.45;color:var(--muted)}
-/* 10-30: at 320-360 the tab strip ran 30 px past the screen, cutting the Home tab the roofer is on and letting the page slide sideways; it now wraps inside the screen */
-@media (max-width:380px){.vtabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:calc(100% - 32px);margin-left:16px;margin-right:16px;gap:2px}.vtabs::-webkit-scrollbar{display:none}.vtabs button{flex:0 0 auto;padding:0 9px}.vtabs #vHome{flex:0 0 auto;padding:0 9px}}   /* one row on small phones (it wrapped Home onto a second row, 46px of the screen, and jumped when the counts landed); a tab that does not fit scrolls into view */
-/* loop 15: with threads on this device the first one opens on its own; its header and the home pane's header land after
-   load and pushed the messages and the roof down ~65px. Their room is held while they are still empty. */
-@media (min-width:641px){body:not([data-inbox-empty])[data-view="inbox"] #crm .cvh:empty{display:block;min-height:70px;box-sizing:border-box}body:not([data-inbox-empty])[data-view="inbox"] #crm .chh:empty{display:flex;min-height:62px;box-sizing:border-box}}
-
-/* loop 16: small phones inside the shell. The shell's own screen strip already offers Inbox, Leads, Calendar and
-   Customers, so the CRM strip keeps only Home (the open record) instead of repeating that nav */
-@media (max-width:380px){
-  html.embedded #vtabs > button:not(#vHome){display:none}
-  html.embedded #vtabs{width:max-content;max-width:calc(100% - 32px)}
-  html.embedded #vtabs > #vHome{flex:0 1 auto;padding:0 14px}
-  /* loop 17: on the record itself that lone Home tab sat over "Back to inbox"; the back button is the one control there */
-  html.embedded body[data-view="home"] #vtabs{display:none}
-}
-
-/* Jack 10-30: the roof label on the house pane is one small pill (3D | Photo, then the size), not a dark card over the house */
-#chstage .title{display:flex;align-items:center;gap:6px;left:8px;top:8px;padding:3px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--ink);box-shadow:0 1px 3px rgba(11,16,32,.14);max-width:calc(100% - 16px)}
-#chstage .title::before{content:none}
-#chstage .title .aseg{margin:0;padding:2px;border-radius:999px;background:var(--ib-wash,#F1F3F6);border:0}
-#chstage .title .aseg button{min-height:22px;padding:0 8px;font-size:11.5px;border-radius:999px}
-#chstage .title h2{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;padding-right:8px}
-#chstage .title h2:empty{display:none}
-/* Jack 10-30: the thread header shows the whole address and owner line; it wraps (stage menu drops under it) instead of cutting to "1008 Me..." */
-@media (min-width:641px){#crm .cvh .cvt-r{align-items:flex-start}#crm .cvh .cvt b,#crm .cvh .cvt small{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}}
-/* 10-30 Jack: the 3D / Photo pill shows the short size (home.js data-short), so it never cuts off */
-#chstage .title h2[data-short]{font-size:0}
-#chstage .title h2[data-short]::after{content:attr(data-short);font-size:11.5px}
-
-/* Loop 26 (Jack: "make this more simple", "I can't scroll"): ONE scroll for the conversation pane. The header sticks, the
-   Next message card sits at the top, the thread runs under it; no inner overflow boxes, the edit box auto-grows. */
-#crm .cv{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
-#crm .cvh{position:sticky;top:0;z-index:5;background:#fff}
-#crm .cvf,#crm .cvf{order:1;max-height:none;overflow:visible;flex:none;padding:12px 16px 0}
-#crm .cvh{order:0}
-#crm .cvm{order:2;flex:1 0 auto;overflow:visible;min-height:0;padding-top:8px}
-#crm .cvf textarea,#crm .cvf .cdraft{resize:none;overflow:hidden;max-height:none;min-height:44px;border:1px solid var(--ib-line);border-radius:10px;padding:8px 10px}
-#crm .ngen{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border-radius:12px}
-#crm .ngen .ngl{margin-right:auto}
-#crm .ngl{font-size:12.5px;font-weight:600;color:var(--slate)}
-#crm .ncard{gap:8px}
-#crm .nhd{display:flex;align-items:center;justify-content:space-between}
-#crm .nhd .nx{padding:4px;display:grid}#crm .nhd .nx .ic{width:14px;height:14px}
-#crm .nto{margin:0;font-size:14px;color:var(--ink);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-#crm .nch{display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:12.5px;background:var(--ib-wash);border-radius:999px;padding:2px 9px}
-#crm .nch .ic{width:13px;height:13px}
-#crm .nwhen{margin:0;font-size:12.5px;color:var(--slate)}
-#crm .nphone{background:var(--ib-wash);border-radius:16px;padding:12px;display:flex;justify-content:flex-end}
-#crm .nbub{max-width:85%;background:var(--accent);color:#fff;border-radius:18px 18px 6px 18px;padding:9px 13px;font-size:14.5px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
-#crm .nmail{border:1px solid var(--ib-line);border-radius:10px;padding:10px 12px;display:grid;gap:6px;font-size:14px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-#crm .nmail b{font-size:14px;white-space:normal;border-bottom:1px solid var(--ib-line);padding-bottom:6px}
-#crm .nblk{margin:0;font-size:13px;color:var(--ink-2);line-height:1.4}
-#crm .nblk .rc-go{font:inherit;font-weight:600;color:var(--accent-ink);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
-#crm .ncard .cact{gap:8px}
-#crm .nsec{display:flex;align-items:center;gap:2px;flex-wrap:wrap;margin-right:auto;min-width:0}
-#crm .nsec .cqr{margin-right:0}
-#crm .mstage{align-self:center;font-size:12.5px;color:var(--slate);margin:2px 0 6px;max-width:92%}
-#crm div.mstage,#crm .mstage summary{display:flex;align-items:center;gap:7px;list-style:none;cursor:default}
-#crm .mstage summary{cursor:pointer}#crm .mstage summary::-webkit-details-marker{display:none}
-#crm .mstage .ic{width:14px;height:14px;flex:none}
-#crm .mstage em{font-style:normal;font-weight:600;color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
-#crm .mstage ol{margin:6px 0 0;padding:0 0 0 18px;display:grid;gap:3px}
-#crm .mnone{padding:8px 2px;justify-content:center;text-align:center;flex:none}
-@media (max-width:640px){
-  #crm .cvf{max-height:none;padding:10px 10px 0}
-  #crm .cvf .cact{padding-right:0}
-  #crm .cvm{padding-bottom:calc(80px + env(safe-area-inset-bottom))}
-  #crm .ncard .cact .cbtn.pri{flex:1 1 100%}
-}
-
-/* loop 26 N2: the inbox tabs (All / Replies / Waiting on them / Not sent) with counts; unread replies in bold */
-#crm .cfil{flex-wrap:wrap;gap:4px 6px;min-height:0;margin:0 10px 6px;padding:0}
-#crm .ctabs{display:flex;gap:3px;flex:1 1 100%;flex-wrap:nowrap;min-width:0}
-#crm .ctabs button{height:28px;padding:0 7px;letter-spacing:-.01em;flex:none;border-radius:999px;border:1px solid var(--ib-line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
-#crm .ctabs button span{font-weight:700;color:var(--accent-ink)}
-#crm .ctabs button:hover{background:var(--ib-wash)}
-#crm .ctabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
-#crm .ctabs button[aria-selected="true"] span{color:#fff}
-#crm .crow.unr .cad b,#crm .crow.unr .clast{font-weight:700;color:var(--ink)}
-@media (max-width:640px){#crm .ctabs button{height:34px;font-size:12.5px;padding:0 9px}#crm .ngen .ngl{display:none}#crm .ngen .cbtn{flex:1}}
+/* saved lists on Pipeline (Nimbus: "save this as my Plano list"), app rules pills */
+.pviews{display:flex;flex-wrap:wrap;gap:6px;margin:0 16px 8px}
+.pviews[hidden]{display:none}
+.pviews button{font:500 13px var(--font,Inter,system-ui,sans-serif);min-height:32px;padding:4px 14px;border:0;border-radius:999px;background:var(--a-canvas,#f1f2f4);color:var(--a-ink,#111318);cursor:pointer}
+.pviews button[aria-pressed="true"]{background:var(--a-blue,#0D6C99);color:#fff}
+.pviews button:focus-visible{outline:2px solid var(--a-blue,#0D6C99);outline-offset:2px}

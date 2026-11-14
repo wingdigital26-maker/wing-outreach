@@ -273,7 +273,6 @@ button.st + button.st{border-left:1px solid var(--hair-2)}
 .outs button{height:46px;border-radius:6px;border:1px solid var(--hair);background:#fff;font-weight:600;font-size:14px;transition:border-color .2s,background .2s}
 .outs button:hover{border-color:var(--ink);background:var(--panel-2)}
 .pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bkq{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}.bkq:empty{display:none}.bkq button{min-height:44px;padding:0 14px;border:1px solid var(--line,rgba(11,16,32,.14));border-radius:8px;background:#fff;font:inherit;font-size:14px;font-weight:600;color:inherit;cursor:pointer}.bkq button:hover{background:#F3F4F7}.bkq button[aria-pressed=true]{border-color:currentColor;box-shadow:inset 0 0 0 1px currentColor}
 .menu{display:grid;gap:6px}
 .menu button,.menu a{display:flex;align-items:center;gap:10px;height:48px;padding:0 14px;border-radius:6px;border:1px solid var(--rule);font-weight:600;font-size:14px;color:var(--ink);text-decoration:none;background:#fff}
 .menu button:hover,.menu a:hover{background:var(--panel-2)}
@@ -302,14 +301,6 @@ button.st + button.st{border-left:1px solid var(--hair-2)}
   .steps{display:flex;overflow-x:auto;scrollbar-width:none;margin:14px 16px 0;border-radius:8px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);padding-right:40px}
   .steps::-webkit-scrollbar{display:none}
   .st{flex:none;padding:10px 14px 12px}.st b{font-size:13px}.st small{display:none}.st.on small{display:block}
-  /* loop 8: all six stages fit a phone (the row cut "Sent t..." with only a faint fade): the current stage keeps its
-     name, the others show their number or check; each still names itself to a screen reader and on long-press (title) */
-  .steps{-webkit-mask-image:none;mask-image:none;padding-left:0;padding-right:0;overflow-x:hidden}
-  .st:not(.on){padding:10px 6px 12px;justify-content:center;flex:0 0 40px}
-  .st:not(.on) > span:not(.d){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .st.on{flex:1 1 auto;min-width:0;gap:9px}
-  .st.on > span:not(.d){min-width:0}
-  .st.on b{white-space:normal;line-height:1.2}
   .main{display:block;padding:12px 0 0}
   .stage{height:52dvh;min-height:380px;margin:0;border-radius:0}
   .title{left:16px;top:10px}.title h2{font-size:20px}.title p{font-size:12.5px;margin-top:3px}
@@ -436,7 +427,7 @@ button.st + button.st{border-left:1px solid var(--hair-2)}
 .pcount{margin-top:16px!important}
 .pph h3{font-size:15px;font-weight:600;letter-spacing:-.01em}
 .pph p{font-size:12.5px;color:var(--muted);margin-top:2px}
-.pcount{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin:0 16px 12px;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.pcount{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0 16px 12px;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
 .pcn{position:relative;padding:8px 9px 10px;text-align:left;display:block;min-width:0;transition:background .2s}
 .pcn + .pcn{border-left:1px solid var(--rule)}
 .pcn:hover{background:var(--panel-2)}
@@ -445,26 +436,7 @@ button.st + button.st{border-left:1px solid var(--hair-2)}
 .pcn i{position:absolute;left:9px;right:9px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--panel-2)}
 .pcn i::after{content:"";display:block;height:100%;width:var(--w);border-radius:inherit;background:var(--accent)}
 .pcn.hot{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
-/* J 10-30: Leads is one dense table; the tiles above filter it */
-.pcols{display:block!important;overflow-y:auto!important;overflow-x:hidden!important;scroll-snap-type:none!important;-webkit-mask-image:none!important;mask-image:none!important}
-.ptbl{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;color:var(--ink);background:#fff;border:1px solid var(--rule);border-radius:6px}
-.ptbl thead th{position:sticky;top:0;z-index:1;background:var(--panel-2);text-align:left;font-size:11.5px;font-weight:600;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--rule)}
-.ptbl thead th:first-child{border-top-left-radius:6px}.ptbl thead th:last-child{border-top-right-radius:6px}
-.ptbl td{padding:7px 10px;border-bottom:1px solid var(--hair-2);vertical-align:middle}
-.ptbl tbody tr:last-child td{border-bottom:0}
-.ptbl tr.pc{cursor:pointer;transition:background .15s}
-.ptbl tr.pc:hover{background:var(--panel-2)}
-.ptbl tr.pc.cur{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
-.ptbl tr.pc.parked{color:var(--slate)}
-.ptbl .pco{display:grid;gap:1px;padding:0;text-align:left;cursor:inherit;border-radius:0}
-.ptbl .pco b{font-size:13px;font-weight:600}
-.ptbl small{display:block;font-size:11.5px;color:var(--muted)}
-.ptbl .th{white-space:nowrap}.ptbl .th small{display:inline;margin-left:6px}
-.ptbl .ts{white-space:nowrap}
-.ptbl .pst{height:30px;max-width:170px;padding:0 8px;border:1px solid var(--hair);border-radius:6px;background:#fff;font:inherit;font-size:12.5px;color:var(--ink)}
-.ptbl .tn{color:var(--ink-2);font-size:12.5px}
-.ptbl .pnone td{color:var(--muted);padding:14px 10px}
-.pcols__old{flex:1;min-height:0;display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:0 16px 16px;scroll-snap-type:x proximity;scroll-padding:0 16px;overscroll-behavior-x:contain}
+.pcols{flex:1;min-height:0;display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:0 16px 16px;scroll-snap-type:x proximity;scroll-padding:0 16px;overscroll-behavior-x:contain}
 .pcol{flex:0 0 168px;display:flex;flex-direction:column;min-height:0;background:var(--panel-2);border-radius:8px;scroll-snap-align:start;transition:background .15s,box-shadow .15s}
 .pcol h4{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px 8px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
 .pcol h4 span{font-size:11px;min-width:20px;height:18px;padding:0 6px;border-radius:4px;background:#fff;color:var(--slate);display:inline-grid;place-items:center}
@@ -628,7 +600,7 @@ body.pfull .pfb span{display:inline}
 .pcol h4 span.pnm{min-width:0;height:auto;padding:0;background:none;color:inherit;display:inline;font-size:inherit;border-radius:0}
 .prow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px}
 .prow .pch{margin-top:0;gap:7px}
-/* J 10-30: the stage tiles show at every width; they filter the table */
+@media (min-width:641px){.pipe .pcount{display:none}}
 .pfp{grid-template-columns:repeat(3,minmax(0,1fr)) ;align-items:center;padding:8px;gap:6px}
 .pfp .pfr{grid-column:auto;min-height:30px}
 .pfc{font-size:11.5px;color:var(--muted);text-align:right}
@@ -768,7 +740,6 @@ body.pdrag .pcols{scroll-snap-type:none}   /* edge scrolling while dragging a ca
    under a 5-column grid), card text readable at arm's length ---------- */
 @media (max-width:640px){
   .pcount{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .pcount:empty{min-height:129px;box-sizing:border-box}.ptools:empty{min-height:94px}   /* the board's search row and six counts land after load: their room is held (loop 15) */
   .pcn:nth-child(3n+1){border-left:0}
   .pcn:nth-child(n+4){border-top:1px solid var(--rule)}
   .pcn span{font-size:13px;white-space:normal}   /* "Inspection booked" was cut to "Inspection bo..." (visual check fixes 10-24) */
@@ -793,10 +764,7 @@ body.pdrag .pcols{scroll-snap-type:none}   /* edge scrolling while dragging a ca
      on their own full-width row; the measurements chip says "Lengths" here */
   .dock{flex-wrap:wrap;row-gap:6px}
   .dock .ctl{margin-left:auto}
-  .dock .chips{order:2;flex:1 1 100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}   /* 10-30: Satellite chip added; the row scrolls sideways if it ever runs out of room */
-  .dock .chips::-webkit-scrollbar,.schips .chips::-webkit-scrollbar{display:none}
-  .schips .chips{overflow-x:auto;scrollbar-width:none}
-  .schips .chip{flex:0 0 auto;white-space:nowrap}
+  .dock .chips{order:2;flex:1 1 100%;overflow:visible}
   .dock .chip{flex:1 1 auto;padding:0 5px;font-size:12.5px;white-space:nowrap}
   .dock .chip .lgl{display:none}.dock .chip .sml{display:inline}
   .stage{height:calc(52dvh + 58px);min-height:438px}   /* room for the second control row, so it never sits on the model */
@@ -947,21 +915,3 @@ body.pdrag .pcols{scroll-snap-type:none}   /* edge scrolling while dragging a ca
 
 /* touch screens: the next task's buttons at least 44px (visual skills gate 10-24: 42px on a phone) */
 @media (pointer:coarse){.next .row button,.next .calx{min-height:44px}}
-@media (max-width:640px){.ptbl th:nth-child(5),.ptbl .tn{display:none}.ptbl td,.ptbl th{padding:7px 6px}.ptbl .pst{max-width:120px}.ptbl .th small{display:block;margin:0}}
-.pcols{padding:0 16px 16px!important}.ptbl .pcc{display:block!important;margin:0}.ptbl .pco{margin:0!important;padding:0!important;min-height:0!important}.ptbl td{padding:6px 10px}
-@media (max-width:640px){.ptbl th:nth-child(3),.ptbl .th{display:none}.pcount{grid-template-columns:repeat(4,minmax(0,1fr))!important}.pcn:nth-child(n){border-left:1px solid var(--rule);border-top:0}.pcn:nth-child(4n+1){border-left:0}.pcn:nth-child(n+5){border-top:1px solid var(--rule)}.pcn span{font-size:12px}}
-@media (max-width:640px){.ptbl{table-layout:fixed}.ptbl th:nth-child(1){width:42%}.ptbl th:nth-child(2){width:30%}.ptbl .pst{width:100%;max-width:none;padding:0 4px}.ptbl .pco b{font-size:13px;overflow-wrap:anywhere}}
-@media (max-width:640px){.ptbl .opc-sc svg{display:none}.ptbl .ts{overflow:hidden}}
-/* E 10-30: inside the shell its left nav already holds Inbox / Leads / Calendar / Customers, so the inner strip goes
-   (standalone pages keep it); the open-house tab is gone everywhere (the record's own header names the home) */
-.embedded .vtabs{display:none!important}
-#vHome{display:none!important}
-/* E 10-30: the record header never pushes Text / More, the Next line or the Won step past the right edge */
-.rh{min-width:0}
-.rt{flex:1 1 0;min-width:0}
-.rt h1{overflow-wrap:anywhere}
-.actwrap{flex:none;max-width:min(48%,440px);min-width:0}
-.acts{flex-wrap:wrap;justify-content:flex-end}
-.actwrap .callwhy{white-space:normal;text-align:right}
-.steps{min-width:0;max-width:100%;box-sizing:border-box}
-.st{min-width:0}.st > span:last-child{min-width:0}.st b{overflow-wrap:anywhere}

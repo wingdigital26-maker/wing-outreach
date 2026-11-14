@@ -95,7 +95,7 @@ html.panel .chip,html.panel .composer,html.panel .send,html.panel .primary,html.
   html.panel .dock{padding-right:16px}
 }
 
-/* loop 27: silent unread dot, no motion, no text */
-.nb-unread{display:none;position:absolute;top:6px;right:6px;width:10px;height:10px;border-radius:50%;background:#C2410C;box-shadow:0 0 0 2px #fff;pointer-events:none}
-.nb-dock.has-unread .nb-unread{display:block}
-.nb-bubble{display:none!important}
+/* Jack 11-02: a small exclamation point, no motion, no text until tapped */
+.nb-unread{display:none;position:absolute;z-index:3;top:0;right:0;width:20px;height:20px;padding:0;border:0;border-radius:50%;place-items:center;background:var(--a-blue,#0D6C99);color:#fff;font:700 13px/1 system-ui,sans-serif;box-shadow:0 0 0 2px #fff;pointer-events:auto;cursor:pointer}
+.nb-dock.has-unread .nb-unread{display:grid}
+body:not(.nb-tap) .nb-bubble{display:none!important}   /* only after the ! is tapped */

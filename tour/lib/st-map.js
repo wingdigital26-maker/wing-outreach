@@ -45,16 +45,6 @@ let fpMaskOf=null;                              // fpItems the point colours wer
 // or a moveend then only changes uniforms (opacity, radius), not 200k points of geometry
 let homesData=null, homesDataFp=null, hitData=null;
 const container=(n,cols)=>({length:n,attributes:{getPosition:{value:STH.xy,size:2},getFillColor:{value:cols,size:4}}});
-// loop 28 (Jack: Storms still laggy): far out a home is under a pixel, so the dots thin by zoom: 1 in 8 below z10, 1 in 4 to z11,
-// 1 in 2 to z12, every home from z12 (where picking turns on). Hit homes always stay. A thinned container keeps the source home
-// ids (ids), so a hover or click maps back with ids[index]. Built once per storm and stride, switched only on moveend.
-const thinStride=z=>z<10?8:z<11?4:z<12?2:1;
-function thinned(base,k){ if(k<=1||!base) return base; const T=base.__thin||(base.__thin={}); if(T[k]) return T[k];
-  const cols=base.attributes.getFillColor.value, n=STH.n, xy=STH.xy; const keep=i=>i%k===0||cols[i*4+3]>=200; let c=0; for(let i=0;i<n;i++) if(keep(i)) c++;
-  const ids=new Uint32Array(c), x2=new Float32Array(c*2), c2=new Uint8Array(c*4);
-  for(let i=0,j=0;i<n;i++) if(keep(i)){ ids[j]=i; x2[j*2]=xy[i*2]; x2[j*2+1]=xy[i*2+1]; c2[j*4]=cols[i*4]; c2[j*4+1]=cols[i*4+1]; c2[j*4+2]=cols[i*4+2]; c2[j*4+3]=cols[i*4+3]; j++; }
-  return T[k]={length:c,ids,attributes:{getPosition:{value:x2,size:2},getFillColor:{value:c2,size:4}}}; }
-const homeId=(d,i)=>i>=0&&d&&d.ids?d.ids[i]:i;
 // a home's point hides only once its own outline is actually drawn, so zooming in never leaves a gap
 function pointColors(){ if(fpMaskOf===fpItems) return homesDataFp; colorsFp.set(colors); for(let j=0;j<fpItems.length;j++) colorsFp[fpItems[j].i*4+3]=0; fpMaskOf=fpItems; homesDataFp=container(STH.n,colorsFp); return homesDataFp; }
 let colors=null, colorsFp=null, hitIdx=null, hitXY=null, hitEl=null, hitCol=null, bands=null, ribGeo=null, denGeo=null;
@@ -92,15 +82,9 @@ function buildDensity(){ const n=STH.n, xy=STH.xy; const box=STH.cat.box; DEN.lo
     if(dq>dr&&dq>ds) q=-r-s; else if(dr>ds) r=-q-s;
     const key=q*100000+r; let c=map_[key]; if(c===undefined){ c=cells.length; map_[key]=c; cells.push({q,r,n:0}); } cells[c].n++; cellOf[i]=c; }
   cells.forEach(c=>{ const cx=R*1.5*c.q, cy=R*(S3/2*c.q+S3*c.r); const ring=[]; for(let k=0;k<6;k++){ const a=Math.PI/3*k; ring.push([DEN.lon0+(cx+R*0.985*Math.cos(a))/DEN.kx, DEN.lat0+(cy+R*0.985*Math.sin(a))/DEN.ky]); } ring.push(ring[0]); c.ring=ring; });
-  // Jack 10-30 (shot 15): homes are loaded in county boxes, so the density stopped in a hard rectangle. Each cell fades
-  // over its last ~2.5 km to the edge of the loaded area (the union of the region boxes), so the layer ends soft, never cut off.
-  const RB=(STH.cat.regions||[]).map(r=>r.box).filter(Boolean);
-  cells.forEach(c=>{ let lo=0,la=0; for(let k=0;k<6;k++){ lo+=c.ring[k][0]; la+=c.ring[k][1]; } lo/=6; la/=6; let d=0;
-    RB.forEach(b=>{ if(lo<b.lon_min||lo>b.lon_max||la<b.lat_min||la>b.lat_max) return; d=Math.max(d,Math.min((lo-b.lon_min)*DEN.kx,(b.lon_max-lo)*DEN.kx,(la-b.lat_min)*DEN.ky,(b.lat_max-la)*DEN.ky)); });
-    c.e=RB.length?Math.max(0.12,Math.min(1,d/2500)):1; });
   DEN.cells=cells; DEN.cellOf=cellOf; }
 function densityFor(hits){ if(!DEN.cells) return EMPTY; const C=DEN.cells, k=new Int32Array(C.length); for(let j=0;j<hits.length;j++){ const c=DEN.cellOf[hits[j]]; if(c>=0) k[c]++; }
-  return {type:'FeatureCollection',features:C.map((c,j)=>({type:'Feature',properties:{n:c.n,k:k[j],e:c.e==null?1:c.e},geometry:{type:'Polygon',coordinates:[c.ring]}}))}; }
+  return {type:'FeatureCollection',features:C.map((c,j)=>({type:'Feature',properties:{n:c.n,k:k[j]},geometry:{type:'Polygon',coordinates:[c.ring]}}))}; }
 function ribbonFor(hits){ const n=hits.length, step=Math.max(1,Math.floor(n/7000)); const f=[]; for(let k=0;k<n;k+=step){ const i=hits[k]; f.push({type:'Feature',properties:{w:Math.min(1,(hail[i]/100-0.9)/Math.max(0.3,cur.max-0.9))},geometry:{type:'Point',coordinates:[STH.lon(i),STH.lat(i)]}}); } return {type:'FeatureCollection',features:f}; }
 
 // ---------- map ----------
@@ -108,35 +92,22 @@ function ribbonFor(hits){ const n=hits.length, step=Math.max(1,Math.floor(n/7000
 const START=MOB?{center:ROOF.center,zoom:11.2,pitch:40,bearing:15}:{center:ROOF.center,zoom:11.8,pitch:45,bearing:20};
 // coming back in the same session (or after a reload) keeps the camera where the user left it
 const CAM=(()=>{ if(Q.get('storm')||Q.get('recent')) return null; try{ return JSON.parse(sessionStorage.getItem('st-cam')||'null'); }catch(e){ return null; } })();
-const map=new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/positron',...START,...(CAM||{}),attributionControl:{compact:true},antialias:!(window.devicePixelRatio>1.25),preserveDrawingBuffer:false,maxTileCacheSize:600,refreshExpiredTiles:false,maxPitch:62,fadeDuration:200,pixelRatio:Math.min(window.devicePixelRatio||1,1.5)});   // pixelRatio: a 2x laptop screen drew 4x the pixels for 271k homes; 1.5x keeps it sharp at about half the cost (Jack 10-26: Storms laggy)
-
-/* Jack 10-30 (Storms "sometimes loads wrong"): the map could size itself while its frame was parked (display:none, 0x0) or
-   before the panels settled, so the canvas and the deck.gl layer stopped at a hard edge. Any change in the container's size,
-   the frame being shown again, and a few settle ticks after load all resize the map (deck.gl redraws with it); a map that was
-   built at 0 size re-fits the storm once it has a real size. */
-(function(){ const el=document.getElementById('map'); let w0=el.clientWidth, h0=el.clientHeight, born0=!(w0&&h0), lastW=-1, lastH=-1;
-  const fix=()=>{ const w=el.clientWidth, h=el.clientHeight; if(!w||!h) return; const c=map.getCanvas(), dpr=map.getPixelRatio?map.getPixelRatio():1;
-    if(w===lastW&&h===lastH&&Math.abs(c.width-w*dpr)<2&&Math.abs(c.height-h*dpr)<2) return; lastW=w; lastH=h; map.resize(); try{ map.triggerRepaint(); }catch(e){}
-    if(born0){ born0=false; try{ if(typeof fitStorm==='function') fitStorm(true); }catch(e){} } };
-  window.__mapFix=fix;
-  if(window.ResizeObserver) new ResizeObserver(fix).observe(el);
-  window.addEventListener('resize',fix);
-  window.addEventListener('message',e=>{ const d=e.data; if(d&&d.type==='visibility'&&!d.hidden) setTimeout(fix,0); });
-  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) fix(); });
-  map.on('load',()=>{ fix(); [120,400,1000,2500].forEach(t=>setTimeout(fix,t)); }); })();
+/* the overview cells start downloading with this script, before the style, so they are ready the moment the map is */
+const OVERVIEW=fetch(rooferDataRoot()+'meta/overview.json').then(r=>r.ok?r.json():null).catch(()=>null);
+const map=new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/positron',...START,...(CAM||{}),attributionControl:{compact:true},antialias:false,preserveDrawingBuffer:/[?&]shot=1/.test(location.search),maxPitch:62,fadeDuration:200,pixelRatio:Math.min(window.devicePixelRatio||1,1.25)});   /* perf (Jack 11-02, 'laggy'): 1.25x cap (was 1.5x: 44% more pixels per frame), no MSAA on the shared canvas, and no preserveDrawingBuffer (it forces a full-buffer copy every frame; ?shot=1 keeps it for captures) */   // pixelRatio: a 2x laptop screen drew 4x the pixels for 271k homes; 1.5x keeps it sharp at about half the cost (Jack 10-26: Storms laggy)
+window.__map=map;   /* the perf checks (.visual/round7/measure_map.py) read the instance here */
 map.scrollZoom.setWheelZoomRate(1/520); map.scrollZoom.setZoomRate(1/140); map.dragRotate.enable(); map.touchZoomRotate.enableRotation(); map.keyboard.disable();
 let overlay=null, labelId=null, gen=0, hideHomes=false, warm=true, warmStage=0, routeShown=null;   // warm: an invisible column layer compiles its program a few frames into the opening fade (warmStage)
 const EMPTY={type:'FeatureCollection',features:[]};
 function layers(){ if(!STH.xy||hideHomes) return []; const z=map.getZoom(); const fpOn=z>=FPZ; const storm=!!hail;
   const L=[]; const colR=z<12.5?11:z<13.5?8.5:6.5, colEl=z<12.5?2.2:z<13.5?1.5:1;
   // the storm you were on, fading out under the new one (same geometry containers it had, so nothing is re-uploaded)
-  if(prev&&xf<1){ L.push(new deck.ScatterplotLayer({id:'homes-prev',beforeId:labelId,data:thinned(prev.homes,thinStride(z)),radiusUnits:'meters',getRadius:prev.storm?4.6:4.2,radiusMinPixels:z<12?0.9:1.3,radiusMaxPixels:4.5,stroked:false,antialiasing:true,pickable:false,opacity:fade*(1-xf)}));
+  if(prev&&xf<1){ L.push(new deck.ScatterplotLayer({id:'homes-prev',beforeId:labelId,data:prev.homes,radiusUnits:'meters',getRadius:prev.storm?4.6:4.2,radiusMinPixels:z<12?0.9:1.3,radiusMaxPixels:4.5,stroked:false,antialiasing:z>=12.5,pickable:false,opacity:fade*(1-xf)}));
     if(prev.storm&&prev.hit&&prev.hit.length) L.push(new deck.ColumnLayer({id:'hit-prev',beforeId:labelId,data:prev.hit,diskResolution:4,radius:colR,angle:45,extruded:true,elevationScale:colEl,radiusUnits:'meters',pickable:false,opacity:fade*0.96*(1-xf),material:{ambient:0.62,diffuse:0.5,shininess:12,specularColor:[255,255,255]}})); }
-  const hd=fpOn&&fpItems.length?pointColors():thinned(homesData,thinStride(z));
-  L.push(new deck.ScatterplotLayer({id:'homes',beforeId:labelId,data:hd,
-    radiusUnits:'meters',getRadius:storm?4.6:4.2,radiusMinPixels:z<12?0.9:1.3,radiusMaxPixels:4.5,stroked:false,antialiasing:true,pickable:z>=12,autoHighlight:z>=12,   /* zoomed out a home is under a pixel: no picking pass over 271k points on every mouse move (10-26) */
+  L.push(new deck.ScatterplotLayer({id:'homes',beforeId:labelId,data:fpOn&&fpItems.length?pointColors():homesData,
+    radiusUnits:'meters',getRadius:storm?4.6:4.2,radiusMinPixels:z<12?0.9:1.3,radiusMaxPixels:4.5,stroked:false,antialiasing:z>=12.5,pickable:z>=12,autoHighlight:z>=12,   /* sub-2px dots need no edge smoothing: the AA fragment path cost most of a county-view frame */   /* zoomed out a home is under a pixel: no picking pass over 271k points on every mouse move (10-26) */
     highlightColor:[39,87,230,255],opacity:fade*xf,
-    onHover:info=>deckHover(homeId(hd,info.index),info,fpOn),onClick:info=>{ const i=homeId(hd,info.index); if(i>=0&&!(fpOn&&fpSent.has(i))) selectHome(i,true); return true; }}));
+    onHover:info=>deckHover(info.index,info,fpOn),onClick:info=>{ if(info.index>=0&&!(fpOn&&fpSent.has(info.index))) selectHome(info.index,true); return true; }}));
   if(storm&&hitIdx.length&&!(fpOn&&fpItems.length)) L.push(new deck.ColumnLayer({id:'hit',beforeId:labelId,data:hitData,
     diskResolution:4,radius:colR,angle:45,extruded:true,elevationScale:colEl,radiusUnits:'meters',pickable:true,opacity:fade*0.96*xf,material:{ambient:0.62,diffuse:0.5,shininess:12,specularColor:[255,255,255]},
     onHover:info=>deckHover(info.index>=0?hitIdx[info.index]:-1,info,fpOn),onClick:info=>{ if(info.index>=0) selectHome(hitIdx[info.index],true); return true; }}));
@@ -216,13 +187,7 @@ function refreshFp(force){ if(map.getZoom()<FPZ){ if(fpItems.length){ fpItems=[]
 // tiles land one by one; fold them into one rebuild per 150 ms so the outlines are tessellated once, not once per tile
 let fpTimer=null;
 function fpArrived(){ if(fpTimer) return; fpTimer=setTimeout(()=>{ fpTimer=null; if(!fpBox||map.getZoom()<FPZ) return; fpItems=STH.footprints(fpBox,fpArrived).items; fpSync(); redraw(); },150); }
-// Jack 10-30 ("took a long time to load"): 'load' waits for every basemap tile, font and sprite from the tile host (2.5 to 7 s here),
-// but our layers only need the style. Build on 'style.load' (the first one only), so the homes draw while the basemap streams in.
-// Loop 27 (Jack: gray patches while zooming): the heavy layers now wait for the basemap's first idle (or load), so the first
-// tiles are not fighting 417k homes for the GPU; a slow tile host still gets the homes after 3.5 s from style.load.
-let _built=false; const onStyle=f=>{ const go=()=>{ if(_built) return; _built=true; f(); };
-  if(map.loaded()) go(); else { map.once('idle',go); map.once('load',go); map.once('style.load',()=>setTimeout(go,3500)); } };
-onStyle(()=>{
+map.on('load',()=>{
   map.getStyle().layers.forEach(l=>{ try{
     if(l.type==='background') map.setPaintProperty(l.id,'background-color','#E3E6EC');
     if(l.type==='fill' && /water/.test(l.id)) map.setPaintProperty(l.id,'fill-color','#CDD3DC');
@@ -242,13 +207,19 @@ onStyle(()=>{
   map.addLayer({id:'den',type:'fill',source:'den',maxzoom:13.6,paint:{
     'fill-color':['case',['>',['get','k'],0],['interpolate',['linear'],['/',['get','k'],['max',1,['get','n']]],0.02,'rgb(199,212,250)',0.35,'rgb(111,143,238)',0.8,'rgb(39,87,230)'],
       ['interpolate',['linear'],['get','n'],1,'rgb(226,229,235)',40,'rgb(204,208,218)',160,'rgb(176,182,197)',400,'rgb(146,154,176)']],
-    'fill-opacity':['interpolate',['linear'],['zoom'],8,['*',0.6,['coalesce',['get','e'],1]],11,['*',0.44,['coalesce',['get','e'],1]],12.4,['*',0.24,['coalesce',['get','e'],1]],13.4,0],'fill-opacity-transition':{duration:300},'fill-antialias':false}},labelId);
+    'fill-opacity':['interpolate',['linear'],['zoom'],8,0.6,11,0.44,12.4,0.24,13.4,0],'fill-opacity-transition':{duration:300},'fill-antialias':false}},labelId);
+  // overview first (Jack 11-02, "these still need to load faster"): the same homes counted into 0.004 degree cells
+  // (meta/overview.json, 68 KB, built by scripts/dfw/build_overview.py) fill the density layer the moment the style is up,
+  // so the service area has its real shape on screen while homes.bin (2.4 MB) is still on the wire; setDen replaces it
+  // with the per-home hexagons once the homes are in.
+  OVERVIEW.then(o=>{
+    if(!o||denGeo||!map.getSource('den')) return; const h=o.cell/2;
+    map.getSource('den').setData({type:'FeatureCollection',features:o.cells.map(c=>({type:'Feature',properties:{n:c[2],k:0},geometry:{type:'Polygon',coordinates:[[[c[0]-h,c[1]-h],[c[0]+h,c[1]-h],[c[0]+h,c[1]+h],[c[0]-h,c[1]+h],[c[0]-h,c[1]-h]]]}}))});
+    window.__overviewMs=Math.round(performance.now()); document.body.classList.add('overview'); }).catch(()=>{});
   // two swath ribbons (a / b): a storm change writes the new swath into the idle one and crossfades their opacity
   const RIBP={'heatmap-weight':['get','w'],'heatmap-intensity':['interpolate',['linear'],['zoom'],9,0.2,12,0.4,14.5,0.6],'heatmap-radius':['interpolate',['linear'],['zoom'],9,14,12,30,14,56],'heatmap-opacity':0,'heatmap-opacity-transition':{duration:XF_MS},
     'heatmap-color':['interpolate',['linear'],['heatmap-density'],0,'rgba(39,87,230,0)',0.15,'rgba(39,87,230,0.08)',0.4,'rgba(39,87,230,0.18)',0.7,'rgba(39,87,230,0.3)',1,'rgba(31,71,201,0.4)']};
-  // ONE swath heatmap (loop 27): a hidden heatmap still renders its offscreen density texture every frame, so the ribbon is a
-  // single layer that is switched off (visibility none) whenever there is no swath
-  map.addSource('rib',{type:'geojson',data:EMPTY}); map.addLayer({id:'rib',type:'heatmap',source:'rib',layout:{visibility:'none'},paint:RIBP},labelId);
+  ['rib','rib-b'].forEach(id=>{ map.addSource(id,{type:'geojson',data:EMPTY}); map.addLayer({id,type:'heatmap',source:id,paint:RIBP},labelId); });
   map.setLight({anchor:'map',position:[1.5,200,38],color:'#FFFFFF',intensity:0.42});
   map.addSource('fp',{type:'geojson',data:EMPTY,buffer:16,tolerance:0.2});
   map.addLayer({id:'fp',type:'fill-extrusion',source:'fp',minzoom:FPZ,paint:{'fill-extrusion-opacity':0,'fill-extrusion-opacity-transition':{duration:0},'fill-extrusion-vertical-gradient':true,'fill-extrusion-color':'rgb(207,212,221)','fill-extrusion-height':4.2}},labelId);
@@ -259,16 +230,11 @@ onStyle(()=>{
   map.on('mouseleave','fp',()=>{ fpHov(-1); hover(-1); });
   map.on('click','fp',e=>{ const f=e.features&&e.features[0]; if(f) selectHome(f.id,true); });
   map.addSource('route',{type:'geojson',data:EMPTY}); map.addLayer({id:'route',type:'line',source:'route',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':'rgba(11,16,32,0.9)','line-width':3}});
-  overlay=new deck.MapboxOverlay({interleaved:true,layers:[]}); map.addControl(overlay);   // the one deck overlay: interleaved into MapLibre's own GL context, MapLibre drives the camera
-  // a lost GPU context (memory pressure on a laptop) is restored instead of leaving a gray map: the overlay is rebuilt on the new context
-  { const cv=map.getCanvas(); cv.addEventListener('webglcontextlost',e=>{ e.preventDefault(); window.__ctxLost=(window.__ctxLost||0)+1; },false);
-    cv.addEventListener('webglcontextrestored',()=>{ try{ map.removeControl(overlay); }catch(_){} overlay=new deck.MapboxOverlay({interleaved:true,layers:[]}); map.addControl(overlay); try{ map.triggerRepaint(); }catch(_){} redraw(); },false); }
-  // click-to-zoom (loop 26 M1): a click on empty map eases in one step on the click point, capped at 18; pins, homes, controls keep their own click; a 5 px move is a drag
-  { let dn=null; const cv=map.getCanvas(); cv.addEventListener('pointerdown',e=>{ dn=[e.clientX,e.clientY]; },true);
-    map.on('click',e=>{ const o=e.originalEvent; if(!o||o.target!==cv||!dn||Math.hypot(o.clientX-dn[0],o.clientY-dn[1])>=5) return;
-      try{ if(overlay&&overlay.pickObject({x:e.point.x,y:e.point.y,radius:2})) return; }catch(_){}
-      if(['fp','r3-flat'].some(id=>map.getLayer(id))&&map.queryRenderedFeatures(e.point,{layers:['fp','r3-flat'].filter(id=>map.getLayer(id))}).length) return;
-      const z=map.getZoom(); if(z>=17.95) return; map.easeTo({center:e.lngLat,zoom:Math.min(18,z+1),duration:300}); }); }
+  overlay=new deck.MapboxOverlay({interleaved:true,layers:[],onLoad:()=>{   // one pixel ratio for the shared canvas (Jack 11-02, 'the map is in two layers'): luma's canvas context
+    // sizes the canvas by window.devicePixelRatio (2x) on every resize while MapLibre draws at its capped 1.5x, so the basemap filled 75% of the
+    // frame and the home dots sat at another scale; hand luma the map's ratio and resize once so both draw into the same buffer
+    try{ const cc=map.__deck&&map.__deck.device&&map.__deck.device.canvasContext; if(cc&&cc.props){ cc.props.useDevicePixels=map.getPixelRatio(); if(cc.update) cc.update(); else if(cc.resize) cc.resize(); map.resize(); } }catch(e){ console.warn('deck pixel ratio', e); }   // map.resize(): MapLibre rebuilds its heatmap framebuffers at the new size (a stale one drew the glow as a flat band)
+  }}); map.addControl(overlay);
   // a drag is not a hover (perf 10-15): deck skips its hover pick while a button is held, but the interleaved overlay's
   // events carry no button flags, so every drag frame ran a picking pass over every home plus a readPixels GPU stall
   // (0.5 s at a time mid-pan on this laptop). While the map moves (drag, wheel, fly) the last hover waits for moveend.
@@ -277,11 +243,7 @@ onStyle(()=>{
       map.on('moveend',()=>{ const e=waiting; waiting=null; if(e) pm(e); }); } }catch(e){}
   const m=document.createElement('div'); m.className='marker'; marker=new maplibregl.Marker({element:m}).setLngLat([0,0]).addTo(map);
   requestAnimationFrame(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')));
-  // loop 28: the swath heatmap re-renders its offscreen density texture every frame of a camera move; hide it while the
-  // camera moves and bring it back on moveend (the hex cells stay, they are cheap pre-tessellated fills)
-  { let ribHid=false; map.on('movestart',()=>{ if(map.getLayer('rib')&&map.getLayoutProperty('rib','visibility')==='visible'){ map.setLayoutProperty('rib','visibility','none'); ribHid=true; } });
-    map.on('moveend',()=>{ if(ribHid){ ribHid=false; if(map.getLayer('rib')&&map.getPaintProperty('rib','heatmap-opacity')>0) map.setLayoutProperty('rib','visibility','visible'); } }); }
-  map.on('move',()=>{ zoomHint(); }); map.on('moveend',()=>{ if(hhWait===2) hhWait=false; refreshFp(false); redraw(); paintHH();
+  map.on('move',()=>{ zoomHint(); }); map.on('moveend',()=>{ hhWait=false; refreshFp(false); redraw(); paintHH();
     try{ const c=map.getCenter(); sessionStorage.setItem('st-cam',JSON.stringify({center:[c.lng,c.lat],zoom:map.getZoom(),pitch:map.getPitch(),bearing:map.getBearing()})); }catch(e){} });
   map.on('zoom',()=>{ const z=map.getZoom(); if((z>=FPZ)!==(fpItems.length>0||fpBox!==null)) { refreshFp(true); redraw(); } });
   map.on('pitchend',()=>paintTilt());
@@ -402,10 +364,10 @@ function paintRecord(i){ const h=ST.recordFor(i,hail);
 function hitBounds(){ const m=hitIdx.length; if(!m) return null; const xs=new Float32Array(m), ys=new Float32Array(m); hitIdx.forEach((i,k)=>{ xs[k]=STH.lon(i); ys[k]=STH.lat(i); }); xs.sort(); ys.sort();
   const lo=Math.floor(m*0.03), hi=Math.max(lo,Math.ceil(m*0.97)-1); const px=Math.max(0.004,(xs[hi]-xs[lo])*0.08), py=Math.max(0.003,(ys[hi]-ys[lo])*0.08); return [[xs[lo]-px,ys[lo]-py],[xs[hi]+px,ys[hi]+py]]; }
 // the swath ribbon and the density cells for the current products (ribbon crossfades between its two sources)
-function setRib(geo){ if(!map.getSource('rib')) return; const on=!!(geo&&geo!==EMPTY&&geo.features&&geo.features.length); map.getSource('rib').setData(on?geo:EMPTY);
-  map.setLayoutProperty('rib','visibility',on?'visible':'none'); map.setPaintProperty('rib','heatmap-opacity',on?0.32:0); }
+let ribOn='rib-b';
+function setRib(geo){ if(!map.getSource('rib')) return; const next=ribOn==='rib'?'rib-b':'rib'; map.getSource(next).setData(geo||EMPTY); map.setPaintProperty(next,'heatmap-opacity',geo&&geo!==EMPTY?0.32:0); map.setPaintProperty(ribOn,'heatmap-opacity',0); ribOn=next; }
 function setDen(){ const s=map.getSource('den'); if(s&&denGeo) s.setData(denGeo); }
-function fitStorm(instant){ const b=hitBounds(); if(!b) return; const pad=MOB?{top:150,bottom:220,left:30,right:30}:{top:110,bottom:150,left:390,right:60};
+function fitStorm(instant){ const b=hitBounds(); if(!b) return; const pad=MOB?{top:150,bottom:220,left:30,right:30}:{top:120,bottom:200,left:390,right:120};
   // the camera leaves the city you picked for the swath: the city chip highlight goes with it (it used to stay lit on Frisco over a Rockwall storm)
   region='all'; document.querySelectorAll('#counties button').forEach(x=>x.classList.toggle('on',x.dataset.c==='all'));
   map.fitBounds(b,{padding:pad,pitch:tilt3d?(MOB?48:50):0,bearing:tilt3d?(MOB?15:20):0,maxZoom:14.2,duration:instant?0:900,easing:EASE}); }
@@ -414,11 +376,10 @@ document.getElementById('fit').addEventListener('click',()=>fitStorm(false));
 // same time; the storm's products come from the cache when it was seen (or warmed as a neighbour), else are computed once.
 function selectStorm(i,instant,fromUrl){ const s=ST.storms[i]; if(!s||s===cur) return; const my=++gen; if(!fromUrl) postRoute(s.iso);
   ST.hail(s).then(h=>{ if(my!==gen) return;
-    if(!instant) beginXfade(); cur=s; hail=h; route=null; hhWait=1; document.body.classList.add('storm'); closeRecord(); buildColors(); setRib(ribGeo); setDen(); fpStorm(); refreshFp(true); redraw(); window.__applied=performance.now();
+    if(!instant) beginXfade(); cur=s; hail=h; route=null; document.body.classList.add('storm'); closeRecord(); buildColors(); setRib(ribGeo); setDen(); fpStorm(); refreshFp(true); redraw(); window.__applied=performance.now();
     paintStat(); paintPipe(); paintTimeline(); if(MOB) paintChips();
     if(!camBefore) camBefore={center:map.getCenter(),zoom:map.getZoom(),pitch:map.getPitch(),bearing:map.getBearing()};
-    // armed after the fit: only a moveend from this fit clears the wait (stopping an older camera move fires one first); no move = paint now
-    fitStorm(instant); hhWait=map.isMoving()?2:false; if(!hhWait) paintHH();
+    hhWait=true; fitStorm(instant); if(instant){ hhWait=false; paintHH(); }
     ST.prefetch(s); ST.neighbours(s).forEach(warmStorm); }); }
 function beginXfade(){ if(homesData){ prev={homes:homesData,hit:hitData,storm:!!hail}; xf=0; } cancelAnimationFrame(xfRaf); const t0=performance.now();
   const step=()=>{ xf=EASE(Math.min(1,(performance.now()-t0)/XF_MS)); redraw(); if(xf<1) xfRaf=requestAnimationFrame(step); else prev=null; }; xfRaf=requestAnimationFrame(step); }
@@ -440,7 +401,7 @@ function paintStat(){ const d=document.getElementById('s-date');
   else { const days=daysSince(LAST); d.textContent='Your service area'; document.getElementById('c-ttl').textContent=RECENT?'Hail in the last 3 days':'No hail in the last 3 days';
     const w6=ST.inWindow('6m').length, all=ST.storms.length;
     // counties from the loaded catalog when the shared facts have not landed yet (the phone painted "in 0 counties")
-    const nc=RC.facts.counties||(STH.regions||[]).length; document.getElementById('c-sub').textContent=`${fmt(RC.facts.homes||STH.n)} homes ${nc?`in ${['','one','two','three','four','five','six','seven'][nc]||nc} count${nc===1?'y':'ies'}`:'in your service area'}. ${w6?`${w6} storm${w6===1?'':'s'} put 1 inch hail on homes here in the past 6 months`:'No storm put 1 inch hail on homes here in the past 6 months'}, ${all} on file since ${ST.season.slice(0,4)}. Last storm ${yd(LAST)}, ${days} days ago, ${fmt(LAST.n)} homes took 1 inch hail or larger.`;
+    const nc=RC.facts.counties||(STH.regions||[]).length; document.getElementById('c-sub').textContent=`${fmt(RC.facts.homes||STH.n)} homes${nc?` in ${nc} count${nc===1?'y':'ies'}`:''}. ${w6?`${w6} storm${w6===1?'':'s'} in 6 months`:'No storm in 6 months'}, ${all} since ${ST.season.slice(0,4)}. Last storm ${yd(LAST)}, ${days} days ago: ${fmt(LAST.n)} homes at 1 inch or larger.`;   // condensed (Jack 11-02): the numbers, no explainer
     document.getElementById('show').textContent=`Show the ${yd(LAST)} storm`; document.getElementById('greet-sub').textContent=`Last storm ${yd(LAST)}, ${days} days ago`;
     paintD50(); } }
 // real counts of hit homes per hail band from this storm's per-home radar values; bar = share of the fullest band
@@ -493,7 +454,7 @@ let zhintWord='';
 function zoomHint(){ const z=map.getZoom(); const w=z>=FPZ?'Roof outlines':z>=12.8?'Streets':z>=10.8?'City':'Counties'; if(w===zhintWord) return; zhintWord=w; document.getElementById('zhint').textContent=w; }
 document.getElementById('counties').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; flyRegion(b.dataset.c); });
 function flyRegion(id){ region=id; document.querySelectorAll('#counties button').forEach(b=>b.classList.toggle('on',b.dataset.c===id));
-  const bb=STH.regionBounds(id); if(!bb) return; const pad=MOB?{top:140,bottom:220,left:24,right:24}:{top:110,bottom:150,left:380,right:60};
+  const bb=STH.regionBounds(id); if(!bb) return; const pad=MOB?{top:140,bottom:220,left:24,right:24}:{top:110,bottom:200,left:380,right:90};
   map.fitBounds([[bb[0],bb[1]],[bb[2],bb[3]]],{padding:pad,pitch:tilt3d?(id==='all'?28:42):0,bearing:tilt3d?(id==='all'?0:18):0,duration:1300,easing:EASE,maxZoom:12.6}); }
 function paintTilt(){ const on=map.getPitch()>5||Math.abs(map.getBearing())>1; tilt3d=on; const b=document.getElementById('tilt'); b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); b.querySelector('span').textContent=on?'3D':'2D'; }
 document.getElementById('tilt').addEventListener('click',()=>{ const on=map.getPitch()>5||Math.abs(map.getBearing())>1; map.easeTo(on?{pitch:0,bearing:0,duration:600,easing:EASE}:{pitch:MOB?45:50,bearing:20,duration:600,easing:EASE}); tilt3d=!on; });
@@ -513,7 +474,7 @@ function go(it){ if(!it) return; closeSearch(); qEl.blur(); it.run(); }
 // streets other screens name (Nimbus names Windrose Ave): offered first, no network round trip
 function localMatches(q){ const t=q.toLowerCase().trim(); const out=[];
   ST.storms.slice().reverse().forEach(s=>{ if(s.d.toLowerCase().startsWith(t)||s.iso.includes(t)||s.long.toLowerCase().includes(t)) out.push({title:`Storm of ${s.long}`,sub:`${fmt(s.n)} homes at 1 inch or larger, ${s.max.toFixed(2)} in radar`,run:()=>selectStorm(s.i)}); });
-  const seenR=new Set(); STH.regions.forEach(r=>{ if(seenR.has(r.name)) return; seenR.add(r.name); if(r.name.toLowerCase().includes(t)) out.push({title:r.name,sub:`${fmt(r.count)} homes`,run:()=>flyRegion(r.id)}); });
+  STH.regions.forEach(r=>{ if(r.name.toLowerCase().includes(t)) out.push({title:r.name,sub:`${fmt(r.count)} homes`,run:()=>flyRegion(r.id)}); });
   return out.slice(0,5); }
 qEl.addEventListener('input',()=>{ clearTimeout(qTimer); const q=qEl.value; if(q.trim().length<2){ closeSearch(); return; } const my=++qGen; const loc=localMatches(q); showResults(loc);
   if(/storm|county/i.test(q)&&loc.length) return;
@@ -564,7 +525,7 @@ const ROUTE_N=12;
 function inView(){ const b=map.getBounds(); const W=b.getWest(),E=b.getEast(),S=b.getSouth(),N=b.getNorth(); const xy=STH.xy, ty=STH.type, out=[];
   for(let k=0;k<hitIdx.length;k++){ const i=hitIdx[k], x=xy[i*2], y=xy[i*2+1]; if(x>=W&&x<=E&&y>=S&&y<=N&&(ty[i]&127)<=4) out.push(i); } return out; }
 const miles=(a,b)=>{ const R=3958.8, r=Math.PI/180; const dLat=(STH.lat(b)-STH.lat(a))*r, dLon=(STH.lon(b)-STH.lon(a))*r; const x=Math.sin(dLat/2)**2+Math.cos(STH.lat(a)*r)*Math.cos(STH.lat(b)*r)*Math.sin(dLon/2)**2; return 2*R*Math.asin(Math.sqrt(x)); };
-let hhWait=false;   // 1/2 from a storm's apply() until the first moveend after fitStorm: the counts would be from the old camera
+let hhWait=false;   // true from a storm's apply() until the first moveend after fitStorm: the counts would be from the old camera
 function paintHH(){ if(!cur||!hitIdx) return; const hh0=document.getElementById('hh'); const waiting=hhWait||(map.isMoving&&map.isMoving()); hh0.classList.toggle('wait',waiting);
   if(waiting){ document.getElementById('hh-sub').textContent=`${yd(cur)} storm. Fitting the map to the swath.`; return; }
   const v=inView(); const top=v.reduce((m,i)=>Math.max(m,hail[i]),0)/100; const stops=Math.min(ROUTE_N,v.length);
@@ -636,15 +597,7 @@ function openPlace(p){ const ranges=p.ranges||[[p.start,p.count]]; flyBounds(ran
 if(DFW){
   // city buttons from the data (catalog regions' by_city), Plano first (lib/brand.js rooferCities)
   STH.ready.then(()=>{ const names=rooferCities(STH.cat);
-    const seg=document.getElementById('counties'); seg.innerHTML=`<button data-c="all" class="on">All</button>`+names.map(c=>`<button data-c="city:${RC.esc(c)}">${RC.esc(c)}</button>`).join('');
-    // Jack 10-30: desktop shows the cities as one compact select, so the toolbar stays one row; it clicks the matching hidden button
-    if(!MOB){ let sel=document.getElementById('cty-sel'); if(!sel){ sel=document.createElement('select'); sel.id='cty-sel'; sel.className='ctysel'; sel.setAttribute('aria-label','Fly to a city'); seg.after(sel);
-        sel.addEventListener('change',()=>{ const b=seg.querySelector(`button[data-c="${CSS.escape(sel.value)}"]`); if(b) b.click(); }); }
-      sel.innerHTML=`<option value="all">All cities</option>`+names.map(c=>`<option value="city:${RC.esc(c)}">${RC.esc(c)}</option>`).join('');
-      new MutationObserver(()=>{ const on=seg.querySelector('button.on'); if(on&&sel.value!==on.dataset.c) sel.value=on.dataset.c; }).observe(seg,{subtree:true,attributes:true,attributeFilter:['class']}); }
-    // + / - and the zoom word go to the map's right edge, out of the toolbar
-    if(!MOB){ const z=document.createElement('div'); z.className='zoomdock glass'; z.id='zoomdock'; ['zin','zout','zhint'].forEach(id=>{ const e=document.getElementById(id); if(e) z.appendChild(e); }); document.body.appendChild(z);
-      document.querySelectorAll('#viewseg button').forEach(b=>{ const t=b.textContent.trim(); if(t){ b.title=t; b.setAttribute('aria-label',t); } }); } });
+    const seg=document.getElementById('counties'); seg.innerHTML=`<button data-c="all" class="on">All</button>`+names.map(c=>`<button data-c="city:${RC.esc(c)}">${RC.esc(c)}</button>`).join(''); });
   const _fly=flyRegion; flyRegion=function(id){ if(String(id).startsWith('city:')) return flyCity(id.slice(5)); return _fly(id); };
   document.getElementById('l-open').hidden=false; document.getElementById('l-open-calm').hidden=false;
   document.getElementById('l-open').addEventListener('click',()=>{ if(!hitIdx) return; openList(`Hit homes, ${yd(cur)}`,hitIdx.filter(i=>STH.residential(i)).sort((a,b)=>a-b)); });

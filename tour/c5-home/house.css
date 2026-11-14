@@ -1,15 +1,17 @@
+/* 11-02: every selector is #house (the section id), not .house: the inbox thread header's "Show the home" button also carries
+   the class house and was inheriting this page's padding (a 48 x 134 px button that squeezed the address). */
 /* house.css: the house page (house.js). Satellite photo first, facts around it, Wing blue, no status dots. */
 :root{--hb:#0D6C99;--hb-d:#0A5679;--hb-t:#E8F2F7;--hink:#0F1B26;--hsub:#4F5D6B;--hline:#E3E8EE;--hbg:#F6F8FA}
 
 /* the old record (3D roof, measurement tabs, stage strip) is gone from view; its buttons stay in the page for rec.js */
 body.house-on[data-view="home"] .rh,body.house-on[data-view="home"] #steps,body.house-on[data-view="home"] main.main,body.house-on[data-view="home"] .stick{display:none!important}
-#stage,.chstage{display:none!important}
-.house{display:none}
-body.house-on[data-view="home"] .house{display:block}
+body[data-view="home"] #stage,body[data-view="home"] .chstage{display:none!important}   /* the house page has no 3D; the inbox pane keeps the model (Jack 11-02) */
+#house{display:none}
+body.house-on[data-view="home"] #house{display:block}
 
-.house{max-width:1280px;margin:0 auto;padding:20px 24px 48px;color:var(--hink);font-family:var(--font,Montserrat,system-ui,sans-serif)}
-.house h1,.house h2{font-family:var(--font,Inter,system-ui,sans-serif);margin:0;font-weight:600;letter-spacing:-.01em}
-.house .none{color:var(--hsub);margin:6px 0 0;font-size:15px}
+#house{max-width:1280px;margin:0 auto;padding:20px 24px 48px;color:var(--hink);font-family:var(--font,Montserrat,system-ui,sans-serif)}
+#house h1,#house h2{font-family:var(--font,Inter,system-ui,sans-serif);margin:0;font-weight:600;letter-spacing:-.01em}
+#house .none{color:var(--hsub);margin:6px 0 0;font-size:15px}
 
 .hh{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
 .hh h1{font-size:30px;line-height:1.15}
@@ -74,7 +76,7 @@ body.house-on[data-view="home"] .house{display:block}
   .hfacts{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:560px){
-  .house{padding:14px 16px 40px}
+  #house{padding:14px 16px 40px}
   .hh h1{font-size:24px}
   .hh-a{width:100%}.hh-a .hb{flex:1;padding:0 10px}
   .hmap{min-height:300px}.hmap-c{min-height:270px}
@@ -84,11 +86,63 @@ body.house-on[data-view="home"] .house{display:block}
 }
 
 /* the app's older skins style bare figures, panels and marker divs; the house page sets its own */
-.house .hmap{padding:0;border:0}
-.house .hmap figcaption{margin:0}
-.house .hpin{background:none!important;padding:0!important;width:auto!important;height:auto!important;border:0!important;box-shadow:none!important}
-.house .hb{display:inline-flex;align-items:center;justify-content:center;line-height:1}
-.house .hs-t{table-layout:fixed}
-.house .hs-t th:nth-child(1){width:34%}.house .hs-t th:nth-child(2){width:18%}
-.house .hs-t td.hsbar{width:auto;padding-right:0}
-.house .hmap{min-height:0;background:#fff}
+#house .hmap{padding:0;border:0}
+#house .hmap figcaption{margin:0}
+#house .hpin{background:none!important;padding:0!important;width:auto!important;height:auto!important;border:0!important;box-shadow:none!important}
+#house .hb{display:inline-flex;align-items:center;justify-content:center;line-height:1}
+#house .hs-t{table-layout:fixed}
+#house .hs-t th:nth-child(1){width:34%}#house .hs-t th:nth-child(2){width:18%}
+#house .hs-t td.hsbar{width:auto;padding-right:0}
+#house .hmap{min-height:0;background:#fff}
+
+/* app rules look (11-02 port): the house page in the target skin: Geist, grey canvas, white borderless cards, round pills, five sizes, sentence case */
+:root{--hb:var(--a-blue,#1d5cf0);--hb-d:var(--a-blue,#1d5cf0);--hb-t:#eef3ff;--hink:var(--a-ink,#111318);--hsub:var(--a-muted,#6b7079);--hline:var(--a-hair,rgba(17,19,24,.08));--hbg:var(--a-canvas,#f1f2f4)}
+html[data-rc="crm"] body.house-on[data-view="home"]{background:var(--a-canvas,#f1f2f4)}
+html[data-rc="crm"] #house{font-family:var(--a-font);padding:24px 24px 110px;font-size:13px;line-height:18px}
+html[data-rc="crm"] #house .hh h1{font-size:22px;line-height:28px;letter-spacing:-.02em}
+html[data-rc="crm"] #house .hh p{font-size:13px;line-height:18px}
+html[data-rc="crm"] #house .hb{font-size:13px;font-weight:500;min-height:40px;padding:0 18px;border-radius:999px;border:0;box-shadow:var(--a-shadow)}
+html[data-rc="crm"] #house .hb.p{box-shadow:none}
+html[data-rc="crm"] #house .hgrid{gap:20px;align-items:start}
+html[data-rc="crm"] #house .hmap{border-radius:24px;box-shadow:var(--a-shadow)}
+html[data-rc="crm"] #house .hmap figcaption{border:0;border-radius:0;font-size:12px;line-height:16px;padding:10px 24px}
+html[data-rc="crm"] #house .hmap-z button{border-radius:999px;font-size:15px}
+html[data-rc="crm"] #house .hmap-z button[data-z="0"]{font-size:12px}
+html[data-rc="crm"] #house .hpin span{border-radius:999px;font:500 12px/1 var(--a-font)}
+html[data-rc="crm"] #house .hcard,html[data-rc="crm"] #house .hstorm{border:0;border-radius:24px;padding:24px;box-shadow:var(--a-shadow)}
+html[data-rc="crm"] #house .hcard h2,html[data-rc="crm"] #house .hstorm h2{font-size:13px;line-height:18px;font-weight:500;text-transform:none;letter-spacing:0;color:var(--a-muted)}
+html[data-rc="crm"] #house .own{font-size:22px;line-height:28px;font-weight:600;letter-spacing:-.02em}
+html[data-rc="crm"] #house .own-s,html[data-rc="crm"] #house .hist li{font-size:13px;line-height:18px}
+html[data-rc="crm"] #house .stg button{font-size:13px;min-height:36px;border:0;background:var(--a-canvas)}
+html[data-rc="crm"] #house .stg button[aria-pressed="true"]{background:var(--a-blue);font-weight:500}
+html[data-rc="crm"] #house .hfacts{gap:0;border:0;border-radius:24px;background:#fff;box-shadow:var(--a-shadow);padding:8px}
+html[data-rc="crm"] #house .hf{padding:16px;border-radius:12px}
+html[data-rc="crm"] #house .hf dt{font-size:12px;line-height:16px;text-transform:none;letter-spacing:0}
+html[data-rc="crm"] #house .hf dd{font-size:22px;line-height:28px;letter-spacing:-.02em}
+html[data-rc="crm"] #house .hf dd em{font-size:13px}
+html[data-rc="crm"] #house .hf small,html[data-rc="crm"] #house .hstorm .src,html[data-rc="crm"] #house .hs-t td small{font-size:12px;line-height:16px}
+html[data-rc="crm"] #house .hs-sum div{border-radius:12px;background:var(--a-canvas)}
+html[data-rc="crm"] #house .hs-sum b{font-size:22px;line-height:28px;color:var(--a-ink)}
+html[data-rc="crm"] #house .hs-sum span{font-size:13px}
+html[data-rc="crm"] #house .hs-t{font-size:13px}
+html[data-rc="crm"] #house .hs-t th{font-size:12px;text-transform:none;letter-spacing:0}
+html[data-rc="crm"] #house .hs-t tr.big b{color:var(--a-blue)}
+html[data-rc="crm"] #house .hs-t td.hsbar{background-image:linear-gradient(#c9d9fb,#c9d9fb)}
+html[data-rc="crm"] #house .hs-t tr.big td.hsbar{background-image:linear-gradient(var(--a-blue),var(--a-blue))}
+html[data-rc="crm"] #house .hlink{color:var(--a-blue);font-size:13px;font-weight:500}
+
+/* Why it fits (11-07, intent signals) */
+#house .hfit .fs{margin:0 0 8px;font-size:15px;color:var(--hsub)}
+#house .hfit .fs b{font-size:28px;font-weight:700;color:inherit;margin-right:4px;color:#0B1020}
+#house .hfit .fs span{display:block;font-size:12px}
+#house .hfit ul{margin:0;padding-left:18px;font-size:14px;line-height:1.5}
+#house .hfit .no{margin:8px 0 0;color:#9B1C1C;font-weight:600;font-size:13px}
+#house .hfit .fd{margin-top:10px;border-top:1px solid #E6E8ED;padding-top:8px}
+#house .hfit .fd summary{cursor:pointer;font-size:13px;font-weight:600}
+#house .hfit .fd dl{margin:8px 0 0}
+#house .hfit .fd dl>div{padding:7px 0;border-bottom:1px solid #EEF0F3}
+#house .hfit .fd dt{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--hsub)}
+#house .hfit .fd dt b{color:#0B1020;font-weight:600;white-space:nowrap}
+#house .hfit .fd dd{margin:3px 0 0;font-size:13.5px;line-height:1.4}
+#house .hfit .fd dd small{display:block;margin-top:3px;font-size:12px;color:var(--hsub);line-height:1.45}
+#house .hfit .fn{margin:8px 0 0;font-size:12px;color:var(--hsub)}

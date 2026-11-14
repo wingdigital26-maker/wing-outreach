@@ -103,3 +103,17 @@ body.nbt-on .nbv-pill{display:none}
 .nbv-call{border:1px solid rgba(11,16,32,.12);border-radius:8px;margin:8px 0;padding:6px 10px 8px}
 .nbv-call legend{font-weight:600;font-size:13px;padding:0 4px}
 .nbv-call input[type=tel]{font:inherit;border:1px solid rgba(11,16,32,.18);border-radius:6px;padding:6px 8px;min-height:36px;margin-left:6px;width:160px}
+/* the yes-or-no card: Nimbus says the change in plain words, nothing happens until Yes */
+.nbv-prop{align-self:stretch;display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid #BFD8E4;border-left:3px solid #0D6C99;border-radius:10px;background:#F2F8FB;font-size:14px;line-height:1.4;color:#0B1020}
+.nbv-prop b{font-weight:600}
+.nbv-prop ul{margin:0;padding:0 0 0 18px}
+.nbv-prop li{margin:2px 0;overflow-wrap:anywhere}
+.nbv-prop-q{margin:0;padding:8px 10px;border-radius:8px;background:#fff;border:1px solid #D5E3EA;font-size:13px;color:#2B3446;overflow-wrap:anywhere}
+.nbv-prop-b{display:flex;flex-wrap:wrap;gap:8px}
+.nbv-prop-b button{flex:1 1 auto;min-height:44px;padding:8px 14px;border-radius:8px;border:1px solid #BFD8E4;background:#fff;color:#0B1020;font:600 14px 'Inter',system-ui,sans-serif;cursor:pointer;transition:background-color .15s ease,border-color .15s ease}
+.nbv-prop-b button.p{background:#0D6C99;border-color:#0D6C99;color:#fff}
+.nbv-prop-b button:hover{border-color:#0D6C99}
+.nbv-prop-b button.p:hover{background:#0B5A80}
+.nbv-prop-b button:focus-visible{outline:2px solid #0D6C99;outline-offset:2px}
+.nbv-prop-w{font-style:normal;font-weight:600;font-size:13px;color:#465065}
+.nbv-prop.done{opacity:.72}

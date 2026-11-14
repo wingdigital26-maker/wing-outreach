@@ -1,12 +1,12 @@
 /* rc-automation.js: the "Automation: on/off" switch in the CRM inbox header (Jack 10-10: sending, replies and follow-up
-   automated until the homeowner books or calls Chris). Writes crm_kv 'automation.enabled' for the signed-in user's
+   automated until the homeowner books or calls the roofer's owner). Writes crm_kv 'automation.enabled' for the signed-in user's
    company; RLS (010_automation.sql) lets only owners/admins write it, so members see the state but no switch.
    The engine (supabase/functions/roof-engine) reads this key before every send. Default off. Signed out = hidden. */
 (function () {
   'use strict';
   const slot = document.getElementById('autoSlot'); if (!slot) return;
-  const URL_ = 'https://wbtrsujvprbdojmxlkpe.supabase.co';
-  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidHJzdWp2cHJiZG9qbXhsa3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNjc0MzcsImV4cCI6MjEwNjY0MzQzN30.rzSf_wXbb9W0uajLg_5Ur04VyobSwgz3pLXgFSyG_5I';
+  const URL_ = 'https://demo-no-backend.invalid';
+  const KEY = 'DEMO-NO-KEY';
   const sess = () => { try { const v = JSON.parse(localStorage.getItem('rc.session') || 'null'); return v && v.access_token && (!v.expires_at || v.expires_at > Date.now() / 1000 + 20) ? v : null; } catch (e) { return null; } };
   const api = (path, opt) => { const s = sess(); if (!s) return Promise.reject(new Error('signed out')); opt = opt || {};
     return fetch(URL_ + '/rest/v1/' + path, { method: opt.method || 'GET', headers: Object.assign({ apikey: KEY, Authorization: 'Bearer ' + s.access_token, 'Content-Type': 'application/json' }, opt.prefer ? { Prefer: opt.prefer } : {}), body: opt.body ? JSON.stringify(opt.body) : undefined, cache: 'no-store' })
@@ -28,7 +28,8 @@
   }
   function toggle() {
     const next = !on;
-    if (next && !confirm('Turn automation on?\n\nTexts and emails will go out on their own (day 1 text, then emails on day 3, 7 and 30), and replies get an AI answer that points to booking or calling Chris. Sends only 9am to 8pm Central. Opt-outs and litigator flags are always honored.')) return;
+    const who = (window.activeRoofer && activeRoofer().owner) || 'the office';   // the roofer's owner, from lib/brand.js
+    if (next && !confirm('Turn automation on?\n\nTexts and emails will go out on their own (day 1 text, then emails on day 3, 7 and 30), and replies get an AI answer that points to booking or calling ' + who + '. Sends only 9am to 8pm Central. Opt-outs and litigator flags are always honored.')) return;
     api('crm_kv?on_conflict=company_id,key', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: [{ company_id: company, key: 'automation.enabled', value: next }] })
       .then(() => { on = next; paint(); }).catch(e => alert('Could not change automation: ' + e.message));
   }
@@ -36,8 +37,8 @@
   // (lib/rc-state.js RC.CONNECT), never a switch that pretends to work
   function notConnected() {
     if (slot.querySelector('.autoinfo')) return;   // keep an open panel open across the 60 s refresh
-    const C = (window.RC && RC.CONNECT) || {}, rows = Object.keys(C).map(k => '<li><b>' + k.charAt(0).toUpperCase() + k.slice(1) + '.</b> ' + C[k].now + ' <i>At onboarding: ' + C[k].onboard + '.</i></li>').join('');
-    slot.innerHTML = '<details class="autoinfo"><summary class="autosw" aria-label="Sending not connected, what connects at onboarding">Sending not connected</summary><div class="autopop"><p>Nothing sends on its own yet. Today:</p><ul>' + rows + '</ul></div></details>';
+    const C = (window.RC && RC.CONNECT) || {}, rows = Object.keys(C).map(k => '<li><b>' + k.charAt(0).toUpperCase() + k.slice(1) + '.</b> ' + C[k].now + ' <i>After setup: ' + C[k].onboard + '.</i></li>').join('');
+    slot.innerHTML = '<details class="autoinfo"><summary class="autosw" aria-label="Sending not connected. What that means">Sending not connected</summary><div class="autopop"><p><b>Nothing sends on its own yet.</b> You send each text and email yourself, from your own phone. Wing connects automatic sending during setup. Today:</p><ul>' + rows + '</ul></div></details>';
     // the inbox pane clips overflow, so the panel is fixed and placed under the button when it opens
     const d = slot.querySelector('.autoinfo'), pop = d.querySelector('.autopop');
     d.addEventListener('toggle', () => { if (!d.open) return; const r = d.querySelector('summary').getBoundingClientRect();
@@ -45,9 +46,17 @@
   }
   function load() {
     if (!sess()) { notConnected(); return; }
-    const want = window.RC && RC.rooferKey ? RC.rooferKey() : 'jackson';
+    // an unknown roofer (lib/brand.js rooferMissing) never borrows another company's switch
+    if (window.rooferMissing && rooferMissing()) { notConnected(); return; }
+    const want = window.RC && RC.rooferKey ? RC.rooferKey() : window.DEFAULT_ROOFER;   // the one default lives in lib/brand.js
+    // no roofer key at all (a page without lib/brand.js): nothing to match, so nothing is attached
+    if (!want) { notConnected(); return; }
     api('companies?select=id,slug').then(rows => {
-      const c = (rows || []).find(r => r.slug === want) || (rows || [])[0]; if (!c) return notConnected();
+      // A KNOWN roofer whose key matches no company slug still gets the first company this login can read. Kept on purpose:
+      // the first roofer's company slug in Supabase is not confirmed to equal its registry key, so dropping this fallback
+      // could switch a paying client's automation off. Remove it once every company slug is confirmed to equal its key.
+      // An unknown roofer never gets here (rooferMissing above), so it can never attach to rows[0].
+      const c =(rows || []).find(r => r.slug === want) || (rows || [])[0]; if (!c) return notConnected();
       company = c.id;
       return Promise.all([api('memberships?select=role&company_id=eq.' + company), api('crm_kv?select=value&company_id=eq.' + company + '&key=eq.automation.enabled')]).then(([m, kv]) => {
         owner = (m || []).some(x => x.role === 'owner' || x.role === 'admin'); on = !!(kv && kv[0] && kv[0].value === true); paint();

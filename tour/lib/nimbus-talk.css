@@ -57,8 +57,7 @@
 .nbk-who em{font-style:normal;font-size:12px;color:#465065}
 .nbk-card.done{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#EEF3FF;border-color:#D6E1FF;color:#1D3F8F;font-weight:500}
 .nbk-card.done button{border:1px solid #C9D7FF;background:#fff;color:#1D3F8F;border-radius:6px;padding:5px 10px;font:600 13px 'Inter',system-ui,sans-serif;cursor:pointer}
-.nbk-card .nbk-undone{display:inline-block;font:600 13px 'Inter',system-ui,sans-serif;font-style:normal;color:#465065}
-.nbk-card.undone{opacity:.5;text-decoration:line-through}.nbk-card.done.undone{text-decoration:none}.nbk-card.done.undone>span{text-decoration:line-through}
+.nbk-card.undone{opacity:.5;text-decoration:line-through}
 .nbk button:focus-visible,.nbk input:focus-visible,.nbk-card:focus-visible{outline:2px solid #1F47C9;outline-offset:2px}
 @media (max-width:760px){
   .nbk{grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr)}

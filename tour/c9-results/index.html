@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-rc="results">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reports | Roof Command</title>
-<script src="../lib/rc-frame-pause.js"></script><!-- parked by the shell = no drawing -->
+<title>Results | Roof Command</title>
+<script src="../lib/rc-frame-pause.js"></script><script src="../lib/rc-fetch-memo.js"></script><!-- one download per data file per page (11-02) --><!-- parked by the shell = no drawing -->
 <script src="../lib/rc-state.js"></script>
 <script src="../lib/brand.js"></script>
 <script src="../lib/rc-results.js"></script>
@@ -53,6 +53,10 @@ ul.kv li:last-child{border-bottom:0}
 ul.kv li b{font-weight:650}
 ul.kv li small{color:var(--slate)}
 .empty{padding:22px 20px;color:var(--slate);font-size:13.5px;line-height:1.5}
+/* nothing worked yet (11-11): what this page will count, and the one next step */
+.empty b{display:block;color:var(--ink);font-size:15px;font-weight:650;letter-spacing:-.01em}
+.empty p{margin:4px 0 14px;max-width:640px}
+.empty .btn{font-size:13.5px;min-height:44px;padding:0 16px}
 .foot{margin:4px 2px 0;font-size:12px;color:var(--slate);line-height:1.5}
 .rev{color:var(--green)}
 @media (max-width:760px){
@@ -73,13 +77,14 @@ ul.kv li small{color:var(--slate)}
 .sum{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 @media (max-width:640px){.sum{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style>
-<link rel="stylesheet" href="../lib/wo-calm.css"><!-- calm skin (DESIGN-RULES.md, 10-29) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../lib/rc-apprules.css"><!-- app rules (11-02) -->
 </head>
 <body>
 <main class="wrap">
   <section class="pan">
     <div class="hd">
-      <div><h1>Reports</h1><p id="sub">What the work turned into, by where each lead came from.</p></div>
+      <div><h1>Results</h1><p id="sub">What the work turned into, by where each lead came from.</p></div>
       <div class="tools">
         <div class="seg" role="group" aria-label="Period">
           <button type="button" data-p="week" class="on">This week</button><button type="button" data-p="month">This month</button><button type="button" data-p="90">90 days</button>
@@ -87,7 +92,6 @@ ul.kv li small{color:var(--slate)}
       </div>
     </div>
     <div class="sum" id="sum"></div>
-    <div class="empty" id="sumEmpty" hidden style="padding:0 20px 16px">Nothing to count yet. Once you text, email or call homes, your weekly results show here.</div>
   </section>
 
   <section class="pan">
@@ -137,8 +141,8 @@ ul.kv li small{color:var(--slate)}
   function load(a, b) {
     const c = cloud();
     if (!c) return Promise.resolve(RCR.compute(a, b, { alerts: ALERTS }));
-    const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidHJzdWp2cHJiZG9qbXhsa3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNjc0MzcsImV4cCI6MjEwNjY0MzQzN30.rzSf_wXbb9W0uajLg_5Ur04VyobSwgz3pLXgFSyG_5I';
-    return fetch('https://wbtrsujvprbdojmxlkpe.supabase.co/rest/v1/rpc/rc_results', { method: 'POST', cache: 'no-store',
+    const KEY = 'DEMO-NO-KEY';
+    return fetch('https://demo-no-backend.invalid/rest/v1/rpc/rc_results', { method: 'POST', cache: 'no-store',
       headers: { apikey: KEY, Authorization: 'Bearer ' + c.token, 'Content-Type': 'application/json' },
       body: JSON.stringify({ p_company: c.company, p_from: new Date(a).toISOString(), p_to: new Date(b).toISOString() }) })
       .then(r => r.ok ? r.json() : Promise.reject(r.status)).then(d => Object.assign(d, { mode: 'cloud' }))
@@ -155,13 +159,12 @@ ul.kv li small{color:var(--slate)}
       // Jack 10-26: the four that matter on top; jobs won and revenue stay in the By lead source table
       $('#sum').innerHTML = [['reached', 'Homes reached'], ['replies', 'Replies'], ['inspections', 'Inspections'], ['proposals', 'Proposals']]
         .map(([k, l]) => `<div><b class="${k === 'revenue' && t[k] ? 'rev' : ''}">${k === 'revenue' ? money(t[k]) : fmt(t[k])}</b><span>${l}</span></div>`).join('');
-      $('#sumEmpty').hidden = !!(t.reached || t.replies || t.inspections || t.proposals);
       const rows = (d.by_source || []).filter(r => r.leads || r.reached || r.replies || r.inspections || r.proposals || r.won);
       const cell = (v, m, s) => `<td class="${v ? '' : 'z'}${s ? ' hide-s' : ''}">${m ? money(v) : fmt(v)}</td>`;   // s: hidden on phones (the totals above have them)
       $('#bySrc').innerHTML = rows.length ? `<table><thead><tr><th>Source</th><th class="hide-s">New leads</th><th>Reached</th><th class="hide-s">Replies</th><th class="hide-s">Insp.</th><th class="hide-s">Proposals</th><th>Won</th><th>Revenue</th></tr></thead><tbody>` +
         rows.map(r => `<tr><td>${esc(RCR.label(r.src))}</td><td class="hide-s ${r.leads ? '' : 'z'}">${fmt(r.leads)}</td>${cell(r.reached)}${cell(r.replies, 0, 1)}${cell(r.inspections, 0, 1)}<td class="hide-s ${r.proposals ? '' : 'z'}">${fmt(r.proposals)}</td>${cell(r.won)}${cell(r.revenue, 1)}</tr>`).join('') +
         `</tbody><tfoot><tr><td>Total</td><td class="hide-s">${fmt(t.leads)}</td><td>${fmt(t.reached)}</td><td class="hide-s">${fmt(t.replies)}</td><td class="hide-s">${fmt(t.inspections)}</td><td class="hide-s">${fmt(t.proposals)}</td><td>${fmt(t.won)}</td><td>${money(t.revenue)}</td></tr></tfoot></table>`
-        : `<div class="empty">No leads worked in this period yet. Texts, emails, replies, bookings and won jobs show up here as they happen, each under the list the home came from.</div>`;
+        : `<div class="empty"><b>Nothing to count ${P === 'week' ? 'this week' : P === 'month' ? 'this month' : 'in the last 90 days'} yet.</b><p>Text or email the first home on Today's list. Homes reached, replies, inspections and jobs won are counted here as they happen, each under the list the home came from.</p><button type="button" class="btn pri" data-go="daily">Open Today's list</button></div>`;
       const al = d.alerts || {}, inP = ALERTS.filter(x => x.alert_day && Date.parse(x.alert_day + 'T12:00:00') >= a && Date.parse(x.alert_day + 'T12:00:00') < b);
       $('#alerts').innerHTML = `<li><span>Alerts on file</span><b>${fmt(d.mode === 'cloud' ? al.sent : inP.length)}</b></li>` +
         inP.slice(0, 3).map(x => `<li><small>${esc(x.storm_label || x.storm)}: up to ${esc(x.max_in)} in, ${fmt(x.homes_hit)} homes hit</small><small>${esc(dlabel(Date.parse(x.alert_day + 'T12:00:00')))}</small></li>`).join('') +
@@ -178,15 +181,18 @@ ul.kv li small{color:var(--slate)}
     });
   }
   document.querySelector('.seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; P = b.dataset.p; paint(); });
+  // the empty state's one next step: Today's list, through the shell's own route (RC.go)
+  $('#bySrc').addEventListener('click', e => { const b = e.target.closest('button[data-go]'); if (b) RC.go(b.dataset.go, {}); });
   // counts only, for scripts/results/weekly_summary.py --counts <file>
   $('#dl').onclick = () => { if (!LAST) return; const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([JSON.stringify(Object.assign({ roofer: RC.rooferKey(), period: P }, LAST), null, 1)], { type: 'application/json' }));
     a.download = `results-${RC.rooferKey()}-${P}-${new Date().toISOString().slice(0, 10)}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); };
   RC.on(d => { if (d && ['pipe', 'pastCust', 'added', 'homes'].includes(d.key)) paint(); });
-  const root = () => RC.dataRoot || '../lib/st-data-dfw/';
+  const root = () => RC.dataRoot;   // set by lib/brand.js (the roofer's data folder)
   Promise.all([
     RC.factsReady.catch(() => null).then(() => fetch(root() + 'meta/alerts.json', { cache: 'no-cache' })).then(r => r.ok ? r.json() : null).catch(() => null),
-    fetch('../lib/seo-' + RC.rooferKey() + '.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null)
+    // the roofer's published pages (lib/brand.js seo); none on file or an unknown roofer = no request
+    (rooferSeoUrl() ? fetch(rooferSeoUrl(), { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null) : Promise.resolve(null))
   ]).then(([al, seo]) => { ALERTS = (al && al.alerts) || []; SEO = seo; paint(); });
   paint();
 })();

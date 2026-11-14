@@ -10,7 +10,7 @@
 (function () {
   if (window.STM) return;
   const src = document.currentScript && document.currentScript.src;
-  const BASE = window.rooferDataRoot ? rooferDataRoot() : (src ? new URL('st-data-dfw/', src).href : new URL('lib/st-data-dfw/', location.href).href);   // the roofer's data (lib/brand.js dataRoot)
+  const BASE = rooferDataRoot();   // the roofer's data (lib/brand.js dataRoot)
   const J = u => fetch(BASE + u).then(r => r.ok ? r.json() : null).catch(() => null);
   const B = u => fetch(BASE + u).then(r => r.ok ? r.arrayBuffer() : null).catch(() => null);
   let catP = null; const cat = () => catP || (catP = J('catalog.json'));
@@ -44,7 +44,7 @@
     const addr = no ? `${no} ${street}` : (street || null), place = [city || null, (S + ' ' + z).trim()].filter(Boolean).join(', ');
     // full: "123 Main St, Frisco, TX 75034" (the one line every screen shows)
     return { addr, street, houseNo: no || null, city, zip: z, state: S, year: year || null, subdivision, sqft, cadId,
-      place, full: addr ? addr + ', ' + place : place, county: String(M.r.name || '').replace(/\s*\(more cities\)/i, ''), region: M.r.id };
+      place, full: addr ? addr + ', ' + place : place, county: M.r.name, region: M.r.id };
   }
   function meta(i) { return cat().then(c => { if (!c) return null; const r = regOf(c, i); return regionMeta(r).then(M => M ? read(M, i - r.offset) : null); }); }
   function metaNow(i) { if (!catP) return null; let out = null; Object.values(metaD).forEach(M => { if (M && i >= M.r.offset && i < M.r.offset + M.n) out = read(M, i - M.r.offset); }); return out; }
@@ -93,7 +93,7 @@
       return { city, when: d.slice(0, 7), date, prec: 'month', permit: permitNo, status: 'Issued', means: 'permit issued', conf: 'medium',
         count, done: true, src: `City of ${city} permit reports`, text: `Re-roofed ${date} (permit ${permitNo}, ${city})` };
     });
-    const city = m && (m.region === 'collin-tx' || m.region === 'collin2-tx') ? (m.city === 'Mckinney' ? 'McKinney' : m.city) : '';
+    const city = m && m.region === 'collin-tx' ? (m.city === 'Mckinney' ? 'McKinney' : m.city) : '';
     if (city && !RR_SINCE[city]) return Promise.all([cat(), rcad()]).then(([c, D]) => {
       const x = D && D.rows && D.rows[String(i - regOf(c, i).offset)]; if (!x) return null;
       const [d, permitNo, pc] = x, date = MON[+d.slice(5, 7) - 1] + ' ' + d.slice(0, 4);
@@ -195,7 +195,7 @@
   function places(r) { return placesP[r.id] || (placesP[r.id] = J(`meta/${r.id}/places.json`)); }
   function searchPlaces(q, limit) {
     const t = String(q || '').toLowerCase().trim(); if (t.length < 2) return Promise.resolve([]);
-    return cat().then(c => Promise.all(c.regions.map(r => places(r).then(p => [r, p])))).then(list => {
+    return cat().then(c => Promise.all(((c && c.regions) || []).map(r => places(r).then(p => [r, p])))).then(list => {
       const out = [];
       list.forEach(([r, p]) => { if (!p || !p.cities) return;
         Object.entries(p.cities).forEach(([city, cv]) => {
@@ -215,7 +215,7 @@
     limit = limit || 6;
     const m = /^\s*(\d{1,5})\s+(.+)$/.exec(q || ''); const num = m ? +m[1] : null, text = norm(m ? m[2] : q);
     if (text.length < 2) return Promise.resolve([]);
-    return cat().then(c => Promise.all(c.regions.map(regionMeta))).then(list => {
+    return cat().then(c => Promise.all(((c && c.regions) || []).map(regionMeta))).then(list => {
       const out = [];
       list.forEach(M => { if (!M) return;
         const want = new Set(); M.st.forEach((s, k) => { const n = norm(s); if (n.includes(text) || (' ' + n).includes(' ' + text)) want.add(k); });
@@ -237,7 +237,7 @@
   // (the global header search lists a street and opens the CRM on it with these homes)
   function streets(q, limit) {
     const text = norm(String(q || '').replace(/^\s*\d{1,5}\s+/, '')); if (text.length < 2) return Promise.resolve([]);
-    return cat().then(c => Promise.all(c.regions.map(regionMeta))).then(list => {
+    return cat().then(c => Promise.all(((c && c.regions) || []).map(regionMeta))).then(list => {
       const g = new Map();
       list.forEach(M => { if (!M) return;
         const want = new Set(); M.st.forEach((s, k) => { const n = norm(s); if (n.startsWith(text) || n.includes(' ' + text) || n.includes(text)) want.add(k); });

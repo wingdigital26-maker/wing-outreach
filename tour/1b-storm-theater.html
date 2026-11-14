@@ -1,9 +1,13 @@
 <!doctype html><html lang="en" data-rc="storm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Storm Map</title>
-<script src="lib/rc-frame-pause.js"></script><!-- parked by the shell = no drawing -->
+<script src="lib/rc-frame-pause.js"></script><script src="lib/rc-fetch-memo.js"></script><!-- one download per data file per page (11-02) --><!-- parked by the shell = no drawing -->
 <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
-<script>/* preload Jackson's homes (lib/brand.js dataRoot = lib/st-data-dfw/) */
-(function(){ var root='lib/st-data-dfw/';
+<script>/* preload the roofer's homes, this early. The data folder is the one the app shell above already settled
+   (lib/brand.js rooferDataRoot); this page's own brand.js loads much further down. Opened on its own there is no shell
+   to ask, so nothing is preloaded and lib/st-homes.js asks for the two files itself. An unknown roofer preloads nothing. */
+(function(){ var root=null;
+  try{ if(window.parent!==window&&window.parent.rooferDataRoot&&!(window.parent.rooferMissing&&window.parent.rooferMissing())) root=window.parent.rooferDataRoot(); }catch(e){ root=null; }
+  if(!root) return;
   ['homes.bin','catalog.json'].forEach(function(f){ document.write('<link rel="preload" href="'+root+f+'" as="fetch" crossorigin>'); }); })();</script>
 <link rel="preload" href="lib/st-fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="lib/st-fonts/montserrat-600.woff2" as="font" type="font/woff2" crossorigin>
@@ -385,60 +389,9 @@ body.sel .hsec{opacity:.55}
  .ask input{font-size:16px}
  .load{font-size:12px}
 }
-</style><link rel="stylesheet" href="lib/rc-console.css"><style>/* Jack 10-30: on desktop the map toolbar sits along the top, right of the service-area card, so the map below is never cut in half */
-@media (min-width:601px){
- /* Jack 10-30 (shot 16): not in the middle of the map; tucked in the top-right corner, beside the zoom stack */
- body #nav.nav.glass{top:24px!important;bottom:auto!important;height:auto!important;left:auto!important;right:calc(24px + 46px + 12px)!important;width:max-content!important;max-width:calc(100vw - 24px - 326px - 16px - 24px - 58px);overflow:visible;flex-wrap:nowrap}
- body.sel #nav.nav.glass{right:calc(24px + 344px + 16px + 46px + 12px)!important}
- /* Jack 10-30 (shot 15): one compact row. Cities in a select, layer toggles as small icon buttons with tooltips, zoom at the map's right edge */
- body #nav #counties{display:none}
- .ctysel{min-height:34px;padding:0 30px 0 12px;border-radius:999px;border:1px solid var(--hair);background:var(--panel-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23737B8F' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center/12px;appearance:none;-webkit-appearance:none;font:600 12.5px/1 inherit;font-family:inherit;color:var(--paper);cursor:pointer}
- body #nav .viewseg button{font-size:0;padding:0 9px;gap:0} body #nav .viewseg button svg{width:15px;height:15px}
- body #nav #fit span,body #nav #rdBtn span:not(.rdd){display:none}
- body #nav #fit,body #nav #rdBtn{padding:0 10px}
- .zoomdock{position:fixed;right:24px;top:24px;z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px;border-radius:999px}
- body.sel .zoomdock{right:calc(24px + 344px + 16px)}
- .zoomdock .zoomhint{display:none}
- body.sel #nav.nav.glass{max-width:calc(100vw - 24px - 326px - 16px - 24px - 344px - 16px)}
- #stat.glass,#nav.glass{clip-path:inset(0 round 12px)}   /* their scrolled overflow left pale ghost rectangles on the map below them */
-}
-@media (min-width:601px) and (max-width:1300px){ body #nav.nav.glass{left:calc(24px + 316px + 16px)!important;max-width:calc(100vw - 24px - 316px - 40px)} body.sel #nav.nav.glass{max-width:calc(100vw - 24px - 316px - 40px - 320px - 16px)} }
-/* loop 27 (Jack shot 24): the "Hardest hit in view" panel is compact, sits under the toolbar and left of the zoom stack, never under either */
-@media (min-width:601px){
- html[data-rc] body #hh,html[data-rc] body.embedded #hh,body #hh{top:80px;right:calc(24px + 46px + 12px);width:272px;padding:12px 14px;border-radius:14px;max-height:calc(100vh - 80px - 190px);overflow:auto}
- .hh h3{font-size:15px;font-weight:600;letter-spacing:-.01em}
- .hh .sub{display:none}
- .hh .facts{display:flex!important;gap:10px;margin:6px 0 8px!important;font-size:12px;color:var(--muted);white-space:nowrap}
- html[data-rc] #hh .facts div{border:0!important;box-shadow:none!important;background:none!important;padding:0!important;border-radius:0!important}
- .hh .facts span{display:none}
- .hh .facts b{display:inline!important;font-size:12.5px!important;font-weight:600}
- .hh .facts b::after{font-weight:400;color:var(--muted);font-size:11.5px}
- .hh #hh-n::after{content:" hit"} .hh #hh-max::after{content:" largest"} .hh #hh-top::after{content:" stops"}
- .hh .pill,.hh #l-open{min-height:30px!important;font-size:12px;padding:0 12px;width:auto!important;display:inline-flex;align-items:center;margin-top:0!important}
- .hh .plan{margin-right:6px}
- .hh .rt .meta{font-size:12px;margin:2px 0 6px}
- .hh .rt .btn{min-height:30px;font-size:12px;padding:0 12px}
- .hh .hard{margin-top:10px;padding-top:8px}
- #hh .hard .hh1 b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
- .hh .hard .hh2{display:none}
- .hh .hard ol{gap:3px}
- #hh .hard li button{min-height:34px;padding:4px 8px;gap:6px}
-}
-/* loop 27 (Jack): with no storm picked the card is only the next moves, small in the corner: the hardest-hit neighborhoods
-   to work and the newest storm button. No service-area explainer, no title, no counts paragraph */
-@media (min-width:601px){
- html[data-rc] body:not(.storm) #stat{width:250px;padding:10px 12px 12px}
- body:not(.storm) #stat .head,body:not(.storm) #stat #c-ttl,body:not(.storm) #stat #c-sub,body:not(.storm) #stat #c-d50,body:not(.storm) #stat .about-link{display:none!important}
- body:not(.storm) #stat #hard{margin-top:0;padding-top:0;border-top:0}
- body:not(.storm) #stat #hard .hh1 b{font-size:12.5px}
- body:not(.storm) #stat #hard .hh1 span{font-size:10.5px}
- body:not(.storm) #stat #hard .hh2{display:none}
- body:not(.storm) #stat #hard ol{gap:3px;margin-top:6px}
- body:not(.storm) #stat #hard li:nth-child(n+6){display:none}
- html[data-rc] body:not(.storm) #stat #hard li button{min-height:32px;padding:4px 8px;gap:6px;font-size:12px}
- body:not(.storm) #stat #show,body:not(.storm) #stat #l-open-calm{min-height:30px!important;font-size:12px;width:100%;margin-top:6px!important}
-}
-</style></head><body>
+</style><link rel="stylesheet" href="lib/rc-console.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="lib/rc-apprules.css"><!-- app rules (11-02) -->
+</head><body>
 <div id="map"></div><div class="fog"></div><div class="vign"></div>
 <div class="top">
   <div class="cap panel rv"><div class="rbrand"><div class="rlogo" data-r="logo"></div><div><div class="rname" data-r="name"></div><div class="rarea" data-r="area"></div></div></div>
@@ -493,9 +446,9 @@ body.sel .hsec{opacity:.55}
 </div>
 <div class="nav glass rv" id="nav">
   <div class="seg" id="counties"><button data-c="all" class="on">All</button></div>
-  <button class="nb only-storm" id="fit" title="Fit storm" aria-label="Fit storm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/></svg><span>Fit storm</span></button>
+  <button class="nb only-storm" id="fit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/></svg><span>Fit storm</span></button>
   <button class="nb" id="tilt" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M3 17 9 5h6l6 12z"/></svg><span>3D</span></button>
-  <button class="nb" id="rdBtn" aria-pressed="false" title="New roofs, last 90 days" aria-label="New roofs"><span class="rdd" aria-hidden="true"></span><span>Re-roofs</span></button><!-- st-radar-layer.js: re-roof permits, last 90 days (Jack 10-23) -->
+  <button class="nb" id="rdBtn" aria-pressed="false"><span class="rdd" aria-hidden="true"></span><span>Re-roofs</span></button><!-- st-radar-layer.js: re-roof permits, last 90 days (Jack 10-23) -->
   <button class="nb ic" id="zin" aria-label="Zoom in">+</button><button class="nb ic" id="zout" aria-label="Zoom out">&minus;</button>
   <span class="zoomhint" id="zhint"></span>
 </div>
@@ -508,12 +461,12 @@ body.sel .hsec{opacity:.55}
 <div class="concept-tag" id="ctag">Concept by Wing Digital. Homes, addresses, radar hail per home and roofs are real data; the pipeline is yours, kept on this device</div>
 <script src="vendor/maplibre-gl@4.7.1/maplibre-gl.js"></script>
 <script src="vendor/deck.gl@9.0.38/dist.min.js"></script>
-<script src="lib/rc-state.js"></script><script src="lib/brand.js"></script><script src="lib/st-homes.js"></script><script src="lib/rc-roof.js"></script><script src="lib/st-meta.js"></script><script src="../js/roofplan.js"></script><script src="lib/real-roof.js"></script><script src="lib/st-storm.js"></script>
+<script src="lib/rc-state.js"></script><script src="lib/brand.js"></script><script src="lib/st-homes.js"></script><script>/* the Storms screen cannot work without the homes: say so, with a retry */ STH.ready.catch(function(){ STH.showFail(); });</script><script src="lib/rc-roof.js"></script><script src="lib/st-meta.js"></script><script src="../js/roofplan.js"></script><script src="lib/real-roof.js"></script><script src="lib/st-storm.js"></script>
 <script src="lib/rc-features.js"></script>
 <script src="lib/st-map.js"></script>
 <script src="lib/rc-lines.js"></script><script src="lib/rc-imagery.js"></script><script src="lib/st-mapview.js"></script>
 <script src="lib/st-radar-layer.js"></script><!-- Satellite | 3D houses toggle: licensed aerial + measurement lines, custom 3D roofs (roof3d tiles) -->
 <script src="lib/st-hard.js"></script><!-- hit hardest: neighbourhood list + glow (calm) and the picked storm's hardest sections outlined on the map -->
 <script src="lib/st-dock.js"></script><!-- storms dropdown + instant timeline (desktop); shorter crossfade and flight on a storm pick -->
-<script src="lib/st-replay.js"></script><!-- storm replay: the front sweeps the whole map (switch RC_FEATURES.stormReplay) --><script src="lib/rc-plain.js"></script><script>/* plain words on the Storms screen (Jack 10-26) */ if (window.RCPLAIN) RCPLAIN.watch(document.body);</script>
+<script src="lib/st-replay.js"></script><!-- storm replay: the front sweeps the whole map (switch RC_FEATURES.stormReplay) --><script src="lib/rc-plain.js"></script><script>/* plain words on the Storms screen (Jack 10-26) */ if (window.RCPLAIN) RCPLAIN.watch(document.body);</script><script src="lib/st-panel.js"></script><!-- folding service-area panel, storm view, newest-storm auto-open (Jack 11-02) -->
 </body></html>

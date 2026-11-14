@@ -6,7 +6,7 @@
 <!-- one page per home, opened from a link in a text or email: never indexed, never cached by search engines -->
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="no-referrer">
-<title>Your roof</title>
+<title>Storm record</title>
 <link rel="stylesheet" href="proof.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
      is the only thing that collects anything, and only what the homeowner types. proof.js paints it; lib/rc-proof.js logs it. -->
 <header class="top">
   <div class="brand"><div class="mark" data-r="logo"></div><span class="nm" data-r="name"></span></div>
-  <span class="kind">Your roof</span>
+  <span class="kind">Storm record</span>
 </header>
 
 <main class="wrap" id="main">
@@ -25,17 +25,12 @@
 
   <article id="doc" hidden>
     <section class="hero">
-      <p class="eyebrow">Made for the home at</p>
+      <p class="eyebrow">Storm record for the home at</p>
       <h1 id="addr"></h1>
       <div class="big" id="big"></div>
       <p class="src"><span class="chip">Source</span><span id="bigSrc"></span></p>
     </section>
 
-    <section class="card" id="h3Card" hidden>
-      <h2>Your home in 3D</h2>
-      <div class="h3" id="h3" aria-label="3D model of this house's roof. Drag to turn it."></div>
-      <p class="src"><span class="chip">Source</span><span>Drawn from the county building outline and USGS LiDAR roof data. A model, not a photo; drag to turn it.</span></p>
-    </section>
     <section class="card" id="nearCard" hidden>
       <h2>How close the hail came</h2>
       <div id="near"></div>
@@ -66,30 +61,9 @@
       <ul class="mean" id="mean"></ul>
     </section>
 
-    <section class="card survey" id="survey">
-      <h2>If you replace the roof</h2>
-      <p>Do you want the same material back, or something different? One tap tells <b data-r="name"></b> which samples to bring.</p>
-      <div class="pills sv" id="sv" role="group" aria-label="Roof material">
-        <button type="button" data-a="keep" aria-pressed="false">Keep the same</button>
-        <button type="button" data-a="switch" aria-pressed="false">Switch material</button>
-        <button type="button" data-a="unsure" aria-pressed="false">Not sure yet</button>
-      </div>
-      <div class="pills sv" id="svMat" role="group" aria-label="Which material" hidden>
-        <button type="button" data-m="metal" aria-pressed="false">Metal</button>
-        <button type="button" data-m="tile" aria-pressed="false">Tile</button>
-        <button type="button" data-m="impact" aria-pressed="false">Impact-resistant shingle</button>
-        <button type="button" data-m="other" aria-pressed="false">Something else</button>
-      </div>
-      <p class="hint" id="svDone" role="status" hidden></p>
-    </section>
     <section class="cta" id="book">
       <h2>Want someone to look at it?</h2>
       <p>A free roof inspection from <b data-r="name"></b>: photos of every slope, and a straight answer on whether there is damage. No cost and no obligation.</p>
-      <ul class="pitch">
-        <li>You get the photos, so you see what the inspector sees</li>
-        <li>A written estimate for the same roof, and for the material you picked above</li>
-        <li>We start from public LiDAR roof data, so the visit is short</li>
-      </ul>
       <button type="button" class="go" id="bOpen">Book a free inspection</button>
       <form id="form" hidden novalidate>
         <fieldset class="when"><legend>Best time for a visit</legend>
@@ -125,13 +99,11 @@
 <script src="../lib/brand.js"></script>
 <script>/* the roofer brands the page (lib/brand.js) */ applyRoofer(rooferKey());
 /* the homeowner's consent and STOP go to the roofer's cloud (Edge Function proof-intake, 10-26); the rep's preview records nothing */
-if (new URLSearchParams(location.search).get('preview') !== '1') window.RCP_SINK = 'https://wbtrsujvprbdojmxlkpe.supabase.co/functions/v1/proof-intake?r=' + encodeURIComponent(rooferKey());</script>
+if (new URLSearchParams(location.search).get('preview') !== '1') window.RCP_SINK = 'https://demo-no-backend.invalid/functions/v1/proof-intake?r=' + encodeURIComponent(rooferKey());</script>
 <script src="../lib/rc-copy.js"></script>
 <script src="../lib/st-meta.js"></script>
 <script src="../lib/rc-roof.js"></script>
 <script src="../lib/rc-hail.js"></script>
-<script src="../../js/roofplan.js"></script>
-<script src="../lib/real-roof.js"></script><!-- the house in 3D: the same model the CRM record and Today draw (house3d.js) -->
 <script src="../lib/rc-proof.js"></script>
 <script src="proof.js"></script>
 </body>

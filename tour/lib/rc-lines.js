@@ -23,7 +23,7 @@
   'use strict';
   if (window.RCLINES) return;
   const src = document.currentScript && document.currentScript.src;
-  const BASE = () => window.rooferDataRoot ? rooferDataRoot() : (src ? new URL('st-data-dfw/', src).href : new URL('lib/st-data-dfw/', location.href).href);
+  const BASE = () => rooferDataRoot();   // lib/brand.js, always loaded before this file
   const J = u => fetch(BASE() + u).then(r => r.ok ? r.json() : null).catch(() => null);
   const TYPES = ['eave', 'ridge', 'hip', 'valley', 'rake', 'wall'];
   const FT = 3.28084, M_LAT = 110540, M_LON = lat => 111320 * Math.cos(lat * Math.PI / 180);

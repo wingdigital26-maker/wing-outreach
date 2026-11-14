@@ -7,11 +7,10 @@
 (function(){
   const now=new Date(); const todayUTC=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate(),12);   // today at noon UTC, like the storm dates
   const ST={storms:[],all:[],today:todayUTC,ready:null,win:'all'};   // Jack 10-26: every storm on file by default, the filter narrows it
-  ST.season='2000-01-01';                   // set from the catalog's oldest storm once it loads (Jack 10-30: data now reaches back to 2020)
+  ST.season='2024-01-01';                   // the DFW data reaches back to 2024
   ST.MONTHS=6;
   const STAGE=i=>(window.RC&&RC.stage('m'+i))||'new';   // the one shared pipeline (lib/rc-state.js); nothing invented
   ST.ready=STH.ready.then(()=>{ ST.all=STH.storms.slice(); ST.storms=STH.storms.filter(s=>s.iso>=ST.season).sort((a,b)=>a.t-b.t); ST.storms.forEach((s,i)=>s.i=i);
-    if(ST.storms.length) ST.season=ST.storms[0].iso;   // labels read the real start year, never a hardcoded one
     return ST; });
   // the window's start (ms): 6 months back from today, or 40 days before the first storm on file
   ST.windowStart=w=>{ w=w||ST.win; if(w==='all'||w==='big') return ST.storms.length?ST.storms[0].t-40*864e5:ST.today-365*864e5; const d=new Date(ST.today); d.setUTCMonth(d.getUTCMonth()-ST.MONTHS); return d.getTime(); };

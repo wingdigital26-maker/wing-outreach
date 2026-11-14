@@ -158,7 +158,7 @@
     markers.forEach(m => m.remove()); markers = [];
     if (!areas.length) { src.setData(EMPTY); return; }
     const fc = { type: 'FeatureCollection', features: [] };
-    areas.forEach((a, k) => { const h = a.hull || (a.hull = hull(a.idx));
+    areas.forEach((a, k) => { const h = a.hull || (a.hull = hull(a.idx)); if (k >= 6 && k !== pickedK) { fc.features.push({ type: 'Feature', properties: { k, sel: 0 }, geometry: { type: 'Polygon', coordinates: [h.ring] } }); return; }   // at most six pills on the map (the list has the rest)
       fc.features.push({ type: 'Feature', properties: { k, sel: k === pickedK ? 1 : 0 }, geometry: { type: 'Polygon', coordinates: [h.ring] } });
       const el = document.createElement('button'); el.type = 'button'; el.className = 'hsec' + (k === pickedK ? ' on' : ''); el.setAttribute('aria-label', `${a.name}, ${a.city}: ${fmt(a.hit)} homes hit, largest hail ${a.max.toFixed(2)} in`);
       el.innerHTML = `<i>${k + 1}</i><em>${esc(a.name)}</em><span>${a.max.toFixed(2)} in</span>`;
@@ -168,21 +168,23 @@
   }
   // labels never pile up: when two would touch, the lower-ranked one waits (its outline stays); re-read on every camera stop
   // (a touching label first tries a step up, then a step down, before it waits)
-  function declutter() { const taken = []; const clash = r => taken.some(t => r.left < t.right + 3 && t.left < r.right + 3 && r.top < t.bottom + 2 && t.top < r.bottom + 2);
+  function declutter() { const taken = []; ['stat', 'nav', 'tbar', 'peek', 'lst'].forEach(id => { const e = document.getElementById(id); if (!e) return; const r = e.getBoundingClientRect(); if (r.width && r.height && getComputedStyle(e).visibility !== 'hidden') taken.push({ left: r.left - 6, right: r.right + 6, top: r.top - 6, bottom: r.bottom + 6 }); });   // panels count as taken: a pill never sits under or behind them (Jack 11-02)
+    const clash = r => taken.some(t => r.left < t.right + 3 && t.left < r.right + 3 && r.top < t.bottom + 2 && t.top < r.bottom + 2);
     markers.forEach(m => { const el = m.getElement(); el.style.visibility = ''; el.style.marginTop = ''; const r0 = el.getBoundingClientRect(); if (!r0.width) return; const h = r0.height + 6;
       for (const dy of [0, -h, h, -2 * h, 2 * h]) { const r = { left: r0.left, right: r0.right, top: r0.top + dy, bottom: r0.bottom + dy }; if (!clash(r)) { el.style.marginTop = dy ? dy + 'px' : ''; taken.push(r); return; } }
       el.style.visibility = 'hidden'; }); }
-  map.on('moveend', declutter); map.on('zoomend', declutter);
+  map.on('moveend', declutter); map.on('zoomend', declutter); window.__declutterPills = declutter;   // the panel toggle re-runs it (st-panel.js)
   // ---------- the glow: two heatmap layers under the labels (all listed areas; the picked one brighter) ----------
   let ready = false;
   function layers() {
-    if (ready || !map.getSource || !map.getSource('rib')) { if (!ready) setTimeout(layers, 300); return; }
+    if (ready || !map.getSource || !map.getSource('rib-b')) { if (!ready) setTimeout(layers, 300); return; }
     // soft and radiant, never a flat blob: low intensity, a wide radius, a translucent core that lightens toward the centre
     const P = (op, r, a) => ({ 'heatmap-weight': ['get', 'w'], 'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 8, 0.4, 11, 0.42, 14, 0.36, 16, 0.3],
       'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 8, 14 * r, 10, 24 * r, 12, 44 * r, 14, 80 * r, 16, 140 * r], 'heatmap-opacity': 0, 'heatmap-opacity-transition': { duration: 450 },
       'heatmap-color': ['interpolate', ['linear'], ['heatmap-density'], 0, 'rgba(39,87,230,0)', 0.1, `rgba(70,120,250,${0.08 * a})`, 0.3, `rgba(52,104,246,${0.18 * a})`, 0.55, `rgba(39,87,230,${0.27 * a})`, 0.8, `rgba(72,128,255,${0.34 * a})`, 1, `rgba(130,172,255,${0.4 * a})`] });
     try {
       map.addSource('hard', { type: 'geojson', data: EMPTY }); map.addLayer({ id: 'hard', type: 'heatmap', source: 'hard', paint: P(1, 1, 1) }, labelId || undefined);
+      map.addSource('hard-sel', { type: 'geojson', data: EMPTY }); map.addLayer({ id: 'hard-sel', type: 'heatmap', source: 'hard-sel', paint: P(1, 1.25, 1.35) }, labelId || undefined);
       // the sections: a light fill and a crisp outline per hard-hit neighbourhood, the picked one stronger
       map.addSource('hard-sec', { type: 'geojson', data: EMPTY });
       map.addLayer({ id: 'hard-sec-fill', type: 'fill', source: 'hard-sec', paint: { 'fill-color': '#2757E6', 'fill-opacity': ['case', ['==', ['get', 'sel'], 1], 0.16, 0.07] } }, labelId || undefined);
@@ -193,13 +195,11 @@
   }
   function syncGlow() {
     if (!ready) return; const calmNow = !document.body.classList.contains('storm');
-    // one heatmap (loop 27): the picked area is the same layer with its homes weighted up, not a second heatmap; off in a storm
-    const a = AREAS[picked];
-    const data = !glowAll ? EMPTY : !a ? glowAll : { type: 'FeatureCollection', features: glowAll.features.map(f => inArea(a, f) ? { ...f, properties: { ...f.properties, w: (f.properties.w || 1) * 2.2 } } : f) };
-    map.getSource('hard').setData(calmNow ? data : EMPTY);
-    map.setLayoutProperty('hard', 'visibility', calmNow && glowAll ? 'visible' : 'none');
+    map.getSource('hard').setData(glowAll || EMPTY);
+    const a = AREAS[picked]; map.getSource('hard-sel').setData(a && glowAll ? { type: 'FeatureCollection', features: glowAll.features.filter(f => inArea(a, f)) } : EMPTY);
     const op = v => ['interpolate', ['linear'], ['zoom'], 12, v, 16, v * 0.6];   // homes stay readable under the glow when zoomed in
-    map.setPaintProperty('hard', 'heatmap-opacity', op(calmNow ? 1 : 0));
+    map.setPaintProperty('hard', 'heatmap-opacity', op(calmNow ? (picked >= 0 ? 0.6 : 1) : 0));
+    map.setPaintProperty('hard-sel', 'heatmap-opacity', op(calmNow && picked >= 0 ? 1 : 0));
   }
   // which reading is on the map: the picked storm's sections, else the 6-month areas
   let modeGen = 0;

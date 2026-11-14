@@ -14,7 +14,7 @@
   var reachedIds = function () { var m = {}; if (!RC) return m; RC.activity().forEach(function (a) { if (a.dir === 'out' && (a.ch === 'text' || a.ch === 'email') && new Date(a.at).toDateString() === new Date().toDateString()) m[a.id] = 1; }); return m; };
   var called = function () { return Object.keys(reachedIds()).length; };
   var queue = function () { return RC ? RC.queue() : 50; };
-  var OWNER = (window.activeRoofer && activeRoofer().owner) || 'Chris';
+  var OWNER = (window.activeRoofer && activeRoofer().owner) || '';   // the registry's owner (lib/brand.js), never a name typed here
 
   /* pipeline on this device, counted by stage */
   function pipeCounts() {
@@ -208,7 +208,7 @@
     }
 
     if (has('hello', 'hi ', 'hey') || t === 'hi')
-      return { html: (RC ? RC.greeting() : 'Hello') + ', ' + OWNER + '. Ask me about a storm, today\'s list or a home.', mood: 'excited' };
+      return { html: (RC ? RC.greeting() : 'Hello') + (OWNER ? ', ' + OWNER : '') + '. Ask me about a storm, today\'s list or a home.', mood: 'excited' };
 
     return { html: FALLBACK, mood: 'alert', fallback: true };
   }
@@ -247,10 +247,16 @@
     var left = Math.max(0, q - called() - skipped);
     return { total: q, left: left, next: next };
   }
+  // the same hail words as Today ("1 inch", "1.4 inches"): RCPLAIN.hail where lib/rc-plain.js is loaded, its rule otherwise
+  function plainHail(v) { if (window.RCPLAIN) return RCPLAIN.hail(v); var r = Math.round(+v * 10) / 10; return r + (r === 1 ? ' inch' : ' inches'); }
   function latestStorm() {
     var c = RC && RC.catalog; if (!c || !c.storms || !c.storms.length) return null;
-    var s = c.storms.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; })[0];
-    return s;
+    // 11-11: the one shared answer (RC.SHOWCASE, the storm the header names). The raw newest catalog row could be a storm
+    // that put 1 in+ hail on no home, which the header never names; that row speaks only when no storm hit a home at all.
+    var iso = RC.SHOWCASE, s = iso && c.storms.filter(function (x) { return x.date === iso; })[0];
+    if (s && s.homes_1in > 0) return s;
+    if (c.storms.some(function (x) { return x.homes_1in > 0; })) return null;
+    return c.storms.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; })[0];
   }
   function updates() {
     var out = [];
@@ -261,15 +267,18 @@
     var r = routeToday();
     if (r) {
       out.push({ key: 'queue', t: r.left ? r.left + ' of ' + r.total + ' homes left on today\'s route.' : 'All ' + r.total + ' homes on today\'s route are done.', k: 'Today', m: r.left ? 'calm' : 'excited', go: { screen: 'daily', params: {} } });
-      if (r.next) out.push({ key: 'next', t: r.next.addr + (r.next.hail != null ? ', ' + (+r.next.hail).toFixed(2) + ' in hail.' : '.'), k: 'Next stop', m: 'excited', go: { screen: 'daily', params: { n: r.next.n } } });
+      if (r.next) out.push({ key: 'next', t: r.next.addr + (+r.next.hail > 0 ? ', ' + plainHail(r.next.hail) + ' hail.' : '.'), k: 'Next stop', m: 'excited', go: { screen: 'daily', params: { n: r.next.n } } });
     }
     var c = pipeCounts();
     var todayB = c.booked.filter(function (b) { return isToday(b.at); });
     if (todayB.length === 1) out.push({ key: 'booked', t: 'Inspection today at ' + new Date(todayB[0].at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase() + ', ' + shortAddr(todayB[0].addr) + '.', k: 'Booked', m: 'excited', go: { screen: 'home', params: { id: todayB[0].id } } });
     else if (todayB.length > 1) out.push({ key: 'booked', t: todayB.length + ' inspections booked today. First at ' + new Date(todayB[0].at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase() + '.', k: 'Booked', m: 'excited', go: { screen: 'home', params: { id: todayB[0].id } } });
     var s = latestStorm();
-    var quiet = s && (Date.now() - Date.parse(s.date + 'T12:00:00Z')) / 864e5 > 3;   // same reading as the storm map's 'No hail in the last 3 days'
-    if (s) out.push({ key: 'storm', t: (quiet ? 'No hail in 3 days. Last: ' : 'Last hail: ') + dayLabel(s.date) + (s.homes_1in ? ', ' + fmt(s.homes_1in) + ' homes at 1 in+.' : ', largest ' + s.max_in + ' in on radar.'), k: 'Storms', m: 'calm', go: { screen: 'storm', params: { iso: s.date } } });
+    // "no hail in 3 days" still reads the newest hail day of any size (same reading as the storm map's 'No hail in the last 3 days');
+    // when that day is not the storm named (it put 1 in+ hail on no home), the storm is called the newest storm, not the last hail
+    var rawD = s && RC.catalog.storms.map(function (x) { return x.date; }).sort().pop() || '';
+    var quiet = s && (Date.now() - Date.parse(rawD + 'T12:00:00Z')) / 864e5 > 3;
+    if (s) out.push({ key: 'storm', t: (quiet ? 'No hail in 3 days. ' : '') + (rawD !== s.date ? 'Newest storm: ' : quiet ? 'Last: ' : 'Last hail: ') + dayLabel(s.date) + (s.homes_1in ? ', ' + fmt(s.homes_1in) + ' homes at 1 in+.' : ', largest ' + s.max_in + ' in on radar.'), k: 'Storms', m: 'calm', go: { screen: 'storm', params: { iso: s.date } } });
     return out;
   }
 
@@ -646,7 +655,7 @@
     var a = anchorBox(), safe = safeProbe ? parseFloat(getComputedStyle(safeProbe).paddingBottom) || 0 : 0;
     /* the Nimbus lane (loop 4, 10-30): on a wider screen the shell keeps a strip under the screen for him, so he, the morning
        briefing pill and the update bubbles sit in it and never cover the screen's own columns, maps or facts */
-    var laneEl = !isPhone() && !bar0() ? document.getElementById('main') : null, lane = laneEl && laneEl.querySelector('#f') ? Math.round(size / 2) : 0;   // loop 25: half his height; he straddles the frame's bottom edge in the corner, so the strip under every screen is 32px, not 80
+    var lane = 0;   /* port 11-02: the app rules frame keeps its own height, no lane strip under it */   // loop 25: half his height; he straddles the frame's bottom edge in the corner, so the strip under every screen is 32px, not 80
     var g = gap(), right = a.right - g, bar = shellBottomBar(a) || phoneBottomBar(a), bottom = a.bottom - (bar ? bar + 8 : lane ? 8 + safe : g + safe);
     var lm = document.getElementById('f');
     if (lm && lm.__lane !== lane) { lm.__lane = lane; if (lane) { lm.style.setProperty('margin-bottom', lane + 'px', 'important'); lm.style.setProperty('height', 'auto', 'important'); } else { lm.style.removeProperty('margin-bottom'); lm.style.removeProperty('height'); } document.body.classList.toggle('nb-lane', !!lane); }
@@ -788,9 +797,12 @@
   /* Jack 10-30 (loop 27): the corner never prompts. say() no longer pops a bubble; a real new thing (an event, an alert)
      only lights a small silent unread dot on the orb, cleared when the roofer opens him. */
   var unreadEl = null;
+  var unreadItem = null;
   function markUnread(item) {
     if (!dock || !item || !(item.m === 'alert' || item.fresh)) return;
-    if (!unreadEl) { unreadEl = document.createElement('span'); unreadEl.className = 'nb-unread'; unreadEl.setAttribute('aria-hidden', 'true'); dock.appendChild(unreadEl); }
+    if (!unreadEl) { unreadEl = document.createElement('button'); unreadEl.type = 'button'; unreadEl.className = 'nb-unread'; unreadEl.textContent = '!'; dock.appendChild(unreadEl);
+      unreadEl.addEventListener('click', function (e) { e.stopPropagation(); clearUnread(); if (unreadItem) { document.body.classList.add('nb-tap'); sayBubble(unreadItem, 7000); setTimeout(function () { document.body.classList.remove('nb-tap'); }, 7000); } }); }   /* Jack 11-02: a small "!" only; its message shows when tapped */
+    unreadItem = item; unreadEl.title = item.t || ''; unreadEl.setAttribute('aria-label', 'Nimbus has something to say: ' + (item.t || ''));
     dock.classList.add('has-unread');
   }
   function clearUnread() { if (dock) dock.classList.remove('has-unread'); }
@@ -885,7 +897,7 @@
   /* the morning brief, one line, after the opening */
   function brief() {
     var s = S();
-    return { t: (RC ? RC.greeting() : 'Good morning') + ', ' + OWNER + '. ' + called() + ' of ' + queue() + ' reached. Newest storm ' + s.d + '.', m: 'excited', k: 'Today', go: { screen: 'daily', params: {} }, ms: 8000 };
+    return { t: (RC ? RC.greeting() : 'Good morning') + (OWNER ? ', ' + OWNER : '') + '. ' + called() + ' of ' + queue() + ' reached. Newest storm ' + s.d + '.', m: 'excited', k: 'Today', go: { screen: 'daily', params: {} }, ms: 8000 };
   }
 
   addEventListener('keydown', function (e) { if (e.key === 'Escape' && bubbleEl && bubbleEl.classList.contains('on')) { hide(); scheduleRotate(); } });

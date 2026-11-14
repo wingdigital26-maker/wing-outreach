@@ -13,7 +13,7 @@
   if (!window.RC || window.RCAsk) return;
   const esc = RC.esc, fmt = RC.fmt, DAY = 864e5;
   const SEND_URL = 'http://127.0.0.1:4911', VOICE_URL = 'http://127.0.0.1:4912';
-  const ENGINE_URL = 'https://wbtrsujvprbdojmxlkpe.supabase.co/functions/v1/roof-engine';
+  const ENGINE_URL = 'https://demo-no-backend.invalid/functions/v1/roof-engine';
   const cloudCtx = () => { try {
     const s = JSON.parse(localStorage.getItem('rc.session') || 'null'), cl = (window.top && window.top.RC_CLOUD) || window.RC_CLOUD;
     return s && s.access_token && (!s.expires_at || s.expires_at > Date.now() / 1000 + 20) && cl && cl.companyId ? { jwt: s.access_token, company: cl.companyId } : null;
@@ -93,10 +93,8 @@
   const NOTQ = /\b(not interested|no thanks|no thank you|stop|unsubscribe|already (have|got)|remove me|don'?t text|do not)\b/i;
   const wantsQuote = body => QUOTE.test(body || '') && !NOTQ.test(body || '');
   function sendLog() {   // the send service's log (sent + received), when it runs; null when it does not
-    if (!!!(window.RC && RC.localSvc && RC.localSvc())) return Promise.resolve(null);   // loop 19: only when the local services are switched on (?localsvc=1 once)
-    if ((function(k){try{return Date.now()-(+localStorage.getItem('rc.off.'+k)||0)<6e5}catch(e){return false}})('send')) return Promise.resolve(null);   // refused a moment ago: skip (loop 6)
     const ctl = new AbortController(); setTimeout(() => ctl.abort(), 2500);
-    return fetch(`${SEND_URL}/inbox?roofer=${encodeURIComponent(RC.rooferKey())}&limit=500`, { signal: ctl.signal }).then(r => r.ok ? r.json() : null).then(d => d && d.messages || null).catch(() => { (function(k){try{localStorage.setItem('rc.off.'+k,Date.now())}catch(e){}})('send'); return null; });
+    return fetch(`${SEND_URL}/inbox?roofer=${encodeURIComponent(RC.rooferKey())}&limit=500`, { signal: ctl.signal }).then(r => r.ok ? r.json() : null).then(d => d && d.messages || null).catch(() => null);
   }
   function lastThread() { try { return JSON.parse(localStorage.getItem('rc.t.lastThread') || 'null'); } catch (e) { return null; } }
 
@@ -309,7 +307,7 @@
       const ins = H.filter(h => h.dir === 'in'); if (ins.length) c.replied++; if (ins.some(h => wantsQuote(h.body))) c.quote++;
       if (H.some(h => h.kind === 'stage' && /^Sent to /.test(h.what || ''))) c.handoff++;
       if (H.some(h => /^Inspection booked/.test(h.what || ''))) c.booked++;
-      if (H.some(h => h.kind === 'stage' && /Won/.test(h.what || '')) || (RC.stageKey(pipe[id].stage) === 'won' && H.length)) c.won++;
+      if (H.some(h => h.kind === 'stage' && /Won/.test(h.what || '')) || (pipe[id].stage === 'won' && H.length)) c.won++;
     });
     const o = OWNER();
     const pl = (n, a, b) => n + ' ' + (n === 1 ? a : b);
@@ -349,7 +347,7 @@
   function oldRoofs() {
     return homes().then(D => {
       const pipe = RC.pipeline(), nowY = new Date().getFullYear();
-      let jobs = Object.keys(pipe).filter(id => RC.stageKey(pipe[id].stage) === 'won' && /^m\d+$/.test(id)).map(id => rec(D, +id.slice(1)));
+      let jobs = Object.keys(pipe).filter(id => pipe[id].stage === 'won' && /^m\d+$/.test(id)).map(id => rec(D, +id.slice(1)));
       let basis = 'won';
       if (!jobs.length) {   // no past-jobs list: the newest county reroof permits stand in, and the answer says so
         basis = 'permits';
@@ -457,7 +455,7 @@
   const CHIPS = () => [['Replies wanting a quote', 'Who replied today and wants a quote?'], ['Draft a reply', 'Draft a reply to this homeowner'], ['Knock route tomorrow', 'Plan me a 3-hour knock route in Plano tomorrow'],
     ['What did we say?', 'What did we say to this house?'], ['Leads this month', `How many leads did we get ${OWNER()} this month?`], ['Big hail, not contacted', 'Which streets got the biggest hail in the last 30 days that we haven\'t contacted?'],
     ['Old roofs near jobs', 'Find roofs over 20 years old near Chris\'s last jobs'], ['Why on today\'s list?', 'Why is this house on today\'s list?'],
-    ['Hail at an address', 'How much hail at ' + (((RC.daily && RC.daily()[0]) || {}).street || '1524 Yorkshire Dr') + '?']];
+    ['Hail at an address', 'How much hail at ' + (((RC.daily && RC.daily()[0]) || {}).street || '8830 Yorkshire Dr') + '?']];
 
   // ---------- look: the CRM's glass deck, light ----------
   const css = `

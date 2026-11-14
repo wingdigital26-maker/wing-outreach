@@ -23,7 +23,7 @@
         prior: [], pipe: SAMPLE.pipe.map((p) => p.slice()), ring: Object.assign({}, SAMPLE.ring), logo: b.logo, wide: !!b.wide, markBg: b.markBg || '', seed: SAMPLE.seed };
     });
   })();
-  const DEFAULT_KEY = window.rooferKey ? window.rooferKey() : 'jackson';
+  const DEFAULT_KEY = window.rooferKey ? window.rooferKey() : window.DEFAULT_ROOFER;
   // the key whose route and roofs the deck draws for this roofer (its own data only)
   const dataKey = (key) => key;
 
@@ -61,7 +61,7 @@
   (function load() {
     const cs = document.currentScript;
     if (!cs || !cs.src || document.readyState !== 'loading') return;
-    const need = [['RCROOF', '../lib/rc-roof.js'], ['STM', '../lib/st-meta.js'], ['RoofPlan', '../../js/roofplan.js'], ['RealRoof', '../lib/real-roof.js'], ['ROOFS_DFW', 'data/roofs-dfw.js']].filter(([g]) => g === 'ROOFS_DFW' ? !(window.ROOFS && ROOFS.jackson) : !window[g]);
+    const need = [['RCROOF', '../lib/rc-roof.js'], ['STM', '../lib/st-meta.js'], ['RoofPlan', '../../js/roofplan.js'], ['RealRoof', '../lib/real-roof.js'], ['ROOFS_DFW', 'data/roofs-dfw.js']].filter(([g]) => g === 'ROOFS_DFW' ? !(window.ROOFS && ROOFS[dataKey(DEFAULT_KEY)]) : !window[g]);
     need.forEach(([, path]) => document.write('<script src="' + new URL(path, cs.src).href + '"><\/script>'));
   })();
 
@@ -220,13 +220,6 @@
   let patched = false;
   function patchPage() {
     if (patched) return; patched = true;
-    // loop 7 / loop 16: an outline still loading after 4 s (counted per house, from when its label first showed) says so
-    // plainly instead of 'Loading the outline' forever, and points at what still works
-    { const seen = new WeakMap(), late = () => { const now = Date.now();
-        document.querySelectorAll('svg text').forEach(t => { if (t.textContent !== 'Loading the outline') return;
-        const s0 = seen.get(t); if (!s0) { seen.set(t, now); return; } if (now - s0 < 4000) return;
-        t.textContent = 'Outline not in yet'; const n = t.nextElementSibling; if (n && n.tagName.toLowerCase() === 'text' && n.textContent === 'for this home') n.textContent = 'Photo and Measure still work'; }); };
-      setInterval(late, 1000); }
     const w = window;
     if (typeof w.platedRoof === 'function') { const o = w.platedRoof; w.platedRoof = function (spec) { return !spec || spec.none ? noneSVG(spec) : o.apply(this, arguments); }; }
     if (typeof w.phHTML === 'function') {
@@ -238,15 +231,14 @@
         // 10-22: squares only from the LiDAR record (an estimate), and the stand-in house says its shape is being checked
         const lidar = !!(h.spec.facetRec || h.spec.facet3d), chk = h.spec.checking ? ', shape being checked' : '';
         // chip: the short form of RCROOF.SQ_NOTE (Jack 10-23: about 10% of permit records, order a report before quoting)
-        const txt = h.spec.loading ? (sq != null ? `<span>${window.RCPLAIN ? RCPLAIN.size(sq) : '~' + sq + ' sq'}<i>, from county records while the outline loads</i></span>` : 'Roof size from county records: not on file') :   // loop 7: some outlines never arrive (timed 60 s+ on tablet), so show the county size, never an endless 'measuring'
-           h.spec.none ? 'No outline on file' : !lidar && !h.spec.drawn ? 'Roof size not measured' + chk : `<span>${window.RCPLAIN ? RCPLAIN.size(sq) : '~' + sq + ' sq'}<em class="lw"></em><em class="ls"></em><i>, an estimate: order a measurement report before you quote</i></span>`;   // no 'red took the hail': no plane is drawn red on these stops (10-17)
+        const txt = h.spec.loading ? 'Loading the outline' : h.spec.none ? 'No outline on file' : !lidar && !h.spec.drawn ? 'Roof size not measured' + chk : `<span>${window.RCPLAIN ? RCPLAIN.size(sq) : '~' + sq + ' sq'}<em class="lw"></em><em class="ls"></em><i>, an estimate: order a measurement report before you quote</i></span>`;   // no 'red took the hail': no plane is drawn red on these stops (10-17)
         return html.replace(/(<div class="bl"><span class="sw"><\/span>)[\s\S]*?(<\/div>)/, (m, a, b) => a + txt + b);
       };
     }
     // (the page's own why() states the no-outline case since the Daily 50 engine; no wrap here)
     // homes added from the storm map ('m<index>'): their own footprint through the same converter, never the generator
     if (typeof w.addedHomes === 'function' && window.RealRoof && RealRoof.mapEntry) {
-      const o = w.addedHomes; let rq = 0;
+      const o = w.addedHomes; let pending = 0;
       w.addedHomes = function () {
         const list = o.apply(this, arguments), want = [];
         list.forEach(h => {
@@ -256,12 +248,8 @@
           h.M = roofMeasure(h.spec); h.sq = h.M.squares; h.pitch = h.M.predominant || null; h.pitchMeasured = !!h.spec.pitchMeasured;
           const f = got && got.facts; if (f) { if (f.addr) { h.addr = f.addr; h.short = short(f.addr); } h.city = f.city || h.city; h.zip = f.zip || h.zip; h.year = f.year; h.permit = f.permit; h.roofAge = f.roofAge; }
         });
-        // loop 17: rebuild once the outlines land (mapOutline, about a second), and again when the county facts follow
-        // loop 19: every batch rebuilds when its own outlines (and then its facts) land; batches landing together share one frame
-        const rebuild = () => { if (rq) return; rq = requestAnimationFrame(() => { rq = 0; try { w.buildList(); w.buildCards(); w.layout(false); } catch (e) { /* page shape changed: next render picks the outlines up */ } }); };
-        if (want.length) { const fast = RealRoof.mapOutline ? Promise.all(want.map(([i, loc]) => RealRoof.mapOutline(i, loc[0], loc[1]))) : null;
-          if (fast) fast.then(rebuild, () => {});
-          Promise.all(want.map(([i, loc]) => RealRoof.mapEntry(i, loc[0], loc[1]))).then(rebuild, rebuild); }
+        if (want.length) { pending++; Promise.all(want.map(([i, loc]) => RealRoof.mapEntry(i, loc[0], loc[1]))).then(() => {
+          if (--pending) return; try { w.buildList(); w.buildCards(); w.layout(false); } catch (e) { /* page shape changed: next render picks the outlines up */ } }); }
         return list;
       };
     }
@@ -287,30 +275,7 @@
   function patchMapSpeed(w) {
     if (typeof w.bulkLayers !== 'function' || typeof w.startMap !== 'function' || param('fulldots')) return;   // ?fulldots=1: the old layer, for A/B
     const orig = w.bulkLayers; let src = null, sets = {}, view = null, lastKey = '';
-    // First open (loop 8): at street zoom the full dot set (~135k) cost each frame ~600 ms of GPU while the map's tiles
-    // and the line fan were still drawing, so Today ignored clicks for ~4 s. Until the fan is over (7 s) and the page is
-    // idle, the layer draws every 16th home (same tone, alpha raised); then the normal set swaps in once.
-    // Loop 9: the swap back is stepped (16 -> 8 -> 4 -> 2 -> every home), one step per idle frame, so no single frame
-    // uploads the whole set. While the fan runs, Nimbus's endless CSS loops (float, glow, orbit) are paused in this page
-    // and the shell until the first step; paused loops resume where they stopped, so he looks the same once it settles.
-    let floor = param('fulldots') ? 1 : 16;
-    const docs = [document]; try { if (w.parent && w.parent !== w && w.parent.document) docs.push(w.parent.document); } catch (e) { }
-    // pause through the animation objects (no stylesheet or class swap, so no restyle of the shell): only loops that
-    // were running get paused, and only those are played again
-    const held = [];
-    const hush = on => { if (on) docs.forEach(d => { try { d.getAnimations().forEach(a => {
-        if (/^wm-/.test(a.animationName || '') && a.playState === 'running') { a.pause(); held.push(a); } }); } catch (e) { } });
-      else while (held.length) { try { held.pop().play(); } catch (e) { } } };
-    if (floor > 1) { [0, 1500].forEach(t => setTimeout(() => { if (floor > 8) hush(true); }, t)); w.addEventListener('pagehide', () => hush(false));
-      // the shell outlives this frame (a screen switch removes it): it lets him move again on its own after 12 s
-      try { if (docs[1]) w.parent.setTimeout(() => hush(false), 12000); } catch (e) { } }
-    const idle = f => w.requestIdleCallback ? w.requestIdleCallback(f, { timeout: 1500 }) : setTimeout(f, 300);
-    const lift = () => { if (floor <= 1) return; hush(false); floor = floor / 2;
-      // redraw only when the dots on screen change (fpRedraw rebuilds every layer; at the wide zoom bands most steps change nothing)
-      try { if (typeof fpRedraw === 'function' && BULK.all && typeof map !== 'undefined' && map && setFor(map).key !== lastKey) fpRedraw(); } catch (e) { }
-      if (floor > 1) setTimeout(() => idle(lift), 250); };
-    setTimeout(() => idle(lift), 7000);
-    const stepAt = z => Math.max(floor, z < 10.5 ? 8 : z < 11.5 ? 4 : z < 12.5 ? 2 : 1);
+    const stepAt = z => z < 10.5 ? 8 : z < 11.5 ? 4 : z < 12.5 ? 2 : 1;
     function setFor(map) {
       const all = BULK.all, n = BULK.nAll; if (src !== all) { src = all; sets = {}; view = null; }
       const z = map.getZoom(), step = stepAt(z);
@@ -360,7 +325,7 @@
       } catch (e) { }
       return r;
     };
-    w.__mapSpeed = () => ({ floor, key: lastKey, drawn: (typeof map !== 'undefined' && map && BULK.all) ? setFor(map).data.length : null, all: BULK.nAll });
+    w.__mapSpeed = () => ({ key: lastKey, drawn: (typeof map !== 'undefined' && map && BULK.all) ? setFor(map).data.length : null, all: BULK.nAll });
   }
 
   // The house in 3D on the stop card (10-17): the CRM record's model (house3d.js, the same lib/real-roof.js spec the
@@ -370,7 +335,8 @@
   // (paintRoof repaints the band when an outline lands). ?no3d=1 keeps the flat picture.
   function patchHouse3D(w) {
     const no3d = () => { try { w.document.documentElement.classList.add('no3d'); } catch (e) { } };   // the flat drawing shows again (dk.css)
-    if (true || param('no3d') || typeof w.layout !== 'function' || !w.WebGLRenderingContext) { no3d(); return; }
+    if (param('no3d') ||   /* 3D back on the Today card (Jack 11-02); the 11-01 port had switched it off */
+     typeof w.layout !== 'function' || !w.WebGLRenderingContext) { no3d(); return; }
     const here = new URL('house3d.js', DK_SRC || location.href).href;   // next to this file (currentScript is gone by the time the page patches)
     let ctl = null, kicked = false, lastSpec = null, lastId = null, loadedAt = 0;
     const after = (name, fn) => { if (typeof w[name] !== 'function') return; const o = w[name]; w[name] = function () { const r = o.apply(this, arguments); try { fn(); } catch (e) { } return r; }; };
@@ -415,11 +381,11 @@
     document.querySelectorAll('[data-logo]').forEach((n) => { n.innerHTML = r.logo; n.classList.toggle('rc-wide', !!r.wide); n.style.background = r.markBg || ''; });
     document.querySelectorAll('[data-wing]').forEach((n) => { n.innerHTML = WING(n.dataset.wing || '#2757E6'); });
     document.querySelectorAll('[data-i]').forEach((n) => { n.innerHTML = I[n.dataset.i] || ''; });
-    document.title = r.name + ' | Wing Outreach';
+    document.title = r.name + ' | Roof Command';
     return r;
   }
   const param = (k, d) => new URLSearchParams(location.search).get(k) || d;
-  // the active roofer: ?roofer= on this page, else the one the shell keeps in rc-state, else jackson
-  const rooferKey = () => { const k = param('roofer', DEFAULT_KEY); return ROOFERS[k] ? k : DEFAULT_KEY; };
+  // the active roofer: ?roofer= on this page, else the one the shell keeps in rc-state, else the default roofer (lib/brand.js)
+  const rooferKey = () => { const k = param('roofer', DEFAULT_KEY); return Object.prototype.hasOwnProperty.call(ROOFERS, k) ? k : DEFAULT_KEY; };
   window.DK = { WING, ROOFERS, I, realSpec, roofMeasure, roofSVG, mountRoof, EDGE_LABEL, EDGE_COL, homes, theme, param, short, rooferKey, dataKey, patch: patchPage };
 })();

@@ -277,17 +277,16 @@
   function stoppedWhy(id, pipe, sk) {
     const p = pipe[id];
     if (RC.optedOut && RC.optedOut(id)) return 'opted out';
-    if (p && RC.stageKey(p.stage) === 'won') return 'won';
+    if (p && p.stage === 'won') return 'won';
     if (p && p.archived) return 'not now';
     if (p && DEAL[p.stage]) return 'in a deal';
-    if (p && p.paused && (!p.paused.until || Date.parse(p.paused.until) > Date.now())) return 'paused';   // Nimbus pause_followups (lib/nimbus-ops.js)
     if (RC.replied ? RC.replied(id) : !!(p && (p.history || []).some(h => h.dir === 'in'))) return 'replied';
     const s = (sk || skipsOf())[id]; if (s && s.reason === 'Not a fit') return 'not a fit';
     return null;
   }
   // the plain words every screen shows for a stopped cadence
   const STOP_TEXT = { 'opted out': 'Opted out, no follow-ups', won: 'Won, no follow-ups', 'not now': 'Not now, no follow-ups',
-    'in a deal': 'In a deal, no cold follow-ups', replied: 'Replied, answer them', 'not a fit': 'Skipped as not a fit, no follow-ups', paused: 'Follow-ups paused' };
+    'in a deal': 'In a deal, no cold follow-ups', replied: 'Replied, answer them', 'not a fit': 'Skipped as not a fit, no follow-ups' };
   RC.cadenceStopText = why => STOP_TEXT[why] || 'No follow-ups';
   function cadenceFrom(times, nowMs, stopped) {
     const today = dayKey(nowMs);
@@ -334,7 +333,7 @@
       if (!inCity(h)) continue;                                        // the roofer's own cities (settings)
       if (cm.has(id)) continue;                                        // reached before: the cadence decides when, not the score
       const s = stoppedWhy(id, pipe, sk); if (s) { bump(s); continue; }
-      if (pipe[id] && pipe[id].stage && RC.stageKey(pipe[id].stage) !== 'new') { ex.activeDeal++; continue; }   // an active thread / deal, not a cold pick
+      if (pipe[id] && pipe[id].stage && pipe[id].stage !== 'new') { ex.activeDeal++; continue; }   // an active thread / deal, not a cold pick
       const sv = sk[id]; if (sv && SKIP_DAYS[sv.reason] && ref - Date.parse(sv.at) < SKIP_DAYS[sv.reason] * DAY) { ex.skippedRecently++; continue; }
       const lt = lastTouch.get(id); if (lt != null && ref - lt < COOLDOWN_DAYS * DAY) { ex.cooldown++; continue; }
       pool.push(h);

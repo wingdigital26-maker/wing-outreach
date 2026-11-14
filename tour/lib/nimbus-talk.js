@@ -123,12 +123,9 @@
     if (c.kind === 'done') return `<article class="nbk-card done"><span>${esc(c.title)}</span>${c.undo ? '<button type="button" data-undo="1">Undo</button>' : ''}</article>`;
     return '';
   }
-  // a card's Undo turns into the word Undone, whether tapped here or undone by "undo that"
-  function markUndone(card) { card.classList.add('undone'); const b = card.querySelector('[data-undo]'); if (b) { const m = document.createElement('em'); m.className = 'nbk-undone'; m.textContent = 'Undone'; b.replaceWith(m); } }
-  window.addEventListener('nimbus-undone', e => { document.querySelectorAll('.nbk-card').forEach(card => { if (card._card && card._card.undo === e.detail) markUndone(card); }); });
   function onCard(e) {
     const card = e.target.closest('.nbk-card'), c = card && card._card; if (!c) return;
-    if (e.target.closest('[data-undo]')) { c.undo && c.undo(); markUndone(card); VA.speak('Undone.'); return; }
+    if (e.target.closest('[data-undo]')) { c.undo && c.undo(); card.classList.add('undone'); e.target.remove(); VA.speak('Undone.'); return; }
     const rv = e.target.closest('[data-reveal]');
     if (rv) { reveal(rv.dataset.reveal, rv.parentNode); return; }
     const op = e.target.closest('[data-open]');

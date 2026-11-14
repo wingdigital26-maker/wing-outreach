@@ -1,0 +1,766 @@
+{
+ "v": 1,
+ "market": "jackson",
+ "roofer": "Jackson Roofing",
+ "built": "2026-11-09T13:02",
+ "today": "2026-11-09",
+ "sources": {
+  "scores_asof": "2026-11-09",
+  "permits_through": "2026-10-15",
+  "radar_through": "2026-10-22",
+  "purchases": "on",
+  "wind": "on",
+  "used": {
+   "scores": "tour\\lib\\st-data-dfw\\meta\\scores",
+   "purchases": "tour\\lib\\st-data-dfw\\meta\\scores",
+   "wind": "tour\\lib\\st-data-dfw\\meta\\scores"
+  },
+  "noaa_window": {
+   "start": "2024-06-02",
+   "end": "2026-05-24",
+   "months": 24
+  },
+  "note": "Radar hail is NOAA MRMS MESH per home, an estimate, not an inspection. Permit counts use full re-roof permits with a known day or month. No keyword volumes or rankings: GSC is not connected."
+ },
+ "rules": {
+  "old_years": 16,
+  "hail_min_in": 1.0,
+  "hail": {
+   "min_homes": 50,
+   "full_share": 0.5,
+   "full_count": 5000,
+   "weight": 1.0
+  },
+  "storm_blog": {
+   "min_homes": 200,
+   "full_share": 0.5,
+   "full_count": 5000,
+   "weight": 0.95,
+   "max_per_city": 2
+  },
+  "hail_size": [
+   1.0,
+   0.7,
+   1.75,
+   1.0
+  ],
+  "freshness": [
+   [
+    90,
+    1.0
+   ],
+   [
+    180,
+    0.7
+   ],
+   [
+    365,
+    0.45
+   ]
+  ],
+  "aging": {
+   "min_homes": 300,
+   "full_share": 0.7,
+   "full_count": 25000,
+   "weight": 0.85
+  },
+  "surge": {
+   "min_permits": 15,
+   "min_ratio": 1.2,
+   "full_ratio_gain": 1.0,
+   "full_count": 150,
+   "weight": 0.9
+  },
+  "purchase": {
+   "min_homes": 100,
+   "full_share": 0.08,
+   "full_count": 4000,
+   "weight": 0.65
+  },
+  "wind": {
+   "min_mph": 58,
+   "min_homes": 200,
+   "full_share": 0.3,
+   "full_count": 5000,
+   "weight": 0.85
+  },
+  "refresh_weight": 0.6,
+  "min_score": 10,
+  "zip_min_homes": 25
+ },
+ "cities": [
+  {
+   "city": "Plano",
+   "homes": 74051,
+   "hail_90d": 0,
+   "hail_12m": 312,
+   "storms_12m": [
+    {
+     "date": "2026-06-02",
+     "homes_1in": 312,
+     "max_in": 1.03,
+     "days_ago": 160
+    }
+   ],
+   "hail_max_12m": 1.03,
+   "hail_last_date": "2026-06-02",
+   "aged_documented": 0,
+   "aged_likely": 0,
+   "aged_unknown": 68690,
+   "aged_old": 0,
+   "permit_list_complete": false,
+   "permits_90d": 0,
+   "permits_base_90d": 4.2,
+   "permit_surge": 0.0,
+   "turnover_homes": 0,
+   "purchases_12m": 4402,
+   "owner_occupied": 61687,
+   "wind_12m": 555,
+   "wind_top_day": "2026-05-15",
+   "wind_max_mph": 68,
+   "zips": [
+    {
+     "zip": "75025",
+     "homes": 14430,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    },
+    {
+     "zip": "75023",
+     "homes": 13791,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    },
+    {
+     "zip": "75093",
+     "homes": 12712,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    },
+    {
+     "zip": "75074",
+     "homes": 12166,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    },
+    {
+     "zip": "75075",
+     "homes": 10854,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    },
+    {
+     "zip": "75024",
+     "homes": 9304,
+     "hail_12m": 312,
+     "permits_90d": 0,
+     "aged_old": 0
+    },
+    {
+     "zip": "75094",
+     "homes": 718,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    }
+   ],
+   "noaa_named_reports": 0
+  },
+  {
+   "city": "Allen",
+   "homes": 31268,
+   "hail_90d": 0,
+   "hail_12m": 0,
+   "storms_12m": [],
+   "hail_max_12m": 0,
+   "hail_last_date": null,
+   "aged_documented": 0,
+   "aged_likely": 16303,
+   "aged_unknown": 0,
+   "aged_old": 16303,
+   "permit_list_complete": true,
+   "permits_90d": 73,
+   "permits_base_90d": 129.5,
+   "permit_surge": 0.56,
+   "turnover_homes": 77,
+   "purchases_12m": 1354,
+   "owner_occupied": 26313,
+   "wind_12m": 634,
+   "wind_top_day": "2026-03-15",
+   "wind_max_mph": 61,
+   "zips": [
+    {
+     "zip": "75002",
+     "homes": 16803,
+     "hail_12m": 0,
+     "permits_90d": 56,
+     "aged_old": 11272
+    },
+    {
+     "zip": "75013",
+     "homes": 14465,
+     "hail_12m": 0,
+     "permits_90d": 17,
+     "aged_old": 5031
+    }
+   ],
+   "noaa_named_reports": 1
+  },
+  {
+   "city": "Frisco",
+   "homes": 62035,
+   "hail_90d": 0,
+   "hail_12m": 6234,
+   "storms_12m": [
+    {
+     "date": "2026-06-02",
+     "homes_1in": 6234,
+     "max_in": 1.41,
+     "days_ago": 160
+    }
+   ],
+   "hail_max_12m": 1.41,
+   "hail_last_date": "2026-06-02",
+   "aged_documented": 0,
+   "aged_likely": 0,
+   "aged_unknown": 34297,
+   "aged_old": 0,
+   "permit_list_complete": false,
+   "permits_90d": 90,
+   "permits_base_90d": 80.2,
+   "permit_surge": 1.12,
+   "turnover_homes": 160,
+   "purchases_12m": 1899,
+   "owner_occupied": 53337,
+   "wind_12m": 1325,
+   "wind_top_day": "2026-05-15",
+   "wind_max_mph": 68,
+   "zips": [
+    {
+     "zip": "75035",
+     "homes": 28745,
+     "hail_12m": 1,
+     "permits_90d": 75,
+     "aged_old": 0
+    },
+    {
+     "zip": "75033",
+     "homes": 13370,
+     "hail_12m": 706,
+     "permits_90d": 8,
+     "aged_old": 0
+    },
+    {
+     "zip": "75034",
+     "homes": 10287,
+     "hail_12m": 5356,
+     "permits_90d": 7,
+     "aged_old": 0
+    },
+    {
+     "zip": "75036",
+     "homes": 8849,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    },
+    {
+     "zip": "75071",
+     "homes": 79,
+     "hail_12m": 0,
+     "permits_90d": 0,
+     "aged_old": 0
+    }
+   ],
+   "noaa_named_reports": 2
+  },
+  {
+   "city": "McKinney",
+   "homes": 61253,
+   "hail_90d": 0,
+   "hail_12m": 0,
+   "storms_12m": [],
+   "hail_max_12m": 0,
+   "hail_last_date": null,
+   "aged_documented": 48,
+   "aged_likely": 22508,
+   "aged_unknown": 0,
+   "aged_old": 22556,
+   "permit_list_complete": true,
+   "permits_90d": 172,
+   "permits_base_90d": 230.8,
+   "permit_surge": 0.75,
+   "turnover_homes": 266,
+   "purchases_12m": 3313,
+   "owner_occupied": 48641,
+   "wind_12m": 671,
+   "wind_top_day": "2026-03-15",
+   "wind_max_mph": 61,
+   "zips": [
+    {
+     "zip": "75071",
+     "homes": 22809,
+     "hail_12m": 0,
+     "permits_90d": 62,
+     "aged_old": 5378
+    },
+    {
+     "zip": "75072",
+     "homes": 17161,
+     "hail_12m": 0,
+     "permits_90d": 69,
+     "aged_old": 8086
+    },
+    {
+     "zip": "75070",
+     "homes": 15598,
+     "hail_12m": 0,
+     "permits_90d": 28,
+     "aged_old": 5674
+    },
+    {
+     "zip": "75069",
+     "homes": 5681,
+     "hail_12m": 0,
+     "permits_90d": 13,
+     "aged_old": 3415
+    }
+   ],
+   "noaa_named_reports": 2
+  },
+  {
+   "city": "Richardson",
+   "homes": 27136,
+   "hail_90d": 0,
+   "hail_12m": 7409,
+   "storms_12m": [
+    {
+     "date": "2026-04-27",
+     "homes_1in": 7409,
+     "max_in": 1.34,
+     "days_ago": 196
+    }
+   ],
+   "hail_max_12m": 1.34,
+   "hail_last_date": "2026-04-27",
+   "aged_documented": 0,
+   "aged_likely": 18542,
+   "aged_unknown": 0,
+   "aged_old": 18542,
+   "permit_list_complete": true,
+   "permits_90d": 51,
+   "permits_base_90d": 73.8,
+   "permit_surge": 0.69,
+   "turnover_homes": 0,
+   "purchases_12m": 476,
+   "owner_occupied": 22831,
+   "wind_12m": 0,
+   "zips": [
+    {
+     "zip": "75080",
+     "homes": 11777,
+     "hail_12m": 3333,
+     "permits_90d": 20,
+     "aged_old": 7977
+    },
+    {
+     "zip": "75081",
+     "homes": 9085,
+     "hail_12m": 4051,
+     "permits_90d": 17,
+     "aged_old": 6826
+    },
+    {
+     "zip": "75082",
+     "homes": 6230,
+     "hail_12m": 0,
+     "permits_90d": 14,
+     "aged_old": 3733
+    }
+   ],
+   "noaa_named_reports": 7
+  },
+  {
+   "city": "Rockwall",
+   "homes": 15289,
+   "hail_90d": 0,
+   "hail_12m": 9237,
+   "storms_12m": [
+    {
+     "date": "2026-04-27",
+     "homes_1in": 9237,
+     "max_in": 2.37,
+     "days_ago": 196
+    },
+    {
+     "date": "2026-03-04",
+     "homes_1in": 6,
+     "max_in": 1.27,
+     "days_ago": 250
+    }
+   ],
+   "hail_max_12m": 2.37,
+   "hail_last_date": "2026-04-27",
+   "aged_documented": 0,
+   "aged_likely": 8281,
+   "aged_unknown": 0,
+   "aged_old": 8281,
+   "permit_list_complete": true,
+   "permits_90d": 193,
+   "permits_base_90d": 114.0,
+   "permit_surge": 1.69,
+   "turnover_homes": 0,
+   "purchases_12m": 0,
+   "owner_occupied": 12131,
+   "wind_12m": 0,
+   "zips": [
+    {
+     "zip": "75087",
+     "homes": 9298,
+     "hail_12m": 3246,
+     "permits_90d": 51,
+     "aged_old": 4394
+    },
+    {
+     "zip": "75032",
+     "homes": 5984,
+     "hail_12m": 5984,
+     "permits_90d": 142,
+     "aged_old": 3880
+    }
+   ],
+   "noaa_named_reports": 2
+  },
+  {
+   "city": "Murphy",
+   "no_roof_data": true,
+   "noaa_named_reports": 5
+  },
+  {
+   "city": "Wylie",
+   "no_roof_data": true,
+   "noaa_named_reports": 4
+  },
+  {
+   "city": "Garland",
+   "no_roof_data": true,
+   "noaa_named_reports": 3
+  },
+  {
+   "city": "Sachse",
+   "no_roof_data": true,
+   "noaa_named_reports": 2
+  },
+  {
+   "city": "Little Elm",
+   "no_roof_data": true,
+   "noaa_named_reports": 2
+  },
+  {
+   "city": "Prosper",
+   "no_roof_data": true,
+   "noaa_named_reports": 1
+  },
+  {
+   "city": "Celina",
+   "no_roof_data": true,
+   "noaa_named_reports": 0
+  },
+  {
+   "city": "The Colony",
+   "no_roof_data": true,
+   "noaa_named_reports": 0
+  }
+ ],
+ "ideas": [
+  {
+   "city": "Richardson",
+   "page_type": "service",
+   "topic": "replacement",
+   "title": "Roof Replacement in Richardson, TX",
+   "slug": "roof-replacement-richardson-tx",
+   "score": 75.0,
+   "reasons": [
+    "18,542 roofs in Richardson are likely 16+ years old: 18,542 built that long ago with no re-roof permit since the city's complete permit list starts",
+    "Oldest-roof ZIPs: 75080 (7977), 75081 (6826), 75082 (3733)"
+   ],
+   "signal": "aging",
+   "signal_date": null,
+   "status": "new",
+   "rank": 1
+  },
+  {
+   "city": "Rockwall",
+   "page_type": "blog",
+   "topic": "cost",
+   "title": "Roof Replacement Costs in Rockwall 2026",
+   "slug": "roof-replacement-cost-rockwall-tx-2026",
+   "score": 73.3,
+   "reasons": [
+    "193 full re-roof permits in Rockwall in the 90 days to the permit refresh, vs 114.0 in an average 90 days the year before (x1.69)",
+    "Busiest ZIPs: 75032 (142), 75087 (51)"
+   ],
+   "signal": "permits",
+   "signal_date": null,
+   "status": "new",
+   "rank": 2
+  },
+  {
+   "city": "Rockwall",
+   "page_type": "service",
+   "topic": "roofers",
+   "title": "Roofers in Rockwall, TX",
+   "slug": "roofers-rockwall-tx",
+   "score": 66.0,
+   "reasons": [
+    "193 full re-roof permits in Rockwall in the 90 days to the permit refresh, vs 114.0 in an average 90 days the year before (x1.69)",
+    "Busiest ZIPs: 75032 (142), 75087 (51)"
+   ],
+   "signal": "permits",
+   "signal_date": null,
+   "status": "new",
+   "rank": 3
+  },
+  {
+   "city": "Allen",
+   "page_type": "service",
+   "topic": "replacement",
+   "title": "Roof Replacement in Allen, TX",
+   "slug": "roof-replacement-allen-tx",
+   "score": 60.2,
+   "reasons": [
+    "16,303 roofs in Allen are likely 16+ years old: 16,303 built that long ago with no re-roof permit since the city's complete permit list starts",
+    "Oldest-roof ZIPs: 75002 (11272), 75013 (5031)"
+   ],
+   "signal": "aging",
+   "signal_date": null,
+   "status": "new",
+   "rank": 4
+  },
+  {
+   "city": "Plano",
+   "page_type": "blog",
+   "topic": "buying",
+   "title": "Roof Inspection When Buying a Home in Plano",
+   "slug": "roof-inspection-buying-home-plano-tx",
+   "score": 55.0,
+   "reasons": [
+    "4,402 homes in Plano changed hands or got a new homestead in the last 12 months (county deed / homestead dates)",
+    "61,687 homes look owner-occupied"
+   ],
+   "signal": "purchases",
+   "signal_date": null,
+   "status": "new",
+   "rank": 5
+  },
+  {
+   "city": "Rockwall",
+   "page_type": "service",
+   "topic": "replacement",
+   "title": "Roof Replacement in Rockwall, TX",
+   "slug": "roof-replacement-rockwall-tx",
+   "score": 50.7,
+   "reasons": [
+    "8,281 roofs in Rockwall are likely 16+ years old: 8,281 built that long ago with no re-roof permit since the city's complete permit list starts",
+    "Oldest-roof ZIPs: 75087 (4394), 75032 (3880)"
+   ],
+   "signal": "aging",
+   "signal_date": null,
+   "status": "new",
+   "rank": 6
+  },
+  {
+   "city": "McKinney",
+   "page_type": "blog",
+   "topic": "buying",
+   "title": "Roof Inspection When Buying a Home in McKinney",
+   "slug": "roof-inspection-buying-home-mckinney-tx",
+   "score": 47.9,
+   "reasons": [
+    "3,313 homes in McKinney changed hands or got a new homestead in the last 12 months (county deed / homestead dates)",
+    "48,641 homes look owner-occupied"
+   ],
+   "signal": "purchases",
+   "signal_date": null,
+   "status": "new",
+   "rank": 7
+  },
+  {
+   "city": "Rockwall",
+   "page_type": "service",
+   "topic": "hail-repair",
+   "title": "Hail Damage Roof Repair in Rockwall, TX",
+   "slug": "hail-damage-roof-repair-rockwall-tx",
+   "score": 45.0,
+   "reasons": [
+    "9,237 of 15,289 homes in Rockwall were under radar hail 1 in or larger in the last 12 months (0 in the last 90 days)",
+    "Biggest storm: April 27, 2026, 9,237 homes hit, up to 2.37 in",
+    "Most recent qualifying storm April 27, 2026 (196 days ago)",
+    "Most hit ZIPs: 75032 (5984), 75087 (3246)"
+   ],
+   "signal": "hail",
+   "signal_date": "2026-04-27",
+   "status": "new",
+   "rank": 8
+  },
+  {
+   "city": "Rockwall",
+   "page_type": "blog",
+   "topic": "hail-storm",
+   "title": "April 2026 Hail Storm in Rockwall: What to Check",
+   "slug": "april-2026-hail-storm-rockwall-tx",
+   "score": 42.8,
+   "reasons": [
+    "9,237 homes in Rockwall under radar hail 1 in+ on April 27, 2026, up to 2.37 in",
+    "196 days ago"
+   ],
+   "signal": "hail",
+   "signal_date": "2026-04-27",
+   "status": "new",
+   "rank": 9
+  },
+  {
+   "city": "Frisco",
+   "page_type": "service",
+   "topic": "hail-repair",
+   "title": "Hail Damage Roof Repair in Frisco, TX",
+   "slug": "hail-damage-roof-repair-frisco-tx",
+   "score": 31.4,
+   "reasons": [
+    "6,234 of 62,035 homes in Frisco were under radar hail 1 in or larger in the last 12 months (0 in the last 90 days)",
+    "Biggest storm: June 2, 2026, 6,234 homes hit, up to 1.41 in",
+    "Most recent qualifying storm June 2, 2026 (160 days ago)",
+    "Most hit ZIPs: 75034 (5356), 75033 (706), 75035 (1)"
+   ],
+   "signal": "hail",
+   "signal_date": "2026-06-02",
+   "status": "new",
+   "rank": 10
+  },
+  {
+   "city": "Allen",
+   "page_type": "blog",
+   "topic": "buying",
+   "title": "Roof Inspection When Buying a Home in Allen",
+   "slug": "roof-inspection-buying-home-allen-tx",
+   "score": 29.9,
+   "reasons": [
+    "1,354 homes in Allen changed hands or got a new homestead in the last 12 months (county deed / homestead dates)",
+    "26,313 homes look owner-occupied"
+   ],
+   "signal": "purchases",
+   "signal_date": null,
+   "status": "new",
+   "rank": 11
+  },
+  {
+   "city": "Frisco",
+   "page_type": "blog",
+   "topic": "hail-storm",
+   "title": "June 2026 Hail Storm in Frisco: What to Check",
+   "slug": "june-2026-hail-storm-frisco-tx",
+   "score": 29.9,
+   "reasons": [
+    "6,234 homes in Frisco under radar hail 1 in+ on June 2, 2026, up to 1.41 in",
+    "160 days ago"
+   ],
+   "signal": "hail",
+   "signal_date": "2026-06-02",
+   "status": "new",
+   "rank": 12
+  },
+  {
+   "city": "Frisco",
+   "page_type": "blog",
+   "topic": "buying",
+   "title": "Roof Inspection When Buying a Home in Frisco",
+   "slug": "roof-inspection-buying-home-frisco-tx",
+   "score": 27.3,
+   "reasons": [
+    "1,899 homes in Frisco changed hands or got a new homestead in the last 12 months (county deed / homestead dates)",
+    "53,337 homes look owner-occupied"
+   ],
+   "signal": "purchases",
+   "signal_date": null,
+   "status": "new",
+   "rank": 13
+  },
+  {
+   "city": "Richardson",
+   "page_type": "service",
+   "topic": "hail-repair",
+   "title": "Hail Damage Roof Repair in Richardson, TX",
+   "slug": "hail-damage-roof-repair-richardson-tx",
+   "score": 27.3,
+   "reasons": [
+    "7,409 of 27,136 homes in Richardson were under radar hail 1 in or larger in the last 12 months (0 in the last 90 days)",
+    "Biggest storm: April 27, 2026, 7,409 homes hit, up to 1.34 in",
+    "Most recent qualifying storm April 27, 2026 (196 days ago)",
+    "Most hit ZIPs: 75081 (4051), 75080 (3333)"
+   ],
+   "signal": "hail",
+   "signal_date": "2026-04-27",
+   "status": "new",
+   "rank": 14
+  },
+  {
+   "city": "Richardson",
+   "page_type": "blog",
+   "topic": "hail-storm",
+   "title": "April 2026 Hail Storm in Richardson: What to Check",
+   "slug": "april-2026-hail-storm-richardson-tx",
+   "score": 26.0,
+   "reasons": [
+    "7,409 homes in Richardson under radar hail 1 in+ on April 27, 2026, up to 1.34 in",
+    "196 days ago"
+   ],
+   "signal": "hail",
+   "signal_date": "2026-04-27",
+   "status": "new",
+   "rank": 15
+  },
+  {
+   "city": "Richardson",
+   "page_type": "blog",
+   "topic": "buying",
+   "title": "Roof Inspection When Buying a Home in Richardson",
+   "slug": "roof-inspection-buying-home-richardson-tx",
+   "score": 11.6,
+   "reasons": [
+    "476 homes in Richardson changed hands or got a new homestead in the last 12 months (county deed / homestead dates)",
+    "22,831 homes look owner-occupied"
+   ],
+   "signal": "purchases",
+   "signal_date": null,
+   "status": "new",
+   "rank": 16
+  }
+ ],
+ "already_have": [
+  {
+   "city": "McKinney",
+   "page_type": "service",
+   "topic": "replacement",
+   "title": "Roof Replacement in McKinney, TX",
+   "slug": "roof-replacement-mckinney-tx",
+   "score": 57.5,
+   "reasons": [
+    "22,556 roofs in McKinney are likely 16+ years old: 48 with a re-roof permit that old, 22,508 built that long ago with no re-roof permit since the city's complete permit list starts",
+    "Oldest-roof ZIPs: 75072 (8086), 75070 (5674), 75071 (5378)"
+   ],
+   "signal": "aging",
+   "signal_date": null,
+   "status": "already-have",
+   "matched": [
+    "roof-replacement-mckinney-tx"
+   ]
+  }
+ ],
+ "dropped_already_published": 1,
+ "published_checked": 44
+}

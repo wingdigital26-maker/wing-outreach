@@ -99,20 +99,26 @@
     let el = document.getElementById('maCard');
     if (!el) { el = document.createElement('section'); el.id = 'maCard'; el.className = 'ma'; el.setAttribute('aria-label', 'Morning-after storm alert'); head.appendChild(el); }
     const sts = (a.top_streets || []).slice(0, 3).map(s => esc(s.street) + ' (' + esc(s.city) + ')').join(', ');
-    head.classList.add('open');   // Jack 10-30: no Details toggle, the full top area always shows (compact)
-    const today = a.alert_day === dayKey(new Date()), open = true;
+    const today = a.alert_day === dayKey(new Date()), open = head.classList.contains('open');
     el.innerHTML = `<div class="mh"><div class="k"><b>Morning after</b><span>Storm on <i class="wd">${esc(wk(a.storm))}, </i>${esc(lbl(a.storm, false))}</span></div>
       <h2>Hail up to ${plainIn(a.max_in)} hit ${fmt(a.homes_hit)} of your homes.<span class="h2b"> ${oldLine(a)}.</span></h2></div>
       <div class="acts"><button type="button" class="pri" data-ma="route">Start today's route (${(a.route || []).length})</button>${moreBtn(open)}</div>
-      <div class="more" id="maMore"><div class="nums"><span><b>${fmt(a.old_no_permit)}</b> roofs 15+ years old on record${a.age_unknown != null ? ` (${fmt(a.old_documented || 0)} by permit, ${fmt(a.old_likely || 0)} by year built in a city with full permit records)` : ''}</span>${a.age_unknown != null ? `<span><b>${fmt(a.age_unknown)}</b> older houses, roof age unknown (no full permit records in that city)</span>` : ''}<span class="n075"><b>${fmt(a.homes_075)}</b> took ${plainIn(0.75)} hail or more</span>${(a.cities || []).length ? `<span>${(a.cities || []).slice(0, 2).map(c => esc(c.city) + ' <b>' + fmt(c.homes) + '</b>').join(', ')}</span>` : ''}</div>
+      <div class="more" id="maMore"><div class="nums"><span><b>${fmt(a.old_no_permit)}</b> roofs 15+ years old on record${a.age_unknown != null ? ` (${fmt(a.old_documented || 0)} by permit, ${fmt(a.old_likely || 0)} by year built in a city with full permit records)` : ''}</span>${a.age_unknown != null ? `<span><b>${fmt(a.age_unknown)}</b> older houses, roof age unknown (no full permit records in that city)</span>` : ''}<span class="n075"><b>${fmt(a.homes_075)}</b> took 0.75 inch hail or more</span>${(a.cities || []).length ? `<span>${(a.cities || []).slice(0, 2).map(c => esc(c.city) + ' <b>' + fmt(c.homes) + '</b>').join(', ')}</span>` : ''}</div>
       ${sts ? `<div class="st">Top streets: ${sts}</div>` : ''}
       <div class="mlinks"><button type="button" class="lnk" data-ma="hist">Past alerts</button><button type="button" class="lnk" data-ma="hide">Hide for today</button></div></div>`;
     const t = document.getElementById('hdMore'); if (t) t.remove();   // the card carries the one Details toggle
   }
-  const moreBtn = () => '';   // Details toggle retired (Jack 10-30)
+  const moreBtn = open => `<button type="button" class="lnk mtog" data-ma="more" aria-expanded="${open}" aria-controls="maMore">${open ? 'Less' : 'Details'}<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  function toggleMore() {
+    const head = document.querySelector('.head'); if (!head) return;
+    const on = !head.classList.contains('open'); head.classList.toggle('open', on);
+    document.querySelectorAll('.head [data-ma="more"]').forEach(b => { b.setAttribute('aria-expanded', on); b.firstChild.textContent = on ? 'Less' : 'Details'; });
+  }
   /* a quiet day (no alert card): the greeting keeps a small Details toggle for the proof line and the stat strip */
   function quietToggle() {
-    const head = document.querySelector('.head'); if (head) head.classList.add('open');   // always open, no toggle (Jack 10-30)
+    const h1 = document.querySelector('.hello h1'); if (!h1 || document.getElementById('maCard') || document.getElementById('hdMore')) return;
+    const w = document.createElement('span'); w.id = 'hdMore'; w.innerHTML = moreBtn(false); h1.after(w);
+    w.addEventListener('click', e => { if (e.target.closest('[data-ma="more"]')) toggleMore(); });
   }
 
   function openDlg(html) {
@@ -162,7 +168,8 @@
     const o = e.target.closest('[data-ma-open]'); if (o) { const a = ALL.find(x => x.id === o.dataset.maOpen); if (a) route(a); return; }
     const b = e.target.closest('[data-ma]'); if (!b) return;
     const k = b.dataset.ma, a = cur || active(ALL) || ALL[0];
-    if (k === 'route') route(a);
+    if (k === 'more') toggleMore();
+    else if (k === 'route') route(a);
     else if (k === 'hist') history();
     else if (k === 'close') dlg && dlg.close();
     else if (k === 'add') addRoute(a);
@@ -171,7 +178,7 @@
   }
   document.addEventListener('click', e => { if (e.target.closest('#maCard')) onClick(e); });
 
-  (RC.factsReady || Promise.resolve()).then(() => fetch((RC.dataRoot || '../lib/st-data-dfw/') + 'meta/alerts.json', { cache: 'no-cache' }))
+  (RC.factsReady || Promise.resolve()).then(() => fetch(RC.dataRoot + 'meta/alerts.json', { cache: 'no-cache' }))
     .then(r => r.ok ? r.json() : null).then(d => {
       ALL = (d && Array.isArray(d.alerts) ? d.alerts : []).filter(a => a && a.id && a.storm).sort((a, b) => a.id < b.id ? 1 : -1);
       const a = active(ALL); cur = a; if (a) card(a); else quietToggle();

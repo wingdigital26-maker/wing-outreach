@@ -50,13 +50,13 @@
     // only when the measured model passed its checks (never the outline stand-in, Jack 10-22)
     $('#kpis').innerHTML = [
       ['Roof area', '~' + n1(m.areaSqft) + ' sq ft', 'estimate'],
-      ['Squares', '~' + n1(m.squares), `LiDAR estimate (${yr}), typically within about 10% of permit records`],
+      ['Squares', '~' + n1(m.squares), `LiDAR estimate (${yr})`],
       ['Pitch', pitch || 'not on file', `${yr} LiDAR, to the nearest 12th`]
     ].concat(PASSED ? [['Sections', m.facetsN || 'not on file', '']] : []).map(([a, v, s]) => `<div><span>${esc(a)}</span><b>${esc(v)}</b>${s ? `<small>${esc(s)}</small>` : ''}</div>`).join('');
     $('#kpis').style.gridTemplateColumns = PASSED ? '' : 'repeat(3,1fr)';
     if (!PASSED) {
       $('#diag').innerHTML = ''; $('#edges').innerHTML = '';
-      $('#secs').innerHTML = `<p class="muted">The roof is measured section by section when it is inspected in person. Squares here are a LiDAR estimate from aerial survey data, typically within about 10% of permit records; a measurement is taken before the final quote.</p>`;
+      $('#secs').innerHTML = `<p class="muted">The roof is measured section by section when it is inspected in person. Squares here are a LiDAR estimate from aerial survey data; a measurement is taken before the final quote.</p>`;
     } else {
       const svg = D && D.geometry_ft ? RCROOF.diagramSVG(D, 760) : SP ? RealRoof.planSVG(SP, 760) : '';
       $('#diag').innerHTML = svg ? `<figure>${svg}<figcaption>Top-down view, lengths in feet. Each lettered section is one roof plane with its pitch.</figcaption></figure>` : '';

@@ -446,7 +446,7 @@ body[data-view]{background:radial-gradient(ellipse 60% 48% at 50% 40%,rgba(255,2
 .cact.book .cbtn.pri{border-radius:var(--c-r2);background:var(--accent);box-shadow:none;min-height:42px}
 #chstage .stage{border-radius:var(--c-r2);background:var(--c-canvas);border:1px solid var(--c-line-2)}
 #chstage .stage::after{display:none}
-#chstage .title{backdrop-filter:none}   /* Jack 10-30: the house-pane roof label is a small light pill (crm.css), not an ink card over the house */
+#chstage .title{border-radius:var(--c-r3);backdrop-filter:none;background:var(--c-ink)}
 #chstage .chips,#chstage .ctl{backdrop-filter:none;background:#fff;border-color:var(--c-line);border-radius:var(--c-r2)}
 #chstage .chip,#chstage .ctl button{border-radius:var(--c-r3)}
 #chstage .legend{border-radius:var(--c-r2)}

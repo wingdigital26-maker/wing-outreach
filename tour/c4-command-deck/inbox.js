@@ -190,11 +190,11 @@
       } else {
         if (r.canSend) send = `<a class="dbtn pri" data-t="send" href="${mailHref(r.subject, r.body)}">Open in Mail</a>`;
         else send = `<button type="button" class="dbtn pri off" aria-disabled="true">Open in Mail</button>`;
-        why = r.missing && r.missing.includes('mailingAddress') && r.missing.includes('homeLink') ? 'Add your mailing address and your public site to send emails.' : r.missing && r.missing.includes('mailingAddress') ? 'Add your mailing address to send emails.' : r.blocked || 'Your mail app opens with the draft. Type the address there.';
+        why = r.missing && r.missing.includes('mailingAddress') ? 'Add your mailing address to send emails.' : r.blocked || 'Your mail app opens with the draft. Type the address there.';
       }
       return `<section class="inext"><div class="ilab"><span>Next: Day ${r.dayN || c.step} ${chan}, ${esc(when)}</span>${seg}</div>` +
         (r.body ? (chan === 'email' && r.subject ? `<p class="isubj">${esc(r.subject)}</p>` : '') + `<textarea class="idraft" rows="${chan === 'email' ? 7 : 4}" aria-label="Next ${chan} draft" ${r.canSend ? '' : 'readonly'}>${esc(r.body)}</textarea>` : '') +
-        `<div class="iact">${why ? `<p class="inote">${RC.setupLink(esc(why))}</p>` : '<span></span>'}${send}</div></section>`;
+        `<div class="iact">${why ? `<p class="inote">${esc(why)}</p>` : '<span></span>'}${send}</div></section>`;
     }
     function suggHTML(id) {
       const s = sugg[id]; if (!s) return '';

@@ -92,7 +92,7 @@ function realSpecFor(h) {
     return RR.spec(e, { seed: +dm[2] }); }
   const mm = /^m(\d+)$/.exec(h.rawId || '');
   if (mm && RR.mapCached) { const e = RR.mapCached(mm[1]); return e ? RR.spec(e, { seed: +mm[1] % 9973 }) : RR.none(); } // storm map home: its own footprint
-  if (!h.rawId) { const R0 = ROOFS[window.rooferKey ? rooferKey() : 'jackson']; if (R0 && R0[R0.default]) { DEFAULT_HOUSE = true; return RR.spec(R0[R0.default], { seed: 1 }); } }
+  if (!h.rawId) { const R0 = ROOFS[window.rooferKey ? rooferKey() : window.DEFAULT_ROOFER]; if (R0 && R0[R0.default]) { DEFAULT_HOUSE = true; return RR.spec(R0[R0.default], { seed: 1 }); } }
   return RR.none(); // never a drawn stand-in: no outline, no roof
 }
 // storm map homes need their footprint tile fetched before the (synchronous) roof build
@@ -604,14 +604,11 @@ function build() {
   document.getElementById('titleH').title = window.RealRoof ? RealRoof.tip(SPEC) : 'Estimated from public building outlines and 2018 LiDAR. Verify on site.'; // squares only from the home's LiDAR roof record (an estimate, typically 6 to 8% off roofer permits); no record = no number
   const FRy = SPEC && SPEC.facetRec ? SPEC.facetRec.year || 2018 : null;
   // short headline (10-23: four lines on a phone): squares and pitch; the LiDAR year and "roof shape being checked" are in the line under it
-  const sqFt = M.area ? ', about ' + M.area.toLocaleString('en-US') + ' sq ft' : '';   // one size, in squares, with the square feet beside it (10-30)
-  const sqTxt = SPEC && SPEC.drawn ? M.squares + ' squares' + sqFt + ' (from your outline)' : FRy ? `${M.squares} squares${sqFt}` : 'Roof size not measured';
+  const sqTxt = SPEC && SPEC.drawn ? '~' + M.squares + ' sq (from your outline)' : FRy ? `~${M.squares} sq est.` : 'Roof size not measured';
   const pTxt = SPEC && SPEC.drawn ? pitchTxt : FRy ? 'pitch ' + M.pitchText : '';
   document.getElementById('titleH').textContent = NONE ? 'Outline not on file yet' : [sqTxt, SPEC && SPEC.checking ? '' : SPEC_INFO ? SPEC_INFO.style : 'hip roof', pTxt].filter(Boolean).join(', ');
   document.getElementById('titleP').textContent = NONE ? 'The public building maps have no outline for this home yet, so there are no squares to show. This is the parcel from above.'
     : `${(SPEC && SPEC.label) || 'Roof drawn from the building outline'}${DEFAULT_HOUSE ? " (stop 1 on today's route)" : ''}. ${SPEC && SPEC.checking ? 'Drag to turn it.' : 'Drag to turn it, click a plane to measure it.'}`;
-  // the Inbox house pane's pill has room for the size only (10-30, Jack: "43.5 squares, about 4,350 s..." was cut off)
-  document.getElementById('titleH').dataset.short = NONE ? 'Outline not on file yet' : FRy || (SPEC && SPEC.drawn) ? M.squares + ' sq' + (M.area ? ' · ' + M.area.toLocaleString('en-US') + ' sq ft' : '') : 'Roof size not measured';
   showNone(); renderTag();
   startIntro();
 }
@@ -731,22 +728,6 @@ function setMode(m) {
   chips.querySelectorAll('.chip').forEach(c => { c.classList.toggle('on', c.dataset.m === m); c.setAttribute('aria-pressed', c.dataset.m === m ? 'true' : 'false'); });
   renderLegend();
 }
-// slopes (Jack 10-30 "accurate slope images"): each plane is drawn at its own rise; the Planes view shades it by pitch in
-// flat brand blues, light = low slope, dark = steep. Pitches come only from the plane data, never invented.
-const SLOPE_BINS = [{ max: 4, c: '#A9CBE6', t: 'Low, up to 4/12' }, { max: 7, c: '#4F8FC4', t: 'Medium, 5 to 7/12' }, { max: 9, c: '#1F5F94', t: 'Steep, 8 to 9/12' }, { max: 99, c: '#0E3A63', t: 'Very steep, 10/12 and up' }];
-const slopeBin = r => SLOPE_BINS.find(b => r <= b.max) || SLOPE_BINS[3];
-const pitchEst = () => !(M.facet && !(SPEC && SPEC.checking)) || !!(SPEC && SPEC.drawn && !SPEC.pitchMeasured);
-const onePitch = () => new Set(PLANES.map(P => P.rise)).size <= 1;
-const slopeDeg = r => (Math.atan(r / 12) * 180 / Math.PI).toFixed(1);
-// side view of one slope: a right triangle at the real rise over a 12 run, the pitch and its angle
-function slopeSVG(r, k) {
-  k = k || 4; const w = 12 * k, h = Math.max(2, r * k), W = w + 4, H = h + 4;
-  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true" style="display:block;flex:none"><path d="M2 ${H - 2}H${w + 2}V${H - 2 - h}Z" fill="rgba(255,255,255,.18)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
-}
-window.__roofPlan = () => ({ mode, active: activeIdx, est: pitchEst(), one: onePitch(), bins: SLOPE_BINS, facet: !!M.facet,
-  planes: planeGroups.map(pg => ({ id: pg.P.id, name: pg.P.name, rise: pg.P.rise, area: pg.P.m.area, sq: sqOf(pg.P.m.area), hit: pg.P.hit || '', col: slopeBin(pg.P.rise).c,
-    pts: pg.P.pts.map(v => [v.x, v.z]), edges: pg.P.m.edges.map(e => ({ type: e.type, ft: e.ft, col: EDGE_COL[e.type], a: [e.a.x, e.a.z], b: [e.b.x, e.b.z] })) })),
-  hail: HAIL, slopeSVG, deg: slopeDeg });
 function renderLegend() {
   const A = activeIdx >= 0 ? planeGroups[activeIdx] : null;
   if (mode === 'edges') {
@@ -754,15 +735,11 @@ function renderLegend() {
     legend.innerHTML = EDGE_ORDER.filter(t => src[t]).map(t => `<span><i style="background:${EDGE_COL[t]}"></i>${EDGE_LABEL[t]}<b>${src[t]} ft</b></span>`).join('') + `<span class="cap">${A ? A.P.name + ', edge lengths' : 'Whole roof, shared edges counted once'}</span>`;
   } else if (mode === 'dims') legend.innerHTML = `<span><i style="background:var(--ink)"></i>Eave runs<b>${M.edgeTotals.eave} ft</b></span><span class="cap">Dimensions in feet along every eave</span>`;
   else if (mode === 'hail') legend.innerHTML = `<span><i style="background:var(--ink)"></i>Hail at this home, ${HAIL.date}<b>${HAIL.size}</b></span><span class="cap">Radar value for the whole home. Radar does not say which slopes were hit; check every plane on the inspection.</span>`;
-  else if (mode === 'planes' && PLANES.length && !NONE) {
-    legend.innerHTML = onePitch() ? `<span><i style="background:${slopeBin(PLANES[0].rise).c}"></i>${PLANES[0].rise}/12<b>${slopeDeg(PLANES[0].rise)}°</b></span><span class="cap">${M.facet && !pitchEst() ? 'One pitch on every plane' : 'One pitch for the whole roof (estimate)'}</span>`
-      : SLOPE_BINS.filter(b => PLANES.some(P => slopeBin(P.rise) === b)).map(b => `<span><i style="background:${b.c}"></i>${b.t}</span>`).join('') + `<span class="cap">Planes shaded by pitch${pitchEst() ? ' (estimated)' : ''}. Click a plane for its slope.</span>`;
-  }
-  legend.hidden = mode === 'planes' && (!PLANES.length || NONE);
+  legend.hidden = mode === 'planes';
 }
 function focusPlane(i) {
   if (i < 0 || i >= planeGroups.length) return;
-  // 10-30 (Jack: "I can't click on sections of the roof"): a roof whose shape is being checked still answers a click; its label says estimate
+  if (SPEC && SPEC.checking) return;   // shape being checked: its sections are not this home's planes, nothing to measure per plane
   activeIdx = i; stage.classList.add('focused');
   setMode('edges');
   const pg = planeGroups[i];
@@ -806,19 +783,19 @@ function renderCallout(A) {
     totalEl.style.cssText = 'position:absolute;top:12px;right:12px;z-index:7;pointer-events:none;text-align:right;background:#fff;color:#0B1020;border:1px solid rgba(11,16,32,.12);border-radius:6px;box-shadow:0 6px 18px rgba(11,16,32,.12);line-height:1.2;font-family:inherit';
     stage.appendChild(totalEl);
     calloutEl = document.createElement('div'); calloutEl.id = 'areaCallout'; calloutEl.setAttribute('aria-live', 'polite');
-    calloutEl.style.cssText = 'position:absolute;left:50%;transform:translate(-50%,calc(-100% - 14px));z-index:6;pointer-events:none;max-width:calc(100% - 24px);font-family:inherit';
+    calloutEl.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);z-index:6;pointer-events:none;max-width:calc(100% - 24px);font-family:inherit';
     stage.appendChild(calloutEl);
   }
   const t = document.getElementById('title');
   if (NONE || !PLANES.length) { totalEl.hidden = true; calloutEl.hidden = true; if (t) t.style.paddingRight = ''; return; }
   const est = M.facet && !(SPEC && SPEC.checking) ? '' : '~', tag = est ? ' est.' : '';   // LiDAR squares are an estimate
-  // 10-30: the headline carries the one roof size (squares, about N sq ft), so the corner box no longer repeats it or covers the text
-  totalEl.hidden = true; if (t) t.style.paddingRight = '';
+  totalEl.hidden = false; totalEl.style.padding = isPhone ? '6px 10px' : '8px 14px';
   totalEl.innerHTML = `<div style="font-size:${isPhone ? '11px' : '12px'};opacity:.65">Total roof</div><div style="font-size:${isPhone ? '16px' : '19px'};font-weight:700;white-space:nowrap">${est}${M.area.toLocaleString('en-US')} sq ft</div><div style="font-size:${isPhone ? '11px' : '12px'};opacity:.7;white-space:nowrap">${est}${totSq()} sq${tag}</div>`;
+  if (t) t.style.paddingRight = (totalEl.offsetWidth + 16) + 'px';   // the headline wraps short of the total, never under it
   // under the title, and under the total when the title is hidden (a focused section on a phone): never on top of the total
   calloutEl.style.top = (Math.max(t && t.offsetHeight ? t.offsetTop + t.offsetHeight : 12, totalEl.offsetTop + totalEl.offsetHeight) + 8) + 'px';
-  calloutEl.hidden = !A; calloutEl.dataset.i = A ? planeGroups.indexOf(A) : '';
-  calloutEl.innerHTML = A ? `<div style="display:flex;align-items:flex-end;gap:12px;background:#0B1020;color:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(11,16,32,.18);padding:${isPhone ? '7px 11px' : '8px 14px'};white-space:nowrap;line-height:1.3;font-size:${isPhone ? '13px' : '14px'}"><div><b style="font-size:${isPhone ? '14px' : '15px'}">${A.P.name}</b><br>${A.P.rise}/12${pitchEst() ? ' est.' : ''}, ${slopeDeg(A.P.rise)}°<br>${est}${A.P.m.area.toLocaleString('en-US')} sq ft, ${sqOf(A.P.m.area)} sq${SPEC && SPEC.checking ? '<br><span style="opacity:.7;font-size:12px">Roof shape being checked</span>' : ''}</div>${slopeSVG(A.P.rise, isPhone ? 3 : 4)}</div>` : '';
+  calloutEl.hidden = !A;
+  calloutEl.innerHTML = A ? `<div style="background:#0B1020;color:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(11,16,32,.18);padding:${isPhone ? '7px 13px' : '8px 16px'};white-space:nowrap;line-height:1.25;font-size:${isPhone ? '15px' : '17px'}">Section ${A.P.id}: <b>${est}${A.P.m.area.toLocaleString('en-US')} sq ft</b> <span style="opacity:.8">(${sqOf(A.P.m.area)} sq), ${A.P.rise}/12</span></div>` : '';
 }
 function renderPanel() {
   const A = activeIdx >= 0 ? planeGroups[activeIdx] : null;
@@ -838,7 +815,7 @@ function renderPanel() {
     return;
   }
   focusEl.innerHTML = A ? planeHTML(A) : `<div class="tot"><div><small>Total roof</small><b title="${window.RealRoof ? RealRoof.tip(SPEC) : 'Estimated from public building outlines and 2018 LiDAR. Verify on site.'}">${M.facet ? '' : '~'}${M.area.toLocaleString('en-US')}<i>sq ft</i></b></div><div><small>Squares</small><b>${M.facet ? '~' + totSq() + '<i>est., LiDAR</i>' : '~' + totSq() + '<i>est.</i>'}</b></div><div><small>${M.facet ? 'Pitch' : 'Pitch est.'}</small><b>${pitchGap() ? 'No LiDAR' : M.pitchText || M.pitch}</b></div><div><small>${M.facet ? 'Facets' : 'Planes'}</small><b>${M.planes.length}</b></div></div>`;
-  tableEl.innerHTML = `<thead><tr><th>Plane</th><th>${M.facet ? 'Pitch' : 'Pitch est.'}</th><th>${M.facet ? 'Area' : 'Area est.'}</th><th>${M.facet ? 'Squares' : 'Squares est.'}</th></tr></thead><tbody>${PLANES.map((P, i) => `<tr data-i="${i}" class="${A && A.P === P ? 'sel' : ''}"><td>${P.name}${P.hit === 'heavy' ? '<span class="tag">hail</span>' : ''}</td><td>${P.rise}/12</td><td>${P.m.area.toLocaleString()} sq ft</td><td><b>${P.m.squares.toFixed(1)}</b></td></tr>`).join('')}</tbody><tfoot><tr><td>Total</td><td>${M.pitchText || M.pitch}</td><td>${M.area.toLocaleString()} sq ft</td><td>${M.facet ? '' : '~'}${totSq()}</td></tr><tr><td colspan="4" style="font-weight:400;font-size:12px;opacity:.75">${SPEC && SPEC.sectionsNote ? SPEC.sectionsNote + ': ' : ''}${totSq() === sqOf(M.area) ? `${PLANES.length} sections add up to ${M.area.toLocaleString('en-US')} sq ft of roof = ${totSq()} squares` : `${PLANES.length} sections add up to ${M.area.toLocaleString('en-US')} sq ft (each rounded to the foot); the measured total is ${totSq()} squares`}</td></tr></tfoot>`;
+  tableEl.innerHTML = `<thead><tr><th>Plane</th><th>Pitch est.</th><th>Area est.</th><th>Squares est.</th></tr></thead><tbody>${PLANES.map((P, i) => `<tr data-i="${i}" class="${A && A.P === P ? 'sel' : ''}"><td>${P.name}${P.hit === 'heavy' ? '<span class="tag">hail</span>' : ''}</td><td>${P.rise}/12</td><td>${P.m.area.toLocaleString()} sq ft</td><td><b>${P.m.squares.toFixed(1)}</b></td></tr>`).join('')}</tbody><tfoot><tr><td>Total</td><td>${M.pitchText || M.pitch}</td><td>${M.area.toLocaleString()} sq ft</td><td>~${totSq()}</td></tr><tr><td colspan="4" style="font-weight:400;font-size:12px;opacity:.75">${SPEC && SPEC.sectionsNote ? SPEC.sectionsNote + ': ' : ''}${totSq() === sqOf(M.area) ? `${PLANES.length} sections add up to ${M.area.toLocaleString('en-US')} sq ft of roof = ${totSq()} squares` : `${PLANES.length} sections add up to ${M.area.toLocaleString('en-US')} sq ft (each rounded to the foot); the estimated total is ${totSq()} squares`}</td></tr></tfoot>`;
   { const mn = document.getElementById('measNote'); if (mn) { const t = M.facet ? (SPEC && SPEC.mesh ? 'Roof drawn as one solid model fitted to the LiDAR returns; the total is the LiDAR-measured squares and each section is scaled to add up to it. Verify on site before the proposal.' : 'Sections from the building outline; the total and pitch are measured from LiDAR. Verify on site before the proposal.') : 'Estimated from the drawing: plane area is plan area times the pitch factor, squares are area over 100, from public building outlines and LiDAR. A field measurement replaces these before the proposal.'; if (mn.textContent !== t) mn.textContent = t; } }
   tableEl.querySelectorAll('tbody tr').forEach(tr => { tr.onclick = () => { const i = +tr.dataset.i; i === activeIdx ? resetView() : focusPlane(i); }; tr.onmouseenter = () => { hoverIdx = +tr.dataset.i; }; tr.onmouseleave = () => { hoverIdx = -1; }; });
   focusEl.querySelectorAll('[data-whole]').forEach(b => b.onclick = resetView);
@@ -858,13 +835,12 @@ addEventListener('keydown', e => { if (e.key === 'Escape' && activeIdx >= 0) res
 const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
 let downAt = null;
 function pick(e) { const r = canvas.getBoundingClientRect(); mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(mouse, camera); const h = ray.intersectObjects(pickables, false)[0]; return h ? h.object.userData.plane : -1; }
-const showCallout = () => renderCallout(activeIdx >= 0 ? planeGroups[activeIdx] : hoverIdx >= 0 ? planeGroups[hoverIdx] : null);
-canvas.addEventListener('pointermove', e => { if (e.pointerType === 'touch' || downAt) return; const h = pick(e); if (h !== hoverIdx) { hoverIdx = h; if (activeIdx < 0) showCallout(); } canvas.style.cursor = hoverIdx >= 0 ? 'pointer' : ''; });
-canvas.addEventListener('pointerleave', () => { hoverIdx = -1; if (activeIdx < 0) showCallout(); });
+canvas.addEventListener('pointermove', e => { if (e.pointerType === 'touch') return; hoverIdx = pick(e); canvas.style.cursor = hoverIdx >= 0 ? 'pointer' : ''; });
+canvas.addEventListener('pointerleave', () => { hoverIdx = -1; });
 canvas.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; });
 canvas.addEventListener('pointerup', e => {
   if (!downAt) return; const d = Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]); downAt = null;
-  if (d < 5) { const i = pick(e); if (i >= 0) { i === activeIdx ? resetView() : focusPlane(i); } else if (activeIdx >= 0) resetView(); }
+  if (d < 6) { const i = pick(e); if (i >= 0) { i === activeIdx ? resetView() : focusPlane(i); } else if (activeIdx >= 0) resetView(); }
 });
 controls.addEventListener('start', () => { tween = null; });
 
@@ -890,8 +866,6 @@ function declutter(els) {
   });
 }
 function frame(now) {
-  // loop 19: the 3D stage is not on screen (Customers, Inbox, Calendar views hide it): no frame work, look again in 0.4 s
-  if (!stage.getClientRects().length) { last = now; setTimeout(() => requestAnimationFrame(frame), 400); return; }
   const dt = Math.min(.05, (now - last) / 1000); last = now;
   stageTop = stage.getBoundingClientRect().top; sheetTop = isPhone && activeIdx >= 0 ? sheet.getBoundingClientRect().top : 1e9;
   explodeT += (explodeTarget - explodeT) * Math.min(1, dt * 4.5);
@@ -914,14 +888,14 @@ function frame(now) {
     if (building) pg.g.position.y += (1 - (pg.introK || 0)) * 2.6;
     pg.ghostMat.opacity = .55 * Math.min(1, pg.lift * 2.2);
     const wantA = isA ? 1 : 0, wantH = i === hoverIdx && !isA ? 1 : 0;
-    const changed = Math.abs(pg.act - wantA) > .002 || Math.abs(pg.hover - wantH) > .002 || frames < 2 || pg.lastMode !== mode; pg.lastMode = mode;
+    const changed = Math.abs(pg.act - wantA) > .002 || Math.abs(pg.hover - wantH) > .002 || frames < 2;
     if (changed || Math.abs(wantLift - pg.lift) > .001) rodBusy = true;
     pg.act += (wantA - pg.act) * Math.min(1, dt * 7); pg.hover += (wantH - pg.hover) * Math.min(1, dt * 9);
     if (changed) {
       const red = pg.P.hit === 'heavy' ? 1 : 0;
       pg.baseCols.forEach((b, k) => {
         const l = b.c.getHSL({}).l; tmpC.copy(b.hit ? RED_HIT : RED).offsetHSL(0, 0, (l - .34) * .45);
-        col.copy(b.c).lerp(tmpC, red); if (mode === 'planes' && !red) col.lerp(tmpC.set(slopeBin(pg.P.rise).c), .5); col.offsetHSL(0, 0, pg.hover * .11 + pg.act * .06); pg.inst.setColorAt(k, col);
+        col.copy(b.c).lerp(tmpC, red); col.offsetHSL(0, 0, pg.hover * .11 + pg.act * .06); pg.inst.setColorAt(k, col);
       });
       if (pg.inst.instanceColor) pg.inst.instanceColor.needsUpdate = true;
       pg.mat.metalness = .74 - .40 * red; pg.mat.roughness = .34 + .14 * red; pg.mat.envMapIntensity = 1 - .7 * red; pg.mat.emissive.setRGB(.025 * red, 0, 0);
@@ -947,7 +921,6 @@ function frame(now) {
   // declutter: a label that would sit on top of a bigger plane's label waits until the view turns
   declutter(planeGroups.slice().sort((a, b) => b.P.m.area - a.P.m.area).map(pg => pg.pin));
   if (activeIdx >= 0) declutter(planeGroups[activeIdx].epins);
-  if (calloutEl && !calloutEl.hidden && calloutEl.dataset.i !== '') { const pg = planeGroups[+calloutEl.dataset.i]; if (pg) { tmpV.copy(pg.centroid).add(pg.g.position); tmpV.y += BASE; const c = project(tmpV), cw = calloutEl.offsetWidth / 2 + 8; calloutEl.style.left = Math.max(cw, Math.min(W2() - cw, c.x)) + 'px'; calloutEl.style.top = Math.max(calloutEl.offsetHeight + 20, c.y) + 'px'; } }
   dimsG.visible = mode === 'dims';
   DIMS.forEach(d => { const toCam = camera.position.clone().sub(d.mid).setY(0).normalize(); const far = Math.max(0, -d.nrm.dot(toCam)); tmpV.copy(d.mid).addScaledVector(d.nrm, d.off + far * 3.4); tmpV.y += BASE - .15; place(d.pin, project(tmpV), mode === 'dims'); });
   const capWant = mode === 'edges' || building ? 0 : Math.max(0, 1 - explodeT * 1.6); capMat.opacity += (capWant - capMat.opacity) * Math.min(1, dt * 8); caps.visible = capMat.opacity > .02;

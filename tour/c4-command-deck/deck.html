@@ -2,8 +2,8 @@
 <html lang="en" data-rc="today">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Wing Outreach</title>
-<script src="../lib/rc-frame-pause.js"></script><!-- parked by the shell = no drawing -->
+<title>Roof Command</title>
+<script src="../lib/rc-frame-pause.js"></script><script src="../lib/rc-fetch-memo.js"></script><!-- one download per data file per page (11-02) --><!-- parked by the shell = no drawing -->
 <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
 <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-600.woff2" as="font" type="font/woff2" crossorigin>
@@ -627,21 +627,21 @@ label.dlab{display:block}
 }
 @media (max-width:640px){ .app .deck .card .ph .bl i{display:none}
   .act{gap:6px}.act button{gap:6px;padding:0 6px;font-size:15px}.act .ic{width:17px;height:17px} }
-/* loop 28: map about 25% wider, list + house card about 15% narrower */
-@media (min-width:1381px){ .main{grid-template-columns:255px minmax(360px,408px) minmax(0,1fr)} }
-@media (min-width:641px) and (max-width:1380px){ .main{grid-template-columns:231px minmax(340px,374px) minmax(0,1fr)}
-  .app .deck .card .cb .facts b{white-space:nowrap;font-size:16px} .app .deck .card .cb .facts b i{display:block;margin:2px 0 0} .app .deck .card .cb .facts div{padding-left:10px;padding-right:8px} }
+/* phone, Why today (11-12): two lines, not one with an ellipsis. On one line the second reason was cut, and when that
+   reason is the roof's honest caveat ("No new roof on city list (starts 2015)") the card lost it. The card has the room:
+   Text, Email, Proof and Skip stay well above the bar. (Out-ranks simple.css's one-line rule, which loads later.) */
+@media (max-width:640px){ html[data-rc] body .app .deck .card .cb p.why{-webkit-line-clamp:2} }
 </style>
 <link rel="stylesheet" href="../lib/rc-console.css"><!-- polish direction B: Ops Console -->
 <link rel="stylesheet" href="simple.css"><!-- Today simplified (Jack 10-26): one hero, a clear house band, one-line rows, a calmer map -->
-<link rel="stylesheet" href="../lib/wo-calm.css"><!-- calm skin (DESIGN-RULES.md, 10-29) -->
-<link rel="stylesheet" href="../lib/opp-cards.css"><!-- the Opportunity Score on cards and rows (10-29) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../lib/rc-apprules.css"><!-- app rules (11-02): dark hero + 4 mini dashboards above the deck, white cards on the grey canvas -->
 </head>
 <body>
 <div class="app">
   <header class="bar">
     <div class="co"><span class="mk" data-logo></span><div><b data-r="name"></b><small data-r="area"></small></div></div>
-    <nav class="tabs" aria-label="Sections"><button class="on" data-nav="today">Today</button><button data-nav="pipeline">Pipeline</button><button data-nav="map">Map</button><button data-nav="homes">Homes</button><button data-nav="storms">Storms</button></nav>
+    <nav class="tabs" aria-label="Sections"><button class="on">Today</button><button>Pipeline</button><button>Map</button><button>Homes</button><button>Storms</button></nav>
     <span class="sp"></span>
     <label class="find"><span class="ic" data-i="search"></span><input id="findIn" type="search" placeholder="Find an address" autocomplete="off" aria-label="Find an address in today's list"></label>
     <div class="sig">Powered by <span class="wm" data-wing="#5B82FF"></span><b>Wing Digital</b></div>
@@ -650,8 +650,18 @@ label.dlab{display:block}
 
   <section class="head">
     <div class="hello">
-      <h1 id="hello"><span id="greet">Good morning</span><span class="rep" data-r="rep"></span></h1>
+      <h1 id="hello"><b class="pgt">Today</b><span id="greet">Good morning</span><span class="rep" data-r="rep"></span></h1>
+      <small class="pgsub" id="pgSub"></small>
     </div>
+  </section>
+  <!-- app rules overview (11-02): one dark hero with the most important number, a side panel, then four mini dashboards.
+       Built by ov.js from the data this page already holds (HOMES, LEFT, THREADS, R.storm, stage counts). Nothing invented. -->
+  <section class="ov" id="ov" aria-label="Today at a glance" hidden>
+    <div class="ov-row1">
+      <article class="ov-hero" id="ovHero"></article>
+      <article class="ov-panel" id="ovPanel"></article>
+    </div>
+    <div class="ov-cards" id="ovCards"></div>
   </section>
 
   <main class="main">
@@ -683,14 +693,14 @@ label.dlab{display:block}
 <div class="sheet rsheet" id="sheetRoof"><span class="grab"></span><div class="sh"><b id="rsAddr">Roof</b><button data-close><span class="ic" data-i="close"></span></button></div><div class="roofwrap" id="rsRoof"></div><div class="rchips" id="rsChips"></div><div class="rtab" id="rsTab"></div></div>
 
 <!-- the list's data first (rc-queue starts its download as soon as it runs), then the 2 MB of map libraries -->
-<script src="../lib/rc-state.js"></script>
+<script src="../lib/rc-state.js"></script><script src="../lib/rc-layout.js"></script>
 <script src="../lib/rc-plain.js"></script><!-- plain words on the surface (Jack 10-26) -->
 <script>/* the right time of day before anything else paints */ try { document.getElementById('greet').textContent = RC.greeting(); } catch (e) {}</script>
 <script src="data/routes-dfw.js"></script>
 <script src="../lib/brand.js"></script>
 <script src="../lib/rc-copy.js"></script>
 <script src="../lib/rc-proof.js"></script><!-- Proof Page: Send proof page from the card (Bet 3, 10-23) -->
-<script src="../lib/st-homes.js"></script>
+<!-- st-homes.js (and its 2.4 MB homes.bin) no longer load before first paint: the map pulls them in after it is ready (Jack 11-02, load time) -->
 <script src="../lib/rc-queue.js"></script>
 <!-- the 2 MB of map libraries download now but run only after the list is on screen (MAPLIBS below) -->
 <link rel="preload" as="script" href="../vendor/maplibre-gl@4.7.1/maplibre-gl.js">
@@ -778,12 +788,8 @@ function loadRoofs(){
   if (!window.RealRoof || !RealRoof.mapEntry) return;
   const want = HOMES.filter(h=>!h.added && h.gi!=null && h.loc && RealRoof.mapCached(h.gi) === undefined);
   const first = HOMES[cur] && want.includes(HOMES[cur]) ? [HOMES[cur]] : [];
-  const paint = h => { const i = HOMES.findIndex(x=>x.id===h.id); if (i < 0) return; withSpec(HOMES[i]); paintRoof(i); };   // by id: buildList() may have rebuilt HOMES (new objects, still 'Loading') while the tile was on its way
-  // loop 17: each outline draws as soon as its footprint tile lands (about a second), then again with the county facts;
-  // the open stop asks first, but the rest no longer wait on its facts (that held every card on 'Loading' for ~40 s)
-  const one = h => (RealRoof.mapOutline ? RealRoof.mapOutline(h.gi, h.loc[0], h.loc[1]).then(()=>paint(h)) : Promise.resolve()).then(()=>RealRoof.mapEntry(h.gi, h.loc[0], h.loc[1])).then(()=>paint(h));
-  const rest = want.filter(h=>!first.includes(h));
-  Promise.all(first.map(one).concat(rest.map(one))).then(()=>{ if (!roofQ++) renderQueue(false); }).catch(()=>{});
+  const one = h => RealRoof.mapEntry(h.gi, h.loc[0], h.loc[1]).then(()=>{ const i = HOMES.indexOf(h); if (i < 0) return; withSpec(h); paintRoof(i); });
+  Promise.all(first.map(one)).then(()=>Promise.all(want.filter(h=>!first.includes(h)).map(one))).then(()=>{ if (!roofQ++) renderQueue(false); }).catch(()=>{});
 }
 // ---------- skips (this device; Undo removes them) ----------
 const SK = 'rc.t.d50skip';
@@ -825,6 +831,7 @@ function why(h,i){
     if (/^Day \d+ follow-up/.test(w)) return w;
     if ((m = w.match(/^Roof is about (\d+) years old/))) return `Roof about ${m[1]} years old`;
     if ((m = w.match(/^Older home, built/))) return 'Older home, roof age unknown';
+    if ((m = w.match(/^Built \d{4}, no re-roof permit on file since (\d{4})/))) return `No re-roof permit on file since ${m[1]}`;   // what stands behind the "likely" roof age (RCPLAIN.words: "No new roof on city list (starts 2017)")
     if (/roof age unknown/.test(w)) return w.replace(/ \(no complete permit list[^)]*\)/, '');
     if (/^[\d.]+ in hail on /.test(w)) return w;   // size and date: the date is not in the tiles
     if ((m = w.match(/^(\d+) neighbors? within about a block re-roofed/))) return `${m[1]} neighbor${m[1]==='1'?'':'s'} within a block re-roofed in the last 90 days`;   // Turnover Radar (10-23)
@@ -833,8 +840,11 @@ function why(h,i){
     return null;   // roof size and pitch: already in the tiles
   };
   // the home's hail (size and date) always leads when it has some, then the strongest other reason
-  const all = (h.pick && h.pick.why || []).map(short).filter(Boolean), hail = all.filter(w=>/ in hail on /.test(w));
-  const r = hail.concat(all.filter(w=>!/ in hail on /.test(w))).slice(0, 2);
+  // 11-11: the engine's own order (strongest reason first) holds, and hail leads only when it is the newest storm's. An
+  // older storm no longer jumps the line (the top pick read "Why today: 1 inch hail on Mar 25, 2025" while its strongest
+  // reasons were the roof's age and the neighbors' new roofs); its date sits on the Hail tile instead.
+  const all = (h.pick && h.pick.why || []).map(short).filter(Boolean), hail = all.filter(w=>/ in hail on .*, the newest storm$/.test(w));
+  const r = hail.concat(all.filter(w=>!hail.includes(w))).slice(0, 2);
   const parts = [];
   if (r.length) parts.push('<b>Why today:</b> '+r.map(esc).join('. ')+'.');
   else if (!hailOk(h.hail)) parts.push('No 1 in+ hail here in the last 24 months.');
@@ -926,6 +936,12 @@ function touchHTML(h){
   if (!can.ok) out.push(`<span class="pill line">${esc(can.reason)}</span>`);
   return out.join('');
 }
+// when the home's hail fell, as the Hail tile's note (the same slot as the Roof tile's "likely"): "Apr 27" this year, "Mar 2025" before
+function hailWhen(h){
+  const iso = /^\d{4}-\d{2}-\d{2}$/.test(String(h.storm||'')) ? h.storm : ''; if (!iso) return '';
+  const d = new Date(iso+'T12:00:00Z'), same = iso.slice(0,4) === String(new Date().getFullYear());
+  return '<i>'+d.toLocaleDateString('en-US', same ? { month:'short', day:'numeric', timeZone:'UTC' } : { month:'short', year:'numeric', timeZone:'UTC' })+'</i>';
+}
 function cbHTML(h,i){
   // Jack 10-17: the card reads in one glance. One plain line under the address (town, who lives there, the sample
   // phone), three short facts with their note on the same line, Why today, then the buttons. The status pills that
@@ -933,13 +949,14 @@ function cbHTML(h,i){
   const who = OWNDATA ? (h.owner ? RC.blurHTML(h.owner) : RC.OWNER_NONE) : h.person ? esc(h.person) : 'Owner not on file yet';
   const ph = h.phone ? pretty(h.phone) : '';
   // a no-permit claim only where the city's re-roof list is complete (McKinney about 2015 on, Allen about 2017 on), 10-23
-  const fullList = /^mckinney$/i.test(h.city || '') ? '2015' : /^allen$/i.test(h.city || '') ? '2017' : '';
+  // 11-11: read from the one roof-age rule (RC.ROOF_COVERAGE), so the card agrees with the list row and the reasons in every city it covers
+  const fullList = (RC.ROOF_COVERAGE || {})[String(h.city || '').trim().toLowerCase()] || '';
   // roof age once, short (Jack 10-26 voice notes: no years everywhere): "~37 yrs, likely"; the years stay on the record
   const NOWY = new Date().getFullYear();
   const roof = h.permit ? `${NOWY - +String(h.permit).slice(0,4)} yrs<i>permit on file</i>` : h.year ? (fullList ? `~${NOWY - h.year} yrs<i>likely</i>` : `Not sure<i>no permit list</i>`) : `Not sure<i>not on file</i>`;
   return `<div class="addr"><div><h2>${phone ? esc(h.addr) : `<a class="hl" href="${homeHref(h)}" data-a="home">${esc(h.addr)}</a>`}</h2><p>${esc(h.city)}${h.zip?', '+DSTATE+' '+h.zip:''}. ${who}${ph?'. '+ph:''}${/\.$/.test(ph || who) ? '' : '.'}</p></div><span class="pill acc">${RC.stageName(RC.stage(h.id))}</span></div>
     <div class="facts">
-      <div title="${hailOk(h.hail)?esc(h.hail+' in, NOAA radar estimate for this home'):'No hail on file for this home'}"><small>Hail</small><b>${hailOk(h.hail)?RCPLAIN.hail(h.hail):'None on file'}</b></div>
+      <div title="${hailOk(h.hail)?esc(h.hail+' in, NOAA radar estimate for this home'):'No hail on file for this home'}"><small>Hail</small><b>${hailOk(h.hail)?RCPLAIN.hail(h.hail)+hailWhen(h):'None on file'}</b></div>
       <div><small>Roof</small><b>${roof}</b></div>
       <div><small>Built</small><b>${h.year||'Not on file'}</b></div>
     </div>
@@ -988,7 +1005,7 @@ function rowMeta(h, d, sk, stg){
   const cb = cadenceBits(h);
   (h.pick && h.pick.why || []).slice(cb ? 1 : 0).forEach(w=>p.push(shortWhy(w)));
   if (!h.pick){ if (h.permit) p.push('Re-roof permit '+String(h.permit).slice(0,4)); else if (h.year) p.push('Built '+h.year); }   // never assume the roof is as old as the house (10-22)
-  return p.length ? p.join(' · ') : (hailOk(h.hail) ? h.hail+' in hail' : 'On the list');
+  return p.length ? p.join(' · ') : (hailOk(h.hail) ? RCPLAIN.hail(h.hail)+' hail' : 'On the list');
 }
 const rowShort = s => RCPLAIN.age(RCPLAIN.words(String(s).split(' · ')[0].replace(/no re-roof permit on file since/, 'no new roof since').replace(/ re-roofed nearby \(90 days\)/, ' new roofs nearby')));
 function renderQueue(anim){
@@ -1002,10 +1019,10 @@ function renderQueue(anim){
     const sc = RC.scheduledFor(h.id);
     const mt = sc ? `<span class="qsch"><span class="ic">${I.clock}</span>Text <span data-due="${esc(sc.due)}" data-fmt="short">${esc(RC.countdown(sc.due,'short'))}</span></span><span class="qsep">, </span>${esc(meta)}` : esc(meta);
     const due = cb ? `<span class="qdue${/overdue/.test(cb.when)?' late':''}">${esc(cb.step+', '+cb.when)}</span>` : '';
-    return `<button class="qrow ${i===cur?'on':d?'done':''}" data-go="${i}" data-id="${esc(h.id)}" title="${esc(full)}"><span class="no">${d&&i!==cur?'<span class="ic" style="width:12px;height:12px">'+I.check+'</span>':h.n}</span><span style="min-width:0"><div class="ad">${esc(h.short)}</div>${due}<div class="mt">${mt}</div></span><span class="hz">${hz ? (hailOk(h.hail) ? h.hail+'"' : '') : h.sq ? Math.round(h.sq)+' sq' : ''}</span></button>`;
+    return `<button class="qrow ${i===cur?'on':d?'done':''}" data-go="${i}" data-id="${esc(h.id)}" title="${esc(full)}"><span class="no">${d&&i!==cur?'<span class="ic" style="width:12px;height:12px">'+I.check+'</span>':h.n}</span><span style="min-width:0"><div class="ad">${esc(h.short)}</div>${due}<div class="mt">${mt}</div></span><span class="hz">${hz ? (hailOk(h.hail) ? RCPLAIN.hail(h.hail) : '') : h.sq ? Math.round(h.sq)+' sq' : ''}</span></button>`;
   }).join('');
   const html = rows || (HOMES.length ? `<div class="qnone">No stop on today's list matches "${esc(query)}".</div>` : `<div class="qnone">No homes to reach today: every storm home on file is reached, closed or waiting for its next follow-up day.</div>`);
-  if (q.__html !== html){ q.innerHTML = html; q.__html = html; q.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ const k = HOMES.findIndex(x=>x.id===b.dataset.id); if (k < 0) return; go(k, true); centerOn(k); }); }
+  if (q.__html !== html){ q.innerHTML = html; q.__html = html; q.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go, true)); }
   const onRow = q.querySelector('.qrow.on');
   if (onRow && !phone){ const t=onRow.offsetTop-q.offsetTop, bt=t+onRow.offsetHeight; if (t<q.scrollTop||bt>q.scrollTop+q.clientHeight) q.scrollTo({top:Math.max(0,t-8), behavior:anim&&!RM.matches?'smooth':'auto'}); }
   if (anim && onRow) onRow.classList.add('flash');
@@ -1024,7 +1041,7 @@ const hpop = document.getElementById('hpop');
 function homePopHTML(h){
   const sent = RC.activity().find(a=>a.id===h.id && a.dir==='out' && (a.ch==='text'||a.ch==='email') && today(a.at)), sch = RC.scheduledFor(h.id);
   const line = sent ? `${sent.ch==='email'?'Email':'Text'} sent ${fmtTime(sent.at)}` : sch ? `Text scheduled, <span data-due="${esc(sch.due)}" data-fmt="short">${esc(RC.countdown(sch.due,'short'))}</span>` : skippedToday(h.id) ? 'Skipped today' : `Home ${h.n} of ${HOMES.length} today`;
-  const facts = [hailOk(h.hail) ? `${h.hail} in hail` : null, h.roofAge || null].filter(Boolean).join(', ');
+  const facts = [hailOk(h.hail) ? RCPLAIN.hail(h.hail) + ' hail' : null, h.roofAge ? RCPLAIN.age(h.roofAge) : null].filter(Boolean).join(', ');
   const who = h.owner || (RC.ownersAllowed && RC.ownersAllowed() ? RC.OWNER_NONE : '');
   return `<div class="bp-h"><span class="bp-ch"><span class="ic">${I.map || I.text}</span>${esc(line)}</span><button type="button" class="bp-x" aria-label="Close">${I.close}</button></div>` +
     `<div class="bp-to"><span class="bp-l">Home ${h.n}</span><b>${esc(h.addr)}</b><span class="bp-who">${esc([h.city, h.zip].filter(Boolean).join(' '))}${who ? ', ' + esc(who) : ''}</span></div>` +
@@ -1059,8 +1076,6 @@ function go(i, anim, quiet){
   if (moved && !quiet) tellShell();
   if (map && anim && HOMES[cur].loc && !inView(HOMES[cur].loc)) map.flyTo({center:HOMES[cur].loc, duration:RM.matches?0:900, curve:1.2, essential:false});   // the stop is already on screen: keep the base and its lines in frame
 }
-// an explicit pick (pin or Up next row): the map flies to that home's own coordinates
-function centerOn(k){ const h = HOMES[k]; if (!map || !h || !h.loc) return; map.stop(); map.easeTo({center:h.loc, zoom:Math.max(map.getZoom(), 15), duration:RM.matches?0:700, essential:false}); }
 function nextOpen(from){ for (let k=from+1;k<HOMES.length;k++) if (!isDone(HOMES[k])) return k; for (let k=0;k<from;k++) if (!isDone(HOMES[k])) return k; return -1; }
 function qMore(){ const q=document.getElementById('qlist'); q.classList.toggle('more', q.scrollTop+q.clientHeight < q.scrollHeight-2); }
 document.getElementById('qlist').addEventListener('scroll', qMore, {passive:true}); addEventListener('resize', qMore);
@@ -1197,8 +1212,6 @@ function textDlg(h, draft, fromSeg){
 // A marketing email must carry the roofer's mailing address: until it is on file the draft says so and Send stays off.
 function emailWhy(r){
   if (r.blocked === 'opted out') return 'This homeowner opted out. No more emails or follow-ups.';
-  if (r.missing && r.missing.includes('mailingAddress') && r.missing.includes('homeLink')) return 'Add your mailing address and your public site to send emails.';
-  if (r.missing && r.missing.includes('homeLink')) return 'Set your public site to send emails.';
   if (r.missing && r.missing.includes('mailingAddress')) return 'Add your mailing address to send emails.';
   return r.blocked ? 'Email is held back: '+r.blocked+'.' : '';
 }
@@ -1207,7 +1220,7 @@ function emailDlg(h){
   openDlg(`<div class="dtop"><h3 id="dlgT">Email ${esc(h.short)}</h3>${chanSeg('email')}</div><p class="dsub">${h.owner?RC.blurHTML(h.owner)+'. ':''}Your mail app opens with the draft. Type the homeowner's address there.</p>
     ${r.body ? `<div class="dlab">Day ${r.dayN} email</div><label class="dlab dsubj" for="eSubj">Subject</label><input id="eSubj" class="dsel" value="${esc(r.subject||'')}" ${ro?'readonly':''}>
     <textarea id="eBody" rows="8" aria-label="Email" ${ro?'readonly':''}>${esc(r.body)}</textarea>` : ''}
-    ${why ? `<p class="snote" id="eWhy">${RC.setupLink(esc(why))}</p>` : ''}
+    ${why ? `<p class="snote" id="eWhy">${esc(why)}</p>` : ''}
     <div class="dact"><button class="dbtn" data-x>Close</button>${ok ? `<a class="dbtn pri" id="dMail" href="${mailHref(r.subject, r.body)}">Open in Mail</a>` : `<button class="dbtn pri off" id="dMail" aria-disabled="true" aria-describedby="eWhy">Open in Mail</button>`}</div>`, d=>{
       d.querySelector('.dseg').onclick = e=>{ const b = e.target.closest('[data-ch]'); if (b && b.dataset.ch==='text') textDlg(h, null, true); };
       const a = d.querySelector('a#dMail'); if (a) a.addEventListener('click', ()=>{ const sj = d.querySelector('#eSubj').value.trim() || r.subject, bd = d.querySelector('#eBody').value.trim() || r.body;
@@ -1388,7 +1401,7 @@ function bulkLayers(){
   const L = [ new window.deck.ScatterplotLayer({ id:'homes-all', beforeId:labelId, data:{ length:BULK.nAll, attributes:{ getPosition:{ value:BULK.all, size:2 } } },
     radiusUnits:'meters', getRadius:7, radiusMinPixels:phone?.7:1, radiusMaxPixels:2.2, getFillColor:[128,136,152,phone?40:52], stroked:false, pickable:false, antialiasing:false }) ];
   if (BULK.hit && BULK.nHit) L.push(new window.deck.ScatterplotLayer({ id:'homes-hit', beforeId:labelId, data:{ length:BULK.nHit, attributes:{ getPosition:{ value:BULK.hit, size:2 } } },
-    radiusUnits:'meters', getRadius:9, radiusMinPixels:phone?1.1:1.5, radiusMaxPixels:3.4, getFillColor:[98,108,128,phone?78:92], stroked:false, pickable:false, antialiasing:true }));
+    radiusUnits:'meters', getRadius:9, radiusMinPixels:phone?1.1:1.5, radiusMaxPixels:3.4, getFillColor:[98,108,128,phone?78:92], stroked:false, pickable:false, antialiasing:false }));
   return L;
 }
 function fpLayers(){
@@ -1397,11 +1410,6 @@ function fpLayers(){
   const acc = hexRGB((getComputedStyle(document.documentElement).getPropertyValue('--accent')||'#0D6C99').trim() || '#0D6C99');
   const CHC = { text:hexRGB('#0D6C99'), email:hexRGB('#5B4BA8') };
   const curGi = HOMES[cur] && HOMES[cur].gi;
-  // Satellite (loop 26 M4, Jack shot 22): the photo is the roof. No white boxes; every house stays a click through a near-clear flat fill, the open home gets a thin accent outline
-  if (document.documentElement.classList.contains('mapsat')) return L.concat([ new window.deck.PolygonLayer({ id:'fp', beforeId:labelId, data:fpItems, getPolygon:d=>d.ring, extruded:false, filled:true, stroked:true, pickable:true,
-    getFillColor:d=>d.i===curGi ? [...acc,40] : [255,255,255,1], getLineColor:d=>d.i===curGi ? [...acc,255] : FPS.ch[d.i] ? [...CHC[FPS.ch[d.i]],200] : [0,0,0,0],
-    lineWidthUnits:'pixels', getLineWidth:d=>d.i===curGi ? 2 : 1.2, updateTriggers:{ getFillColor:[fpKey, curGi], getLineColor:[fpKey, curGi], getLineWidth:[curGi] },
-    autoHighlight:true, highlightColor:[255,255,255,70], onClick:info=>fpClick(info) }) ]);
   return L.concat([ new window.deck.SolidPolygonLayer({ id:'fp', beforeId:labelId, data:fpItems, getPolygon:d=>d.ring, extruded:true, pickable:true, opacity:.97,
     getFillColor:d=>{ if (d.i===curGi) return [...acc,255]; const c = FPS.ch[d.i]; if (c) return [...CHC[c],245]; if (FPS.stop[d.i]!=null) return [96,106,128,240]; return [207,212,221,235]; },
     getElevation:d=>{ if (d.i===curGi) return 22; if (FPS.ch[d.i]) return 18; if (FPS.stop[d.i]!=null) return 13; return 4.2+((d.i*7)%5)*0.7; },
@@ -1409,27 +1417,10 @@ function fpLayers(){
     material:{ambient:0.6,diffuse:0.55,shininess:10,specularColor:[255,255,255]},
     autoHighlight:true, highlightColor:[39,87,230,235],
     // a stop opens its card here; any other house opens its record in the CRM (Jack 10-15: every house is clickable)
-    onClick:info=>fpClick(info) }) ]);
-}
-function fpClick(info){ { const o = info.object; if (!o) return false; const i = FPS.stop[o.i]; if (i!=null){ if (reach && reach.has(HOMES[i].id)) reach.openFor(HOMES[i].id, {x:info.x, y:info.y}); else go(i,true); return true; }
+    onClick:info=>{ const o = info.object; if (!o) return false; const i = FPS.stop[o.i]; if (i!=null){ if (reach && reach.has(HOMES[i].id)) reach.openFor(HOMES[i].id, {x:info.x, y:info.y}); else go(i,true); return true; }
       const id = 'm'+o.i, m = window.STM && STM.metaNow ? STM.metaNow(o.i) : null;
       if (m && RC.remember) RC.remember({ id, gi:o.i, addr:m.addr, city:m.city, zip:m.zip, place:m.place, full:m.full, subdivision:m.subdivision||'', state:m.state });
-      RC.go('home', { id }); return true; } }
-/* loop 20: deck.gl's own animation loop asked for a frame 60 times a second on an idle Today even with nothing to draw.
-   Once the overlay has had nothing to redraw for 2 s and no pointer, move or layer change came in, the loop stops;
-   any layer change, map move or pointer over the map starts it again (picking and hover run in that loop). */
-function idleDeck(){
-  const d = overlay && overlay._deck, L = d && d.animationLoop; if (!L || typeof L.stop !== 'function' || typeof L.start !== 'function') return;
-  let last = performance.now(), asleep = false;
-  const wake = () => { last = performance.now(); if (asleep) { asleep = false; try { L.start(); } catch (e) {} map.triggerRepaint(); } };
-  const sp = overlay.setProps.bind(overlay); overlay.setProps = p => { wake(); return sp(p); };
-  const box = map.getContainer(); ['pointermove','pointerdown','wheel','touchstart','keydown'].forEach(t => box.addEventListener(t, wake, { passive:true, capture:true }));
-  map.on('move', wake); map.on('resize', wake);
-  setInterval(() => { if (asleep || performance.now() - last < 2000) return;
-    let busy = false; try { busy = !!d.needsRedraw({ clearRedrawFlags:false }); } catch (e) { busy = true; }
-    if (busy) { last = performance.now(); return; }
-    asleep = true; try { L.stop(); } catch (e) { asleep = false; } }, 1000);
-  window.__deckIdle = { asleep: () => asleep, wake };
+      RC.go('home', { id }); return true; } }) ]);
 }
 function fpRedraw(){ FPS = fpState(); fpKey = JSON.stringify(FPS.ch); if (overlay) overlay.setProps({ layers: fpLayers() }); }
 // building outlines only where the camera is, and only zoomed in (street level): zoomed out the dots carry the picture,
@@ -1459,7 +1450,7 @@ function planMessages(){
   const c = msgCounts();
   const ms = document.getElementById('mStops'); ms.textContent = HOMES.length ? `${c.togo} home${c.togo===1?'':'s'} to reach today${c.sent ? ', ' + c.sent + ' done' : ''}${c.sch ? ', ' + c.sch + ' set for later' : ''}` : 'No homes on the list';   // plain words (10-26) ms.classList.remove('skel');
   document.getElementById('peekDist').textContent = HOMES.length ? `${c.sent} of ${TOTAL} sent` : '';
-  const k = VIS.map(i=>HOMES[i].id).join(',');   // by id: a re-sort (score.js) or a relist keeps the same indexes but moves homes, and pins kept stale ids
+  const k = VIS.join(',');
   if (k !== routeKey){ routeKey = k; if (map){ buildMarkers(); refreshFp(); } }
 }
 // the aerial: turned so the base sits at the top of the frame and the beams fan down to the homes
@@ -1564,8 +1555,8 @@ function buildMarkers(){
   if (!map) return; markers.forEach(m=>m.remove()); markers = []; MI = [];
   VIS.forEach(i=>{ const h = HOMES[i]; if (!h.loc) return; const e=document.createElement('div'); e.className='stop'+(h.added?' added':''); e.textContent=h.n; e.title=h.addr; e.dataset.id=h.id;
     // a home already reached shows what was sent (no navigation); any other stop moves the card to it
-    e.onclick=ev=>{ ev.stopPropagation(); const k = HOMES.findIndex(x=>x.id===h.id); if (k < 0) return; const m=document.getElementById('map').getBoundingClientRect(), at = {x:ev.clientX-m.left, y:ev.clientY-m.top};
-      if (reach && reach.has(h.id)){ closeHomePop(); reach.openFor(h.id, at); } else { if (reach) reach.close(); go(k,true); centerOn(k); homePop(HOMES[k], {x:m.width/2, y:m.height/2}); } };
+    e.onclick=ev=>{ ev.stopPropagation(); const k = HOMES.indexOf(h); if (k < 0) return; const m=document.getElementById('map').getBoundingClientRect(), at = {x:ev.clientX-m.left, y:ev.clientY-m.top};
+      if (reach && reach.has(h.id)){ closeHomePop(); reach.openFor(h.id, at); } else { if (reach) reach.close(); go(k,true); homePop(h, at); } };
     markers.push(new maplibregl.Marker({element:e}).setLngLat(h.loc).addTo(map)); MI.push(i); });
   markers.forEach((mk,k)=>{ const i = MI[k], e = mk.getElement(); e.classList.toggle('now',i===cur); e.classList.toggle('done',i!==cur && isDone(HOMES[i])); e.style.zIndex = i===cur?5:1; });
   if (reach){ reach.update(); setTimeout(uncollide, 0); }
@@ -1606,7 +1597,7 @@ const toShell = m => { if (window.parent === window) return; try { window.parent
 const READY = { cards:false, map:false, sent:false };
 function readyStage(name){ toShell({ type:'today-stage', stage:name }); }
 function readyCheck(why){
-  if (READY.sent) return; if (why !== 'force' && !READY.cards) return;   // loop 19: the cards and list are the usable screen; the map and 3D finish after the reveal
+  if (READY.sent) return; if (why !== 'force' && !(READY.cards && READY.map)) return;
   READY.sent = true; window.__todayReady = performance.now(); toShell({ type:'today-ready', why:why||'ready', t:Math.round(window.__todayReady) });
 }
 const onShown = [];   // work that waits for the reveal (the owner roll, several MB): never during the opening or the crossfade
@@ -1625,22 +1616,19 @@ const want = DK.param('id'), wantN = +DK.param('n',0);
 function startMap(){
   try{
     const a = aerial(), c = (HOMES[cur] && HOMES[cur].loc) || hqLoc();
-    map = new maplibregl.Map({container:'map',style:LIGHT,antialias:false,fadeDuration:0,pixelRatio:Math.min(window.devicePixelRatio||1,1.5),center:c,zoom:12,pitch:a.pitch,bearing:a.bearing,maxPitch:76,attributionControl:{compact:true},interactive:true});
+    map = new maplibregl.Map({container:'map',style:LIGHT,antialias:false,fadeDuration:0,pixelRatio:Math.min(window.devicePixelRatio||1,1.25),center:c,zoom:12,pitch:a.pitch,bearing:a.bearing,maxPitch:76,attributionControl:{compact:true},interactive:true}); window.__map=map;
     map.on('load',()=>{
       restyle();
-      if (window.deck){ overlay = new window.deck.MapboxOverlay({ interleaved:true, layers:[], getCursor:({isDragging,isHovering})=>isDragging?'grabbing':isHovering?'pointer':'grab' });   /* a house under the cursor = pointer: every house is a click */ map.addControl(overlay); idleDeck(); }
-      if (window.STH) STH.ready.then(()=>{ buildBulk(); fpRedraw(); refreshFp(); }).catch(()=>{});
+      if (window.deck){ overlay = new window.deck.MapboxOverlay({ interleaved:true, layers:[], getCursor:({isDragging,isHovering})=>isDragging?'grabbing':isHovering?'pointer':'grab' });   /* a house under the cursor = pointer: every house is a click */ map.addControl(overlay); }
+      // the 271k background dots: st-homes.js + homes.bin arrive after the first view has drawn, on an idle slot
+      const bulkLater=()=>{ const go=()=>{ if(window.STH){ STH.ready.then(()=>{ buildBulk(); fpRedraw(); refreshFp(); }).catch(()=>{}); return; } const sc=document.createElement('script'); sc.src='../lib/st-homes.js'; sc.onload=go; document.head.appendChild(sc); };
+        (window.requestIdleCallback||setTimeout)(go,{timeout:2500}); };
+      setTimeout(bulkLater, 1200);
       RC.on(d=>{ if (d.key==='att' || d.key==='pipe') fpRedraw(); });
       map.resize(); fitAll(true); setTimeout(()=>{map.resize(); fitAll(true);},300);
       document.querySelectorAll('.maplibregl-ctrl-attrib').forEach(a=>a.classList.remove('maplibregl-compact-show'));
       map.on('moveend', ()=>{ map.getContainer().classList.toggle('far', map.getZoom() < 14); uncollide(); refreshFp(); });
       map.on('movestart', ()=>{ window.__mapMoving = true; }); map.on('moveend', ()=>{ window.__mapMoving = false; });   /* the 3D house pauses while the map moves (10-17) */
-      // click-to-zoom (loop 26 M1): a click on empty map eases in one step on the click point, capped at 18; pins, homes, controls keep their own click; a 5 px move is a drag
-  { let dn=null; const cv=map.getCanvas(); cv.addEventListener('pointerdown',e=>{ dn=[e.clientX,e.clientY]; },true);
-    map.on('click',e=>{ const o=e.originalEvent; if(!o||o.target!==cv||!dn||Math.hypot(o.clientX-dn[0],o.clientY-dn[1])>=5) return;
-      try{ if(overlay&&overlay.pickObject({x:e.point.x,y:e.point.y,radius:2})) return; }catch(_){}
-      if([].some(id=>map.getLayer(id))&&map.queryRenderedFeatures(e.point,{layers:[].filter(id=>map.getLayer(id))}).length) return;
-      const z=map.getZoom(); if(z>=17.95) return; map.easeTo({center:e.lngLat,zoom:Math.min(18,z+1),duration:300}); }); }
       map.on('dragstart', closeHomePop); map.on('zoomstart', e=>{ if (e.originalEvent) closeHomePop(); });
       // the shell may size this frame after load (kept-alive tabs): refit whenever the map box changes size
       let rz=0; new ResizeObserver(()=>{ clearTimeout(rz); rz=setTimeout(()=>{ map.resize(); fitAll(true); },120); }).observe(document.getElementById('map'));
@@ -1673,6 +1661,8 @@ function startList(){
   setTimeout(()=>whenShown(warmOwners), 1500);
 }
 // rebuild the list from the engine (a new day, an opt-out, a home added on the storm map), keeping the open card
+const routeSig = () => JSON.stringify([RC.setting('routeSize',50),RC.setting('cities',null)]);
+let routeSigNow = routeSig();
 function relist(fresh){
   const id = HOMES[cur] && HOMES[cur].id; buildList(); buildCards();
   if (fresh) Object.keys(actState).forEach(k=>delete actState[k]);
@@ -1705,6 +1695,8 @@ RC.on(d=>{
   if (d.key==='optout'){ relist(false); return; }
   if (!d.remote) return;
   if (d.key==='added'){ relist(false); return; }
+  // Nimbus changed a setting: redraw in place, the roofer keeps his stop (no frame reload)
+  if (d.key==='settings'){ const sg = routeSig(); if (sg !== routeSigNow){ routeSigNow = sg; relist(false); } else { renderHeader(); refreshCard(cur); renderQueue(false); } if (map) setTimeout(()=>map.resize(),40); return; }
   renderHeader(); refreshCard(cur); renderQueue(false); markers.forEach((mk,k)=>{ const i = MI[k]; mk.getElement().classList.toggle('done', i!==cur && isDone(HOMES[i])); }); });
 setInterval(()=>{ if (!HOMES[cur]) return; renderHeader(); if (!actState[HOMES[cur].id]) refreshCard(cur); }, 60000);   // greeting and the texting hours follow the clock
 // the shell keeps this frame alive and routes by message: {type:'route', params:{n}} moves to stop n without a reload
@@ -1742,12 +1734,7 @@ if (window.RCTIP) RCTIP.ready.then(() => { const h = document.querySelector('.he
 </script>
 <script src="../lib/rc-features.js"></script>
 <script src="features.js"></script>
-<script src="../lib/wing-mascot.js"></script><!-- Nimbus bar removed from Today (Jack 10-30); the shell orb stays -->
-<script src="../lib/st-meta.js"></script><script src="../lib/opp-score.js"></script><script src="../lib/opp-data.js"></script><script src="../lib/opp-cards.js"></script><script src="../vendor/floating-ui@1.8.0/floating-ui.core.umd.min.js"></script><script src="../vendor/floating-ui@1.8.0/floating-ui.dom.umd.min.js"></script><script src="../lib/opp-tips.js"></script><script src="score.js"></script><!-- Opportunity Score v2 on Today: sorted Up next, ring + confidence on every card, breakdown, Nimbus "why this house?" (10-29) -->
-<script>/* standalone top tabs (the shell owns them when embedded): Map expands the map here, the others open the shell screen */
-document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('[data-nav]'); if (!b) return; const k = b.dataset.nav;
-  if (k === 'map') { try { if (phone) openSheet('route'); else setBig(!document.documentElement.classList.contains('mapbig')); } catch (x) {} return; }
-  const to = { pipeline: '#/crm/pipeline', homes: '#/crm', storms: '#/storm' }[k]; if (to) location.href = '../product.html' + to; });</script>
+<script src="ov.js"></script><!-- app rules overview: hero + 4 mini dashboards (11-02) -->
 <script>document.addEventListener('click', e => { const x = e.target.closest('[data-openhome]'); if (!x) return; const dg = x.closest('dialog'); if (dg && dg.open) dg.close(); RC.go('home', { id: x.dataset.openhome }); });   // Text with no phone: add it on the record (10-22)
 </script>
 </body>

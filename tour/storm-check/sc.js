@@ -74,7 +74,7 @@
       if (f.reroof && !f.reroof.none && f.reroof.date) rows.push(['Last re-roof permit', f.reroof.date, f.reroof.src || 'city permit records']);
       else if (f.reroof && f.reroof.none) rows.push(['Re-roof permits', 'None on file', f.reroof.text]);
       const sq = f.roof && f.roof.sq ? Math.round(f.roof.sq * 10) / 10 : null;
-      if (sq) rows.push(['Roof size', 'About ' + sq + ' squares', 'LiDAR estimate from aerial survey data, typically within about 10%. (1 square = 100 sq ft)']);
+      if (sq) rows.push(['Roof size', 'About ' + sq + ' squares', 'LiDAR estimate from aerial survey data; order a measurement report before you quote. (1 square = 100 sq ft)']);
       $('#roof').innerHTML = rows.length ? rows.map(([a, b, n]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}${n ? `<span class="note">${esc(n)}</span>` : ''}</dd></div>`).join('')
         : '<div><dt>Roof records</dt><dd>Not on file</dd></div>';
 

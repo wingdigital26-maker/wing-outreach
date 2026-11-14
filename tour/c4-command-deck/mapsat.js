@@ -38,7 +38,6 @@ html.mapsat .hqm .hqd{box-shadow:0 0 0 2px #fff,0 2px 8px rgba(0,0,0,.5)}
   function apply() {
     document.querySelectorAll('.mseg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.ms === want)));
     document.documentElement.classList.toggle('mapsat', want === 'sat');
-    try { if (typeof overlay !== 'undefined' && overlay && typeof fpLayers === 'function') overlay.setProps({ layers: fpLayers() }); } catch (e) {}   // flat outlines in Satellite, 3D blocks in Map (loop 26 M4)
     const M = typeof map !== 'undefined' ? map : null; if (!M || !M.isStyleLoaded || !window.RCIMG) return;
     const host = M.getContainer().parentElement;
     if (!credit) { credit = document.createElement('div'); credit.className = 'satcredit'; credit.hidden = true; host.appendChild(credit); }

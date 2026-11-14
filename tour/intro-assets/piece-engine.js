@@ -227,7 +227,7 @@ camera.position.set(0,0,CAM_D);
 
 const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
 renderer.setSize(getW(), getH());
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));          // v5's DPR policy
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));        // 1.5 on a 2x laptop: 2x drew 4x the pixels of a metal slab with an env map while Today loaded underneath (Jack 11-02: the opening was laggy)
 renderer.toneMapping = THREE.NeutralToneMapping; // ACES drags bright blues toward lavender; Neutral keeps the hue
 renderer.toneMappingExposure = 1.0;
 renderer.setClearColor(0x000000, 0);

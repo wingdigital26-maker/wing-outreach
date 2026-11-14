@@ -19,7 +19,7 @@
     const sk = (RC.__get('d50skip', {}) || {})[id];
     if (sk && isToday(sk.at)) return true;
     const p = RC.pipeline()[id] || {};
-    if (RC.stageKey(p.stage) === 'won' || p.archived) return true;
+    if (p.stage === 'won' || p.archived) return true;
     return RC.history(id).some(h => isToday(h.at) && (/^Knocked: /.test(h.what || '') || ((h.kind === 'text' || h.kind === 'email') && h.dir !== 'in')));
   }
   const openStops = () => list.filter(h => !doneToday(h.id));
@@ -41,7 +41,7 @@
     if (h.yearBuilt) bits.push('built ' + h.yearBuilt);
     if (h.hail) bits.push(hailWords(h.hail));
     if (h.permit) bits.push('re-roofed ' + String(h.permit).slice(0, 4));
-    else { const w = (h.why || []).find(s => /no re-roof permit on file since (\d{4})/.test(s)); const m = w && /since (\d{4})/.exec(w); if (m) bits.push('no new roof since ' + m[1]); }
+    else { const w = (h.why || []).find(s => /no re-roof permit on file since (\d{4})/.test(s)); const m = w && /since (\d{4})/.exec(w); if (m) bits.push('no new roof on the city list, which starts in ' + m[1]); }
     return (lead || 'Next') + ': ' + bits.join(', ') + '.';
   }
   function say(t) { lastSay = t; return window.NimbusVA ? NimbusVA.speak(t) : Promise.resolve(); }

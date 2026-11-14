@@ -12,7 +12,7 @@
   const KIND = { home: 'Home', owner: 'Owner', street: 'Street', subdivision: 'Subdivision', zip: 'ZIP', city: 'City', storm: 'Storm' };
   let O = null, input, box, res, items = [], sel = 0, gen = 0, timer = null, busy = false, enterWaiting = false, lastQ = '';
   let catP = null;
-  const storms = () => catP || (catP = fetch((window.STM ? STM.BASE : 'lib/st-data-dfw/') + 'catalog.json').then(r => r.ok ? r.json() : null).then(c => (c && c.storms) || []).catch(() => []));
+  const storms = () => catP || (catP = fetch((window.STM ? STM.BASE : rooferDataRoot()) + 'catalog.json').then(r => r.ok ? r.json() : null).then(c => (c && c.storms) || []).catch(() => []));
   const css = document.createElement('style');
   css.textContent = `
 .fres{position:fixed;z-index:60;background:#fff;border:1px solid var(--c-line,#D5D9E0);border-radius:6px;box-shadow:0 1px 2px rgba(11,16,32,.06),0 18px 40px -18px rgba(11,16,32,.35);padding:4px;display:none;max-height:min(560px,calc(100vh - 80px));overflow-y:auto;overscroll-behavior:contain}

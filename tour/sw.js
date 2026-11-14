@@ -4,30 +4,36 @@
    - Pinned vendor files and fonts: cache first (their URLs carry the version, they never change).
    - Pages (HTML), scripts and styles: network first (revalidated, so an edit shows on the very next load with no
      hard refresh), the cached copy only when the network fails or takes over 4 s.
-   - Home data, footprint tiles and the real house facts (lib/st-data-dfw/meta: addresses, radar hail, permits,
+   - Home data, footprint tiles and the real house facts (lib/st-data-<market>/meta: addresses, radar hail, permits,
      LiDAR pitch): stale-while-revalidate (instant from cache, refreshed in the background).
    - A new version takes over at once (skipWaiting + clients.claim), deletes every older cache, and reloads open tabs
      that an older version was serving so nobody keeps looking at the old shell.
    - Basemap tiles, glyphs and sprites from tiles.openfreemap.org: cache first, capped.
    Only GET over http(s) is ever cached; POSTs, Range requests, tel:/sms: links and every other host pass straight through.
    To refresh everything for every visitor: bump CACHE_VERSION. To switch it off for one browser: open any tour page with ?nosw=1. */
-const CACHE_VERSION = 'rc-tour-v19-jackson-coplanar-r24';
+const CACHE_VERSION = 'rc-tour-v24-intent';   // 11-07: v2 score (wind, moved in, who lives there); 11-02: app rules look, preload, skeletons
 const SHELL = CACHE_VERSION + '-shell';
 const DATA = CACHE_VERSION + '-data';
 const TILES = CACHE_VERSION + '-tiles';
 const TILE_HOSTS = ['tiles.openfreemap.org'];
 const TILE_MAX = 3000;
+// The default roofer's own files in the starter list: its data folder and its list of published pages (lib/brand.js
+// dataRoot and seo). A service worker cannot read the page's registry, so the hosted build rewrites the next line from it
+// (scripts/build_deploy_jackson.py, the same roofer_config() that stamps lib/auth-gate.js). An empty value = not cached.
+const ROOFER_DATA = 'lib/st-data-dfw/', ROOFER_SEO = 'lib/seo-jackson.json';   /*@RC_ROOFER_FILES@*/
 
 const PRECACHE = [
-  'product.html',
-  'lib/nimbus-shell.css', 'lib/rc-physical.css', 'lib/rc-features.js', 'lib/nb-react.js', 'lib/rc-state.js', 'lib/rc-roof.js', 'lib/st-meta.js', 'lib/brand.js', 'lib/wing-mascot.js', 'lib/nimbus-shell.js', 'lib/nimbus-assistant.css', 'lib/nimbus-truck.css', 'lib/nimbus-tools.js', 'lib/nimbus-brain.js', 'lib/nimbus-assistant.js', 'lib/nimbus-truck.js', 'lib/nimbus-kb.json', 'lib/nimbus-settings.js', 'lib/nimbus-data.js', 'lib/nimbus-talk.js', 'lib/nimbus-talk.css', 'lib/nimbus-ops.js', 'lib/rc-push.js',
+  'product.html', 'lib/rc-apprules.css', 'lib/rc-frame-pause.js', 'lib/rc-fetch-memo.js',
+  // screens the shell preloads after Today (APP-RULES 10): Find, SEO, Results
+  'c10-find/index.html', 'c8-seo/index.html', 'c9-results/index.html', 'lib/rc-scores.js', 'lib/rc-intent.js', 'lib/rc-results.js', ROOFER_SEO,
+  'lib/nimbus-shell.css', 'lib/rc-physical.css', 'lib/rc-features.js', 'lib/nb-react.js', 'lib/rc-state.js', 'lib/rc-roof.js', 'lib/st-meta.js', 'lib/brand.js', 'lib/wing-mascot.js', 'lib/nimbus-shell.js', 'lib/nimbus-assistant.css', 'lib/nimbus-truck.css', 'lib/nimbus-tools.js', 'lib/nimbus-brain.js', 'lib/nimbus-assistant.js', 'lib/nimbus-truck.js', 'lib/nimbus-kb.json', 'lib/nimbus-settings.js', 'lib/nimbus-data.js', 'lib/nimbus-talk.js', 'lib/nimbus-talk.css',
   'lib/st-fonts/montserrat-400.woff2', 'lib/st-fonts/montserrat-500.woff2', 'lib/st-fonts/montserrat-600.woff2', 'lib/st-fonts/montserrat-700.woff2', 'lib/st-fonts/ibm-plex-mono-400-latin.woff2',
   // Daily 50
   'c4-command-deck/deck.html', 'c4-command-deck/dk.css', 'c4-command-deck/features.css', 'c4-command-deck/features.js', 'c4-command-deck/dk.js', 'c4-command-deck/reach.js', 'c4-command-deck/data/routes-dfw.js',
   'c4-command-deck/fonts/montserrat-400.woff2', 'c4-command-deck/fonts/montserrat-500.woff2', 'c4-command-deck/fonts/montserrat-600.woff2', 'c4-command-deck/fonts/montserrat-700.woff2', 'c4-command-deck/fonts/ibm-plex-mono-400-latin.woff2',
   'vendor/maplibre-gl@4.7.1/maplibre-gl.js', 'vendor/maplibre-gl@4.7.1/maplibre-gl.css',
   // Storm map (the 4 MB homes file is cached the first time the Storm map opens, not here)
-  '1b-storm-theater.html', 'lib/st-common.css', 'lib/st-homes.js', 'lib/st-storm.js', 'lib/st-map.js', 'lib/st-replay.js', 'lib/st-data-dfw/catalog.json',
+  '1b-storm-theater.html', 'lib/st-common.css', 'lib/st-homes.js', 'lib/st-storm.js', 'lib/st-map.js', 'lib/st-replay.js', ROOFER_DATA && ROOFER_DATA + 'catalog.json', ROOFER_DATA && ROOFER_DATA + 'meta/overview.json',
   'vendor/deck.gl@9.0.38/dist.min.js',
   // Home
   'c5-home/index.html', 'c5-home/home.css', 'c5-home/features.css', 'c5-home/features.js', 'c5-home/rec.js', 'c5-home/home.js',
@@ -40,7 +46,7 @@ const PRECACHE = [
   // Ask Nimbus
   'c2-nimbus/index.html', 'c2-nimbus/streets-real-dfw.json',
   'c2-nimbus/fonts/montserrat-400.woff2', 'c2-nimbus/fonts/montserrat-500.woff2', 'c2-nimbus/fonts/montserrat-600.woff2', 'c2-nimbus/fonts/montserrat-700.woff2', 'c2-nimbus/fonts/ibm-plex-mono-400-latin.woff2'
-];
+].filter(Boolean);
 
 // install takes no time (nothing to wait for), so a new version replaces an old one on the very next load
 self.addEventListener('install', () => self.skipWaiting());
@@ -113,7 +119,12 @@ self.addEventListener('fetch', e => {
   if (/(^|\/)(audit\/|_)|\.py$/.test(path) || url.searchParams.get('nosw') === '1') return;
 
   if (path.startsWith('vendor/') || /\.(woff2?|ttf)$/.test(path)) { e.respondWith(cacheFirst(SHELL, req, { ignoreSearch: true })); return; }
-  if (path.startsWith('lib/st-data-dfw/')) { e.respondWith(staleWhileRevalidate(DATA, req, e)); return; }
+  if (/^lib\/st-data-[a-z0-9-]+\//.test(path)) {   // any roofer's data folder (lib/brand.js dataRoot is always lib/st-data-<market>/)
+    // 11-02 (load time): the big binaries (homes.bin, meta/*.bin, fp/, roof3d/, initials/) only change with a data rebuild,
+    // which bumps CACHE_VERSION; re-validating them on every visit re-downloaded ~4 MB in the background (HAR: homes_meta.bin
+    // twice per session) and starved the page. They are cache-first now; the small json feeds keep stale-while-revalidate.
+    if (/\.json(\?|$)/.test(path)) e.respondWith(staleWhileRevalidate(DATA, req, e)); else e.respondWith(cacheFirst(DATA, req));
+    return; }
   // pages carry their screen params in the query (deck.html?n=3, index.html?home=x): one cached copy per page
   const page = req.mode === 'navigate' || /\.html$/.test(path);
   if (page || /\.(js|css)$/.test(path)) {
@@ -122,20 +133,4 @@ self.addEventListener('fetch', e => {
     return;
   }
   e.respondWith(staleWhileRevalidate(SHELL, req, e).catch(() => fetch(req)));
-});
-
-// Reply alerts (Jack 10-29): the cloud engine pushes when a homeowner replies (supabase/functions/roof-engine/push.ts).
-// Tapping the alert opens that conversation, reusing an open Roof Command tab when there is one.
-self.addEventListener('push', e => {
-  let d = {}; try { d = e.data ? e.data.json() : {}; } catch (x) { d = { title: 'Roof Command', body: e.data ? e.data.text() : '' }; }
-  e.waitUntil(self.registration.showNotification(d.title || 'A homeowner replied', { body: d.body || '', tag: d.tag || 'reply', renotify: true, data: { url: d.url || 'product.html#/home?view=inbox' } }));
-});
-self.addEventListener('notificationclick', e => {
-  e.notification.close();
-  const target = new URL((e.notification.data && e.notification.data.url) || 'product.html', self.registration.scope).href;
-  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(cs => {
-    const c = cs.find(x => x.url.indexOf('/product.html') >= 0);
-    if (c) { c.navigate(target).catch(() => { }); return c.focus(); }
-    return self.clients.openWindow(target);
-  }));
 });

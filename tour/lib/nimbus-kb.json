@@ -13,7 +13,7 @@
     },
     "roof_size": {
       "keys": ["how sure is the roof size", "roof size", "how accurate", "how big is the roof", "squares", "lidar", "how sure", "measurement", "measured"],
-      "say": "Roof size comes from LiDAR, laser height data flown over the county. It is an estimate, usually within about 10 percent of a tape measure. Use it to plan and quote a ballpark, and always measure on the roof before you order materials.",
+      "say": "Roof size comes from LiDAR, laser height data flown over the county. Roof size is an estimate from public LiDAR and building outlines. Use it to plan a ballpark. Order a measurement report before you quote.",
       "dynamic": "roof"
     },
     "pitch": {
@@ -86,7 +86,7 @@
   "rules": [
     "Never send a text or email yourself. Open the draft; a person taps send.",
     "No promises about insurance, claims, coverage or deductibles.",
-    "LiDAR roof sizes and pitch are estimates, usually within about 10 percent. Measure before ordering.",
+    "LiDAR roof sizes and pitch are estimates, only estimates. Measure before ordering.",
     "Radar hail is an estimate at the address, not proof of damage.",
     "Homeowner names and phone numbers stay on this device."
   ]
